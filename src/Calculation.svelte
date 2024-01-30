@@ -1,7 +1,6 @@
 <script>
 
-    // Define deckSize at the top level
-    const deckSize = 99;
+
 
 
     // Function to calculate combinations (n choose k)
@@ -40,21 +39,44 @@ function logChoose(n, k) {
 function multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn) {
     let totalProbability = 0;
 
-    // Iterate through all combinations of drawing at least one card from each group
-    for (let i = 1; i <= Math.min(cardsDrawn, groupSizes[0]); i++) {
-        for (let j = 1; j <= Math.min(cardsDrawn - i, groupSizes[1]); j++) {
-            let probGroup1 = choose(groupSizes[0], i);
-            let probGroup2 = choose(groupSizes[1], j);
-            let probOtherCards = choose(deckSize - groupSizes[0] - groupSizes[1], cardsDrawn - i - j);
-            let probCombination = probGroup1 * probGroup2 * probOtherCards / choose(deckSize, cardsDrawn);
-
-            totalProbability += probCombination;
+    // Helper function to recursively calculate probabilities
+    function calculate(groupIndex, cardsLeft, accumulatedProbability) {
+        if (groupIndex === groupSizes.length) {
+            // All groups considered, calculate remaining probability
+            return accumulatedProbability * choose(deckSize - sumGroupSizes(groupIndex), cardsLeft) / choose(deckSize, cardsDrawn);
         }
+
+        let groupProb = 0;
+        for (let i = 1; i <= Math.min(cardsLeft, groupSizes[groupIndex]); i++) {
+            groupProb += calculate(groupIndex + 1, cardsLeft - i, accumulatedProbability * choose(groupSizes[groupIndex], i));
+        }
+        return groupProb;
     }
 
-    return Math.min(1, totalProbability); // Ensure the probability does not exceed 1
+    function sumGroupSizes(upToIndex) {
+        return groupSizes.slice(0, upToIndex).reduce((sum, size) => sum + size, 0);
+    }
+
+    return Math.min(1, calculate(0, cardsDrawn, 1));
 }
 
+
+
+
+function calculateLinkedGroups(linkedGroups) {
+        const groupResults = [];
+        let cardsDrawn = 7; // Initial hand
+        const groupSizes = linkedGroups.map(group => group.size);
+        const linkName = linkedGroups[0].link;
+
+        for (let turn = 0; turn <= 4; turn++) {
+            if (turn > 0) cardsDrawn += 1;
+            let probability = multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn);
+            groupResults.push({ turn, probability });
+        }
+
+        results[linkName] = groupResults;
+    }
 
 
 
@@ -64,13 +86,16 @@ function multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn) {
 
 
     export let groups = [];
+    export let deckSize; // Received from App.svelte
+    export let mulliganCount;
+
+
     let results = {};
 
     // Reactive statement to calculate probabilities when groups change
     $: if (groups.length > 0) {
         calculateProbabilities();
     }
-
 
 
 
@@ -97,41 +122,57 @@ function multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn) {
         }
     }
 
-    function calculateSingleGroup(group) {
-        const groupResults = [];
-        let cardsDrawn = 7; // Initial hand
 
-        for (let turn = 0; turn <= 4; turn++) {
-            if (turn > 0) cardsDrawn += 1;
-            // Calculate probability for the specified number of cards
-            let probability = 0;
-            for (let x = group.cardsToDraw; x <= Math.min(group.size, cardsDrawn); x++) {
-                probability += hypergeometricCDF(x, deckSize, group.size, cardsDrawn);
-            }
-            groupResults.push({ turn, probability });
-        }
 
-        results[group.name] = groupResults;
+
+    function applyLondonMulligan(group, cardsDrawn, deckSize, mulligans) {
+    let totalProbability = 0;
+    let remainingDeckSize = deckSize;
+
+    for (let mulligan = 0; mulligan <= mulligans; mulligan++) {
+        let probabilityThisMulligan = calculateProbabilityForHand(group, cardsDrawn, remainingDeckSize);
+        totalProbability += (1 - totalProbability) * probabilityThisMulligan;
+
+        remainingDeckSize -= 1; // One card put back for each mulligan
     }
 
-    function calculateLinkedGroups(linkedGroups) {
-        const groupResults = [];
-        let cardsDrawn = 7; // Initial hand
-        const groupSizes = linkedGroups.map(group => group.size);
-        const linkName = linkedGroups[0].link;
+    return Math.min(1, totalProbability);
+}
 
-        for (let turn = 0; turn <= 4; turn++) {
-            if (turn > 0) cardsDrawn += 1;
-            let probability = multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn);
-            groupResults.push({ turn, probability });
+function calculateProbabilityForHand(group, cardsDrawn) {
+    let probability = 0;
+    for (let x = group.cardsToDraw; x <= Math.min(group.size, cardsDrawn); x++) {
+        probability += hypergeometricCDF(x, deckSize, group.size, cardsDrawn);
+    }
+    return probability;
+}
+
+function calculateSingleGroup(group) {
+    const groupResults = [];
+    let cardsDrawn = 7; // Initial hand size
+    let deckSizeAfterMulligan = deckSize - mulliganCount; // Adjusting deck size for mulligans
+    let turn0Boost = 0;
+
+    for (let turn = 0; turn <= 4; turn++) {
+        if (turn > 0) cardsDrawn += 1;
+
+        let probability;
+        if (turn === 0) {
+            let baseProbability = calculateProbabilityForHand(group, cardsDrawn, deckSize);
+            probability = applyLondonMulligan(group, cardsDrawn, deckSize, mulliganCount);
+            turn0Boost = probability - baseProbability; // Boost gained from mulligan on turn 0
+        } else {
+            // For subsequent turns, apply the boost gained from turn 0
+            probability = calculateProbabilityForHand(group, cardsDrawn, deckSizeAfterMulligan) + turn0Boost;
+            probability = Math.min(1, probability); // Ensure probability does not exceed 100%
         }
 
-        results[linkName] = groupResults;
+        groupResults.push({ turn, probability });
+        console.log(`Turn ${turn}: Probability = ${probability}, Deck Size After Mulligan = ${deckSizeAfterMulligan}`);
     }
 
-
-
-
+    results[group.name] = groupResults;
+}
 
 
 
@@ -158,27 +199,34 @@ function multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn) {
 
 
 
+const presetColors = [
+    "#E1BEE7", // Example colors
+    "#B2DFDB",
+    "#FFE0B2",
+    "#DCEDC8",
+    "#B3E5FC",
+    "#FFCCBC",
+    "#C5CAE9"
+];
 
 let groupColors = {};
+let colorIndex = 0;
 
 function assignGroupColors(groups) {
-    const getRandomColor = () => `hsl(${Math.random() * 360}, 70%, 75%)`;
-
     groups.forEach(group => {
         // For linked groups
         if (group.link) {
             if (!groupColors[group.link]) {
-                // Assign a new color to the linked group if it doesn't have one
-                groupColors[group.link] = getRandomColor();
+                groupColors[group.link] = presetColors[colorIndex % presetColors.length];
+                colorIndex++;
             }
-            // Set group color same as its linked group color
             groupColors[group.name] = groupColors[group.link];
         } 
         // For non-linked groups
         else {
             if (!groupColors[group.name]) {
-                // Assign a new color to the group if it doesn't have one
-                groupColors[group.name] = getRandomColor();
+                groupColors[group.name] = presetColors[colorIndex % presetColors.length];
+                colorIndex++;
             }
         }
     });
@@ -192,17 +240,17 @@ $: if (groups.length > 0) {
 
 
 
+
 </script>
 
-<div>
-    <h2>Calculation Results</h2>
+<div class="output-diagram">
     {#each Array(5) as _, turn}
         <div class="turn-row">
             <div class="turn-label">Turn {turn}:</div>
             <div class="card-rectangles">
                 {#each createGroupCards(groups, results, turn) as card}
                     <div class="card-container">
-                        <div class="rectangle" style="background-color: {card.probability !== null ? groupColors[card.label] : 'lightgray'}">
+                        <div class="rectangle" style="background-color: {card.probability !== null ? groupColors[card.label] : '#e5e5e5'}">
                             {card.probability !== null ? `${card.probability}%` : ''}
                         </div>
                         <div class="card-label">{card.label}</div>
@@ -233,18 +281,25 @@ $: if (groups.length > 0) {
         margin-right: 5px;
     }
     .rectangle {
-        width: 30px;
-        height: 50px;
+        width: 40px;
+        height: 60px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid black;
+        border: 1px solid rgb(142, 142, 142);
         font-size: 0.8em;
         text-align: center;
+        border-radius: 4px;
     }
     .card-label {
         margin-top: 5px;
         font-size: 0.7em;
         text-align: center;
     }
+
+    .output-diagram {
+        max-width: 55rem;
+        margin: auto; /* Centers the container */
+    }
+
 </style>
