@@ -1,22 +1,37 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import { groupColors } from './colorStore.js';
 
     const dispatch = createEventDispatcher();
     let groups = [{ name: '', size: 1, cardsToDraw: 1, link: '' }];
-    let deckSize = 99; // Default deck size
-    let mulliganCount = 0; // Default to no mulligan
+    let deckSize = 99;
+    let mulliganCount = 0;
 
+    const presetColors = [
+        "#E1BEE7", "#B2DFDB", "#FFE0B2", "#DCEDC8", "#B3E5FC", "#FFCCBC", "#C5CAE9"
+    ];
+    let colorIndex = 0;
 
+    $: {
+        let updatedColors = {};
+        if (groups.length > 0) {
+            // Assign colors to each group
+            groups.forEach(group => {
+                if (group.link && group.link.trim() !== '') {
+                    // If link is present and not empty, assign or use existing color based on link
+                    if (!updatedColors[group.link]) {
+                        updatedColors[group.link] = presetColors[colorIndex++ % presetColors.length];
+                    }
+                    updatedColors[group.name] = updatedColors[group.link];
+                } else {
+                    // If no link, assign a unique color
+                    updatedColors[group.name] = presetColors[colorIndex++ % presetColors.length];
+                }
+            });
 
-
-    $: if (groups.length > 0) {
-        groups = groups.map(group => {
-            if (group.link) {
-                return { ...group, cardsToDraw: 1 };
-            }
-            return group;
-        });
-        dispatch('updateGroups', { groups, deckSize, mulliganCount }); // Include deckSize in the dispatched event
+            groupColors.set(updatedColors);
+            dispatch('updateGroups', { groups, deckSize, mulliganCount });
+        }
     }
 
     function addGroup() {
@@ -28,38 +43,58 @@
     }
 </script>
 
+
+
+
 <div class="parameters">
 
     <table>
         <thead>
             <tr>
-                <th>Category Name</th>
+                <th>Category unique name</th>
                 <th># Cards in category</th>
-                <th># Desired Cards</th>
-                <th>Linked Categories*</th>
-                <th>Actions</th>
+                <th>Minimum # desired cards</th>
+                <th>Linked categories*</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {#each groups as group, index}
                 <tr>
                     <td>
-                        <input type="text" bind:value={group.name} placeholder="mana, draw, ramp, etc" />
-                    </td>
-                    <td>
-                        <input type="number" bind:value={group.size} min="1" max="99" />
+                        <input 
+                            class="input-group" 
+                            style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
+                            type="text" 
+                            bind:value={group.name} 
+                            placeholder="mana, draw, ramp, etc" />
                     </td>
                     <td>
                         <input 
+                            class="input-group" 
+                            style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
+                            type="number" 
+                            bind:value={group.size} 
+                            min="1" 
+                            max="99" />
+                    </td>
+                    <td>
+                        <input 
+                            class="input-group" 
+                            style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="number" 
                             bind:value={group.cardsToDraw} 
                             min="1" 
                             max="99" 
-                            disabled={!!group.link} 
-                        />
+                             />
                     </td>
                     <td>
-                        <input type="text" bind:value={group.link} placeholder="combo pieces, synergy 1, etc" />
+                        <input 
+                            class="input-group"
+                            style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
+                            type="text" 
+                            bind:value={group.link} 
+                            placeholder="combo pieces, synergy 1, etc" />
                     </td>
                     <td>
                         {#if index > 0}
@@ -113,6 +148,10 @@
         width: 95%;
         padding: 5px;
         margin: 0px;
+    }
+
+    .input-group {
+        background-color: var(--bg-color, #fff); /* Default to white if no color */
     }
 
     input::placeholder {

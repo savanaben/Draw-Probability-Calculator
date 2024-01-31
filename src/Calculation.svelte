@@ -1,6 +1,5 @@
 <script>
-
-
+    import { groupColors } from './colorStore.js';
 
 
     // Function to calculate combinations (n choose k)
@@ -36,18 +35,16 @@ function logChoose(n, k) {
 }
 
 
-function multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn) {
+function multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, cardsDrawn) {
     let totalProbability = 0;
 
-    // Helper function to recursively calculate probabilities
     function calculate(groupIndex, cardsLeft, accumulatedProbability) {
         if (groupIndex === groupSizes.length) {
-            // All groups considered, calculate remaining probability
             return accumulatedProbability * choose(deckSize - sumGroupSizes(groupIndex), cardsLeft) / choose(deckSize, cardsDrawn);
         }
 
         let groupProb = 0;
-        for (let i = 1; i <= Math.min(cardsLeft, groupSizes[groupIndex]); i++) {
+        for (let i = groupCardsToDraw[groupIndex]; i <= Math.min(cardsLeft, groupSizes[groupIndex]); i++) {
             groupProb += calculate(groupIndex + 1, cardsLeft - i, accumulatedProbability * choose(groupSizes[groupIndex], i));
         }
         return groupProb;
@@ -62,21 +59,49 @@ function multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn) {
 
 
 
-
 function calculateLinkedGroups(linkedGroups) {
-        const groupResults = [];
-        let cardsDrawn = 7; // Initial hand
-        const groupSizes = linkedGroups.map(group => group.size);
-        const linkName = linkedGroups[0].link;
+    const groupResults = [];
+    let cardsDrawn = 7; // Initial hand
+    const groupSizes = linkedGroups.map(group => group.size);
+    const groupCardsToDraw = linkedGroups.map(group => group.cardsToDraw);
+    const linkName = linkedGroups[0].link;
+    let turn0Boost = 0;
 
-        for (let turn = 0; turn <= 4; turn++) {
-            if (turn > 0) cardsDrawn += 1;
-            let probability = multivariateHypergeometricCDF(groupSizes, deckSize, cardsDrawn);
-            groupResults.push({ turn, probability });
+    for (let turn = 0; turn <= 4; turn++) {
+        if (turn > 0) cardsDrawn += 1;
+
+        let probability;
+        if (turn === 0) {
+            let baseProbability = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, cardsDrawn);
+            probability = applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulliganCount, cardsDrawn);
+            turn0Boost = probability - baseProbability;
+        } else {
+            probability = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize - mulliganCount, cardsDrawn) + turn0Boost;
+            probability = Math.min(1, probability);
         }
 
-        results[linkName] = groupResults;
+        groupResults.push({ turn, probability });
     }
+
+    results[linkName] = groupResults;
+}
+
+
+
+
+function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulligans, cardsDrawn) {
+    let totalProbability = 0;
+    let remainingDeckSize = deckSize;
+
+    for (let mulligan = 0; mulligan <= mulligans; mulligan++) {
+        let probabilityThisMulligan = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, remainingDeckSize, cardsDrawn);
+        totalProbability += (1 - totalProbability) * probabilityThisMulligan;
+
+        remainingDeckSize -= 1; // One card put back for each mulligan
+    }
+
+    return Math.min(1, totalProbability);
+}
 
 
 
@@ -101,26 +126,27 @@ function calculateLinkedGroups(linkedGroups) {
 
 
 
-       function calculateProbabilities() {
-        console.log("Calculating probabilities for groups:", groups);
-        results = {};
+    function calculateProbabilities() {
+    console.log("Calculating probabilities for groups:", groups);
+    results = {};
 
-        // Group by links
-        const links = {};
-        groups.forEach(group => {
-            if (group.link) {
-                if (!links[group.link]) links[group.link] = [];
-                links[group.link].push(group);
-            } else {
-                calculateSingleGroup(group);
-            }
-        });
-
-        // Calculate probabilities for linked groups
-        for (const link in links) {
-            calculateLinkedGroups(links[link]);
+    // Group by links, excluding empty links
+    const links = {};
+    groups.forEach(group => {
+        if (group.link && group.link.trim() !== '') { // Check for non-empty link
+            if (!links[group.link]) links[group.link] = [];
+            links[group.link].push(group);
+        } else {
+            calculateSingleGroup(group);
         }
+    });
+
+    // Calculate probabilities for linked groups
+    for (const link in links) {
+        calculateLinkedGroups(links[link]);
     }
+}
+
 
 
 
@@ -179,12 +205,16 @@ function calculateSingleGroup(group) {
 
 
 
-    function createGroupCards(groups, results, turn) {
+function createGroupCards(groups, results, turn) {
     let cards = groups.map(group => {
         let groupName = group.link ? group.link : group.name;
         let groupResult = results[groupName];
         let probability = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
-        return { probability, label: group.name };
+
+        // Access the color from the groupColors store
+        let color = $groupColors[groupName] || '#e5e5e5'; // Default color if not set
+
+        return { probability, label: group.name, color };
     });
 
     // Fill up the remaining cards for the turn with blanks
@@ -209,33 +239,32 @@ const presetColors = [
     "#C5CAE9"
 ];
 
-let groupColors = {};
-let colorIndex = 0;
-
 function assignGroupColors(groups) {
-    groups.forEach(group => {
-        // For linked groups
-        if (group.link) {
-            if (!groupColors[group.link]) {
-                groupColors[group.link] = presetColors[colorIndex % presetColors.length];
-                colorIndex++;
-            }
-            groupColors[group.name] = groupColors[group.link];
-        } 
-        // For non-linked groups
-        else {
-            if (!groupColors[group.name]) {
-                groupColors[group.name] = presetColors[colorIndex % presetColors.length];
-                colorIndex++;
-            }
-        }
-    });
-}
+        let colorIndex = 0;
+        let updatedColors = {};
 
-$: if (groups.length > 0) {
-    assignGroupColors(groups);
-    calculateProbabilities();
-}
+        // First, assign colors based on unique names or links
+        groups.forEach(group => {
+            if (!updatedColors[group.name]) {
+                updatedColors[group.name] = presetColors[colorIndex % presetColors.length];
+                colorIndex++;
+            }
+        });
+
+        // Next, ensure linked groups share the same color
+        groups.forEach(group => {
+            if (group.link && group.link.trim() !== '') {
+                updatedColors[group.link] = updatedColors[group.name];
+            }
+        });
+
+        groupColors.set(updatedColors); // Update the store with new color mappings
+    }
+
+    $: if (groups.length > 0) {
+        assignGroupColors(groups);
+        calculateProbabilities();
+    }
 
 
 
@@ -250,7 +279,7 @@ $: if (groups.length > 0) {
             <div class="card-rectangles">
                 {#each createGroupCards(groups, results, turn) as card}
                     <div class="card-container">
-                        <div class="rectangle" style="background-color: {card.probability !== null ? groupColors[card.label] : '#e5e5e5'}">
+                        <div class="rectangle" style="background-color: {card.color}">
                             {card.probability !== null ? `${card.probability}%` : ''}
                         </div>
                         <div class="card-label">{card.label}</div>
