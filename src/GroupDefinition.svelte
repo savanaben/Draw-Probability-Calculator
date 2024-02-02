@@ -12,27 +12,22 @@
     ];
     let colorIndex = 0;
 
+    
     $: {
         let updatedColors = {};
-        if (groups.length > 0) {
-            // Assign colors to each group
-            groups.forEach(group => {
-                if (group.link && group.link.trim() !== '') {
-                    // If link is present and not empty, assign or use existing color based on link
-                    if (!updatedColors[group.link]) {
-                        updatedColors[group.link] = presetColors[colorIndex++ % presetColors.length];
-                    }
-                    updatedColors[group.name] = updatedColors[group.link];
-                } else {
-                    // If no link, assign a unique color
-                    updatedColors[group.name] = presetColors[colorIndex++ % presetColors.length];
-                }
-            });
+        groups.forEach(group => {
+            let key = group.link && group.link.trim() ? group.link : group.name;
+            if (!updatedColors[key]) {
+                updatedColors[key] = presetColors[colorIndex++ % presetColors.length];
+            }
+        });
 
-            groupColors.set(updatedColors);
-            dispatch('updateGroups', { groups, deckSize, mulliganCount });
-        }
+        groupColors.set(updatedColors);
+        dispatch('updateGroups', { groups, deckSize, mulliganCount });
     }
+
+
+
 
     function addGroup() {
         groups = [...groups, { name: '', size: 1, cardsToDraw: 1, link: '' }];
@@ -94,7 +89,7 @@
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="text" 
                             bind:value={group.link} 
-                            placeholder="combo pieces, synergy 1, etc" />
+                            placeholder="Category 1 + 2, etc" />
                     </td>
                     <td>
                         {#if index > 0}
@@ -108,7 +103,7 @@
     
     <div class="controls-container">
         
-        <button on:click={addGroup}>Add Another Group</button>
+        <button on:click={addGroup}>Add another category</button>
         
         <div class="mulligan-selection">
             <label for="mulliganCount">Number of Mulligans**:</label>
@@ -140,10 +135,13 @@
         border: 1px solid #ddd;
         padding: 8px;
         text-align: left;
+        background-color: white;
     }
     th {
         background-color: #f4f4f4;
     }
+
+
     input {
         width: 95%;
         padding: 5px;

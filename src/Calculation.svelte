@@ -205,25 +205,40 @@ function calculateSingleGroup(group) {
 
 
 
+
 function createGroupCards(groups, results, turn) {
     let cards = groups.map(group => {
         let groupName = group.link ? group.link : group.name;
         let groupResult = results[groupName];
-        let probability = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
+        let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
+        
+        // Determine the ratio representation
+        let ratioText = convertPercentToRatio(probabilityPercent);
 
         // Access the color from the groupColors store
         let color = $groupColors[groupName] || '#e5e5e5'; // Default color if not set
 
-        return { probability, label: group.name, color };
+        return { probability: probabilityPercent, label: group.name, color, ratioText };
     });
 
     // Fill up the remaining cards for the turn with blanks
     while (cards.length < 7 + turn) {
-        cards.push({ probability: null, label: '' });
+        cards.push({ probability: null, label: '', ratioText: '' });
     }
 
     return cards;
 }
+
+function convertPercentToRatio(percent) {
+    if (percent === null) return '';
+
+    // Directly map the percentage to a scale of 20
+    let number = Math.round((percent / 100) * 20);
+
+    return `${number} out of 20`;
+}
+
+
 
 
 
@@ -280,7 +295,10 @@ function assignGroupColors(groups) {
                 {#each createGroupCards(groups, results, turn) as card}
                     <div class="card-container">
                         <div class="rectangle" style="background-color: {card.color}">
-                            {card.probability !== null ? `${card.probability}%` : ''}
+                            <div class="card-details">
+                                <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
+                                <div class="card-ratio">{card.ratioText}</div>
+                            </div>
                         </div>
                         <div class="card-label">{card.label}</div>
                     </div>
@@ -291,44 +309,74 @@ function assignGroupColors(groups) {
 </div>
 
 <style>
-    .turn-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    .turn-label {
-        margin-right: 10px;
-        font-weight: bold;
-    }
-    .card-rectangles {
-        display: flex;
-    }
-    .card-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-right: 5px;
-    }
-    .rectangle {
-        width: 40px;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid rgb(142, 142, 142);
-        font-size: 0.8em;
-        text-align: center;
-        border-radius: 4px;
-    }
-    .card-label {
-        margin-top: 5px;
-        font-size: 0.7em;
-        text-align: center;
-    }
-
     .output-diagram {
-        max-width: 55rem;
-        margin: auto; /* Centers the container */
-    }
+    max-width: 55rem;
+    margin: auto; /* Centers the container */
+}
+
+.turn-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.turn-label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.card-rectangles {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line if needed */
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.rectangle {
+    position: relative;
+    width: 40px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    border: 1px solid rgb(142, 142, 142);
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 4px;
+    background-color: rgb(231, 231, 231);
+    padding: 6px; /* Add padding for spacing */
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column; /* Stack ratio and probability vertically */
+    align-items: center;
+    justify-content: space-around; /* Distribute space above and below */
+    height: 100%; /* Take full height of parent to align items vertically */
+}
+
+.card-ratio {
+    font-size: 1em;
+    margin-top: 4px; /* Space between ratio and probability */
+    font-style: italic;
+}
+
+.probability {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.card-label {
+    margin-top: 5px;
+    font-size: 0.7em;
+    text-align: center;
+}
+
 
 </style>
