@@ -838,20 +838,20 @@ var app = (function () {
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
-    	child_ctx[17] = list;
-    	child_ctx[18] = i;
+    	child_ctx[17] = list[i];
+    	child_ctx[18] = list;
+    	child_ctx[19] = i;
     	return child_ctx;
     }
 
-    // (95:24) {#if index > 0}
+    // (94:24) {#if index > 0}
     function create_if_block$2(ctx) {
     	let button;
     	let mounted;
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[11](/*index*/ ctx[18]);
+    		return /*click_handler*/ ctx[11](/*index*/ ctx[19]);
     	}
 
     	const block = {
@@ -859,7 +859,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Remove";
     			attr_dev(button, "class", "svelte-119iqjf");
-    			add_location(button, file$5, 95, 28, 3379);
+    			add_location(button, file$5, 94, 28, 3716);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -883,14 +883,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(95:24) {#if index > 0}",
+    		source: "(94:24) {#if index > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (57:12) {#each groups as group, index}
+    // (56:12) {#each groups as group, index}
     function create_each_block$2(ctx) {
     	let tr;
     	let td0;
@@ -911,22 +911,22 @@ var app = (function () {
     	let dispose;
 
     	function input0_input_handler() {
-    		/*input0_input_handler*/ ctx[7].call(input0, /*each_value*/ ctx[17], /*index*/ ctx[18]);
+    		/*input0_input_handler*/ ctx[7].call(input0, /*each_value*/ ctx[18], /*index*/ ctx[19]);
     	}
 
     	function input1_input_handler() {
-    		/*input1_input_handler*/ ctx[8].call(input1, /*each_value*/ ctx[17], /*index*/ ctx[18]);
+    		/*input1_input_handler*/ ctx[8].call(input1, /*each_value*/ ctx[18], /*index*/ ctx[19]);
     	}
 
     	function input2_input_handler() {
-    		/*input2_input_handler*/ ctx[9].call(input2, /*each_value*/ ctx[17], /*index*/ ctx[18]);
+    		/*input2_input_handler*/ ctx[9].call(input2, /*each_value*/ ctx[18], /*index*/ ctx[19]);
     	}
 
     	function input3_input_handler() {
-    		/*input3_input_handler*/ ctx[10].call(input3, /*each_value*/ ctx[17], /*index*/ ctx[18]);
+    		/*input3_input_handler*/ ctx[10].call(input3, /*each_value*/ ctx[18], /*index*/ ctx[19]);
     	}
 
-    	let if_block = /*index*/ ctx[18] > 0 && create_if_block$2(ctx);
+    	let if_block = /*index*/ ctx[19] > 0 && create_if_block$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -948,71 +948,71 @@ var app = (function () {
     			t4 = space();
     			attr_dev(input0, "class", "input-group svelte-119iqjf");
 
-    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    			? /*group*/ ctx[16].link
-    			: /*group*/ ctx[16].name]);
+    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    			? /*group*/ ctx[17].link
+    			: /*group*/ ctx[17].name]);
 
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "mana, draw, ramp, etc");
-    			add_location(input0, file$5, 59, 24, 1581);
+    			add_location(input0, file$5, 58, 24, 1918);
     			attr_dev(td0, "class", "svelte-119iqjf");
-    			add_location(td0, file$5, 58, 20, 1551);
+    			add_location(td0, file$5, 57, 20, 1888);
     			attr_dev(input1, "class", "input-group svelte-119iqjf");
 
-    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    			? /*group*/ ctx[16].link
-    			: /*group*/ ctx[16].name]);
+    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    			? /*group*/ ctx[17].link
+    			: /*group*/ ctx[17].name]);
 
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", "1");
     			attr_dev(input1, "max", "99");
-    			add_location(input1, file$5, 67, 24, 2004);
+    			add_location(input1, file$5, 66, 24, 2341);
     			attr_dev(td1, "class", "svelte-119iqjf");
-    			add_location(td1, file$5, 66, 20, 1974);
+    			add_location(td1, file$5, 65, 20, 2311);
     			attr_dev(input2, "class", "input-group svelte-119iqjf");
 
-    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    			? /*group*/ ctx[16].link
-    			: /*group*/ ctx[16].name]);
+    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    			? /*group*/ ctx[17].link
+    			: /*group*/ ctx[17].name]);
 
     			attr_dev(input2, "type", "number");
     			attr_dev(input2, "min", "1");
     			attr_dev(input2, "max", "99");
-    			add_location(input2, file$5, 76, 24, 2440);
+    			add_location(input2, file$5, 75, 24, 2777);
     			attr_dev(td2, "class", "svelte-119iqjf");
-    			add_location(td2, file$5, 75, 20, 2410);
+    			add_location(td2, file$5, 74, 20, 2747);
     			attr_dev(input3, "class", "input-group svelte-119iqjf");
 
-    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    			? /*group*/ ctx[16].link
-    			: /*group*/ ctx[16].name]);
+    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    			? /*group*/ ctx[17].link
+    			: /*group*/ ctx[17].name]);
 
     			attr_dev(input3, "type", "text");
     			attr_dev(input3, "placeholder", "Category 1 + 2, etc");
-    			add_location(input3, file$5, 86, 24, 2914);
+    			add_location(input3, file$5, 85, 24, 3251);
     			attr_dev(td3, "class", "svelte-119iqjf");
-    			add_location(td3, file$5, 85, 20, 2884);
+    			add_location(td3, file$5, 84, 20, 3221);
     			attr_dev(td4, "class", "svelte-119iqjf");
-    			add_location(td4, file$5, 93, 20, 3304);
-    			add_location(tr, file$5, 57, 16, 1525);
+    			add_location(td4, file$5, 92, 20, 3641);
+    			add_location(tr, file$5, 56, 16, 1862);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
     			append_dev(tr, td0);
     			append_dev(td0, input0);
-    			set_input_value(input0, /*group*/ ctx[16].name);
+    			set_input_value(input0, /*group*/ ctx[17].name);
     			append_dev(tr, t0);
     			append_dev(tr, td1);
     			append_dev(td1, input1);
-    			set_input_value(input1, /*group*/ ctx[16].size);
+    			set_input_value(input1, /*group*/ ctx[17].size);
     			append_dev(tr, t1);
     			append_dev(tr, td2);
     			append_dev(td2, input2);
-    			set_input_value(input2, /*group*/ ctx[16].cardsToDraw);
+    			set_input_value(input2, /*group*/ ctx[17].cardsToDraw);
     			append_dev(tr, t2);
     			append_dev(tr, td3);
     			append_dev(td3, input3);
-    			set_input_value(input3, /*group*/ ctx[16].link);
+    			set_input_value(input3, /*group*/ ctx[17].link);
     			append_dev(tr, t3);
     			append_dev(tr, td4);
     			if (if_block) if_block.m(td4, null);
@@ -1033,46 +1033,46 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (dirty & /*$groupColors, groups*/ 9) {
-    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    				? /*group*/ ctx[16].link
-    				: /*group*/ ctx[16].name]);
+    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    				? /*group*/ ctx[17].link
+    				: /*group*/ ctx[17].name]);
     			}
 
-    			if (dirty & /*groups*/ 1 && input0.value !== /*group*/ ctx[16].name) {
-    				set_input_value(input0, /*group*/ ctx[16].name);
-    			}
-
-    			if (dirty & /*$groupColors, groups*/ 9) {
-    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    				? /*group*/ ctx[16].link
-    				: /*group*/ ctx[16].name]);
-    			}
-
-    			if (dirty & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[16].size) {
-    				set_input_value(input1, /*group*/ ctx[16].size);
+    			if (dirty & /*groups*/ 1 && input0.value !== /*group*/ ctx[17].name) {
+    				set_input_value(input0, /*group*/ ctx[17].name);
     			}
 
     			if (dirty & /*$groupColors, groups*/ 9) {
-    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    				? /*group*/ ctx[16].link
-    				: /*group*/ ctx[16].name]);
+    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    				? /*group*/ ctx[17].link
+    				: /*group*/ ctx[17].name]);
     			}
 
-    			if (dirty & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[16].cardsToDraw) {
-    				set_input_value(input2, /*group*/ ctx[16].cardsToDraw);
+    			if (dirty & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[17].size) {
+    				set_input_value(input1, /*group*/ ctx[17].size);
     			}
 
     			if (dirty & /*$groupColors, groups*/ 9) {
-    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[16].link && /*group*/ ctx[16].link.trim()
-    				? /*group*/ ctx[16].link
-    				: /*group*/ ctx[16].name]);
+    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    				? /*group*/ ctx[17].link
+    				: /*group*/ ctx[17].name]);
     			}
 
-    			if (dirty & /*groups*/ 1 && input3.value !== /*group*/ ctx[16].link) {
-    				set_input_value(input3, /*group*/ ctx[16].link);
+    			if (dirty & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[17].cardsToDraw) {
+    				set_input_value(input2, /*group*/ ctx[17].cardsToDraw);
     			}
 
-    			if (/*index*/ ctx[18] > 0) if_block.p(ctx, dirty);
+    			if (dirty & /*$groupColors, groups*/ 9) {
+    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[3][/*group*/ ctx[17].link && /*group*/ ctx[17].link.trim()
+    				? /*group*/ ctx[17].link
+    				: /*group*/ ctx[17].name]);
+    			}
+
+    			if (dirty & /*groups*/ 1 && input3.value !== /*group*/ ctx[17].link) {
+    				set_input_value(input3, /*group*/ ctx[17].link);
+    			}
+
+    			if (/*index*/ ctx[19] > 0) if_block.p(ctx, dirty);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(tr);
@@ -1086,7 +1086,7 @@ var app = (function () {
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(57:12) {#each groups as group, index}",
+    		source: "(56:12) {#each groups as group, index}",
     		ctx
     	});
 
@@ -1190,59 +1190,59 @@ var app = (function () {
     			t21 = space();
     			input = element("input");
     			attr_dev(th0, "class", "svelte-119iqjf");
-    			add_location(th0, file$5, 48, 16, 1212);
+    			add_location(th0, file$5, 47, 16, 1549);
     			attr_dev(th1, "class", "svelte-119iqjf");
-    			add_location(th1, file$5, 49, 16, 1259);
+    			add_location(th1, file$5, 48, 16, 1596);
     			attr_dev(th2, "class", "svelte-119iqjf");
-    			add_location(th2, file$5, 50, 16, 1305);
+    			add_location(th2, file$5, 49, 16, 1642);
     			attr_dev(th3, "class", "svelte-119iqjf");
-    			add_location(th3, file$5, 51, 16, 1355);
+    			add_location(th3, file$5, 50, 16, 1692);
     			attr_dev(th4, "class", "svelte-119iqjf");
-    			add_location(th4, file$5, 52, 16, 1400);
-    			add_location(tr, file$5, 47, 12, 1190);
-    			add_location(thead, file$5, 46, 8, 1169);
-    			add_location(tbody, file$5, 55, 8, 1456);
+    			add_location(th4, file$5, 51, 16, 1737);
+    			add_location(tr, file$5, 46, 12, 1527);
+    			add_location(thead, file$5, 45, 8, 1506);
+    			add_location(tbody, file$5, 54, 8, 1793);
     			attr_dev(table, "class", "svelte-119iqjf");
-    			add_location(table, file$5, 45, 4, 1152);
+    			add_location(table, file$5, 44, 4, 1489);
     			attr_dev(button, "class", "svelte-119iqjf");
-    			add_location(button, file$5, 105, 8, 3636);
+    			add_location(button, file$5, 104, 8, 3973);
     			attr_dev(label0, "for", "mulliganCount");
     			attr_dev(label0, "class", "svelte-119iqjf");
-    			add_location(label0, file$5, 108, 12, 3759);
+    			add_location(label0, file$5, 107, 12, 4096);
     			option0.__value = "0";
     			option0.value = option0.__value;
-    			add_location(option0, file$5, 110, 16, 3883);
+    			add_location(option0, file$5, 109, 16, 4220);
     			option1.__value = "1";
     			option1.value = option1.__value;
-    			add_location(option1, file$5, 111, 16, 3929);
+    			add_location(option1, file$5, 110, 16, 4266);
     			option2.__value = "2";
     			option2.value = option2.__value;
-    			add_location(option2, file$5, 112, 16, 3975);
+    			add_location(option2, file$5, 111, 16, 4312);
     			option3.__value = "3";
     			option3.value = option3.__value;
-    			add_location(option3, file$5, 113, 16, 4021);
+    			add_location(option3, file$5, 112, 16, 4358);
     			option4.__value = "4";
     			option4.value = option4.__value;
-    			add_location(option4, file$5, 114, 16, 4067);
+    			add_location(option4, file$5, 113, 16, 4404);
     			attr_dev(select, "class", "svelte-119iqjf");
     			if (/*mulliganCount*/ ctx[2] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[12].call(select));
-    			add_location(select, file$5, 109, 12, 3830);
+    			add_location(select, file$5, 108, 12, 4167);
     			attr_dev(div0, "class", "mulligan-selection svelte-119iqjf");
-    			add_location(div0, file$5, 107, 8, 3713);
+    			add_location(div0, file$5, 106, 8, 4050);
     			attr_dev(label1, "for", "deckSize");
     			attr_dev(label1, "class", "svelte-119iqjf");
-    			add_location(label1, file$5, 119, 12, 4193);
+    			add_location(label1, file$5, 118, 12, 4530);
     			attr_dev(input, "type", "number");
     			attr_dev(input, "id", "deckSize");
     			attr_dev(input, "min", "1");
     			attr_dev(input, "class", "svelte-119iqjf");
-    			add_location(input, file$5, 120, 12, 4247);
+    			add_location(input, file$5, 119, 12, 4584);
     			attr_dev(div1, "class", "deck-size-container svelte-119iqjf");
-    			add_location(div1, file$5, 118, 8, 4146);
+    			add_location(div1, file$5, 117, 8, 4483);
     			attr_dev(div2, "class", "controls-container svelte-119iqjf");
-    			add_location(div2, file$5, 103, 4, 3584);
+    			add_location(div2, file$5, 102, 4, 3921);
     			attr_dev(div3, "class", "parameters svelte-119iqjf");
-    			add_location(div3, file$5, 43, 0, 1120);
+    			add_location(div3, file$5, 42, 0, 1457);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1362,15 +1362,17 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('GroupDefinition', slots, []);
     	const dispatch = createEventDispatcher();
+    	let nextIndex = 1; // Initialize the counter for group indexes
 
     	let groups = [
     		{
-    			name: '',
+    			index: 0,
+    			name: 'Category 1',
     			size: 1,
     			cardsToDraw: 1,
     			link: ''
     		}
-    	];
+    	]; // Initial group with name 'Category 1'
 
     	let deckSize = 99;
     	let mulliganCount = 0;
@@ -1381,17 +1383,20 @@ var app = (function () {
     		$$invalidate(0, groups = [
     			...groups,
     			{
-    				name: '',
+    				index: nextIndex,
+    				name: `Category ${nextIndex + 1}`,
     				size: 1,
     				cardsToDraw: 1,
     				link: ''
     			}
     		]);
+
+    		nextIndex++; // Increment the counter after adding a new group
     	}
 
     	function removeGroup(index) {
     		$$invalidate(0, groups = groups.filter((_, i) => i !== index));
-    	}
+    	} // After removal, update names to maintain order if needed. This could be an additional feature.
 
     	const writable_props = [];
 
@@ -1435,6 +1440,7 @@ var app = (function () {
     		createEventDispatcher,
     		groupColors,
     		dispatch,
+    		nextIndex,
     		groups,
     		deckSize,
     		mulliganCount,
@@ -1446,6 +1452,7 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
+    		if ('nextIndex' in $$props) nextIndex = $$props.nextIndex;
     		if ('groups' in $$props) $$invalidate(0, groups = $$props.groups);
     		if ('deckSize' in $$props) $$invalidate(1, deckSize = $$props.deckSize);
     		if ('mulliganCount' in $$props) $$invalidate(2, mulliganCount = $$props.mulliganCount);
@@ -2176,7 +2183,7 @@ var app = (function () {
     			h1.textContent = "Magic Probability Calculator";
     			t1 = space();
     			p = element("p");
-    			p.textContent = "This tool is made to answer questions like, \"what are the chances I draw a mana rock and 2 lands in my opening hand.\" If it helps you, consider buying me a half a coffee 🙂.";
+    			p.textContent = "This tool is made to answer questions like, \"what are the chances I draw a mana rock and two lands in my opening hand.\" If it helps you, consider buying me a half a coffee 🙂.";
     			attr_dev(h1, "class", "title svelte-1cm7is4");
     			add_location(h1, file$3, 55, 4, 912);
     			attr_dev(p, "class", "svelte-1cm7is4");

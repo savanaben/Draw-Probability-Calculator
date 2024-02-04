@@ -1,18 +1,22 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     import { groupColors } from './colorStore.js';
+    import { Popper } from 'svelte-popperjs';
+  import 'svelte-popperjs/dist/index.css'; // Import default styles. You can customize it as needed.
 
     const dispatch = createEventDispatcher();
-    let groups = [{ name: '', size: 1, cardsToDraw: 1, link: '' }];
+    let nextIndex = 1; // Initialize the counter for group indexes
+    let groups = [{ index: 0, name: 'Category 1', size: 1, cardsToDraw: 1, link: '' }]; // Initial group with name 'Category 1'
     let deckSize = 99;
     let mulliganCount = 0;
+    let buttonElement;
+    let popperVisible = false;
 
     const presetColors = [
         "#E1BEE7", "#B2DFDB", "#FFE0B2", "#DCEDC8", "#B3E5FC", "#FFCCBC", "#C5CAE9"
     ];
     let colorIndex = 0;
 
-    
     $: {
         let updatedColors = {};
         groups.forEach(group => {
@@ -26,18 +30,31 @@
         dispatch('updateGroups', { groups, deckSize, mulliganCount });
     }
 
-
-
-
     function addGroup() {
-        groups = [...groups, { name: '', size: 1, cardsToDraw: 1, link: '' }];
+        groups = [...groups, { index: nextIndex, name: `Category ${nextIndex + 1}`, size: 1, cardsToDraw: 1, link: '' }];
+        nextIndex++; // Increment the counter after adding a new group
     }
 
     function removeGroup(index) {
         groups = groups.filter((_, i) => i !== index);
+        // After removal, update names to maintain order if needed. This could be an additional feature.
     }
 </script>
 
+
+
+<button bind:this={buttonElement} on:click={() => popperVisible = !popperVisible}>
+    Click me
+  </button>
+  
+  {#if popperVisible}
+    <Popper target={buttonElement} placement="bottom">
+      <div class="popover-content">
+        Here's some interesting content.
+        <!-- You can add images or any other Svelte/HTML content inside the Popper -->
+      </div>
+    </Popper>
+  {/if}
 
 
 

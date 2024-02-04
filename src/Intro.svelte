@@ -54,6 +54,6 @@
   
   <div class="intro-section">
     <h1 class="title">Magic Probability Calculator</h1>
-    <p>This tool is made to answer questions like, "what are the chances I draw a mana rock and 2 lands in my opening hand." If it helps you, consider buying me a half a coffee 🙂.</p>
+    <p>This tool is made to answer questions like, "what are the chances I draw a mana rock and two lands in my opening hand." If it helps you, consider buying me a half a coffee 🙂.</p>
   </div>
   
