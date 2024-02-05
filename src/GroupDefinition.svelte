@@ -16,7 +16,7 @@
 
 
     const presetColors = [
-        "#E1BEE7", "#B2DFDB", "#FFE0B2", "#DCEDC8", "#B3E5FC", "#FFCCBC", "#C5CAE9"
+        "#DCEDC8", "#B2DFDB", "#FFE0B2", "#E1BEE7", "#B3E5FC", "#FFCCBC", "#C5CAE9"
     ];
    
 
@@ -195,7 +195,7 @@
 
     input {
         width: 95%;
-        padding: 5px;
+        padding: 6px;
         margin: 0px;
         min-width: 45px;
     }
@@ -246,11 +246,14 @@
 
     button {
         margin: 0;
+        color: #0066e9;
+        padding: 6px 8px 6px 8px;
     }
 
 .moreInfo {
     border-radius: 40px;
     border-style: none;
+    padding: 0.2em 0.25em 0.15em 0.25em;
 }
 
 .popover-content:first-child {

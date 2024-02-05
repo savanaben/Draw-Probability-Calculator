@@ -3,13 +3,15 @@
   
     let faqs = [
       { question: "How does this work?", 
-      answer: "This tool uses <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric distribution</a> math to calculate probabilities common to Magic and other card games."
+      answer: "This tool uses <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric distribution</a> math to calculate draw probabilities common to Magic and other card games."
       },
       { question: "How do I know this is accurate?", 
-       answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement. I don't guarantee the accuracy of this tool in any way."
+       answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub,</a><a href='https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html' target='_blank'> mtg combo calc</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement."
+
       },
       { question: "I'd like to support this or give feedback.", 
-       answer: "FAQ to come..." },
+       answer: "There's a lot of ways to help! <p><b>If you're a mathy person,</b> you could help me figure out mulligan calculations by providing a rough framework of how the calculation would work. See the github <a href='https://github.com/savanaben/svelte-mtg-calculator?tab=readme-ov-file#svelte-mtg-calculator' target='_blank'>readme</a> for more info.</p> <p><b>If you're a developer,</b> feel free to check out the <a href='https://github.com/savanaben/svelte-mtg-calculator?tab=readme-ov-file#svelte-mtg-calculator' target='_blank'>readme</a> project and propose improvements. The readme has a list of areas of improvement/known issues.</p> <p>Finally, <b>If you just have a great idea to make this more useful,</b> send me an email (ben.c.gross@gmail.com). This is a passion project and I'd love to extend or add functionality that helps people build their deck.</p> "
+      },
     ];
   
     let openItem = null;

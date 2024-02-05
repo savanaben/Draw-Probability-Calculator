@@ -245,10 +245,10 @@ function convertPercentToRatio(percent) {
 
 
 const presetColors = [
-    "#E1BEE7", // Example colors
+    "#DCEDC8", // Example colors
     "#B2DFDB",
     "#FFE0B2",
-    "#DCEDC8",
+    "#E1BEE7",
     "#B3E5FC",
     "#FFCCBC",
     "#C5CAE9"

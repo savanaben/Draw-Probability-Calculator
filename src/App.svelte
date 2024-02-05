@@ -30,7 +30,7 @@
 .parameters {
 	max-width: 60rem;
 	margin: auto; /* Centers the container */
-	padding-bottom: 1rem; /* Centers the container */
+	padding-bottom: 2.5rem; /* Centers the container */
 }
 
 

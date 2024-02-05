@@ -2857,7 +2857,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if (content_slot) content_slot.c();
-    			attr_dev(div, "class", "popover-content svelte-1hwa642");
+    			attr_dev(div, "class", "popover-content svelte-1xdb37g");
     			add_location(div, file$6, 45, 4, 1461);
     		},
     		m: function mount(target, anchor) {
@@ -2940,7 +2940,7 @@ var app = (function () {
     			t = space();
     			if (if_block) if_block.c();
     			if_block_anchor = empty();
-    			attr_dev(div, "class", "popover-button-container svelte-1hwa642");
+    			attr_dev(div, "class", "popover-button-container svelte-1xdb37g");
     			add_location(div, file$6, 40, 2, 1263);
     		},
     		l: function claim(nodes) {
@@ -7218,7 +7218,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-16ly6fo");
+    			attr_dev(button, "class", "moreInfo svelte-1imgv3i");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "aria-label", "Help");
     			add_location(button, file$4, 60, 24, 1901);
@@ -7283,10 +7283,10 @@ var app = (function () {
     			b = element("b");
     			b.textContent = "must";
     			t4 = text(" have a unique text name for the tool to work (some day I'll figure out indexing...)");
-    			attr_dev(p0, "class", "popover-content svelte-16ly6fo");
+    			attr_dev(p0, "class", "popover-content svelte-1imgv3i");
     			add_location(p0, file$4, 64, 26, 2250);
     			add_location(b, file$4, 65, 67, 2490);
-    			attr_dev(p1, "class", "popover-content svelte-16ly6fo");
+    			attr_dev(p1, "class", "popover-content svelte-1imgv3i");
     			add_location(p1, file$4, 65, 26, 2449);
     			attr_dev(div, "slot", "content");
     			add_location(div, file$4, 63, 24, 2202);
@@ -7337,7 +7337,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-16ly6fo");
+    			attr_dev(button, "class", "moreInfo svelte-1imgv3i");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "aria-label", "Help");
     			add_location(button, file$4, 72, 24, 2864);
@@ -7398,7 +7398,7 @@ var app = (function () {
     			i.textContent = "at least";
     			t2 = text(" this many cards.");
     			add_location(i, file$4, 76, 81, 3268);
-    			attr_dev(p, "class", "popover-content svelte-16ly6fo");
+    			attr_dev(p, "class", "popover-content svelte-1imgv3i");
     			add_location(p, file$4, 76, 28, 3215);
     			attr_dev(div, "slot", "content");
     			add_location(div, file$4, 75, 24, 3165);
@@ -7447,7 +7447,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-16ly6fo");
+    			attr_dev(button, "class", "moreInfo svelte-1imgv3i");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "aria-label", "Help");
     			add_location(button, file$4, 82, 24, 3527);
@@ -7513,9 +7513,9 @@ var app = (function () {
     			p1 = element("p");
     			p1.textContent = "Linked categories must have the exact same name (keyword match) and you can't link more than 4 categories together currently.";
     			add_location(i, file$4, 86, 223, 4073);
-    			attr_dev(p0, "class", "popover-content svelte-16ly6fo");
+    			attr_dev(p0, "class", "popover-content svelte-1imgv3i");
     			add_location(p0, file$4, 86, 28, 3878);
-    			attr_dev(p1, "class", "popover-content svelte-16ly6fo");
+    			attr_dev(p1, "class", "popover-content svelte-1imgv3i");
     			add_location(p1, file$4, 87, 28, 4152);
     			attr_dev(div, "slot", "content");
     			add_location(div, file$4, 85, 24, 3828);
@@ -7560,7 +7560,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Remove";
-    			attr_dev(button, "class", "svelte-16ly6fo");
+    			attr_dev(button, "class", "svelte-1imgv3i");
     			add_location(button, file$4, 134, 28, 6393);
     		},
     		m: function mount(target, anchor) {
@@ -7648,7 +7648,7 @@ var app = (function () {
     			td4 = element("td");
     			if (if_block) if_block.c();
     			t4 = space();
-    			attr_dev(input0, "class", "input-group svelte-16ly6fo");
+    			attr_dev(input0, "class", "input-group svelte-1imgv3i");
 
     			set_style(input0, "--bg-color", /*$groupColors*/ ctx[4][/*group*/ ctx[26].link && /*group*/ ctx[26].link.trim()
     			? /*group*/ ctx[26].link
@@ -7657,9 +7657,9 @@ var app = (function () {
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "mana, draw, ramp, etc");
     			add_location(input0, file$4, 98, 24, 4595);
-    			attr_dev(td0, "class", "svelte-16ly6fo");
+    			attr_dev(td0, "class", "svelte-1imgv3i");
     			add_location(td0, file$4, 97, 20, 4565);
-    			attr_dev(input1, "class", "input-group svelte-16ly6fo");
+    			attr_dev(input1, "class", "input-group svelte-1imgv3i");
 
     			set_style(input1, "--bg-color", /*$groupColors*/ ctx[4][/*group*/ ctx[26].link && /*group*/ ctx[26].link.trim()
     			? /*group*/ ctx[26].link
@@ -7669,9 +7669,9 @@ var app = (function () {
     			attr_dev(input1, "min", "1");
     			attr_dev(input1, "max", "99");
     			add_location(input1, file$4, 106, 24, 5018);
-    			attr_dev(td1, "class", "svelte-16ly6fo");
+    			attr_dev(td1, "class", "svelte-1imgv3i");
     			add_location(td1, file$4, 105, 20, 4988);
-    			attr_dev(input2, "class", "input-group svelte-16ly6fo");
+    			attr_dev(input2, "class", "input-group svelte-1imgv3i");
 
     			set_style(input2, "--bg-color", /*$groupColors*/ ctx[4][/*group*/ ctx[26].link && /*group*/ ctx[26].link.trim()
     			? /*group*/ ctx[26].link
@@ -7681,9 +7681,9 @@ var app = (function () {
     			attr_dev(input2, "min", "1");
     			attr_dev(input2, "max", "99");
     			add_location(input2, file$4, 115, 24, 5454);
-    			attr_dev(td2, "class", "svelte-16ly6fo");
+    			attr_dev(td2, "class", "svelte-1imgv3i");
     			add_location(td2, file$4, 114, 20, 5424);
-    			attr_dev(input3, "class", "input-group svelte-16ly6fo");
+    			attr_dev(input3, "class", "input-group svelte-1imgv3i");
 
     			set_style(input3, "--bg-color", /*$groupColors*/ ctx[4][/*group*/ ctx[26].link && /*group*/ ctx[26].link.trim()
     			? /*group*/ ctx[26].link
@@ -7692,9 +7692,9 @@ var app = (function () {
     			attr_dev(input3, "type", "text");
     			attr_dev(input3, "placeholder", "Category 1 + 2, etc");
     			add_location(input3, file$4, 125, 24, 5928);
-    			attr_dev(td3, "class", "svelte-16ly6fo");
+    			attr_dev(td3, "class", "svelte-1imgv3i");
     			add_location(td3, file$4, 124, 20, 5898);
-    			attr_dev(td4, "class", "svelte-16ly6fo");
+    			attr_dev(td4, "class", "svelte-1imgv3i");
     			add_location(td4, file$4, 132, 20, 6318);
     			add_location(tr, file$4, 96, 16, 4539);
     		},
@@ -7815,7 +7815,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-16ly6fo");
+    			attr_dev(button, "class", "moreInfo svelte-1imgv3i");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "aria-label", "Help");
     			add_location(button, file$4, 150, 20, 6915);
@@ -7874,9 +7874,9 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "Mulligans on turn 1, turn 2, etc. simply \"carry over\" the increased probability of multiple opening hands to your first, second, third, etc. draw. This is probably not mathematically accurate, still working on it!";
-    			attr_dev(p0, "class", "popover-content svelte-16ly6fo");
+    			attr_dev(p0, "class", "popover-content svelte-1imgv3i");
     			add_location(p0, file$4, 154, 24, 7250);
-    			attr_dev(p1, "class", "popover-content svelte-16ly6fo");
+    			attr_dev(p1, "class", "popover-content svelte-1imgv3i");
     			add_location(p1, file$4, 155, 25, 7482);
     			attr_dev(div, "slot", "content");
     			add_location(div, file$4, 153, 20, 7204);
@@ -8099,25 +8099,25 @@ var app = (function () {
     			label1.textContent = "Deck Size:";
     			t22 = space();
     			input = element("input");
-    			attr_dev(th0, "class", "svelte-16ly6fo");
+    			attr_dev(th0, "class", "svelte-1imgv3i");
     			add_location(th0, file$4, 58, 16, 1780);
-    			attr_dev(th1, "class", "svelte-16ly6fo");
+    			attr_dev(th1, "class", "svelte-1imgv3i");
     			add_location(th1, file$4, 69, 16, 2694);
-    			attr_dev(th2, "class", "svelte-16ly6fo");
+    			attr_dev(th2, "class", "svelte-1imgv3i");
     			add_location(th2, file$4, 70, 16, 2740);
-    			attr_dev(th3, "class", "svelte-16ly6fo");
+    			attr_dev(th3, "class", "svelte-1imgv3i");
     			add_location(th3, file$4, 80, 16, 3409);
-    			attr_dev(th4, "class", "svelte-16ly6fo");
+    			attr_dev(th4, "class", "svelte-1imgv3i");
     			add_location(th4, file$4, 91, 16, 4414);
     			add_location(tr, file$4, 57, 12, 1758);
     			add_location(thead, file$4, 56, 8, 1737);
     			add_location(tbody, file$4, 94, 8, 4470);
-    			attr_dev(table, "class", "svelte-16ly6fo");
+    			attr_dev(table, "class", "svelte-1imgv3i");
     			add_location(table, file$4, 55, 4, 1720);
-    			attr_dev(button, "class", "svelte-16ly6fo");
+    			attr_dev(button, "class", "svelte-1imgv3i");
     			add_location(button, file$4, 144, 8, 6650);
     			attr_dev(label0, "for", "mulliganCount");
-    			attr_dev(label0, "class", "svelte-16ly6fo");
+    			attr_dev(label0, "class", "svelte-1imgv3i");
     			add_location(label0, file$4, 147, 12, 6773);
     			option0.__value = "0";
     			option0.value = option0.__value;
@@ -8134,24 +8134,24 @@ var app = (function () {
     			option4.__value = "4";
     			option4.value = option4.__value;
     			add_location(option4, file$4, 165, 16, 8078);
-    			attr_dev(select, "class", "svelte-16ly6fo");
+    			attr_dev(select, "class", "svelte-1imgv3i");
     			if (/*mulliganCount*/ ctx[2] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[21].call(select));
     			add_location(select, file$4, 160, 12, 7841);
-    			attr_dev(div0, "class", "mulligan-selection svelte-16ly6fo");
+    			attr_dev(div0, "class", "mulligan-selection svelte-1imgv3i");
     			add_location(div0, file$4, 146, 8, 6727);
     			attr_dev(label1, "for", "deckSize");
-    			attr_dev(label1, "class", "svelte-16ly6fo");
+    			attr_dev(label1, "class", "svelte-1imgv3i");
     			add_location(label1, file$4, 170, 12, 8204);
     			attr_dev(input, "type", "number");
     			attr_dev(input, "id", "deckSize");
     			attr_dev(input, "min", "1");
-    			attr_dev(input, "class", "svelte-16ly6fo");
+    			attr_dev(input, "class", "svelte-1imgv3i");
     			add_location(input, file$4, 171, 12, 8258);
-    			attr_dev(div1, "class", "deck-size-container svelte-16ly6fo");
+    			attr_dev(div1, "class", "deck-size-container svelte-1imgv3i");
     			add_location(div1, file$4, 169, 8, 8157);
-    			attr_dev(div2, "class", "controls-container svelte-16ly6fo");
+    			attr_dev(div2, "class", "controls-container svelte-1imgv3i");
     			add_location(div2, file$4, 142, 4, 6598);
-    			attr_dev(div3, "class", "parameters svelte-16ly6fo");
+    			attr_dev(div3, "class", "parameters svelte-1imgv3i");
     			add_location(div3, file$4, 53, 0, 1688);
     		},
     		l: function claim(nodes) {
@@ -8369,7 +8369,7 @@ var app = (function () {
     	let mulliganCount = 0;
     	let colorIndex = 0;
     	let showPopover = false;
-    	const presetColors = ["#E1BEE7", "#B2DFDB", "#FFE0B2", "#DCEDC8", "#B3E5FC", "#FFCCBC", "#C5CAE9"];
+    	const presetColors = ["#DCEDC8", "#B2DFDB", "#FFE0B2", "#E1BEE7", "#B3E5FC", "#FFCCBC", "#C5CAE9"];
 
     	function addGroup() {
     		$$invalidate(0, groups = [
@@ -9064,7 +9064,7 @@ var app = (function () {
     		return cards;
     	}
 
-    	const presetColors = ["#E1BEE7", "#B2DFDB", "#FFE0B2", "#DCEDC8", "#B3E5FC", "#FFCCBC", "#C5CAE9"]; // Example colors
+    	const presetColors = ["#DCEDC8", "#B2DFDB", "#FFE0B2", "#E1BEE7", "#B3E5FC", "#FFCCBC", "#C5CAE9"]; // Example colors
 
     	function assignGroupColors(groups) {
     		let colorIndex = 0;
@@ -9208,7 +9208,7 @@ var app = (function () {
     /* src\Intro.svelte generated by Svelte v3.59.2 */
     const file$2 = "src\\Intro.svelte";
 
-    // (64:8) 
+    // (67:8) 
     function create_trigger_slot(ctx) {
     	let button;
     	let mounted;
@@ -9217,11 +9217,11 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			button = element("button");
-    			button.textContent = "venmoing me a half a coffee";
-    			attr_dev(button, "class", "moreInfo");
+    			button.textContent = "venmoing me half a coffee";
+    			attr_dev(button, "class", "moreInfo svelte-jrt1mu");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$2, 63, 8, 1297);
+    			add_location(button, file$2, 66, 8, 1408);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9243,41 +9243,31 @@ var app = (function () {
     		block,
     		id: create_trigger_slot.name,
     		type: "slot",
-    		source: "(64:8) ",
+    		source: "(67:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (67:8) 
+    // (70:8) 
     function create_content_slot(ctx) {
     	let div;
     	let p;
-    	let t0;
-    	let i;
-    	let t2;
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			p = element("p");
-    			t0 = text("Percent change you'll get ");
-    			i = element("i");
-    			i.textContent = "at least";
-    			t2 = text(" this many cards.");
-    			add_location(i, file$2, 67, 65, 1555);
-    			attr_dev(p, "class", "popover-content svelte-1cm7is4");
-    			add_location(p, file$2, 67, 12, 1502);
+    			p.textContent = "venmo info to come...";
+    			attr_dev(p, "class", "popover-content svelte-jrt1mu");
+    			add_location(p, file$2, 70, 12, 1611);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$2, 66, 8, 1468);
+    			add_location(div, file$2, 69, 8, 1577);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, p);
-    			append_dev(p, t0);
-    			append_dev(p, i);
-    			append_dev(p, t2);
     		},
     		p: noop$3,
     		d: function destroy(detaching) {
@@ -9289,7 +9279,7 @@ var app = (function () {
     		block,
     		id: create_content_slot.name,
     		type: "slot",
-    		source: "(67:8) ",
+    		source: "(70:8) ",
     		ctx
     	});
 
@@ -9334,15 +9324,15 @@ var app = (function () {
     			h1.textContent = "Draw Probability Calculator";
     			t1 = space();
     			p = element("p");
-    			t2 = text("This tool is made to answer questions like, \"what are the chances I draw a mana rock and two lands in my opening hand.\" While I set the default deck size to 99 (edh), the tool will work for any deck size. If it helps you, consider \r\n      \r\n      ");
+    			t2 = text("This tool is made to answer questions like, \"what are the chances I draw ramp and two lands in my opening hand.\" While I thought about this tool in the frame of Magic edh, it will work for any deck size and card game that draws 7 cards to start, and then 1 card per turn after. If you find this helpful, consider \r\n      \r\n      ");
     			create_component(popover.$$.fragment);
     			t3 = text("\r\n\r\n   🙂.");
-    			attr_dev(h1, "class", "title svelte-1cm7is4");
-    			add_location(h1, file$2, 59, 4, 932);
-    			attr_dev(p, "class", "svelte-1cm7is4");
-    			add_location(p, file$2, 60, 4, 988);
-    			attr_dev(div, "class", "intro-section svelte-1cm7is4");
-    			add_location(div, file$2, 58, 2, 899);
+    			attr_dev(h1, "class", "title svelte-jrt1mu");
+    			add_location(h1, file$2, 62, 4, 961);
+    			attr_dev(p, "class", "svelte-jrt1mu");
+    			add_location(p, file$2, 63, 4, 1017);
+    			attr_dev(div, "class", "intro-section svelte-jrt1mu");
+    			add_location(div, file$2, 61, 2, 928);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9490,7 +9480,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (61:8) {#if openItem === index}
+    // (63:8) {#if openItem === index}
     function create_if_block(ctx) {
     	let div;
     	let raw_value = /*answer*/ ctx[5] + "";
@@ -9501,7 +9491,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "answer svelte-1wk37ja");
-    			add_location(div, file$1, 61, 10, 2089);
+    			add_location(div, file$1, 63, 10, 2998);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9540,14 +9530,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(61:8) {#if openItem === index}",
+    		source: "(63:8) {#if openItem === index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (58:4) {#each faqs as {question, answer}
+    // (60:4) {#each faqs as {question, answer}
     function create_each_block(ctx) {
     	let div;
     	let h3;
@@ -9572,9 +9562,9 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t2 = space();
     			attr_dev(h3, "class", "svelte-1wk37ja");
-    			add_location(h3, file$1, 59, 8, 2024);
+    			add_location(h3, file$1, 61, 8, 2933);
     			attr_dev(div, "class", "accordion-item svelte-1wk37ja");
-    			add_location(div, file$1, 58, 6, 1951);
+    			add_location(div, file$1, 60, 6, 2860);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9627,7 +9617,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(58:4) {#each faqs as {question, answer}",
+    		source: "(60:4) {#each faqs as {question, answer}",
     		ctx
     	});
 
@@ -9653,7 +9643,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", "accordion svelte-1wk37ja");
-    			add_location(div, file$1, 56, 2, 1873);
+    			add_location(div, file$1, 58, 2, 2782);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9718,15 +9708,15 @@ var app = (function () {
     	let faqs = [
     		{
     			question: "How does this work?",
-    			answer: "This tool uses <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric distribution</a> math to calculate probabilities common to Magic and other card games."
+    			answer: "This tool uses <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric distribution</a> math to calculate draw probabilities common to Magic and other card games."
     		},
     		{
     			question: "How do I know this is accurate?",
-    			answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement. I don't guarantee the accuracy of this tool in any way."
+    			answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub,</a><a href='https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html' target='_blank'> mtg combo calc</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement."
     		},
     		{
     			question: "I'd like to support this or give feedback.",
-    			answer: "FAQ to come..."
+    			answer: "There's a lot of ways to help! <p><b>If you're a mathy person,</b> you could help me figure out mulligan calculations by providing a rough framework of how the calculation would work. See the github <a href='https://github.com/savanaben/svelte-mtg-calculator?tab=readme-ov-file#svelte-mtg-calculator' target='_blank'>readme</a> for more info.</p> <p><b>If you're a developer,</b> feel free to check out the <a href='https://github.com/savanaben/svelte-mtg-calculator?tab=readme-ov-file#svelte-mtg-calculator' target='_blank'>readme</a> project and propose improvements. The readme has a list of areas of improvement/known issues.</p> <p>Finally, <b>If you just have a great idea to make this more useful,</b> send me an email (ben.c.gross@gmail.com). This is a passion project and I'd love to extend or add functionality that helps people build their deck.</p> "
     		}
     	];
 
@@ -9812,7 +9802,7 @@ var app = (function () {
     			create_component(calculation.$$.fragment);
     			t2 = space();
     			create_component(faq.$$.fragment);
-    			attr_dev(main, "class", "parameters svelte-18jvlxf");
+    			attr_dev(main, "class", "parameters svelte-1hj1r27");
     			add_location(main, file, 20, 0, 468);
     		},
     		l: function claim(nodes) {

@@ -18,6 +18,7 @@
       font-size: 36px;
       font-weight: bold;
       margin-bottom: 20px;
+      text-align: center;
     }
   
     .subtitle {
@@ -31,7 +32,12 @@
       line-height: 1.6;
       margin-bottom: 15px;
     }
-  
+    
+button {
+  padding: 4px;
+  color: #0066e9;
+}
+
     .highlight {
       font-weight: bold;
       color: #333;
@@ -42,9 +48,6 @@
         padding: 10px;
       }
   
-      .title {
-        font-size: 24px;
-      }
   
       .subtitle {
         font-size: 20px;
@@ -58,14 +61,14 @@
   
   <div class="intro-section">
     <h1 class="title">Draw Probability Calculator</h1>
-    <p>This tool is made to answer questions like, "what are the chances I draw a mana rock and two lands in my opening hand." While I set the default deck size to 99 (edh), the tool will work for any deck size. If it helps you, consider 
+    <p>This tool is made to answer questions like, "what are the chances I draw ramp and two lands in my opening hand." While I thought about this tool in the frame of Magic edh, it will work for any deck size and card game that draws 7 cards to start, and then 1 card per turn after. If you find this helpful, consider 
       
       <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo"  slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
-          venmoing me a half a coffee
+          venmoing me half a coffee
         </button>
         <div slot="content">
-            <p class="popover-content">Percent change you'll get <i>at least</i> this many cards.</p>
+            <p class="popover-content">venmo info to come...</p>
         </div>
     </Popover>
 
