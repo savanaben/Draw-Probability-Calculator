@@ -22,15 +22,13 @@
 	<Intro />
     <GroupDefinition on:updateGroups={handleGroupUpdate} />
     <Calculation {groups} {deckSize} {mulliganCount} />
-	<p>*You can link up to 4 categories by assigning them the same name (name text must match).</p>
-	<p>**WARNING - Mulligan feature is experimental. Mulligan on turn 0 factors in calculations and such, while mulligans on turn 1, turn 2, etc. simply add the increased probability of getting the desired card from turn 0. I am sure this is not an accurate method but it's the best I could think of for now.</p>
 	<FAQ />
 </main>
 
 <!-- Your styles here -->
 <style>
 .parameters {
-	max-width: 55rem;
+	max-width: 60rem;
 	margin: auto; /* Centers the container */
 	padding-bottom: 1rem; /* Centers the container */
 }

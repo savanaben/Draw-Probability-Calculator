@@ -1,5 +1,9 @@
 <script>
-    // JavaScript section for any reactive variables or imports
+
+      import Popover from './Popover.svelte';
+
+      let showPopover = false;
+
   </script>
   
   <style>
@@ -53,7 +57,18 @@
   </style>
   
   <div class="intro-section">
-    <h1 class="title">Magic Probability Calculator</h1>
-    <p>This tool is made to answer questions like, "what are the chances I draw a mana rock and two lands in my opening hand." If it helps you, consider buying me a half a coffee 🙂.</p>
+    <h1 class="title">Draw Probability Calculator</h1>
+    <p>This tool is made to answer questions like, "what are the chances I draw a mana rock and two lands in my opening hand." While I set the default deck size to 99 (edh), the tool will work for any deck size. If it helps you, consider 
+      
+      <Popover bind:show={showPopover} placement="top">
+        <button class="moreInfo"  slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
+          venmoing me a half a coffee
+        </button>
+        <div slot="content">
+            <p class="popover-content">Percent change you'll get <i>at least</i> this many cards.</p>
+        </div>
+    </Popover>
+
+   🙂.</p>
   </div>
   

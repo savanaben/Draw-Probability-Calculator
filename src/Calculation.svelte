@@ -373,7 +373,7 @@ function assignGroupColors(groups) {
 }
 
 .card-label {
-    margin-top: 5px;
+    margin: 5px;
     font-size: 0.7em;
     text-align: center;
 }

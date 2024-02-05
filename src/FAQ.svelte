@@ -2,12 +2,14 @@
     import { slide } from 'svelte/transition';
   
     let faqs = [
-      { question: "How do I use this?", 
-       answer: "Svelte is a radical new approach to building user interfaces. Unlike traditional frameworks, Svelte shifts much of the work to compile time, producing highly efficient code that runs directly in the browser." },
+      { question: "How does this work?", 
+      answer: "This tool uses <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric distribution</a> math to calculate probabilities common to Magic and other card games."
+      },
       { question: "How do I know this is accurate?", 
-       answer: "You might choose Svelte for its simplicity, speed, and ease of learning. It compiles your code to tiny, framework-less vanilla JS — your app starts fast and stays fast." },
+       answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement. I don't guarantee the accuracy of this tool in any way."
+      },
       { question: "I'd like to support this or give feedback.", 
-       answer: "Svelte differs in that it doesn't use a virtual DOM. It compiles your components down to efficient imperative code that directly updates the DOM when the state of the app changes." }
+       answer: "FAQ to come..." },
     ];
   
     let openItem = null;
@@ -19,7 +21,7 @@
   
   <style>
     .accordion {
-
+max-width: 55em;
       padding: 1em;
     }
     .accordion-item {
@@ -58,7 +60,7 @@ h3 {
         <h3>{question}</h3>
         {#if openItem === index}
           <div class="answer" transition:slide|local={{duration: 250}}>
-            <p>{answer}</p>
+            {@html answer} <!-- Updated this line -->
           </div>
         {/if}
       </div>
