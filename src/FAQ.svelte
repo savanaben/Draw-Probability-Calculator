@@ -5,8 +5,8 @@
       { question: "How does this work?", 
       answer: "This tool uses <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric distribution</a> math to calculate draw probabilities common to Magic and other card games."
       },
-      { question: "How do I know this is accurate?", 
-       answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub,</a><a href='https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html' target='_blank'> mtg combo calc</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement."
+      { question: "How do you know this is accurate?", 
+       answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub,</a><a href='https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html' target='_blank'> mtg combo calc,</a><a href='https://deckstats.net/' target='_blank'> deckstats</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement."
 
       },
       { question: "I'd like to support this or give feedback.", 
@@ -14,6 +14,7 @@
       },
     ];
   
+
     let openItem = null;
   
     function toggleItem(index) {

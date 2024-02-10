@@ -10,6 +10,8 @@
     let nextIndex = 1; // Initialize the counter for group indexes
     let groups = [{ index: 0, name: '', size: 1, cardsToDraw: 1, link: '' }]; // Initial group with name 'Category 1'
     let deckSize = 99;
+    let InitialDrawSize = 7;
+    console.log("Initial InitialDrawSize:", InitialDrawSize);
     let mulliganCount = 0;
     let colorIndex = 0;
     let showPopover = false;
@@ -19,6 +21,9 @@
         "#DCEDC8", "#B2DFDB", "#FFE0B2", "#E1BEE7", "#B3E5FC", "#FFCCBC", "#C5CAE9"
     ];
    
+
+ 
+
 
 
 
@@ -32,7 +37,7 @@
         });
 
         groupColors.set(updatedColors);
-        dispatch('updateGroups', { groups, deckSize, mulliganCount });
+        dispatch('updateGroups', { groups, deckSize, InitialDrawSize, mulliganCount });
     }
 
     function addGroup() {
@@ -62,8 +67,8 @@
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                          <p class="popover-content">Categories are the group of similar cards you want to find the percent chance of drawing. For example, draw, ramp, lands, interaction, etc. </p>
-                          <p class="popover-content">Each category <b>must</b> have a unique text name for the tool to work (some day I'll figure out indexing...)</p>
+                          <p class="popover-content">Categories are the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. </p>
+                          <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
                         </div>
                     </Popover>
                 </th>
@@ -84,8 +89,8 @@
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">Use this field to link multiple categories together. When categories are linked, the tool displays the percent chance of getting the minimum number of desired cards in <i>each</i> category with the same link name.</p>
-                            <p class="popover-content">Linked categories must have the exact same name (keyword match) and you can't link more than 4 categories together currently. </p>
+                            <p class="popover-content">When categories are linked, the tool displays the percent chance of getting the minimum number of desired cards in <i>each</i> category with the same link name.</p>
+                            <p class="popover-content"><b>Categories must have the exact same name (keyword match) and you can't link more than 4 categories together currently.</b></p>
                         </div>
                     </Popover>
                 </th>
@@ -128,7 +133,7 @@
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="text" 
                             bind:value={group.link} 
-                            placeholder="Category 1 + 2, etc" />
+                            placeholder="Link via keyword matching..." />
                     </td>
                     <td>
                         {#if index > 0}
@@ -142,10 +147,10 @@
     
     <div class="controls-container">
         
-        <button on:click={addGroup}>Add another category</button>
+        <button on:click={addGroup}>Add category</button>
         
         <div class="mulligan-selection">
-            <label for="mulliganCount">Mulligans (Experimental)
+            <label for="mulliganCount">Mulligans (experimental)
 
                 <Popover bind:show={showPopover} placement="top">
                     <button class="moreInfo"  slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
@@ -168,8 +173,13 @@
         </div>
 
         <div class="deck-size-container">
-            <label for="deckSize">Deck Size:</label>
-            <input type="number" id="deckSize" bind:value={deckSize} min="1" />
+            <label for="deckSize">Initial cards drawn:</label>
+            <input type="number" class="deckSize" bind:value={InitialDrawSize} min="1" />
+        </div>
+
+        <div class="deck-size-container">
+            <label for="deckSize">Deck size:</label>
+            <input type="number" class="deckSize" bind:value={deckSize} min="1" />
         </div>
 
     </div>
@@ -222,13 +232,12 @@
         justify-content: space-between;
         align-items: center;
         margin-top: 12px;
-        gap: 8px;
+        gap: 12px;
     }
 
     .deck-size-container {
         display: flex;
         align-items: center;
-        width: 150px;
     }
 
     .mulligan-selection {
@@ -236,6 +245,9 @@
         align-items: center;
     }
 
+.deckSize {
+max-width: 65px;
+}
 
     label {
         margin-right: 10px;
