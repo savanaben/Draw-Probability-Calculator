@@ -5,6 +5,11 @@ html, body {
 	background-color:#fffae9;
 }
 
+h1{
+	font-family: 'Vollkorn', serif;
+	color: #924b00;
+	
+}
 
 img {
 	max-width: 100%; /* Ensures the image is responsive and does not overflow the popover */
