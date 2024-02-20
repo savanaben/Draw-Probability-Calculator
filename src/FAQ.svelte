@@ -1,30 +1,25 @@
 <script>
-    import { slide } from 'svelte/transition';
-  
-    let faqs = [
-      { question: "How does this work?", 
-      answer: "This tool uses <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric distribution</a> math to calculate draw probabilities common to Magic and other card games."
-      },
-      { question: "How do you know this is accurate?", 
-       answer: "This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub,</a><a href='https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html' target='_blank'> mtg combo calc,</a><a href='https://deckstats.net/' target='_blank'> deckstats</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement."
+  import { slide } from 'svelte/transition';
 
-      },
-      { question: "I'd like to support this or give feedback.", 
-       answer: "There's a lot of ways to help! <p><b>If you're a mathy person,</b> you could help me figure out mulligan calculations by providing a rough framework of how the calculation would work. See the github <a href='https://github.com/savanaben/svelte-mtg-calculator?tab=readme-ov-file#svelte-mtg-calculator' target='_blank'>readme</a> for more info.</p> <p><b>If you're a developer,</b> feel free to check out the <a href='https://github.com/savanaben/svelte-mtg-calculator?tab=readme-ov-file#svelte-mtg-calculator' target='_blank'>readme</a> project and propose improvements. The readme has a list of areas of improvement/known issues.</p> <p>Finally, <b>If you just have a great idea to make this more useful,</b> send me an email (ben.c.gross@gmail.com). This is a passion project and I'd love to extend or add functionality that helps people build their deck.</p> "
-      },
-    ];
-  
+  let openItem = null;
 
-    let openItem = null;
-  
-    function toggleItem(index) {
+  function toggleItem(index) {
       openItem = openItem === index ? null : index;
-    }
-  </script>
+  }
+
+  export let faqs = []; // Accept faqs as a prop
+  export let customClass = ''; // Accept class as a prop
+
+</script>
   
   <style>
+
+   .reduced-padding {
+    padding: 0em !important;
+   }
+
     .accordion {
-max-width: 55em;
+     max-width: 55em;
       padding: 1em;
     }
     .accordion-item {
@@ -57,16 +52,16 @@ h3 {
     }
   </style>
   
-  <div class="accordion">
+  <div class={`accordion ${customClass}`}>
     {#each faqs as {question, answer}, index}
-      <div class="accordion-item" on:click={() => toggleItem(index)}>
-        <h3>{question}</h3>
-        {#if openItem === index}
-          <div class="answer" transition:slide|local={{duration: 250}}>
-            {@html answer} <!-- Updated this line -->
-          </div>
-        {/if}
-      </div>
+        <div class="accordion-item" on:click={() => toggleItem(index)}>
+            <h3>{question}</h3>
+            {#if openItem === index}
+                <div class="answer" transition:slide|local={{duration: 250}}>
+                    {@html answer}
+                </div>
+            {/if}
+        </div>
     {/each}
-  </div>
+</div>
   

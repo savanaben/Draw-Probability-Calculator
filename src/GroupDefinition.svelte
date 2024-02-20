@@ -51,13 +51,16 @@
     }
 
 
+
+    
+
 </script>
 
 
 
-
+<h2 style="text-align: center;">What you want to assess</h2>
 <div class="parameters">
-
+    <div class="table-wrapper">
     <table>
         <thead>
             <tr>
@@ -79,7 +82,7 @@
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">Percent change you'll get <i>at least</i> this many cards.</p>
+                            <p class="popover-content">Percent change you'll get <i>at least</i> this many cards from this category.</p>
                         </div>
                     </Popover>
                 </th>
@@ -89,8 +92,8 @@
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">When categories are linked, the tool displays the percent chance of getting the minimum number of desired cards in <i>each</i> category with the same link name.</p>
-                            <p class="popover-content"><b>Categories must have the exact same name (keyword match) and you can't link more than 4 categories together currently.</b></p>
+                            <p class="popover-content">When categories are linked, the tool displays the percent chance of getting at least the minimum number of desired cards in <i>each</i> category.</p>
+                            <p class="popover-content"><b>Categories must have the exact same link name (keyword match) and you can't link more than 4 categories together currently.</b></p>
                         </div>
                     </Popover>
                 </th>
@@ -107,7 +110,13 @@
                             type="text" 
                             bind:value={group.name} 
                             placeholder="mana, draw, ramp, etc" />
-                    </td>
+                           
+                            <!--
+                            {#if index > 0}
+                            <button on:click={() => removeGroup(index)}>Remove</button>
+                              {/if}
+                            -->
+              </td>
                     <td>
                         <input 
                             class="input-group" 
@@ -141,10 +150,11 @@
                         {/if}
                     </td>
                 </tr>
+
             {/each}
         </tbody>
     </table>
-    
+    </div>
     <div class="controls-container">
         
         <button on:click={addGroup}>Add category</button>
@@ -188,12 +198,42 @@
 
 <style>
     /* Add your styles here */
+    
+    .table-wrapper {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+    margin: auto;
+    max-width: 100%; /* Ensures the wrapper does not exceed the parent width */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #888 #e0e0e0; /* For Firefox */
+}
+    
+.table-wrapper::-webkit-scrollbar {
+    height: 12px; /* Height of the scrollbar */
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #e0e0e0; /* Color of the track */
+    border-radius: 30px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners of the scrollbar thumb */
+    border: 4px solid #e0e0e0; /* Creates padding around the scrollbar thumb */
+    
+}
+
+
+
+
     table {
-        width: 100%;
-        border-collapse: collapse;
+        width: auto; /* Allows the table to expand as needed */
+    min-width: 100%; /* Ensures the table takes up at least the full width of the wrapper */
+    border-collapse: collapse;
     }
     th, td {
-        border: 1px solid #ddd;
+        border: 0px solid #ddd;
         padding: 8px;
         text-align: left;
         background-color: white;
@@ -235,19 +275,28 @@
         gap: 12px;
     }
 
+    @media (max-width: 640px) {
+  .controls-container {
+    flex-wrap: wrap;
+  }
+}
+
+
     .deck-size-container {
         display: flex;
         align-items: center;
     }
+
+    .deckSize {
+max-width: 65px;
+}
 
     .mulligan-selection {
         display: flex;
         align-items: center;
     }
 
-.deckSize {
-max-width: 65px;
-}
+
 
     label {
         margin-right: 10px;
@@ -278,6 +327,7 @@ max-width: 65px;
 
     select {
         margin:0;
+        background-color: white;
     }
 
 

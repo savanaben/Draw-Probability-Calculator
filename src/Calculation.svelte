@@ -113,25 +113,18 @@ function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSi
     export let deckSize; // Received from App.svelte
     export let mulliganCount;
     export let InitialDrawSize; 
-    console.log('InitialDrawSize immediately after declaration:', InitialDrawSize);
+
 
 
     let results = {};
-    let numberOfTurns = 5; // Calculate probabilities up to turn 5
-
-
-    $: if (InitialDrawSize !== undefined) {
-    console.log('InitialDrawSize:', InitialDrawSize);
-}
+    let numberOfTurns = 5; // Calculate probabilities up to certain numer of turn
 
 
 
-    // Reactive statement to calculate probabilities when groups change
     // Reactive statement to calculate probabilities when groups change
     $: if (groups.length > 0) {
         calculateProbabilities();
     }
-
 
 
 
@@ -306,6 +299,7 @@ function assignGroupColors(groups) {
 
 </script>
 
+<h2 style="text-align: center;">What to expect</h2>
 <div class="output-diagram">
     {#each generateTurnsArray(numberOfTurns) as _, turn}
         <div class="turn-row">
@@ -330,11 +324,59 @@ function assignGroupColors(groups) {
     {/each}
 </div>
 
+<div class="deck-size-container">
+    <label for="deckSize">Number of turns:</label>
+    <input type="number" class="deckSize" bind:value={numberOfTurns} min="1" />
+</div>
+
 <style>
-    .output-diagram {
-    max-width: 55rem;
-    margin: auto; /* Centers the container */
+.output-diagram {
+    max-width: 100%; /* Adjust based on your layout */
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Keeps the inner content on a single line */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling on touch devices */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #888 #e0e0e0; /* For Firefox */
 }
+
+.output-diagram::-webkit-scrollbar {
+    height: 12px; /* Height of the scrollbar */
+}
+
+.output-diagram::-webkit-scrollbar-track {
+    background: #e0e0e0; /* Color of the track */
+    border-radius: 30px;
+}
+
+.output-diagram::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners of the scrollbar thumb */
+    border: 4px solid #e0e0e0; /* Creates padding around the scrollbar thumb */
+}
+
+.deck-size-container {
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+        margin-left: 60px;
+    }
+
+    .deckSize {
+max-width: 65px;
+}
+
+input {
+        padding: 6px;
+        margin: 0px;
+        min-width: 45px;
+    }
+
+
+
+label {
+        margin-right: 10px;
+
+    }
 
 .turn-row {
     display: flex;
@@ -345,6 +387,7 @@ function assignGroupColors(groups) {
 .turn-label {
     margin-right: 10px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .turn-label i {
@@ -354,8 +397,8 @@ function assignGroupColors(groups) {
 }
 
 .card-rectangles {
-    display: flex;
-    flex-wrap: wrap; /* Allows cards to wrap to the next line if needed */
+    display: inline-flex; /* Changes from flex to inline-flex */
+    flex-wrap: nowrap; /* Prevents wrapping */
 }
 
 .card-container {
@@ -391,8 +434,11 @@ function assignGroupColors(groups) {
 
 .card-ratio {
     font-size: 1em;
-    margin-top: 4px; /* Space between ratio and probability */
+    margin-top: 4px; /* Adjust as needed */
     font-style: italic;
+    white-space: normal; /* Allows text to wrap */
+    word-break: break-word; /* Ensures long words do not overflow */
+    text-align: center; /* Keeps the text centered */
 }
 
 .probability {
