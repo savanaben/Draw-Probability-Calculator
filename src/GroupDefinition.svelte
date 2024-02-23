@@ -58,7 +58,7 @@
 
 
 
-<h2 style="text-align: center;">What you want to assess</h2>
+<h2 style="text-align: center;">Deck inputs and card categories</h2>
 <div class="parameters">
     <div class="table-wrapper">
     <table>
@@ -66,7 +66,7 @@
             <tr>
                 <th>Category unique name
                     <Popover bind:show={showPopover} placement="top">
-                        <button class="moreInfo"  slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
+                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
@@ -78,7 +78,7 @@
                 <th># Cards in category</th>
                 <th>Minimum # desired cards
                     <Popover bind:show={showPopover} placement="top">
-                        <button class="moreInfo"  slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
+                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
@@ -88,7 +88,7 @@
                 </th>
                 <th>Linked categories
                     <Popover bind:show={showPopover} placement="top">
-                        <button class="moreInfo"  slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
+                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
@@ -163,7 +163,7 @@
             <label for="mulliganCount">Mulligans (experimental)
 
                 <Popover bind:show={showPopover} placement="top">
-                    <button class="moreInfo"  slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
+                    <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                         <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                     </button>
                     <div slot="content">

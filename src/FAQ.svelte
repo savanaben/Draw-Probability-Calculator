@@ -7,6 +7,13 @@
       openItem = openItem === index ? null : index;
   }
 
+    // Function to handle keydown events on accordion items
+    function handleKeydown(event, index) {
+    if (event.key === 'Enter') {
+      toggleItem(index);
+    }
+  }
+
   export let faqs = []; // Accept faqs as a prop
   export let customClass = ''; // Accept class as a prop
 
@@ -38,7 +45,7 @@
 h3 {
     margin-top: 0; /* Remove margin-top */
     margin-bottom: 0; /* Remove margin-bottom and control spacing with padding */ 
-    color: rgb(23, 23, 185);
+    color: #0066e9;
 }
 
   p {
@@ -54,14 +61,15 @@ h3 {
   
   <div class={`accordion ${customClass}`}>
     {#each faqs as {question, answer}, index}
-        <div class="accordion-item" on:click={() => toggleItem(index)}>
-            <h3>{question}</h3>
-            {#if openItem === index}
-                <div class="answer" transition:slide|local={{duration: 250}}>
-                    {@html answer}
-                </div>
-            {/if}
-        </div>
+      <div tabindex="0" class="accordion-item" on:click={() => toggleItem(index)} on:keydown={(event) => handleKeydown(event, index)}>
+        <h3>{question}</h3>
+        {#if openItem === index}
+          <div class="answer" transition:slide|local={{duration: 250}}>
+            {@html answer}
+          </div>
+        {/if}
+      </div>
     {/each}
-</div>
+  </div>
+  
   

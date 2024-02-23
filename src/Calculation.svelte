@@ -169,6 +169,8 @@ function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSi
     return Math.min(1, totalProbability);
 }
 
+
+
 function calculateProbabilityForHand(group, cardsDrawn) {
     let probability = 0;
     for (let x = group.cardsToDraw; x <= Math.min(group.size, cardsDrawn); x++) {
@@ -299,7 +301,7 @@ function assignGroupColors(groups) {
 
 </script>
 
-<h2 style="text-align: center;">What to expect</h2>
+<h2 style="text-align: center;">Probabilities</h2>
 <div class="output-diagram">
     {#each generateTurnsArray(numberOfTurns) as _, turn}
         <div class="turn-row">

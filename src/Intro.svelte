@@ -83,7 +83,7 @@ button {
     <p>This tool is made to answer questions like, "what are the chances I draw ramp and two lands in my opening hand." While I thought about this tool in the frame of Magic edh, it will work for any deck size and card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider 
       
       <Popover bind:show={showPopover} placement="bottom">
-        <button class="moreInfo" slot="trigger" on:click={() => showPopover = !showPopover} aria-label="Help">
+        <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
           venmoing me half a coffee
         </button>
         <div slot="content">
@@ -119,7 +119,7 @@ button {
 
 
     let example = [
-      { question: "Examples of how to use this tool", 
+      { question: "Show examples of how to use this tool", 
       answer: "<p>This tool helps people think about probabilities of single and multiple-card combinations in their opening hands. For example, in the following setup, I can see the chances i'll get 3 lands <i>or</i> a draw card in my opening hand.</p><img src='simple-setup.png' alt='Coffee Image'><img src='simple-probabilities.png' alt='Coffee Image'><hr><p>Using the link feature, you can see the chances i'll get 3 lands <i>and</i> a draw card in my opening hand.</p><img src='linked-simple.png' alt='Coffee Image'><img src='linked-simple-outcome.png' alt='Coffee Image'><hr><p>In this more complex example, you can see the chances i'll get specific lands and a ramp spell. Separately, I can also see the chances i'll get my combo.</p><img src='setup.png' alt='Coffee Image'><img src='probabilities.png' alt='Coffee Image'><hr>"
       },
       ];
