@@ -1,6 +1,8 @@
 # Draw Probability Calculator
 A hypergeometric distribution calculator customized for card games like Magic the Gathering. 
 
+https://savanaben.github.io/Draw-Probability-Calculator/
+
  ## Notes/to do
  - Fix category name method so it's index-based, and does not require unique text names. 
  - Figure our accurate london mulligan method.
