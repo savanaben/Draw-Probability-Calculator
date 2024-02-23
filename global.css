@@ -64,7 +64,7 @@ select {
 
 button {
 	color: #333;
-	outline: none;
+
 	background-color: white;
 	border-radius: 4px;
 	cursor: pointer;
@@ -78,6 +78,3 @@ button:not(:disabled):active {
 	background-color: #ddd;
 }
 
-button:focus {
-	border-color: #666;
-}
