@@ -18,7 +18,7 @@ The main challenge I've faced with calculating mulligans is how to carry forward
 
 Currently the code is somewhat "dumb". I think I'm accurately calculating turn 0, but then I'm just adding the increased probability from multiple turn 0 hands to baseline hypergeometric turn 1, 2, 3, etc calculations. This does not feel accurate. 
 
-To dig deeper, you'd want to focus on the Calculation.svelte file and the applyLondonMulligan,calculateSingleGroup, applyLondonMulliganForLinkedGroups, and calculateLinkedGroups functions. 
+To dig deeper, you'd want to focus on the Calculation.svelte file and the applyLondonMulligan, calculateSingleGroup, applyLondonMulliganForLinkedGroups, and calculateLinkedGroups functions. 
 
 To help me, a specific step-by-step description of how the calculations would work (from turn 0 to subsequent turns) might be enough to get gpt to crack it. Or, I imagine this could be done more easily in python, and I could try converting python to js for this. 
 
