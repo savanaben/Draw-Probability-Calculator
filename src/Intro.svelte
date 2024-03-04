@@ -80,7 +80,7 @@ button {
 
   <div class="intro-section">
     <h1 class="title">Draw Probability Calculator</h1>
-    <p>This tool is made to answer questions like, "what are the chances I draw ramp and two lands in my opening hand." While I thought about this tool in the frame of Magic edh, it will work for any deck size and card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider 
+    <p>This tool is made to answer questions like, "what are the chances I draw one ramp spell and two lands in my opening hand." While I thought about this tool in the frame of Magic edh, it will work for any deck size and card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider 
       
       <Popover bind:show={showPopover} placement="bottom">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">

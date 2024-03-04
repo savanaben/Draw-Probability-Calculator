@@ -15,6 +15,12 @@
     let mulliganCount = 0;
     let colorIndex = 0;
     let showPopover = false;
+    let mulliganCountString = "0"; // Use a string for the binding
+
+
+
+        // Reactive statement to ensure mulliganCount is always a number
+        $: mulliganCount = Number(mulliganCountString);
 
 
     const presetColors = [
@@ -167,13 +173,13 @@
                         <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                     </button>
                     <div slot="content">
-                        <p class="popover-content">London mulligan feature is experimental. Mulligan on turn 0 may be more accurate, and essentially calculates the probability with multiple opening hands in mind and averages.</p>
-                         <p class="popover-content">Mulligans on turn 1, turn 2, etc. simply "carry over" the increased probability of multiple opening hands to your first, second, third, etc. draw. This is probably not mathematically accurate, still working on it!</p>
+                        <p class="popover-content">London mulligan feature is experimental. Mulligans for non-linked categories is believed to be correct, but not confirmed. Mulligans for linked categories is known to not be correct, and still uses a "carry over" effect (making turn 1, 2, 3.. less accurate. Turn 0 may be correct.)</p>
+                         <p class="popover-content">See the FAQ and github if you want to help out here - I need a mathematician to confirm logic!</p>
                     </div>
                 </Popover>
                 
                 :</label>
-            <select bind:value={mulliganCount}>
+            <select bind:value={mulliganCountString}>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

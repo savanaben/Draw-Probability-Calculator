@@ -7213,13 +7213,13 @@ var app = (function () {
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[28] = list[i];
-    	child_ctx[29] = list;
-    	child_ctx[30] = i;
+    	child_ctx[29] = list[i];
+    	child_ctx[30] = list;
+    	child_ctx[31] = i;
     	return child_ctx;
     }
 
-    // (69:24) 
+    // (75:24) 
     function create_trigger_slot_3(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -7243,7 +7243,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 68, 24, 2127);
+    			add_location(button, file$4, 74, 24, 2332);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -7251,7 +7251,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[9], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[10], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -7277,14 +7277,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_3.name,
     		type: "slot",
-    		source: "(69:24) ",
+    		source: "(75:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (72:24) 
+    // (78:24) 
     function create_content_slot_3(ctx) {
     	let div;
     	let p0;
@@ -7304,12 +7304,12 @@ var app = (function () {
     			b.textContent = "Each category must have a unique text name";
     			t3 = text(" for the tool to work (some day I'll figure out indexing...)");
     			attr_dev(p0, "class", "popover-content svelte-gl2bfz");
-    			add_location(p0, file$4, 72, 26, 2490);
-    			add_location(b, file$4, 73, 53, 2710);
+    			add_location(p0, file$4, 78, 26, 2695);
+    			add_location(b, file$4, 79, 53, 2915);
     			attr_dev(p1, "class", "popover-content svelte-gl2bfz");
-    			add_location(p1, file$4, 73, 26, 2683);
+    			add_location(p1, file$4, 79, 26, 2888);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 71, 24, 2442);
+    			add_location(div, file$4, 77, 24, 2647);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7329,14 +7329,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_3.name,
     		type: "slot",
-    		source: "(72:24) ",
+    		source: "(78:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (81:24) 
+    // (87:24) 
     function create_trigger_slot_2(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -7360,7 +7360,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 80, 24, 3099);
+    			add_location(button, file$4, 86, 24, 3304);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -7368,7 +7368,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[11], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[12], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -7394,14 +7394,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_2.name,
     		type: "slot",
-    		source: "(81:24) ",
+    		source: "(87:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (84:24) 
+    // (90:24) 
     function create_content_slot_2(ctx) {
     	let div;
     	let p;
@@ -7417,11 +7417,11 @@ var app = (function () {
     			i = element("i");
     			i.textContent = "at least";
     			t2 = text(" this many cards from this category.");
-    			add_location(i, file$4, 84, 81, 3517);
+    			add_location(i, file$4, 90, 81, 3722);
     			attr_dev(p, "class", "popover-content svelte-gl2bfz");
-    			add_location(p, file$4, 84, 28, 3464);
+    			add_location(p, file$4, 90, 28, 3669);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 83, 24, 3414);
+    			add_location(div, file$4, 89, 24, 3619);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7440,14 +7440,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_2.name,
     		type: "slot",
-    		source: "(84:24) ",
+    		source: "(90:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (91:24) 
+    // (97:24) 
     function create_trigger_slot_1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -7471,7 +7471,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 90, 24, 3795);
+    			add_location(button, file$4, 96, 24, 4000);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -7479,7 +7479,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[13], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[14], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -7505,14 +7505,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1.name,
     		type: "slot",
-    		source: "(91:24) ",
+    		source: "(97:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (94:24) 
+    // (100:24) 
     function create_content_slot_1(ctx) {
     	let div;
     	let p0;
@@ -7535,14 +7535,14 @@ var app = (function () {
     			p1 = element("p");
     			b = element("b");
     			b.textContent = "Categories must have the exact same link name (keyword match) and you can't link more than 4 categories together currently.";
-    			add_location(i, file$4, 94, 179, 4311);
+    			add_location(i, file$4, 100, 179, 4516);
     			attr_dev(p0, "class", "popover-content svelte-gl2bfz");
-    			add_location(p0, file$4, 94, 28, 4160);
-    			add_location(b, file$4, 95, 55, 4393);
+    			add_location(p0, file$4, 100, 28, 4365);
+    			add_location(b, file$4, 101, 55, 4598);
     			attr_dev(p1, "class", "popover-content svelte-gl2bfz");
-    			add_location(p1, file$4, 95, 28, 4366);
+    			add_location(p1, file$4, 101, 28, 4571);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 93, 24, 4110);
+    			add_location(div, file$4, 99, 24, 4315);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7564,21 +7564,21 @@ var app = (function () {
     		block,
     		id: create_content_slot_1.name,
     		type: "slot",
-    		source: "(94:24) ",
+    		source: "(100:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (148:24) {#if index > 0}
+    // (154:24) {#if index > 0}
     function create_if_block$1(ctx) {
     	let button;
     	let mounted;
     	let dispose;
 
     	function click_handler_3() {
-    		return /*click_handler_3*/ ctx[19](/*index*/ ctx[30]);
+    		return /*click_handler_3*/ ctx[20](/*index*/ ctx[31]);
     	}
 
     	const block = {
@@ -7586,7 +7586,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Remove";
     			attr_dev(button, "class", "svelte-gl2bfz");
-    			add_location(button, file$4, 148, 28, 6881);
+    			add_location(button, file$4, 154, 28, 7086);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -7610,14 +7610,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(148:24) {#if index > 0}",
+    		source: "(154:24) {#if index > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (104:12) {#each groups as group, index}
+    // (110:12) {#each groups as group, index}
     function create_each_block$2(ctx) {
     	let tr;
     	let td0;
@@ -7638,22 +7638,22 @@ var app = (function () {
     	let dispose;
 
     	function input0_input_handler() {
-    		/*input0_input_handler*/ ctx[15].call(input0, /*each_value*/ ctx[29], /*index*/ ctx[30]);
+    		/*input0_input_handler*/ ctx[16].call(input0, /*each_value*/ ctx[30], /*index*/ ctx[31]);
     	}
 
     	function input1_input_handler() {
-    		/*input1_input_handler*/ ctx[16].call(input1, /*each_value*/ ctx[29], /*index*/ ctx[30]);
+    		/*input1_input_handler*/ ctx[17].call(input1, /*each_value*/ ctx[30], /*index*/ ctx[31]);
     	}
 
     	function input2_input_handler() {
-    		/*input2_input_handler*/ ctx[17].call(input2, /*each_value*/ ctx[29], /*index*/ ctx[30]);
+    		/*input2_input_handler*/ ctx[18].call(input2, /*each_value*/ ctx[30], /*index*/ ctx[31]);
     	}
 
     	function input3_input_handler() {
-    		/*input3_input_handler*/ ctx[18].call(input3, /*each_value*/ ctx[29], /*index*/ ctx[30]);
+    		/*input3_input_handler*/ ctx[19].call(input3, /*each_value*/ ctx[30], /*index*/ ctx[31]);
     	}
 
-    	let if_block = /*index*/ ctx[30] > 0 && create_if_block$1(ctx);
+    	let if_block = /*index*/ ctx[31] > 0 && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -7675,71 +7675,71 @@ var app = (function () {
     			t4 = space();
     			attr_dev(input0, "class", "input-group svelte-gl2bfz");
 
-    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    			? /*group*/ ctx[28].link
-    			: /*group*/ ctx[28].name]);
+    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    			? /*group*/ ctx[29].link
+    			: /*group*/ ctx[29].name]);
 
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "mana, draw, ramp, etc");
-    			add_location(input0, file$4, 106, 24, 4813);
+    			add_location(input0, file$4, 112, 24, 5018);
     			attr_dev(td0, "class", "svelte-gl2bfz");
-    			add_location(td0, file$4, 105, 20, 4783);
+    			add_location(td0, file$4, 111, 20, 4988);
     			attr_dev(input1, "class", "input-group svelte-gl2bfz");
 
-    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    			? /*group*/ ctx[28].link
-    			: /*group*/ ctx[28].name]);
+    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    			? /*group*/ ctx[29].link
+    			: /*group*/ ctx[29].name]);
 
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", "1");
     			attr_dev(input1, "max", "99");
-    			add_location(input1, file$4, 120, 24, 5497);
+    			add_location(input1, file$4, 126, 24, 5702);
     			attr_dev(td1, "class", "svelte-gl2bfz");
-    			add_location(td1, file$4, 119, 20, 5467);
+    			add_location(td1, file$4, 125, 20, 5672);
     			attr_dev(input2, "class", "input-group svelte-gl2bfz");
 
-    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    			? /*group*/ ctx[28].link
-    			: /*group*/ ctx[28].name]);
+    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    			? /*group*/ ctx[29].link
+    			: /*group*/ ctx[29].name]);
 
     			attr_dev(input2, "type", "number");
     			attr_dev(input2, "min", "1");
     			attr_dev(input2, "max", "99");
-    			add_location(input2, file$4, 129, 24, 5933);
+    			add_location(input2, file$4, 135, 24, 6138);
     			attr_dev(td2, "class", "svelte-gl2bfz");
-    			add_location(td2, file$4, 128, 20, 5903);
+    			add_location(td2, file$4, 134, 20, 6108);
     			attr_dev(input3, "class", "input-group svelte-gl2bfz");
 
-    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    			? /*group*/ ctx[28].link
-    			: /*group*/ ctx[28].name]);
+    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    			? /*group*/ ctx[29].link
+    			: /*group*/ ctx[29].name]);
 
     			attr_dev(input3, "type", "text");
     			attr_dev(input3, "placeholder", "Link via keyword matching...");
-    			add_location(input3, file$4, 139, 24, 6407);
+    			add_location(input3, file$4, 145, 24, 6612);
     			attr_dev(td3, "class", "svelte-gl2bfz");
-    			add_location(td3, file$4, 138, 20, 6377);
+    			add_location(td3, file$4, 144, 20, 6582);
     			attr_dev(td4, "class", "svelte-gl2bfz");
-    			add_location(td4, file$4, 146, 20, 6806);
-    			add_location(tr, file$4, 104, 16, 4757);
+    			add_location(td4, file$4, 152, 20, 7011);
+    			add_location(tr, file$4, 110, 16, 4962);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
     			append_dev(tr, td0);
     			append_dev(td0, input0);
-    			set_input_value(input0, /*group*/ ctx[28].name);
+    			set_input_value(input0, /*group*/ ctx[29].name);
     			append_dev(tr, t0);
     			append_dev(tr, td1);
     			append_dev(td1, input1);
-    			set_input_value(input1, /*group*/ ctx[28].size);
+    			set_input_value(input1, /*group*/ ctx[29].size);
     			append_dev(tr, t1);
     			append_dev(tr, td2);
     			append_dev(td2, input2);
-    			set_input_value(input2, /*group*/ ctx[28].cardsToDraw);
+    			set_input_value(input2, /*group*/ ctx[29].cardsToDraw);
     			append_dev(tr, t2);
     			append_dev(tr, td3);
     			append_dev(td3, input3);
-    			set_input_value(input3, /*group*/ ctx[28].link);
+    			set_input_value(input3, /*group*/ ctx[29].link);
     			append_dev(tr, t3);
     			append_dev(tr, td4);
     			if (if_block) if_block.m(td4, null);
@@ -7760,46 +7760,46 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (dirty[0] & /*$groupColors, groups*/ 33) {
-    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    				? /*group*/ ctx[28].link
-    				: /*group*/ ctx[28].name]);
+    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    				? /*group*/ ctx[29].link
+    				: /*group*/ ctx[29].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && input0.value !== /*group*/ ctx[28].name) {
-    				set_input_value(input0, /*group*/ ctx[28].name);
-    			}
-
-    			if (dirty[0] & /*$groupColors, groups*/ 33) {
-    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    				? /*group*/ ctx[28].link
-    				: /*group*/ ctx[28].name]);
-    			}
-
-    			if (dirty[0] & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[28].size) {
-    				set_input_value(input1, /*group*/ ctx[28].size);
+    			if (dirty[0] & /*groups*/ 1 && input0.value !== /*group*/ ctx[29].name) {
+    				set_input_value(input0, /*group*/ ctx[29].name);
     			}
 
     			if (dirty[0] & /*$groupColors, groups*/ 33) {
-    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    				? /*group*/ ctx[28].link
-    				: /*group*/ ctx[28].name]);
+    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    				? /*group*/ ctx[29].link
+    				: /*group*/ ctx[29].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[28].cardsToDraw) {
-    				set_input_value(input2, /*group*/ ctx[28].cardsToDraw);
+    			if (dirty[0] & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[29].size) {
+    				set_input_value(input1, /*group*/ ctx[29].size);
     			}
 
     			if (dirty[0] & /*$groupColors, groups*/ 33) {
-    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[28].link && /*group*/ ctx[28].link.trim()
-    				? /*group*/ ctx[28].link
-    				: /*group*/ ctx[28].name]);
+    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    				? /*group*/ ctx[29].link
+    				: /*group*/ ctx[29].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && input3.value !== /*group*/ ctx[28].link) {
-    				set_input_value(input3, /*group*/ ctx[28].link);
+    			if (dirty[0] & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[29].cardsToDraw) {
+    				set_input_value(input2, /*group*/ ctx[29].cardsToDraw);
     			}
 
-    			if (/*index*/ ctx[30] > 0) if_block.p(ctx, dirty);
+    			if (dirty[0] & /*$groupColors, groups*/ 33) {
+    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[5][/*group*/ ctx[29].link && /*group*/ ctx[29].link.trim()
+    				? /*group*/ ctx[29].link
+    				: /*group*/ ctx[29].name]);
+    			}
+
+    			if (dirty[0] & /*groups*/ 1 && input3.value !== /*group*/ ctx[29].link) {
+    				set_input_value(input3, /*group*/ ctx[29].link);
+    			}
+
+    			if (/*index*/ ctx[31] > 0) if_block.p(ctx, dirty);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(tr);
@@ -7813,14 +7813,14 @@ var app = (function () {
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(104:12) {#each groups as group, index}",
+    		source: "(110:12) {#each groups as group, index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (166:20) 
+    // (172:20) 
     function create_trigger_slot$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -7844,7 +7844,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 165, 20, 7403);
+    			add_location(button, file$4, 171, 20, 7608);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -7852,7 +7852,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_4*/ ctx[20], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_4*/ ctx[21], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -7878,14 +7878,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$1.name,
     		type: "slot",
-    		source: "(166:20) ",
+    		source: "(172:20) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (169:20) 
+    // (175:20) 
     function create_content_slot$1(ctx) {
     	let div;
     	let p0;
@@ -7896,16 +7896,16 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			p0 = element("p");
-    			p0.textContent = "London mulligan feature is experimental. Mulligan on turn 0 may be more accurate, and essentially calculates the probability with multiple opening hands in mind and averages.";
+    			p0.textContent = "London mulligan feature is experimental. Mulligans for non-linked categories is believed to be correct, but not confirmed. Mulligans for linked categories is known to not be correct, and still uses a \"carry over\" effect (making turn 1, 2, 3.. less accurate. Turn 0 may be correct.)";
     			t1 = space();
     			p1 = element("p");
-    			p1.textContent = "Mulligans on turn 1, turn 2, etc. simply \"carry over\" the increased probability of multiple opening hands to your first, second, third, etc. draw. This is probably not mathematically accurate, still working on it!";
+    			p1.textContent = "See the FAQ and github if you want to help out here - I need a mathematician to confirm logic!";
     			attr_dev(p0, "class", "popover-content svelte-gl2bfz");
-    			add_location(p0, file$4, 169, 24, 7752);
+    			add_location(p0, file$4, 175, 24, 7957);
     			attr_dev(p1, "class", "popover-content svelte-gl2bfz");
-    			add_location(p1, file$4, 170, 25, 7984);
+    			add_location(p1, file$4, 176, 25, 8296);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 168, 20, 7706);
+    			add_location(div, file$4, 174, 20, 7911);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7923,7 +7923,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$1.name,
     		type: "slot",
-    		source: "(169:20) ",
+    		source: "(175:20) ",
     		ctx
     	});
 
@@ -7990,7 +7990,7 @@ var app = (function () {
     	let dispose;
 
     	function popover0_show_binding(value) {
-    		/*popover0_show_binding*/ ctx[10](value);
+    		/*popover0_show_binding*/ ctx[11](value);
     	}
 
     	let popover0_props = {
@@ -8010,7 +8010,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover0, 'show', popover0_show_binding));
 
     	function popover1_show_binding(value) {
-    		/*popover1_show_binding*/ ctx[12](value);
+    		/*popover1_show_binding*/ ctx[13](value);
     	}
 
     	let popover1_props = {
@@ -8030,7 +8030,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover1, 'show', popover1_show_binding));
 
     	function popover2_show_binding(value) {
-    		/*popover2_show_binding*/ ctx[14](value);
+    		/*popover2_show_binding*/ ctx[15](value);
     	}
 
     	let popover2_props = {
@@ -8057,7 +8057,7 @@ var app = (function () {
     	}
 
     	function popover3_show_binding(value) {
-    		/*popover3_show_binding*/ ctx[21](value);
+    		/*popover3_show_binding*/ ctx[22](value);
     	}
 
     	let popover3_props = {
@@ -8144,71 +8144,71 @@ var app = (function () {
     			t27 = space();
     			input1 = element("input");
     			set_style(h2, "text-align", "center");
-    			add_location(h2, file$4, 60, 0, 1813);
+    			add_location(h2, file$4, 66, 0, 2018);
     			attr_dev(th0, "class", "svelte-gl2bfz");
-    			add_location(th0, file$4, 66, 16, 2006);
+    			add_location(th0, file$4, 72, 16, 2211);
     			attr_dev(th1, "class", "svelte-gl2bfz");
-    			add_location(th1, file$4, 77, 16, 2929);
+    			add_location(th1, file$4, 83, 16, 3134);
     			attr_dev(th2, "class", "svelte-gl2bfz");
-    			add_location(th2, file$4, 78, 16, 2975);
+    			add_location(th2, file$4, 84, 16, 3180);
     			attr_dev(th3, "class", "svelte-gl2bfz");
-    			add_location(th3, file$4, 88, 16, 3677);
+    			add_location(th3, file$4, 94, 16, 3882);
     			attr_dev(th4, "class", "svelte-gl2bfz");
-    			add_location(th4, file$4, 99, 16, 4632);
-    			add_location(tr, file$4, 65, 12, 1984);
-    			add_location(thead, file$4, 64, 8, 1963);
-    			add_location(tbody, file$4, 102, 8, 4688);
+    			add_location(th4, file$4, 105, 16, 4837);
+    			add_location(tr, file$4, 71, 12, 2189);
+    			add_location(thead, file$4, 70, 8, 2168);
+    			add_location(tbody, file$4, 108, 8, 4893);
     			attr_dev(table, "class", "svelte-gl2bfz");
-    			add_location(table, file$4, 63, 4, 1946);
+    			add_location(table, file$4, 69, 4, 2151);
     			attr_dev(div0, "class", "table-wrapper svelte-gl2bfz");
-    			add_location(div0, file$4, 62, 4, 1913);
+    			add_location(div0, file$4, 68, 4, 2118);
     			attr_dev(button, "class", "svelte-gl2bfz");
-    			add_location(button, file$4, 159, 8, 7146);
+    			add_location(button, file$4, 165, 8, 7351);
     			attr_dev(label0, "for", "mulliganCount");
     			attr_dev(label0, "class", "svelte-gl2bfz");
-    			add_location(label0, file$4, 162, 12, 7261);
+    			add_location(label0, file$4, 168, 12, 7466);
     			option0.__value = "0";
     			option0.value = option0.__value;
-    			add_location(option0, file$4, 176, 16, 8396);
+    			add_location(option0, file$4, 182, 16, 8595);
     			option1.__value = "1";
     			option1.value = option1.__value;
-    			add_location(option1, file$4, 177, 16, 8442);
+    			add_location(option1, file$4, 183, 16, 8641);
     			option2.__value = "2";
     			option2.value = option2.__value;
-    			add_location(option2, file$4, 178, 16, 8488);
+    			add_location(option2, file$4, 184, 16, 8687);
     			option3.__value = "3";
     			option3.value = option3.__value;
-    			add_location(option3, file$4, 179, 16, 8534);
+    			add_location(option3, file$4, 185, 16, 8733);
     			option4.__value = "4";
     			option4.value = option4.__value;
-    			add_location(option4, file$4, 180, 16, 8580);
+    			add_location(option4, file$4, 186, 16, 8779);
     			attr_dev(select, "class", "svelte-gl2bfz");
-    			if (/*mulliganCount*/ ctx[3] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[22].call(select));
-    			add_location(select, file$4, 175, 12, 8343);
+    			if (/*mulliganCountString*/ ctx[3] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[23].call(select));
+    			add_location(select, file$4, 181, 12, 8536);
     			attr_dev(div1, "class", "mulligan-selection svelte-gl2bfz");
-    			add_location(div1, file$4, 161, 8, 7215);
+    			add_location(div1, file$4, 167, 8, 7420);
     			attr_dev(label1, "for", "deckSize");
     			attr_dev(label1, "class", "svelte-gl2bfz");
-    			add_location(label1, file$4, 185, 12, 8706);
+    			add_location(label1, file$4, 191, 12, 8905);
     			attr_dev(input0, "type", "number");
     			attr_dev(input0, "class", "deckSize svelte-gl2bfz");
     			attr_dev(input0, "min", "1");
-    			add_location(input0, file$4, 186, 12, 8770);
+    			add_location(input0, file$4, 192, 12, 8969);
     			attr_dev(div2, "class", "deck-size-container svelte-gl2bfz");
-    			add_location(div2, file$4, 184, 8, 8659);
+    			add_location(div2, file$4, 190, 8, 8858);
     			attr_dev(label2, "for", "deckSize");
     			attr_dev(label2, "class", "svelte-gl2bfz");
-    			add_location(label2, file$4, 190, 12, 8922);
+    			add_location(label2, file$4, 196, 12, 9121);
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "class", "deckSize svelte-gl2bfz");
     			attr_dev(input1, "min", "1");
-    			add_location(input1, file$4, 191, 12, 8976);
+    			add_location(input1, file$4, 197, 12, 9175);
     			attr_dev(div3, "class", "deck-size-container svelte-gl2bfz");
-    			add_location(div3, file$4, 189, 8, 8875);
+    			add_location(div3, file$4, 195, 8, 9074);
     			attr_dev(div4, "class", "controls-container svelte-gl2bfz");
-    			add_location(div4, file$4, 157, 4, 7094);
+    			add_location(div4, file$4, 163, 4, 7299);
     			attr_dev(div5, "class", "parameters svelte-gl2bfz");
-    			add_location(div5, file$4, 61, 0, 1883);
+    			add_location(div5, file$4, 67, 0, 2088);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8261,7 +8261,7 @@ var app = (function () {
     			append_dev(select, option2);
     			append_dev(select, option3);
     			append_dev(select, option4);
-    			select_option(select, /*mulliganCount*/ ctx[3], true);
+    			select_option(select, /*mulliganCountString*/ ctx[3], true);
     			append_dev(div4, t22);
     			append_dev(div4, div2);
     			append_dev(div2, label1);
@@ -8279,9 +8279,9 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					listen_dev(button, "click", /*addGroup*/ ctx[6], false, false, false, false),
-    					listen_dev(select, "change", /*select_change_handler*/ ctx[22]),
-    					listen_dev(input0, "input", /*input0_input_handler_1*/ ctx[23]),
-    					listen_dev(input1, "input", /*input1_input_handler_1*/ ctx[24])
+    					listen_dev(select, "change", /*select_change_handler*/ ctx[23]),
+    					listen_dev(input0, "input", /*input0_input_handler_1*/ ctx[24]),
+    					listen_dev(input1, "input", /*input1_input_handler_1*/ ctx[25])
     				];
 
     				mounted = true;
@@ -8290,7 +8290,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover0_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 1) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 2) {
     				popover0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -8303,7 +8303,7 @@ var app = (function () {
     			popover0.$set(popover0_changes);
     			const popover1_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 1) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 2) {
     				popover1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -8316,7 +8316,7 @@ var app = (function () {
     			popover1.$set(popover1_changes);
     			const popover2_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 1) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 2) {
     				popover2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -8354,7 +8354,7 @@ var app = (function () {
 
     			const popover3_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 1) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 2) {
     				popover3_changes.$$scope = { dirty, ctx };
     			}
 
@@ -8366,8 +8366,8 @@ var app = (function () {
 
     			popover3.$set(popover3_changes);
 
-    			if (dirty[0] & /*mulliganCount*/ 8) {
-    				select_option(select, /*mulliganCount*/ ctx[3]);
+    			if (dirty[0] & /*mulliganCountString*/ 8) {
+    				select_option(select, /*mulliganCountString*/ ctx[3]);
     			}
 
     			if (dirty[0] & /*InitialDrawSize*/ 4 && to_number(input0.value) !== /*InitialDrawSize*/ ctx[2]) {
@@ -8443,6 +8443,7 @@ var app = (function () {
     	let mulliganCount = 0;
     	let colorIndex = 0;
     	let showPopover = false;
+    	let mulliganCountString = "0"; // Use a string for the binding
     	const presetColors = ["#DCEDC8", "#B2DFDB", "#FFE0B2", "#E1BEE7", "#B3E5FC", "#FFCCBC", "#C5CAE9"];
 
     	function addGroup() {
@@ -8520,8 +8521,8 @@ var app = (function () {
     	}
 
     	function select_change_handler() {
-    		mulliganCount = select_value(this);
-    		$$invalidate(3, mulliganCount);
+    		mulliganCountString = select_value(this);
+    		$$invalidate(3, mulliganCountString);
     	}
 
     	function input0_input_handler_1() {
@@ -8548,6 +8549,7 @@ var app = (function () {
     		mulliganCount,
     		colorIndex,
     		showPopover,
+    		mulliganCountString,
     		presetColors,
     		addGroup,
     		removeGroup,
@@ -8559,9 +8561,10 @@ var app = (function () {
     		if ('groups' in $$props) $$invalidate(0, groups = $$props.groups);
     		if ('deckSize' in $$props) $$invalidate(1, deckSize = $$props.deckSize);
     		if ('InitialDrawSize' in $$props) $$invalidate(2, InitialDrawSize = $$props.InitialDrawSize);
-    		if ('mulliganCount' in $$props) $$invalidate(3, mulliganCount = $$props.mulliganCount);
-    		if ('colorIndex' in $$props) $$invalidate(8, colorIndex = $$props.colorIndex);
+    		if ('mulliganCount' in $$props) $$invalidate(8, mulliganCount = $$props.mulliganCount);
+    		if ('colorIndex' in $$props) $$invalidate(9, colorIndex = $$props.colorIndex);
     		if ('showPopover' in $$props) $$invalidate(4, showPopover = $$props.showPopover);
+    		if ('mulliganCountString' in $$props) $$invalidate(3, mulliganCountString = $$props.mulliganCountString);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -8569,7 +8572,12 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*groups, colorIndex, deckSize, InitialDrawSize, mulliganCount*/ 271) {
+    		if ($$self.$$.dirty[0] & /*mulliganCountString*/ 8) {
+    			// Reactive statement to ensure mulliganCount is always a number
+    			$$invalidate(8, mulliganCount = Number(mulliganCountString));
+    		}
+
+    		if ($$self.$$.dirty[0] & /*groups, colorIndex, deckSize, InitialDrawSize, mulliganCount*/ 775) {
     			{
     				let updatedColors = {};
 
@@ -8579,7 +8587,7 @@ var app = (function () {
     					: group.name;
 
     					if (!updatedColors[key]) {
-    						updatedColors[key] = presetColors[$$invalidate(8, colorIndex++, colorIndex) % presetColors.length];
+    						updatedColors[key] = presetColors[$$invalidate(9, colorIndex++, colorIndex) % presetColors.length];
     					}
     				});
 
@@ -8599,11 +8607,12 @@ var app = (function () {
     		groups,
     		deckSize,
     		InitialDrawSize,
-    		mulliganCount,
+    		mulliganCountString,
     		showPopover,
     		$groupColors,
     		addGroup,
     		removeGroup,
+    		mulliganCount,
     		colorIndex,
     		click_handler,
     		popover0_show_binding,
@@ -8648,36 +8657,36 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
-    	child_ctx[18] = i;
+    	child_ctx[15] = list[i];
+    	child_ctx[17] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[19] = list[i];
+    	child_ctx[18] = list[i];
     	return child_ctx;
     }
 
-    // (313:16) {#each createGroupCards(groups, results, turn) as card}
+    // (307:16) {#each createGroupCards(groups, results, turn) as card}
     function create_each_block_1(ctx) {
     	let div5;
     	let div3;
     	let div2;
     	let div0;
 
-    	let t0_value = (/*card*/ ctx[19].probability !== null
-    	? `${/*card*/ ctx[19].probability}%`
+    	let t0_value = (/*card*/ ctx[18].probability !== null
+    	? `${/*card*/ ctx[18].probability}%`
     	: '') + "";
 
     	let t0;
     	let t1;
     	let div1;
-    	let t2_value = /*card*/ ctx[19].ratioText + "";
+    	let t2_value = /*card*/ ctx[18].ratioText + "";
     	let t2;
     	let t3;
     	let div4;
-    	let t4_value = /*card*/ ctx[19].label + "";
+    	let t4_value = /*card*/ ctx[18].label + "";
     	let t4;
     	let t5;
 
@@ -8696,18 +8705,18 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			attr_dev(div0, "class", "probability svelte-bf6y84");
-    			add_location(div0, file$3, 316, 32, 9839);
+    			add_location(div0, file$3, 310, 32, 10162);
     			attr_dev(div1, "class", "card-ratio svelte-bf6y84");
-    			add_location(div1, file$3, 317, 32, 9961);
+    			add_location(div1, file$3, 311, 32, 10284);
     			attr_dev(div2, "class", "card-details svelte-bf6y84");
-    			add_location(div2, file$3, 315, 28, 9779);
+    			add_location(div2, file$3, 309, 28, 10102);
     			attr_dev(div3, "class", "rectangle svelte-bf6y84");
-    			set_style(div3, "background-color", /*card*/ ctx[19].color);
-    			add_location(div3, file$3, 314, 24, 9687);
+    			set_style(div3, "background-color", /*card*/ ctx[18].color);
+    			add_location(div3, file$3, 308, 24, 10010);
     			attr_dev(div4, "class", "card-label svelte-bf6y84");
-    			add_location(div4, file$3, 320, 24, 10101);
+    			add_location(div4, file$3, 314, 24, 10424);
     			attr_dev(div5, "class", "card-container svelte-bf6y84");
-    			add_location(div5, file$3, 313, 20, 9633);
+    			add_location(div5, file$3, 307, 20, 9956);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div5, anchor);
@@ -8724,17 +8733,17 @@ var app = (function () {
     			append_dev(div5, t5);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*groups, results*/ 5 && t0_value !== (t0_value = (/*card*/ ctx[19].probability !== null
-    			? `${/*card*/ ctx[19].probability}%`
+    			if (dirty & /*groups, results*/ 5 && t0_value !== (t0_value = (/*card*/ ctx[18].probability !== null
+    			? `${/*card*/ ctx[18].probability}%`
     			: '') + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty & /*groups, results*/ 5 && t2_value !== (t2_value = /*card*/ ctx[19].ratioText + "")) set_data_dev(t2, t2_value);
+    			if (dirty & /*groups, results*/ 5 && t2_value !== (t2_value = /*card*/ ctx[18].ratioText + "")) set_data_dev(t2, t2_value);
 
     			if (dirty & /*groups, results*/ 5) {
-    				set_style(div3, "background-color", /*card*/ ctx[19].color);
+    				set_style(div3, "background-color", /*card*/ ctx[18].color);
     			}
 
-    			if (dirty & /*groups, results*/ 5 && t4_value !== (t4_value = /*card*/ ctx[19].label + "")) set_data_dev(t4, t4_value);
+    			if (dirty & /*groups, results*/ 5 && t4_value !== (t4_value = /*card*/ ctx[18].label + "")) set_data_dev(t4, t4_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div5);
@@ -8745,14 +8754,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(313:16) {#each createGroupCards(groups, results, turn) as card}",
+    		source: "(307:16) {#each createGroupCards(groups, results, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (306:4) {#each generateTurnsArray(numberOfTurns) as _, turn}
+    // (300:4) {#each generateTurnsArray(numberOfTurns) as _, turn}
     function create_each_block$1(ctx) {
     	let div2;
     	let div0;
@@ -8764,7 +8773,7 @@ var app = (function () {
     	let i;
     	let t4;
 
-    	let t5_value = (/*turn*/ ctx[18] === 0
+    	let t5_value = (/*turn*/ ctx[17] === 0
     	? `Draw ${/*InitialDrawSize*/ ctx[1]}`
     	: 'Draw 1') + "";
 
@@ -8773,7 +8782,7 @@ var app = (function () {
     	let t7;
     	let div1;
     	let t8;
-    	let each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[2], /*turn*/ ctx[18]);
+    	let each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[2], /*turn*/ ctx[17]);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -8786,7 +8795,7 @@ var app = (function () {
     			div2 = element("div");
     			div0 = element("div");
     			t0 = text("Turn ");
-    			t1 = text(/*turn*/ ctx[18]);
+    			t1 = text(/*turn*/ ctx[17]);
     			t2 = text(":");
     			br = element("br");
     			t3 = space();
@@ -8802,15 +8811,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$3, 308, 28, 9393);
+    			add_location(br, file$3, 302, 28, 9716);
     			attr_dev(i, "class", "svelte-bf6y84");
-    			add_location(i, file$3, 309, 16, 9415);
+    			add_location(i, file$3, 303, 16, 9738);
     			attr_dev(div0, "class", "turn-label svelte-bf6y84");
-    			add_location(div0, file$3, 307, 12, 9339);
+    			add_location(div0, file$3, 301, 12, 9662);
     			attr_dev(div1, "class", "card-rectangles svelte-bf6y84");
-    			add_location(div1, file$3, 311, 12, 9509);
+    			add_location(div1, file$3, 305, 12, 9832);
     			attr_dev(div2, "class", "turn-row svelte-bf6y84");
-    			add_location(div2, file$3, 306, 8, 9303);
+    			add_location(div2, file$3, 300, 8, 9626);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -8836,12 +8845,12 @@ var app = (function () {
     			append_dev(div2, t8);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*InitialDrawSize*/ 2 && t5_value !== (t5_value = (/*turn*/ ctx[18] === 0
+    			if (dirty & /*InitialDrawSize*/ 2 && t5_value !== (t5_value = (/*turn*/ ctx[17] === 0
     			? `Draw ${/*InitialDrawSize*/ ctx[1]}`
     			: 'Draw 1') + "")) set_data_dev(t5, t5_value);
 
     			if (dirty & /*createGroupCards, groups, results*/ 21) {
-    				each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[2], /*turn*/ ctx[18]);
+    				each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[2], /*turn*/ ctx[17]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -8874,7 +8883,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(306:4) {#each generateTurnsArray(numberOfTurns) as _, turn}",
+    		source: "(300:4) {#each generateTurnsArray(numberOfTurns) as _, turn}",
     		ctx
     	});
 
@@ -8918,18 +8927,18 @@ var app = (function () {
     			t4 = space();
     			input = element("input");
     			set_style(h2, "text-align", "center");
-    			add_location(h2, file$3, 303, 0, 9155);
+    			add_location(h2, file$3, 297, 0, 9478);
     			attr_dev(div0, "class", "output-diagram svelte-bf6y84");
-    			add_location(div0, file$3, 304, 0, 9207);
+    			add_location(div0, file$3, 298, 0, 9530);
     			attr_dev(label, "for", "deckSize");
     			attr_dev(label, "class", "svelte-bf6y84");
-    			add_location(label, file$3, 329, 4, 10296);
+    			add_location(label, file$3, 323, 4, 10619);
     			attr_dev(input, "type", "number");
     			attr_dev(input, "class", "deckSize svelte-bf6y84");
     			attr_dev(input, "min", "1");
-    			add_location(input, file$3, 330, 4, 10348);
+    			add_location(input, file$3, 324, 4, 10671);
     			attr_dev(div1, "class", "deck-size-container svelte-bf6y84");
-    			add_location(div1, file$3, 328, 0, 10257);
+    			add_location(div1, file$3, 322, 0, 10580);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9137,6 +9146,7 @@ var app = (function () {
     		console.log('At start of calculateProbabilities, InitialDrawSize:', InitialDrawSize);
     		console.log("Calculating probabilities for groups:", groups);
     		$$invalidate(2, results = {});
+    		console.log('Mulligan count at start of calculateProbabilities:', mulliganCount);
 
     		// Group by links, excluding empty links
     		const links = {};
@@ -9158,51 +9168,46 @@ var app = (function () {
     		}
     	}
 
-    	function applyLondonMulligan(group, cardsDrawn, deckSize, mulligans) {
+    	function applyLondonMulligan(group) {
     		let totalProbability = 0;
 
-    		for (let mulligan = 0; mulligan <= mulligans; mulligan++) {
-    			let probabilityThisMulligan = calculateProbabilityForHand(group, cardsDrawn);
-    			totalProbability += (1 - totalProbability) * probabilityThisMulligan;
+    		for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+    			let drawsThisMulligan = InitialDrawSize;
+    			let probThisMulligan = 0;
+
+    			for (let k = 0; k < group.cardsToDraw; k++) {
+    				probThisMulligan += hypergeometricCDF(k, deckSize, group.size, drawsThisMulligan);
+    			}
+
+    			totalProbability += (1 - totalProbability) * (1 - probThisMulligan);
     		}
 
-    		return Math.min(1, totalProbability);
-    	}
-
-    	function calculateProbabilityForHand(group, cardsDrawn) {
-    		let probability = 0;
-
-    		for (let x = group.cardsToDraw; x <= Math.min(group.size, cardsDrawn); x++) {
-    			probability += hypergeometricCDF(x, deckSize, group.size, cardsDrawn);
-    		}
-
-    		return probability;
+    		return totalProbability;
     	}
 
     	function calculateSingleGroup(group) {
-    		console.log('Inside calculateSingleGroup, InitialDrawSize:', InitialDrawSize);
     		const groupResults = [];
-    		let cardsDrawn = InitialDrawSize; // Initial hand size
-    		let deckSizeAfterMulligan = deckSize - mulliganCount; // Adjusting deck size for mulligans
-    		let turn0Boost = 0;
+    		let initialProb = applyLondonMulligan(group);
+    		groupResults.push({ turn: 0, probability: initialProb });
+    		let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize; // Start from 0 if there are mulligans. 
+    		let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0); // Decrease deck size of subseiqent turns if there are mulligans. the deck size is reduced because when mulliganing, the subsequent turns are separate calculations that are combined with the turn 0 mulligans, and we assume the cards in your hand are not the desired cards. also note that this sort of factors the london mulligan aspect of putting x cards on the bottom of your library based on the # of times you mulligan. the assumption is you'd put none-desired cards on the bottom, so for the sake of caluculations, imagining these cards are in your hand (and not in the deck) feels similar to if they are on the bottom (you know the cards above them must have the desired card, so you can discount them i think)
 
-    		for (let turn = 0; turn <= numberOfTurns; turn++) {
-    			if (turn > 0) cardsDrawn += 1;
-    			let probability;
+    		for (let turn = 1; turn <= numberOfTurns; turn++) {
+    			totalCardsSeen += 1;
+    			let probLessThanDesiredAUpToThisTurn = 0;
 
-    			if (turn === 0) {
-    				let baseProbability = calculateProbabilityForHand(group, cardsDrawn);
-    				probability = applyLondonMulligan(group, cardsDrawn, deckSize, mulliganCount);
-    				turn0Boost = probability - baseProbability; // Boost gained from mulligan on turn 0
-    			} else {
-    				// For subsequent turns, apply the boost gained from turn 0
-    				probability = calculateProbabilityForHand(group, cardsDrawn) + turn0Boost;
-
-    				probability = Math.min(1, probability); // Ensure probability does not exceed 100%
+    			for (let k = 0; k < group.cardsToDraw; k++) {
+    				probLessThanDesiredAUpToThisTurn += hypergeometricCDF(k, adjustedDeckSize, group.size, totalCardsSeen);
     			}
 
-    			groupResults.push({ turn, probability });
-    			console.log(`Turn ${turn}: Probability = ${probability}, Deck Size After Mulligan = ${deckSizeAfterMulligan}`);
+    			let probAtLeastDesiredA = 1 - probLessThanDesiredAUpToThisTurn;
+
+    			if (mulliganCount > 0) {
+    				// Combine the probability from turn 0 with the probability of drawing additional cards
+    				probAtLeastDesiredA = 1 - (1 - initialProb) * (1 - probAtLeastDesiredA);
+    			}
+
+    			groupResults.push({ turn, probability: probAtLeastDesiredA });
     		}
 
     		$$invalidate(2, results[group.name] = groupResults, results);
@@ -9316,7 +9321,6 @@ var app = (function () {
     		numberOfTurns,
     		calculateProbabilities,
     		applyLondonMulligan,
-    		calculateProbabilityForHand,
     		calculateSingleGroup,
     		createGroupCards,
     		convertPercentToRatio,
@@ -9816,7 +9820,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$1, 85, 8, 1702);
+    			add_location(button, file$1, 85, 8, 1712);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9871,18 +9875,18 @@ var app = (function () {
     			a1.textContent = "Open in mobile app";
     			if (!src_url_equal(img.src, img_src_value = "venmo_qrcode.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Coffee Image");
-    			add_location(img, file$1, 90, 10, 1957);
+    			add_location(img, file$1, 90, 10, 1967);
     			attr_dev(a0, "href", "https://venmo.com/u/Benjamin-Gross-10");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$1, 92, 12, 2020);
-    			add_location(br, file$1, 92, 91, 2099);
+    			add_location(a0, file$1, 92, 12, 2030);
+    			add_location(br, file$1, 92, 91, 2109);
     			attr_dev(a1, "href", "venmo://paycharge?txn=pay&recipients=Benjamin-Gross-10&amount=2.5&note=half-a-coffee");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$1, 93, 12, 2117);
+    			add_location(a1, file$1, 93, 12, 2127);
     			attr_dev(div0, "class", "popover-group svelte-hxfi6v");
-    			add_location(div0, file$1, 89, 10, 1916);
+    			add_location(div0, file$1, 89, 10, 1926);
     			attr_dev(div1, "slot", "content");
-    			add_location(div1, file$1, 88, 8, 1884);
+    			add_location(div1, file$1, 88, 8, 1894);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -9963,7 +9967,7 @@ var app = (function () {
     			h1.textContent = "Draw Probability Calculator";
     			t2 = space();
     			p = element("p");
-    			t3 = text("This tool is made to answer questions like, \"what are the chances I draw ramp and two lands in my opening hand.\" While I thought about this tool in the frame of Magic edh, it will work for any deck size and card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider \r\n      \r\n      ");
+    			t3 = text("This tool is made to answer questions like, \"what are the chances I draw one ramp spell and two lands in my opening hand.\" While I thought about this tool in the frame of Magic edh, it will work for any deck size and card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider \r\n      \r\n      ");
     			create_component(popover.$$.fragment);
     			t4 = text("\r\n   🙂.");
     			t5 = space();

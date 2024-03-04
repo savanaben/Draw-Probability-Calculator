@@ -133,6 +133,8 @@ function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSi
     console.log('At start of calculateProbabilities, InitialDrawSize:', InitialDrawSize);
     console.log("Calculating probabilities for groups:", groups);
     results = {};
+    console.log('Mulligan count at start of calculateProbabilities:', mulliganCount);
+
 
     // Group by links, excluding empty links
     const links = {};
@@ -154,63 +156,55 @@ function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSi
 
 
 
-
-    function applyLondonMulligan(group, cardsDrawn, deckSize, mulligans) {
+function applyLondonMulligan(group) {
     let totalProbability = 0;
-    let remainingDeckSize = deckSize;
 
-    for (let mulligan = 0; mulligan <= mulligans; mulligan++) {
-        let probabilityThisMulligan = calculateProbabilityForHand(group, cardsDrawn, remainingDeckSize);
-        totalProbability += (1 - totalProbability) * probabilityThisMulligan;
-
-        remainingDeckSize -= 1; // One card put back for each mulligan
+    for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+        let drawsThisMulligan = InitialDrawSize;
+        let probThisMulligan = 0;
+        for (let k = 0; k < group.cardsToDraw; k++) {
+            probThisMulligan += hypergeometricCDF(k, deckSize, group.size, drawsThisMulligan);
+        }
+        totalProbability += (1 - totalProbability) * (1 - probThisMulligan);
     }
 
-    return Math.min(1, totalProbability);
+    return totalProbability;
 }
 
 
 
-function calculateProbabilityForHand(group, cardsDrawn) {
-    let probability = 0;
-    for (let x = group.cardsToDraw; x <= Math.min(group.size, cardsDrawn); x++) {
-        probability += hypergeometricCDF(x, deckSize, group.size, cardsDrawn);
-    }
-    return probability;
-}
 
 function calculateSingleGroup(group) {
-   
-   
-    console.log('Inside calculateSingleGroup, InitialDrawSize:', InitialDrawSize);
-
-
-
     const groupResults = [];
-    let cardsDrawn = InitialDrawSize; // Initial hand size
-    let deckSizeAfterMulligan = deckSize - mulliganCount; // Adjusting deck size for mulligans
-    let turn0Boost = 0;
+    let initialProb = applyLondonMulligan(group);
+    groupResults.push({ turn: 0, probability: initialProb });
 
-    for (let turn = 0; turn <= numberOfTurns; turn++) {
-        if (turn > 0) cardsDrawn += 1;
+    let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize; // Start from 0 if there are mulligans. 
+    let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0); // Decrease deck size of subseiqent turns if there are mulligans. the deck size is reduced because when mulliganing, the subsequent turns are separate calculations that are combined with the turn 0 mulligans, and we assume the cards in your hand are not the desired cards. also note that this sort of factors the london mulligan aspect of putting x cards on the bottom of your library based on the # of times you mulligan. the assumption is you'd put none-desired cards on the bottom, so for the sake of caluculations, imagining these cards are in your hand (and not in the deck) feels similar to if they are on the bottom (you know the cards above them must have the desired card, so you can discount them i think)
+    for (let turn = 1; turn <= numberOfTurns; turn++) {
+        totalCardsSeen += 1;
 
-        let probability;
-        if (turn === 0) {
-            let baseProbability = calculateProbabilityForHand(group, cardsDrawn, deckSize);
-            probability = applyLondonMulligan(group, cardsDrawn, deckSize, mulliganCount);
-            turn0Boost = probability - baseProbability; // Boost gained from mulligan on turn 0
-        } else {
-            // For subsequent turns, apply the boost gained from turn 0
-            probability = calculateProbabilityForHand(group, cardsDrawn, deckSizeAfterMulligan) + turn0Boost;
-            probability = Math.min(1, probability); // Ensure probability does not exceed 100%
+        let probLessThanDesiredAUpToThisTurn = 0;
+        for (let k = 0; k < group.cardsToDraw; k++) {
+            probLessThanDesiredAUpToThisTurn += hypergeometricCDF(k, adjustedDeckSize, group.size, totalCardsSeen);
         }
 
-        groupResults.push({ turn, probability });
-        console.log(`Turn ${turn}: Probability = ${probability}, Deck Size After Mulligan = ${deckSizeAfterMulligan}`);
+        let probAtLeastDesiredA = 1 - probLessThanDesiredAUpToThisTurn;
+
+        if (mulliganCount > 0) {
+            // Combine the probability from turn 0 with the probability of drawing additional cards
+            probAtLeastDesiredA = 1 - ((1 - initialProb) * (1 - probAtLeastDesiredA));
+        }
+
+        groupResults.push({ turn, probability: probAtLeastDesiredA });
     }
 
     results[group.name] = groupResults;
 }
+
+
+
+
 
 
 
