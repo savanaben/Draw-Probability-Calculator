@@ -23,45 +23,7 @@
 //multivariateHypergeometricCDF 3 functions below
 
 
-function calculateLinkedGroups(linkedGroups) {
-    const groupResults = [];
-    let cardsDrawn = InitialDrawSize; // Initial hand
-    const groupSizes = linkedGroups.map(group => group.size);
-    const groupCardsToDraw = linkedGroups.map(group => group.cardsToDraw);
-    const linkName = linkedGroups[0].link;
-    let turn0Boost = 0;
 
-    for (let turn = 0; turn <= numberOfTurns; turn++) {
-        if (turn > 0) cardsDrawn += 1;
-
-        let probability;
-        if (turn === 0) {
-            let baseProbability = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, cardsDrawn);
-            probability = applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulliganCount, cardsDrawn);
-            turn0Boost = probability - baseProbability;
-        } else {
-            probability = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize - mulliganCount, cardsDrawn) + turn0Boost;
-            probability = Math.min(1, probability);
-        }
-
-        groupResults.push({ turn, probability });
-    }
-
-    results[linkName] = groupResults;
-}
-
-
-    function logFactorial(n) {
-    let result = 0;
-    for (let i = 2; i <= n; i++) {
-        result += Math.log(i);
-    }
-    return result;
-}
-
-function logChoose(n, k) {
-    return logFactorial(n) - logFactorial(k) - logFactorial(n - k);
-}
 
 
 function multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, cardsDrawn) {
@@ -87,24 +49,63 @@ function multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, c
 }
 
 
-
 function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulligans, cardsDrawn) {
     let totalProbability = 0;
-    let remainingDeckSize = deckSize;
 
     for (let mulligan = 0; mulligan <= mulligans; mulligan++) {
-        let probabilityThisMulligan = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, remainingDeckSize, cardsDrawn);
-        totalProbability += (1 - totalProbability) * probabilityThisMulligan;
-
-        remainingDeckSize -= 1; // One card put back for each mulligan
+        let drawsThisMulligan = cardsDrawn;
+        let probThisMulligan = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, drawsThisMulligan);
+        totalProbability += (1 - totalProbability) * probThisMulligan;
     }
 
-    return Math.min(1, totalProbability);
+    return totalProbability;
 }
 
+function calculateLinkedGroups(linkedGroups) {
+    const groupResults = [];
+    const groupSizes = linkedGroups.map(group => group.size);
+    const groupCardsToDraw = linkedGroups.map(group => group.cardsToDraw);
+    const linkName = linkedGroups[0].link;
 
+    let initialProb = applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulliganCount, InitialDrawSize);
+    groupResults.push({ turn: 0, probability: initialProb });
 
+    let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize;
+    let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0);
 
+    let extendedNumberOfTurns = numberOfTurns + 10; // Extend the number of turns to ensure we have enough data to filter
+
+    let allResults = [];
+
+    for (let turn = 1; turn <= extendedNumberOfTurns; turn++) {
+        totalCardsSeen += 1;
+        let probAtLeastDesiredA = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, adjustedDeckSize, totalCardsSeen);
+        if (mulliganCount > 0) {
+            probAtLeastDesiredA = 1 - ((1 - initialProb) * (1 - probAtLeastDesiredA));
+        }
+        allResults.push({ turn, probability: probAtLeastDesiredA });
+    }
+
+    // Filter out consecutive duplicate probabilities. this is the same logic issue I faced in calculateSingleGroup. when mulliganing and there are greater groupCardsToDraw (cardsToDraw), I was getting early turn duplication that would increase (more early turns were showing the same probability) with increased groupCardsToDraw value. I could not find a pattern to why this was occuring. so I applied this bandaid fix that just pre-calculates the probabilities and removes duplicates :S. wellll it seems to work! I'd love help on this puzzling issue. 
+
+    let filteredResults = allResults.filter((result, index, array) => {
+        return index === 0 || result.probability !== array[index - 1].probability;
+    });
+
+    // Add the filtered results to groupResults, adjusting the turn numbers
+    filteredResults.forEach((result, index) => {
+        if (index < numberOfTurns && (mulliganCount === 0 || index > 0)) { // Skip turn 1 when there are mulligans. this is another bandaid. for some reason the above filter out duplicates logic does not capture turn 0 and turn 1. sooo this just skips turn 1 when there are mulligans, effectively removing the last remaining duplicate. 
+            groupResults.push({ turn: index, probability: result.probability });
+        }
+    });
+
+        // Add an extra turn if we skipped turn 1 due to mulligans. another compensation function to fix the display. without this the final card/turn is blank in the results. 
+        if (mulliganCount > 0 && groupResults.length < numberOfTurns + 1) {
+        groupResults.push({ turn: numberOfTurns, probability: filteredResults[numberOfTurns].probability });
+    }
+
+    results[linkName] = groupResults;
+}
 
 
 
@@ -121,12 +122,10 @@ function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSi
 
 
 
-    // Reactive statement to calculate probabilities when groups change
-    $: if (groups.length > 0) {
-        calculateProbabilities();
-    }
-
-
+    // Reactive statement to calculate probabilities when groups or numberOfTurns changes
+    $: if (groups.length > 0 || numberOfTurns) {
+    calculateProbabilities();
+}
 
 
     function calculateProbabilities() {
@@ -179,28 +178,39 @@ function calculateSingleGroup(group) {
     let initialProb = applyLondonMulligan(group);
     groupResults.push({ turn: 0, probability: initialProb });
 
-    let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize; // Start from 0 if there are mulligans. 
-    let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0); // Decrease deck size of subseiqent turns if there are mulligans. the deck size is reduced because when mulliganing, the subsequent turns are separate calculations that are combined with the turn 0 mulligans, and we assume the cards in your hand are not the desired cards. also note that this sort of factors the london mulligan aspect of putting x cards on the bottom of your library based on the # of times you mulligan. the assumption is you'd put none-desired cards on the bottom, so for the sake of caluculations, imagining these cards are in your hand (and not in the deck) feels similar to if they are on the bottom (you know the cards above them must have the desired card, so you can discount them i think)
-    for (let turn = 1; turn <= numberOfTurns; turn++) {
+    let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize;
+    let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0);
+    // Decrease deck size of subseiqent turns if there are mulligans. the deck size is reduced because when mulliganing, the subsequent turns are separate calculations that are combined with the turn 0 mulligans, and we assume the cards in your hand are not the desired cards. also note that this sort of factors the london mulligan aspect of putting x cards on the bottom of your library based on the # of times you mulligan. the assumption is you'd put none-desired cards on the bottom, so for the sake of caluculations, imagining these cards are in your hand (and not in the deck) feels similar to if they are on the bottom (you know the cards above them must have the desired card, so you can discount them i think)
+
+
+    let extendedNumberOfTurns = numberOfTurns + (mulliganCount > 0 ? group.cardsToDraw - 1 : 0);
+    // Extend the loop to compensate for skipped turns when there are mulligans. this is band-aid logic! I don't know why, if I don't have this, early turns (turn 1, 2, 3, etc) will duplicate turn 0 values a number of times equal to the cardsToDraw value). so I'm just skipping early loops to compensate... 
+
+
+    for (let turn = 1; turn <= extendedNumberOfTurns; turn++) {
         totalCardsSeen += 1;
 
-        let probLessThanDesiredAUpToThisTurn = 0;
-        for (let k = 0; k < group.cardsToDraw; k++) {
-            probLessThanDesiredAUpToThisTurn += hypergeometricCDF(k, adjustedDeckSize, group.size, totalCardsSeen);
+        let probAtLeastDesiredA = 0;
+        for (let k = group.cardsToDraw; k <= Math.min(totalCardsSeen, group.size); k++) {
+            probAtLeastDesiredA += hypergeometricCDF(k, adjustedDeckSize, group.size, totalCardsSeen);
         }
-
-        let probAtLeastDesiredA = 1 - probLessThanDesiredAUpToThisTurn;
 
         if (mulliganCount > 0) {
             // Combine the probability from turn 0 with the probability of drawing additional cards
             probAtLeastDesiredA = 1 - ((1 - initialProb) * (1 - probAtLeastDesiredA));
         }
 
-        groupResults.push({ turn, probability: probAtLeastDesiredA });
+        if (mulliganCount === 0 || turn >= group.cardsToDraw) {
+            groupResults.push({ turn: turn - (mulliganCount > 0 ? group.cardsToDraw - 1 : 0), probability: probAtLeastDesiredA });
+        }
+         // Skip adding the first few probabilities when there are mulligans. this is band-aid logic! I don't know why, if I don't have this, early turns (turn 1, 2, 3, etc) will duplicate turn 0 values a number of times equal to the cardsToDraw value). so I'm just skipping early loops to compensate... 
+
     }
 
     results[group.name] = groupResults;
 }
+
+
 
 
 

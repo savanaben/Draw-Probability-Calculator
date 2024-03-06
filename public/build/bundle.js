@@ -7889,28 +7889,25 @@ var app = (function () {
     function create_content_slot$1(ctx) {
     	let div;
     	let p0;
-    	let t1;
     	let p1;
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			p0 = element("p");
-    			p0.textContent = "London mulligan feature is experimental. Mulligans for non-linked categories is believed to be correct, but not confirmed. Mulligans for linked categories is known to not be correct, and still uses a \"carry over\" effect (making turn 1, 2, 3.. less accurate. Turn 0 may be correct.)";
-    			t1 = space();
+    			p0.textContent = "London mulligan feature is experimental and combines the probabilities of the mulligan phase with the probabilities of subsequent draws to derive a cumulative probability.\r\n                        ";
     			p1 = element("p");
-    			p1.textContent = "See the FAQ and github if you want to help out here - I need a mathematician to confirm logic!";
+    			p1.textContent = "See the FAQ and github if you want to help out here - I need a mathematician to confirm this logic!";
     			attr_dev(p0, "class", "popover-content svelte-gl2bfz");
     			add_location(p0, file$4, 175, 24, 7957);
     			attr_dev(p1, "class", "popover-content svelte-gl2bfz");
-    			add_location(p1, file$4, 176, 25, 8296);
+    			add_location(p1, file$4, 176, 24, 8181);
     			attr_dev(div, "slot", "content");
     			add_location(div, file$4, 174, 20, 7911);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, p0);
-    			append_dev(div, t1);
     			append_dev(div, p1);
     		},
     		p: noop$3,
@@ -8169,42 +8166,42 @@ var app = (function () {
     			add_location(label0, file$4, 168, 12, 7466);
     			option0.__value = "0";
     			option0.value = option0.__value;
-    			add_location(option0, file$4, 182, 16, 8595);
+    			add_location(option0, file$4, 182, 16, 8485);
     			option1.__value = "1";
     			option1.value = option1.__value;
-    			add_location(option1, file$4, 183, 16, 8641);
+    			add_location(option1, file$4, 183, 16, 8531);
     			option2.__value = "2";
     			option2.value = option2.__value;
-    			add_location(option2, file$4, 184, 16, 8687);
+    			add_location(option2, file$4, 184, 16, 8577);
     			option3.__value = "3";
     			option3.value = option3.__value;
-    			add_location(option3, file$4, 185, 16, 8733);
+    			add_location(option3, file$4, 185, 16, 8623);
     			option4.__value = "4";
     			option4.value = option4.__value;
-    			add_location(option4, file$4, 186, 16, 8779);
+    			add_location(option4, file$4, 186, 16, 8669);
     			attr_dev(select, "class", "svelte-gl2bfz");
     			if (/*mulliganCountString*/ ctx[3] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[23].call(select));
-    			add_location(select, file$4, 181, 12, 8536);
+    			add_location(select, file$4, 181, 12, 8426);
     			attr_dev(div1, "class", "mulligan-selection svelte-gl2bfz");
     			add_location(div1, file$4, 167, 8, 7420);
     			attr_dev(label1, "for", "deckSize");
     			attr_dev(label1, "class", "svelte-gl2bfz");
-    			add_location(label1, file$4, 191, 12, 8905);
+    			add_location(label1, file$4, 191, 12, 8795);
     			attr_dev(input0, "type", "number");
     			attr_dev(input0, "class", "deckSize svelte-gl2bfz");
     			attr_dev(input0, "min", "1");
-    			add_location(input0, file$4, 192, 12, 8969);
+    			add_location(input0, file$4, 192, 12, 8859);
     			attr_dev(div2, "class", "deck-size-container svelte-gl2bfz");
-    			add_location(div2, file$4, 190, 8, 8858);
+    			add_location(div2, file$4, 190, 8, 8748);
     			attr_dev(label2, "for", "deckSize");
     			attr_dev(label2, "class", "svelte-gl2bfz");
-    			add_location(label2, file$4, 196, 12, 9121);
+    			add_location(label2, file$4, 196, 12, 9011);
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "class", "deckSize svelte-gl2bfz");
     			attr_dev(input1, "min", "1");
-    			add_location(input1, file$4, 197, 12, 9175);
+    			add_location(input1, file$4, 197, 12, 9065);
     			attr_dev(div3, "class", "deck-size-container svelte-gl2bfz");
-    			add_location(div3, file$4, 195, 8, 9074);
+    			add_location(div3, file$4, 195, 8, 8964);
     			attr_dev(div4, "class", "controls-container svelte-gl2bfz");
     			add_location(div4, file$4, 163, 4, 7299);
     			attr_dev(div5, "class", "parameters svelte-gl2bfz");
@@ -8668,7 +8665,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (307:16) {#each createGroupCards(groups, results, turn) as card}
+    // (317:16) {#each createGroupCards(groups, results, turn) as card}
     function create_each_block_1(ctx) {
     	let div5;
     	let div3;
@@ -8705,18 +8702,18 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			attr_dev(div0, "class", "probability svelte-bf6y84");
-    			add_location(div0, file$3, 310, 32, 10162);
+    			add_location(div0, file$3, 320, 32, 12380);
     			attr_dev(div1, "class", "card-ratio svelte-bf6y84");
-    			add_location(div1, file$3, 311, 32, 10284);
+    			add_location(div1, file$3, 321, 32, 12502);
     			attr_dev(div2, "class", "card-details svelte-bf6y84");
-    			add_location(div2, file$3, 309, 28, 10102);
+    			add_location(div2, file$3, 319, 28, 12320);
     			attr_dev(div3, "class", "rectangle svelte-bf6y84");
     			set_style(div3, "background-color", /*card*/ ctx[18].color);
-    			add_location(div3, file$3, 308, 24, 10010);
+    			add_location(div3, file$3, 318, 24, 12228);
     			attr_dev(div4, "class", "card-label svelte-bf6y84");
-    			add_location(div4, file$3, 314, 24, 10424);
+    			add_location(div4, file$3, 324, 24, 12642);
     			attr_dev(div5, "class", "card-container svelte-bf6y84");
-    			add_location(div5, file$3, 307, 20, 9956);
+    			add_location(div5, file$3, 317, 20, 12174);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div5, anchor);
@@ -8733,17 +8730,17 @@ var app = (function () {
     			append_dev(div5, t5);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*groups, results*/ 5 && t0_value !== (t0_value = (/*card*/ ctx[18].probability !== null
+    			if (dirty & /*groups, results*/ 9 && t0_value !== (t0_value = (/*card*/ ctx[18].probability !== null
     			? `${/*card*/ ctx[18].probability}%`
     			: '') + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty & /*groups, results*/ 5 && t2_value !== (t2_value = /*card*/ ctx[18].ratioText + "")) set_data_dev(t2, t2_value);
+    			if (dirty & /*groups, results*/ 9 && t2_value !== (t2_value = /*card*/ ctx[18].ratioText + "")) set_data_dev(t2, t2_value);
 
-    			if (dirty & /*groups, results*/ 5) {
+    			if (dirty & /*groups, results*/ 9) {
     				set_style(div3, "background-color", /*card*/ ctx[18].color);
     			}
 
-    			if (dirty & /*groups, results*/ 5 && t4_value !== (t4_value = /*card*/ ctx[18].label + "")) set_data_dev(t4, t4_value);
+    			if (dirty & /*groups, results*/ 9 && t4_value !== (t4_value = /*card*/ ctx[18].label + "")) set_data_dev(t4, t4_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div5);
@@ -8754,14 +8751,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(307:16) {#each createGroupCards(groups, results, turn) as card}",
+    		source: "(317:16) {#each createGroupCards(groups, results, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (300:4) {#each generateTurnsArray(numberOfTurns) as _, turn}
+    // (310:4) {#each generateTurnsArray(numberOfTurns) as _, turn}
     function create_each_block$1(ctx) {
     	let div2;
     	let div0;
@@ -8782,7 +8779,7 @@ var app = (function () {
     	let t7;
     	let div1;
     	let t8;
-    	let each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[2], /*turn*/ ctx[17]);
+    	let each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[3], /*turn*/ ctx[17]);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -8811,15 +8808,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$3, 302, 28, 9716);
+    			add_location(br, file$3, 312, 28, 11934);
     			attr_dev(i, "class", "svelte-bf6y84");
-    			add_location(i, file$3, 303, 16, 9738);
+    			add_location(i, file$3, 313, 16, 11956);
     			attr_dev(div0, "class", "turn-label svelte-bf6y84");
-    			add_location(div0, file$3, 301, 12, 9662);
+    			add_location(div0, file$3, 311, 12, 11880);
     			attr_dev(div1, "class", "card-rectangles svelte-bf6y84");
-    			add_location(div1, file$3, 305, 12, 9832);
+    			add_location(div1, file$3, 315, 12, 12050);
     			attr_dev(div2, "class", "turn-row svelte-bf6y84");
-    			add_location(div2, file$3, 300, 8, 9626);
+    			add_location(div2, file$3, 310, 8, 11844);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -8849,8 +8846,8 @@ var app = (function () {
     			? `Draw ${/*InitialDrawSize*/ ctx[1]}`
     			: 'Draw 1') + "")) set_data_dev(t5, t5_value);
 
-    			if (dirty & /*createGroupCards, groups, results*/ 21) {
-    				each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[2], /*turn*/ ctx[17]);
+    			if (dirty & /*createGroupCards, groups, results*/ 25) {
+    				each_value_1 = /*createGroupCards*/ ctx[4](/*groups*/ ctx[0], /*results*/ ctx[3], /*turn*/ ctx[17]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -8883,7 +8880,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(300:4) {#each generateTurnsArray(numberOfTurns) as _, turn}",
+    		source: "(310:4) {#each generateTurnsArray(numberOfTurns) as _, turn}",
     		ctx
     	});
 
@@ -8901,7 +8898,7 @@ var app = (function () {
     	let input;
     	let mounted;
     	let dispose;
-    	let each_value = generateTurnsArray(/*numberOfTurns*/ ctx[3]);
+    	let each_value = generateTurnsArray(/*numberOfTurns*/ ctx[2]);
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -8927,18 +8924,18 @@ var app = (function () {
     			t4 = space();
     			input = element("input");
     			set_style(h2, "text-align", "center");
-    			add_location(h2, file$3, 297, 0, 9478);
+    			add_location(h2, file$3, 307, 0, 11696);
     			attr_dev(div0, "class", "output-diagram svelte-bf6y84");
-    			add_location(div0, file$3, 298, 0, 9530);
+    			add_location(div0, file$3, 308, 0, 11748);
     			attr_dev(label, "for", "deckSize");
     			attr_dev(label, "class", "svelte-bf6y84");
-    			add_location(label, file$3, 323, 4, 10619);
+    			add_location(label, file$3, 333, 4, 12837);
     			attr_dev(input, "type", "number");
     			attr_dev(input, "class", "deckSize svelte-bf6y84");
     			attr_dev(input, "min", "1");
-    			add_location(input, file$3, 324, 4, 10671);
+    			add_location(input, file$3, 334, 4, 12889);
     			attr_dev(div1, "class", "deck-size-container svelte-bf6y84");
-    			add_location(div1, file$3, 322, 0, 10580);
+    			add_location(div1, file$3, 332, 0, 12798);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8959,7 +8956,7 @@ var app = (function () {
     			append_dev(div1, label);
     			append_dev(div1, t4);
     			append_dev(div1, input);
-    			set_input_value(input, /*numberOfTurns*/ ctx[3]);
+    			set_input_value(input, /*numberOfTurns*/ ctx[2]);
 
     			if (!mounted) {
     				dispose = listen_dev(input, "input", /*input_input_handler*/ ctx[7]);
@@ -8968,7 +8965,7 @@ var app = (function () {
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*createGroupCards, groups, results, InitialDrawSize, numberOfTurns*/ 31) {
-    				each_value = generateTurnsArray(/*numberOfTurns*/ ctx[3]);
+    				each_value = generateTurnsArray(/*numberOfTurns*/ ctx[2]);
     				validate_each_argument(each_value);
     				let i;
 
@@ -8991,8 +8988,8 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
-    			if (dirty & /*numberOfTurns*/ 8 && to_number(input.value) !== /*numberOfTurns*/ ctx[3]) {
-    				set_input_value(input, /*numberOfTurns*/ ctx[3]);
+    			if (dirty & /*numberOfTurns*/ 4 && to_number(input.value) !== /*numberOfTurns*/ ctx[2]) {
+    				set_input_value(input, /*numberOfTurns*/ ctx[2]);
     			}
     		},
     		i: noop$3,
@@ -9038,20 +9035,7 @@ var app = (function () {
     	return Ckx * CnKxn / CnN;
     }
 
-    function logFactorial(n) {
-    	let result = 0;
-
-    	for (let i = 2; i <= n; i++) {
-    		result += Math.log(i);
-    	}
-
-    	return result;
-    }
-
-    function logChoose(n, k) {
-    	return logFactorial(n) - logFactorial(k) - logFactorial(n - k);
-    }
-
+    //multivariateHypergeometricCDF 3 functions below
     function multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, cardsDrawn) {
 
     	function calculate(groupIndex, cardsLeft, accumulatedProbability) {
@@ -9077,15 +9061,14 @@ var app = (function () {
 
     function applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulligans, cardsDrawn) {
     	let totalProbability = 0;
-    	let remainingDeckSize = deckSize;
 
     	for (let mulligan = 0; mulligan <= mulligans; mulligan++) {
-    		let probabilityThisMulligan = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, remainingDeckSize, cardsDrawn);
-    		totalProbability += (1 - totalProbability) * probabilityThisMulligan;
-    		remainingDeckSize -= 1; // One card put back for each mulligan
+    		let drawsThisMulligan = cardsDrawn;
+    		let probThisMulligan = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, drawsThisMulligan);
+    		totalProbability += (1 - totalProbability) * probThisMulligan;
     	}
 
-    	return Math.min(1, totalProbability);
+    	return totalProbability;
     }
 
     function convertPercentToRatio(percent) {
@@ -9110,29 +9093,52 @@ var app = (function () {
 
     	function calculateLinkedGroups(linkedGroups) {
     		const groupResults = [];
-    		let cardsDrawn = InitialDrawSize; // Initial hand
     		const groupSizes = linkedGroups.map(group => group.size);
     		const groupCardsToDraw = linkedGroups.map(group => group.cardsToDraw);
     		const linkName = linkedGroups[0].link;
-    		let turn0Boost = 0;
+    		let initialProb = applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulliganCount, InitialDrawSize);
+    		groupResults.push({ turn: 0, probability: initialProb });
+    		let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize;
+    		let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0);
+    		let extendedNumberOfTurns = numberOfTurns + 10; // Extend the number of turns to ensure we have enough data to filter
+    		let allResults = [];
 
-    		for (let turn = 0; turn <= numberOfTurns; turn++) {
-    			if (turn > 0) cardsDrawn += 1;
-    			let probability;
+    		for (let turn = 1; turn <= extendedNumberOfTurns; turn++) {
+    			totalCardsSeen += 1;
+    			let probAtLeastDesiredA = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, adjustedDeckSize, totalCardsSeen);
 
-    			if (turn === 0) {
-    				let baseProbability = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, cardsDrawn);
-    				probability = applyLondonMulliganForLinkedGroups(groupSizes, groupCardsToDraw, deckSize, mulliganCount, cardsDrawn);
-    				turn0Boost = probability - baseProbability;
-    			} else {
-    				probability = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize - mulliganCount, cardsDrawn) + turn0Boost;
-    				probability = Math.min(1, probability);
+    			if (mulliganCount > 0) {
+    				probAtLeastDesiredA = 1 - (1 - initialProb) * (1 - probAtLeastDesiredA);
     			}
 
-    			groupResults.push({ turn, probability });
+    			allResults.push({ turn, probability: probAtLeastDesiredA });
     		}
 
-    		$$invalidate(2, results[linkName] = groupResults, results);
+    		// Filter out consecutive duplicate probabilities. this is the same logic issue I faced in calculateSingleGroup. when mulliganing and there are greater groupCardsToDraw (cardsToDraw), I was getting early turn duplication that would increase (more early turns were showing the same probability) with increased groupCardsToDraw value. I could not find a pattern to why this was occuring. so I applied this bandaid fix that just pre-calculates the probabilities and removes duplicates :S. wellll it seems to work! I'd love help on this puzzling issue. 
+    		let filteredResults = allResults.filter((result, index, array) => {
+    			return index === 0 || result.probability !== array[index - 1].probability;
+    		});
+
+    		// Add the filtered results to groupResults, adjusting the turn numbers
+    		filteredResults.forEach((result, index) => {
+    			if (index < numberOfTurns && (mulliganCount === 0 || index > 0)) {
+    				// Skip turn 1 when there are mulligans. this is another bandaid. for some reason the above filter out duplicates logic does not capture turn 0 and turn 1. sooo this just skips turn 1 when there are mulligans, effectively removing the last remaining duplicate. 
+    				groupResults.push({
+    					turn: index,
+    					probability: result.probability
+    				});
+    			}
+    		});
+
+    		// Add an extra turn if we skipped turn 1 due to mulligans. another compensation function to fix the display. without this the final card/turn is blank in the results. 
+    		if (mulliganCount > 0 && groupResults.length < numberOfTurns + 1) {
+    			groupResults.push({
+    				turn: numberOfTurns,
+    				probability: filteredResults[numberOfTurns].probability
+    			});
+    		}
+
+    		$$invalidate(3, results[linkName] = groupResults, results);
     	}
 
     	let { groups = [] } = $$props;
@@ -9145,7 +9151,7 @@ var app = (function () {
     	function calculateProbabilities() {
     		console.log('At start of calculateProbabilities, InitialDrawSize:', InitialDrawSize);
     		console.log("Calculating probabilities for groups:", groups);
-    		$$invalidate(2, results = {});
+    		$$invalidate(3, results = {});
     		console.log('Mulligan count at start of calculateProbabilities:', mulliganCount);
 
     		// Group by links, excluding empty links
@@ -9189,28 +9195,35 @@ var app = (function () {
     		const groupResults = [];
     		let initialProb = applyLondonMulligan(group);
     		groupResults.push({ turn: 0, probability: initialProb });
-    		let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize; // Start from 0 if there are mulligans. 
-    		let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0); // Decrease deck size of subseiqent turns if there are mulligans. the deck size is reduced because when mulliganing, the subsequent turns are separate calculations that are combined with the turn 0 mulligans, and we assume the cards in your hand are not the desired cards. also note that this sort of factors the london mulligan aspect of putting x cards on the bottom of your library based on the # of times you mulligan. the assumption is you'd put none-desired cards on the bottom, so for the sake of caluculations, imagining these cards are in your hand (and not in the deck) feels similar to if they are on the bottom (you know the cards above them must have the desired card, so you can discount them i think)
+    		let totalCardsSeen = mulliganCount > 0 ? 0 : InitialDrawSize;
+    		let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0);
 
-    		for (let turn = 1; turn <= numberOfTurns; turn++) {
+    		// Decrease deck size of subseiqent turns if there are mulligans. the deck size is reduced because when mulliganing, the subsequent turns are separate calculations that are combined with the turn 0 mulligans, and we assume the cards in your hand are not the desired cards. also note that this sort of factors the london mulligan aspect of putting x cards on the bottom of your library based on the # of times you mulligan. the assumption is you'd put none-desired cards on the bottom, so for the sake of caluculations, imagining these cards are in your hand (and not in the deck) feels similar to if they are on the bottom (you know the cards above them must have the desired card, so you can discount them i think)
+    		let extendedNumberOfTurns = numberOfTurns + (mulliganCount > 0 ? group.cardsToDraw - 1 : 0);
+
+    		// Extend the loop to compensate for skipped turns when there are mulligans. this is band-aid logic! I don't know why, if I don't have this, early turns (turn 1, 2, 3, etc) will duplicate turn 0 values a number of times equal to the cardsToDraw value). so I'm just skipping early loops to compensate... 
+    		for (let turn = 1; turn <= extendedNumberOfTurns; turn++) {
     			totalCardsSeen += 1;
-    			let probLessThanDesiredAUpToThisTurn = 0;
+    			let probAtLeastDesiredA = 0;
 
-    			for (let k = 0; k < group.cardsToDraw; k++) {
-    				probLessThanDesiredAUpToThisTurn += hypergeometricCDF(k, adjustedDeckSize, group.size, totalCardsSeen);
+    			for (let k = group.cardsToDraw; k <= Math.min(totalCardsSeen, group.size); k++) {
+    				probAtLeastDesiredA += hypergeometricCDF(k, adjustedDeckSize, group.size, totalCardsSeen);
     			}
-
-    			let probAtLeastDesiredA = 1 - probLessThanDesiredAUpToThisTurn;
 
     			if (mulliganCount > 0) {
     				// Combine the probability from turn 0 with the probability of drawing additional cards
     				probAtLeastDesiredA = 1 - (1 - initialProb) * (1 - probAtLeastDesiredA);
     			}
 
-    			groupResults.push({ turn, probability: probAtLeastDesiredA });
-    		}
+    			if (mulliganCount === 0 || turn >= group.cardsToDraw) {
+    				groupResults.push({
+    					turn: turn - (mulliganCount > 0 ? group.cardsToDraw - 1 : 0),
+    					probability: probAtLeastDesiredA
+    				});
+    			}
+    		} // Skip adding the first few probabilities when there are mulligans. this is band-aid logic! I don't know why, if I don't have this, early turns (turn 1, 2, 3, etc) will duplicate turn 0 values a number of times equal to the cardsToDraw value). so I'm just skipping early loops to compensate... 
 
-    		$$invalidate(2, results[group.name] = groupResults, results);
+    		$$invalidate(3, results[group.name] = groupResults, results);
     	}
 
     	function createGroupCards(groups, results, turn) {
@@ -9294,7 +9307,7 @@ var app = (function () {
 
     	function input_input_handler() {
     		numberOfTurns = to_number(this.value);
-    		$$invalidate(3, numberOfTurns);
+    		$$invalidate(2, numberOfTurns);
     	}
 
     	$$self.$$set = $$props => {
@@ -9308,11 +9321,9 @@ var app = (function () {
     		groupColors,
     		choose,
     		hypergeometricCDF,
-    		calculateLinkedGroups,
-    		logFactorial,
-    		logChoose,
     		multivariateHypergeometricCDF,
     		applyLondonMulliganForLinkedGroups,
+    		calculateLinkedGroups,
     		groups,
     		deckSize,
     		mulliganCount,
@@ -9335,8 +9346,8 @@ var app = (function () {
     		if ('deckSize' in $$props) $$invalidate(5, deckSize = $$props.deckSize);
     		if ('mulliganCount' in $$props) $$invalidate(6, mulliganCount = $$props.mulliganCount);
     		if ('InitialDrawSize' in $$props) $$invalidate(1, InitialDrawSize = $$props.InitialDrawSize);
-    		if ('results' in $$props) $$invalidate(2, results = $$props.results);
-    		if ('numberOfTurns' in $$props) $$invalidate(3, numberOfTurns = $$props.numberOfTurns);
+    		if ('results' in $$props) $$invalidate(3, results = $$props.results);
+    		if ('numberOfTurns' in $$props) $$invalidate(2, numberOfTurns = $$props.numberOfTurns);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -9344,9 +9355,9 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*groups*/ 1) {
-    			// Reactive statement to calculate probabilities when groups change
-    			if (groups.length > 0) {
+    		if ($$self.$$.dirty & /*groups, numberOfTurns*/ 5) {
+    			// Reactive statement to calculate probabilities when groups or numberOfTurns changes
+    			if (groups.length > 0 || numberOfTurns) {
     				calculateProbabilities();
     			}
     		}
@@ -9362,8 +9373,8 @@ var app = (function () {
     	return [
     		groups,
     		InitialDrawSize,
-    		results,
     		numberOfTurns,
+    		results,
     		createGroupCards,
     		deckSize,
     		mulliganCount,
@@ -10155,7 +10166,7 @@ var app = (function () {
     			t2 = space();
     			create_component(faq.$$.fragment);
     			attr_dev(main, "class", "parameters svelte-1hj1r27");
-    			add_location(main, file, 40, 0, 2716);
+    			add_location(main, file, 40, 0, 2731);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -10237,7 +10248,7 @@ var app = (function () {
     		},
     		{
     			question: "How do you know this is accurate?",
-    			answer: "<p>This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub,</a><a href='https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html' target='_blank'> mtg combo calc,</a><a href='https://deckstats.net/' target='_blank'> deckstats</a>) for accuracy. NOTE that the mulligan feature is still experimental and needs refinement.</p>"
+    			answer: "<p>This tool has been checked against others (<a href='https://deckulator.appspot.com/' target='_blank'>deckulator, </a> <a href='https://aetherhub.com/Apps/HyperGeometric' target='_blank'>aetherhub,</a><a href='https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html' target='_blank'> mtg combo calc,</a><a href='https://deckstats.net/' target='_blank'> deckstats</a>) for accuracy.</p><p>NOTE that the mulligan feature is experimental and needs mathematical confirmation.</p>"
     		},
     		{
     			question: "I'd like to support this or give feedback.",

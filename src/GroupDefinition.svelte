@@ -173,8 +173,8 @@
                         <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                     </button>
                     <div slot="content">
-                        <p class="popover-content">London mulligan feature is experimental. Mulligans for non-linked categories is believed to be correct, but not confirmed. Mulligans for linked categories is known to not be correct, and still uses a "carry over" effect (making turn 1, 2, 3.. less accurate. Turn 0 may be correct.)</p>
-                         <p class="popover-content">See the FAQ and github if you want to help out here - I need a mathematician to confirm logic!</p>
+                        <p class="popover-content">London mulligan feature is experimental and combines the probabilities of the mulligan phase with the probabilities of subsequent draws to derive a cumulative probability.
+                        <p class="popover-content">See the FAQ and github if you want to help out here - I need a mathematician to confirm this logic!</p>
                     </div>
                 </Popover>
                 
