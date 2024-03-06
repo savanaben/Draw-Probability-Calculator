@@ -98,8 +98,8 @@
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">When categories are linked, the tool displays the percent chance of getting at least the minimum number of desired cards in <i>each</i> category.</p>
-                            <p class="popover-content"><b>Categories must have the exact same link name (keyword match) and you can't link more than 4 categories together currently.</b></p>
+                            <p class="popover-content">When categories have the same link name, the tool displays the percent chance of getting at least the minimum number of desired cards in <i>each</i> linked category.</p>
+                            <p class="popover-content"><b>Categories must have the exact same link name (keyword match). The tool does not support linking more than 4 categories together currently.</b></p>
                         </div>
                     </Popover>
                 </th>
@@ -174,7 +174,7 @@
                     </button>
                     <div slot="content">
                         <p class="popover-content">London mulligan feature is experimental and combines the probabilities of the mulligan phase with the probabilities of subsequent draws to derive a cumulative probability.
-                        <p class="popover-content">See the FAQ and github if you want to help out here - I need a mathematician to confirm this logic!</p>
+                        <p class="popover-content">See the FAQ (bottom of this page) and github if you want to help out here - I need a mathematician to confirm this logic!</p>
                     </div>
                 </Popover>
                 
