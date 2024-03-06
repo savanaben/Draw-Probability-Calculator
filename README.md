@@ -1,5 +1,5 @@
 # Draw Probability Calculator
-A probability calculator customized for card games like Magic the Gathering.
+A draw probability calculator customized for card games like Magic the Gathering.
 
 This tool applies hypergeometric distribution calculations to determine probabilities. For magic, this tool supports london mulligans. I have given it my best shot on how this complex math works, and need a mathematician to confirm the logic! You can see the bottom of this readme for more details. 
 
@@ -22,7 +22,7 @@ https://savanaben.github.io/Draw-Probability-Calculator/
 ## Mulligan challenge
 The main challenge I've faced with calculating mulligans is how to carry forward the increase in probabilities from turn 0 (the multiple opening hands you see) to your subsequent hands. This involves a complex nested combination of probabilities approach. Ultimately, I need a mathematician or a mulligan tool to confirm my work. 
 
-My current attempt tries to break this apart into two calculations and the combine them:
+My current attempt tries to break this apart into two calculations and then combine them:
 1. Calculation 1 - the "applyLondonMulligan" and "applyLondonMulliganForLinkedGroups" functions handles turn 0 and mulliganing. they calculate the cumulative probability for each mulligan, if there are mulligans.
 2. Calculation 2 -  the "calculateSingleGroup" and "calculateLinkedGroups" functions handle the subsequent turns, where you draw 1 card per turn. If there are no mulligans, they use the standard hypergeometric/multivariate equations. If there are mulligans, they will combine the probability from "applyLondonMulligan/applyLondonMulliganForLinkedGroups" with the subsequent turns probability. There are comments in the code (Calculation.svelte) that go over some assumptions and unfortunate band-aids I added. 
 
@@ -31,7 +31,7 @@ The "london" aspect of the london mulligan (placing x cards on the bottom of you
 - For calculation simplicity (in the code) I assume it does not matter (between your hand or the bottom of the deck) where these cards go, as in either location, they should not really be factored into the hypergeometric calculation. 
 ```let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0);```
 This line of code adjusts the "applyLondonMulligan" and "applyLondonMulliganForLinkedGroups". 
-  - if no mulligan, don't adjust the deck and let the core hypergeometric calculation do it's thing because we don't need to do cumulative probabilities. 
-  - if there are mulligans, for subsequent turn calculations, imagine the deck is <InitialDrawSize> less cards (in magic, 7 cards less). I think we can do this because we now have two separate probabilities we combine:
-    - mulligan step, which in and of itself combines probabilities if multiple mulligans. 
-    - subsequent turns step, which imagines a smaller deck because your <InitialDrawSize> hand is either in your hand OR on the bottom of the deck (due to the london mulligan). If it's on the bottom of the deck, we can discount those cards because we assume they are not the desired cards. 
+  - if no mulligan, don't adjust the deck and let the core hypergeometric calculation do its thing because we don't need to do cumulative probabilities. 
+  - if there are mulligans, for subsequent turn calculations, imagine the deck is InitialDrawSize less cards (in magic, 7 cards less). I think we can do this because we now have two separate probabilities we combine:
+    - mulligan step, which in-and-of-itself combines probabilities of multiple mulligans. 
+    - subsequent turns step, which imagines a smaller deck because your InitialDrawSize hand is either in your hand OR on the bottom of the deck (due to the london mulligan). If it's on the bottom of the deck, we can discount those cards because we assume they are not the desired cards. 
