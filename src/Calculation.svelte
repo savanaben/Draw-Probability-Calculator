@@ -237,8 +237,9 @@ function createGroupCards(groups, results, turn) {
         return { probability: probabilityPercent, label: group.name, color, ratioText };
     });
 
-    // Fill up the remaining cards for the turn with blanks
-    while (cards.length < InitialDrawSize + turn) {
+    // Fill up the remaining cards for the turn with blanks, adjusting for mulligans
+    let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount, 0); // Ensure it doesn't go below 0
+    while (cards.length < adjustedDrawSize + turn) {
         cards.push({ probability: null, label: '', ratioText: '' });
     }
 

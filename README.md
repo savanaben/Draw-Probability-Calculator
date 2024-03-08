@@ -34,4 +34,4 @@ This line of code adjusts the "applyLondonMulligan" and "applyLondonMulliganForL
   - if no mulligan, don't adjust the deck and let the core hypergeometric calculation do its thing because we don't need to do cumulative probabilities. 
   - if there are mulligans, for subsequent turn calculations, imagine the deck is InitialDrawSize less cards (in magic, 7 cards less). I think we can do this because we now have two separate probabilities we combine:
     - mulligan step, which in-and-of-itself combines probabilities of multiple mulligans. 
-    - subsequent turns step, which imagines a smaller deck because your InitialDrawSize hand is either in your hand OR on the bottom of the deck (due to the london mulligan). If it's on the bottom of the deck, we can discount those cards because we assume they are not the desired cards. 
+    - subsequent turns step, which imagines a smaller deck because your InitialDrawSize hand is either in your hand OR on the bottom of the deck (due to the london mulligan). In either position, we can discount those cards because we assume they are not the desired cards. 

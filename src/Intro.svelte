@@ -4,7 +4,7 @@
 
 
     .intro-section {
-      max-width: 650px;
+      max-width: 658px;
       margin: 0 auto;
       padding: 20px;
       color: #333;
