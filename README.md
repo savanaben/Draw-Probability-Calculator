@@ -15,23 +15,17 @@ https://savanaben.github.io/Draw-Probability-Calculator/
  ### Nice to haves
  - fancier link/multivariate logic, such as OR operator (what are the chances I draw a plains and an island, OR a dual land).
  - Group linked cards in the output visual in some way (connector line, within a box, include link name, even just adjacent)
- - Support variable draws per turn? (what if I have a lot of cantrips, scry, early-game draw, etc). 
+ - Support variable draws per turn? (what if I have a lot of cantrips, scry, early-game draw, etc). I'm imagining a dropdown next to each "draw x" line, which could let you increase that value by 1-3. consider if scry can be supported in a similar way (assume you always pitch a card to the bottom if it's not a desired card?) 
  - support shuffling on any turn (fetch lands, etc, would change probabilities with london mulligan as the cards placed on the bottom sort of "re-enter" the random pool).
  - Some kind of integration with moxfield tags... (I imagine the groupings ppl use on moxfield might also be the groupings they'd want to know probabilities for.. (what are the chances I get x card from "creatures" or "removal")).
 
 ## Mulligan challenge
-The main challenge I've faced with calculating mulligans is how to carry forward the increase in probabilities from turn 0 (the multiple opening hands you see) to your subsequent hands. This involves a complex nested combination of probabilities approach. Ultimately, I need a mathematician or a mulligan tool to confirm my work. 
+The London mulligan calculations were the most challenging part of this project! I believe the calculations are correct given my outputs match Michael Moore's [guiding exemplar](https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html), as well as Kelvin Liu-Huang's [mtg combo calc](https://www.andrew.cmu.edu/user/kmliu/mtg_combo_calc.html).
 
-My current attempt tries to break this apart into two calculations and then combine them:
-1. Calculation 1 - the "applyLondonMulligan" and "applyLondonMulliganForLinkedGroups" functions handles turn 0 and mulliganing. they calculate the cumulative probability for each mulligan, if there are mulligans.
-2. Calculation 2 -  the "calculateSingleGroup" and "calculateLinkedGroups" functions handle the subsequent turns, where you draw 1 card per turn. If there are no mulligans, they use the standard hypergeometric/multivariate equations. If there are mulligans, they will combine the probability from "applyLondonMulligan/applyLondonMulliganForLinkedGroups" with the subsequent turns probability. There are comments in the code (Calculation.svelte) that go over some assumptions and unfortunate band-aids I added. 
+There are two open aspects:
+- My mulligan outputs are sometimes ~0.5% off from Kelvin's. Not sure if there's some rounding aspect that's causing this minor difference. It does not seem to ever reach significance. 
+- Kelvin's tool does not support calculations with more than 1 desired card (ex - I have a 10 card group, and I want to get 2 of them). Because of this, I can't confirm that aspect of my calculations are correct. 
 
 The "london" aspect of the london mulligan (placing x cards on the bottom of your deck, where x = number of mulligans) adds some assumptions and considerations:
 - It's always assumed the desired card(s) are not in your hand, drawn, or placed on the bottom of the deck. 
-- For calculation simplicity (in the code) I assume it does not matter (between your hand or the bottom of the deck) where these cards go, as in either location, they should not really be factored into the hypergeometric calculation. 
-```let adjustedDeckSize = deckSize - (mulliganCount > 0 ? InitialDrawSize : 0);```
-This line of code adjusts the "applyLondonMulligan" and "applyLondonMulliganForLinkedGroups". 
-  - if no mulligan, don't adjust the deck and let the core hypergeometric calculation do its thing because we don't need to do cumulative probabilities. 
-  - if there are mulligans, for subsequent turn calculations, imagine the deck is InitialDrawSize less cards (in magic, 7 cards less). I think we can do this because we now have two separate probabilities we combine:
-    - mulligan step, which in-and-of-itself combines probabilities of multiple mulligans. 
-    - subsequent turns step, which imagines a smaller deck because your InitialDrawSize hand is either in your hand OR on the bottom of the deck (due to the london mulligan). In either position, we can discount those cards because we assume they are not the desired cards. 
+- For calculation simplicity I assume it does not matter (between your hand or the bottom of the deck) where these london mulliganed cards go, as in either location, they should not really be factored into the hypergeometric calculation. The calculations assume the cards are still in your hand. My key assumption is that practically, this leads to the same probabilities because if the cards were on the bottom of the deck, they'd be known to be the furthest away.

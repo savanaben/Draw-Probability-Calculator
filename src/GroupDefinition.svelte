@@ -173,8 +173,9 @@
                         <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                     </button>
                     <div slot="content">
-                        <p class="popover-content">London mulligan feature is experimental and combines the probabilities of the mulligan phase with the probabilities of subsequent draws to derive a cumulative probability.
-                        <p class="popover-content">See the FAQ (bottom of this page) and github if you want to help out here - I need a mathematician to confirm this logic!</p>
+                        <p class="popover-content">The London mulligan feature derives the cumulative probability of your initial draw, mulligans, and subsequent draw-1 turns.
+                        <p class="popover-content">See the FAQs (bottom of this page) and github if you want to help confirm this logic (mulligan calculations have not been confirmed for setups with more than 1 desired card).</p>
+                        <p class="popover-content">Special thanks to Michael Moore for helping me understand the mathematics via <a href='https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html' target='_blank'>this post</a>.</p>
                     </div>
                 </Popover>
                 
