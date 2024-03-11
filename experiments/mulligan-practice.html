@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hypergeometric Probability Calculator</title>
+</head>
+<body>
+    <h2>Hypergeometric Probability Calculator</h2>
+    <button onclick="calculateAndDisplayProbabilities()">Calculate Probabilities</button>
+    <pre id="output"></pre>
+
+    <script>
+        // Function to calculate combinations (n choose k)
+        function choose(n, k) {
+            let result = 1;
+            for (let i = 1; i <= k; i++) {
+                result *= (n + 1 - i) / i;
+            }
+            return result;
+        }
+
+        // Function to calculate hypergeometric CDF
+        function hypergeometricCDF(x, N, K, n) {
+            const Ckx = choose(K, x);
+            const CnKxn = choose(N - K, n - x);
+            const CnN = choose(N, n);
+            return Ckx * CnKxn / CnN;
+        }
+
+        // JavaScript version of the Python functions
+
+        function calculate_mulligan_probability(deck_size, group_a_size, draw_size, desired_a_cards=1, mulligans=0) {
+            let total_draws = draw_size * (mulligans + 1);
+            let prob_less_than_desired_a = 0;
+            for (let k = 0; k < desired_a_cards; k++) {
+                prob_less_than_desired_a += hypergeometricCDF(k, deck_size, group_a_size, total_draws);
+            }
+            return 1 - prob_less_than_desired_a;
+        }
+
+        function calculate_cumulative_probability(deck_size, group_a_size, draw_size, desired_a_cards=1, mulligans=0, subsequent_turns=0) {
+    let probabilities = [];
+    let initial_prob = calculate_mulligan_probability(deck_size, group_a_size, draw_size, desired_a_cards, mulligans);
+    probabilities.push(initial_prob);
+
+    let total_cards_seen = draw_size * (mulligans + 1);
+    let adjusted_deck_size = deck_size - mulligans; // Adjust deck size for cards put back after mulligans
+
+    for (let turn = 1; turn <= subsequent_turns; turn++) {
+        total_cards_seen += 1;
+        adjusted_deck_size -= 1; // Adjust deck size for each card drawn
+        let prob_less_than_desired_a_up_to_this_turn = 0;
+        for (let k = 0; k < desired_a_cards; k++) {
+            prob_less_than_desired_a_up_to_this_turn += hypergeometricCDF(k, adjusted_deck_size, group_a_size, total_cards_seen);
+        }
+        let prob_at_least_desired_a = 1 - prob_less_than_desired_a_up_to_this_turn;
+        probabilities.push(prob_at_least_desired_a);
+    }
+
+    return probabilities;
+}
+
+
+        function calculateAndDisplayProbabilities() {
+            let mulligans = 0;
+            let subsequent_turns = 5;
+            let desired_a_cards = 1;
+            let cumulative_probabilities = calculate_cumulative_probability(99, 10, 7, desired_a_cards, mulligans, subsequent_turns);
+
+            let output = `Cumulative probabilities after ${mulligans} mulligans and up to ${subsequent_turns} subsequent turns for drawing at least ${desired_a_cards} cards from Group A:\n`;
+            cumulative_probabilities.forEach((prob, turn) => {
+                output += `Turn ${turn}: ${prob}\n`;
+            });
+
+            document.getElementById('output').innerText = output;
+        }
+    </script>
+</body>
+</html>

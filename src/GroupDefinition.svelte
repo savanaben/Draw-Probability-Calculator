@@ -76,7 +76,7 @@
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                          <p class="popover-content">Categories are the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. </p>
+                          <p class="popover-content">In edh categories can be thought of as the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
                           <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
                         </div>
                     </Popover>
@@ -88,7 +88,7 @@
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">Percent change you'll get <i>at least</i> this many cards from this category.</p>
+                            <p class="popover-content">Percent change you'll draw <i>at least</i> this many cards from this category.</p>
                         </div>
                     </Popover>
                 </th>

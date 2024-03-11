@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mana Production Profiles</title>
+    <script>
+function identifyProfiles() {
+    const lands = [
+                { W: 1 },
+                { R: 1 },
+                { B: 1 },
+                { U: 1 },
+                { G: 1 },
+                { W: 1, B: 1},
+                { W: 1, B: 1},
+                { W: 1, U: 1},
+                { W: 1, R: 1,},
+    ];
+
+// going to want to support "AND" in land calculations.. challenge - how to support lands that cost 1 colorless and tap - add 2 different colors. 
+
+    const profiles = new Set();
+    lands.forEach(land => {
+        const landProfile = JSON.stringify(land);
+        profiles.add(landProfile);
+    });
+
+    const distinctProfiles = Array.from(profiles).map(profile => JSON.parse(profile));
+    console.log('Distinct Mana Production Profiles:', distinctProfiles);
+
+    const manaRequirements = { W: 1, B:1};
+    const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+    const neededCombinations = determineNeededCombinations(lands, manaRequirements, totalManaNeeded);
+    console.log('Needed Land Combinations:', neededCombinations);
+}
+
+
+function determineNeededCombinations(lands, requirements, totalManaNeeded) {
+    const neededCombinations = new Set(); // Use a Set to store unique combinations
+    const combinations = getAllCombinations(lands, true, totalManaNeeded); // Pass totalManaNeeded
+
+    combinations.forEach(combination => {
+        if (combination.length < totalManaNeeded) return; // Skip combinations with insufficient lands
+
+        const combinedProfile = combineProfiles(combination);
+        const profileSatisfiesRequirements = canSatisfyRequirements(combinedProfile, requirements);
+
+        if (profileSatisfiesRequirements && eachRequirementMetBySeparateLand(combination, requirements, totalManaNeeded)) {
+            const combinationKey = JSON.stringify(combination.map(land => JSON.stringify(land)).sort()); // Create a unique key for this combination
+            neededCombinations.add(combinationKey); // Add the key to the Set
+        }
+    });
+
+    return Array.from(neededCombinations).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr))); // Convert the Set back to an array of land combinations
+}
+
+
+function eachRequirementMetBySeparateLand(combination, requirements) {
+    // Create a copy of the requirements to track remaining requirements
+    const remainingRequirements = { ...requirements };
+
+    // Iterate over each land in the combination
+    combination.forEach(land => {
+        // Iterate over each type of mana the land can produce
+        for (const color in land) {
+            if (remainingRequirements[color] && remainingRequirements[color] > 0) {
+                // Allocate this land's mana to satisfy the requirement
+                remainingRequirements[color]--;
+                break; // Stop checking other mana types for this land
+            }
+        }
+    });
+
+    // Check if all requirements have been satisfied
+    return Object.values(remainingRequirements).every(amount => amount === 0);
+}
+
+
+
+
+function canSatisfyRequirements(combinedProfile, requirements) {
+    // Create a copy of the requirements to modify
+    const remainingRequirements = { ...requirements };
+
+    // Try to allocate lands to satisfy the requirements
+    for (const color in combinedProfile) {
+        if (remainingRequirements[color]) {
+            const amountNeeded = remainingRequirements[color];
+            const amountAvailable = combinedProfile[color];
+            const amountToAllocate = Math.min(amountNeeded, amountAvailable);
+
+            remainingRequirements[color] -= amountToAllocate;
+        }
+    }
+
+    // Check if all requirements have been satisfied
+    return Object.values(remainingRequirements).every(amount => amount <= 0);
+}
+
+
+
+function getAllCombinations(lands, allowDuplicates = false, totalManaNeeded) {
+    const combinations = [];
+    const landCounts = lands.reduce((counts, land) => {
+        const key = JSON.stringify(land);
+        counts[key] = (counts[key] || 0) + 1;
+        return counts;
+    }, {});
+
+    const generateCombinations = (index, currentCombination, currentCounts) => {
+        if (currentCombination.length > totalManaNeeded) return; // Limit combination length
+
+        if (index === lands.length) {
+            combinations.push(currentCombination);
+            return;
+        }
+
+        generateCombinations(index + 1, currentCombination, currentCounts); // Skip current land
+
+        const land = lands[index];
+        const landKey = JSON.stringify(land);
+        if (!currentCounts[landKey]) {
+            currentCounts[landKey] = 0;
+        }
+
+        if (!allowDuplicates || currentCounts[landKey] < landCounts[landKey]) {
+            // Add current land and generate further combinations
+            const newCounts = { ...currentCounts, [landKey]: currentCounts[landKey] + 1 };
+            generateCombinations(index + 1, [...currentCombination, land], newCounts);
+        }
+    };
+
+    generateCombinations(0, [], {});
+
+    return combinations;
+}
+
+
+
+
+
+
+        function combineProfiles(profiles) {
+            const combinedProfile = {};
+
+            profiles.forEach(profile => {
+                Object.entries(profile).forEach(([color, amount]) => {
+                    combinedProfile[color] = (combinedProfile[color] || 0) + amount;
+                });
+            });
+
+            return combinedProfile;
+        }
+    </script>
+</head>
+<body>
+    <h2>Mana Production Profiles</h2>
+    <button onclick="identifyProfiles()">Identify Profiles</button>
+</body>
+</html>
