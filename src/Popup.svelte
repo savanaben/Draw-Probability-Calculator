@@ -6,9 +6,9 @@
     export let show = false;
   
     let popupElement;
-  
+    let triggerElement;
+
     const calculatePosition = () => {
-      const triggerElement = document.getElementById(triggerElementId);
       if (triggerElement && popupElement) {
         const triggerRect = triggerElement.getBoundingClientRect();
         const popupRect = popupElement.getBoundingClientRect();
@@ -23,10 +23,15 @@
     let style = `position: fixed;`;
   
     onMount(() => {
+      triggerElement = document.getElementById(triggerElementId);
       if (show) {
         const { top, left } = calculatePosition();
         style += `top: ${top}px; left: ${left}px;`;
       }
+      // Add click event listener to the trigger element
+      triggerElement.addEventListener('click', () => {
+        show = !show;
+      });
     });
   
     $: if (show) {
@@ -57,4 +62,3 @@
       padding-bottom: 1rem;
     }
   </style>
-  

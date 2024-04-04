@@ -3,6 +3,7 @@
     import Calculation from './Calculation.svelte';
     import Intro from './Intro.svelte';
     import FAQ from './FAQ.svelte';
+    import MonteAccordion from './MonteAccordion.svelte';
 
     let groups = [];
     let deckSize = 99; // Default deck size
@@ -36,11 +37,14 @@
     ];
 
 
+
+
 </script>
 
 <main class="parameters">
 	<Intro />
     <GroupDefinition on:updateGroups={handleGroupUpdate} />
+    <MonteAccordion />
     <Calculation {groups} {deckSize} {InitialDrawSize} {mulliganCount} />
 	<FAQ {faqs} />
 </main>

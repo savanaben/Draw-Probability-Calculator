@@ -24,6 +24,10 @@ import _ from 'lodash';
 
 //multivariateHypergeometricCDF 3 functions below
 
+
+
+
+
 function multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, deckSize, cardsDrawn) {
     let totalProbability = 0;
 
@@ -306,6 +310,169 @@ function transformCombinationForLinkedGroups(combination, landGroupSizes) {
 }
 
 
+// this function was the original, that just sums the combinations probabilities. 
+// the issue is that it's not really accurate in summing. 
+
+function calculateProbabilitiesForCombinations(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns) {
+    const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+
+    preparedCombinations.forEach(combination => {
+        const linkedGroups = transformCombinationForLinkedGroups(combination, landGroupSizes);
+        calculateLinkedGroups(linkedGroups, deckSize, mulliganCount, initialDrawSize);
+
+        // Assuming the linkName is the same for all groups in a combination
+        const linkName = linkedGroups[0].link;
+
+        for (let turn = 0; turn <= numberOfTurns; turn++) {
+            const turnProbability = results[linkName] ? results[linkName][turn].probability : 0;
+            probabilitiesByTurn[turn] += turnProbability;
+        }
+    });
+
+    return probabilitiesByTurn;
+}
+
+
+
+
+
+
+//this tried to use the inclusion-exclusion principle to calc combinations. 
+//it got laggy around 30ish combinations, and I ultimately dropped this idea for the monte carlo
+//simulation method. 
+
+
+// function calculateProbabilitiesForCombinations(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns) {
+//     const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+
+//     // Calculate probabilities for individual combinations
+//     preparedCombinations.forEach(combination => {
+//         const linkedGroups = transformCombinationForLinkedGroups(combination, landGroupSizes);
+//         const groupResults = calculateLinkedGroups(linkedGroups, deckSize, mulliganCount, initialDrawSize);
+
+//         // Assuming the linkName is the same for all groups in a combination
+//         const linkName = linkedGroups[0].link;
+
+//         for (let turn = 0; turn <= numberOfTurns; turn++) {
+//             const turnProbability = results[linkName] ? results[linkName][turn].probability : 0;
+//             probabilitiesByTurn[turn] += turnProbability;
+//         }
+//     });
+
+//     // Apply inclusion-exclusion principle
+//     for (let i = 2; i <= preparedCombinations.length; i++) {
+//         const sign = i % 2 === 0 ? -1 : 1;
+
+//         // Generate all possible intersections of i combinations
+//         const intersections = generateIntersections(preparedCombinations, i);
+//         intersections.forEach(intersection => {
+//             const linkedGroups = transformCombinationForLinkedGroups(intersection, landGroupSizes);
+//             const groupResults = calculateLinkedGroups(linkedGroups, deckSize, mulliganCount, initialDrawSize);
+
+//             // Assuming the linkName is the same for all groups in an intersection
+//             const linkName = linkedGroups[0].link;
+
+//             for (let turn = 0; turn <= numberOfTurns; turn++) {
+//                 const turnProbability = results[linkName] ? results[linkName][turn].probability : 0;
+//                 probabilitiesByTurn[turn] += sign * turnProbability;
+//             }
+//         });
+//     }
+
+//     return probabilitiesByTurn;
+// }
+
+
+// function generateIntersections(combinations, count) {
+//     const intersections = [];
+
+//     function combine(currentIndex, currentCombination, remainingCount) {
+//         if (remainingCount === 0) {
+//             intersections.push(currentCombination);
+//             return;
+//         }
+
+//         for (let i = currentIndex; i < combinations.length; i++) {
+//             const newCombination = mergeCombinations(currentCombination, combinations[i]);
+//             combine(i + 1, newCombination, remainingCount - 1);
+//         }
+//     }
+
+//     combine(0, [], count);
+//     return intersections;
+// }
+
+// function mergeCombinations(combinationA, combinationB) {
+//     const merged = {};
+
+//     combinationA.forEach(land => {
+//         const key = JSON.stringify(land.land);
+//         merged[key] = (merged[key] || 0) + land.count;
+//     });
+
+//     combinationB.forEach(land => {
+//         const key = JSON.stringify(land.land);
+//         merged[key] = (merged[key] || 0) + land.count;
+//     });
+
+//     return Object.entries(merged).map(([land, count]) => ({
+//         land: JSON.parse(land),
+//         count
+//     }));
+// }
+
+
+function createDeck(lands) {
+    let deck = [];
+    lands.forEach(land => {
+        for (let i = 0; i < land.count; i++) {
+            deck.push(land.land);
+        }
+    });
+    return deck;
+}
+
+
+// V1 - this code worked but I don't think is factoring in deck size reduction on draws
+
+// function monteCarloSimulation(preparedCombinations, landGroupSizes, deck, mulliganCount, initialDrawSize, numberOfTurns, numIterations, deckSize) {
+//     const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+
+//     // Calculate the number of dummy cards to fill the rest of the deck
+//     const numDummyCards = deckSize - deck.length;
+
+//     // Create the complete deck with dummy cards
+//     const completeDeck = deck.concat(Array(numDummyCards).fill({ dummy: 1 }));
+
+//     for (let iteration = 0; iteration < numIterations; iteration++) {
+//         let hand;
+//         for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+//             hand = _.sampleSize(completeDeck, initialDrawSize);
+//             if (handMeetsRequirements(hand, preparedCombinations)) {
+//                 break;
+//             }
+//         }
+
+//         for (let turn = 0; turn <= numberOfTurns; turn++) {
+//             if (turn > 0) {
+//                 const newCard = _.sampleSize(completeDeck, 1)[0];
+//                 hand.push(newCard);
+//             }
+
+//             if (handMeetsRequirements(hand, preparedCombinations)) {
+//                 probabilitiesByTurn[turn]++;
+//             }
+//         }
+//     }
+
+//     return probabilitiesByTurn.map(prob => (prob / numIterations) * 100);
+// }
+
+
+
+
+
+
 
 
 function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
@@ -358,6 +525,124 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
 
 
 
+//this code is a version of what's working above, but the deck is not modified
+// during each iteration. Instead, an array of indices (remainingDeckIndices) 
+//is used to keep track of which cards have been drawn. This approach avoids 
+//the need for deep copying the deck for each iteration and mulligan, which 
+//can improve performance.
+
+
+// function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
+//     const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+//     const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
+//     const numDummyCards = Math.max(deckSize - totalLands, 0);
+//     const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
+
+//     for (let iteration = 0; iteration < numIterations; iteration++) {
+//         let hand;
+//         let remainingDeckIndices = Array.from({ length: deckSize }, (_, i) => i);
+
+//         for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+//             const sampledIndices = _.sampleSize(remainingDeckIndices, initialDrawSize);
+//             hand = sampledIndices.map(index => completeDeck[index]);
+//             if (handMeetsRequirements(hand, preparedCombinations)) {
+//                 break;
+//             }
+//             if (mulligan < mulliganCount) {
+//                 remainingDeckIndices = Array.from({ length: deckSize }, (_, i) => i); // Reset for next mulligan
+//             }
+//         }
+
+//         if (handMeetsRequirements(hand, preparedCombinations)) {
+//             probabilitiesByTurn[0]++;
+//         }
+
+//         for (let turn = 1; turn <= numberOfTurns; turn++) {
+//             const additionalCardIndex = _.sample(remainingDeckIndices);
+//             hand.push(completeDeck[additionalCardIndex]);
+//             remainingDeckIndices = remainingDeckIndices.filter(index => index !== additionalCardIndex);
+
+//             if (handMeetsRequirements(hand, preparedCombinations)) {
+//                 probabilitiesByTurn[turn]++;
+//             }
+//         }
+//     }
+
+//     return probabilitiesByTurn.map(prob => (prob / numIterations) * 100);
+// }
+
+
+
+//--------------------------------------------------------------------------
+
+
+
+
+//this was the monteCarloSimulation function that was trying to
+//account for a changing deck size, did not end up working. 
+
+// function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
+//     const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+
+//     for (let iteration = 0; iteration < numIterations; iteration++) {
+//         let completeDeck = createCompleteDeck(landGroupSizes, deckSize);
+//         let hand;
+
+//         for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+//             hand = drawHand(completeDeck, initialDrawSize);
+//             if (handMeetsRequirements(hand, preparedCombinations)) {
+//                 break;
+//             }
+//         }
+
+//         for (let turn = 0; turn <= numberOfTurns; turn++) {
+//             if (turn > 0) {
+//                 const newCard = drawCard(completeDeck);
+//                 hand.push(newCard);
+//             }
+
+//             if (handMeetsRequirements(hand, preparedCombinations)) {
+//                 probabilitiesByTurn[turn]++;
+//             }
+//         }
+//     }
+
+//     return probabilitiesByTurn.map(prob => (prob / numIterations) * 100);
+// }
+
+// function drawHand(deck, numCards) {
+//     return _.sampleSize(deck, numCards).map(card => {
+//         _.remove(deck, c => c === card);
+//         return card;
+//     });
+// }
+
+// function drawCard(deck) {
+//     const card = _.sample(deck);
+//     _.remove(deck, c => c === card);
+//     return card;
+// }
+
+// function createCompleteDeck(landGroupSizes, deckSize) {
+//     const totalLands = landGroupSizes.reduce((total, land) => total + land.count, 0);
+//     const numDummyCards = deckSize - totalLands;
+//     console.log("Total lands:", totalLands);
+//     console.log("Deck size:", deckSize);
+//     console.log("Number of dummy cards:", numDummyCards);
+
+//     const dummyCard = { isDummy: true };
+
+//     return [
+//         ...landGroupSizes.flatMap(land => Array(land.count).fill(land.land)),
+//         ...Array(numDummyCards).fill(dummyCard),
+//     ];
+// }
+
+
+
+
+
+
 function handMeetsRequirements(hand, preparedCombinations) {
     return preparedCombinations.some(combination => {
         const landCounts = combination.reduce((counts, land) => {
@@ -376,6 +661,9 @@ function handMeetsRequirements(hand, preparedCombinations) {
         });
     });
 }
+
+
+
 
 
 function identifyProfiles() {
@@ -427,9 +715,21 @@ function identifyProfiles() {
             const neededCombinations = determineNeededCombinations(lands, manaRequirements, totalManaNeeded);
             const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
             const landGroupSizes = calculateLandGroupSizes(lands);
-           
+            //prolly can remove totalProbability, old sum logic
+            const totalProbability = calculateProbabilitiesForCombinations(preparedCombinations, landGroupSizes, deckSize, mulliganCount, InitialDrawSize);
             
+            //old sum based logic, can prolly remove
+            //probabilitiesByTurn = calculateProbabilitiesForCombinations(preparedCombinations, landGroupSizes, deckSize, mulliganCount, InitialDrawSize, numberOfTurns);
+
+
+            const flatDeck = lands.reduce((deck, land) => {
+        return deck.concat(Array(landGroupSizes.find(group => JSON.stringify(group.land) === JSON.stringify(land)).count).fill(land));
+    }, []);
+
     
+    const deck = createDeck(landGroupSizes);
+
+
     probabilitiesByTurn = monteCarloSimulation(
         preparedCombinations,
         landGroupSizes,
@@ -441,9 +741,41 @@ function identifyProfiles() {
     );
 
 
+
+// this version is for the monteCarloSimulation that works but is not accouting
+// for the change in deck size V1
+//     const probabilitiesByTurn = monteCarloSimulation(
+//     preparedCombinations,
+//     landGroupSizes,
+//     deck,
+//     mulliganCount,
+//     InitialDrawSize,
+//     numberOfTurns,
+//     1000,
+//     deckSize
+// );
+
+
+//this version is for the monteCarloSimulation function that's trying to account
+//for changing deck size
+
+// const probabilitiesByTurn = monteCarloSimulation(
+//     preparedCombinations,
+//     landGroupSizes,
+//     deckSize,
+//     mulliganCount,
+//     InitialDrawSize,
+//     numberOfTurns,
+//     100000
+// );
+
+
+
             console.log('Land Group Sizes:', landGroupSizes);
+         // console.log('Distinct Mana Production Profiles:', [...new Set(lands.map(land => JSON.stringify(land)))].map(profile => JSON.parse(profile)));
             console.log('pre-cleaned Land Combinations:', neededCombinations);
             console.log('Prepared Combinations:', preparedCombinations);
+        //  console.log('Total Probability (OLD WRONG):', totalProbability);
             console.log('Probabilities by Turn:', probabilitiesByTurn);
 
         }
@@ -456,11 +788,14 @@ function runSimulation() {
     identifyProfiles();
     simulationRun = true;
 }
-//------------------------------------------------------------
+
+//-----------------------------------------
+
 
 
 
 //the following makes the cards output
+
 function createGroupCards(groups, results, probabilitiesByTurn, turn) {
     let cards = groups.map(group => {
         let groupName = group.link ? group.link : group.name;
@@ -485,8 +820,8 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         turnTotalProbability = probabilitiesByTurn[turn];
         cards.push({
             probability: turnTotalProbability,
-            label: 'Mana chances',
-            color: '#fff', // Some color for this card
+            label: 'Mana changes',
+            color: '#f0f0f0', // Some color for this card
             ratioText: convertPercentToRatio(turnTotalProbability)
         });
     }
@@ -515,6 +850,10 @@ function convertPercentToRatio(percent) {
 
 
 
+
+
+
+
 const presetColors = [
     "#DCEDC8", // Example colors
     "#B2DFDB",
@@ -524,7 +863,6 @@ const presetColors = [
     "#FFCCBC",
     "#C5CAE9"
 ];
-
 
 function assignGroupColors(groups) {
         let colorIndex = 0;
