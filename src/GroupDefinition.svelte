@@ -4,6 +4,7 @@
     import Popover from './Popover.svelte';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+    import MonteAccordion from './MonteAccordion.svelte';
 
 
     const dispatch = createEventDispatcher();
@@ -115,7 +116,7 @@
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="text" 
                             bind:value={group.name} 
-                            placeholder="mana, draw, ramp, etc" />
+                            placeholder="draw, ramp, removal, etc" />
                            
                             <!--
                             {#if index > 0}
@@ -156,14 +157,21 @@
                         {/if}
                     </td>
                 </tr>
-
             {/each}
+            <tr>
+                <td colspan="5"> <!-- Span across all columns -->
+                    <button style="margin-bottom: .5rem;" on:click={addGroup}>Add category</button>
+                </td>
+            </tr>
         </tbody>
     </table>
+
+  
     </div>
+    
+    <MonteAccordion />
+
     <div class="controls-container">
-        
-        <button on:click={addGroup}>Add category</button>
         
         <div class="mulligan-selection">
             <label for="mulliganCount">Mulligans (experimental)
@@ -278,8 +286,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        justify-content: flex-start;
         margin-top: 12px;
-        gap: 12px;
+        column-gap: 2rem;
+        row-gap: 0.5rem;
     }
 
     @media (max-width: 640px) {
@@ -306,7 +316,7 @@ max-width: 65px;
 
 
     label {
-        margin-right: 10px;
+        margin-right: 5px;
         min-width: 73px;
 
 

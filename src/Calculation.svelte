@@ -1,8 +1,10 @@
 <script>
-    import { groupColors } from './colorStore.js';
+import { groupColors } from './colorStore.js';
+import { simulationData } from './colorStore.js';
 // Additional imports for randomness
 import { sampleSize } from 'lodash';
 import _ from 'lodash';
+
 
     // Function to calculate combinations (n choose k)
     function choose(n, k) {
@@ -87,6 +89,9 @@ function calculateLinkedGroups(linkedGroups) {
     export let deckSize; // Received from App.svelte
     export let mulliganCount;
     export let InitialDrawSize; 
+
+
+
 
 
 
@@ -378,58 +383,85 @@ function handMeetsRequirements(hand, preparedCombinations) {
 }
 
 
-function identifyProfiles() {
-            const lands = [
-                { U: 1},
-                { U: 1},
-                { B: 1},
-                { W: 1},
-                { W: 1},
-                { B: 1},
-                { B: 1},
-                { W: 1},
-                { U: 1},
-                { B: 1},
-                { W: 1},
-                { W: 1},
-                { B: 1},
-                { B: 1},
-                { W: 1},
-                { U: 1},
-                { B: 1},
-                { W: 1},
-                { W: 1},
-                { B: 1},
-                { B: 1},
-                { W: 1},
-                { U: 1},
-                { U: 1},
-                { U: 1},
-                // { W: 1, B: 1, U: 1},
-                // { W: 1, B: 1, U: 1},
-                // { W: 1, B: 1, U: 1},
-                // { W: 1, B: 1, U: 1},
-                // { W: 1, B: 1, U: 1},
-                // { W: 1, B: 1},
-                // { W: 1, B: 1},
-                // { W: 1, B: 1},
-                // { W: 1, U: 1},
-                // { W: 1, U: 1},
-                // { W: 1, U: 1},
-                // { B: 1, U: 1},
-                // { B: 1, U: 1},
-                // { B: 1, U: 1},
-                // { B: 1, U: 1},
-            ];
+// function identifyProfiles() {
+//             const lands = [
+//                 { U: 1},
+//                 { U: 1},
+//                 { B: 1},
+//                 { W: 1},
+//                 { W: 1},
+//                 { B: 1},
+//                 { B: 1},
+//                 { W: 1},
+//                 { U: 1},
+//                 { B: 1},
+//                 { W: 1},
+//                 { W: 1},
+//                 { B: 1},
+//                 { B: 1},
+//                 { W: 1},
+//                 { U: 1},
+//                 { B: 1},
+//                 { W: 1},
+//                 { W: 1},
+//                 { B: 1},
+//                 { B: 1},
+//                 { W: 1},
+//                 { U: 1},
+//                 { U: 1},
+//                 { U: 1},
+//                 // { W: 1, B: 1, U: 1},
+//                 // { W: 1, B: 1, U: 1},
+//                 // { W: 1, B: 1, U: 1},
+//                 // { W: 1, B: 1, U: 1},
+//                 // { W: 1, B: 1, U: 1},
+//                 // { W: 1, B: 1},
+//                 // { W: 1, B: 1},
+//                 // { W: 1, B: 1},
+//                 // { W: 1, U: 1},
+//                 // { W: 1, U: 1},
+//                 // { W: 1, U: 1},
+//                 // { B: 1, U: 1},
+//                 // { B: 1, U: 1},
+//                 // { B: 1, U: 1},
+//                 // { B: 1, U: 1},
+//             ];
 
-            const manaRequirements = {W: 1, B: 1, U: 1};
-            const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
-            const neededCombinations = determineNeededCombinations(lands, manaRequirements, totalManaNeeded);
-            const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
-            const landGroupSizes = calculateLandGroupSizes(lands);
+//             const manaRequirements = {W: 1, B: 1, U: 1};
+//             const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+//             const neededCombinations = determineNeededCombinations(lands, manaRequirements, totalManaNeeded);
+//             const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
+//             const landGroupSizes = calculateLandGroupSizes(lands);
            
             
     
+//     probabilitiesByTurn = monteCarloSimulation(
+//         preparedCombinations,
+//         landGroupSizes,
+//         deckSize,
+//         mulliganCount,
+//         InitialDrawSize,
+//         numberOfTurns,
+//         10000
+//     );
+
+
+//             console.log('Land Group Sizes:', landGroupSizes);
+//             console.log('pre-cleaned Land Combinations:', neededCombinations);
+//             console.log('Prepared Combinations:', preparedCombinations);
+//             console.log('Probabilities by Turn:', probabilitiesByTurn);
+
+//   }
+
+
+
+
+function identifyProfiles() {
+    const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+    const neededCombinations = determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);
+    const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
+    const landGroupSizes = calculateLandGroupSizes(preparedCards);
+
     probabilitiesByTurn = monteCarloSimulation(
         preparedCombinations,
         landGroupSizes,
@@ -440,17 +472,37 @@ function identifyProfiles() {
         10000
     );
 
-
-            console.log('Land Group Sizes:', landGroupSizes);
-            console.log('pre-cleaned Land Combinations:', neededCombinations);
-            console.log('Prepared Combinations:', preparedCombinations);
-            console.log('Probabilities by Turn:', probabilitiesByTurn);
-
-        }
+    console.log('Land Group Sizes:', landGroupSizes);
+    console.log('Needed Combinations:', neededCombinations);
+    console.log('Prepared Combinations:', preparedCombinations);
+    console.log('Probabilities by Turn:', probabilitiesByTurn);
+}
 
 
+
+
+
+
+// Initialize state
+let preparedCards = [];
+let manaRequirements = {};
 let probabilitiesByTurn = [];
 let simulationRun = false;
+
+
+
+// Reactive statement to update the component's data whenever the store changes
+$: {
+    preparedCards = $simulationData.preparedCards;
+    manaRequirements = $simulationData.manaRequirements;
+    identifyProfiles(); // Call the function with the updated data
+}
+
+$: if ($simulationData && $simulationData.preparedCards.length > 0 && Object.values($simulationData.manaRequirements).some(value => value > 0)) {
+    runSimulation();
+}
+
+
 
 function runSimulation() {
     identifyProfiles();
@@ -483,17 +535,22 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
 
     if (simulationRun) {
         turnTotalProbability = probabilitiesByTurn[turn];
+        const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
         cards.push({
             probability: turnTotalProbability,
-            label: 'Mana chances',
-            color: '#fff', // Some color for this card
-            ratioText: convertPercentToRatio(turnTotalProbability)
+            label: 'Mana',
+            color: '#fff',
+            ratioText: convertPercentToRatio(turnTotalProbability),
+            stackedCards: Math.max(totalManaNeeded - 1, 0) // Subtract 1 because the first card is already displayed
         });
     }
 
 
-    // Fill up the remaining cards for the turn with blanks, adjusting for mulligans
-    let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount, 0); // Ensure it doesn't go below 0
+    // Calculate the total number of desired cards from hypergeometric groups and mana requirements
+    const totalDesiredCards = groups.reduce((sum, group) => sum + group.cardsToDraw, 0) + Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+
+    // Fill up the remaining cards for the turn with blanks, adjusting for mulligans and desired cards
+    let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalDesiredCards, 0);
     while (cards.length < adjustedDrawSize + turn) {
         cards.push({ probability: null, label: '', ratioText: '' });
     }
@@ -560,7 +617,7 @@ function assignGroupColors(groups) {
 
 
 </script>
-<button on:click={runSimulation}>Run Simulation</button>
+
 <h2 style="text-align: center;">Probabilities</h2>
 <div class="output-diagram">
     {#each generateTurnsArray(numberOfTurns) as _, turn}
@@ -571,16 +628,21 @@ function assignGroupColors(groups) {
             </div>
             <div class="card-rectangles">
                 {#each createGroupCards(groups, results, probabilitiesByTurn, turn) as card}
-                <div class="card-container">
-                        <div class="rectangle" style="background-color: {card.color}">
-                            <div class="card-details">
-                                <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
-                                <div class="card-ratio">{card.ratioText}</div>
-                            </div>
+                <div class="card-container" style="margin-right: {5 + (card.stackedCards || 0) * 4}px;">
+                    <div class="rectangle" style="background-color: {card.color}">
+                        <div class="card-details">
+                            <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
+                            <div class="card-ratio">{card.ratioText}</div>
                         </div>
-                        <div class="card-label">{card.label}</div>
                     </div>
-                {/each}
+                    <div class="stacked-cards">
+                        {#each Array(card.stackedCards || 0).reverse() as _, i}
+                        <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)};"></div>
+                        {/each}
+                    </div>
+                    <div class="card-label">{card.label}</div>
+                </div>
+            {/each}
             </div>
         </div>
     {/each}
@@ -592,6 +654,23 @@ function assignGroupColors(groups) {
 </div>
 
 <style>
+
+.stacked-cards {
+    position: absolute;
+    left: 4px;
+}
+
+.stacked-card {
+    position: absolute;
+    width: 52px; /* Same as the width of the main card */
+    height: 72px; /* Same as the height of the main card */
+    border: 1px solid rgb(142, 142, 142);
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    top: 0;
+    z-index: -1; /* Ensure the stacked cards appear behind the main card */
+}
+
 .output-diagram {
     max-width: 100%; /* Adjust based on your layout */
     overflow-x: auto; /* Enables horizontal scrolling */
@@ -668,6 +747,7 @@ label {
     flex-direction: column;
     align-items: center;
     margin-right: 5px;
+    position: relative;
 }
 
 .rectangle {

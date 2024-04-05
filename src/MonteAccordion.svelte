@@ -1,16 +1,19 @@
 <script>
-  // Import the ManaCard component
+  import { createEventDispatcher } from 'svelte';
   import ManaCard from './ManaCard.svelte';
   import { slide } from 'svelte/transition';
   import Popover from './Popover.svelte';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+  import { simulationData } from './colorStore.js';
 
 
   let openItem = null;
   let showPopover = false;
+  
+  const dispatch = createEventDispatcher();
   let manaCards = [];
-  let manaRequirements = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 }; // Initialize mana requirements
+  let manaRequirements = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0, ANY:0 }; // Initialize mana requirements
 
 
 
@@ -26,7 +29,7 @@
   }
 
   function addCard() {
-  const newCard = { id: Date.now(), mana: { W: false, U: false, B: false, R: false, G: false, C: false }, amount: 1 };
+  const newCard = { id: Date.now(), mana: { W: false, U: false, B: false, R: false, G: false, C: false }, amount: 0 };
   manaCards = [...manaCards, newCard];
   console.log('Added card:', newCard);
 }
@@ -41,6 +44,8 @@ function removeCard(id) {
   $: {
     console.log('Updated manaCards:', manaCards);
 }
+
+$: totalAmount = manaCards.reduce((sum, card) => sum + card.amount, 0);
 
 
 
@@ -64,17 +69,22 @@ function prepareManaCardsForCalculation() {
 
 
 function logPreparedCards() {
-  const preparedCards = prepareManaCardsForCalculation();
-  console.log('Prepared Cards:', preparedCards);
+    const preparedCards = prepareManaCardsForCalculation();
+    console.log('Prepared Cards:', preparedCards);
+
+    // Filter out entries with zero values
+    const filteredManaRequirements = Object.entries(manaRequirements).reduce((acc, [key, value]) => {
+        if (value > 0) acc[key] = value;
+        return acc;
+    }, {});
+    console.log('Mana Requirements:', filteredManaRequirements);
+
+    simulationData.set({
+        preparedCards: prepareManaCardsForCalculation(),
+        manaRequirements: filteredManaRequirements
+    });
 }
 
-
-  // Example of sending data back to Calculation.svelte
-  // This could be triggered by a button click or another event
-  function sendDataToCalculation() {
-    let data = prepareManaCardsForCalculation();
-    // Use a store, event dispatcher, or prop binding to send data to Calculation.svelte
-  }
 
 
 </script>
@@ -116,6 +126,7 @@ function logPreparedCards() {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    margin-top: 0.5rem;
     
   }
 
@@ -133,6 +144,14 @@ function logPreparedCards() {
   gap: 5px;
 }
 
+
+.land-group-parameters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.5rem;
+  gap: 10px;
+}
 
 .mana-requirements-container {
     display: flex;
@@ -157,11 +176,17 @@ function logPreparedCards() {
   }
 
   .mana-requirements-divider {
-    margin-top: 20px; /* Add some space above the inputs */
+    margin-top: 15px; /* Add some space above the inputs */
     border: none;
     height: 1px;
     background-color: #ccc;
   }
+
+  button {
+        margin: 0;
+        color: #0066e9;
+        padding: 6px 8px 6px 8px;
+    }
 
 </style>
 
@@ -191,6 +216,7 @@ function logPreparedCards() {
       style:height="{openItem === 0 ? 'auto' : '0'}"
     >
       <!-- Mana Cards and Add Button -->
+      <p>Add all of the lands in your deck and what mana they produce.</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -198,18 +224,19 @@ function logPreparedCards() {
           on:remove={() => removeCard(card.id)}
         />
       {/each}
-        <button on:click={addCard}>Add Mana Group</button>
       </div>
+      <div class="land-group-parameters">
+      <button on:click={addCard}>Add Land Group</button>
+      <div>Total Lands: {totalAmount}</div>
+    </div>
+
 
       <!-- Horizontal Rule for Separation -->
       <hr class="mana-requirements-divider">
 
     
-
       <!-- Mana Requirements Fields -->
-
-      <button on:click={logPreparedCards}>Log Prepared Cards</button>
-
+      <p>Specify the amount of each type of mana you'd like.</p>
       <div class="mana-requirements-container">
         {#each Object.entries(manaRequirements) as [color, amount]}
           <div class="mana-requirement">
@@ -223,6 +250,7 @@ function logPreparedCards() {
           </div>
         {/each}
       </div>
+      <button on:click={logPreparedCards}>Run Simulation</button>
     </div>
   </div>
 </div>

@@ -1,12 +1,14 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
     import Popover from './Popover.svelte';
-    
+    import { createEventDispatcher } from 'svelte';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 
     let dropdownOpen = false;
     let buttonPosition = { top: 0, left: 0 };
+    const dispatch = createEventDispatcher();
+
 
     export let card = {
       mana: {
@@ -17,15 +19,15 @@
         G: false,
         C: false
       },
-      amount: 1
+      amount: 0
     };
   
   
 
     // Dummy remove function (you'll need to implement the actual logic)
-    function remove() {
-      console.log('Remove card');
-    }
+  function remove() {
+    dispatch('remove');
+  }
   
   
     function toggleMana(mana) {
@@ -143,6 +145,12 @@ width: inherit;
       width: 100%;
       box-sizing: border-box;
     }
+
+    button {
+        margin: 0;
+        color: #0066e9;
+        padding: 6px 8px 6px 8px;
+    }
   </style>
   
 
@@ -170,7 +178,7 @@ width: inherit;
     </div>
     <div class="mana-card-header">
         <label for="amount" class="amount-label">Amount:</label>
-        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="1" bind:value={card.amount} />
+        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} />
     </div>
 </div>
 
