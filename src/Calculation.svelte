@@ -456,7 +456,8 @@ function handMeetsRequirements(hand, preparedCombinations) {
 
 
 
-function identifyProfiles() {
+function identifyProfiles(numIterations) {
+
     const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
     const neededCombinations = determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);
     const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
@@ -469,7 +470,7 @@ function identifyProfiles() {
         mulliganCount,
         InitialDrawSize,
         numberOfTurns,
-        10000
+        numIterations
     );
 
     console.log('Land Group Sizes:', landGroupSizes);
@@ -495,7 +496,8 @@ let simulationRun = false;
 $: {
     preparedCards = $simulationData.preparedCards;
     manaRequirements = $simulationData.manaRequirements;
-    identifyProfiles(); // Call the function with the updated data
+    const numIterations = $simulationData.iterations || 10000; // Default to 10000 if undefined
+    identifyProfiles(numIterations); // Call the function with the updated data
 }
 
 $: if ($simulationData && $simulationData.preparedCards.length > 0 && Object.values($simulationData.manaRequirements).some(value => value > 0)) {
@@ -505,7 +507,7 @@ $: if ($simulationData && $simulationData.preparedCards.length > 0 && Object.val
 
 
 function runSimulation() {
-    identifyProfiles();
+    identifyProfiles($simulationData.iterations);
     simulationRun = true;
 }
 //------------------------------------------------------------
@@ -525,8 +527,14 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         // Access the color from the groupColors store
         let color = $groupColors[groupName] || '#e5e5e5'; // Default color if not set
 
-        return { probability: probabilityPercent, label: group.name, color, ratioText };
-    });
+        return {
+            probability: probabilityPercent,
+            label: group.name,
+            color,
+            ratioText,
+            stackedCards: Math.max(group.cardsToDraw - 1, 0) // Subtract 1 because the first card is already displayed
+        };   
+     });
 
     // Add a card for the total probability of getting mana for each turn
     // only if the simulation has been run
@@ -546,14 +554,23 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
     }
 
 
-    // Calculate the total number of desired cards from hypergeometric groups and mana requirements
-    const totalDesiredCards = groups.reduce((sum, group) => sum + group.cardsToDraw, 0) + Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+// Calculate the total number of extra desired cards from hypergeometric groups
+// Subtract 1 for each group because one card is already displayed by default
+const totalExtraCardsFromGroups = groups.reduce((sum, group) => sum + Math.max(group.cardsToDraw - 1, 0), 0);
 
-    // Fill up the remaining cards for the turn with blanks, adjusting for mulligans and desired cards
-    let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalDesiredCards, 0);
-    while (cards.length < adjustedDrawSize + turn) {
-        cards.push({ probability: null, label: '', ratioText: '' });
-    }
+// Calculate the total number of desired cards from mana requirements
+// Subtract 1 because we assume that the mana requirements card is already displayed by default
+const totalDesiredCardsFromManaRequirements = Math.max(Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1, 0);
+
+// Calculate the total number of extra cards, combining groups and mana requirements
+const totalExtraCards = totalExtraCardsFromGroups + totalDesiredCardsFromManaRequirements;
+
+// Fill up the remaining cards for the turn with blanks, adjusting for mulligans and extra cards
+let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalExtraCards, 0);
+while (cards.length < adjustedDrawSize + turn) {
+    cards.push({ probability: null, label: '', ratioText: '' });
+}
+
 
     return cards;
     
@@ -628,8 +645,8 @@ function assignGroupColors(groups) {
             </div>
             <div class="card-rectangles">
                 {#each createGroupCards(groups, results, probabilitiesByTurn, turn) as card}
-                <div class="card-container" style="margin-right: {5 + (card.stackedCards || 0) * 4}px;">
-                    <div class="rectangle" style="background-color: {card.color}">
+                <div class="card-container" style="margin-right: {7 + (card.stackedCards || 0) * 4}px;">
+                    <div class="rectangle" style="background-color: {card.color};">
                         <div class="card-details">
                             <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
                             <div class="card-ratio">{card.ratioText}</div>
@@ -637,7 +654,7 @@ function assignGroupColors(groups) {
                     </div>
                     <div class="stacked-cards">
                         {#each Array(card.stackedCards || 0).reverse() as _, i}
-                        <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)};"></div>
+                        <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {card.color};"></div>
                         {/each}
                     </div>
                     <div class="card-label">{card.label}</div>
@@ -789,9 +806,13 @@ label {
 }
 
 .card-label {
-    margin: 5px;
     font-size: 0.7em;
     text-align: center;
+    max-width: 54px;
+    word-wrap: break-word;
+    hyphens: auto;
+    text-wrap: balance;
+    overflow-wrap: break-word;
 }
 
 

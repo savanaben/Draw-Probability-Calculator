@@ -4,6 +4,26 @@
     import { createEventDispatcher } from 'svelte';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
+    
+import WIcon from './mana-icons/plains.svg';
+import UIcon from './mana-icons/swamp.svg';
+import BIcon from './mana-icons/island.svg';
+import RIcon from './mana-icons/mountain.svg';
+import GIcon from './mana-icons/forrest.svg';
+import CIcon from './mana-icons/colorless.svg';
+
+const manaIcons = {
+    W: WIcon,
+    U: UIcon,
+    B: BIcon,
+    R: RIcon,
+    G: GIcon,
+    C: CIcon,
+};
+
+
+
+
 
     let dropdownOpen = false;
     let buttonPosition = { top: 0, left: 0 };
@@ -110,11 +130,11 @@ width: inherit;
 
     .mana-option {
       display: flex;
-      align-items: baseline;
+   
       justify-content: space-between;
       padding: 5px;
       cursor: pointer;
-      width: 35px;
+   
     }
   
     .mana-option:hover {
@@ -127,7 +147,7 @@ width: inherit;
       justify-content: center;
       width: 100%;
       font-weight: bold;
-      margin: 0 0 0.5em 0;
+      margin: 0.5em 0 0.5em 0;
     }
   
     .mana-symbol {
@@ -151,6 +171,16 @@ width: inherit;
         color: #0066e9;
         padding: 6px 8px 6px 8px;
     }
+
+
+    input {
+        width: 95%;
+        padding: 6px;
+        margin: 0px;
+        min-width: 45px;
+    }
+
+
   </style>
   
 
@@ -172,9 +202,12 @@ width: inherit;
         </button>
     </div>
     <div class="mana-symbols">
-        {#each ['W', 'U', 'B', 'R', 'G', 'C'] as mana}
-            <div class="mana-symbol {card.mana[mana] ? 'active' : ''}" on:click={() => toggleMana(mana)}>{mana}</div>
-        {/each}
+      {#each Object.keys(manaIcons) as mana}
+      <div class="mana-symbol {card.mana[mana] ? 'active' : ''}" on:click={() => toggleMana(mana)}>
+        <img src={manaIcons[mana]} alt="{mana} mana icon" class="mana-icon" />
+      </div>
+  {/each}
+  
     </div>
     <div class="mana-card-header">
         <label for="amount" class="amount-label">Amount:</label>

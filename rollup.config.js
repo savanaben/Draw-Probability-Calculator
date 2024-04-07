@@ -6,6 +6,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
 import postcss from 'rollup-plugin-postcss';
+import image from '@rollup/plugin-image';
+
 
 
 const production = !process.env.ROLLUP_WATCH;
@@ -60,6 +62,8 @@ export default {
 			dedupe: ['svelte'],
 			exportConditions: ['svelte']
 		}),
+		
+		image(),
 		commonjs(),
 
 		// In dev mode, call `npm run start` once

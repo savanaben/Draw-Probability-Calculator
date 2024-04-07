@@ -4,6 +4,7 @@
     import Popover from './Popover.svelte';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+    import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import MonteAccordion from './MonteAccordion.svelte';
 
 
@@ -152,9 +153,9 @@
                             placeholder="Link via keyword matching..." />
                     </td>
                     <td>
-                        {#if index > 0}
-                            <button on:click={() => removeGroup(index)}>Remove</button>
-                        {/if}
+                        <button class="remove-button" on:click={() => removeGroup(index)}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </button>
                     </td>
                 </tr>
             {/each}

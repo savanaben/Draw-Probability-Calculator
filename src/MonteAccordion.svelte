@@ -7,6 +7,33 @@
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
   import { simulationData } from './colorStore.js';
 
+import WIcon from './mana-icons/plains.svg';
+import UIcon from './mana-icons/swamp.svg';
+import BIcon from './mana-icons/island.svg';
+import RIcon from './mana-icons/mountain.svg';
+import GIcon from './mana-icons/forrest.svg';
+import CIcon from './mana-icons/colorless.svg';
+import AnyIcon0 from './mana-icons/any-0.svg';
+import AnyIcon1 from './mana-icons/any-1.svg';
+import AnyIcon2 from './mana-icons/any-2.svg';
+import AnyIcon3 from './mana-icons/any-3.svg';
+import AnyIcon4 from './mana-icons/any-4.svg';
+import AnyIcon5 from './mana-icons/any-5.svg';
+import AnyIcon6 from './mana-icons/any-6.svg';
+import AnyIcon7 from './mana-icons/any-7.svg';
+import AnyIcon8 from './mana-icons/any-8.svg';
+import AnyIcon9 from './mana-icons/any-9plus.svg';
+
+const manaIcons = {
+    W: WIcon,
+    U: UIcon,
+    B: BIcon,
+    R: RIcon,
+    G: GIcon,
+    C: CIcon,
+    ANY: [AnyIcon0, AnyIcon1, AnyIcon2, AnyIcon3, AnyIcon4, AnyIcon5, AnyIcon6, AnyIcon7, AnyIcon8, AnyIcon9]
+};
+
 
   let openItem = null;
   let showPopover = false;
@@ -14,7 +41,22 @@
   const dispatch = createEventDispatcher();
   let manaCards = [];
   let manaRequirements = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0, ANY:0 }; // Initialize mana requirements
+  let iterations = 10000; // Default number of iterations
 
+
+  function getAnyIcon(value) {
+    if (value <= 0) return manaIcons.ANY[0];
+    if (value === 1) return manaIcons.ANY[1];
+    if (value === 2) return manaIcons.ANY[2];
+    if (value === 3) return manaIcons.ANY[3];
+    if (value === 4) return manaIcons.ANY[4];
+    if (value === 5) return manaIcons.ANY[5];
+    if (value === 6) return manaIcons.ANY[6];
+    if (value === 7) return manaIcons.ANY[7];
+    if (value === 8) return manaIcons.ANY[8];
+    if (value >= 9) return manaIcons.ANY[9];
+    return manaIcons.ANY[0]; // Default to AnyIcon1 if none of the conditions match
+}
 
 
   
@@ -81,7 +123,8 @@ function logPreparedCards() {
 
     simulationData.set({
         preparedCards: prepareManaCardsForCalculation(),
-        manaRequirements: filteredManaRequirements
+        manaRequirements: filteredManaRequirements,
+        iterations: iterations
     });
 }
 
@@ -98,7 +141,6 @@ function logPreparedCards() {
   }
 
   .accordion-item {
-    cursor: pointer;
     padding: 0.5rem;
     border-bottom: 1px solid #ccc;
   }
@@ -142,6 +184,7 @@ function logPreparedCards() {
   flex-direction: row;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 }
 
 
@@ -169,6 +212,8 @@ function logPreparedCards() {
 
   .mana-requirement label {
     margin-right: 5px;
+    display: flex;
+    align-items: flex-end;
   }
 
   .mana-requirement input {
@@ -187,6 +232,19 @@ function logPreparedCards() {
         color: #0066e9;
         padding: 6px 8px 6px 8px;
     }
+
+    input {
+        width: 95%;
+        padding: 6px;
+        margin: 0px;
+        min-width: 45px;
+    }
+
+    .mana-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
 
 </style>
 
@@ -239,18 +297,37 @@ function logPreparedCards() {
       <p>Specify the amount of each type of mana you'd like.</p>
       <div class="mana-requirements-container">
         {#each Object.entries(manaRequirements) as [color, amount]}
-          <div class="mana-requirement">
-            <label for="{color}-requirement">{color}:</label>
+        <div class="mana-requirement">
+            <label for="{color}-requirement">
+                <img src={color === 'ANY' ? getAnyIcon(amount) : manaIcons[color]} alt="{color} mana icon" class="mana-icon" />&nbsp;: 
+            </label>
             <input
-              id="{color}-requirement"
-              type="number"
-              min="0"
-              bind:value={manaRequirements[color]}
+                id="{color}-requirement"
+                type="number"
+                min="0"
+                bind:value={manaRequirements[color]}
             />
-          </div>
-        {/each}
+        </div>
+    {/each}
+    
       </div>
+      <div class="land-group-parameters">
       <button on:click={logPreparedCards}>Run Simulation</button>
+      <div class="mana-requirement">
+        <label for="iterations">Simulation iterations (caution):</label>
+        <input style="width: 90px;" id="iterations" type="number" min="1" bind:value={iterations} />
+        <Popover bind:show={showPopover} placement="top">
+          <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+            <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
+          </button>
+          <div slot="content">
+            <p class="popover-content"><b>Caution - may crash your browser!</p>
+            <p class="popover-content">This parameter changes the number of samples, or draws, taken for this mana probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. The page might crash and you will have to re-input your lands.</p>
+          </div>
+        </Popover>
+
+      </div>
+  </div>
     </div>
   </div>
 </div>
