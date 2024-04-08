@@ -81,9 +81,10 @@ function removeCard(id) {
 }
 
 
+$: enableSimulationButton = Object.values(manaRequirements).some(amount => amount > 0) && manaCards.some(card => card.amount > 0);
 
 
-  $: {
+$: {
     console.log('Updated manaCards:', manaCards);
 }
 
@@ -233,6 +234,15 @@ function logPreparedCards() {
         padding: 6px 8px 6px 8px;
     }
 
+
+    button:disabled {
+  /* Disabled button styles */
+  color: rgb(146, 146, 146);
+  cursor: default;
+  background-color: rgb(233, 233, 233);
+  border-color: rgba(255, 255, 255, 0);
+}
+
     input {
         width: 95%;
         padding: 6px;
@@ -274,7 +284,7 @@ function logPreparedCards() {
       style:height="{openItem === 0 ? 'auto' : '0'}"
     >
       <!-- Mana Cards and Add Button -->
-      <p>Add all of the lands in your deck and what mana they produce.</p>
+      <p style="margin-top: 0.5rem;">Step 1 - Add all of the lands in your deck and what mana they produce.</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -285,7 +295,7 @@ function logPreparedCards() {
       </div>
       <div class="land-group-parameters">
       <button on:click={addCard}>Add Land Group</button>
-      <div>Total Lands: {totalAmount}</div>
+      <div>Total Lands: <b>{totalAmount}</b></div>
     </div>
 
 
@@ -294,7 +304,7 @@ function logPreparedCards() {
 
     
       <!-- Mana Requirements Fields -->
-      <p>Specify the amount of each type of mana you'd like.</p>
+      <p>Step 2 - Specify the amount of each type of mana you'd like.</p>
       <div class="mana-requirements-container">
         {#each Object.entries(manaRequirements) as [color, amount]}
         <div class="mana-requirement">
@@ -312,8 +322,8 @@ function logPreparedCards() {
     
       </div>
       <div class="land-group-parameters">
-      <button on:click={logPreparedCards}>Run Simulation</button>
-      <div class="mana-requirement">
+        <button on:click={logPreparedCards} disabled={!enableSimulationButton}>Run Simulation</button>
+        <div class="mana-requirement">
         <label for="iterations">Simulation iterations (caution):</label>
         <input style="width: 90px;" id="iterations" type="number" min="1" bind:value={iterations} />
         <Popover bind:show={showPopover} placement="top">

@@ -34,6 +34,9 @@
       { question: "I'd like to support this or give feedback.", 
        answer: "<p>There's a lot of ways to help!</p> <p><b>If you're a mathy person,</b> you could help me confirm the mulligan calculations in some specific situations. See the github <a href='https://github.com/savanaben/Draw-Probability-Calculator?tab=readme-ov-file#readme' target='_blank'>readme</a> for more info, or email me (ben.c.gross@gmail.com).</p> <p><b>If you're a developer,</b> feel free to check out the <a href='https://github.com/savanaben/Draw-Probability-Calculator?tab=readme-ov-file#readme' target='_blank'>readme</a> project and propose improvements/pull requests. The readme has a list of areas of improvement/known issues.</p> <p>Finally, <b>if you just have a great idea to make this more useful,</b> send me an email (ben.c.gross@gmail.com). This is a passion project and I'd love to extend or add functionality that helps people build their deck.</p>"
       },
+      { question: "Thanks and credits", 
+       answer: "<p>Greatest thanks to Michael B. Moore and their <a href='https://deckulator.appspot.com/' target='_blank'>deckulator</a> app, which helped confirm logic.</p> <p>Thanks to <a href='https://www.slightlymagic.net/forum/viewtopic.php?f=15&t=4430' target='_blank'>Goblin Hero</a> for their mana symbol svgs.</p>"
+      },
     ];
 
 

@@ -808,7 +808,7 @@ label {
 .card-label {
     font-size: 0.7em;
     text-align: center;
-    max-width: 54px;
+    width: 54px;
     word-wrap: break-word;
     hyphens: auto;
     text-wrap: balance;

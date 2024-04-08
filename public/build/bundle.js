@@ -975,6 +975,10 @@ var app = (function () {
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
     }
+    function prop_dev(node, property, value) {
+        node[property] = value;
+        dispatch_dev('SvelteDOMSetProperty', { node, property, value });
+    }
     function set_data_dev(text, data) {
         data = '' + data;
         if (text.data === data)
@@ -7354,7 +7358,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (190:12) 
+    // (192:12) 
     function create_trigger_slot$3(ctx) {
     	let button;
 
@@ -7363,8 +7367,8 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Mana";
     			attr_dev(button, "slot", "trigger");
-    			attr_dev(button, "class", "dropdown-button svelte-s2ts0n");
-    			add_location(button, file$6, 189, 12, 3772);
+    			attr_dev(button, "class", "dropdown-button svelte-zz6t04");
+    			add_location(button, file$6, 191, 12, 3796);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -7379,14 +7383,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$3.name,
     		type: "slot",
-    		source: "(190:12) ",
+    		source: "(192:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (192:16) {#each ['W', 'U', 'B', 'R', 'G', 'C'] as mana}
+    // (194:16) {#each ['W', 'U', 'B', 'R', 'G', 'C'] as mana}
     function create_each_block_1$2(ctx) {
     	let div;
     	let span;
@@ -7413,12 +7417,12 @@ var app = (function () {
     			t1 = space();
     			input = element("input");
     			t2 = space();
-    			add_location(span, file$6, 193, 24, 4058);
+    			add_location(span, file$6, 195, 24, 4082);
     			attr_dev(input, "type", "checkbox");
-    			attr_dev(input, "class", "svelte-s2ts0n");
-    			add_location(input, file$6, 194, 24, 4103);
-    			attr_dev(div, "class", "mana-option svelte-s2ts0n");
-    			add_location(div, file$6, 192, 20, 3973);
+    			attr_dev(input, "class", "svelte-zz6t04");
+    			add_location(input, file$6, 196, 24, 4127);
+    			attr_dev(div, "class", "mana-option svelte-zz6t04");
+    			add_location(div, file$6, 194, 20, 3997);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7456,14 +7460,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1$2.name,
     		type: "each",
-    		source: "(192:16) {#each ['W', 'U', 'B', 'R', 'G', 'C'] as mana}",
+    		source: "(194:16) {#each ['W', 'U', 'B', 'R', 'G', 'C'] as mana}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (191:12) 
+    // (193:12) 
     function create_content_slot$3(ctx) {
     	let div;
     	let each_value_1 = ['W', 'U', 'B', 'R', 'G', 'C'];
@@ -7484,7 +7488,7 @@ var app = (function () {
 
     			attr_dev(div, "slot", "content");
     			attr_dev(div, "class", "mana-options");
-    			add_location(div, file$6, 190, 12, 3846);
+    			add_location(div, file$6, 192, 12, 3870);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7528,14 +7532,14 @@ var app = (function () {
     		block,
     		id: create_content_slot$3.name,
     		type: "slot",
-    		source: "(191:12) ",
+    		source: "(193:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (205:6) {#each Object.keys(manaIcons) as mana}
+    // (207:6) {#each Object.keys(manaIcons) as mana}
     function create_each_block$4(ctx) {
     	let div;
     	let img;
@@ -7557,9 +7561,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[1][/*mana*/ ctx[11]])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "" + (/*mana*/ ctx[11] + " mana icon"));
     			attr_dev(img, "class", "mana-icon");
-    			add_location(img, file$6, 206, 8, 4578);
-    			attr_dev(div, "class", div_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[11]] ? 'active' : '') + " svelte-s2ts0n");
-    			add_location(div, file$6, 205, 6, 4475);
+    			add_location(img, file$6, 208, 8, 4602);
+    			attr_dev(div, "class", div_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[11]] ? 'active' : '') + " svelte-zz6t04");
+    			add_location(div, file$6, 207, 6, 4499);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7574,7 +7578,7 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*card*/ 1 && div_class_value !== (div_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[11]] ? 'active' : '') + " svelte-s2ts0n")) {
+    			if (dirty & /*card*/ 1 && div_class_value !== (div_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[11]] ? 'active' : '') + " svelte-zz6t04")) {
     				attr_dev(div, "class", div_class_value);
     			}
     		},
@@ -7589,7 +7593,7 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(205:6) {#each Object.keys(manaIcons) as mana}",
+    		source: "(207:6) {#each Object.keys(manaIcons) as mana}",
     		ctx
     	});
 
@@ -7656,25 +7660,25 @@ var app = (function () {
     			label.textContent = "Amount:";
     			t4 = space();
     			input = element("input");
-    			attr_dev(button, "class", "remove-button svelte-s2ts0n");
-    			add_location(button, file$6, 199, 8, 4262);
-    			attr_dev(div0, "class", "mana-card-header svelte-s2ts0n");
-    			add_location(div0, file$6, 187, 4, 3690);
-    			attr_dev(div1, "class", "mana-symbols svelte-s2ts0n");
-    			add_location(div1, file$6, 203, 4, 4395);
+    			attr_dev(button, "class", "remove-button svelte-zz6t04");
+    			add_location(button, file$6, 201, 8, 4286);
+    			attr_dev(div0, "class", "mana-card-header svelte-zz6t04");
+    			add_location(div0, file$6, 189, 4, 3714);
+    			attr_dev(div1, "class", "mana-symbols svelte-zz6t04");
+    			add_location(div1, file$6, 205, 4, 4419);
     			attr_dev(label, "for", "amount");
-    			attr_dev(label, "class", "amount-label svelte-s2ts0n");
-    			add_location(label, file$6, 212, 8, 4735);
+    			attr_dev(label, "class", "amount-label svelte-zz6t04");
+    			add_location(label, file$6, 214, 8, 4759);
     			attr_dev(input, "id", "amount");
-    			attr_dev(input, "class", "amount-input svelte-s2ts0n");
+    			attr_dev(input, "class", "amount-input svelte-zz6t04");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "placeholder", "Amount");
     			attr_dev(input, "min", "0");
-    			add_location(input, file$6, 213, 8, 4801);
-    			attr_dev(div2, "class", "mana-card-header svelte-s2ts0n");
-    			add_location(div2, file$6, 211, 4, 4695);
-    			attr_dev(div3, "class", "mana-card svelte-s2ts0n");
-    			add_location(div3, file$6, 186, 2, 3661);
+    			add_location(input, file$6, 215, 8, 4825);
+    			attr_dev(div2, "class", "mana-card-header svelte-zz6t04");
+    			add_location(div2, file$6, 213, 4, 4719);
+    			attr_dev(div3, "class", "mana-card svelte-zz6t04");
+    			add_location(div3, file$6, 188, 2, 3685);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7972,22 +7976,22 @@ var app = (function () {
 
     function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[25] = list[i][0];
-    	child_ctx[26] = list[i][1];
-    	child_ctx[27] = list;
-    	child_ctx[28] = i;
+    	child_ctx[26] = list[i][0];
+    	child_ctx[27] = list[i][1];
+    	child_ctx[28] = list;
+    	child_ctx[29] = i;
     	return child_ctx;
     }
 
     function get_each_context_1$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[29] = list[i];
-    	child_ctx[30] = list;
-    	child_ctx[31] = i;
+    	child_ctx[30] = list[i];
+    	child_ctx[31] = list;
+    	child_ctx[32] = i;
     	return child_ctx;
     }
 
-    // (262:8) 
+    // (272:8) 
     function create_trigger_slot_1$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -8007,11 +8011,11 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-11ykd18");
+    			attr_dev(button, "class", "moreInfo svelte-16xx7qi");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$5, 261, 8, 6468);
+    			add_location(button, file$5, 271, 8, 6792);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8019,7 +8023,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[13], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[14], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -8045,14 +8049,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1$1.name,
     		type: "slot",
-    		source: "(262:8) ",
+    		source: "(272:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (265:8) 
+    // (275:8) 
     function create_content_slot_1$1(ctx) {
     	let div;
     	let p0;
@@ -8071,13 +8075,13 @@ var app = (function () {
     			b = element("b");
     			b.textContent = "Each category must have a unique text name";
     			t3 = text(" for the tool to work (some day I'll figure out indexing...)");
-    			attr_dev(p0, "class", "popover-content svelte-11ykd18");
-    			add_location(p0, file$5, 265, 10, 6764);
-    			add_location(b, file$5, 266, 37, 7091);
-    			attr_dev(p1, "class", "popover-content svelte-11ykd18");
-    			add_location(p1, file$5, 266, 10, 7064);
+    			attr_dev(p0, "class", "popover-content svelte-16xx7qi");
+    			add_location(p0, file$5, 275, 10, 7088);
+    			add_location(b, file$5, 276, 37, 7415);
+    			attr_dev(p1, "class", "popover-content svelte-16xx7qi");
+    			add_location(p1, file$5, 276, 10, 7388);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 264, 8, 6732);
+    			add_location(div, file$5, 274, 8, 7056);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8097,14 +8101,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_1$1.name,
     		type: "slot",
-    		source: "(265:8) ",
+    		source: "(275:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (279:8) {#each manaCards as card (card.id)}
+    // (289:8) {#each manaCards as card (card.id)}
     function create_each_block_1$1(key_1, ctx) {
     	let first;
     	let manacard;
@@ -8112,17 +8116,17 @@ var app = (function () {
     	let current;
 
     	function manacard_card_binding(value) {
-    		/*manacard_card_binding*/ ctx[16](value, /*card*/ ctx[29], /*each_value_1*/ ctx[30], /*card_index*/ ctx[31]);
+    		/*manacard_card_binding*/ ctx[17](value, /*card*/ ctx[30], /*each_value_1*/ ctx[31], /*card_index*/ ctx[32]);
     	}
 
     	function remove_handler() {
-    		return /*remove_handler*/ ctx[17](/*card*/ ctx[29]);
+    		return /*remove_handler*/ ctx[18](/*card*/ ctx[30]);
     	}
 
     	let manacard_props = {};
 
-    	if (/*card*/ ctx[29] !== void 0) {
-    		manacard_props.card = /*card*/ ctx[29];
+    	if (/*card*/ ctx[30] !== void 0) {
+    		manacard_props.card = /*card*/ ctx[30];
     	}
 
     	manacard = new ManaCard({ props: manacard_props, $$inline: true });
@@ -8148,7 +8152,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*manaCards*/ 1) {
     				updating_card = true;
-    				manacard_changes.card = /*card*/ ctx[29];
+    				manacard_changes.card = /*card*/ ctx[30];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -8173,14 +8177,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1$1.name,
     		type: "each",
-    		source: "(279:8) {#each manaCards as card (card.id)}",
+    		source: "(289:8) {#each manaCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (299:8) {#each Object.entries(manaRequirements) as [color, amount]}
+    // (309:8) {#each Object.entries(manaRequirements) as [color, amount]}
     function create_each_block$3(ctx) {
     	let div;
     	let label;
@@ -8197,7 +8201,7 @@ var app = (function () {
     	let dispose;
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[18].call(input, /*color*/ ctx[25]);
+    		/*input_input_handler*/ ctx[19].call(input, /*color*/ ctx[26]);
     	}
 
     	const block = {
@@ -8210,23 +8214,23 @@ var app = (function () {
     			input = element("input");
     			t2 = space();
 
-    			if (!src_url_equal(img.src, img_src_value = /*color*/ ctx[25] === 'ANY'
-    			? /*getAnyIcon*/ ctx[7](/*amount*/ ctx[26])
-    			: /*manaIcons*/ ctx[6][/*color*/ ctx[25]])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*color*/ ctx[26] === 'ANY'
+    			? /*getAnyIcon*/ ctx[8](/*amount*/ ctx[27])
+    			: /*manaIcons*/ ctx[7][/*color*/ ctx[26]])) attr_dev(img, "src", img_src_value);
 
-    			attr_dev(img, "alt", img_alt_value = "" + (/*color*/ ctx[25] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon svelte-11ykd18");
-    			add_location(img, file$5, 301, 16, 8330);
-    			attr_dev(label, "for", label_for_value = "" + (/*color*/ ctx[25] + "-requirement"));
-    			attr_dev(label, "class", "svelte-11ykd18");
-    			add_location(label, file$5, 300, 12, 8279);
-    			attr_dev(input, "id", input_id_value = "" + (/*color*/ ctx[25] + "-requirement"));
+    			attr_dev(img, "alt", img_alt_value = "" + (/*color*/ ctx[26] + " mana icon"));
+    			attr_dev(img, "class", "mana-icon svelte-16xx7qi");
+    			add_location(img, file$5, 311, 16, 8707);
+    			attr_dev(label, "for", label_for_value = "" + (/*color*/ ctx[26] + "-requirement"));
+    			attr_dev(label, "class", "svelte-16xx7qi");
+    			add_location(label, file$5, 310, 12, 8656);
+    			attr_dev(input, "id", input_id_value = "" + (/*color*/ ctx[26] + "-requirement"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			attr_dev(input, "class", "svelte-11ykd18");
-    			add_location(input, file$5, 303, 12, 8485);
-    			attr_dev(div, "class", "mana-requirement svelte-11ykd18");
-    			add_location(div, file$5, 299, 8, 8235);
+    			attr_dev(input, "class", "svelte-16xx7qi");
+    			add_location(input, file$5, 313, 12, 8862);
+    			attr_dev(div, "class", "mana-requirement svelte-16xx7qi");
+    			add_location(div, file$5, 309, 8, 8612);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8235,7 +8239,7 @@ var app = (function () {
     			append_dev(label, t0);
     			append_dev(div, t1);
     			append_dev(div, input);
-    			set_input_value(input, /*manaRequirements*/ ctx[3][/*color*/ ctx[25]]);
+    			set_input_value(input, /*manaRequirements*/ ctx[1][/*color*/ ctx[26]]);
     			append_dev(div, t2);
 
     			if (!mounted) {
@@ -8246,26 +8250,26 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && !src_url_equal(img.src, img_src_value = /*color*/ ctx[25] === 'ANY'
-    			? /*getAnyIcon*/ ctx[7](/*amount*/ ctx[26])
-    			: /*manaIcons*/ ctx[6][/*color*/ ctx[25]])) {
+    			if (dirty[0] & /*manaRequirements*/ 2 && !src_url_equal(img.src, img_src_value = /*color*/ ctx[26] === 'ANY'
+    			? /*getAnyIcon*/ ctx[8](/*amount*/ ctx[27])
+    			: /*manaIcons*/ ctx[7][/*color*/ ctx[26]])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && img_alt_value !== (img_alt_value = "" + (/*color*/ ctx[25] + " mana icon"))) {
+    			if (dirty[0] & /*manaRequirements*/ 2 && img_alt_value !== (img_alt_value = "" + (/*color*/ ctx[26] + " mana icon"))) {
     				attr_dev(img, "alt", img_alt_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && label_for_value !== (label_for_value = "" + (/*color*/ ctx[25] + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 2 && label_for_value !== (label_for_value = "" + (/*color*/ ctx[26] + "-requirement"))) {
     				attr_dev(label, "for", label_for_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && input_id_value !== (input_id_value = "" + (/*color*/ ctx[25] + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 2 && input_id_value !== (input_id_value = "" + (/*color*/ ctx[26] + "-requirement"))) {
     				attr_dev(input, "id", input_id_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && to_number(input.value) !== /*manaRequirements*/ ctx[3][/*color*/ ctx[25]]) {
-    				set_input_value(input, /*manaRequirements*/ ctx[3][/*color*/ ctx[25]]);
+    			if (dirty[0] & /*manaRequirements*/ 2 && to_number(input.value) !== /*manaRequirements*/ ctx[1][/*color*/ ctx[26]]) {
+    				set_input_value(input, /*manaRequirements*/ ctx[1][/*color*/ ctx[26]]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -8279,14 +8283,14 @@ var app = (function () {
     		block,
     		id: create_each_block$3.name,
     		type: "each",
-    		source: "(299:8) {#each Object.entries(manaRequirements) as [color, amount]}",
+    		source: "(309:8) {#each Object.entries(manaRequirements) as [color, amount]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (320:10) 
+    // (330:10) 
     function create_trigger_slot$2(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -8306,11 +8310,11 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-11ykd18");
+    			attr_dev(button, "class", "moreInfo svelte-16xx7qi");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$5, 319, 10, 9103);
+    			add_location(button, file$5, 329, 10, 9519);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8318,7 +8322,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[20], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[21], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -8344,14 +8348,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$2.name,
     		type: "slot",
-    		source: "(320:10) ",
+    		source: "(330:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (323:10) 
+    // (333:10) 
     function create_content_slot$2(ctx) {
     	let div;
     	let p0;
@@ -8368,13 +8372,13 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "This parameter changes the number of samples, or draws, taken for this mana probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. The page might crash and you will have to re-input your lands.";
-    			add_location(b, file$5, 323, 39, 9434);
-    			attr_dev(p0, "class", "popover-content svelte-11ykd18");
-    			add_location(p0, file$5, 323, 12, 9407);
-    			attr_dev(p1, "class", "popover-content svelte-11ykd18");
-    			add_location(p1, file$5, 324, 12, 9488);
+    			add_location(b, file$5, 333, 39, 9850);
+    			attr_dev(p0, "class", "popover-content svelte-16xx7qi");
+    			add_location(p0, file$5, 333, 12, 9823);
+    			attr_dev(p1, "class", "popover-content svelte-16xx7qi");
+    			add_location(p1, file$5, 334, 12, 9904);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 322, 10, 9373);
+    			add_location(div, file$5, 332, 10, 9789);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8393,7 +8397,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$2.name,
     		type: "slot",
-    		source: "(323:10) ",
+    		source: "(333:10) ",
     		ctx
     	});
 
@@ -8421,6 +8425,7 @@ var app = (function () {
     	let t7;
     	let div2;
     	let t8;
+    	let b;
     	let t9;
     	let t10;
     	let hr;
@@ -8431,6 +8436,8 @@ var app = (function () {
     	let t14;
     	let div6;
     	let button1;
+    	let t15;
+    	let button1_disabled_value;
     	let t16;
     	let div5;
     	let label;
@@ -8445,7 +8452,7 @@ var app = (function () {
     	let dispose;
 
     	function popover0_show_binding(value) {
-    		/*popover0_show_binding*/ ctx[14](value);
+    		/*popover0_show_binding*/ ctx[15](value);
     	}
 
     	let popover0_props = {
@@ -8457,15 +8464,15 @@ var app = (function () {
     		$$scope: { ctx }
     	};
 
-    	if (/*showPopover*/ ctx[2] !== void 0) {
-    		popover0_props.show = /*showPopover*/ ctx[2];
+    	if (/*showPopover*/ ctx[3] !== void 0) {
+    		popover0_props.show = /*showPopover*/ ctx[3];
     	}
 
     	popover0 = new Popover({ props: popover0_props, $$inline: true });
     	binding_callbacks.push(() => bind(popover0, 'show', popover0_show_binding));
     	let each_value_1 = /*manaCards*/ ctx[0];
     	validate_each_argument(each_value_1);
-    	const get_key = ctx => /*card*/ ctx[29].id;
+    	const get_key = ctx => /*card*/ ctx[30].id;
     	validate_each_keys(ctx, each_value_1, get_each_context_1$1, get_key);
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -8474,7 +8481,7 @@ var app = (function () {
     		each0_lookup.set(key, each_blocks_1[i] = create_each_block_1$1(key, child_ctx));
     	}
 
-    	let each_value = Object.entries(/*manaRequirements*/ ctx[3]);
+    	let each_value = Object.entries(/*manaRequirements*/ ctx[1]);
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -8483,7 +8490,7 @@ var app = (function () {
     	}
 
     	function popover1_show_binding(value) {
-    		/*popover1_show_binding*/ ctx[21](value);
+    		/*popover1_show_binding*/ ctx[22](value);
     	}
 
     	let popover1_props = {
@@ -8495,8 +8502,8 @@ var app = (function () {
     		$$scope: { ctx }
     	};
 
-    	if (/*showPopover*/ ctx[2] !== void 0) {
-    		popover1_props.show = /*showPopover*/ ctx[2];
+    	if (/*showPopover*/ ctx[3] !== void 0) {
+    		popover1_props.show = /*showPopover*/ ctx[3];
     	}
 
     	popover1 = new Popover({ props: popover1_props, $$inline: true });
@@ -8514,7 +8521,7 @@ var app = (function () {
     			t2 = space();
     			div7 = element("div");
     			p0 = element("p");
-    			p0.textContent = "Add all of the lands in your deck and what mana they produce.";
+    			p0.textContent = "Step 1 - Add all of the lands in your deck and what mana they produce.";
     			t4 = space();
     			div1 = element("div");
 
@@ -8529,12 +8536,13 @@ var app = (function () {
     			t7 = space();
     			div2 = element("div");
     			t8 = text("Total Lands: ");
+    			b = element("b");
     			t9 = text(/*totalAmount*/ ctx[5]);
     			t10 = space();
     			hr = element("hr");
     			t11 = space();
     			p1 = element("p");
-    			p1.textContent = "Specify the amount of each type of mana you'd like.";
+    			p1.textContent = "Step 2 - Specify the amount of each type of mana you'd like.";
     			t13 = space();
     			div4 = element("div");
 
@@ -8545,7 +8553,7 @@ var app = (function () {
     			t14 = space();
     			div6 = element("div");
     			button1 = element("button");
-    			button1.textContent = "Run Simulation";
+    			t15 = text("Run Simulation");
     			t16 = space();
     			div5 = element("div");
     			label = element("label");
@@ -8554,48 +8562,51 @@ var app = (function () {
     			input = element("input");
     			t19 = space();
     			create_component(popover1.$$.fragment);
-    			attr_dev(h3, "class", "svelte-11ykd18");
-    			add_location(h3, file$5, 259, 6, 6365);
-    			attr_dev(div0, "class", "accordion-title svelte-11ykd18");
-    			add_location(div0, file$5, 258, 4, 6297);
-    			attr_dev(p0, "class", "svelte-11ykd18");
-    			add_location(p0, file$5, 276, 6, 7444);
-    			attr_dev(div1, "class", "mana-cards-container svelte-11ykd18");
-    			add_location(div1, file$5, 277, 6, 7520);
-    			attr_dev(button0, "class", "svelte-11ykd18");
-    			add_location(button0, file$5, 286, 6, 7788);
-    			add_location(div2, file$5, 287, 6, 7846);
-    			attr_dev(div3, "class", "land-group-parameters svelte-11ykd18");
-    			add_location(div3, file$5, 285, 6, 7745);
-    			attr_dev(hr, "class", "mana-requirements-divider svelte-11ykd18");
-    			add_location(hr, file$5, 292, 6, 7954);
-    			attr_dev(p1, "class", "svelte-11ykd18");
-    			add_location(p1, file$5, 296, 6, 8049);
-    			attr_dev(div4, "class", "mana-requirements-container svelte-11ykd18");
-    			add_location(div4, file$5, 297, 6, 8115);
-    			attr_dev(button1, "class", "svelte-11ykd18");
-    			add_location(button1, file$5, 314, 6, 8759);
+    			attr_dev(h3, "class", "svelte-16xx7qi");
+    			add_location(h3, file$5, 269, 6, 6689);
+    			attr_dev(div0, "class", "accordion-title svelte-16xx7qi");
+    			add_location(div0, file$5, 268, 4, 6621);
+    			set_style(p0, "margin-top", "0.5rem");
+    			attr_dev(p0, "class", "svelte-16xx7qi");
+    			add_location(p0, file$5, 286, 6, 7768);
+    			attr_dev(div1, "class", "mana-cards-container svelte-16xx7qi");
+    			add_location(div1, file$5, 287, 6, 7881);
+    			attr_dev(button0, "class", "svelte-16xx7qi");
+    			add_location(button0, file$5, 296, 6, 8149);
+    			add_location(b, file$5, 297, 24, 8225);
+    			add_location(div2, file$5, 297, 6, 8207);
+    			attr_dev(div3, "class", "land-group-parameters svelte-16xx7qi");
+    			add_location(div3, file$5, 295, 6, 8106);
+    			attr_dev(hr, "class", "mana-requirements-divider svelte-16xx7qi");
+    			add_location(hr, file$5, 302, 6, 8322);
+    			attr_dev(p1, "class", "svelte-16xx7qi");
+    			add_location(p1, file$5, 306, 6, 8417);
+    			attr_dev(div4, "class", "mana-requirements-container svelte-16xx7qi");
+    			add_location(div4, file$5, 307, 6, 8492);
+    			button1.disabled = button1_disabled_value = !/*enableSimulationButton*/ ctx[6];
+    			attr_dev(button1, "class", "svelte-16xx7qi");
+    			add_location(button1, file$5, 324, 8, 9138);
     			attr_dev(label, "for", "iterations");
-    			attr_dev(label, "class", "svelte-11ykd18");
-    			add_location(label, file$5, 316, 8, 8866);
+    			attr_dev(label, "class", "svelte-16xx7qi");
+    			add_location(label, file$5, 326, 8, 9282);
     			set_style(input, "width", "90px");
     			attr_dev(input, "id", "iterations");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "1");
-    			attr_dev(input, "class", "svelte-11ykd18");
-    			add_location(input, file$5, 317, 8, 8940);
-    			attr_dev(div5, "class", "mana-requirement svelte-11ykd18");
-    			add_location(div5, file$5, 315, 6, 8826);
-    			attr_dev(div6, "class", "land-group-parameters svelte-11ykd18");
-    			add_location(div6, file$5, 313, 6, 8716);
-    			attr_dev(div7, "class", "answer svelte-11ykd18");
-    			set_style(div7, "height", /*openItem*/ ctx[1] === 0 ? 'auto' : '0');
-    			add_location(div7, file$5, 270, 4, 7257);
+    			attr_dev(input, "class", "svelte-16xx7qi");
+    			add_location(input, file$5, 327, 8, 9356);
+    			attr_dev(div5, "class", "mana-requirement svelte-16xx7qi");
+    			add_location(div5, file$5, 325, 8, 9242);
+    			attr_dev(div6, "class", "land-group-parameters svelte-16xx7qi");
+    			add_location(div6, file$5, 323, 6, 9093);
+    			attr_dev(div7, "class", "answer svelte-16xx7qi");
+    			set_style(div7, "height", /*openItem*/ ctx[2] === 0 ? 'auto' : '0');
+    			add_location(div7, file$5, 280, 4, 7581);
     			attr_dev(div8, "tabindex", "0");
-    			attr_dev(div8, "class", "accordion-item svelte-11ykd18");
-    			add_location(div8, file$5, 253, 2, 6183);
-    			attr_dev(div9, "class", "accordion svelte-11ykd18");
-    			add_location(div9, file$5, 250, 0, 6037);
+    			attr_dev(div8, "class", "accordion-item svelte-16xx7qi");
+    			add_location(div8, file$5, 263, 2, 6507);
+    			attr_dev(div9, "class", "accordion svelte-16xx7qi");
+    			add_location(div9, file$5, 260, 0, 6361);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8625,7 +8636,8 @@ var app = (function () {
     			append_dev(div3, t7);
     			append_dev(div3, div2);
     			append_dev(div2, t8);
-    			append_dev(div2, t9);
+    			append_dev(div2, b);
+    			append_dev(b, t9);
     			append_dev(div7, t10);
     			append_dev(div7, hr);
     			append_dev(div7, t11);
@@ -8642,6 +8654,7 @@ var app = (function () {
     			append_dev(div7, t14);
     			append_dev(div7, div6);
     			append_dev(div6, button1);
+    			append_dev(button1, t15);
     			append_dev(div6, t16);
     			append_dev(div6, div5);
     			append_dev(div5, label);
@@ -8654,11 +8667,11 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div0, "click", /*click_handler_1*/ ctx[15], false, false, false, false),
-    					listen_dev(button0, "click", /*addCard*/ ctx[10], false, false, false, false),
-    					listen_dev(button1, "click", /*logPreparedCards*/ ctx[12], false, false, false, false),
-    					listen_dev(input, "input", /*input_input_handler_1*/ ctx[19]),
-    					listen_dev(div8, "keydown", /*keydown_handler*/ ctx[22], false, false, false, false)
+    					listen_dev(div0, "click", /*click_handler_1*/ ctx[16], false, false, false, false),
+    					listen_dev(button0, "click", /*addCard*/ ctx[11], false, false, false, false),
+    					listen_dev(button1, "click", /*logPreparedCards*/ ctx[13], false, false, false, false),
+    					listen_dev(input, "input", /*input_input_handler_1*/ ctx[20]),
+    					listen_dev(div8, "keydown", /*keydown_handler*/ ctx[23], false, false, false, false)
     				];
 
     				mounted = true;
@@ -8667,19 +8680,19 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover0_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 4 | dirty[1] & /*$$scope*/ 2) {
+    			if (dirty[0] & /*showPopover*/ 8 | dirty[1] & /*$$scope*/ 4) {
     				popover0_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_show && dirty[0] & /*showPopover*/ 4) {
+    			if (!updating_show && dirty[0] & /*showPopover*/ 8) {
     				updating_show = true;
-    				popover0_changes.show = /*showPopover*/ ctx[2];
+    				popover0_changes.show = /*showPopover*/ ctx[3];
     				add_flush_callback(() => updating_show = false);
     			}
 
     			popover0.$set(popover0_changes);
 
-    			if (dirty[0] & /*manaCards, removeCard*/ 2049) {
+    			if (dirty[0] & /*manaCards, removeCard*/ 4097) {
     				each_value_1 = /*manaCards*/ ctx[0];
     				validate_each_argument(each_value_1);
     				group_outros();
@@ -8690,8 +8703,8 @@ var app = (function () {
 
     			if (!current || dirty[0] & /*totalAmount*/ 32) set_data_dev(t9, /*totalAmount*/ ctx[5]);
 
-    			if (dirty[0] & /*manaRequirements, getAnyIcon, manaIcons*/ 200) {
-    				each_value = Object.entries(/*manaRequirements*/ ctx[3]);
+    			if (dirty[0] & /*manaRequirements, getAnyIcon, manaIcons*/ 386) {
+    				each_value = Object.entries(/*manaRequirements*/ ctx[1]);
     				validate_each_argument(each_value);
     				let i;
 
@@ -8714,26 +8727,30 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
+    			if (!current || dirty[0] & /*enableSimulationButton*/ 64 && button1_disabled_value !== (button1_disabled_value = !/*enableSimulationButton*/ ctx[6])) {
+    				prop_dev(button1, "disabled", button1_disabled_value);
+    			}
+
     			if (dirty[0] & /*iterations*/ 16 && to_number(input.value) !== /*iterations*/ ctx[4]) {
     				set_input_value(input, /*iterations*/ ctx[4]);
     			}
 
     			const popover1_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 4 | dirty[1] & /*$$scope*/ 2) {
+    			if (dirty[0] & /*showPopover*/ 8 | dirty[1] & /*$$scope*/ 4) {
     				popover1_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_show_1 && dirty[0] & /*showPopover*/ 4) {
+    			if (!updating_show_1 && dirty[0] & /*showPopover*/ 8) {
     				updating_show_1 = true;
-    				popover1_changes.show = /*showPopover*/ ctx[2];
+    				popover1_changes.show = /*showPopover*/ ctx[3];
     				add_flush_callback(() => updating_show_1 = false);
     			}
 
     			popover1.$set(popover1_changes);
 
-    			if (dirty[0] & /*openItem*/ 2) {
-    				set_style(div7, "height", /*openItem*/ ctx[1] === 0 ? 'auto' : '0');
+    			if (dirty[0] & /*openItem*/ 4) {
+    				set_style(div7, "height", /*openItem*/ ctx[2] === 0 ? 'auto' : '0');
     			}
     		},
     		i: function intro(local) {
@@ -8800,6 +8817,7 @@ var app = (function () {
     }
 
     function instance$5($$self, $$props, $$invalidate) {
+    	let enableSimulationButton;
     	let totalAmount;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('MonteAccordion', slots, []);
@@ -8857,7 +8875,7 @@ var app = (function () {
     	}
 
     	function toggleItem(index) {
-    		$$invalidate(1, openItem = openItem === index ? null : index);
+    		$$invalidate(2, openItem = openItem === index ? null : index);
     	}
 
     	function handleKeydown(event, index) {
@@ -8937,11 +8955,11 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$3.warn(`<MonteAccordion> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => $$invalidate(2, showPopover = !showPopover);
+    	const click_handler = () => $$invalidate(3, showPopover = !showPopover);
 
     	function popover0_show_binding(value) {
     		showPopover = value;
-    		$$invalidate(2, showPopover);
+    		$$invalidate(3, showPopover);
     	}
 
     	const click_handler_1 = () => toggleItem(0);
@@ -8955,7 +8973,7 @@ var app = (function () {
 
     	function input_input_handler(color) {
     		manaRequirements[color] = to_number(this.value);
-    		$$invalidate(3, manaRequirements);
+    		$$invalidate(1, manaRequirements);
     	}
 
     	function input_input_handler_1() {
@@ -8963,11 +8981,11 @@ var app = (function () {
     		$$invalidate(4, iterations);
     	}
 
-    	const click_handler_2 = () => $$invalidate(2, showPopover = !showPopover);
+    	const click_handler_2 = () => $$invalidate(3, showPopover = !showPopover);
 
     	function popover1_show_binding(value) {
     		showPopover = value;
-    		$$invalidate(2, showPopover);
+    		$$invalidate(3, showPopover);
     	}
 
     	const keydown_handler = event => handleKeydown(event, 0);
@@ -9010,16 +9028,18 @@ var app = (function () {
     		removeCard,
     		prepareManaCardsForCalculation,
     		logPreparedCards,
-    		totalAmount
+    		totalAmount,
+    		enableSimulationButton
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('openItem' in $$props) $$invalidate(1, openItem = $$props.openItem);
-    		if ('showPopover' in $$props) $$invalidate(2, showPopover = $$props.showPopover);
+    		if ('openItem' in $$props) $$invalidate(2, openItem = $$props.openItem);
+    		if ('showPopover' in $$props) $$invalidate(3, showPopover = $$props.showPopover);
     		if ('manaCards' in $$props) $$invalidate(0, manaCards = $$props.manaCards);
-    		if ('manaRequirements' in $$props) $$invalidate(3, manaRequirements = $$props.manaRequirements);
+    		if ('manaRequirements' in $$props) $$invalidate(1, manaRequirements = $$props.manaRequirements);
     		if ('iterations' in $$props) $$invalidate(4, iterations = $$props.iterations);
     		if ('totalAmount' in $$props) $$invalidate(5, totalAmount = $$props.totalAmount);
+    		if ('enableSimulationButton' in $$props) $$invalidate(6, enableSimulationButton = $$props.enableSimulationButton);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -9027,6 +9047,10 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
+    		if ($$self.$$.dirty[0] & /*manaRequirements, manaCards*/ 3) {
+    			$$invalidate(6, enableSimulationButton = Object.values(manaRequirements).some(amount => amount > 0) && manaCards.some(card => card.amount > 0));
+    		}
+
     		if ($$self.$$.dirty[0] & /*manaCards*/ 1) {
     			{
     				console.log('Updated manaCards:', manaCards);
@@ -9040,11 +9064,12 @@ var app = (function () {
 
     	return [
     		manaCards,
+    		manaRequirements,
     		openItem,
     		showPopover,
-    		manaRequirements,
     		iterations,
     		totalAmount,
+    		enableSimulationButton,
     		manaIcons,
     		getAnyIcon,
     		toggleItem,
@@ -27801,7 +27826,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "stacked-card svelte-itn3xh");
+    			attr_dev(div, "class", "stacked-card svelte-1p8xpx2");
     			set_style(div, "left", /*i*/ ctx[29] * 4 + "px");
     			set_style(div, "z-index", -(/*i*/ ctx[29] + 1));
     			set_style(div, "background-color", /*card*/ ctx[25].color);
@@ -27883,20 +27908,20 @@ var app = (function () {
     			div5 = element("div");
     			t5 = text(t5_value);
     			t6 = space();
-    			attr_dev(div0, "class", "probability svelte-itn3xh");
+    			attr_dev(div0, "class", "probability svelte-1p8xpx2");
     			add_location(div0, file$3, 650, 28, 23198);
-    			attr_dev(div1, "class", "card-ratio svelte-itn3xh");
+    			attr_dev(div1, "class", "card-ratio svelte-1p8xpx2");
     			add_location(div1, file$3, 651, 28, 23316);
-    			attr_dev(div2, "class", "card-details svelte-itn3xh");
+    			attr_dev(div2, "class", "card-details svelte-1p8xpx2");
     			add_location(div2, file$3, 649, 24, 23142);
-    			attr_dev(div3, "class", "rectangle svelte-itn3xh");
+    			attr_dev(div3, "class", "rectangle svelte-1p8xpx2");
     			set_style(div3, "background-color", /*card*/ ctx[25].color);
     			add_location(div3, file$3, 648, 20, 23053);
-    			attr_dev(div4, "class", "stacked-cards svelte-itn3xh");
+    			attr_dev(div4, "class", "stacked-cards svelte-1p8xpx2");
     			add_location(div4, file$3, 654, 20, 23444);
-    			attr_dev(div5, "class", "card-label svelte-itn3xh");
+    			attr_dev(div5, "class", "card-label svelte-1p8xpx2");
     			add_location(div5, file$3, 659, 20, 23771);
-    			attr_dev(div6, "class", "card-container svelte-itn3xh");
+    			attr_dev(div6, "class", "card-container svelte-1p8xpx2");
     			set_style(div6, "margin-right", 7 + (/*card*/ ctx[25].stackedCards || 0) * 4 + "px");
     			add_location(div6, file$3, 647, 16, 22943);
     		},
@@ -28032,13 +28057,13 @@ var app = (function () {
 
     			t8 = space();
     			add_location(br, file$3, 642, 28, 22686);
-    			attr_dev(i, "class", "svelte-itn3xh");
+    			attr_dev(i, "class", "svelte-1p8xpx2");
     			add_location(i, file$3, 643, 16, 22708);
-    			attr_dev(div0, "class", "turn-label svelte-itn3xh");
+    			attr_dev(div0, "class", "turn-label svelte-1p8xpx2");
     			add_location(div0, file$3, 641, 12, 22632);
-    			attr_dev(div1, "class", "card-rectangles svelte-itn3xh");
+    			attr_dev(div1, "class", "card-rectangles svelte-1p8xpx2");
     			add_location(div1, file$3, 645, 12, 22802);
-    			attr_dev(div2, "class", "turn-row svelte-itn3xh");
+    			attr_dev(div2, "class", "turn-row svelte-1p8xpx2");
     			add_location(div2, file$3, 640, 8, 22596);
     		},
     		m: function mount(target, anchor) {
@@ -28148,16 +28173,16 @@ var app = (function () {
     			input = element("input");
     			set_style(h2, "text-align", "center");
     			add_location(h2, file$3, 637, 0, 22448);
-    			attr_dev(div0, "class", "output-diagram svelte-itn3xh");
+    			attr_dev(div0, "class", "output-diagram svelte-1p8xpx2");
     			add_location(div0, file$3, 638, 0, 22500);
     			attr_dev(label, "for", "deckSize");
-    			attr_dev(label, "class", "svelte-itn3xh");
+    			attr_dev(label, "class", "svelte-1p8xpx2");
     			add_location(label, file$3, 668, 4, 23958);
     			attr_dev(input, "type", "number");
-    			attr_dev(input, "class", "deckSize svelte-itn3xh");
+    			attr_dev(input, "class", "deckSize svelte-1p8xpx2");
     			attr_dev(input, "min", "1");
     			add_location(input, file$3, 669, 4, 24010);
-    			attr_dev(div1, "class", "deck-size-container svelte-itn3xh");
+    			attr_dev(div1, "class", "deck-size-container svelte-1p8xpx2");
     			add_location(div1, file$3, 667, 0, 23919);
     		},
     		l: function claim(nodes) {
@@ -29698,7 +29723,7 @@ var app = (function () {
     			t2 = space();
     			create_component(faq.$$.fragment);
     			attr_dev(main, "class", "parameters svelte-1hj1r27");
-    			add_location(main, file, 43, 0, 2730);
+    			add_location(main, file, 46, 0, 3105);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29785,6 +29810,10 @@ var app = (function () {
     		{
     			question: "I'd like to support this or give feedback.",
     			answer: "<p>There's a lot of ways to help!</p> <p><b>If you're a mathy person,</b> you could help me confirm the mulligan calculations in some specific situations. See the github <a href='https://github.com/savanaben/Draw-Probability-Calculator?tab=readme-ov-file#readme' target='_blank'>readme</a> for more info, or email me (ben.c.gross@gmail.com).</p> <p><b>If you're a developer,</b> feel free to check out the <a href='https://github.com/savanaben/Draw-Probability-Calculator?tab=readme-ov-file#readme' target='_blank'>readme</a> project and propose improvements/pull requests. The readme has a list of areas of improvement/known issues.</p> <p>Finally, <b>if you just have a great idea to make this more useful,</b> send me an email (ben.c.gross@gmail.com). This is a passion project and I'd love to extend or add functionality that helps people build their deck.</p>"
+    		},
+    		{
+    			question: "Thanks and credits",
+    			answer: "<p>Greatest thanks to Michael B. Moore and their <a href='https://deckulator.appspot.com/' target='_blank'>deckulator</a> app, which helped confirm logic.</p> <p>Thanks to <a href='https://www.slightlymagic.net/forum/viewtopic.php?f=15&t=4430' target='_blank'>Goblin Hero</a> for their mana symbol svgs.</p>"
     		}
     	];
 

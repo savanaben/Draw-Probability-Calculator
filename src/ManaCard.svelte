@@ -91,12 +91,13 @@ const manaIcons = {
     }
 
     .mana-symbol.active {
-        border-color: #000; /* Black border for active state */
+        border-color: #1b67e1; 
         border-width: 2px;
+        background-color: #eaf2ff;
     }
 
     .mana-card {
-      width: 110px;
+      width: 130px;
       height: auto;
       background-color: #f0f0f0;
       margin: 5px;
@@ -162,7 +163,8 @@ width: inherit;
     }
   
     .remove-button {
-      width: 100%;
+      width: 30%;
+      height: 100%;
       box-sizing: border-box;
     }
 
