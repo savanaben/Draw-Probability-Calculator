@@ -476,7 +476,7 @@ function identifyProfiles(numIterations) {
     console.log('Land Group Sizes:', landGroupSizes);
     console.log('Needed Combinations:', neededCombinations);
     console.log('Prepared Combinations:', preparedCombinations);
-    console.log('Probabilities by Turn:', probabilitiesByTurn);
+   // console.log('Probabilities by Turn:', probabilitiesByTurn);
 }
 
 

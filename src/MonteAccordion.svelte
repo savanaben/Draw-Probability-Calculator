@@ -1,11 +1,13 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import ManaCard from './ManaCard.svelte';
+  import CustomCard from './CustomCard.svelte';
   import { slide } from 'svelte/transition';
   import Popover from './Popover.svelte';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
   import { simulationData } from './colorStore.js';
+
 
 import WIcon from './mana-icons/plains.svg';
 import UIcon from './mana-icons/swamp.svg';
@@ -40,6 +42,7 @@ const manaIcons = {
   
   const dispatch = createEventDispatcher();
   let manaCards = [];
+  let customCards = [];
   let manaRequirements = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0, ANY:0 }; // Initialize mana requirements
   let iterations = 10000; // Default number of iterations
 
@@ -81,6 +84,79 @@ function removeCard(id) {
 }
 
 
+function addCustomCard() {
+    const newCustomCard = { 
+        id: Date.now(), 
+        title: `Group ${customCards.length + 1}`, 
+        attributes: [], 
+        amount: 0 
+    };
+    customCards = [...customCards, newCustomCard];
+}
+
+
+
+
+function removeCustomCard(id) {
+    // Find the custom card that is being removed
+    const removedCard = customCards.find(card => card.id === id);
+
+    // Remove the custom card from the array
+    customCards = customCards.filter(card => card.id !== id);
+
+    // Remove the title and attributes from manaRequirements and create a new object
+    if (removedCard) {
+        let newManaRequirements = { ...manaRequirements };
+        delete newManaRequirements[removedCard.title];
+        removedCard.attributes.forEach(attr => {
+            delete newManaRequirements[attr];
+        });
+        manaRequirements = newManaRequirements;
+    }
+}
+
+
+
+$: {
+    customCards.forEach(card => {
+        manaRequirements[card.title] = manaRequirements[card.title] || 0;
+        card.attributes.forEach(attr => {
+            manaRequirements[attr.name] = manaRequirements[attr.name] || 0;
+        });
+    });
+}
+
+
+$: {
+    // Update manaRequirements based on customCards titles
+    customCards.forEach(card => {
+        if (!(card.title in manaRequirements)) {
+            manaRequirements[card.title] = 0; // Initialize if the title is new
+        }
+    });
+    // Remove keys from manaRequirements that are no longer in customCards
+    Object.keys(manaRequirements).forEach(key => {
+        if (!customCards.some(card => card.title === key) && !(key in manaIcons)) {
+            delete manaRequirements[key];
+        }
+    });
+}
+
+
+
+
+$: {
+    console.log('Custom Cards:', customCards);
+    customCards.forEach(card => {
+        manaRequirements[card.title] = manaRequirements[card.title] || 0;
+        card.attributes.forEach(attr => {
+            manaRequirements[attr] = manaRequirements[attr] || 0;
+        });
+    });
+}
+
+
+
 $: enableSimulationButton = Object.values(manaRequirements).some(amount => amount > 0) && manaCards.some(card => card.amount > 0);
 
 
@@ -91,23 +167,43 @@ $: {
 $: totalAmount = manaCards.reduce((sum, card) => sum + card.amount, 0);
 
 
+$: {
+    // Update manaRequirements based on customCards
+    customCards.forEach(card => {
+        manaRequirements[card.title] = manaRequirements[card.title] || 0;
+        card.attributes.forEach(attr => {
+            manaRequirements[attr] = manaRequirements[attr] || 0;
+        });
+    });
+}
+
 
 function prepareManaCardsForCalculation() {
-  let preparedCards = [];
-  manaCards.forEach(card => {
-    let cardEntry = Object.entries(card.mana)
-      .filter(([key, value]) => value)
-      .reduce((acc, [key, value]) => {
-        acc[key] = 1;
-        return acc;
-      }, { ANY: 1 }); // Add generic mana
+    let preparedCards = [];
 
-    for (let i = 0; i < card.amount; i++) {
-      preparedCards.push(cardEntry);
-    }
-  });
-  console.log(preparedCards); // Add this line to log the array
-  return preparedCards;
+    // Add logic for custom cards
+    customCards.forEach(card => {
+        let cardEntry = { [card.title]: 1, ...card.attributes.reduce((acc, attr) => ({ ...acc, [attr]: 1 }), {}) };
+        for (let i = 0; i < card.amount; i++) {
+            preparedCards.push(cardEntry);
+        }
+    });
+
+    // Existing logic for mana cards
+    manaCards.forEach(card => {
+        let cardEntry = Object.entries(card.mana)
+            .filter(([key, value]) => value)
+            .reduce((acc, [key, value]) => {
+                acc[key] = 1;
+                return acc;
+            }, { ANY: 1 }); // Add generic mana
+
+        for (let i = 0; i < card.amount; i++) {
+            preparedCards.push(cardEntry);
+        }
+    });
+    console.log(preparedCards); // Add this line to log the array
+    return preparedCards;
 }
 
 
@@ -294,7 +390,7 @@ function logPreparedCards() {
       {/each}
       </div>
       <div class="land-group-parameters">
-      <button on:click={addCard}>Add Land Group</button>
+      <button on:click={addCard}>Add Mana Group</button>
       <div>Total Lands: <b>{totalAmount}</b></div>
     </div>
 
@@ -302,25 +398,43 @@ function logPreparedCards() {
       <!-- Horizontal Rule for Separation -->
       <hr class="mana-requirements-divider">
 
-    
+      <div class="custom-cards-container">
+        {#each customCards as card (card.id)}
+            <CustomCard bind:card={card} on:remove={() => removeCustomCard(card.id)} />
+        {/each}
+    </div>
+    <div class="custom-card-controls">
+        <button on:click={addCustomCard}>Add Custom Group</button>
+    </div>
+
+         <!-- Horizontal Rule for Separation -->
+         <hr class="mana-requirements-divider">
+
+
+
       <!-- Mana Requirements Fields -->
       <p>Step 2 - Specify the amount of each type of mana you'd like.</p>
       <div class="mana-requirements-container">
-        {#each Object.entries(manaRequirements) as [color, amount]}
-        <div class="mana-requirement">
-            <label for="{color}-requirement">
-                <img src={color === 'ANY' ? getAnyIcon(amount) : manaIcons[color]} alt="{color} mana icon" class="mana-icon" />&nbsp;: 
-            </label>
-            <input
-                id="{color}-requirement"
-                type="number"
-                min="0"
-                bind:value={manaRequirements[color]}
-            />
-        </div>
-    {/each}
+        {#each Object.entries(manaRequirements) as [key, amount]}
+            <div class="mana-requirement">
+                <label for="{key}-requirement">
+                    {#if manaIcons[key]}
+                        <img src={key === 'ANY' ? getAnyIcon(amount) : manaIcons[key]} alt="{key} mana icon" class="mana-icon" />&nbsp;:
+                    {:else}
+                        {key}: <!-- Display the custom card title -->
+                    {/if}
+                </label>
+                <input
+                    id="{key}-requirement"
+                    type="number"
+                    min="0"
+                    bind:value={manaRequirements[key]}
+                />
+            </div>
+        {/each}
+    </div>
     
-      </div>
+    
       <div class="land-group-parameters">
         <button on:click={logPreparedCards} disabled={!enableSimulationButton}>Run Simulation</button>
         <div class="mana-requirement">
