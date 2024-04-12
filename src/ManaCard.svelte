@@ -101,7 +101,7 @@ const manaIcons = {
       height: auto;
       background-color: #f0f0f0;
       margin: 5px;
-      padding: 5px;
+      padding: 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -152,7 +152,7 @@ width: inherit;
     }
   
     .mana-symbol {
-      width: 21%;
+      width: 23%;
       text-align: center;
       margin: 2px;
     }
@@ -188,7 +188,11 @@ width: inherit;
 
   <div class="mana-card">
     <div class="mana-card-header">
-        <Popover placement="bottom">
+      <p style="margin: 0.2rem 0 0.2rem 0;">Mana&nbsp;card(s)</p>
+     
+               <!-- the following method was a dropdown, which I eventually cut for buttons. might be
+          better on mobile... -->
+      <!-- <Popover placement="bottom">
             <button slot="trigger" class="dropdown-button">Mana</button>
             <div slot="content" class="mana-options">
                 {#each ['W', 'U', 'B', 'R', 'G', 'C'] as mana}
@@ -197,8 +201,8 @@ width: inherit;
                         <input type="checkbox" bind:checked={card.mana[mana]} />
                     </div>
                 {/each}
-            </div>
-        </Popover>
+            </div> 
+        </Popover>  -->
         <button class="remove-button" on:click={remove}>
             <FontAwesomeIcon icon={faTimes} />
         </button>

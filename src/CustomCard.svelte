@@ -2,8 +2,12 @@
     import { createEventDispatcher } from 'svelte';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-
-    const dispatch = createEventDispatcher();
+    import Popover from './Popover.svelte';
+    import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+   
+  const dispatch = createEventDispatcher();
+ 
+  let showPopover = false;
 
     export let card = {
         title: '',
@@ -16,29 +20,39 @@
     }
 
     function addAttribute() {
-        card.attributes = [...card.attributes, ''];
-    }
+    card.attributes = [...card.attributes, `Attribute ${card.attributes.length + 1}`]; // Give a default name to the new attribute
+}
 
-    function removeAttribute(index) {
-        card.attributes = card.attributes.filter((_, i) => i !== index);
-    }
 
-    function updateAttribute(index, value) {
-        card.attributes[index] = value;
-    }
+function removeAttribute(index) {
+    const removedAttribute = card.attributes[index];
+    card.attributes = card.attributes.filter((_, i) => i !== index);
+    dispatch('removeattribute', { attribute: removedAttribute });
+}
+
+
+function updateAttribute(index, value) {
+    const oldValue = card.attributes[index];
+    card.attributes[index] = value;
+    dispatch('updateattribute', { newAttr: value, oldAttr: oldValue });
+}
+
+
+
+
 </script>
 
 
 <style>
     .custom-card {
-        width: 180px;
+        width: 165px;
         height: auto;
         background-color: #f0f0f0;
         margin: 5px;
         padding: 5px;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-between;
         border-radius: 4px;
         overflow: hidden;
@@ -52,7 +66,7 @@
     }
 
     .title-input {
-        width: 70%;
+       
     }
 
     .remove-button {
@@ -76,12 +90,11 @@
     }
 
     .add-attribute-button {
-        width: 100%;
         margin-top: 5px;
     }
 
     .card-footer {
-        width: 100%;
+        width: 70%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -99,9 +112,24 @@
     input, button {
         padding: 6px;
         margin: 0;
-        width: 140px;
+        width: 125px;
         box-sizing: border-box;
     }
+
+    button {
+        margin: 0;
+        color: #0066e9;
+        padding: 6px 8px 6px 8px;
+    }
+
+    .moreInfo {
+    border-radius: 40px;
+    border-style: none;
+    padding: 0.2em 0.25em 0.15em 0.25em;
+    margin: 0;
+    width: 100%;
+}
+
 </style>
 
 <div class="custom-card">
@@ -115,14 +143,21 @@
         {#each card.attributes as attribute, index}
             <div class="attribute-row">
                 <input type="text" placeholder="Attribute" bind:value={attribute} on:input={e => updateAttribute(index, e.target.value)} />
-                {#if index > 0}
                     <button class="remove-attribute-button" on:click={() => removeAttribute(index)}>
                         <FontAwesomeIcon icon={faTimes} />
-                    </button>
-                {/if}
+                    </button>    
             </div>
         {/each}
         <button class="add-attribute-button" on:click={addAttribute}>Add Attribute</button>
+        <Popover bind:show={showPopover} placement="top">
+            <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+              <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
+            </button>
+            <div slot="content">
+              <p class="popover-content">In edh categories can be thought of as the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
+              <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
+            </div>
+          </Popover>
     </div>
     <div class="card-footer">
         <label for="amount" class="amount-label">Amount:</label>

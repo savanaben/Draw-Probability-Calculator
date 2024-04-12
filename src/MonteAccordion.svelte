@@ -45,6 +45,8 @@ const manaIcons = {
   let customCards = [];
   let manaRequirements = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0, ANY:0 }; // Initialize mana requirements
   let iterations = 10000; // Default number of iterations
+  let customAttributeRequirements = {}; // New variable for custom attributes
+  let uniqueAttributes = new Set();
 
 
   function getAnyIcon(value) {
@@ -103,6 +105,7 @@ function removeCustomCard(id) {
 
     // Remove the custom card from the array
     customCards = customCards.filter(card => card.id !== id);
+    updateCustomAttributeRequirements();
 
     // Remove the title and attributes from manaRequirements and create a new object
     if (removedCard) {
@@ -120,10 +123,20 @@ function removeCustomCard(id) {
 $: {
     customCards.forEach(card => {
         manaRequirements[card.title] = manaRequirements[card.title] || 0;
-        card.attributes.forEach(attr => {
-            manaRequirements[attr.name] = manaRequirements[attr.name] || 0;
+        card.attributes.forEach(attrName => {
+            manaRequirements[attrName] = manaRequirements[attrName] || 0;
         });
     });
+
+    // Remove keys from manaRequirements that are no longer in customCards
+    Object.keys(manaRequirements).forEach(key => {
+        if (!customCards.some(card => card.title === key || card.attributes.includes(key)) && !(key in manaIcons)) {
+            delete manaRequirements[key];
+        }
+    });
+
+    console.log("Updated manaRequirements:", manaRequirements);
+
 }
 
 
@@ -153,11 +166,17 @@ $: {
             manaRequirements[attr] = manaRequirements[attr] || 0;
         });
     });
+
+
+    console.log("Updated manaRequirements (attributes):", manaRequirements);
+
 }
 
 
 
-$: enableSimulationButton = Object.values(manaRequirements).some(amount => amount > 0) && manaCards.some(card => card.amount > 0);
+$: enableSimulationButton = 
+    (Object.values(manaRequirements).some(amount => amount > 0) || Object.values(customAttributeRequirements).some(amount => amount > 0)) &&
+    (manaCards.some(card => card.amount > 0) || customCards.some(card => card.amount > 0));
 
 
 $: {
@@ -178,12 +197,136 @@ $: {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Reactivity for custom attributes
+  $: {
+      customCards.forEach(card => {
+          card.attributes.forEach(attr => {
+              if (!(attr in customAttributeRequirements)) {
+                  customAttributeRequirements[attr] = 0; // Initialize if the attribute is new
+              }
+          });
+      });
+      // Remove keys from customAttributeRequirements that are no longer in customCards
+      Object.keys(customAttributeRequirements).forEach(key => {
+          if (!customCards.some(card => card.attributes.includes(key))) {
+              delete customAttributeRequirements[key];
+          }
+      });
+
+      
+      mergeCustomAttributesIntoManaRequirements();
+
+  }
+
+
+  $: {
+    uniqueAttributes.clear();
+    customCards.forEach(card => {
+        card.attributes.forEach(attr => {
+            uniqueAttributes.add(attr);
+        });
+    });
+    console.log("Unique attributes:", uniqueAttributes);
+}
+
+
+
+// Update function for custom attributes
+function updateCustomAttribute(attr, value) {
+    console.log(`Updating custom attribute ${attr} to value:`, value);
+    customAttributeRequirements[attr] = Number(value);
+    console.log(`Updated customAttributeRequirements:`, customAttributeRequirements);
+}
+
+
+function mergeCustomAttributesIntoManaRequirements() {
+    Object.entries(customAttributeRequirements).forEach(([key, value]) => {
+        manaRequirements[key] = value;
+    });
+    console.log("Merged manaRequirements:", manaRequirements);
+}
+
+
+$: filteredManaRequirements = Object.fromEntries(
+    Object.entries(manaRequirements).filter(([key]) => !customCards.some(card => card.attributes.includes(key)))
+);
+
+
+
+function updateCustomAttributeRequirements() {
+    const allAttributes = customCards.flatMap(card => card.attributes);
+    const uniqueAttributes = Array.from(new Set(allAttributes));
+    customAttributeRequirements = uniqueAttributes.reduce((acc, attr) => {
+        acc[attr] = customAttributeRequirements[attr] || 0;
+        return acc;
+    }, {});
+}
+
+
+function handleAttributeUpdate(newAttr, oldAttr, cardId) {
+    // Update the customCard attributes
+    customCards = customCards.map(card => {
+        if (card.id === cardId) {
+            return {
+                ...card,
+                attributes: card.attributes.map(attr => (attr === oldAttr ? newAttr : attr))
+            };
+        }
+        return card;
+    });
+
+    // Update the uniqueAttributes set
+    uniqueAttributes.delete(oldAttr);
+    uniqueAttributes.add(newAttr);
+
+    // Trigger reactivity by converting the set to an array
+    uniqueAttributes = new Set([...uniqueAttributes]);
+
+    // Update the customAttributeRequirements object
+    const oldValue = customAttributeRequirements[oldAttr] || 0;
+    delete customAttributeRequirements[oldAttr];
+    customAttributeRequirements[newAttr] = oldValue;
+
+    console.log('Updated customCards:', customCards);
+    console.log('Updated uniqueAttributes:', uniqueAttributes);
+    console.log('Updated customAttributeRequirements:', customAttributeRequirements);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function prepareManaCardsForCalculation() {
     let preparedCards = [];
 
     // Add logic for custom cards
     customCards.forEach(card => {
-        let cardEntry = { [card.title]: 1, ...card.attributes.reduce((acc, attr) => ({ ...acc, [attr]: 1 }), {}) };
+        let cardEntry = { [card.title]: 1 };
+        card.attributes.forEach(attr => {
+            cardEntry[attr] = 1;
+        });
         for (let i = 0; i < card.amount; i++) {
             preparedCards.push(cardEntry);
         }
@@ -202,7 +345,6 @@ function prepareManaCardsForCalculation() {
             preparedCards.push(cardEntry);
         }
     });
-    console.log(preparedCards); // Add this line to log the array
     return preparedCards;
 }
 
@@ -226,7 +368,6 @@ function logPreparedCards() {
 }
 
 
-
 </script>
 
 <style>
@@ -235,10 +376,11 @@ function logPreparedCards() {
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 6px;
+    margin-top: .5rem;
   }
 
   .accordion-item {
-    padding: 0.5rem;
+    padding: 0.7rem;
     border-bottom: 1px solid #ccc;
   }
 
@@ -253,7 +395,7 @@ function logPreparedCards() {
   h3 {
     margin: 0;
     color: #0066e9;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 16px;
   }
 
@@ -263,9 +405,11 @@ function logPreparedCards() {
 
   .mana-cards-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: flex-start;
     margin-top: 0.5rem;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
     
   }
 
@@ -282,6 +426,7 @@ function logPreparedCards() {
   align-items: center;
   gap: 5px;
   cursor: pointer;
+  height: 28px;
 }
 
 
@@ -296,7 +441,8 @@ function logPreparedCards() {
 .mana-requirements-container {
     display: flex;
     grid-template-columns: repeat(6, auto); /* Display inputs horizontally */
-    gap: 10px;
+    column-gap: 12px;
+    row-gap: 10px;
     padding: 10px;
     justify-content: start;
     flex-wrap: wrap;
@@ -308,7 +454,7 @@ function logPreparedCards() {
   }
 
   .mana-requirement label {
-    margin-right: 5px;
+    margin-right: 4px;
     display: flex;
     align-items: flex-end;
   }
@@ -317,17 +463,33 @@ function logPreparedCards() {
     width: 50px;
   }
 
-  .mana-requirements-divider {
+  .primary-divider {
+    margin-top: 15px; /* Add some space above the inputs */
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+  }
+
+  .secondary-divider {
     margin-top: 15px; /* Add some space above the inputs */
     border: none;
     height: 1px;
-    background-color: #ccc;
+    background-color: #d9d9d9;
   }
 
   button {
         margin: 0;
         color: #0066e9;
         padding: 6px 8px 6px 8px;
+    }
+
+
+    .primary-btn {
+        margin: 0;
+        color: white;
+        background-color: #0066e9;
+        padding: 6px 8px 6px 8px;
+        border: none;
     }
 
 
@@ -363,8 +525,16 @@ function logPreparedCards() {
     on:keydown={(event) => handleKeydown(event, 0)}
   >
     <div class="accordion-title" on:click={() => toggleItem(0)}>
-      <h3>Advanced mana probabilities</h3>
-      <Popover bind:show={showPopover} placement="top">
+      <h3>Advanced mana and card attribute probabilities</h3>
+    </div>
+    <div
+      class="answer"
+      transition:slide|local={{ duration: 250 }}
+      style:height="{openItem === 0 ? 'auto' : '0'}"
+    >
+      <!-- Mana Cards and Add Button -->
+      <p style="margin-top: 0.5rem;">This section applies a different method of calculation that enables you to consider card attributes, like mana and abilities. The probabilities from this section do not take into account cards from the above section. To learn more, click the info button ->       
+        <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
           <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
         </button>
@@ -373,14 +543,12 @@ function logPreparedCards() {
           <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
         </div>
       </Popover>
-    </div>
-    <div
-      class="answer"
-      transition:slide|local={{ duration: 250 }}
-      style:height="{openItem === 0 ? 'auto' : '0'}"
-    >
-      <!-- Mana Cards and Add Button -->
-      <p style="margin-top: 0.5rem;">Step 1 - Add all of the lands in your deck and what mana they produce.</p>
+    </p>
+
+
+
+
+      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the lands (and/or mana producing cards) in your deck and what mana they produce. You can also add in custom groups (see the custom groups (?) button for more details).</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -391,37 +559,52 @@ function logPreparedCards() {
       </div>
       <div class="land-group-parameters">
       <button on:click={addCard}>Add Mana Group</button>
-      <div>Total Lands: <b>{totalAmount}</b></div>
+      <div>Total mana producing cards: <b>{totalAmount}</b></div>
     </div>
 
 
       <!-- Horizontal Rule for Separation -->
-      <hr class="mana-requirements-divider">
+      <hr class="secondary-divider">
 
-      <div class="custom-cards-container">
-        {#each customCards as card (card.id)}
-            <CustomCard bind:card={card} on:remove={() => removeCustomCard(card.id)} />
-        {/each}
+      <div class="mana-cards-container">
+   {#each customCards as card (card.id)}
+        <CustomCard
+        bind:card={card}
+        on:remove={() => removeCustomCard(card.id)}
+        on:removeattribute={({ detail }) => updateCustomAttributeRequirements()}
+        on:updateattribute={({ detail }) => handleAttributeUpdate(detail, card.id)}
+    />          
+    {/each}
     </div>
-    <div class="custom-card-controls">
+    <div class="land-group-parameters">
         <button on:click={addCustomCard}>Add Custom Group</button>
+        <Popover bind:show={showPopover} placement="top">
+          <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+            <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
+          </button>
+          <div slot="content">
+            <p class="popover-content">In edh categories can be thought of as the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
+            <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
+          </div>
+        </Popover>
     </div>
 
          <!-- Horizontal Rule for Separation -->
-         <hr class="mana-requirements-divider">
+         <hr class="primary-divider">
 
 
 
       <!-- Mana Requirements Fields -->
-      <p>Step 2 - Specify the amount of each type of mana you'd like.</p>
+      <p><strong>Step 2</strong> - Specify the amount of each mana, card, or attribute you would like. Note that this assumes a separate card for each mana/card/attribute.</p>
       <div class="mana-requirements-container">
         {#each Object.entries(manaRequirements) as [key, amount]}
+        {#if !customCards.some(card => card.attributes.includes(key))}
             <div class="mana-requirement">
                 <label for="{key}-requirement">
                     {#if manaIcons[key]}
                         <img src={key === 'ANY' ? getAnyIcon(amount) : manaIcons[key]} alt="{key} mana icon" class="mana-icon" />&nbsp;:
                     {:else}
-                        {key}: <!-- Display the custom card title -->
+                        {key}: <!-- Display the mana or card title -->
                     {/if}
                 </label>
                 <input
@@ -429,14 +612,39 @@ function logPreparedCards() {
                     type="number"
                     min="0"
                     bind:value={manaRequirements[key]}
+                    on:input={() => console.log(`Input event for ${key}:`, manaRequirements[key])}
                 />
             </div>
-        {/each}
+        {/if}
+    {/each}
+    
+
+
+
+        {#each Array.from(uniqueAttributes) as attr}
+        <div class="mana-requirement">
+            <label for="custom-{attr}">{attr}: </label>
+            <input
+                id="custom-{attr}"
+                type="number"
+                min="0"
+                value={customAttributeRequirements[attr] || 0}
+                on:input={e => updateCustomAttribute(attr, e.target.value)}
+            />
+        </div>
+    {/each}
+    
+    
+
+
+
+
+
     </div>
     
     
       <div class="land-group-parameters">
-        <button on:click={logPreparedCards} disabled={!enableSimulationButton}>Run Simulation</button>
+        <button class="primary-btn" on:click={logPreparedCards} disabled={!enableSimulationButton}>Run Simulation</button>
         <div class="mana-requirement">
         <label for="iterations">Simulation iterations (caution):</label>
         <input style="width: 90px;" id="iterations" type="number" min="1" bind:value={iterations} />
