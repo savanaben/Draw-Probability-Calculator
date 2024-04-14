@@ -3,12 +3,26 @@
     import Calculation from './Calculation.svelte';
     import Intro from './Intro.svelte';
     import FAQ from './FAQ.svelte';
+    import SimulationModal from './SimulationModal.svelte';
+    import { simulationRun } from './colorStore.js';
 
 
     let groups = [];
     let deckSize = 99; // Default deck size
     let InitialDrawSize = 7; // Default initial draw size
     let mulliganCount = 0;
+
+
+    // Reactive statement to control scrolling
+    $: {
+        if ($simulationRun) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+
 
     function handleGroupUpdate(event) {
         groups = event.detail.groups;
@@ -45,7 +59,8 @@
 </script>
 
 <main class="parameters">
-	<Intro />
+    <SimulationModal />
+    <Intro />
     <GroupDefinition on:updateGroups={handleGroupUpdate} />
     <Calculation {groups} {deckSize} {InitialDrawSize} {mulliganCount} />
 	<FAQ {faqs} />
@@ -58,6 +73,4 @@
 	margin: auto; /* Centers the container */
 	padding-bottom: 2.5rem; /* Centers the container */
 }
-
-
 </style>

@@ -1,12 +1,11 @@
 <script>
     import { groupColors } from './colorStore.js';
-    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress } from './colorStore.js';
+    import { simulationData } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
     import { onMount } from 'svelte';
-    import { writable } from 'svelte/store';
-
+    
     
     
         // Function to calculate combinations (n choose k)
@@ -394,78 +393,58 @@
     //THIS ALL WORKED! BUT INEFFIEICENT
     
     function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
-    return new Promise((resolve, reject) => {
         const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
         const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
         const numDummyCards = Math.max(deckSize - totalLands, 0);
         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
-        let iteration = 0;
-
-
-        function runIteration() {
-           
-            if ($cancelSimulation) {
-                reject(new Error("Simulation canceled by user"));
-                return;
-            }
-           
-           
-            if (iteration >= numIterations) {
-                // Set Monte Carlo results in the dedicated store right before resolving the promise
-                monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
-                resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
-                return;
-            }
-
-
-            // Update the progress of the simulation
-            simulationProgress.set((iteration / numIterations) * 100);
-             
+    
+        for (let iteration = 0; iteration < numIterations; iteration++) {
             let hand = [];
             let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
             let metRequirementTurn = -1; // Track when requirements are met
-
+    
             // Handle mulligans for turn 0
             for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
                 hand = _.sampleSize(remainingDeck, initialDrawSize);
                 remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
+               // console.log(`Iteration ${iteration}, Mulligan ${mulligan}, Hand:`, hand);
                 if (handMeetsRequirements(hand, preparedCombinations)) {
                     probabilitiesByTurn[0]++;
                     metRequirementTurn = 0;
+                  //  console.log(`Requirements met during mulligans at iteration ${iteration}, turn 0`);
                     break;
                 }
             }
-
+    
             // Simulate drawing for subsequent turns if requirements not met in mulligans
             if (metRequirementTurn == -1) {
                 for (let turn = 1; turn <= numberOfTurns; turn++) {
                     const newCard = _.sample(remainingDeck);
                     hand.push(newCard);
                     remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
-
+    
+                 //   console.log(`Iteration ${iteration}, Turn ${turn}, Hand:`, hand);
+                 //   console.log(`Remaining Deck after turn ${turn}:`, remainingDeck);
+    
                     if (handMeetsRequirements(hand, preparedCombinations)) {
                         probabilitiesByTurn[turn]++;
                         metRequirementTurn = turn;
+                     //   console.log(`Requirements first met at iteration ${iteration}, turn ${turn}`);
                         break; // Stop further drawings for this iteration
                     }
                 }
             }
-
+    
             // Mark all subsequent turns as meeting requirements once the requirement is met
             if (metRequirementTurn != -1) {
                 for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
                     probabilitiesByTurn[turn]++;
                 }
             }
-
-            iteration++;
-            setTimeout(runIteration, 0); // Schedule the next iteration
         }
-
-        runIteration(); // Start the first iteration
-    });
-}
-
+    
+        return probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1));
+    }
     
     
     
@@ -519,41 +498,41 @@
     
     
     
-// Inside identifyProfiles function
-async function identifyProfiles(numIterations) {
-    const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
-    const neededCombinations = determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);
-    const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
-    const landGroupSizes = calculateLandGroupSizes(preparedCards);
-
-    let rawProbabilities = await monteCarloSimulation(
-        preparedCombinations,
-        landGroupSizes,
-        deckSize,
-        mulliganCount,
-        InitialDrawSize,
-        numberOfTurns,
-        numIterations
-    );
-
-    probabilitiesByTurn.set(rawProbabilities); // Ensure you are using .set() correctly if it's a store
-    simulationRun.set(true); // Set simulation run flag to true
-
-    console.log('Simulation results:', $probabilitiesByTurn); // Ensure this logs after the update
-    // Call or trigger createGroupCards here if necessary, or ensure it's part of a reactive chain that will catch this update
-}
-
-
-
+    
+    function identifyProfiles(numIterations) {
+    
+        const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+        const neededCombinations = determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);
+        const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
+        const landGroupSizes = calculateLandGroupSizes(preparedCards);
+    
+        probabilitiesByTurn = monteCarloSimulation(
+            preparedCombinations,
+            landGroupSizes,
+            deckSize,
+            mulliganCount,
+            InitialDrawSize,
+            numberOfTurns,
+            numIterations
+        );
+    
+        console.log('Land Group Sizes:', landGroupSizes);
+        console.log('Needed Combinations:', neededCombinations);
+        console.log('Prepared Combinations:', preparedCombinations);
+       // console.log('Probabilities by Turn:', probabilitiesByTurn);
+    }
+    
+    
+    
+    
     
     
     // Initialize state
     let preparedCards = [];
     let manaRequirements = {};
-    let probabilitiesByTurn = writable([]);
-   // let simulationRun = writable(false);
-    let currentTurn = writable(0); // Start from turn 0
-
+    let probabilitiesByTurn = [];
+    let simulationRun = false;
+    
     
     
     // Reactive statement to update the component's data whenever the store changes
@@ -561,6 +540,7 @@ async function identifyProfiles(numIterations) {
         preparedCards = $simulationData.preparedCards;
         manaRequirements = $simulationData.manaRequirements;
         const numIterations = $simulationData.iterations || 10000; // Default to 10000 if undefined
+        identifyProfiles(numIterations); // Call the function with the updated data
     }
     
     $: if ($simulationData && $simulationData.preparedCards.length > 0 && Object.values($simulationData.manaRequirements).some(value => value > 0)) {
@@ -569,100 +549,75 @@ async function identifyProfiles(numIterations) {
     
     
     
-    async function runSimulation() {
-    simulationRun.set(true);  // Enable the modal
-    cancelSimulation.set(false); // Ensure cancellation flag is reset before starting
-    const numIterations = $simulationData.iterations || 10000;
-    try {
-        await identifyProfiles(numIterations);
-    } catch (error) {
-        console.error(error); // Handle the error if simulation was canceled
+    function runSimulation() {
+        identifyProfiles($simulationData.iterations);
+        simulationRun = true;
     }
-    simulationRun.set(false); // Disable the modal once complete
-    cancelSimulation.set(false); // Reset cancellation state
-}
-
-
-
     //------------------------------------------------------------
     
     
     
     //the following makes the cards output
     function createGroupCards(groups, results, probabilitiesByTurn, turn) {
-    console.log("Groups received:", groups);
-    console.log("Results received:", results);
-    console.log("Probabilities by Turn received:", probabilitiesByTurn);
-    console.log("Current turn:", turn);
-
-    let cards = [];
-
-    // Check and use Monte Carlo results if available
-    if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
-        let turnTotalProbability = parseFloat($monteCarloResults[turn]);
-        cards.push({
-            probability: turnTotalProbability,
-            label: 'Custom',
-            color: '#fff',  // Distinct color to differentiate it
-            ratioText: convertPercentToRatio(turnTotalProbability),
-            stackedCards: 0 // Assuming no stacking for simulation results
-        });
-    } else if ($simulationRun) {
-        // Fallback to current probabilities if Monte Carlo results are not available
-        let turnTotalProbability = parseFloat(probabilitiesByTurn[turn]);
-        const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
-        cards.push({
-            probability: turnTotalProbability,
-            label: 'Mana',
-            color: '#fff',
-            ratioText: convertPercentToRatio(turnTotalProbability),
-            stackedCards: Math.max(totalManaNeeded - 1, 0)
-        });
-    }
-
-    // Process each group and add to the cards array ensuring they do not overwrite the Monte Carlo card
-    cards = cards.concat(groups.map(group => {
-        let groupName = group.link ? group.link : group.name;
-        let groupResult = results[groupName];
-        let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
-        
-        // Determine the ratio representation
-        let ratioText = convertPercentToRatio(probabilityPercent);
-
-        // Access the color from the groupColors store
-        let color = $groupColors[groupName] || '#e5e5e5'; // Default color if not set
-
-        return {
-            probability: probabilityPercent,
-            label: group.name,
-            color,
-            ratioText,
-            stackedCards: Math.max(group.cardsToDraw - 1, 0) // Subtract 1 because the first card is already displayed
-        };   
-    }));
-
-    console.log("Cards generated for UI:", cards);
-
+        let cards = groups.map(group => {
+            let groupName = group.link ? group.link : group.name;
+            let groupResult = results[groupName];
+            let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
+            
+            // Determine the ratio representation
+            let ratioText = convertPercentToRatio(probabilityPercent);
+    
+            // Access the color from the groupColors store
+            let color = $groupColors[groupName] || '#e5e5e5'; // Default color if not set
+    
+            return {
+                probability: probabilityPercent,
+                label: group.name,
+                color,
+                ratioText,
+                stackedCards: Math.max(group.cardsToDraw - 1, 0) // Subtract 1 because the first card is already displayed
+            };   
+         });
+    
+        // Add a card for the total probability of getting mana for each turn
+        // only if the simulation has been run
+    
+        let turnTotalProbability;
+    
+        if (simulationRun) {
+            turnTotalProbability = probabilitiesByTurn[turn];
+            const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+            cards.push({
+                probability: turnTotalProbability,
+                label: 'Mana',
+                color: '#fff',
+                ratioText: convertPercentToRatio(turnTotalProbability),
+                stackedCards: Math.max(totalManaNeeded - 1, 0) // Subtract 1 because the first card is already displayed
+            });
+        }
+    
+    
     // Calculate the total number of extra desired cards from hypergeometric groups
+    // Subtract 1 for each group because one card is already displayed by default
     const totalExtraCardsFromGroups = groups.reduce((sum, group) => sum + Math.max(group.cardsToDraw - 1, 0), 0);
-
+    
     // Calculate the total number of desired cards from mana requirements
+    // Subtract 1 because we assume that the mana requirements card is already displayed by default
     const totalDesiredCardsFromManaRequirements = Math.max(Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1, 0);
-
+    
     // Calculate the total number of extra cards, combining groups and mana requirements
     const totalExtraCards = totalExtraCardsFromGroups + totalDesiredCardsFromManaRequirements;
-
+    
     // Fill up the remaining cards for the turn with blanks, adjusting for mulligans and extra cards
     let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalExtraCards, 0);
     while (cards.length < adjustedDrawSize + turn) {
         cards.push({ probability: null, label: '', ratioText: '' });
     }
-
-    return cards;
-}
-
-
-
+    
+    
+        return cards;
+        
+    }
     
     
     
@@ -732,7 +687,7 @@ async function identifyProfiles(numIterations) {
                     <i>({turn === 0 ? `Draw ${InitialDrawSize}` : 'Draw 1'})</i>
                 </div>
                 <div class="card-rectangles">
-                    {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
+                    {#each createGroupCards(groups, results, probabilitiesByTurn, turn) as card}
                     <div class="card-container" style="margin-right: {7 + (card.stackedCards || 0) * 4}px;">
                         <div class="rectangle" style="background-color: {card.color};">
                             <div class="card-details">

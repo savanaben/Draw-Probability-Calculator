@@ -47,6 +47,7 @@ const manaIcons = {
   let iterations = 10000; // Default number of iterations
   let customAttributeRequirements = {}; // New variable for custom attributes
   let uniqueAttributes = new Set();
+  let activeManaTypes = {};
 
 
   function getAnyIcon(value) {
@@ -118,6 +119,25 @@ function removeCustomCard(id) {
     }
 }
 
+//this tracks what mana types are selected in cards, so we only show the relevant
+//fields in the manaRequirements section
+$: {
+    let types = { B: false, U: false, G: false, R: false, W: false, C: false, ANY: false };
+    let anyActive = false;
+    manaCards.forEach(card => {
+      Object.keys(card.mana).forEach(type => {
+        if (card.mana[type]) {
+          types[type] = true;
+          anyActive = true; // Set to true if any mana type is true
+        }
+      });
+    });
+
+    // Only set ANY active if any mana type is active, ignoring custom cards for ANY visibility
+    types.ANY = anyActive;
+
+    activeManaTypes = types;
+  }
 
 
 $: {
@@ -597,26 +617,26 @@ function logPreparedCards() {
       <!-- Mana Requirements Fields -->
       <p><strong>Step 2</strong> - Specify the amount of each mana, card, or attribute you would like. Note that this assumes a separate card for each mana/card/attribute.</p>
       <div class="mana-requirements-container">
-        {#each Object.entries(manaRequirements) as [key, amount]}
-        {#if !customCards.some(card => card.attributes.includes(key))}
-            <div class="mana-requirement">
-                <label for="{key}-requirement">
-                    {#if manaIcons[key]}
-                        <img src={key === 'ANY' ? getAnyIcon(amount) : manaIcons[key]} alt="{key} mana icon" class="mana-icon" />&nbsp;:
-                    {:else}
-                        {key}: <!-- Display the mana or card title -->
-                    {/if}
-                </label>
-                <input
-                    id="{key}-requirement"
-                    type="number"
-                    min="0"
-                    bind:value={manaRequirements[key]}
-                    on:input={() => console.log(`Input event for ${key}:`, manaRequirements[key])}
-                />
-            </div>
+      {#each Object.entries(manaRequirements) as [key, amount]}
+        {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
+          <div class="mana-requirement">
+            <label for="{key}-requirement">
+              {#if manaIcons[key]}
+                <img src={key === 'ANY' ? getAnyIcon(amount) : manaIcons[key]} alt="{key} mana icon" class="mana-icon" />&nbsp;:
+              {:else}
+                {key}: <!-- This will include custom card titles as well -->
+              {/if}
+            </label>
+            <input
+                id="{key}-requirement"
+                type="number"
+                min="0"
+                bind:value={manaRequirements[key]}
+                on:input={() => console.log(`Input event for ${key}:`, manaRequirements[key])}
+            />
+          </div>
         {/if}
-    {/each}
+      {/each}
     
 
 
