@@ -7741,11 +7741,11 @@ var app = (function () {
     			create_component(fontawesomeicon.$$.fragment);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", "Attribute");
-    			attr_dev(input, "class", "svelte-10ojgnr");
+    			attr_dev(input, "class", "svelte-1xf2ung");
     			add_location(input, file$7, 152, 16, 3406);
-    			attr_dev(button, "class", "remove-attribute-button svelte-10ojgnr");
+    			attr_dev(button, "class", "remove-attribute-button svelte-1xf2ung");
     			add_location(button, file$7, 153, 20, 3551);
-    			attr_dev(div, "class", "attribute-row svelte-10ojgnr");
+    			attr_dev(div, "class", "attribute-row svelte-1xf2ung");
     			add_location(div, file$7, 151, 12, 3361);
     		},
     		m: function mount(target, anchor) {
@@ -7822,7 +7822,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-10ojgnr");
+    			attr_dev(button, "class", "moreInfo svelte-1xf2ung");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
@@ -7886,10 +7886,10 @@ var app = (function () {
     			b = element("b");
     			b.textContent = "Limitation";
     			t3 = text(" - Right now, this simulation can only match one card to one desired attribute/card/mana. Let's say you had a card with two attributes (A and B). If you mark below that you desire attribute A and B, the simulation assumes you want two cards to meet those requirements. There is no way to specify that one card can fulfill multiple requirements (a great feature to add, someday).");
-    			attr_dev(p0, "class", "popover-content svelte-10ojgnr");
+    			attr_dev(p0, "class", "popover-content svelte-1xf2ung");
     			add_location(p0, file$7, 164, 14, 4241);
     			add_location(b, file$7, 165, 41, 4556);
-    			attr_dev(p1, "class", "popover-content svelte-10ojgnr");
+    			attr_dev(p1, "class", "popover-content svelte-1xf2ung");
     			add_location(p1, file$7, 165, 14, 4529);
     			attr_dev(div, "slot", "content");
     			add_location(div, file$7, 163, 12, 4205);
@@ -8000,30 +8000,30 @@ var app = (function () {
     			label.textContent = "Amount:";
     			t7 = space();
     			input1 = element("input");
-    			attr_dev(input0, "class", "title-input svelte-10ojgnr");
+    			attr_dev(input0, "class", "title-input svelte-1xf2ung");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Title");
     			add_location(input0, file$7, 144, 8, 3034);
-    			attr_dev(button0, "class", "remove-button svelte-10ojgnr");
+    			attr_dev(button0, "class", "remove-button svelte-1xf2ung");
     			add_location(button0, file$7, 145, 8, 3129);
-    			attr_dev(div0, "class", "card-header svelte-10ojgnr");
+    			attr_dev(div0, "class", "card-header svelte-1xf2ung");
     			add_location(div0, file$7, 143, 4, 2999);
-    			attr_dev(button1, "class", "add-attribute-button svelte-10ojgnr");
+    			attr_dev(button1, "class", "add-attribute-button svelte-1xf2ung");
     			add_location(button1, file$7, 158, 8, 3773);
-    			attr_dev(div1, "class", "attributes-section svelte-10ojgnr");
+    			attr_dev(div1, "class", "attributes-section svelte-1xf2ung");
     			add_location(div1, file$7, 149, 4, 3262);
     			attr_dev(label, "for", "amount");
-    			attr_dev(label, "class", "amount-label svelte-10ojgnr");
+    			attr_dev(label, "class", "amount-label svelte-1xf2ung");
     			add_location(label, file$7, 170, 8, 5050);
     			attr_dev(input1, "id", "amount");
-    			attr_dev(input1, "class", "amount-input svelte-10ojgnr");
+    			attr_dev(input1, "class", "amount-input svelte-1xf2ung");
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "placeholder", "Amount");
     			attr_dev(input1, "min", "0");
     			add_location(input1, file$7, 171, 8, 5116);
-    			attr_dev(div2, "class", "card-footer svelte-10ojgnr");
+    			attr_dev(div2, "class", "card-footer svelte-1xf2ung");
     			add_location(div2, file$7, 169, 4, 5015);
-    			attr_dev(div3, "class", "custom-card svelte-10ojgnr");
+    			attr_dev(div3, "class", "custom-card svelte-1xf2ung");
     			add_location(div3, file$7, 142, 0, 2968);
     		},
     		l: function claim(nodes) {

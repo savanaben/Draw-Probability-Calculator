@@ -45,11 +45,11 @@ function updateAttribute(index, value) {
 
 <style>
     .custom-card {
-        width: 165px;
+        width: 160px;
         height: auto;
         background-color: #f0f0f0;
         margin: 5px;
-        padding: 5px;
+        padding: 8px;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
@@ -112,7 +112,7 @@ function updateAttribute(index, value) {
     input, button {
         padding: 6px;
         margin: 0;
-        width: 125px;
+        width: 120px;
         box-sizing: border-box;
     }
     .popover-content:first-child {
