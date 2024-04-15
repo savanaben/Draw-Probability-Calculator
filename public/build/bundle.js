@@ -8404,7 +8404,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$6, 557, 8, 15134);
+    			add_location(button, file$6, 557, 8, 15133);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8465,12 +8465,12 @@ var app = (function () {
     			b.textContent = "Each category must have a unique text name";
     			t3 = text(" for the tool to work (some day I'll figure out indexing...)");
     			attr_dev(p0, "class", "popover-content svelte-17re8io");
-    			add_location(p0, file$6, 561, 10, 15430);
-    			add_location(b, file$6, 562, 37, 15757);
+    			add_location(p0, file$6, 561, 10, 15429);
+    			add_location(b, file$6, 562, 37, 15756);
     			attr_dev(p1, "class", "popover-content svelte-17re8io");
-    			add_location(p1, file$6, 562, 10, 15730);
+    			add_location(p1, file$6, 562, 10, 15729);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$6, 560, 8, 15398);
+    			add_location(div, file$6, 560, 8, 15397);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8679,7 +8679,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$6, 601, 10, 17240);
+    			add_location(button, file$6, 601, 10, 17239);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8740,12 +8740,12 @@ var app = (function () {
     			b.textContent = "Each category must have a unique text name";
     			t3 = text(" for the tool to work (some day I'll figure out indexing...)");
     			attr_dev(p0, "class", "popover-content svelte-17re8io");
-    			add_location(p0, file$6, 605, 12, 17544);
-    			add_location(b, file$6, 606, 39, 17873);
+    			add_location(p0, file$6, 605, 12, 17543);
+    			add_location(b, file$6, 606, 39, 17872);
     			attr_dev(p1, "class", "popover-content svelte-17re8io");
-    			add_location(p1, file$6, 606, 12, 17846);
+    			add_location(p1, file$6, 606, 12, 17845);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$6, 604, 10, 17510);
+    			add_location(div, file$6, 604, 10, 17509);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8808,14 +8808,14 @@ var app = (function () {
     			input = element("input");
     			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[49] + "-requirement"));
     			attr_dev(label, "class", "svelte-17re8io");
-    			add_location(label, file$6, 622, 12, 18634);
+    			add_location(label, file$6, 622, 12, 18633);
     			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[49] + "-requirement"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
     			attr_dev(input, "class", "svelte-17re8io");
-    			add_location(input, file$6, 629, 12, 18989);
+    			add_location(input, file$6, 629, 12, 18988);
     			attr_dev(div, "class", "mana-requirement svelte-17re8io");
-    			add_location(div, file$6, 621, 10, 18590);
+    			add_location(div, file$6, 621, 10, 18589);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8933,7 +8933,7 @@ var app = (function () {
 
     			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[49] + " mana icon"));
     			attr_dev(img, "class", "mana-icon svelte-17re8io");
-    			add_location(img, file$6, 624, 16, 18719);
+    			add_location(img, file$6, 624, 16, 18718);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -9052,15 +9052,15 @@ var app = (function () {
     			t3 = space();
     			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[46]);
     			attr_dev(label, "class", "svelte-17re8io");
-    			add_location(label, file$6, 645, 12, 19423);
+    			add_location(label, file$6, 645, 12, 19422);
     			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[46]);
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
     			input.value = input_value_value = /*customAttributeRequirements*/ ctx[3][/*attr*/ ctx[46]] || 0;
     			attr_dev(input, "class", "svelte-17re8io");
-    			add_location(input, file$6, 646, 12, 19480);
+    			add_location(input, file$6, 646, 12, 19479);
     			attr_dev(div, "class", "mana-requirement svelte-17re8io");
-    			add_location(div, file$6, 644, 8, 19379);
+    			add_location(div, file$6, 644, 8, 19378);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9134,7 +9134,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$6, 671, 10, 20264);
+    			add_location(button, file$6, 671, 10, 20263);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9192,13 +9192,13 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "This parameter changes the number of samples, or draws, taken for this mana probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. The page might crash and you will have to re-input your lands.";
-    			add_location(b, file$6, 675, 39, 20595);
+    			add_location(b, file$6, 675, 39, 20594);
     			attr_dev(p0, "class", "popover-content svelte-17re8io");
-    			add_location(p0, file$6, 675, 12, 20568);
+    			add_location(p0, file$6, 675, 12, 20567);
     			attr_dev(p1, "class", "popover-content svelte-17re8io");
-    			add_location(p1, file$6, 676, 12, 20649);
+    			add_location(p1, file$6, 676, 12, 20648);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$6, 674, 10, 20534);
+    			add_location(div, file$6, 674, 10, 20533);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9467,63 +9467,63 @@ var app = (function () {
     			t28 = space();
     			create_component(popover2.$$.fragment);
     			attr_dev(h3, "class", "svelte-17re8io");
-    			add_location(h3, file$6, 547, 6, 14511);
+    			add_location(h3, file$6, 547, 6, 14510);
     			attr_dev(div0, "class", "accordion-title svelte-17re8io");
-    			add_location(div0, file$6, 546, 4, 14443);
+    			add_location(div0, file$6, 546, 4, 14442);
     			set_style(p0, "margin-top", "0.5rem");
     			attr_dev(p0, "class", "svelte-17re8io");
-    			add_location(p0, file$6, 555, 6, 14771);
-    			add_location(strong0, file$6, 570, 37, 15962);
+    			add_location(p0, file$6, 555, 6, 14770);
+    			add_location(strong0, file$6, 570, 37, 15961);
     			set_style(p1, "margin-top", "0.5rem");
     			attr_dev(p1, "class", "svelte-17re8io");
-    			add_location(p1, file$6, 570, 6, 15931);
+    			add_location(p1, file$6, 570, 6, 15930);
     			attr_dev(div1, "class", "mana-cards-container svelte-17re8io");
-    			add_location(div1, file$6, 571, 6, 16178);
+    			add_location(div1, file$6, 571, 6, 16177);
     			attr_dev(button0, "class", "svelte-17re8io");
-    			add_location(button0, file$6, 580, 6, 16446);
-    			add_location(b, file$6, 581, 39, 16537);
-    			add_location(div2, file$6, 581, 6, 16504);
+    			add_location(button0, file$6, 580, 6, 16445);
+    			add_location(b, file$6, 581, 39, 16536);
+    			add_location(div2, file$6, 581, 6, 16503);
     			attr_dev(div3, "class", "land-group-parameters svelte-17re8io");
-    			add_location(div3, file$6, 579, 6, 16403);
+    			add_location(div3, file$6, 579, 6, 16402);
     			attr_dev(hr0, "class", "secondary-divider svelte-17re8io");
-    			add_location(hr0, file$6, 586, 6, 16634);
+    			add_location(hr0, file$6, 586, 6, 16633);
     			attr_dev(div4, "class", "mana-cards-container svelte-17re8io");
-    			add_location(div4, file$6, 588, 6, 16674);
+    			add_location(div4, file$6, 588, 6, 16673);
     			attr_dev(button1, "class", "svelte-17re8io");
-    			add_location(button1, file$6, 599, 8, 17111);
+    			add_location(button1, file$6, 599, 8, 17110);
     			attr_dev(div5, "class", "land-group-parameters svelte-17re8io");
-    			add_location(div5, file$6, 598, 4, 17066);
+    			add_location(div5, file$6, 598, 4, 17065);
     			attr_dev(hr1, "class", "primary-divider svelte-17re8io");
-    			add_location(hr1, file$6, 612, 9, 18100);
-    			add_location(strong1, file$6, 617, 9, 18186);
+    			add_location(hr1, file$6, 612, 9, 18099);
+    			add_location(strong1, file$6, 617, 9, 18185);
     			attr_dev(p2, "class", "svelte-17re8io");
-    			add_location(p2, file$6, 617, 6, 18183);
+    			add_location(p2, file$6, 617, 6, 18182);
     			attr_dev(div6, "class", "mana-requirements-container svelte-17re8io");
-    			add_location(div6, file$6, 618, 6, 18360);
+    			add_location(div6, file$6, 618, 6, 18359);
     			attr_dev(button2, "class", "primary-btn svelte-17re8io");
     			button2.disabled = button2_disabled_value = !/*enableSimulationButton*/ ctx[10];
-    			add_location(button2, file$6, 666, 8, 19863);
+    			add_location(button2, file$6, 666, 8, 19862);
     			attr_dev(label, "for", "iterations");
     			attr_dev(label, "class", "svelte-17re8io");
-    			add_location(label, file$6, 668, 8, 20027);
+    			add_location(label, file$6, 668, 8, 20026);
     			set_style(input, "width", "90px");
     			attr_dev(input, "id", "iterations");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "1");
     			attr_dev(input, "class", "svelte-17re8io");
-    			add_location(input, file$6, 669, 8, 20101);
+    			add_location(input, file$6, 669, 8, 20100);
     			attr_dev(div7, "class", "mana-requirement svelte-17re8io");
-    			add_location(div7, file$6, 667, 8, 19987);
+    			add_location(div7, file$6, 667, 8, 19986);
     			attr_dev(div8, "class", "land-group-parameters svelte-17re8io");
-    			add_location(div8, file$6, 665, 6, 19818);
+    			add_location(div8, file$6, 665, 6, 19817);
     			attr_dev(div9, "class", "answer svelte-17re8io");
     			set_style(div9, "height", /*openItem*/ ctx[5] === 0 ? 'auto' : '0');
-    			add_location(div9, file$6, 549, 4, 14584);
+    			add_location(div9, file$6, 549, 4, 14583);
     			attr_dev(div10, "tabindex", "0");
     			attr_dev(div10, "class", "accordion-item svelte-17re8io");
-    			add_location(div10, file$6, 541, 2, 14329);
+    			add_location(div10, file$6, 541, 2, 14328);
     			attr_dev(div11, "class", "accordion svelte-17re8io");
-    			add_location(div11, file$6, 538, 0, 14183);
+    			add_location(div11, file$6, 538, 0, 14182);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9871,7 +9871,7 @@ var app = (function () {
     		ANY: 0
     	}; // Initialize mana requirements
 
-    	let iterations = 10000; // Default number of iterations
+    	let iterations = 8000; // Default number of iterations
     	let customAttributeRequirements = {}; // New variable for custom attributes
     	let uniqueAttributes = new Set();
     	let activeManaTypes = {};
@@ -29133,7 +29133,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (744:28) {#each Array(card.stackedCards || 0).reverse() as _, i}
+    // (824:28) {#each Array(card.stackedCards || 0).reverse() as _, i}
     function create_each_block_2(ctx) {
     	let div;
 
@@ -29144,7 +29144,7 @@ var app = (function () {
     			set_style(div, "left", /*i*/ ctx[34] * 4 + "px");
     			set_style(div, "z-index", -(/*i*/ ctx[34] + 1));
     			set_style(div, "background-color", /*card*/ ctx[30].color);
-    			add_location(div, file$4, 744, 28, 29873);
+    			add_location(div, file$4, 824, 28, 34113);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29163,14 +29163,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(744:28) {#each Array(card.stackedCards || 0).reverse() as _, i}",
+    		source: "(824:28) {#each Array(card.stackedCards || 0).reverse() as _, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (735:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
+    // (815:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
     function create_each_block_1(ctx) {
     	let div6;
     	let div3;
@@ -29223,21 +29223,21 @@ var app = (function () {
     			t5 = text(t5_value);
     			t6 = space();
     			attr_dev(div0, "class", "probability svelte-8vnq7q");
-    			add_location(div0, file$4, 738, 32, 29469);
+    			add_location(div0, file$4, 818, 32, 33709);
     			attr_dev(div1, "class", "card-ratio svelte-8vnq7q");
-    			add_location(div1, file$4, 739, 32, 29591);
+    			add_location(div1, file$4, 819, 32, 33831);
     			attr_dev(div2, "class", "card-details svelte-8vnq7q");
-    			add_location(div2, file$4, 737, 28, 29409);
+    			add_location(div2, file$4, 817, 28, 33649);
     			attr_dev(div3, "class", "rectangle svelte-8vnq7q");
     			set_style(div3, "background-color", /*card*/ ctx[30].color);
-    			add_location(div3, file$4, 736, 24, 29316);
+    			add_location(div3, file$4, 816, 24, 33556);
     			attr_dev(div4, "class", "stacked-cards svelte-8vnq7q");
-    			add_location(div4, file$4, 742, 24, 29731);
+    			add_location(div4, file$4, 822, 24, 33971);
     			attr_dev(div5, "class", "card-label svelte-8vnq7q");
-    			add_location(div5, file$4, 747, 24, 30078);
+    			add_location(div5, file$4, 827, 24, 34318);
     			attr_dev(div6, "class", "card-container svelte-8vnq7q");
     			set_style(div6, "margin-right", 7 + (/*card*/ ctx[30].stackedCards || 0) * 4 + "px");
-    			add_location(div6, file$4, 735, 20, 29202);
+    			add_location(div6, file$4, 815, 20, 33442);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -29313,14 +29313,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(735:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}",
+    		source: "(815:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (728:8) {#each generateTurnsArray(numberOfTurns) as _, turn}
+    // (808:8) {#each generateTurnsArray(numberOfTurns) as _, turn}
     function create_each_block$1(ctx) {
     	let div2;
     	let div0;
@@ -29370,15 +29370,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 730, 32, 28924);
+    			add_location(br, file$4, 810, 32, 33164);
     			attr_dev(i, "class", "svelte-8vnq7q");
-    			add_location(i, file$4, 731, 20, 28950);
+    			add_location(i, file$4, 811, 20, 33190);
     			attr_dev(div0, "class", "turn-label svelte-8vnq7q");
-    			add_location(div0, file$4, 729, 16, 28866);
+    			add_location(div0, file$4, 809, 16, 33106);
     			attr_dev(div1, "class", "card-rectangles svelte-8vnq7q");
-    			add_location(div1, file$4, 733, 16, 29052);
+    			add_location(div1, file$4, 813, 16, 33292);
     			attr_dev(div2, "class", "turn-row svelte-8vnq7q");
-    			add_location(div2, file$4, 728, 12, 28826);
+    			add_location(div2, file$4, 808, 12, 33066);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -29442,7 +29442,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(728:8) {#each generateTurnsArray(numberOfTurns) as _, turn}",
+    		source: "(808:8) {#each generateTurnsArray(numberOfTurns) as _, turn}",
     		ctx
     	});
 
@@ -29486,18 +29486,18 @@ var app = (function () {
     			t4 = space();
     			input = element("input");
     			set_style(h2, "text-align", "center");
-    			add_location(h2, file$4, 725, 4, 28666);
+    			add_location(h2, file$4, 805, 4, 32906);
     			attr_dev(div0, "class", "output-diagram svelte-8vnq7q");
-    			add_location(div0, file$4, 726, 4, 28722);
+    			add_location(div0, file$4, 806, 4, 32962);
     			attr_dev(label, "for", "deckSize");
     			attr_dev(label, "class", "svelte-8vnq7q");
-    			add_location(label, file$4, 756, 8, 30301);
+    			add_location(label, file$4, 836, 8, 34541);
     			attr_dev(input, "type", "number");
     			attr_dev(input, "class", "deckSize svelte-8vnq7q");
     			attr_dev(input, "min", "1");
-    			add_location(input, file$4, 757, 8, 30357);
+    			add_location(input, file$4, 837, 8, 34597);
     			attr_dev(div1, "class", "deck-size-container svelte-8vnq7q");
-    			add_location(div1, file$4, 755, 4, 30258);
+    			add_location(div1, file$4, 835, 4, 34498);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29982,7 +29982,65 @@ var app = (function () {
     	//         });
     	//     });
     	// }
-    	//THIS ALL WORKED! BUT INEFFIEICENT
+    	//monteCarloSimulation before trying to batch sim to increase efficiency
+    	//     function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
+    	//     return new Promise((resolve, reject) => {
+    	//         const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+    	//         const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
+    	//         const numDummyCards = Math.max(deckSize - totalLands, 0);
+    	//         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
+    	//         let iteration = 0;
+    	//         function runIteration() {
+    	//             if ($cancelSimulation) {
+    	//                 reject(new Error("Simulation canceled by user"));
+    	//                 return;
+    	//             }
+    	//             if (iteration >= numIterations) {
+    	//                 // Set Monte Carlo results in the dedicated store right before resolving the promise
+    	//                 monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+    	//                 resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+    	//                 return;
+    	//             }
+    	//             // Update the progress of the simulation
+    	//             simulationProgress.set((iteration / numIterations) * 100);
+    	//             let hand = [];
+    	//             let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
+    	//             let metRequirementTurn = -1; // Track when requirements are met
+    	//             // Handle mulligans for turn 0
+    	//             for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+    	//                 hand = _.sampleSize(remainingDeck, initialDrawSize);
+    	//                 remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
+    	//                 if (handMeetsRequirements(hand, preparedCombinations)) {
+    	//                     probabilitiesByTurn[0]++;
+    	//                     metRequirementTurn = 0;
+    	//                     break;
+    	//                 }
+    	//             }
+    	//             // Simulate drawing for subsequent turns if requirements not met in mulligans
+    	//             if (metRequirementTurn == -1) {
+    	//                 for (let turn = 1; turn <= numberOfTurns; turn++) {
+    	//                     const newCard = _.sample(remainingDeck);
+    	//                     hand.push(newCard);
+    	//                     remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
+    	//                     if (handMeetsRequirements(hand, preparedCombinations)) {
+    	//                         probabilitiesByTurn[turn]++;
+    	//                         metRequirementTurn = turn;
+    	//                         break; // Stop further drawings for this iteration
+    	//                     }
+    	//                 }
+    	//             }
+    	//             // Mark all subsequent turns as meeting requirements once the requirement is met
+    	//             if (metRequirementTurn != -1) {
+    	//                 for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
+    	//                     probabilitiesByTurn[turn]++;
+    	//                 }
+    	//             }
+    	//             iteration++;
+    	//             setTimeout(runIteration, 0); // Schedule the next iteration
+    	//         }
+    	//         runIteration(); // Start the first iteration
+    	//     });
+    	// }
     	function monteCarloSimulation(
     		preparedCombinations,
     	landGroupSizes,
@@ -29998,6 +30056,7 @@ var app = (function () {
     				const numDummyCards = Math.max(deckSize - totalLands, 0);
     				const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
     				let iteration = 0;
+    				let batchSize = 4; // Number of iterations to process in each batch
 
     				function runIteration() {
     					if ($cancelSimulation) {
@@ -30005,57 +30064,62 @@ var app = (function () {
     						return;
     					}
 
-    					if (iteration >= numIterations) {
-    						// Set Monte Carlo results in the dedicated store right before resolving the promise
-    						monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+    					let batchCounter = 0;
 
-    						resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
-    						return;
+    					while (batchCounter < batchSize && iteration < numIterations) {
+    						let hand = [];
+    						let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
+    						let metRequirementTurn = -1; // Track when requirements are met
+
+    						// Handle mulligans for turn 0
+    						for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+    							hand = _.sampleSize(remainingDeck, initialDrawSize);
+    							remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
+
+    							if (handMeetsRequirements(hand, preparedCombinations)) {
+    								probabilitiesByTurn[0]++;
+    								metRequirementTurn = 0;
+    								break;
+    							}
+    						}
+
+    						// Simulate drawing for subsequent turns if requirements not met in mulligans
+    						if (metRequirementTurn == -1) {
+    							for (let turn = 1; turn <= numberOfTurns; turn++) {
+    								const newCard = _.sample(remainingDeck);
+    								hand.push(newCard);
+    								remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
+
+    								if (handMeetsRequirements(hand, preparedCombinations)) {
+    									probabilitiesByTurn[turn]++;
+    									metRequirementTurn = turn;
+    									break; // Stop further drawings for this iteration
+    								}
+    							}
+    						}
+
+    						// Mark all subsequent turns as meeting requirements once the requirement is met
+    						if (metRequirementTurn != -1) {
+    							for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
+    								probabilitiesByTurn[turn]++;
+    							}
+    						}
+
+    						iteration++;
+    						batchCounter++;
     					}
 
     					// Update the progress of the simulation
     					simulationProgress.set(iteration / numIterations * 100);
 
-    					let hand = [];
-    					let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
-    					let metRequirementTurn = -1; // Track when requirements are met
+    					if (iteration < numIterations) {
+    						setTimeout(runIteration, 0); // Schedule the next batch
+    					} else {
+    						// Set Monte Carlo results in the dedicated store right before resolving the promise
+    						monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
 
-    					// Handle mulligans for turn 0
-    					for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
-    						hand = _.sampleSize(remainingDeck, initialDrawSize);
-    						remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
-
-    						if (handMeetsRequirements(hand, preparedCombinations)) {
-    							probabilitiesByTurn[0]++;
-    							metRequirementTurn = 0;
-    							break;
-    						}
+    						resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
     					}
-
-    					// Simulate drawing for subsequent turns if requirements not met in mulligans
-    					if (metRequirementTurn == -1) {
-    						for (let turn = 1; turn <= numberOfTurns; turn++) {
-    							const newCard = _.sample(remainingDeck);
-    							hand.push(newCard);
-    							remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
-
-    							if (handMeetsRequirements(hand, preparedCombinations)) {
-    								probabilitiesByTurn[turn]++;
-    								metRequirementTurn = turn;
-    								break; // Stop further drawings for this iteration
-    							}
-    						}
-    					}
-
-    					// Mark all subsequent turns as meeting requirements once the requirement is met
-    					if (metRequirementTurn != -1) {
-    						for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
-    							probabilitiesByTurn[turn]++;
-    						}
-    					}
-
-    					iteration++;
-    					setTimeout(runIteration, 0); // Schedule the next iteration
     				}
 
     				runIteration(); // Start the first iteration
@@ -30102,16 +30166,23 @@ var app = (function () {
     	async function runSimulation() {
     		simulationRun.set(true); // Enable the modal
     		cancelSimulation.set(false); // Ensure cancellation flag is reset before starting
-    		const numIterations = $simulationData.iterations || 10000;
 
-    		try {
-    			await identifyProfiles(numIterations);
-    		} catch(error) {
-    			console.error(error); // Handle the error if simulation was canceled
-    		}
+    		// Use setTimeout to defer the simulation start until after the UI has updated
+    		setTimeout(
+    			async () => {
+    				const numIterations = $simulationData.iterations || 8000;
 
-    		simulationRun.set(false); // Disable the modal once complete
-    		cancelSimulation.set(false); // Reset cancellation state
+    				try {
+    					await identifyProfiles(numIterations);
+    				} catch(error) {
+    					console.error("Simulation was canceled or an error occurred:", error);
+    				} finally {
+    					simulationRun.set(false); // Disable the modal once complete
+    					cancelSimulation.set(false); // Reset cancellation state
+    				}
+    			},
+    			0
+    		); // Timeout set to 0 to push to end of execution queue
     	}
 
     	//------------------------------------------------------------
@@ -30126,13 +30197,14 @@ var app = (function () {
     		// Check and use Monte Carlo results if available
     		if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
     			let turnTotalProbability = parseFloat($monteCarloResults[turn]);
+    			let stackedCardsCount = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Calculate how many cards are in the stack minus the top one
 
     			cards.push({
     				probability: turnTotalProbability,
     				label: 'Custom',
     				color: '#fff', // Distinct color to differentiate it
     				ratioText: convertPercentToRatio(turnTotalProbability),
-    				stackedCards: 0, // Assuming no stacking for simulation results
+    				stackedCards: Math.max(stackedCardsCount, 0), // Ensure non-negative
     				
     			});
     		} else if ($simulationRun) {
@@ -30339,7 +30411,7 @@ var app = (function () {
     			{
     				preparedCards = $simulationData.preparedCards;
     				manaRequirements = $simulationData.manaRequirements;
-    				$simulationData.iterations || 10000; // Default to 10000 if undefined
+    				$simulationData.iterations || 8000; // Default to 10000 if undefined
     			}
     		}
 
@@ -31096,10 +31168,13 @@ var app = (function () {
     	let div0;
     	let h2;
     	let t1;
-    	let progress;
-    	let t2;
+    	let p;
+    	let i;
     	let t3;
+    	let progress;
     	let t4;
+    	let t5;
+    	let t6;
     	let button;
     	let mounted;
     	let dispose;
@@ -31111,23 +31186,29 @@ var app = (function () {
     			h2 = element("h2");
     			h2.textContent = "Simulation in Progress...";
     			t1 = space();
+    			p = element("p");
+    			i = element("i");
+    			i.textContent = "If it's taking too long, cancel and decrease the \"iteration\" value. This will also reduce accuracy.";
+    			t3 = space();
     			progress = element("progress");
-    			t2 = text(/*$simulationProgress*/ ctx[1]);
-    			t3 = text("%");
-    			t4 = space();
+    			t4 = text(/*$simulationProgress*/ ctx[1]);
+    			t5 = text("%");
+    			t6 = space();
     			button = element("button");
     			button.textContent = "Cancel Simulation";
-    			attr_dev(h2, "class", "svelte-86ezjf");
+    			attr_dev(h2, "class", "svelte-q5bu08");
     			add_location(h2, file$1, 16, 8, 305);
+    			add_location(i, file$1, 17, 11, 352);
+    			add_location(p, file$1, 17, 8, 349);
     			progress.value = /*$simulationProgress*/ ctx[1];
     			attr_dev(progress, "max", "100");
-    			attr_dev(progress, "class", "svelte-86ezjf");
-    			add_location(progress, file$1, 17, 8, 349);
-    			attr_dev(button, "class", "svelte-86ezjf");
-    			add_location(button, file$1, 18, 8, 444);
-    			attr_dev(div0, "class", "modal-content svelte-86ezjf");
+    			attr_dev(progress, "class", "svelte-q5bu08");
+    			add_location(progress, file$1, 18, 8, 472);
+    			attr_dev(button, "class", "svelte-q5bu08");
+    			add_location(button, file$1, 19, 8, 567);
+    			attr_dev(div0, "class", "modal-content svelte-q5bu08");
     			add_location(div0, file$1, 15, 4, 268);
-    			attr_dev(div1, "class", "modal svelte-86ezjf");
+    			attr_dev(div1, "class", "modal svelte-q5bu08");
     			add_location(div1, file$1, 14, 0, 243);
     		},
     		m: function mount(target, anchor) {
@@ -31135,10 +31216,13 @@ var app = (function () {
     			append_dev(div1, div0);
     			append_dev(div0, h2);
     			append_dev(div0, t1);
+    			append_dev(div0, p);
+    			append_dev(p, i);
+    			append_dev(div0, t3);
     			append_dev(div0, progress);
-    			append_dev(progress, t2);
-    			append_dev(progress, t3);
-    			append_dev(div0, t4);
+    			append_dev(progress, t4);
+    			append_dev(progress, t5);
+    			append_dev(div0, t6);
     			append_dev(div0, button);
 
     			if (!mounted) {
@@ -31147,7 +31231,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$simulationProgress*/ 2) set_data_dev(t2, /*$simulationProgress*/ ctx[1]);
+    			if (dirty & /*$simulationProgress*/ 2) set_data_dev(t4, /*$simulationProgress*/ ctx[1]);
 
     			if (dirty & /*$simulationProgress*/ 2) {
     				prop_dev(progress, "value", /*$simulationProgress*/ ctx[1]);

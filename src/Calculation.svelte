@@ -391,8 +391,81 @@
     
     
     
-    //THIS ALL WORKED! BUT INEFFIEICENT
+    //monteCarloSimulation before trying to batch sim to increase efficiency
     
+//     function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
+//     return new Promise((resolve, reject) => {
+//         const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+//         const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
+//         const numDummyCards = Math.max(deckSize - totalLands, 0);
+//         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
+//         let iteration = 0;
+
+
+//         function runIteration() {
+           
+//             if ($cancelSimulation) {
+//                 reject(new Error("Simulation canceled by user"));
+//                 return;
+//             }
+           
+           
+//             if (iteration >= numIterations) {
+//                 // Set Monte Carlo results in the dedicated store right before resolving the promise
+//                 monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+//                 resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+//                 return;
+//             }
+
+
+//             // Update the progress of the simulation
+//             simulationProgress.set((iteration / numIterations) * 100);
+             
+//             let hand = [];
+//             let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
+//             let metRequirementTurn = -1; // Track when requirements are met
+
+//             // Handle mulligans for turn 0
+//             for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+//                 hand = _.sampleSize(remainingDeck, initialDrawSize);
+//                 remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
+//                 if (handMeetsRequirements(hand, preparedCombinations)) {
+//                     probabilitiesByTurn[0]++;
+//                     metRequirementTurn = 0;
+//                     break;
+//                 }
+//             }
+
+//             // Simulate drawing for subsequent turns if requirements not met in mulligans
+//             if (metRequirementTurn == -1) {
+//                 for (let turn = 1; turn <= numberOfTurns; turn++) {
+//                     const newCard = _.sample(remainingDeck);
+//                     hand.push(newCard);
+//                     remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
+
+//                     if (handMeetsRequirements(hand, preparedCombinations)) {
+//                         probabilitiesByTurn[turn]++;
+//                         metRequirementTurn = turn;
+//                         break; // Stop further drawings for this iteration
+//                     }
+//                 }
+//             }
+
+//             // Mark all subsequent turns as meeting requirements once the requirement is met
+//             if (metRequirementTurn != -1) {
+//                 for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
+//                     probabilitiesByTurn[turn]++;
+//                 }
+//             }
+
+//             iteration++;
+//             setTimeout(runIteration, 0); // Schedule the next iteration
+//         }
+
+//         runIteration(); // Start the first iteration
+//     });
+// }
+
     function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
     return new Promise((resolve, reject) => {
         const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
@@ -400,73 +473,73 @@
         const numDummyCards = Math.max(deckSize - totalLands, 0);
         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
         let iteration = 0;
-
+        let batchSize = 4; // Number of iterations to process in each batch
 
         function runIteration() {
-           
             if ($cancelSimulation) {
                 reject(new Error("Simulation canceled by user"));
                 return;
             }
-           
-           
-            if (iteration >= numIterations) {
-                // Set Monte Carlo results in the dedicated store right before resolving the promise
-                monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
-                resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
-                return;
-            }
 
+            let batchCounter = 0;
+            while (batchCounter < batchSize && iteration < numIterations) {
+                let hand = [];
+                let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
+                let metRequirementTurn = -1; // Track when requirements are met
+
+                // Handle mulligans for turn 0
+                for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
+                    hand = _.sampleSize(remainingDeck, initialDrawSize);
+                    remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
+                    if (handMeetsRequirements(hand, preparedCombinations)) {
+                        probabilitiesByTurn[0]++;
+                        metRequirementTurn = 0;
+                        break;
+                    }
+                }
+
+                // Simulate drawing for subsequent turns if requirements not met in mulligans
+                if (metRequirementTurn == -1) {
+                    for (let turn = 1; turn <= numberOfTurns; turn++) {
+                        const newCard = _.sample(remainingDeck);
+                        hand.push(newCard);
+                        remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
+
+                        if (handMeetsRequirements(hand, preparedCombinations)) {
+                            probabilitiesByTurn[turn]++;
+                            metRequirementTurn = turn;
+                            break; // Stop further drawings for this iteration
+                        }
+                    }
+                }
+
+                // Mark all subsequent turns as meeting requirements once the requirement is met
+                if (metRequirementTurn != -1) {
+                    for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
+                        probabilitiesByTurn[turn]++;
+                    }
+                }
+
+                iteration++;
+                batchCounter++;
+            }
 
             // Update the progress of the simulation
             simulationProgress.set((iteration / numIterations) * 100);
-             
-            let hand = [];
-            let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
-            let metRequirementTurn = -1; // Track when requirements are met
 
-            // Handle mulligans for turn 0
-            for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
-                hand = _.sampleSize(remainingDeck, initialDrawSize);
-                remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
-                if (handMeetsRequirements(hand, preparedCombinations)) {
-                    probabilitiesByTurn[0]++;
-                    metRequirementTurn = 0;
-                    break;
-                }
+            if (iteration < numIterations) {
+                setTimeout(runIteration, 0); // Schedule the next batch
+            } else {
+                // Set Monte Carlo results in the dedicated store right before resolving the promise
+                monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+                resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
             }
-
-            // Simulate drawing for subsequent turns if requirements not met in mulligans
-            if (metRequirementTurn == -1) {
-                for (let turn = 1; turn <= numberOfTurns; turn++) {
-                    const newCard = _.sample(remainingDeck);
-                    hand.push(newCard);
-                    remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
-
-                    if (handMeetsRequirements(hand, preparedCombinations)) {
-                        probabilitiesByTurn[turn]++;
-                        metRequirementTurn = turn;
-                        break; // Stop further drawings for this iteration
-                    }
-                }
-            }
-
-            // Mark all subsequent turns as meeting requirements once the requirement is met
-            if (metRequirementTurn != -1) {
-                for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
-                    probabilitiesByTurn[turn]++;
-                }
-            }
-
-            iteration++;
-            setTimeout(runIteration, 0); // Schedule the next iteration
         }
 
         runIteration(); // Start the first iteration
     });
 }
 
-    
     
     
     function removeDrawnCardsFromDeck(deck, drawnCards) {
@@ -560,7 +633,7 @@ async function identifyProfiles(numIterations) {
     $: {
         preparedCards = $simulationData.preparedCards;
         manaRequirements = $simulationData.manaRequirements;
-        const numIterations = $simulationData.iterations || 10000; // Default to 10000 if undefined
+        const numIterations = $simulationData.iterations || 8000; // Default to 10000 if undefined
     }
     
     $: if ($simulationData && $simulationData.preparedCards.length > 0 && Object.values($simulationData.manaRequirements).some(value => value > 0)) {
@@ -572,15 +645,21 @@ async function identifyProfiles(numIterations) {
     async function runSimulation() {
     simulationRun.set(true);  // Enable the modal
     cancelSimulation.set(false); // Ensure cancellation flag is reset before starting
-    const numIterations = $simulationData.iterations || 10000;
-    try {
-        await identifyProfiles(numIterations);
-    } catch (error) {
-        console.error(error); // Handle the error if simulation was canceled
-    }
-    simulationRun.set(false); // Disable the modal once complete
-    cancelSimulation.set(false); // Reset cancellation state
+
+    // Use setTimeout to defer the simulation start until after the UI has updated
+    setTimeout(async () => {
+        const numIterations = $simulationData.iterations || 8000;
+        try {
+            await identifyProfiles(numIterations);
+        } catch (error) {
+            console.error("Simulation was canceled or an error occurred:", error);
+        } finally {
+            simulationRun.set(false); // Disable the modal once complete
+            cancelSimulation.set(false); // Reset cancellation state
+        }
+    }, 0); // Timeout set to 0 to push to end of execution queue
 }
+
 
 
 
@@ -600,12 +679,13 @@ async function identifyProfiles(numIterations) {
     // Check and use Monte Carlo results if available
     if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
         let turnTotalProbability = parseFloat($monteCarloResults[turn]);
+        let stackedCardsCount = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Calculate how many cards are in the stack minus the top one
         cards.push({
             probability: turnTotalProbability,
             label: 'Custom',
             color: '#fff',  // Distinct color to differentiate it
             ratioText: convertPercentToRatio(turnTotalProbability),
-            stackedCards: 0 // Assuming no stacking for simulation results
+            stackedCards: Math.max(stackedCardsCount, 0)  // Ensure non-negative
         });
     } else if ($simulationRun) {
         // Fallback to current probabilities if Monte Carlo results are not available

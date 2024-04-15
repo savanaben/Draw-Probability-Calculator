@@ -15,6 +15,7 @@
 <div class="modal">
     <div class="modal-content">
         <h2>Simulation in Progress...</h2>
+        <p><i>If it's taking too long, cancel and decrease the "iteration" value. This will also reduce accuracy.</i></p>
         <progress value="{$simulationProgress}" max="100"> {$simulationProgress}% </progress>
         <button on:click={handleCancel}>Cancel Simulation</button>
     </div>
@@ -40,6 +41,8 @@
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        max-width: 30rem;
+        margin: 1rem;
     }
 
     progress {
