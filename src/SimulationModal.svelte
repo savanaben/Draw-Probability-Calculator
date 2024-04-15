@@ -15,7 +15,8 @@
 <div class="modal">
     <div class="modal-content">
         <h2>Simulation in Progress...</h2>
-        <p><i>If it's taking too long, cancel and decrease the "iteration" value. This will also reduce accuracy.</i></p>
+        <p><i>Simulations with large amounts of cards or desired cards can be slower to start.</i></p>
+        <p><i>If it's taking too long, you can try decreasing the "iteration" value. This will reduce probability accuracy.</i></p>
         <progress value="{$simulationProgress}" max="100"> {$simulationProgress}% </progress>
         <button on:click={handleCancel}>Cancel Simulation</button>
     </div>

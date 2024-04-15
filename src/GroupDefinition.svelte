@@ -83,8 +83,8 @@
                         </div>
                     </Popover>
                 </th>
-                <th># Cards in category</th>
-                <th>Minimum # desired cards
+                <th style="width: 18%;"># Cards in category</th>
+                <th style="width: 25%;">Minimum # desired cards
                     <Popover bind:show={showPopover} placement="top">
                         <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
@@ -161,7 +161,7 @@
             {/each}
             <tr>
                 <td colspan="5"> <!-- Span across all columns -->
-                    <button style="margin-bottom: .5rem;" on:click={addGroup}>Add category</button>
+                    <button on:click={addGroup}>Add category</button>
                 </td>
             </tr>
         </tbody>
@@ -222,6 +222,8 @@
     max-width: 100%; /* Ensures the wrapper does not exceed the parent width */
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: #888 #e0e0e0; /* For Firefox */
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
     
 .table-wrapper::-webkit-scrollbar {
@@ -260,7 +262,7 @@
 
 
     input {
-        width: 95%;
+        width: 100%;
         padding: 6px;
         margin: 0px;
         min-width: 45px;
@@ -329,6 +331,9 @@ max-width: 65px;
         padding: 6px 8px 6px 8px;
     }
 
+    .remove-button {
+       width: 35px;
+    }
 .moreInfo {
     border-radius: 40px;
     border-style: none;

@@ -473,7 +473,23 @@
         const numDummyCards = Math.max(deckSize - totalLands, 0);
         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
         let iteration = 0;
-        let batchSize = 4; // Number of iterations to process in each batch
+        
+        // Calculate the total mana needed to determine the batch size. this
+        // improves performance 
+
+        const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+        let batchSize;
+        if (totalManaNeeded <= 2) {
+            batchSize = 50;
+        } else if (totalManaNeeded === 3) {
+            batchSize = 30;
+        } else if (totalManaNeeded === 4) {
+            batchSize = 10;
+        } else if (totalManaNeeded === 5) {
+            batchSize = 3;
+        } else {
+            batchSize = 1;
+        }
 
         function runIteration() {
             if ($cancelSimulation) {
@@ -656,6 +672,7 @@ async function identifyProfiles(numIterations) {
         } finally {
             simulationRun.set(false); // Disable the modal once complete
             cancelSimulation.set(false); // Reset cancellation state
+            simulationProgress.set(0); // Reset progress to 0 after finishing the simulation
         }
     }, 0); // Timeout set to 0 to push to end of execution queue
 }

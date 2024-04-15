@@ -503,6 +503,21 @@ function logPreparedCards() {
         padding: 6px 8px 6px 8px;
     }
 
+.semi-bold {
+  font-weight: 500;
+}
+
+.popover-content:first-child {
+  margin-top: 0;
+}
+
+.popover-text-fixer {
+  margin-bottom: 1rem;
+}
+
+.popover-content:last-child {
+  margin-bottom: 0;
+}
 
     .primary-btn {
         margin: 0;
@@ -553,14 +568,15 @@ function logPreparedCards() {
       style:height="{openItem === 0 ? 'auto' : '0'}"
     >
       <!-- Mana Cards and Add Button -->
-      <p style="margin-top: 0.5rem;">This section applies a different method of calculation that enables you to consider card attributes, like mana and abilities. The probabilities from this section do not take into account cards from the above section. To learn more, click the info button ->       
+      <p style="margin-top: 0.5rem;">This section applies a different method of calculation that enables you to consider card attributes, like mana and abilities. <span class="semi-bold">Probabilities from this section do not take into account cards from the above section.</span> To learn more, click the info button ->       
         <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
           <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
         </button>
         <div slot="content">
-          <p class="popover-content">In edh categories can be thought of as the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
-          <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
+          <p class="popover-content popover-text-fixer">This section uses a <a href='https://en.wikipedia.org/wiki/Monte_Carlo_method' target='_blank'>Monte Carlo simulation</a> method, which basically means we draw a theoretical deck thousands of times to estimate the probability of getting certain cards. This method is better suited for mana probabilities (compared to the top <a href='https://en.wikipedia.org/wiki/Hypergeometric_distribution' target='_blank'>hypergeometric</a> part of this tool) because it can take into account cards with multiple attributes (such as a land producing an island or a plains). This is done with a two-step process. 
+            <p class="popover-content popover-text-fixer">First, we calculate all of the possible combinations of cards that can achieve your desired results. Then, the simulation draws the deck thousands of times, checking if any combination is achieved across each turn.</p>
+          <p class="popover-content popover-text-fixer">My research has only come up with one other method to find this kind of probability - the inclusion exclusion principle. And that seemed hella hard to implement, so I went with this.</p>
         </div>
       </Popover>
     </p>
@@ -603,8 +619,8 @@ function logPreparedCards() {
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">
-            <p class="popover-content">In edh categories can be thought of as the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
-            <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
+            <p class="popover-content popover-text-fixer">A custom group allows you to mix in other cards with your mana-producing cards above, or just use this simulation in a sandbox way. For example, maybe you have some cards in your deck that have overlapping or multiple abilities, and you want to find the probability you'll draw a certain combination.</p>
+            <p class="popover-content popover-text-fixer">You can select that you want a certain amount of cards from a group, as well as certain amount of cards that include some attribute.</p>
           </div>
         </Popover>
     </div>
@@ -673,8 +689,8 @@ function logPreparedCards() {
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">
-            <p class="popover-content"><b>Caution - may crash your browser!</p>
-            <p class="popover-content">This parameter changes the number of samples, or draws, taken for this mana probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. The page might crash and you will have to re-input your lands.</p>
+            <p class="popover-content popover-text-fixer"><b>Caution - may crash your browser!</p>
+            <p class="popover-content popover-text-fixer">This parameter changes the number of samples, or draws, taken for this mana probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. The page might crash and you will have to re-input your lands.</p>
           </div>
         </Popover>
 

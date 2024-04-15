@@ -115,6 +115,14 @@ function updateAttribute(index, value) {
         width: 125px;
         box-sizing: border-box;
     }
+    .popover-content:first-child {
+  margin-top: 0;
+}
+
+.popover-content:last-child {
+  margin-bottom: 0;
+}
+
 
     button {
         margin: 0;
@@ -154,8 +162,8 @@ function updateAttribute(index, value) {
               <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
             </button>
             <div slot="content">
-              <p class="popover-content">In edh categories can be thought of as the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
-              <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
+              <p class="popover-content">Attributes allow you to create more custom setups. Think of an attribute like an ability. In land terms, I think of an attribute as a single color that a land can produce. For example, a land that makes islands and plains has two attributes.</p>
+              <p class="popover-content"><b>Limitation</b> - Right now, this simulation can only match one card to one desired attribute/card/mana. Let's say you had a card with two attributes (A and B). If you mark below that you desire attribute A and B, the simulation assumes you want two cards to meet those requirements. There is no way to specify that one card can fulfill multiple requirements (a great feature to add, someday).</p>
             </div>
           </Popover>
     </div>
