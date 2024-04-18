@@ -1,5 +1,5 @@
 <script>
-    import { groupColors } from './colorStore.js';
+    import { groupColors, neededCombinationsCount } from './colorStore.js';
     import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
@@ -484,11 +484,11 @@
         } else if (totalManaNeeded === 3) {
             batchSize = 30;
         } else if (totalManaNeeded === 4) {
-            batchSize = 10;
+            batchSize = 20;
         } else if (totalManaNeeded === 5) {
-            batchSize = 3;
+            batchSize = 20;
         } else {
-            batchSize = 1;
+            batchSize = 20;
         }
 
         function runIteration() {
@@ -612,8 +612,17 @@
 async function identifyProfiles(numIterations) {
     const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
     const neededCombinations = determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);
+   
+    neededCombinationsCount.set(neededCombinations.length);  // Update the store with the count
+
+   
     const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
     const landGroupSizes = calculateLandGroupSizes(preparedCards);
+
+
+    console.log('Prepared combinations:', preparedCombinations); // Ensure this logs after the update
+    console.log('needed combinations:', neededCombinations); // Ensure this logs after the update
+
 
     let rawProbabilities = await monteCarloSimulation(
         preparedCombinations,
@@ -661,6 +670,7 @@ async function identifyProfiles(numIterations) {
     async function runSimulation() {
     simulationRun.set(true);  // Enable the modal
     cancelSimulation.set(false); // Ensure cancellation flag is reset before starting
+    neededCombinationsCount.set(null); // Set the count to a loading placeholder
 
     // Use setTimeout to defer the simulation start until after the UI has updated
     setTimeout(async () => {
@@ -686,10 +696,10 @@ async function identifyProfiles(numIterations) {
     
     //the following makes the cards output
     function createGroupCards(groups, results, probabilitiesByTurn, turn) {
-    console.log("Groups received:", groups);
-    console.log("Results received:", results);
-    console.log("Probabilities by Turn received:", probabilitiesByTurn);
-    console.log("Current turn:", turn);
+    // console.log("Groups received:", groups);
+    // console.log("Results received:", results);
+    // console.log("Probabilities by Turn received:", probabilitiesByTurn);
+    // console.log("Current turn:", turn);
 
     let cards = [];
 
@@ -738,7 +748,7 @@ async function identifyProfiles(numIterations) {
         };   
     }));
 
-    console.log("Cards generated for UI:", cards);
+    //  console.log("Cards generated for UI:", cards);
 
     // Calculate the total number of extra desired cards from hypergeometric groups
     const totalExtraCardsFromGroups = groups.reduce((sum, group) => sum + Math.max(group.cardsToDraw - 1, 0), 0);

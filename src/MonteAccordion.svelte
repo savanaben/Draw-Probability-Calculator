@@ -568,7 +568,7 @@ function logPreparedCards() {
       style:height="{openItem === 0 ? 'auto' : '0'}"
     >
       <!-- Mana Cards and Add Button -->
-      <p style="margin-top: 0.5rem;">This section applies a different method of calculation that enables you to consider card attributes, like mana and abilities. <span class="semi-bold">Probabilities from this section do not take into account cards from the above section.</span> To learn more, click the info button ->       
+      <p style="margin-top: 0.5rem;">This section allows you to consider card attributes, like mana and abilities. <span class="semi-bold">Probabilities from this section do not take into account cards from the above section.</span> To learn more, click the info button ->       
         <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
           <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
@@ -619,8 +619,8 @@ function logPreparedCards() {
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">
-            <p class="popover-content popover-text-fixer">A custom group allows you to mix in other cards with your mana-producing cards above, or just use this simulation in a sandbox way. For example, maybe you have some cards in your deck that have overlapping or multiple abilities, and you want to find the probability you'll draw a certain combination.</p>
-            <p class="popover-content popover-text-fixer">You can select that you want a certain amount of cards from a group, as well as certain amount of cards that include some attribute.</p>
+            <p class="popover-content popover-text-fixer">A custom group allows you to mix in other cards with your mana-producing cards above, or just use this simulation in a sandbox way. For example, maybe you want to find the probability of getting certain colors and a ramp spell. You can also add attributes to custom cards to consider overlap.</p>
+            <p class="popover-content popover-text-fixer">In Step 2, you can select that you want a certain amount of cards from a custom group, as well as certain amount of cards that include some attribute.</p>
           </div>
         </Popover>
     </div>
