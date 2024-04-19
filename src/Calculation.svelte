@@ -8,6 +8,10 @@
     import { writable } from 'svelte/store';
 
     
+    function selectInput(event) {
+    event.target.select(); // Selects all text in the input upon focus
+}
+
     
         // Function to calculate combinations (n choose k)
         function choose(n, k) {
@@ -862,7 +866,9 @@ async function identifyProfiles(numIterations) {
     
     <div class="deck-size-container">
         <label for="deckSize">Number of turns:</label>
-        <input type="number" class="deckSize" bind:value={numberOfTurns} min="1" />
+        <input type="number" class="deckSize" bind:value={numberOfTurns} min="1" 
+        on:focus="{selectInput}"
+        />
     </div>
     
     <style>

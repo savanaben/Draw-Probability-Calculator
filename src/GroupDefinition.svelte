@@ -59,7 +59,9 @@
     }
 
 
-
+    function selectInput(event) {
+    event.target.select(); // Selects all text in the input upon focus
+}
     
 
 </script>
@@ -117,7 +119,9 @@
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="text" 
                             bind:value={group.name} 
-                            placeholder="draw, ramp, removal, etc" />
+                            placeholder="draw, ramp, removal, etc" 
+                            on:focus="{selectInput}"
+                            />
                            
                             <!--
                             {#if index > 0}
@@ -132,7 +136,9 @@
                             type="number" 
                             bind:value={group.size} 
                             min="1" 
-                            max="99" />
+                            max="99" 
+                            on:focus="{selectInput}"
+                            />
                     </td>
                     <td>
                         <input 
@@ -142,7 +148,8 @@
                             bind:value={group.cardsToDraw} 
                             min="1" 
                             max="99" 
-                             />
+                            on:focus="{selectInput}"
+                            />
                     </td>
                     <td>
                         <input 
@@ -200,12 +207,16 @@
 
         <div class="deck-size-container">
             <label for="deckSize">Initial cards drawn:</label>
-            <input type="number" class="deckSize" bind:value={InitialDrawSize} min="1" />
+            <input type="number" class="deckSize" bind:value={InitialDrawSize} min="1" 
+            on:focus="{selectInput}"
+            />
         </div>
 
         <div class="deck-size-container">
             <label for="deckSize">Deck size:</label>
-            <input type="number" class="deckSize" bind:value={deckSize} min="1" />
+            <input type="number" class="deckSize" bind:value={deckSize} min="1" 
+            on:focus="{selectInput}"
+            />
         </div>
 
     </div>
@@ -352,7 +363,10 @@ max-width: 65px;
         margin:0;
         background-color: white;
     }
-
+    option {
+        margin:0;
+        border-radius: 0px;
+    }
 
 
 </style>

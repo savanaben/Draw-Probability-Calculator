@@ -55,6 +55,10 @@ const manaIcons = {
   }
   
 
+  function selectInput(event) {
+    event.target.select(); // Selects all text in the input upon focus
+}
+
   </script>
   
   
@@ -81,13 +85,14 @@ const manaIcons = {
     }
 
 .mana-symbol {
-        width: 20%;
+        width: 29%;
         text-align: center;
         cursor: pointer;
         padding: 2px;
         background-color: white;
         border-radius: 4px;
         border: 2px solid rgb(255, 255, 255); /* Default transparent border */
+        margin: 2px;
     }
 
     .mana-symbol.active {
@@ -151,11 +156,6 @@ width: inherit;
       margin: 0.5em 0 0.5em 0;
     }
   
-    .mana-symbol {
-      width: 23%;
-      text-align: center;
-      margin: 2px;
-    }
   
     .amount-input {
       width: 100%;
@@ -209,15 +209,17 @@ width: inherit;
     </div>
     <div class="mana-symbols">
       {#each Object.keys(manaIcons) as mana}
-      <div class="mana-symbol {card.mana[mana] ? 'active' : ''}" on:click={() => toggleMana(mana)}>
+      <button class="mana-symbol {card.mana[mana] ? 'active' : ''}" on:click={() => toggleMana(mana)} tabindex="0">
         <img src={manaIcons[mana]} alt="{mana} mana icon" class="mana-icon" />
-      </div>
+      </button>
   {/each}
   
     </div>
     <div class="mana-card-header">
         <label for="amount" class="amount-label">Amount:</label>
-        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} />
+        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 
+        on:focus="{selectInput}"
+        />
     </div>
 </div>
 

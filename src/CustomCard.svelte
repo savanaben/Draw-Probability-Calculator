@@ -20,8 +20,11 @@
     }
 
     function addAttribute() {
-    card.attributes = [...card.attributes, `Attribute ${card.attributes.length + 1}`]; // Give a default name to the new attribute
+    const newAttribute = `Attribute ${card.attributes.length + 1}`; // Give a default name to the new attribute
+    card.attributes = [...card.attributes, newAttribute];
+    dispatch('addattribute', { attribute: newAttribute });
 }
+
 
 
 function removeAttribute(index) {
@@ -38,7 +41,9 @@ function updateAttribute(index, value) {
 }
 
 
-
+function selectInput(event) {
+    event.target.select(); // Selects all text in the input upon focus
+}
 
 </script>
 
@@ -142,7 +147,9 @@ function updateAttribute(index, value) {
 
 <div class="custom-card">
     <div class="card-header">
-        <input class="title-input" type="text" placeholder="Title" bind:value={card.title} />
+        <input class="title-input" type="text" placeholder="Title" bind:value={card.title} 
+        on:focus="{selectInput}"
+        />
         <button class="remove-button" on:click={remove}>
             <FontAwesomeIcon icon={faTimes} />
         </button>
@@ -150,7 +157,9 @@ function updateAttribute(index, value) {
     <div class="attributes-section">
         {#each card.attributes as attribute, index}
             <div class="attribute-row">
-                <input type="text" placeholder="Attribute" bind:value={attribute} on:input={e => updateAttribute(index, e.target.value)} />
+                <input type="text" placeholder="Attribute" bind:value={attribute} on:input={e => updateAttribute(index, e.target.value)} 
+                on:focus="{selectInput}"
+                />
                     <button class="remove-attribute-button" on:click={() => removeAttribute(index)}>
                         <FontAwesomeIcon icon={faTimes} />
                     </button>    
@@ -169,7 +178,9 @@ function updateAttribute(index, value) {
     </div>
     <div class="card-footer">
         <label for="amount" class="amount-label">Amount:</label>
-        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} />
+        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 
+        on:focus="{selectInput}"
+        />
     </div>
 </div>
 

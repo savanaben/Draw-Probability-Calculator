@@ -226,12 +226,6 @@ $: {
 
 
 
-
-
-
-
-
-
   // Reactivity for custom attributes
   $: {
       customCards.forEach(card => {
@@ -290,12 +284,25 @@ $: filteredManaRequirements = Object.fromEntries(
 
 function updateCustomAttributeRequirements() {
     const allAttributes = customCards.flatMap(card => card.attributes);
-    const uniqueAttributes = Array.from(new Set(allAttributes));
-    customAttributeRequirements = uniqueAttributes.reduce((acc, attr) => {
-        acc[attr] = customAttributeRequirements[attr] || 0;
-        return acc;
-    }, {});
+    const newRequirements = {};
+
+    // Only add current attributes, initializing them to existing values or 0.
+    allAttributes.forEach(attr => {
+        newRequirements[attr] = customAttributeRequirements[attr] || 0;
+    });
+
+    // By completely replacing the object, we ensure Svelte detects the change.
+    customAttributeRequirements = newRequirements;
+
+    // Optionally, trigger attribute updates if needed (simulate with no changes)
+    allAttributes.forEach(attr => {
+        // This is hypothetical and may need adjustment:
+        handleAttributeUpdate(attr, attr);
+    });
+
+    console.log('Updated customAttributeRequirements:', customAttributeRequirements);
 }
+
 
 
 function handleAttributeUpdate(newAttr, oldAttr, cardId) {
@@ -387,6 +394,19 @@ function logPreparedCards() {
     });
 }
 
+
+function handleInput(key, value) {
+    console.log(`Input event for ${key}:`, value);
+    // Convert input value to number, ensure NaN values are reverted to zero
+    let numberValue = Number(value);
+    manaRequirements[key] = isNaN(numberValue) ? 0 : numberValue;
+}
+
+
+
+function selectInput(event) {
+    event.target.select(); // Selects all text in the input upon focus
+}
 
 </script>
 
@@ -554,12 +574,13 @@ function logPreparedCards() {
 <div class="accordion">
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
    <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div
-    tabindex="0"
-    class="accordion-item"
-    on:keydown={(event) => handleKeydown(event, 0)}
-  >
-    <div class="accordion-title" on:click={() => toggleItem(0)}>
+  <div class="accordion-item">
+    <div class="accordion-title" on:click={() => toggleItem(0)}
+      
+      tabindex="0"
+      on:keydown={(event) => handleKeydown(event, 0)}
+      
+      >
       <h3>Advanced mana and card attribute probabilities</h3>
     </div>
     <div
@@ -609,6 +630,8 @@ function logPreparedCards() {
         on:remove={() => removeCustomCard(card.id)}
         on:removeattribute={({ detail }) => updateCustomAttributeRequirements()}
         on:updateattribute={({ detail }) => handleAttributeUpdate(detail, card.id)}
+        on:addattribute={({ detail }) => updateCustomAttributeRequirements()} 
+
     />          
     {/each}
     </div>
@@ -632,7 +655,7 @@ function logPreparedCards() {
 
       <!-- Mana Requirements Fields -->
       <p><strong>Step 2</strong> - Specify the amount of each mana, card, or attribute you would like. Note that this assumes a separate card for each mana/card/attribute.</p>
-      <div class="mana-requirements-container">
+    <div class="mana-requirements-container">
       {#each Object.entries(manaRequirements) as [key, amount]}
         {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
           <div class="mana-requirement">
@@ -644,12 +667,14 @@ function logPreparedCards() {
               {/if}
             </label>
             <input
-                id="{key}-requirement"
-                type="number"
-                min="0"
-                bind:value={manaRequirements[key]}
-                on:input={() => console.log(`Input event for ${key}:`, manaRequirements[key])}
-            />
+            id="{key}-requirement"
+            type="number"  
+            min="0"
+            value={manaRequirements[key]}
+            on:input={e => handleInput(key, e.target.value)}
+            on:focus="{selectInput}"
+        />
+        
           </div>
         {/if}
       {/each}
@@ -664,26 +689,24 @@ function logPreparedCards() {
                 id="custom-{attr}"
                 type="number"
                 min="0"
-                value={customAttributeRequirements[attr] || 0}
+                value={customAttributeRequirements[attr]}
                 on:input={e => updateCustomAttribute(attr, e.target.value)}
+                on:focus="{selectInput}"
             />
         </div>
     {/each}
+  </div>
     
     
 
 
-
-
-
-    </div>
-    
-    
       <div class="land-group-parameters">
         <button class="primary-btn" on:click={logPreparedCards} disabled={!enableSimulationButton}>Run Simulation</button>
         <div class="mana-requirement">
         <label for="iterations">Simulation iterations (caution):</label>
-        <input style="width: 90px;" id="iterations" type="number" min="1" bind:value={iterations} />
+        <input style="width: 90px;" id="iterations" type="number" min="1" bind:value={iterations} 
+        on:focus="{selectInput}"
+        />
         <Popover bind:show={showPopover} placement="top">
           <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
