@@ -95,6 +95,12 @@ const manaIcons = {
         margin: 2px;
     }
 
+    .mana-symbol:hover {
+      outline-style: solid;
+	outline-color: #b3b3b3;
+	outline-width: 1px;
+    }
+
     .mana-symbol.active {
         border-color: #1b67e1; 
         border-width: 2px;

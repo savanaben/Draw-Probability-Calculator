@@ -61,13 +61,13 @@
 <style>
   .popover-content {
     background-color: white;
-    border: 1px solid #ccc;
+    border: 1px solid #c8c8c8;
     border-radius: 4px;
     padding: 16px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 100;
     font-weight: 400;
-    max-width: 400px;
+    max-width: 450px;
   }
 
   .popover-button-container {

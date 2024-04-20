@@ -129,18 +129,12 @@ function selectInput(event) {
 }
 
 
-    button {
-        margin: 0;
-        color: #0066e9;
-        padding: 6px 8px 6px 8px;
-    }
-
-    .moreInfo {
+    #moreInfo {
+    width: 100%;
     border-radius: 40px;
     border-style: none;
     padding: 0.2em 0.25em 0.15em 0.25em;
     margin: 0;
-    width: 100%;
 }
 
 </style>
@@ -167,7 +161,7 @@ function selectInput(event) {
         {/each}
         <button class="add-attribute-button" on:click={addAttribute}>Add Attribute</button>
         <Popover bind:show={showPopover} placement="top">
-            <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+            <button id ="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
               <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
             </button>
             <div slot="content">

@@ -49,7 +49,7 @@
     }
 
     function addGroup() {
-        groups = [...groups, { index: nextIndex, name: `Category ${nextIndex + 1}`, size: 1, cardsToDraw: 1, link: '' }];
+        groups = [...groups, { index: nextIndex, name: `Group ${nextIndex + 1}`, size: 1, cardsToDraw: 1, link: '' }];
         nextIndex++; // Increment the counter after adding a new group
     }
 
@@ -68,42 +68,42 @@
 
 
 
-<h2 style="text-align: center;">Deck inputs and card categories</h2>
+<h2 style="text-align: center;">Deck inputs and card groups</h2>
 <div class="parameters">
     <div class="table-wrapper">
     <table>
         <thead>
             <tr>
-                <th>Category unique name
+                <th>Group unique name
                     <Popover bind:show={showPopover} placement="top">
                         <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                          <p class="popover-content">In edh categories can be thought of as the group of similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
-                          <p class="popover-content"><b>Each category must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
+                          <p class="popover-content">In edh groups can be thought of as the similar cards you want to find the percent chance of drawing. For example, ramp, lands, interaction, etc. In 60-card formats this might be more focused around individual cards you have 2-4 of in your deck.</p>
+                          <p class="popover-content"><b>Each group must have a unique text name </b> for the tool to work (some day I'll figure out indexing...)</p>
                         </div>
                     </Popover>
                 </th>
-                <th style="width: 18%;"># Cards in category</th>
+                <th style="width: 18%;"># Cards in group</th>
                 <th style="width: 25%;">Minimum # desired cards
                     <Popover bind:show={showPopover} placement="top">
                         <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">Percent change you'll draw <i>at least</i> this many cards from this category.</p>
+                            <p class="popover-content">Percent change you'll draw <i>at least</i> this many cards from this group.</p>
                         </div>
                     </Popover>
                 </th>
-                <th>Linked categories
+                <th>Linked groups
                     <Popover bind:show={showPopover} placement="top">
                         <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">When categories have the same link name, the tool displays the percent chance of getting at least the minimum number of desired cards in <i>each</i> linked category.</p>
-                            <p class="popover-content"><b>Categories must have the exact same link name (keyword match). The tool does not support linking more than 4 categories together currently.</b></p>
+                            <p class="popover-content">When groups have the same link name, the tool displays the percent chance of getting at least the minimum number of desired cards in <i>each</i> linked group.</p>
+                            <p class="popover-content"><b>Groups must have the exact same link name (keyword match). The tool does not support linking more than 4 groups together currently.</b></p>
                         </div>
                     </Popover>
                 </th>
@@ -168,7 +168,7 @@
             {/each}
             <tr>
                 <td colspan="5"> <!-- Span across all columns -->
-                    <button on:click={addGroup}>Add category</button>
+                    <button on:click={addGroup}>Add group</button>
                 </td>
             </tr>
         </tbody>

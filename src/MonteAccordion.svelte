@@ -424,6 +424,10 @@ function selectInput(event) {
     border-bottom: 1px solid #ccc;
   }
 
+  .accordion-title:hover {
+    color: #8090a5;
+}
+
   .accordion-item:last-child {
     border-bottom: none;
   }
@@ -453,12 +457,6 @@ function selectInput(event) {
     
   }
 
-  .moreInfo {
-    border-radius: 40px;
-    border-style: none;
-    padding: 0.2em 0.25em 0.15em 0.25em;
-    margin: 0;
-}
 
 .accordion-title {
   display: flex;
@@ -517,11 +515,7 @@ function selectInput(event) {
     background-color: #d9d9d9;
   }
 
-  button {
-        margin: 0;
-        color: #0066e9;
-        padding: 6px 8px 6px 8px;
-    }
+
 
 .semi-bold {
   font-weight: 500;
@@ -539,22 +533,7 @@ function selectInput(event) {
   margin-bottom: 0;
 }
 
-    .primary-btn {
-        margin: 0;
-        color: white;
-        background-color: #0066e9;
-        padding: 6px 8px 6px 8px;
-        border: none;
-    }
 
-
-    button:disabled {
-  /* Disabled button styles */
-  color: rgb(146, 146, 146);
-  cursor: default;
-  background-color: rgb(233, 233, 233);
-  border-color: rgba(255, 255, 255, 0);
-}
 
     input {
         width: 95%;
@@ -642,8 +621,8 @@ function selectInput(event) {
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">
-            <p class="popover-content popover-text-fixer">A custom group allows you to mix in other cards with your mana-producing cards above, or just use this simulation in a sandbox way. For example, maybe you want to find the probability of getting certain colors and a ramp spell. You can also add attributes to custom cards to consider overlap.</p>
-            <p class="popover-content popover-text-fixer">In Step 2, you can select that you want a certain amount of cards from a custom group, as well as certain amount of cards that include some attribute.</p>
+            <p class="popover-content popover-text-fixer">A custom group allows you to mix in other cards with your mana-producing cards above, or just use this simulation in a sandbox way. For example, maybe you want to find the probability of getting certain colors and a ramp spell (the ramp spells would be a custom group). You can also add attributes to custom cards for more complex calculations that consider custom groups with specific or common abilities.</p>
+            <p class="popover-content popover-text-fixer">In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.</p>
           </div>
         </Popover>
     </div>
@@ -712,8 +691,8 @@ function selectInput(event) {
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">
-            <p class="popover-content popover-text-fixer"><b>Caution - may crash your browser!</p>
-            <p class="popover-content popover-text-fixer">This parameter changes the number of samples, or draws, taken for this mana probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. The page might crash and you will have to re-input your lands.</p>
+            <p class="popover-content popover-text-fixer"><b>Caution - increasing this may crash your browser!</p>
+            <p class="popover-content popover-text-fixer">This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.</p>
           </div>
         </Popover>
 

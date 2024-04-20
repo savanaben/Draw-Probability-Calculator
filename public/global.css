@@ -32,7 +32,9 @@ a {
 }
 
 a:hover {
+	color: rgb(0, 122, 244);
 	text-decoration: underline;
+	text-decoration-thickness: 2px;
 }
 
 a:visited {
@@ -63,18 +65,63 @@ select {
 }
 
 button {
-	color: #333;
-
+	margin: 0;
+    color: #0066e9;
+    padding: 6px 8px 6px 8px;
 	background-color: white;
 	border-radius: 4px;
 	cursor: pointer;
 }
 
-button:disabled {
-	color: #999;
+button:hover {
+	background-color: #ffffff;
+	border-color: #8a8a8a;
+	box-shadow: 0px 2px 0px 0px rgb(231, 231, 231);
+
+}
+
+
+
+.moreInfo {
+	border-radius: 40px;
+    border-style: none;
+    padding: 0.2em 0.25em 0.15em 0.25em;
+    margin: 0;
+}
+
+.moreInfo:hover {
+	outline-style: solid;
+	outline-color: #b3b3b3;
+	outline-width: 1px;
+}
+
+.primary-btn {
+	margin: 0;
+	color: white;
+	background-color: #0066e9;
+	padding: 6px 8px 6px 8px;
+	border: none;
+}
+
+
+.primary-btn:disabled {
+	/* Disabled button styles */
+	color: rgb(146, 146, 146);
+	cursor: default;
+	background-color: rgb(233, 233, 233);
+	border-color: rgba(255, 255, 255, 0);
+	box-shadow: none;
+  }
+
+input:hover {
+	border-color: rgb(147, 147, 147);
+}
+
+select:hover {
+	border-color: rgb(147, 147, 147);
 }
 
 button:not(:disabled):active {
-	background-color: #ddd;
+	box-shadow: none;
 }
 
