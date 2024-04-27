@@ -7,6 +7,7 @@
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
   import { simulationData } from './colorStore.js';
+  import { trackEvent } from './analytics.js';
 
 
 import WIcon from './mana-icons/plains.svg';
@@ -48,7 +49,7 @@ const manaIcons = {
   let customAttributeRequirements = {}; // New variable for custom attributes
   let uniqueAttributes = new Set();
   let activeManaTypes = {};
-
+  let isHovering = false;
 
   function getAnyIcon(value) {
     if (value <= 0) return manaIcons.ANY[0];
@@ -63,6 +64,18 @@ const manaIcons = {
     if (value >= 9) return manaIcons.ANY[9];
     return manaIcons.ANY[0]; // Default to AnyIcon1 if none of the conditions match
 }
+
+
+function handleButtonClick() {
+ 
+  logPreparedCards(); // Call the original function to run the simulation
+
+    trackEvent('run_simulation_click', {
+      event_category: 'button click',
+      event_label: 'Run Simulation',
+      value: 'User clicked Run Simulation button'
+    });
+  }
 
 
   
@@ -419,14 +432,15 @@ function selectInput(event) {
     margin-top: .5rem;
   }
 
+  .accordion.hovering {
+    border-color: #8a8a8a;
+    box-shadow: 0px 2px 0px 0px rgb(231, 231, 231);
+}
+
   .accordion-item {
     padding: 0.7rem;
     border-bottom: 1px solid #ccc;
   }
-
-  .accordion-title:hover {
-    color: #8090a5;
-}
 
   .accordion-item:last-child {
     border-bottom: none;
@@ -465,7 +479,10 @@ function selectInput(event) {
   gap: 5px;
   cursor: pointer;
   height: 28px;
+  margin: -0.7rem;
+  padding: 0.7rem;
 }
+
 
 
 .land-group-parameters {
@@ -550,15 +567,16 @@ function selectInput(event) {
 
 </style>
 
-<div class="accordion">
+<div class="accordion {isHovering ? 'hovering' : ''}">
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
    <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="accordion-item">
-    <div class="accordion-title" on:click={() => toggleItem(0)}
-      
-      tabindex="0"
+    <div class="accordion-title" 
+      on:click={() => toggleItem(0)}
       on:keydown={(event) => handleKeydown(event, 0)}
-      
+      on:mouseenter={() => isHovering = true}
+      on:mouseleave={() => isHovering = false}
+      tabindex="0"
       >
       <h3>Advanced mana and card attribute probabilities</h3>
     </div>
@@ -595,7 +613,7 @@ function selectInput(event) {
       </div>
       <div class="land-group-parameters">
       <button on:click={addCard}>Add Mana Group</button>
-      <div>Total mana producing cards: <b>{totalAmount}</b></div>
+      <div>Total mana cards: <b>{totalAmount}</b></div>
     </div>
 
 
@@ -680,14 +698,14 @@ function selectInput(event) {
 
 
       <div class="land-group-parameters">
-        <button class="primary-btn" on:click={logPreparedCards} disabled={!enableSimulationButton}>Run Simulation</button>
+        <button class="primary-btn" on:click={handleButtonClick} disabled={!enableSimulationButton}>Run Simulation</button>
         <div class="mana-requirement">
         <label for="iterations">Simulation iterations (caution):</label>
         <input style="width: 90px;" id="iterations" type="number" min="1" bind:value={iterations} 
         on:focus="{selectInput}"
         />
         <Popover bind:show={showPopover} placement="top">
-          <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+          <button style="margin-left: 4px;" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">

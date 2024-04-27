@@ -160,7 +160,7 @@
                             placeholder="Link via keyword matching..." />
                     </td>
                     <td>
-                        <button class="remove-button" on:click={() => removeGroup(index)}>
+                        <button class="group-remove-button" on:click={() => removeGroup(index)}>
                             <FontAwesomeIcon icon={faTimes} />
                         </button>
                     </td>
@@ -182,7 +182,7 @@
     <div class="controls-container">
         
         <div class="mulligan-selection">
-            <label for="mulliganCount">Mulligans (experimental)
+            <label for="mulliganCount">Mulligans 
 
                 <Popover bind:show={showPopover} placement="top">
                     <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
@@ -196,7 +196,7 @@
                 </Popover>
                 
                 :</label>
-            <select bind:value={mulliganCountString}>
+            <select id="mulliganCount" bind:value={mulliganCountString}>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -206,15 +206,15 @@
         </div>
 
         <div class="deck-size-container">
-            <label for="deckSize">Initial cards drawn:</label>
-            <input type="number" class="deckSize" bind:value={InitialDrawSize} min="1" 
+            <label for="cardsDrawn">Initial cards drawn:</label>
+            <input type="number" class="deckSize" id="cardsDrawn" bind:value={InitialDrawSize} min="1" 
             on:focus="{selectInput}"
             />
         </div>
 
         <div class="deck-size-container">
             <label for="deckSize">Deck size:</label>
-            <input type="number" class="deckSize" bind:value={deckSize} min="1" 
+            <input type="number" class="deckSize" id="deckSize" bind:value={deckSize} min="1" 
             on:focus="{selectInput}"
             />
         </div>
@@ -342,7 +342,7 @@ max-width: 65px;
         padding: 6px 8px 6px 8px;
     }
 
-    .remove-button {
+    .group-remove-button {
        width: 35px;
     }
 .moreInfo {

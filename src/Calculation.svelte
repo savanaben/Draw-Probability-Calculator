@@ -696,30 +696,25 @@ async function identifyProfiles(numIterations) {
 
     //------------------------------------------------------------
     
-    
-    
-    //the following makes the cards output
-    function createGroupCards(groups, results, probabilitiesByTurn, turn) {
-    // console.log("Groups received:", groups);
-    // console.log("Results received:", results);
-    // console.log("Probabilities by Turn received:", probabilitiesByTurn);
-    // console.log("Current turn:", turn);
 
+
+function createGroupCards(groups, results, probabilitiesByTurn, turn) {
     let cards = [];
+    let linkedGroupData = {}; // Object to hold accumulated data for linked groups
+    let totalStackedCardsFromLinkedGroups = 0; // Variable to keep track of all stacked cards from linked groups
 
     // Check and use Monte Carlo results if available
     if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
         let turnTotalProbability = parseFloat($monteCarloResults[turn]);
-        let stackedCardsCount = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Calculate how many cards are in the stack minus the top one
+        let stackedCardsCount = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1;
         cards.push({
             probability: turnTotalProbability,
             label: 'Custom',
-            color: '#fff',  // Distinct color to differentiate it
+            color: '#fff',
             ratioText: convertPercentToRatio(turnTotalProbability),
-            stackedCards: Math.max(stackedCardsCount, 0)  // Ensure non-negative
+            stackedCards: Math.max(stackedCardsCount, 0)
         });
     } else if ($simulationRun) {
-        // Fallback to current probabilities if Monte Carlo results are not available
         let turnTotalProbability = parseFloat(probabilitiesByTurn[turn]);
         const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
         cards.push({
@@ -731,46 +726,144 @@ async function identifyProfiles(numIterations) {
         });
     }
 
-    // Process each group and add to the cards array ensuring they do not overwrite the Monte Carlo card
-    cards = cards.concat(groups.map(group => {
+    // Collect linked group data first
+    groups.forEach(group => {
         let groupName = group.link ? group.link : group.name;
         let groupResult = results[groupName];
         let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
-        
-        // Determine the ratio representation
-        let ratioText = convertPercentToRatio(probabilityPercent);
+        let color = $groupColors[groupName] || '#e5e5e5';
 
-        // Access the color from the groupColors store
-        let color = $groupColors[groupName] || '#e5e5e5'; // Default color if not set
+        if (group.link) {
+            if (!linkedGroupData[group.link]) {
+                linkedGroupData[group.link] = { cardsToDraw: 0, probability: probabilityPercent, label: group.link, color: color, ratioText: convertPercentToRatio(probabilityPercent) };
+            }
+            linkedGroupData[group.link].cardsToDraw += group.cardsToDraw;
+        }
+    });
 
-        return {
-            probability: probabilityPercent,
-            label: group.name,
-            color,
-            ratioText,
-            stackedCards: Math.max(group.cardsToDraw - 1, 0) // Subtract 1 because the first card is already displayed
-        };   
-    }));
+    // Add linked groups as a single card entry
+    Object.values(linkedGroupData).forEach(group => {
+        let stackedCards = Math.max(group.cardsToDraw - 1, 0);
+        totalStackedCardsFromLinkedGroups += stackedCards;
+        cards.push({
+            probability: group.probability,
+            label: group.label,
+            color: group.color,
+            ratioText: group.ratioText,
+            stackedCards
+        });
+    });
 
-    //  console.log("Cards generated for UI:", cards);
+    // Then add single groups not part of any linked group
+    groups.forEach(group => {
+        if (!group.link) {
+            let groupName = group.name;
+            let groupResult = results[groupName];
+            let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
+            let color = $groupColors[groupName] || '#e5e5e5';
+            cards.push({
+                probability: probabilityPercent,
+                label: groupName,
+                color,
+                ratioText: convertPercentToRatio(probabilityPercent),
+                stackedCards: Math.max(group.cardsToDraw - 1, 0)
+            });
+        }
+    });
 
-    // Calculate the total number of extra desired cards from hypergeometric groups
+    // Calculate total extra cards and adjust draw size
     const totalExtraCardsFromGroups = groups.reduce((sum, group) => sum + Math.max(group.cardsToDraw - 1, 0), 0);
-
-    // Calculate the total number of desired cards from mana requirements
     const totalDesiredCardsFromManaRequirements = Math.max(Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1, 0);
-
-    // Calculate the total number of extra cards, combining groups and mana requirements
     const totalExtraCards = totalExtraCardsFromGroups + totalDesiredCardsFromManaRequirements;
-
-    // Fill up the remaining cards for the turn with blanks, adjusting for mulligans and extra cards
-    let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalExtraCards, 0);
+    let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalExtraCards - totalStackedCardsFromLinkedGroups, 0);
     while (cards.length < adjustedDrawSize + turn) {
         cards.push({ probability: null, label: '', ratioText: '' });
     }
 
     return cards;
 }
+
+
+
+
+
+
+
+    //THIS IS OLD CREATE GROUP CARDS FUNCTION
+    
+//     //the following makes the cards output
+//     function createGroupCards(groups, results, probabilitiesByTurn, turn) {
+//     // console.log("Groups received:", groups);
+//     // console.log("Results received:", results);
+//     // console.log("Probabilities by Turn received:", probabilitiesByTurn);
+//     // console.log("Current turn:", turn);
+
+//     let cards = [];
+
+//     // Check and use Monte Carlo results if available
+//     if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
+//         let turnTotalProbability = parseFloat($monteCarloResults[turn]);
+//         let stackedCardsCount = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Calculate how many cards are in the stack minus the top one
+//         cards.push({
+//             probability: turnTotalProbability,
+//             label: 'Custom',
+//             color: '#fff',  // Distinct color to differentiate it
+//             ratioText: convertPercentToRatio(turnTotalProbability),
+//             stackedCards: Math.max(stackedCardsCount, 0)  // Ensure non-negative
+//         });
+//     } else if ($simulationRun) {
+//         // Fallback to current probabilities if Monte Carlo results are not available
+//         let turnTotalProbability = parseFloat(probabilitiesByTurn[turn]);
+//         const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+//         cards.push({
+//             probability: turnTotalProbability,
+//             label: 'Mana',
+//             color: '#fff',
+//             ratioText: convertPercentToRatio(turnTotalProbability),
+//             stackedCards: Math.max(totalManaNeeded - 1, 0)
+//         });
+//     }
+
+//     // Process each group and add to the cards array ensuring they do not overwrite the Monte Carlo card
+//     cards = cards.concat(groups.map(group => {
+//         let groupName = group.link ? group.link : group.name;
+//         let groupResult = results[groupName];
+//         let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
+        
+//         // Determine the ratio representation
+//         let ratioText = convertPercentToRatio(probabilityPercent);
+
+//         // Access the color from the groupColors store
+//         let color = $groupColors[groupName] || '#e5e5e5'; // Default color if not set
+
+//         return {
+//             probability: probabilityPercent,
+//             label: group.name,
+//             color,
+//             ratioText,
+//             stackedCards: Math.max(group.cardsToDraw - 1, 0) // Subtract 1 because the first card is already displayed
+//         };   
+//     }));
+
+//     //  console.log("Cards generated for UI:", cards);
+
+//     // Calculate the total number of extra desired cards from hypergeometric groups
+//     const totalExtraCardsFromGroups = groups.reduce((sum, group) => sum + Math.max(group.cardsToDraw - 1, 0), 0);
+
+//     // Calculate the total number of desired cards from mana requirements
+//     const totalDesiredCardsFromManaRequirements = Math.max(Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1, 0);
+
+//     // Calculate the total number of extra cards, combining groups and mana requirements
+//     const totalExtraCards = totalExtraCardsFromGroups + totalDesiredCardsFromManaRequirements;
+
+//     // Fill up the remaining cards for the turn with blanks, adjusting for mulligans and extra cards
+//     let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalExtraCards, 0);
+//     while (cards.length < adjustedDrawSize + turn) {
+//         cards.push({ probability: null, label: '', ratioText: '' });
+//     }
+
+//     return cards;
+// }
 
 
 
@@ -783,7 +876,7 @@ async function identifyProfiles(numIterations) {
         // Directly map the percentage to a scale of 20
         let number = Math.round((percent / 100) * 20);
     
-        return `${number} out of 20`;
+        return `${number} out<br>of 20`;
     }
     
     
@@ -848,7 +941,7 @@ async function identifyProfiles(numIterations) {
                         <div class="rectangle" style="background-color: {card.color};">
                             <div class="card-details">
                                 <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
-                                <div class="card-ratio">{card.ratioText}</div>
+                                <div class="card-ratio">{@html card.ratioText}</div>
                             </div>
                         </div>
                         <div class="stacked-cards">
@@ -865,8 +958,8 @@ async function identifyProfiles(numIterations) {
     </div>
     
     <div class="deck-size-container">
-        <label for="deckSize">Number of turns:</label>
-        <input type="number" class="deckSize" bind:value={numberOfTurns} min="1" 
+        <label for="numberTurns">Number of turns:</label>
+        <input type="number" class="deckSize" id="numberTurns" bind:value={numberOfTurns} min="1" 
         on:focus="{selectInput}"
         />
     </div>
@@ -1002,12 +1095,13 @@ async function identifyProfiles(numIterations) {
     }
     
     .probability {
-        font-size: 1.1em;
+        font-size: 1.2em;
         font-weight: bold;
     }
     
     .card-label {
         font-size: 0.7em;
+        padding-top: 2px;
         text-align: center;
         width: 54px;
         word-wrap: break-word;

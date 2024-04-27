@@ -103,6 +103,11 @@ button:hover {
 	border: none;
 }
 
+.primary-btn:hover {
+	background-color: #1a7dff;
+	box-shadow: none;
+}
+
 
 .primary-btn:disabled {
 	/* Disabled button styles */
@@ -125,3 +130,26 @@ button:not(:disabled):active {
 	box-shadow: none;
 }
 
+
+h3 {
+	margin-top: 0;
+    margin-bottom: 0;
+    color: #0066e9;
+}
+
+
+.remove-button {
+	width: 30%;
+	box-sizing: border-box;
+	background: none;
+	  border: none;
+	  cursor: pointer;
+	  padding: 0 !important;
+	  margin-left: 5px !important;
+	  height: 28px;
+  }
+
+  .remove-button:hover {
+	box-shadow: none;
+	background-color: white;
+  }

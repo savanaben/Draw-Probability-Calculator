@@ -77,11 +77,6 @@
     padding: .5rem; /* Add padding to replace margin for smoother transition */
   }
 
-h3 {
-    margin-top: 0; /* Remove margin-top */
-    margin-bottom: 0; /* Remove margin-bottom and control spacing with padding */ 
-    color: #0066e9;
-}
 
   p {
     margin-top: 0; /* Remove margin-top */

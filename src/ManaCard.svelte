@@ -76,13 +76,6 @@ const manaIcons = {
         align-items: baseline;
     }
 
-    .remove-button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        margin-left: 5px;
-    }
 
 .mana-symbol {
         width: 29%;
@@ -168,11 +161,6 @@ width: inherit;
       box-sizing: border-box;
     }
   
-    .remove-button {
-      width: 30%;
-      height: 100%;
-      box-sizing: border-box;
-    }
 
     button {
         margin: 0;
@@ -222,8 +210,8 @@ width: inherit;
   
     </div>
     <div class="mana-card-header">
-        <label for="amount" class="amount-label">Amount:</label>
-        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 
+        <label for="manaAmount" class="amount-label">Amount:</label>
+        <input id="manaAmount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 
         on:focus="{selectInput}"
         />
     </div>

@@ -74,13 +74,6 @@ function selectInput(event) {
        
     }
 
-    .remove-button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        margin-left: 5px;
-    }
 
     .attributes-section {
         width: 100%;
