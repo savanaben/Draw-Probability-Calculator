@@ -6,7 +6,7 @@
   import Popover from './Popover.svelte';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
-  import { simulationData } from './colorStore.js';
+  import { simulationData, monteCarloResults, shouldResetSimulation } from './colorStore.js';
   import { trackEvent } from './analytics.js';
 
 
@@ -50,6 +50,9 @@ const manaIcons = {
   let uniqueAttributes = new Set();
   let activeManaTypes = {};
   let isHovering = false;
+  let totalCustomAmount = 0; // This will hold the sum of all custom cards' amounts
+
+
 
   function getAnyIcon(value) {
     if (value <= 0) return manaIcons.ANY[0];
@@ -66,19 +69,50 @@ const manaIcons = {
 }
 
 
-function handleButtonClick() {
- 
-  logPreparedCards(); // Call the original function to run the simulation
+// Generic function to handle button clicks and send analytics---------------------------
 
+
+
+function handleRunSimulationClick() {
+    logPreparedCards(); // Call the original function to run the simulation
     trackEvent('run_simulation_click', {
-      event_category: 'button click',
-      event_label: 'Run Simulation',
-      value: 'User clicked Run Simulation button'
+        'event_label': 'User clicked Run Simulation button'
     });
-  }
+}
 
+function handleToggleAccordionClick() {
+    toggleItem(0); // Assuming toggleItem toggles the visibility of accordion item
+    trackEvent('toggle_monte_accordion_click', {
+        'event_label': 'User toggled the monte carlo simulation accordion'
+    });
+}
+
+function handleAddManaGroupClick() {
+    addCard(); // Call the original function to add a mana group
+    trackEvent('add_mana_group_click', {
+        'event_label': 'User clicked Add Mana Group button'
+    });
+}
+
+function handleAddCustomGroupClick() {
+    addCustomCard(); // Call the original function to add a custom group
+    trackEvent('add_custom_group_click', {
+        'event_label': 'User clicked Add Custom Group button'
+    });
+}
+
+//------------------------------
 
   
+function ClearSimulation() {
+  // Reset simulation data
+    monteCarloResults.set([]);
+    shouldResetSimulation.set(true);
+    // Optional: reset shouldResetSimulation after a microtask to allow other components to detect the change
+    setTimeout(() => shouldResetSimulation.set(false), 0);
+}
+
+
   function toggleItem(index) {
     openItem = openItem === index ? null : index;
   }
@@ -217,6 +251,8 @@ $: {
 }
 
 $: totalAmount = manaCards.reduce((sum, card) => sum + card.amount, 0);
+
+$: totalCustomAmount = customCards.reduce((sum, card) => sum + card.amount, 0);
 
 
 $: {
@@ -572,7 +608,7 @@ function selectInput(event) {
    <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="accordion-item">
     <div class="accordion-title" 
-      on:click={() => toggleItem(0)}
+      on:click={handleToggleAccordionClick}
       on:keydown={(event) => handleKeydown(event, 0)}
       on:mouseenter={() => isHovering = true}
       on:mouseleave={() => isHovering = false}
@@ -612,8 +648,8 @@ function selectInput(event) {
       {/each}
       </div>
       <div class="land-group-parameters">
-      <button on:click={addCard}>Add Mana Group</button>
-      <div>Total mana cards: <b>{totalAmount}</b></div>
+        <button on:click={handleAddManaGroupClick}>Add Mana Group</button>
+        <div>Total mana cards: <b>{totalAmount}</b></div>
     </div>
 
 
@@ -633,8 +669,8 @@ function selectInput(event) {
     {/each}
     </div>
     <div class="land-group-parameters">
-        <button on:click={addCustomCard}>Add Custom Group</button>
-        <Popover bind:show={showPopover} placement="top">
+      <button on:click={handleAddCustomGroupClick}>Add Custom Group</button>
+       <Popover bind:show={showPopover} placement="top">
           <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
@@ -643,6 +679,7 @@ function selectInput(event) {
             <p class="popover-content popover-text-fixer">In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.</p>
           </div>
         </Popover>
+        <div>Total custom cards: <b>{totalCustomAmount}</b></div> <!-- Display the total amount here -->
     </div>
 
          <!-- Horizontal Rule for Separation -->
@@ -698,7 +735,14 @@ function selectInput(event) {
 
 
       <div class="land-group-parameters">
-        <button class="primary-btn" on:click={handleButtonClick} disabled={!enableSimulationButton}>Run Simulation</button>
+        <button class="primary-btn" on:click={handleRunSimulationClick} disabled={!enableSimulationButton}>
+          Run Simulation
+        </button>  
+       
+        <!-- I could not get this to work. need to somehow re-run the simulation or 
+        createGroupCards. function                                            -->
+        <!-- <button on:click={ClearSimulation}>Clear Simulation</button>  -->
+      
         <div class="mana-requirement">
         <label for="iterations">Simulation iterations (caution):</label>
         <input style="width: 90px;" id="iterations" type="number" min="1" bind:value={iterations} 

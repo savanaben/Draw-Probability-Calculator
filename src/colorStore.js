@@ -8,6 +8,7 @@ export const simulationData = writable({
     manaRequirements: {}
 });
 
+export const shouldResetSimulation = writable(false);
 
 export const simulationRun = writable(false);
 export const simulationProgress = writable(0); // Tracks the progress of the simulation

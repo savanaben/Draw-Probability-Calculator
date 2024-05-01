@@ -6,6 +6,7 @@
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import MonteAccordion from './MonteAccordion.svelte';
+    import { trackEvent } from './analytics.js';
 
 
     const dispatch = createEventDispatcher();
@@ -21,8 +22,32 @@
 
 
 
-        // Reactive statement to ensure mulliganCount is always a number
-        $: mulliganCount = Number(mulliganCountString);
+
+// function to handle button clicks and send analytics------------------
+
+function handleSelectChange(value) {
+    mulliganCountString = value; // Assuming you have this variable already bound to keep the state
+
+    // Send analytics data
+    trackEvent('mulligan_count_change', {
+        mulligan_count: value
+    });
+}
+
+
+
+function handleAddGroupClick() {
+    addGroup(); // Assuming toggleItem toggles the visibility of accordion item
+    trackEvent('add_hypergeo_group', {
+        'event_label': 'User clicked add group for hypergeometric'
+    });
+}
+
+//--------------------------------------------
+
+
+    // Reactive statement to ensure mulliganCount is always a number
+     $: mulliganCount = Number(mulliganCountString);
 
 
     const presetColors = [
@@ -168,7 +193,7 @@
             {/each}
             <tr>
                 <td colspan="5"> <!-- Span across all columns -->
-                    <button on:click={addGroup}>Add group</button>
+                    <button on:click={handleAddGroupClick}>Add Group</button>
                 </td>
             </tr>
         </tbody>
@@ -196,7 +221,7 @@
                 </Popover>
                 
                 :</label>
-            <select id="mulliganCount" bind:value={mulliganCountString}>
+                <select id="mulliganCount" bind:value={mulliganCountString} on:change="{event => handleSelectChange(event.target.value)}">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

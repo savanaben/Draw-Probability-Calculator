@@ -1,6 +1,6 @@
 <script>
     import { groupColors, neededCombinationsCount } from './colorStore.js';
-    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress } from './colorStore.js';
+    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, shouldResetSimulation } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
@@ -669,8 +669,9 @@ async function identifyProfiles(numIterations) {
         runSimulation();
     }
     
-    
-    
+
+
+
     async function runSimulation() {
     simulationRun.set(true);  // Enable the modal
     cancelSimulation.set(false); // Ensure cancellation flag is reset before starting
@@ -698,7 +699,7 @@ async function identifyProfiles(numIterations) {
     
 
 
-function createGroupCards(groups, results, probabilitiesByTurn, turn) {
+    function createGroupCards(groups, results, probabilitiesByTurn, turn) {
     let cards = [];
     let linkedGroupData = {}; // Object to hold accumulated data for linked groups
     let totalStackedCardsFromLinkedGroups = 0; // Variable to keep track of all stacked cards from linked groups
@@ -706,13 +707,13 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
     // Check and use Monte Carlo results if available
     if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
         let turnTotalProbability = parseFloat($monteCarloResults[turn]);
-        let stackedCardsCount = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1;
+        let stackedCardsCount = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Calculate how many cards are in the stack minus the top one
         cards.push({
             probability: turnTotalProbability,
             label: 'Custom',
-            color: '#fff',
+            color: '#fff',  // Distinct color to differentiate it
             ratioText: convertPercentToRatio(turnTotalProbability),
-            stackedCards: Math.max(stackedCardsCount, 0)
+            stackedCards: Math.max(stackedCardsCount, 0)  // Ensure non-negative
         });
     } else if ($simulationRun) {
         let turnTotalProbability = parseFloat(probabilitiesByTurn[turn]);
@@ -726,63 +727,65 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         });
     }
 
-    // Collect linked group data first
+    // Process each group
     groups.forEach(group => {
-        let groupName = group.link ? group.link : group.name;
-        let groupResult = results[groupName];
-        let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
-        let color = $groupColors[groupName] || '#e5e5e5';
+    let groupName = group.link ? group.link : group.name;
+    let groupResult = results[groupName];
+    let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
+    let color = $groupColors[groupName] || '#e5e5e5';
 
-        if (group.link) {
-            if (!linkedGroupData[group.link]) {
-                linkedGroupData[group.link] = { cardsToDraw: 0, probability: probabilityPercent, label: group.link, color: color, ratioText: convertPercentToRatio(probabilityPercent) };
-            }
-            linkedGroupData[group.link].cardsToDraw += group.cardsToDraw;
+    if (group.link) {
+        if (!linkedGroupData[group.link]) {
+            linkedGroupData[group.link] = { cardsToDraw: 0, membersCount: 0, probability: probabilityPercent, label: group.link, color: color, ratioText: convertPercentToRatio(probabilityPercent) };
         }
-    });
-
-    // Add linked groups as a single card entry
-    Object.values(linkedGroupData).forEach(group => {
-        let stackedCards = Math.max(group.cardsToDraw - 1, 0);
-        totalStackedCardsFromLinkedGroups += stackedCards;
+        linkedGroupData[group.link].cardsToDraw += group.cardsToDraw;
+        linkedGroupData[group.link].membersCount++;
+    } else {
         cards.push({
-            probability: group.probability,
-            label: group.label,
-            color: group.color,
-            ratioText: group.ratioText,
-            stackedCards
+            probability: probabilityPercent,
+            label: group.name,
+            color,
+            ratioText: convertPercentToRatio(probabilityPercent),
+            stackedCards: Math.max(group.cardsToDraw - 1, 0)
         });
-    });
-
-    // Then add single groups not part of any linked group
-    groups.forEach(group => {
-        if (!group.link) {
-            let groupName = group.name;
-            let groupResult = results[groupName];
-            let probabilityPercent = groupResult && turn < groupResult.length ? Math.round(groupResult[turn].probability * 1000) / 10 : null;
-            let color = $groupColors[groupName] || '#e5e5e5';
-            cards.push({
-                probability: probabilityPercent,
-                label: groupName,
-                color,
-                ratioText: convertPercentToRatio(probabilityPercent),
-                stackedCards: Math.max(group.cardsToDraw - 1, 0)
-            });
-        }
-    });
-
-    // Calculate total extra cards and adjust draw size
-    const totalExtraCardsFromGroups = groups.reduce((sum, group) => sum + Math.max(group.cardsToDraw - 1, 0), 0);
-    const totalDesiredCardsFromManaRequirements = Math.max(Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1, 0);
-    const totalExtraCards = totalExtraCardsFromGroups + totalDesiredCardsFromManaRequirements;
-    let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalExtraCards - totalStackedCardsFromLinkedGroups, 0);
-    while (cards.length < adjustedDrawSize + turn) {
-        cards.push({ probability: null, label: '', ratioText: '' });
     }
+});
+
+// Add linked groups as a single card entry and calculate total stacked cards from linked groups
+
+
+// Adding linked groups and calculating blank cards to add back
+let additionalBlanksToAddBack = 0;
+Object.values(linkedGroupData).forEach(group => {
+    let stackedCards = Math.max(group.cardsToDraw - 1, 0);
+    additionalBlanksToAddBack += (group.cardsToDraw - group.membersCount); //this is kind of workaround logic, could not get blank cards to add correctly otherwise
+    cards.push({
+        probability: group.probability,
+        label: group.label,
+        color: group.color,
+        ratioText: group.ratioText,
+        stackedCards
+    });
+});
+
+
+// Calculate the total number of extra desired cards from hypergeometric groups and mana requirements
+const totalExtraCardsFromGroups = groups.reduce((sum, group) => sum + Math.max(group.cardsToDraw - 1, 0), 0);
+const totalDesiredCardsFromManaRequirements = Math.max(Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1, 0);
+const totalExtraCards = totalExtraCardsFromGroups + totalDesiredCardsFromManaRequirements;
+
+// Calculate additional subtraction for linked groups (one per each member of linked group)
+const totalLinkedGroups = Object.values(linkedGroupData).reduce((acc, group) => acc + group.cardsToDraw - 1, 0);
+
+// Adjust draw size and add back blank cards
+let adjustedDrawSize = Math.max(InitialDrawSize - mulliganCount - totalExtraCards - totalLinkedGroups + additionalBlanksToAddBack, 0);
+while (cards.length < adjustedDrawSize + turn) {
+    cards.push({ probability: null, label: '', ratioText: '' });
+}
+
 
     return cards;
 }
-
 
 
 
