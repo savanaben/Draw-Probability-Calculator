@@ -14,6 +14,12 @@
     ],
   });
 
+  // Function to close the popover when focus moves away from the button
+  function handleBlur(event) {
+    show.set(false); // Close the popover
+  }
+
+
   function clickOutside(node) {
     const handleClick = event => {
       if (!node.contains(event.target)) {
@@ -30,24 +36,36 @@
     };
   }
 
-  function togglePopover() {
+  // Adjust togglePopover to only stop propagation
+  function togglePopover(event) {
+    event.stopPropagation(); // Prevent click outside logic from triggering
+    // Do not toggle here; let mousedown handle it
+  }
+
+  // Use mousedown to toggle the popover
+  function handleMousedown(event) {
+    event.stopPropagation(); // Still stop propagation to prevent click outside logic
     show.update(current => !current);
   }
 
-  // New function to handle keydown events
+  // Adjust handleKeydown to ensure it's only for Enter key and stops propagation
   function handleKeydown(event) {
     if (event.key === 'Enter') {
-      togglePopover();
+      event.stopPropagation(); // Prevent any potential bubbling issues
+      show.update(current => !current);
     }
   }
 </script>
 
 <div
-  class="popover-button-container"
-  use:popperRef
-  on:click={togglePopover}
-  on:keydown={handleKeydown}
-  tabindex="0" 
+class="popover-button-container"
+use:popperRef
+on:mousedown={handleMousedown} 
+on:click={togglePopover} 
+on:keydown={handleKeydown}
+on:blur={handleBlur}
+
+tabindex="0"
 >
   <slot name="trigger"></slot>
 </div>
