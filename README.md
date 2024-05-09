@@ -18,6 +18,18 @@ This tool applies hypergeometric and monte carlo methods of calculation to deter
  - ~~Support adding more turns.~~ 
  - ~~support advanced mana probability calculations~~
 
+ ## Known Accessibility to-do
+ - Contents within the monte accordion (Advanced mana and...) need to not be in the tab index when the accordion is closed.
+ - Focus needs to move to "cancel simulation" when the simulation modal opens. 
+ - screen reader
+   - For some reason, the custom groups title label is not connecting to the input in step 2. Not sure why, as the mana inputs are. 
+   - In step 2, the mana labels need to be better (not "W", "plans"). Need to be careful not to mess with this as that value ("W") is used in the simulation too. 
+   - more info popovers need toggle/open/closed declaration. 
+   - I think the mana and custom cards need sub-grouping. like, a parent focus state that says "custom group name", and then you arrow or tab into that group. I can imagine screen readers would have some trouble connecting/grouping. 
+   - when a user clicks "add custom group" or "add mana group", I think either focus should move to that new group, or an alert should be read out so the screen reader person knows to kind of backtrack and look for that group. Maybe both needs to happen. 
+   - "click to copy email" in FAQs should prolly have an alert, like "email copied to clipboard". 
+   - The probabilities output area feels functional to me, but it could be better. Maybe a table layout would be more understandable. Or focus group each row so it's easier to jump around. 
+   
  ### Nice to haves
  - fancier link/multivariate logic, such as OR operator (what are the chances I draw a plains and an island, OR a dual land).
  - ~~Group linked cards in the output visual in some way (connector line, within a box, include link name, even just adjacent)~~

@@ -614,17 +614,17 @@ function selectInput(event) {
       on:mouseleave={() => isHovering = false}
       tabindex="0"
       >
-      <h3>Advanced mana and card attribute probabilities</h3>
+      <h3>Advanced mana and attribute probabilities</h3>
     </div>
-    <div
+      <div
       class="answer"
       transition:slide|local={{ duration: 250 }}
       style:height="{openItem === 0 ? 'auto' : '0'}"
-    >
+       >
       <!-- Mana Cards and Add Button -->
       <p style="margin-top: 0.5rem;">This section allows you to consider card attributes, like mana and abilities. <span class="semi-bold">Probabilities from this section do not take into account cards from the above section.</span> To learn more, click the info button ->       
         <Popover bind:show={showPopover} placement="top">
-        <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+        <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
           <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
         </button>
         <div slot="content">
@@ -638,7 +638,7 @@ function selectInput(event) {
 
 
 
-      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the lands (and/or mana producing cards) in your deck and what mana they produce. You can also add in custom groups (see the custom groups (?) button for more details).</p>
+      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the lands (and/or mana producing cards) in your deck and what mana they produce. You can also add custom groups (see the custom groups (?) button for more details).</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -671,7 +671,7 @@ function selectInput(event) {
     <div class="land-group-parameters">
       <button on:click={handleAddCustomGroupClick}>Add Custom Group</button>
        <Popover bind:show={showPopover} placement="top">
-          <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+          <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">
@@ -749,7 +749,7 @@ function selectInput(event) {
         on:focus="{selectInput}"
         />
         <Popover bind:show={showPopover} placement="top">
-          <button style="margin-left: 4px;" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+          <button style="margin-left: 4px;" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
           </button>
           <div slot="content">

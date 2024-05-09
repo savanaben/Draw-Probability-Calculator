@@ -964,7 +964,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         // Directly map the percentage to a scale of 20
         let number = Math.round((percent / 100) * 20);
     
-        return `${number} out<br>of 20`;
+        return `${number} out<br aria-hidden="true">of 20`;
     }
     
     
@@ -1021,13 +1021,13 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
 
     <h2 style="text-align: center; margin-bottom:0;">Probabilities</h2>
     {#if hasOutput}
-    <p style="margin-top:0; text-align: center;"><i>Each column of stacked cards represents a separate drawing event.</i>
+    <p style="margin-top:0; text-align: center;"><i>Each column of stacked cards represents a separate opening hand and subsequent draws.</i>
         <Popover bind:show={showPopover} placement="top">
             <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                 <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
             </button>
             <div slot="content">
-                <p class="popover-content">This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Each column of stacked cards in this output probabilities section represents a separate opening hand and subsequent draws.</p>
+                <p class="popover-content">This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the "Linked groups" feature or Advanced section to calculate the probability of drawing cards from different groups.</p>
             </div>
         </Popover>
     </p>
@@ -1052,7 +1052,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
                         </div>
                         <div class="stacked-cards">
                             {#each card.isBlank as isBlank, i}
-                            <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : 'rgb(142, 142, 142)'};"></div>                            {/each}
+                            <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>                            {/each}
                         </div>
                         <div class="card-label">{card.label}</div>
                     </div>

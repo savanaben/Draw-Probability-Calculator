@@ -134,27 +134,27 @@ function selectInput(event) {
 
 <div class="custom-card">
     <div class="card-header">
-        <input class="title-input" type="text" placeholder="Title" bind:value={card.title} 
+        <input aria-label="custom group title" class="title-input" type="text" placeholder="Title" bind:value={card.title} 
         on:focus="{selectInput}"
         />
-        <button class="remove-button" on:click={remove}>
+        <button aria-label="Remove custom group" class="remove-button" on:click={remove}>
             <FontAwesomeIcon icon={faTimes} />
         </button>
     </div>
     <div class="attributes-section">
         {#each card.attributes as attribute, index}
             <div class="attribute-row">
-                <input type="text" placeholder="Attribute" bind:value={attribute} on:input={e => updateAttribute(index, e.target.value)} 
+                <input aria-label="custom attribute name" type="text" placeholder="Attribute" bind:value={attribute} on:input={e => updateAttribute(index, e.target.value)} 
                 on:focus="{selectInput}"
                 />
-                    <button class="remove-attribute-button" on:click={() => removeAttribute(index)}>
+                    <button aria-label="Remove custom attribute" class="remove-attribute-button" on:click={() => removeAttribute(index)}>
                         <FontAwesomeIcon icon={faTimes} />
                     </button>    
             </div>
         {/each}
         <button class="add-attribute-button" on:click={addAttribute}>Add Attribute</button>
         <Popover bind:show={showPopover} placement="top">
-            <button id ="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+            <button id ="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
               <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
             </button>
             <div slot="content">

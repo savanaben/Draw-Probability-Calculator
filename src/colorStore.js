@@ -16,3 +16,5 @@ export const cancelSimulation = writable(false);  // This store manages the canc
 export const monteCarloResults = writable([]); // Store for Monte Carlo results
 
 export const neededCombinationsCount = writable(0);  // Store for the count of needed combinations
+
+export const activePopover = writable(null);

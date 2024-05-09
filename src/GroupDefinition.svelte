@@ -101,7 +101,7 @@ function handleAddGroupClick() {
             <tr>
                 <th>Group unique name
                     <Popover bind:show={showPopover} placement="top">
-                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
@@ -113,17 +113,17 @@ function handleAddGroupClick() {
                 <th style="width: 18%;"># Cards in group</th>
                 <th style="width: 25%;">Minimum # desired cards
                     <Popover bind:show={showPopover} placement="top">
-                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
-                            <p class="popover-content">Percent change you'll draw <i>at least</i> this many cards from this group.</p>
+                            <p class="popover-content">Percent chance you'll draw <i>at least</i> this many cards from this group.</p>
                         </div>
                     </Popover>
                 </th>
                 <th>Linked groups
                     <Popover bind:show={showPopover} placement="top">
-                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+                        <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                         </button>
                         <div slot="content">
@@ -140,6 +140,7 @@ function handleAddGroupClick() {
                 <tr>
                     <td>
                         <input 
+                            aria-label="Group unique name"
                             class="input-group" 
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="text" 
@@ -156,6 +157,7 @@ function handleAddGroupClick() {
               </td>
                     <td>
                         <input 
+                            aria-label="Number of cards in group"
                             class="input-group" 
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="number" 
@@ -167,6 +169,7 @@ function handleAddGroupClick() {
                     </td>
                     <td>
                         <input 
+                            aria-label="Minimum number of desired cards from group"
                             class="input-group" 
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="number" 
@@ -178,6 +181,7 @@ function handleAddGroupClick() {
                     </td>
                     <td>
                         <input 
+                            aria-label="Linked group name"
                             class="input-group"
                             style="--bg-color: {$groupColors[group.link && group.link.trim() ? group.link : group.name]}"
                             type="text" 
@@ -185,7 +189,7 @@ function handleAddGroupClick() {
                             placeholder="Link via keyword matching..." />
                     </td>
                     <td>
-                        <button class="group-remove-button" on:click={() => removeGroup(index)}>
+                        <button aria-label="Remove group" class="group-remove-button" on:click={() => removeGroup(index)}>
                             <FontAwesomeIcon icon={faTimes} />
                         </button>
                     </td>
@@ -207,10 +211,8 @@ function handleAddGroupClick() {
     <div class="controls-container">
         
         <div class="mulligan-selection">
-            <label for="mulliganCount">Mulligans 
-
-                <Popover bind:show={showPopover} placement="top">
-                    <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
+            <label for="mulliganCount">Mulligans <Popover bind:show={showPopover} placement="top">
+                    <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
                         <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                     </button>
                     <div slot="content">
@@ -218,9 +220,7 @@ function handleAddGroupClick() {
                         <p class="popover-content">See the FAQs (bottom of this page) and github if you want to help confirm this logic (mulligan calculations have not been confirmed for setups with more than 1 desired card).</p>
                         <p class="popover-content">Special thanks to Michael Moore for helping me understand the mathematics via <a href='https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html' target='_blank'>this post</a>.</p>
                     </div>
-                </Popover>
-                
-                :</label>
+                </Popover>:</label>
                 <select id="mulliganCount" bind:value={mulliganCountString} on:change="{event => handleSelectChange(event.target.value)}">
                 <option value="0">0</option>
                 <option value="1">1</option>

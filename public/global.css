@@ -153,3 +153,57 @@ h3 {
 	box-shadow: none;
 	background-color: white;
   }
+
+
+
+  /* Default style for desktop */
+.responsive-image {
+	height: 100px; /* or your desired default height */
+	}
+	
+	/* Media query for screens that are 768px wide or less (common breakpoint for mobile devices) */
+	@media (max-width: 480px) {
+	.responsive-image {
+	  height: 70px; /* Adjust this value based on your needs for mobile */
+	}
+	}
+	
+
+	  /* Default style for desktop */
+.responsive-image-shorter {
+	height: 113px; /* or your desired default height */
+	}
+	
+	/* Media query for screens that are 768px wide or less (common breakpoint for mobile devices) */
+	@media (max-width: 480px) {
+	.responsive-image-shorter {
+	  height: 80px; /* Adjust this value based on your needs for mobile */
+	}
+	}
+	
+
+		  /* Default style for desktop */
+.responsive-image-midsized {
+	height: 60px; /* or your desired default height */
+	}
+	
+	/* Media query for screens that are 768px wide or less (common breakpoint for mobile devices) */
+	@media (max-width: 480px) {
+	.responsive-image-midsized {
+	  height: 50px; /* Adjust this value based on your needs for mobile */
+	}
+	}
+	
+
+
+			  /* Default style for desktop */
+.fixed-image {
+	max-height: 200px; /* or your desired default height */
+	}
+	
+	/* Media query for screens that are 768px wide or less (common breakpoint for mobile devices) */
+	@media (max-width: 480px) {
+	.fixed-image {
+	  height: auto; /* Adjust this value based on your needs for mobile */
+	}
+	}

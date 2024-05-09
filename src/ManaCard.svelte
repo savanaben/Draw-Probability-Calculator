@@ -13,12 +13,12 @@ import GIcon from './mana-icons/forrest.svg';
 import CIcon from './mana-icons/colorless.svg';
 
 const manaIcons = {
-    W: WIcon,
-    U: UIcon,
-    B: BIcon,
-    R: RIcon,
-    G: GIcon,
-    C: CIcon,
+    W: { icon: WIcon, label: 'Plains' },
+    U: { icon: UIcon, label: 'Swamp' },
+    B: { icon: BIcon, label: 'Island' },
+    R: { icon: RIcon, label: 'Mountain' },
+    G: { icon: GIcon, label: 'Forest' },
+    C: { icon: CIcon, label: 'Colorless' },
 };
 
 
@@ -197,18 +197,24 @@ width: inherit;
                 {/each}
             </div> 
         </Popover>  -->
-        <button class="remove-button" on:click={remove}>
+        <button aria-label="Remove mana group" class="remove-button" on:click={remove}>
             <FontAwesomeIcon icon={faTimes} />
         </button>
-    </div>
-    <div class="mana-symbols">
-      {#each Object.keys(manaIcons) as mana}
-      <button class="mana-symbol {card.mana[mana] ? 'active' : ''}" on:click={() => toggleMana(mana)} tabindex="0">
-        <img src={manaIcons[mana]} alt="{mana} mana icon" class="mana-icon" />
+  </div>
+
+  <div class="mana-symbols">
+    {#each Object.keys(manaIcons) as mana}
+      <button 
+        class="mana-symbol {card.mana[mana] ? 'active' : ''}" 
+        on:click={() => toggleMana(mana)} 
+        tabindex="0"
+        aria-label={manaIcons[mana].label + ' mana'}
+        aria-pressed={card.mana[mana] ? 'true' : 'false'}>
+          <img src={manaIcons[mana].icon} alt="{mana} mana icon" class="mana-icon" />
       </button>
-  {/each}
-  
-    </div>
+    {/each}
+  </div>
+
     <div class="mana-card-header">
         <label for="manaAmount" class="amount-label">Amount:</label>
         <input id="manaAmount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 

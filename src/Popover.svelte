@@ -1,9 +1,13 @@
 <script>
   import { createPopperActions } from 'svelte-popperjs';
   import { writable } from 'svelte/store';
+  import { activePopover } from './colorStore.js';
+
 
   export let placement = 'top';
   let show = writable(false);
+  let isOpen = false; // Local variable to bind to $show
+  const componentId = Date.now(); // Unique identifier for each popover instance
 
   const [popperRef, popperContent, getPopperInstance] = createPopperActions({
     placement,
@@ -18,6 +22,10 @@
   function handleBlur(event) {
     show.set(false); // Close the popover
   }
+
+
+  // Bind the local variable to the show store
+   $: isOpen = $show;
 
 
   function clickOutside(node) {
@@ -42,11 +50,28 @@
     // Do not toggle here; let mousedown handle it
   }
 
-  // Use mousedown to toggle the popover
+
+  // Subscribe to the activePopover store
+  activePopover.subscribe($activePopover => {
+    if ($activePopover !== componentId) {
+      show.set(false);
+    }
+  });
+
   function handleMousedown(event) {
-    event.stopPropagation(); // Still stop propagation to prevent click outside logic
-    show.update(current => !current);
+    event.stopPropagation(); // Prevent click outside logic from triggering
+    show.update(current => {
+      if (current) {
+        activePopover.set(null); // If closing this popover, clear the active popover
+        return false;
+      } else {
+        activePopover.set(componentId); // Set this popover as the active one
+        return true;
+      }
+    });
   }
+
+
 
   // Adjust handleKeydown to ensure it's only for Enter key and stops propagation
   function handleKeydown(event) {
@@ -59,6 +84,8 @@
 
 <div
 class="popover-button-container"
+aria-label="More information"
+aria-expanded={isOpen}
 use:popperRef
 on:mousedown={handleMousedown} 
 on:click={togglePopover} 

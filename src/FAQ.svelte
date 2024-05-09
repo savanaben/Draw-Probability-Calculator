@@ -4,6 +4,9 @@
 
   let openItem = null;
 
+
+
+
   function toggleItem(index) {
       openItem = openItem === index ? null : index;
   }
@@ -60,8 +63,15 @@
       padding: 1em;
     }
 
+      /* Media query for mobile devices */
+@media (max-width: 480px) {
+  .accordion {
+    padding: 1rem 0; /* Adjusted padding for mobile */
+  }
+}
+
 .accordion-item:hover {
-  background-color: white;
+  background-color: white !important;
 }
 
     .accordion-item {
@@ -71,6 +81,7 @@
     border-color: rgb(124, 124, 124);
     border-width: 1px;
   }
+
 
   .answer {
     overflow: hidden;
@@ -102,10 +113,13 @@
 
   </style>
   
+
+
   <div class="accordion">
     {#each faqs as {question, answer}, index}
         <div class="accordion-item"
-             tabindex="0" 
+        style="background-color: {openItem === index ? 'white' : 'transparent'};"
+        tabindex="0" 
              on:click={(event) => handleAccordionItemClick(event, index)}
              on:keydown={(event) => handleKeydown(event, index)}>
             <h3>{question}</h3>
