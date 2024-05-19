@@ -693,7 +693,7 @@ function selectInput(event) {
       {#each Object.entries(manaRequirements) as [key, amount]}
         {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
           <div class="mana-requirement">
-            <label for="{key}-requirement">
+            <label for="{key.replace(/\s+/g, '_')}-requirement">
               {#if manaIcons[key]}
                 <img src={key === 'ANY' ? getAnyIcon(amount) : manaIcons[key]} alt="{key} mana icon" class="mana-icon" />&nbsp;:
               {:else}
@@ -701,7 +701,7 @@ function selectInput(event) {
               {/if}
             </label>
             <input
-            id="{key}-requirement"
+            id="{key.replace(/\s+/g, '_')}-requirement"
             type="number"  
             min="0"
             value={manaRequirements[key]}
@@ -718,9 +718,9 @@ function selectInput(event) {
 
         {#each Array.from(uniqueAttributes) as attr}
         <div class="mana-requirement">
-            <label for="custom-{attr}">{attr}: </label>
-            <input
-                id="custom-{attr}"
+          <label for="custom-{attr.replace(/\s+/g, '_')}">{attr}: </label>
+          <input
+                id="custom-{attr.replace(/\s+/g, '_')}"
                 type="number"
                 min="0"
                 value={customAttributeRequirements[attr]}

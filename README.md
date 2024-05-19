@@ -20,9 +20,9 @@ This tool applies hypergeometric and monte carlo methods of calculation to deter
 
  ## Known Accessibility to-do
  - Contents within the monte accordion (Advanced mana and...) need to not be in the tab index when the accordion is closed.
- - Focus needs to move to "cancel simulation" when the simulation modal opens. 
+ - Focus needs to move to "cancel simulation" when the simulation modal opens. This is partially fixed but the focus visual state is not showing?? 
  - screen reader
-   - For some reason, the custom groups title label is not connecting to the input in step 2. Not sure why, as the mana inputs are. 
+   - ~~For some reason, the custom groups title label is not connecting to the input in step 2. Not sure why, as the mana inputs are.~~ 
    - In step 2, the mana labels need to be better (not "W", "plans"). Need to be careful not to mess with this as that value ("W") is used in the simulation too. 
    - more info popovers need toggle/open/closed declaration. 
    - I think the mana and custom cards need sub-grouping. like, a parent focus state that says "custom group name", and then you arrow or tab into that group. I can imagine screen readers would have some trouble connecting/grouping. 

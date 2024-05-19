@@ -1063,7 +1063,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         {/each}
         {:else}
          <div class="placeholder">
-               Add a group or run a simulation above to see output probabilities.
+               Add a group or run a simulation above to show output probabilities.
          </div>
         {/if}
     </div>
@@ -1201,7 +1201,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         flex-direction: column;
         align-items: center;
         margin-right: 5px;
-        position: relative;
+        position: sticky;
     }
     
     .rectangle {

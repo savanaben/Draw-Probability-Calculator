@@ -1,13 +1,14 @@
 <script>
   import { createPopperActions } from 'svelte-popperjs';
-  import { writable } from 'svelte/store';
-  import { activePopover } from './colorStore.js';
-
+  import { writable, get } from 'svelte/store';
+  import { activePopover, getNextUniqueId } from './colorStore.js';
 
   export let placement = 'top';
   let show = writable(false);
-  let isOpen = false; // Local variable to bind to $show
-  const componentId = Date.now(); // Unique identifier for each popover instance
+  const componentId = getNextUniqueId(); // Generates a unique ID for each popover instance
+
+  console.log(`Popover initialized with componentId: ${componentId}`);
+
 
   const [popperRef, popperContent, getPopperInstance] = createPopperActions({
     placement,
@@ -18,15 +19,37 @@
     ],
   });
 
+  // Reactive statement to close this popover if it's not the active one
+  $: if ($activePopover !== componentId && get(show)) {
+    console.log(`Closing popover with componentId: ${componentId} because activePopover is: ${$activePopover}`);
+    show.set(false);
+  }
+
+  function togglePopover(event) {
+    event.stopPropagation(); // Prevent click outside logic from triggering
+    if (!get(show)) {
+      console.log(`Opening popover with componentId: ${componentId}`);
+
+      activePopover.set(componentId); // Set this popover as the active one
+      show.set(true);
+    } else {
+      console.log(`Closing popover with componentId: ${componentId}`);
+
+      activePopover.set(null); // Clear the active popover if this popover is being closed
+      show.set(false);
+    }
+  }
+
+  function handleMousedown(event) {
+    event.stopPropagation(); // Prevent click outside logic from triggering
+    // This function might not be necessary if togglePopover is handling the logic
+  }
+
   // Function to close the popover when focus moves away from the button
+  // Consider if you need this based on your UX requirements
   function handleBlur(event) {
     show.set(false); // Close the popover
   }
-
-
-  // Bind the local variable to the show store
-   $: isOpen = $show;
-
 
   function clickOutside(node) {
     const handleClick = event => {
@@ -44,55 +67,25 @@
     };
   }
 
-  // Adjust togglePopover to only stop propagation
-  function togglePopover(event) {
-    event.stopPropagation(); // Prevent click outside logic from triggering
-    // Do not toggle here; let mousedown handle it
-  }
-
-
-  // Subscribe to the activePopover store
-  activePopover.subscribe($activePopover => {
-    if ($activePopover !== componentId) {
-      show.set(false);
-    }
-  });
-
-  function handleMousedown(event) {
-    event.stopPropagation(); // Prevent click outside logic from triggering
-    show.update(current => {
-      if (current) {
-        activePopover.set(null); // If closing this popover, clear the active popover
-        return false;
-      } else {
-        activePopover.set(componentId); // Set this popover as the active one
-        return true;
-      }
-    });
-  }
-
-
-
   // Adjust handleKeydown to ensure it's only for Enter key and stops propagation
   function handleKeydown(event) {
     if (event.key === 'Enter') {
       event.stopPropagation(); // Prevent any potential bubbling issues
-      show.update(current => !current);
+      // Toggle logic might need to be adjusted based on how you want Enter to behave
+      togglePopover(event);
     }
   }
 </script>
 
 <div
-class="popover-button-container"
-aria-label="More information"
-aria-expanded={isOpen}
-use:popperRef
-on:mousedown={handleMousedown} 
-on:click={togglePopover} 
-on:keydown={handleKeydown}
-on:blur={handleBlur}
-
-tabindex="0"
+  class="popover-button-container"
+  aria-label="More information"
+  use:popperRef
+  on:mousedown={handleMousedown} 
+  on:click={togglePopover} 
+  on:keydown={handleKeydown}
+  on:blur={handleBlur}
+  tabindex="0"
 >
   <slot name="trigger"></slot>
 </div>
@@ -118,5 +111,4 @@ tabindex="0"
   .popover-button-container {
     display: inline-block;
   }
-
 </style>
