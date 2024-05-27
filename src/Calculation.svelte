@@ -1,5 +1,5 @@
 <script>
-    import { groupColors, neededCombinationsCount } from './colorStore.js';
+    import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
     import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, shouldResetSimulation } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
@@ -11,7 +11,8 @@
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 
-
+  // Log the value of numberOfTurns
+  $: console.log('numberOfTurns:', $numberOfTurns);
     
     function selectInput(event) {
     event.target.select(); // Selects all text in the input upon focus
@@ -77,14 +78,14 @@
         let totalCardsSeen = InitialDrawSize;
         let adjustedDeckSize = deckSize;
     
-        for (let turn = 1; turn <= numberOfTurns; turn++) {
-            totalCardsSeen += 1;
-            let probAtLeastDesiredA = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, adjustedDeckSize, totalCardsSeen);
-    
-            if (mulliganCount > 0) {
-                let probNotDrawingCombination = Math.pow((1 - initialProb), mulliganCount); // (1 - P) for each mulligan
-                probAtLeastDesiredA = 1 - (probNotDrawingCombination * (1 - probAtLeastDesiredA));
-            }
+        for (let turn = 1; turn <= $numberOfTurns.length; turn++) {
+        totalCardsSeen += $numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
+        let probAtLeastDesiredA = multivariateHypergeometricCDF(groupSizes, groupCardsToDraw, adjustedDeckSize, totalCardsSeen);
+
+        if (mulliganCount > 0) {
+            let probNotDrawingCombination = Math.pow((1 - initialProb), mulliganCount); // (1 - P) for each mulligan
+            probAtLeastDesiredA = 1 - (probNotDrawingCombination * (1 - probAtLeastDesiredA));
+        }
     
             groupResults.push({ turn, probability: probAtLeastDesiredA });
         }
@@ -108,14 +109,15 @@
     
     
         let results = {};
-        let numberOfTurns = 5; // Calculate probabilities up to certain numer of turn
         let showPopover = false;
 
     
     
         // Reactive statement to calculate probabilities when groups or numberOfTurns changes
-        $: if (groups.length > 0 || numberOfTurns) {
+        $: if (groups.length > 0 || $numberOfTurns) {
         calculateProbabilities();
+        console.log('Results after calculateProbabilities:', results);
+
     }
     
     // //Reactive statement to run monte carlo simulation on groups or other changes (live vs button)
@@ -160,39 +162,78 @@
     
     
     
+//before I messed with draws PER TURN
+
+    // function calculateSingleGroup(group) {
+    //     const groupResults = [];
+    //     let totalCardsSeen = InitialDrawSize;
+    
+    //     // Calculate the probability for turn 0 without mulligans
+    //     let initialProb = 0;
+    //     for (let k = group.cardsToDraw; k <= Math.min(totalCardsSeen, group.size); k++) {
+    //         initialProb += hypergeometricCDF(k, deckSize, group.size, totalCardsSeen);
+    //     }
+    
+    //     // Adjust the initial probability to account for mulligans
+    //     let turn0Prob = 1 - Math.pow((1 - initialProb), mulliganCount + 1);
+    //     groupResults.push({ turn: 0, probability: turn0Prob });
+    
+    //     for (let turn = 1; turn <= $numberOfTurns; turn++) {
+    //         totalCardsSeen += 1;
+    //         let probAtLeastDesiredA = 0;
+    //         for (let k = group.cardsToDraw; k <= Math.min(totalCardsSeen, group.size); k++) {
+    //             probAtLeastDesiredA += hypergeometricCDF(k, deckSize, group.size, totalCardsSeen);
+    //         }
+    
+    //         if (mulliganCount > 0) {
+    //             let probNotDrawingCombination = Math.pow((1 - initialProb), mulliganCount); // (1 - P) for each mulligan
+    //             probAtLeastDesiredA = 1 - (probNotDrawingCombination * (1 - probAtLeastDesiredA));
+    //         }
+    
+    //         groupResults.push({ turn, probability: probAtLeastDesiredA });
+    //     }
+    
+    //     results[group.name] = groupResults;
+    // }
+    
+    
+
     function calculateSingleGroup(group) {
         const groupResults = [];
         let totalCardsSeen = InitialDrawSize;
-    
+
         // Calculate the probability for turn 0 without mulligans
         let initialProb = 0;
         for (let k = group.cardsToDraw; k <= Math.min(totalCardsSeen, group.size); k++) {
             initialProb += hypergeometricCDF(k, deckSize, group.size, totalCardsSeen);
         }
-    
+
         // Adjust the initial probability to account for mulligans
         let turn0Prob = 1 - Math.pow((1 - initialProb), mulliganCount + 1);
         groupResults.push({ turn: 0, probability: turn0Prob });
-    
-        for (let turn = 1; turn <= numberOfTurns; turn++) {
-            totalCardsSeen += 1;
+
+        console.log(`Turn 0 - Group: ${group.name}, Probability: ${turn0Prob}`);
+
+
+        for (let turn = 1; turn <= $numberOfTurns.length; turn++) {
+            totalCardsSeen += $numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
             let probAtLeastDesiredA = 0;
             for (let k = group.cardsToDraw; k <= Math.min(totalCardsSeen, group.size); k++) {
                 probAtLeastDesiredA += hypergeometricCDF(k, deckSize, group.size, totalCardsSeen);
             }
-    
+
             if (mulliganCount > 0) {
                 let probNotDrawingCombination = Math.pow((1 - initialProb), mulliganCount); // (1 - P) for each mulligan
                 probAtLeastDesiredA = 1 - (probNotDrawingCombination * (1 - probAtLeastDesiredA));
             }
-    
+
             groupResults.push({ turn, probability: probAtLeastDesiredA });
         }
-    
+
         results[group.name] = groupResults;
+        console.log(`Group Results for ${group.name}:`, groupResults);
+
     }
-    
-    
     
     
     //the following is the start of mana probability calculations -------------------
@@ -476,9 +517,9 @@
 //     });
 // }
 
-    function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
+function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
     return new Promise((resolve, reject) => {
-        const probabilitiesByTurn = Array.from({ length: numberOfTurns + 1 }, () => 0);
+        const probabilitiesByTurn = Array.from({ length: numberOfTurns.length + 1 }, () => 0); // Updated to use numberOfTurns.length
         const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
         const numDummyCards = Math.max(deckSize - totalLands, 0);
         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
@@ -526,10 +567,11 @@
 
                 // Simulate drawing for subsequent turns if requirements not met in mulligans
                 if (metRequirementTurn == -1) {
-                    for (let turn = 1; turn <= numberOfTurns; turn++) {
-                        const newCard = _.sample(remainingDeck);
-                        hand.push(newCard);
-                        remainingDeck = removeDrawnCardsFromDeck(remainingDeck, [newCard]);
+                    for (let turn = 1; turn <= numberOfTurns.length; turn++) { // Updated to use numberOfTurns.length
+                        const cardsToDraw = numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
+                        const newCards = _.sampleSize(remainingDeck, cardsToDraw); // Draw multiple cards based on numberOfTurns
+                        hand.push(...newCards);
+                        remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
 
                         if (handMeetsRequirements(hand, preparedCombinations)) {
                             probabilitiesByTurn[turn]++;
@@ -541,7 +583,7 @@
 
                 // Mark all subsequent turns as meeting requirements once the requirement is met
                 if (metRequirementTurn != -1) {
-                    for (let turn = metRequirementTurn + 1; turn <= numberOfTurns; turn++) {
+                    for (let turn = metRequirementTurn + 1; turn <= numberOfTurns.length; turn++) { // Updated to use numberOfTurns.length
                         probabilitiesByTurn[turn]++;
                     }
                 }
@@ -640,7 +682,7 @@ async function identifyProfiles(numIterations) {
         deckSize,
         mulliganCount,
         InitialDrawSize,
-        numberOfTurns,
+        $numberOfTurns,
         numIterations
     );
 
@@ -1008,12 +1050,14 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         }
     
      // Reactive statement to check if there's any output to display
-     $: hasOutput = generateTurnsArray(numberOfTurns).some(turn => createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0);
+     $: hasOutput = generateTurnsArray($numberOfTurns).some(turn => createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0);
 
-
-        function generateTurnsArray(numberOfTurns) {
-        return Array.from({ length: numberOfTurns + 1 }, (_, i) => i);
-    }
+// Function to generate turns array
+$: generateTurnsArray = () => {
+    const array = Array.from({ length: $numberOfTurns.length + 1 }, (_, i) => i);
+    console.log('Generated Turns Array:', array);
+    return array;
+}
     
     
     </script>
@@ -1034,12 +1078,12 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
     {/if}
     <div class="output-diagram">
         {#if hasOutput}
-        {#each generateTurnsArray(numberOfTurns) as _, turn}
+        {#each generateTurnsArray($numberOfTurns.length) as _, turn}
         {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}
             <div class="turn-row">
                 <div class="turn-label">
                     Turn {turn}:<br>
-                    <i>({turn === 0 ? `Draw ${InitialDrawSize}` : 'Draw 1'})</i>
+                    <i>({turn === 0 ? `Draw ${InitialDrawSize}` : `Draw ${$numberOfTurns[turn - 1]}`})</i>
                 </div>
                 <div class="card-rectangles">
                     {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
@@ -1099,12 +1143,12 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
         {/each}
     </div> -->
     
-    <div class="deck-size-container">
+    <!-- <div class="deck-size-container">
         <label for="numberTurns">Number of turns:</label>
         <input type="number" class="deckSize" id="numberTurns" bind:value={numberOfTurns} min="1" 
         on:focus="{selectInput}"
         />
-    </div>
+    </div> -->
     
     <style>
     

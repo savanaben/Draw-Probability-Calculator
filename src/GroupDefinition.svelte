@@ -1,12 +1,15 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import { groupColors } from './colorStore.js';
+    import { groupColors, numberOfTurns } from './colorStore.js';
     import Popover from './Popover.svelte';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import MonteAccordion from './MonteAccordion.svelte';
     import { trackEvent } from './analytics.js';
+    import TurnDrawsAccordion from './TurnDrawsAccordion.svelte';
+    import { writable } from 'svelte/store';
+
 
 
     const dispatch = createEventDispatcher();
@@ -14,13 +17,32 @@
     let groups = [{ index: 0, name: '', size: 1, cardsToDraw: 1, link: '' }]; // Initial group with name 'Category 1'
     let deckSize = 99;
     let InitialDrawSize = 7;
-    console.log("Initial InitialDrawSize:", InitialDrawSize);
     let mulliganCount = 0;
     let colorIndex = 0;
     let showPopover = false;
     let mulliganCountString = "0"; // Use a string for the binding
+    let numberOfTurnsInput = 5; // Default value
 
 
+
+    // Function to handle draw amount changes
+    function handleDrawAmountChange(event) {
+        const { turn, value } = event.detail;
+        numberOfTurns.update(turns => {
+            turns[turn] = value;
+            return turns;
+        });
+    }
+
+
+    function handleNumberOfTurnsChange(event) {
+        const value = parseInt(event.target.value, 10);
+        numberOfTurnsInput = value; // Update the local variable
+        numberOfTurns.update(turns => {
+            const newTurns = Array.from({ length: value }, (_, i) => turns[i] || 1);
+            return newTurns;
+        });
+    }
 
 
 // function to handle button clicks and send analytics------------------
@@ -231,7 +253,7 @@ function handleAddGroupClick() {
         </div>
 
         <div class="deck-size-container">
-            <label for="cardsDrawn">Initial cards drawn:</label>
+            <label for="cardsDrawn">Initial hand size:</label>
             <input type="number" class="deckSize" id="cardsDrawn" bind:value={InitialDrawSize} min="1" 
             on:focus="{selectInput}"
             />
@@ -244,7 +266,18 @@ function handleAddGroupClick() {
             />
         </div>
 
+        <div class="deck-size-container">
+            <label for="numberTurns">Number of turns:</label>
+            <input type="number" class="deckSize" id="numberTurns" min="1" 
+                bind:value={numberOfTurnsInput}
+                on:focus="{selectInput}"
+                on:change="{handleNumberOfTurnsChange}"
+            />
+        </div>
+
     </div>
+
+    <TurnDrawsAccordion on:drawAmountChange={handleDrawAmountChange} />
 
 </div>
 

@@ -514,7 +514,6 @@ function selectInput(event) {
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  height: 28px;
   margin: -0.7rem;
   padding: 0.7rem;
 }
@@ -614,7 +613,15 @@ function selectInput(event) {
       on:mouseleave={() => isHovering = false}
       tabindex="0"
       >
-      <h3>Advanced mana and attribute probabilities</h3>
+<h3 style="font-size:18px; display: flex; align-items: center; gap:3px">
+    Advanced mana and attribute probabilities
+    &nbsp;
+    <img src={WIcon} alt="Plains" class="mana-icon" />
+    <img src={UIcon} alt="Swamp" class="mana-icon" />
+    <img src={BIcon} alt="Island" class="mana-icon" />
+    <img src={RIcon} alt="Mountain" class="mana-icon" />
+    <img src={GIcon} alt="Forest" class="mana-icon" />
+</h3>
     </div>
       <div
       class="answer"
