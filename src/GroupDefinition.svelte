@@ -359,7 +359,7 @@ function handleAddGroupClick() {
         justify-content: space-between;
         align-items: center;
         justify-content: flex-start;
-        margin-top: 12px;
+        margin-top: 0.5rem;
         column-gap: 2rem;
         row-gap: 0.5rem;
     }
@@ -417,10 +417,7 @@ max-width: 65px;
   margin-bottom: 0;
 }
 
-    select {
-        margin:0;
-        background-color: white;
-    }
+
     option {
         margin:0;
         border-radius: 0px;

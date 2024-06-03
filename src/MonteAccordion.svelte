@@ -26,6 +26,7 @@ import AnyIcon6 from './mana-icons/any-6.svg';
 import AnyIcon7 from './mana-icons/any-7.svg';
 import AnyIcon8 from './mana-icons/any-8.svg';
 import AnyIcon9 from './mana-icons/any-9plus.svg';
+    import { faYenSign } from '@fortawesome/free-solid-svg-icons';
 
 const manaIcons = {
     W: WIcon,
@@ -390,6 +391,78 @@ function handleAttributeUpdate(newAttr, oldAttr, cardId) {
 
 
 
+const rampCards = [
+    {
+        TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+        ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+        CanProduce: 2,
+        AbilityCost: 0,
+        AvailableTurnPlayed: 1,
+        amount: 7
+    },
+    {
+        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+        ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+        CanProduce: 1,
+        AbilityCost: 0,
+        AvailableTurnPlayed: 0,
+        amount: 20
+    }
+    // {
+    //     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 2 },
+    //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    //     CanProduce: 1,
+    //     AbilityCost: 0,
+    //     AvailableTurnPlayed: 0,
+    //     amount: 7
+    // },
+    // {
+    //     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+    //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    //     CanProduce: 1,
+    //     AbilityCost: 0,
+    //     AvailableTurnPlayed: 0,
+    //     amount: 7
+    // }
+    // {
+    //     TotalManaCost: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 0 },
+    //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 0 },
+    //     CanProduce: 2,
+    //     AbilityCost: 1,
+    //     amount: 1
+    // },
+    // {
+    //     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 1, C: 1, ANY: 0 },
+    //     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 1, C: 1, ANY: 0 },
+    //     CanProduce: 2,
+    //     AbilityCost: 1,
+    //     amount: 1
+    // },
+    // {
+    //     TotalManaCost: { B: 1, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+    //     ColorsCanProduce: { B: 1, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+    //     CanProduce: 2,
+    //     AbilityCost: 1,
+    //     amount: 1
+    // },
+    // {
+    //     TotalManaCost: { B: 0, U: 1, G: 0, R: 1, W: 0, C: 0, ANY: 0 },
+    //     ColorsCanProduce: { B: 0, U: 1, G: 0, R: 1, W: 0, C: 0, ANY: 0 },
+    //     CanProduce: 2,
+    //     AbilityCost: 1,
+    //     amount: 1
+    // }
+];
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -421,6 +494,15 @@ function prepareManaCardsForCalculation() {
             preparedCards.push(cardEntry);
         }
     });
+
+
+    // Add logic for ramp cards
+    rampCards.forEach(card => {
+        for (let i = 0; i < card.amount; i++) {
+            preparedCards.push(card);
+        }
+    });
+
     return preparedCards;
 }
 

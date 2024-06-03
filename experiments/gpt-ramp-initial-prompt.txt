@@ -1,0 +1,36 @@
+I have a new idea and want to consider feasibility. this idea will focus on the identifyProfiles and monteCarloSimulation functions. 
+
+I'd like the monte carlo simulation to support a new card type called "ramp". ramp cards will have a TotalManaCost, which could be something like "{ B: 1, U: 1, G: 0, R: 0, W: 0, C: 0, ANY: 0}". they will also have a "colors can produce", which would be the same format, like { B: 1, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0}. they will also have an amount mana produced, which will be something like [CanProduce:2}. we assume unique production of mana, so in this example with CanProduce of 2, we can produce 1 B and 1 G. If CanProduce:1 in this example, we'd be able to produce 1 B or 1 G. Finally, there will be an "AbilityCost:1" value. In this example, that'd mean it costs 1 mana of any color/type to produce the CanProduce amount. 
+
+Now, the ramp cards will be shuffled into the monte carlo simulation deck with the rest of the prepared cards. 
+
+as the simulation runs and draws cards, the following logic will apply. 
+
+there will be a few tracked values
+- AvailableManaPerTurn - amount of mana available to play ramp spells. AvailableMana equals the turn number plus the sum of any prior "canProduce" amounts from any ramp spells already played.
+- AvailableColors - Available colors will be in a format like { B: 1, U: 1, G: 0, R: 0, W: 0, C: 0}, and will  be based on what mana the lands and ramp you draw can produce. 
+
+
+- if a ramp card is drawn, it's total cost (the sum of the TotalManaCost amounts) will be compared against the "AvailableManaPerTurn" value. If the TotalManaCost  is less than the AvailableManaPerTurn and the AvailableColors and satisfy the TotalManaCost colors, the ramp card is played. Once played, the ramp cards total cost (the sum of the TotalManaCost amounts) is subtracted from the AvailableManaPerTurn. also, the ramp cards TotalManaCost colors are subtracted from the AvailableColors. Finally, since the ramp card has been played, it's "colors can produce" will be added to the AvailableColors for the next turn calculations, and it's CanProduce value will be added to the AvailableManaPerTurn for the next turn calculations. If there are other ramp cards in hand, they can also be played (multiple ramp cards can be played on one turn) as long as their is enough AvailableManaPerTurn remaining and the AvailableColors fullfill the ramp cards TotalManaCost color requirements. 
+
+once these calcualtions are complete and no more ramp spells can be played, the process will start again on the next turn. new card(s) will be drawn, the hand will be checked for ramp spells, and if there are any, they will attempt to be played. 
+
+please analyze this logic. How could this be implemented in a simple way that does not disrupt existing logic in the monteCarloSimulation. consider if a seperate function could work and be added to the monteCarloSimulation. or, if there is a better method, discuss it. consider the larger picture goal - to simulate drawing and playing ramp spells, and how that adds to the mana you have. 
+
+
+--------------------------------------------------------------
+
+
+
+
+alright let's work on fixing the playRampCards logic. let's try to break this down more. currently we have the availableManaPerTurn. let's change that to availableMana, availableRamp, and totalAvailableMana. availableMana will work like the following. 
+
+availableMana equals the turn, unless the amount of mana/land cards in the hand is lower. in the case where the amount of land cards in the hand is lower than the turn, the availableMana then equals the number of land cards in the hand. 
+
+availableRamp will equal the total CanProduce value of all played ramp. note that the ramp has to be played to contribute to the availableRamp. Also, when ramp is played, it needs to be on a 1 turn delay before it is added to the availableRamp total. for example, it's turn 1 and my availableRamp value is at 0. if I play a ramp spell on turn 1 and it has a CanProduce value of 1, then on turn 1 my availableRamp will still be 0. on turn 2, my availableRamp will go up to 1. 
+
+totalAvailableMana will be the sum of availableRamp and availableMana. 
+
+Finally, there will be a manaRemainingThisTurn. this value will equal the totalAvailableMana minus the TotalManaCost of any ramp played this turn. for example, say my totalAvailableMana was 4. I then played a ramp card with the total mana cost attached (W:2). then, my updated manaRemainingThisTurn would become 2 (4-2 = 2). 
+
+update the playRampCards function logic to make these changes. add console logs so I can track how these variables change and update. just reprint the function(s) changed not the whole file

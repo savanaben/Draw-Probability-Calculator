@@ -62,7 +62,11 @@ input:disabled {
 
 select {
 	cursor: pointer;
+	margin:0;
+	background-color: white;
 }
+
+
 
 button {
 	margin: 0;
