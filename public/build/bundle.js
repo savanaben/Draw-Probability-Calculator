@@ -261,9 +261,18 @@ var app = (function () {
             select.selectedIndex = -1; // no option should be selected
         }
     }
+    function select_options(select, value) {
+        for (let i = 0; i < select.options.length; i += 1) {
+            const option = select.options[i];
+            option.selected = ~value.indexOf(option.__value);
+        }
+    }
     function select_value(select) {
         const selected_option = select.querySelector(':checked');
         return selected_option && selected_option.__value;
+    }
+    function select_multiple_value(select) {
+        return [].map.call(select.querySelectorAll(':checked'), option => option.__value);
     }
     function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
         const e = document.createEvent('CustomEvent');
@@ -1146,6 +1155,20 @@ var app = (function () {
     function getNextUniqueId() {
       return `popover-${idCounter++}`;
     }
+
+    // Mulligan configuration store
+    const mulliganConfig = writable({
+        maxMulligans: 3, // Max amount of mulligans (0 to 7)
+        firstMulliganFree: false, // First mulligan is free (true/false)
+        freeMulliganTillLands: false, // mulligan until meeting min/max land requirements (true/false)
+        minLandsInHand: 2, // Min amount of lands in hand (0 to 7)
+        maxLandsInHand: 5, // Max amount of lands in hand (0 to 7)
+        allowTwoLandsPlusRamp: false, // Allow 2 lands + playable ramp (true/false)
+        mulliganIfLandsCanOnlyMake: '', // Mulligan if lands can only make (color)
+        mulliganUnlessOpeningHandCanMake: [], // Mulligan unless opening hand can make (array of colors)
+        rampMustBePlayable: false, // If ramp drawn, must be playable (true/false)
+        mustHaveRamp: false // Must have ramp (true/false)
+    });
 
     var top = 'top';
     var bottom = 'bottom';
@@ -8517,14 +8540,14 @@ var app = (function () {
     	return child_ctx;
     }
 
-    function get_each_context_1$2(ctx, list, i) {
+    function get_each_context_1$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[59] = list[i][0];
     	child_ctx[60] = list[i][1];
     	return child_ctx;
     }
 
-    function get_each_context_2$1(ctx, list, i) {
+    function get_each_context_2$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[63] = list[i];
     	child_ctx[64] = list;
@@ -8532,7 +8555,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    function get_each_context_3(ctx, list, i) {
+    function get_each_context_3$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[63] = list[i];
     	child_ctx[66] = list;
@@ -8540,7 +8563,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (716:8) 
+    // (746:8) 
     function create_trigger_slot_2$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -8563,7 +8586,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 715, 8, 20284);
+    			add_location(button, file$7, 745, 8, 20885);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8597,14 +8620,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_2$1.name,
     		type: "slot",
-    		source: "(716:8) ",
+    		source: "(746:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (719:8) 
+    // (749:8) 
     function create_content_slot_2$1(ctx) {
     	let div;
     	let p0;
@@ -8635,18 +8658,18 @@ var app = (function () {
     			p2.textContent = "My research has only come up with one other method to find this kind of probability - the inclusion exclusion principle. And that seemed hella hard to implement, so I went with this.";
     			attr_dev(a0, "href", "https://en.wikipedia.org/wiki/Monte_Carlo_method");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$7, 719, 76, 20628);
+    			add_location(a0, file$7, 749, 76, 21229);
     			attr_dev(a1, "href", "https://en.wikipedia.org/wiki/Hypergeometric_distribution");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$7, 719, 381, 20933);
+    			add_location(a1, file$7, 749, 381, 21534);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 719, 10, 20562);
+    			add_location(p0, file$7, 749, 10, 21163);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 720, 12, 21221);
+    			add_location(p1, file$7, 750, 12, 21822);
     			attr_dev(p2, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p2, file$7, 721, 10, 21497);
+    			add_location(p2, file$7, 751, 10, 22098);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 718, 8, 20530);
+    			add_location(div, file$7, 748, 8, 21131);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8670,15 +8693,15 @@ var app = (function () {
     		block,
     		id: create_content_slot_2$1.name,
     		type: "slot",
-    		source: "(719:8) ",
+    		source: "(749:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (732:8) {#each manaCards as card (card.id)}
-    function create_each_block_3(key_1, ctx) {
+    // (762:8) {#each manaCards as card (card.id)}
+    function create_each_block_3$1(key_1, ctx) {
     	let first;
     	let manacard;
     	let updating_card;
@@ -8744,17 +8767,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_3.name,
+    		id: create_each_block_3$1.name,
     		type: "each",
-    		source: "(732:8) {#each manaCards as card (card.id)}",
+    		source: "(762:8) {#each manaCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (749:3) {#each customCards as card (card.id)}
-    function create_each_block_2$1(key_1, ctx) {
+    // (779:3) {#each customCards as card (card.id)}
+    function create_each_block_2$2(key_1, ctx) {
     	let first;
     	let customcard;
     	let updating_card;
@@ -8827,16 +8850,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_2$1.name,
+    		id: create_each_block_2$2.name,
     		type: "each",
-    		source: "(749:3) {#each customCards as card (card.id)}",
+    		source: "(779:3) {#each customCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (763:10) 
+    // (793:10) 
     function create_trigger_slot_1$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -8859,7 +8882,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 762, 10, 23196);
+    			add_location(button, file$7, 792, 10, 23797);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8893,14 +8916,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1$1.name,
     		type: "slot",
-    		source: "(763:10) ",
+    		source: "(793:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (766:10) 
+    // (796:10) 
     function create_content_slot_1$1(ctx) {
     	let div;
     	let p0;
@@ -8916,11 +8939,11 @@ var app = (function () {
     			p1 = element("p");
     			p1.textContent = "In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.";
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 766, 12, 23482);
+    			add_location(p0, file$7, 796, 12, 24083);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 767, 12, 23952);
+    			add_location(p1, file$7, 797, 12, 24553);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 765, 10, 23448);
+    			add_location(div, file$7, 795, 10, 24049);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8938,14 +8961,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_1$1.name,
     		type: "slot",
-    		source: "(766:10) ",
+    		source: "(796:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (783:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
+    // (813:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
     function create_if_block$3(ctx) {
     	let div;
     	let label;
@@ -8978,15 +9001,15 @@ var app = (function () {
     			input = element("input");
     			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[59].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 784, 12, 24905);
+    			add_location(label, file$7, 814, 12, 25506);
     			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[59].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
     			input.value = input_value_value = /*manaRequirements*/ ctx[2][/*key*/ ctx[59]];
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 791, 12, 25281);
+    			add_location(input, file$7, 821, 12, 25882);
     			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 783, 10, 24861);
+    			add_location(div, file$7, 813, 10, 25462);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9043,14 +9066,14 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(783:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
+    		source: "(813:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (788:14) {:else}
+    // (818:14) {:else}
     function create_else_block$1(ctx) {
     	let t0_value = /*key*/ ctx[59] + "";
     	let t0;
@@ -9078,14 +9101,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(788:14) {:else}",
+    		source: "(818:14) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (786:14) {#if manaIcons[key]}
+    // (816:14) {#if manaIcons[key]}
     function create_if_block_1$2(ctx) {
     	let img;
     	let img_src_value;
@@ -9103,7 +9126,7 @@ var app = (function () {
 
     			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[59] + " mana icon"));
     			attr_dev(img, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img, file$7, 786, 16, 25011);
+    			add_location(img, file$7, 816, 16, 25612);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -9130,15 +9153,15 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(786:14) {#if manaIcons[key]}",
+    		source: "(816:14) {#if manaIcons[key]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (782:6) {#each Object.entries(manaRequirements) as [key, amount]}
-    function create_each_block_1$2(ctx) {
+    // (812:6) {#each Object.entries(manaRequirements) as [key, amount]}
+    function create_each_block_1$3(ctx) {
     	let show_if = /*activeManaTypes*/ ctx[8][/*key*/ ctx[59]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
     	let if_block_anchor;
 
@@ -9182,16 +9205,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_1$2.name,
+    		id: create_each_block_1$3.name,
     		type: "each",
-    		source: "(782:6) {#each Object.entries(manaRequirements) as [key, amount]}",
+    		source: "(812:6) {#each Object.entries(manaRequirements) as [key, amount]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (808:8) {#each Array.from(uniqueAttributes) as attr}
+    // (838:8) {#each Array.from(uniqueAttributes) as attr}
     function create_each_block$4(ctx) {
     	let div;
     	let label;
@@ -9222,15 +9245,15 @@ var app = (function () {
     			t3 = space();
     			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[56].replace(/\s+/g, '_'));
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 809, 10, 25725);
+    			add_location(label, file$7, 839, 10, 26326);
     			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[56].replace(/\s+/g, '_'));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
     			input.value = input_value_value = /*customAttributeRequirements*/ ctx[3][/*attr*/ ctx[56]];
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 810, 10, 25801);
+    			add_location(input, file$7, 840, 10, 26402);
     			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 808, 8, 25683);
+    			add_location(div, file$7, 838, 8, 26284);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9277,14 +9300,14 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(808:8) {#each Array.from(uniqueAttributes) as attr}",
+    		source: "(838:8) {#each Array.from(uniqueAttributes) as attr}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (841:10) 
+    // (871:10) 
     function create_trigger_slot$3(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -9308,7 +9331,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 840, 10, 26965);
+    			add_location(button, file$7, 870, 10, 27566);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9342,14 +9365,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$3.name,
     		type: "slot",
-    		source: "(841:10) ",
+    		source: "(871:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (844:10) 
+    // (874:10) 
     function create_content_slot$3(ctx) {
     	let div;
     	let p0;
@@ -9366,13 +9389,13 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.";
-    			add_location(b, file$7, 844, 58, 27323);
+    			add_location(b, file$7, 874, 58, 27924);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 844, 12, 27277);
+    			add_location(p0, file$7, 874, 12, 27878);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 845, 12, 27393);
+    			add_location(p1, file$7, 875, 12, 27994);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 843, 10, 27243);
+    			add_location(div, file$7, 873, 10, 27844);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9391,7 +9414,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$3.name,
     		type: "slot",
-    		source: "(844:10) ",
+    		source: "(874:10) ",
     		ctx
     	});
 
@@ -9509,23 +9532,23 @@ var app = (function () {
     	let each_value_3 = /*manaCards*/ ctx[0];
     	validate_each_argument(each_value_3);
     	const get_key = ctx => /*card*/ ctx[63].id;
-    	validate_each_keys(ctx, each_value_3, get_each_context_3, get_key);
+    	validate_each_keys(ctx, each_value_3, get_each_context_3$1, get_key);
 
     	for (let i = 0; i < each_value_3.length; i += 1) {
-    		let child_ctx = get_each_context_3(ctx, each_value_3, i);
+    		let child_ctx = get_each_context_3$1(ctx, each_value_3, i);
     		let key = get_key(child_ctx);
-    		each0_lookup.set(key, each_blocks_3[i] = create_each_block_3(key, child_ctx));
+    		each0_lookup.set(key, each_blocks_3[i] = create_each_block_3$1(key, child_ctx));
     	}
 
     	let each_value_2 = /*customCards*/ ctx[1];
     	validate_each_argument(each_value_2);
     	const get_key_1 = ctx => /*card*/ ctx[63].id;
-    	validate_each_keys(ctx, each_value_2, get_each_context_2$1, get_key_1);
+    	validate_each_keys(ctx, each_value_2, get_each_context_2$2, get_key_1);
 
     	for (let i = 0; i < each_value_2.length; i += 1) {
-    		let child_ctx = get_each_context_2$1(ctx, each_value_2, i);
+    		let child_ctx = get_each_context_2$2(ctx, each_value_2, i);
     		let key = get_key_1(child_ctx);
-    		each1_lookup.set(key, each_blocks_2[i] = create_each_block_2$1(key, child_ctx));
+    		each1_lookup.set(key, each_blocks_2[i] = create_each_block_2$2(key, child_ctx));
     	}
 
     	function popover1_show_binding(value) {
@@ -9552,7 +9575,7 @@ var app = (function () {
     	let each_blocks_1 = [];
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
-    		each_blocks_1[i] = create_each_block_1$2(get_each_context_1$2(ctx, each_value_1, i));
+    		each_blocks_1[i] = create_each_block_1$3(get_each_context_1$3(ctx, each_value_1, i));
     	}
 
     	let each_value = Array.from(/*uniqueAttributes*/ ctx[4]);
@@ -9683,87 +9706,87 @@ var app = (function () {
     			if (!src_url_equal(img0.src, img0_src_value = img$f)) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "Plains");
     			attr_dev(img0, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img0, file$7, 700, 4, 19450);
+    			add_location(img0, file$7, 730, 4, 20051);
     			if (!src_url_equal(img1.src, img1_src_value = img$e)) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Swamp");
     			attr_dev(img1, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img1, file$7, 701, 4, 19506);
+    			add_location(img1, file$7, 731, 4, 20107);
     			if (!src_url_equal(img2.src, img2_src_value = img$d)) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Island");
     			attr_dev(img2, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img2, file$7, 702, 4, 19561);
+    			add_location(img2, file$7, 732, 4, 20162);
     			if (!src_url_equal(img3.src, img3_src_value = img$c)) attr_dev(img3, "src", img3_src_value);
     			attr_dev(img3, "alt", "Mountain");
     			attr_dev(img3, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img3, file$7, 703, 4, 19617);
+    			add_location(img3, file$7, 733, 4, 20218);
     			if (!src_url_equal(img4.src, img4_src_value = img$b)) attr_dev(img4, "src", img4_src_value);
     			attr_dev(img4, "alt", "Forest");
     			attr_dev(img4, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img4, file$7, 704, 4, 19675);
+    			add_location(img4, file$7, 734, 4, 20276);
     			set_style(h3, "font-size", "18px");
     			set_style(h3, "display", "flex");
     			set_style(h3, "align-items", "center");
     			set_style(h3, "gap", "3px");
     			attr_dev(h3, "class", "svelte-1q4pgtd");
-    			add_location(h3, file$7, 697, 0, 19313);
+    			add_location(h3, file$7, 727, 0, 19914);
     			attr_dev(div0, "class", "accordion-title svelte-1q4pgtd");
     			attr_dev(div0, "tabindex", "0");
-    			add_location(div0, file$7, 690, 4, 19058);
+    			add_location(div0, file$7, 720, 4, 19659);
     			attr_dev(span, "class", "semi-bold svelte-1q4pgtd");
-    			add_location(span, file$7, 713, 115, 20051);
+    			add_location(span, file$7, 743, 115, 20652);
     			set_style(p0, "margin-top", "0.5rem");
     			attr_dev(p0, "class", "svelte-1q4pgtd");
-    			add_location(p0, file$7, 713, 6, 19942);
-    			add_location(strong0, file$7, 729, 37, 21820);
+    			add_location(p0, file$7, 743, 6, 20543);
+    			add_location(strong0, file$7, 759, 37, 22421);
     			set_style(p1, "margin-top", "0.5rem");
     			attr_dev(p1, "class", "svelte-1q4pgtd");
-    			add_location(p1, file$7, 729, 6, 21789);
+    			add_location(p1, file$7, 759, 6, 22390);
     			attr_dev(div1, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div1, file$7, 730, 6, 22033);
-    			add_location(button0, file$7, 739, 8, 22303);
-    			add_location(b0, file$7, 740, 31, 22402);
-    			add_location(div2, file$7, 740, 8, 22379);
+    			add_location(div1, file$7, 760, 6, 22634);
+    			add_location(button0, file$7, 769, 8, 22904);
+    			add_location(b0, file$7, 770, 31, 23003);
+    			add_location(div2, file$7, 770, 8, 22980);
     			attr_dev(div3, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div3, file$7, 738, 6, 22258);
+    			add_location(div3, file$7, 768, 6, 22859);
     			attr_dev(hr0, "class", "secondary-divider svelte-1q4pgtd");
-    			add_location(hr0, file$7, 745, 6, 22499);
+    			add_location(hr0, file$7, 775, 6, 23100);
     			attr_dev(div4, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div4, file$7, 747, 6, 22539);
-    			add_location(button1, file$7, 760, 6, 23056);
-    			add_location(b1, file$7, 770, 33, 24227);
-    			add_location(div5, file$7, 770, 8, 24202);
+    			add_location(div4, file$7, 777, 6, 23140);
+    			add_location(button1, file$7, 790, 6, 23657);
+    			add_location(b1, file$7, 800, 33, 24828);
+    			add_location(div5, file$7, 800, 8, 24803);
     			attr_dev(div6, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div6, file$7, 759, 4, 23013);
+    			add_location(div6, file$7, 789, 4, 23614);
     			attr_dev(hr1, "class", "primary-divider svelte-1q4pgtd");
-    			add_location(hr1, file$7, 774, 9, 24373);
-    			add_location(strong1, file$7, 779, 9, 24459);
+    			add_location(hr1, file$7, 804, 9, 24974);
+    			add_location(strong1, file$7, 809, 9, 25060);
     			attr_dev(p2, "class", "svelte-1q4pgtd");
-    			add_location(p2, file$7, 779, 6, 24456);
+    			add_location(p2, file$7, 809, 6, 25057);
     			attr_dev(div7, "class", "mana-requirements-container svelte-1q4pgtd");
-    			add_location(div7, file$7, 780, 4, 24631);
+    			add_location(div7, file$7, 810, 4, 25232);
     			attr_dev(button2, "class", "primary-btn");
     			button2.disabled = button2_disabled_value = !/*enableSimulationButton*/ ctx[12];
-    			add_location(button2, file$7, 826, 8, 26222);
+    			add_location(button2, file$7, 856, 8, 26823);
     			attr_dev(label, "for", "iterations");
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 835, 8, 26684);
+    			add_location(label, file$7, 865, 8, 27285);
     			set_style(input, "width", "90px");
     			attr_dev(input, "id", "iterations");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "1");
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 836, 8, 26758);
+    			add_location(input, file$7, 866, 8, 27359);
     			attr_dev(div8, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div8, file$7, 834, 8, 26644);
+    			add_location(div8, file$7, 864, 8, 27245);
     			attr_dev(div9, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div9, file$7, 825, 6, 26177);
+    			add_location(div9, file$7, 855, 6, 26778);
     			attr_dev(div10, "class", "answer svelte-1q4pgtd");
     			set_style(div10, "height", /*openItem*/ ctx[5] === 0 ? 'auto' : '0');
-    			add_location(div10, file$7, 707, 6, 19752);
+    			add_location(div10, file$7, 737, 6, 20353);
     			attr_dev(div11, "class", "accordion-item svelte-1q4pgtd");
-    			add_location(div11, file$7, 689, 2, 19024);
+    			add_location(div11, file$7, 719, 2, 19625);
     			attr_dev(div12, "class", div12_class_value = "accordion " + (/*isHovering*/ ctx[9] ? 'hovering' : '') + " svelte-1q4pgtd");
-    			add_location(div12, file$7, 686, 0, 18847);
+    			add_location(div12, file$7, 716, 0, 19448);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9904,8 +9927,8 @@ var app = (function () {
     				each_value_3 = /*manaCards*/ ctx[0];
     				validate_each_argument(each_value_3);
     				group_outros();
-    				validate_each_keys(ctx, each_value_3, get_each_context_3, get_key);
-    				each_blocks_3 = update_keyed_each(each_blocks_3, dirty, get_key, 1, ctx, each_value_3, each0_lookup, div1, outro_and_destroy_block, create_each_block_3, null, get_each_context_3);
+    				validate_each_keys(ctx, each_value_3, get_each_context_3$1, get_key);
+    				each_blocks_3 = update_keyed_each(each_blocks_3, dirty, get_key, 1, ctx, each_value_3, each0_lookup, div1, outro_and_destroy_block, create_each_block_3$1, null, get_each_context_3$1);
     				check_outros();
     			}
 
@@ -9915,8 +9938,8 @@ var app = (function () {
     				each_value_2 = /*customCards*/ ctx[1];
     				validate_each_argument(each_value_2);
     				group_outros();
-    				validate_each_keys(ctx, each_value_2, get_each_context_2$1, get_key_1);
-    				each_blocks_2 = update_keyed_each(each_blocks_2, dirty, get_key_1, 1, ctx, each_value_2, each1_lookup, div4, outro_and_destroy_block, create_each_block_2$1, null, get_each_context_2$1);
+    				validate_each_keys(ctx, each_value_2, get_each_context_2$2, get_key_1);
+    				each_blocks_2 = update_keyed_each(each_blocks_2, dirty, get_key_1, 1, ctx, each_value_2, each1_lookup, div4, outro_and_destroy_block, create_each_block_2$2, null, get_each_context_2$2);
     				check_outros();
     			}
 
@@ -9941,12 +9964,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value_1.length; i += 1) {
-    					const child_ctx = get_each_context_1$2(ctx, each_value_1, i);
+    					const child_ctx = get_each_context_1$3(ctx, each_value_1, i);
 
     					if (each_blocks_1[i]) {
     						each_blocks_1[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks_1[i] = create_each_block_1$2(child_ctx);
+    						each_blocks_1[i] = create_each_block_1$3(child_ctx);
     						each_blocks_1[i].c();
     						each_blocks_1[i].m(div7, t31);
     					}
@@ -10338,11 +10361,27 @@ var app = (function () {
     	}
 
     	const rampCards = [
+    		// {
+    		//     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+    		//     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+    		//     CanProduce: 2,
+    		//     AbilityCost: 0,
+    		//     AvailableTurnPlayed: 1,
+    		//     amount: 7
+    		// },
+    		// {
+    		//     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    		//     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+    		//     CanProduce: 1,
+    		//     AbilityCost: 0,
+    		//     AvailableTurnPlayed: 0,
+    		//     amount: 25
+    		// }
     		{
     			TotalManaCost: {
     				B: 0,
     				U: 0,
-    				G: 0,
+    				G: 1,
     				R: 0,
     				W: 0,
     				C: 0,
@@ -10351,15 +10390,15 @@ var app = (function () {
     			ColorsCanProduce: {
     				B: 0,
     				U: 0,
-    				G: 0,
+    				G: 1,
     				R: 0,
-    				W: 0,
+    				W: 1,
     				C: 0,
     				ANY: 1
     			},
-    			CanProduce: 2,
+    			CanProduce: 1,
     			AbilityCost: 0,
-    			AvailableTurnPlayed: 1,
+    			AvailableTurnPlayed: 0,
     			amount: 7
     		},
     		{
@@ -10370,13 +10409,13 @@ var app = (function () {
     				R: 0,
     				W: 0,
     				C: 0,
-    				ANY: 1
+    				ANY: 0
     			},
     			ColorsCanProduce: {
     				B: 0,
     				U: 0,
     				G: 1,
-    				R: 1,
+    				R: 0,
     				W: 0,
     				C: 0,
     				ANY: 1
@@ -10384,7 +10423,7 @@ var app = (function () {
     			CanProduce: 1,
     			AbilityCost: 0,
     			AvailableTurnPlayed: 0,
-    			amount: 20
+    			amount: 5
     		}
     	]; // {
     	//     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 2 },
@@ -10884,14 +10923,14 @@ var app = (function () {
     	return child_ctx;
     }
 
-    function get_each_context_1$1(ctx, list, i) {
+    function get_each_context_1$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[14] = list[i];
     	return child_ctx;
     }
 
     // (110:24) {#each Array.from({ length: 7 }, (_, i) => i + 1) as option}
-    function create_each_block_1$1(ctx) {
+    function create_each_block_1$2(ctx) {
     	let option;
     	let t_value = /*option*/ ctx[14] + "";
     	let t;
@@ -10922,7 +10961,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_1$1.name,
+    		id: create_each_block_1$2.name,
     		type: "each",
     		source: "(110:24) {#each Array.from({ length: 7 }, (_, i) => i + 1) as option}",
     		ctx
@@ -10945,12 +10984,12 @@ var app = (function () {
     	let t4;
     	let mounted;
     	let dispose;
-    	let each_value_1 = Array.from({ length: 7 }, func);
+    	let each_value_1 = Array.from({ length: 7 }, func$1);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
-    		each_blocks[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
+    		each_blocks[i] = create_each_block_1$2(get_each_context_1$2(ctx, each_value_1, i));
     	}
 
     	function change_handler(...args) {
@@ -11008,17 +11047,17 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (dirty & /*Array, $numberOfTurns*/ 1) {
-    				each_value_1 = Array.from({ length: 7 }, func);
+    				each_value_1 = Array.from({ length: 7 }, func$1);
     				validate_each_argument(each_value_1);
     				let i;
 
     				for (i = 0; i < each_value_1.length; i += 1) {
-    					const child_ctx = get_each_context_1$1(ctx, each_value_1, i);
+    					const child_ctx = get_each_context_1$2(ctx, each_value_1, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_1$1(child_ctx);
+    						each_blocks[i] = create_each_block_1$2(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(select, null);
     					}
@@ -11221,7 +11260,7 @@ var app = (function () {
     	return block;
     }
 
-    const func = (_, i) => i + 1;
+    const func$1 = (_, i) => i + 1;
 
     function instance$6($$self, $$props, $$invalidate) {
     	let $numberOfTurns;
@@ -11316,9 +11355,27 @@ var app = (function () {
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[36] = list[i];
-    	child_ctx[37] = list;
-    	child_ctx[38] = i;
+    	child_ctx[47] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_1$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[47] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_2$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[47] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_3(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[54] = list[i];
+    	child_ctx[55] = list;
+    	child_ctx[56] = i;
     	return child_ctx;
     }
 
@@ -11342,10 +11399,10 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-19ljjz4");
+    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 125, 24, 3960);
+    			add_location(button, file$5, 125, 24, 3976);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -11353,7 +11410,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[14], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[15], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -11405,13 +11462,13 @@ var app = (function () {
     			b = element("b");
     			b.textContent = "Each group must have a unique text name";
     			t3 = text(" for the tool to work (some day I'll figure out indexing...)");
-    			attr_dev(p0, "class", "popover-content svelte-19ljjz4");
-    			add_location(p0, file$5, 129, 26, 4305);
-    			add_location(b, file$5, 130, 53, 4635);
-    			attr_dev(p1, "class", "popover-content svelte-19ljjz4");
-    			add_location(p1, file$5, 130, 26, 4608);
+    			attr_dev(p0, "class", "popover-content svelte-jnyg77");
+    			add_location(p0, file$5, 129, 26, 4321);
+    			add_location(b, file$5, 130, 53, 4651);
+    			attr_dev(p1, "class", "popover-content svelte-jnyg77");
+    			add_location(p1, file$5, 130, 26, 4624);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 128, 24, 4257);
+    			add_location(div, file$5, 128, 24, 4273);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11458,10 +11515,10 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-19ljjz4");
+    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 137, 24, 5058);
+    			add_location(button, file$5, 137, 24, 5074);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -11469,7 +11526,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[16], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[17], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -11518,11 +11575,11 @@ var app = (function () {
     			i = element("i");
     			i.textContent = "at least";
     			t2 = text(" this many cards from this group.");
-    			add_location(i, file$5, 141, 82, 5459);
-    			attr_dev(p, "class", "popover-content svelte-19ljjz4");
-    			add_location(p, file$5, 141, 28, 5405);
+    			add_location(i, file$5, 141, 82, 5475);
+    			attr_dev(p, "class", "popover-content svelte-jnyg77");
+    			add_location(p, file$5, 141, 28, 5421);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 140, 24, 5355);
+    			add_location(div, file$5, 140, 24, 5371);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11568,10 +11625,10 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-19ljjz4");
+    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 147, 24, 5730);
+    			add_location(button, file$5, 147, 24, 5746);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -11579,7 +11636,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[18], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[19], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -11635,14 +11692,14 @@ var app = (function () {
     			p1 = element("p");
     			b = element("b");
     			b.textContent = "Groups must have the exact same link name (keyword match). The tool does not support linking more than 4 groups together currently.";
-    			add_location(i, file$5, 151, 188, 6237);
-    			attr_dev(p0, "class", "popover-content svelte-19ljjz4");
-    			add_location(p0, file$5, 151, 28, 6077);
-    			add_location(b, file$5, 152, 55, 6323);
-    			attr_dev(p1, "class", "popover-content svelte-19ljjz4");
-    			add_location(p1, file$5, 152, 28, 6296);
+    			add_location(i, file$5, 151, 188, 6253);
+    			attr_dev(p0, "class", "popover-content svelte-jnyg77");
+    			add_location(p0, file$5, 151, 28, 6093);
+    			add_location(b, file$5, 152, 55, 6339);
+    			attr_dev(p1, "class", "popover-content svelte-jnyg77");
+    			add_location(p1, file$5, 152, 28, 6312);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 150, 24, 6027);
+    			add_location(div, file$5, 150, 24, 6043);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11672,7 +11729,7 @@ var app = (function () {
     }
 
     // (161:12) {#each groups as group, index}
-    function create_each_block$2(ctx) {
+    function create_each_block_3(ctx) {
     	let tr;
     	let td0;
     	let input0;
@@ -11694,25 +11751,25 @@ var app = (function () {
     	let dispose;
 
     	function input0_input_handler() {
-    		/*input0_input_handler*/ ctx[20].call(input0, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input0_input_handler*/ ctx[21].call(input0, /*each_value_3*/ ctx[55], /*index*/ ctx[56]);
     	}
 
     	function input1_input_handler() {
-    		/*input1_input_handler*/ ctx[21].call(input1, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input1_input_handler*/ ctx[22].call(input1, /*each_value_3*/ ctx[55], /*index*/ ctx[56]);
     	}
 
     	function input2_input_handler() {
-    		/*input2_input_handler*/ ctx[22].call(input2, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input2_input_handler*/ ctx[23].call(input2, /*each_value_3*/ ctx[55], /*index*/ ctx[56]);
     	}
 
     	function input3_input_handler() {
-    		/*input3_input_handler*/ ctx[23].call(input3, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input3_input_handler*/ ctx[24].call(input3, /*each_value_3*/ ctx[55], /*index*/ ctx[56]);
     	}
 
     	fontawesomeicon = new FontAwesomeIcon({ props: { icon: faTimes }, $$inline: true });
 
     	function click_handler_3() {
-    		return /*click_handler_3*/ ctx[24](/*index*/ ctx[38]);
+    		return /*click_handler_3*/ ctx[25](/*index*/ ctx[56]);
     	}
 
     	const block = {
@@ -11734,79 +11791,79 @@ var app = (function () {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
     			attr_dev(input0, "aria-label", "Group unique name");
-    			attr_dev(input0, "class", "input-group svelte-19ljjz4");
+    			attr_dev(input0, "class", "input-group svelte-jnyg77");
 
-    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    			? /*group*/ ctx[54].link
+    			: /*group*/ ctx[54].name]);
 
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "draw, ramp, removal, etc");
-    			add_location(input0, file$5, 163, 24, 6751);
-    			attr_dev(td0, "class", "svelte-19ljjz4");
-    			add_location(td0, file$5, 162, 20, 6721);
+    			add_location(input0, file$5, 163, 24, 6767);
+    			attr_dev(td0, "class", "svelte-jnyg77");
+    			add_location(td0, file$5, 162, 20, 6737);
     			attr_dev(input1, "aria-label", "Number of cards in group");
-    			attr_dev(input1, "class", "input-group svelte-19ljjz4");
+    			attr_dev(input1, "class", "input-group svelte-jnyg77");
 
-    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    			? /*group*/ ctx[54].link
+    			: /*group*/ ctx[54].name]);
 
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", "1");
     			attr_dev(input1, "max", "99");
-    			add_location(input1, file$5, 180, 24, 7582);
-    			attr_dev(td1, "class", "svelte-19ljjz4");
-    			add_location(td1, file$5, 179, 20, 7552);
+    			add_location(input1, file$5, 180, 24, 7598);
+    			attr_dev(td1, "class", "svelte-jnyg77");
+    			add_location(td1, file$5, 179, 20, 7568);
     			attr_dev(input2, "aria-label", "Minimum number of desired cards from group");
-    			attr_dev(input2, "class", "input-group svelte-19ljjz4");
+    			attr_dev(input2, "class", "input-group svelte-jnyg77");
 
-    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    			? /*group*/ ctx[54].link
+    			: /*group*/ ctx[54].name]);
 
     			attr_dev(input2, "type", "number");
     			attr_dev(input2, "min", "1");
     			attr_dev(input2, "max", "99");
-    			add_location(input2, file$5, 192, 24, 8169);
-    			attr_dev(td2, "class", "svelte-19ljjz4");
-    			add_location(td2, file$5, 191, 20, 8139);
+    			add_location(input2, file$5, 192, 24, 8185);
+    			attr_dev(td2, "class", "svelte-jnyg77");
+    			add_location(td2, file$5, 191, 20, 8155);
     			attr_dev(input3, "aria-label", "Linked group name");
-    			attr_dev(input3, "class", "input-group svelte-19ljjz4");
+    			attr_dev(input3, "class", "input-group svelte-jnyg77");
 
-    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    			? /*group*/ ctx[54].link
+    			: /*group*/ ctx[54].name]);
 
     			attr_dev(input3, "type", "text");
     			attr_dev(input3, "placeholder", "Link via keyword matching...");
-    			add_location(input3, file$5, 204, 24, 8781);
-    			attr_dev(td3, "class", "svelte-19ljjz4");
-    			add_location(td3, file$5, 203, 20, 8751);
+    			add_location(input3, file$5, 204, 24, 8797);
+    			attr_dev(td3, "class", "svelte-jnyg77");
+    			add_location(td3, file$5, 203, 20, 8767);
     			attr_dev(button, "aria-label", "Remove group");
-    			attr_dev(button, "class", "group-remove-button svelte-19ljjz4");
-    			add_location(button, file$5, 213, 24, 9270);
-    			attr_dev(td4, "class", "svelte-19ljjz4");
-    			add_location(td4, file$5, 212, 20, 9240);
-    			add_location(tr, file$5, 161, 16, 6695);
+    			attr_dev(button, "class", "group-remove-button svelte-jnyg77");
+    			add_location(button, file$5, 213, 24, 9286);
+    			attr_dev(td4, "class", "svelte-jnyg77");
+    			add_location(td4, file$5, 212, 20, 9256);
+    			add_location(tr, file$5, 161, 16, 6711);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
     			append_dev(tr, td0);
     			append_dev(td0, input0);
-    			set_input_value(input0, /*group*/ ctx[36].name);
+    			set_input_value(input0, /*group*/ ctx[54].name);
     			append_dev(tr, t0);
     			append_dev(tr, td1);
     			append_dev(td1, input1);
-    			set_input_value(input1, /*group*/ ctx[36].size);
+    			set_input_value(input1, /*group*/ ctx[54].size);
     			append_dev(tr, t1);
     			append_dev(tr, td2);
     			append_dev(td2, input2);
-    			set_input_value(input2, /*group*/ ctx[36].cardsToDraw);
+    			set_input_value(input2, /*group*/ ctx[54].cardsToDraw);
     			append_dev(tr, t2);
     			append_dev(tr, td3);
     			append_dev(td3, input3);
-    			set_input_value(input3, /*group*/ ctx[36].link);
+    			set_input_value(input3, /*group*/ ctx[54].link);
     			append_dev(tr, t3);
     			append_dev(tr, td4);
     			append_dev(td4, button);
@@ -11832,43 +11889,43 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
+    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    				? /*group*/ ctx[54].link
+    				: /*group*/ ctx[54].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && input0.value !== /*group*/ ctx[36].name) {
-    				set_input_value(input0, /*group*/ ctx[36].name);
-    			}
-
-    			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
-    			}
-
-    			if (dirty[0] & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[36].size) {
-    				set_input_value(input1, /*group*/ ctx[36].size);
+    			if (dirty[0] & /*groups*/ 1 && input0.value !== /*group*/ ctx[54].name) {
+    				set_input_value(input0, /*group*/ ctx[54].name);
     			}
 
     			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
+    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    				? /*group*/ ctx[54].link
+    				: /*group*/ ctx[54].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[36].cardsToDraw) {
-    				set_input_value(input2, /*group*/ ctx[36].cardsToDraw);
+    			if (dirty[0] & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[54].size) {
+    				set_input_value(input1, /*group*/ ctx[54].size);
     			}
 
     			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
+    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    				? /*group*/ ctx[54].link
+    				: /*group*/ ctx[54].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && input3.value !== /*group*/ ctx[36].link) {
-    				set_input_value(input3, /*group*/ ctx[36].link);
+    			if (dirty[0] & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[54].cardsToDraw) {
+    				set_input_value(input2, /*group*/ ctx[54].cardsToDraw);
+    			}
+
+    			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
+    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[54].link && /*group*/ ctx[54].link.trim()
+    				? /*group*/ ctx[54].link
+    				: /*group*/ ctx[54].name]);
+    			}
+
+    			if (dirty[0] & /*groups*/ 1 && input3.value !== /*group*/ ctx[54].link) {
+    				set_input_value(input3, /*group*/ ctx[54].link);
     			}
     		},
     		i: function intro(local) {
@@ -11890,7 +11947,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$2.name,
+    		id: create_each_block_3.name,
     		type: "each",
     		source: "(161:12) {#each groups as group, index}",
     		ctx
@@ -11921,10 +11978,10 @@ var app = (function () {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
     			t = space();
-    			attr_dev(button, "class", "moreInfo svelte-19ljjz4");
+    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 236, 20, 10038);
+    			add_location(button, file$5, 236, 20, 10054);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -11933,7 +11990,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_4*/ ctx[25], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_4*/ ctx[26], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -11992,17 +12049,17 @@ var app = (function () {
     			a.textContent = "this post";
     			t5 = text(".");
     			t6 = space();
-    			attr_dev(p0, "class", "popover-content svelte-19ljjz4");
-    			add_location(p0, file$5, 240, 24, 10369);
-    			attr_dev(p1, "class", "popover-content svelte-19ljjz4");
-    			add_location(p1, file$5, 241, 24, 10546);
+    			attr_dev(p0, "class", "popover-content svelte-jnyg77");
+    			add_location(p0, file$5, 240, 24, 10385);
+    			attr_dev(p1, "class", "popover-content svelte-jnyg77");
+    			add_location(p1, file$5, 241, 24, 10562);
     			attr_dev(a, "href", "https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html");
     			attr_dev(a, "target", "_blank");
-    			add_location(a, file$5, 242, 129, 10882);
-    			attr_dev(p2, "class", "popover-content svelte-19ljjz4");
-    			add_location(p2, file$5, 242, 24, 10777);
+    			add_location(a, file$5, 242, 129, 10898);
+    			attr_dev(p2, "class", "popover-content svelte-jnyg77");
+    			add_location(p2, file$5, 242, 24, 10793);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 239, 20, 10323);
+    			add_location(div, file$5, 239, 20, 10339);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -12032,10 +12089,118 @@ var app = (function () {
     	return block;
     }
 
+    // (261:16) {#each Array(8).fill(0).map((_, i) => i) as num}
+    function create_each_block_2$1(ctx) {
+    	let option;
+    	let t_value = /*num*/ ctx[47] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			option = element("option");
+    			t = text(t_value);
+    			option.__value = /*num*/ ctx[47];
+    			option.value = option.__value;
+    			attr_dev(option, "class", "svelte-jnyg77");
+    			add_location(option, file$5, 261, 20, 11715);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, option, anchor);
+    			append_dev(option, t);
+    		},
+    		p: noop$3,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(option);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_2$1.name,
+    		type: "each",
+    		source: "(261:16) {#each Array(8).fill(0).map((_, i) => i) as num}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (270:16) {#each Array(8).fill(0).map((_, i) => i) as num}
+    function create_each_block_1$1(ctx) {
+    	let option;
+    	let t_value = /*num*/ ctx[47] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			option = element("option");
+    			t = text(t_value);
+    			option.__value = /*num*/ ctx[47];
+    			option.value = option.__value;
+    			attr_dev(option, "class", "svelte-jnyg77");
+    			add_location(option, file$5, 270, 20, 12039);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, option, anchor);
+    			append_dev(option, t);
+    		},
+    		p: noop$3,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(option);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1$1.name,
+    		type: "each",
+    		source: "(270:16) {#each Array(8).fill(0).map((_, i) => i) as num}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (279:16) {#each Array(8).fill(0).map((_, i) => i) as num}
+    function create_each_block$2(ctx) {
+    	let option;
+    	let t_value = /*num*/ ctx[47] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			option = element("option");
+    			t = text(t_value);
+    			option.__value = /*num*/ ctx[47];
+    			option.value = option.__value;
+    			attr_dev(option, "class", "svelte-jnyg77");
+    			add_location(option, file$5, 279, 20, 12363);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, option, anchor);
+    			append_dev(option, t);
+    		},
+    		p: noop$3,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(option);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$2.name,
+    		type: "each",
+    		source: "(279:16) {#each Array(8).fill(0).map((_, i) => i) as num}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     function create_fragment$5(ctx) {
     	let h2;
     	let t1;
-    	let div6;
+    	let div16;
     	let div0;
     	let table;
     	let thead;
@@ -12067,7 +12232,7 @@ var app = (function () {
     	let t13;
     	let monteaccordion;
     	let t14;
-    	let div5;
+    	let div15;
     	let div1;
     	let label0;
     	let t15;
@@ -12075,7 +12240,7 @@ var app = (function () {
     	let updating_show_3;
     	let t16;
     	let t17;
-    	let select;
+    	let select0;
     	let option0;
     	let option1;
     	let option2;
@@ -12085,25 +12250,87 @@ var app = (function () {
     	let div2;
     	let label1;
     	let t25;
-    	let input0;
+    	let select1;
     	let t26;
     	let div3;
     	let label2;
     	let t28;
-    	let input1;
+    	let select2;
     	let t29;
     	let div4;
     	let label3;
     	let t31;
-    	let input2;
+    	let select3;
     	let t32;
+    	let div5;
+    	let label4;
+    	let t34;
+    	let input0;
+    	let t35;
+    	let div6;
+    	let label5;
+    	let t37;
+    	let input1;
+    	let t38;
+    	let div7;
+    	let label6;
+    	let t40;
+    	let input2;
+    	let t41;
+    	let div8;
+    	let label7;
+    	let t43;
+    	let select4;
+    	let option5;
+    	let option6;
+    	let option7;
+    	let option8;
+    	let option9;
+    	let option10;
+    	let t50;
+    	let div9;
+    	let label8;
+    	let t52;
+    	let select5;
+    	let option11;
+    	let option12;
+    	let option13;
+    	let option14;
+    	let option15;
+    	let option16;
+    	let t59;
+    	let div10;
+    	let label9;
+    	let t61;
+    	let input3;
+    	let t62;
+    	let div11;
+    	let label10;
+    	let t64;
+    	let input4;
+    	let t65;
+    	let div12;
+    	let label11;
+    	let t67;
+    	let input5;
+    	let t68;
+    	let div13;
+    	let label12;
+    	let t70;
+    	let input6;
+    	let t71;
+    	let div14;
+    	let label13;
+    	let t73;
+    	let input7;
+    	let t74;
     	let turndrawsaccordion;
     	let current;
     	let mounted;
     	let dispose;
 
     	function popover0_show_binding(value) {
-    		/*popover0_show_binding*/ ctx[15](value);
+    		/*popover0_show_binding*/ ctx[16](value);
     	}
 
     	let popover0_props = {
@@ -12123,7 +12350,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover0, 'show', popover0_show_binding));
 
     	function popover1_show_binding(value) {
-    		/*popover1_show_binding*/ ctx[17](value);
+    		/*popover1_show_binding*/ ctx[18](value);
     	}
 
     	let popover1_props = {
@@ -12143,7 +12370,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover1, 'show', popover1_show_binding));
 
     	function popover2_show_binding(value) {
-    		/*popover2_show_binding*/ ctx[19](value);
+    		/*popover2_show_binding*/ ctx[20](value);
     	}
 
     	let popover2_props = {
@@ -12161,22 +12388,22 @@ var app = (function () {
 
     	popover2 = new Popover({ props: popover2_props, $$inline: true });
     	binding_callbacks.push(() => bind(popover2, 'show', popover2_show_binding));
-    	let each_value = /*groups*/ ctx[0];
-    	validate_each_argument(each_value);
-    	let each_blocks = [];
+    	let each_value_3 = /*groups*/ ctx[0];
+    	validate_each_argument(each_value_3);
+    	let each_blocks_3 = [];
 
-    	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+    	for (let i = 0; i < each_value_3.length; i += 1) {
+    		each_blocks_3[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
     	}
 
-    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
-    		each_blocks[i] = null;
+    	const out = i => transition_out(each_blocks_3[i], 1, 1, () => {
+    		each_blocks_3[i] = null;
     	});
 
     	monteaccordion = new MonteAccordion({ $$inline: true });
 
     	function popover3_show_binding(value) {
-    		/*popover3_show_binding*/ ctx[26](value);
+    		/*popover3_show_binding*/ ctx[27](value);
     	}
 
     	let popover3_props = {
@@ -12194,15 +12421,39 @@ var app = (function () {
 
     	popover3 = new Popover({ props: popover3_props, $$inline: true });
     	binding_callbacks.push(() => bind(popover3, 'show', popover3_show_binding));
+    	let each_value_2 = Array(8).fill(0).map(func);
+    	validate_each_argument(each_value_2);
+    	let each_blocks_2 = [];
+
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks_2[i] = create_each_block_2$1(get_each_context_2$1(ctx, each_value_2, i));
+    	}
+
+    	let each_value_1 = Array(8).fill(0).map(func_1);
+    	validate_each_argument(each_value_1);
+    	let each_blocks_1 = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks_1[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
+    	}
+
+    	let each_value = Array(8).fill(0).map(func_2);
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+    	}
+
     	turndrawsaccordion = new TurnDrawsAccordion({ $$inline: true });
-    	turndrawsaccordion.$on("drawAmountChange", /*handleDrawAmountChange*/ ctx[7]);
+    	turndrawsaccordion.$on("drawAmountChange", /*handleDrawAmountChange*/ ctx[8]);
 
     	const block = {
     		c: function create() {
     			h2 = element("h2");
     			h2.textContent = "Deck inputs and card groups";
     			t1 = space();
-    			div6 = element("div");
+    			div16 = element("div");
     			div0 = element("div");
     			table = element("table");
     			thead = element("thead");
@@ -12226,8 +12477,8 @@ var app = (function () {
     			t10 = space();
     			tbody = element("tbody");
 
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
+    			for (let i = 0; i < each_blocks_3.length; i += 1) {
+    				each_blocks_3[i].c();
     			}
 
     			t11 = space();
@@ -12238,14 +12489,14 @@ var app = (function () {
     			t13 = space();
     			create_component(monteaccordion.$$.fragment);
     			t14 = space();
-    			div5 = element("div");
+    			div15 = element("div");
     			div1 = element("div");
     			label0 = element("label");
     			t15 = text("Mulligans ");
     			create_component(popover3.$$.fragment);
     			t16 = text(":");
     			t17 = space();
-    			select = element("select");
+    			select0 = element("select");
     			option0 = element("option");
     			option0.textContent = "0";
     			option1 = element("option");
@@ -12259,112 +12510,315 @@ var app = (function () {
     			t23 = space();
     			div2 = element("div");
     			label1 = element("label");
-    			label1.textContent = "Initial hand size:";
+    			label1.textContent = "Max Mulligans:";
     			t25 = space();
-    			input0 = element("input");
+    			select1 = element("select");
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				each_blocks_2[i].c();
+    			}
+
     			t26 = space();
     			div3 = element("div");
     			label2 = element("label");
-    			label2.textContent = "Deck size:";
+    			label2.textContent = "Min Lands in Hand:";
     			t28 = space();
-    			input1 = element("input");
+    			select2 = element("select");
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].c();
+    			}
+
     			t29 = space();
     			div4 = element("div");
     			label3 = element("label");
-    			label3.textContent = "Number of turns:";
+    			label3.textContent = "Max Lands in Hand:";
     			t31 = space();
-    			input2 = element("input");
+    			select3 = element("select");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
     			t32 = space();
+    			div5 = element("div");
+    			label4 = element("label");
+    			label4.textContent = "First Mulligan Free:";
+    			t34 = space();
+    			input0 = element("input");
+    			t35 = space();
+    			div6 = element("div");
+    			label5 = element("label");
+    			label5.textContent = "free mulligans until Max/min lands are satisfied";
+    			t37 = space();
+    			input1 = element("input");
+    			t38 = space();
+    			div7 = element("div");
+    			label6 = element("label");
+    			label6.textContent = "Allow 2 Lands + Playable Ramp:";
+    			t40 = space();
+    			input2 = element("input");
+    			t41 = space();
+    			div8 = element("div");
+    			label7 = element("label");
+    			label7.textContent = "Mulligan if Lands Can Only Make:";
+    			t43 = space();
+    			select4 = element("select");
+    			option5 = element("option");
+    			option5.textContent = "None";
+    			option6 = element("option");
+    			option6.textContent = "1 color";
+    			option7 = element("option");
+    			option7.textContent = "2 colors";
+    			option8 = element("option");
+    			option8.textContent = "3 colors";
+    			option9 = element("option");
+    			option9.textContent = "4 colors";
+    			option10 = element("option");
+    			option10.textContent = "5 colors";
+    			t50 = space();
+    			div9 = element("div");
+    			label8 = element("label");
+    			label8.textContent = "Mulligan Unless Opening Hand Can Make:";
+    			t52 = space();
+    			select5 = element("select");
+    			option11 = element("option");
+    			option11.textContent = "B";
+    			option12 = element("option");
+    			option12.textContent = "U";
+    			option13 = element("option");
+    			option13.textContent = "G";
+    			option14 = element("option");
+    			option14.textContent = "R";
+    			option15 = element("option");
+    			option15.textContent = "W";
+    			option16 = element("option");
+    			option16.textContent = "C";
+    			t59 = space();
+    			div10 = element("div");
+    			label9 = element("label");
+    			label9.textContent = "Ramp Must Be Playable:";
+    			t61 = space();
+    			input3 = element("input");
+    			t62 = space();
+    			div11 = element("div");
+    			label10 = element("label");
+    			label10.textContent = "Must Have Ramp:";
+    			t64 = space();
+    			input4 = element("input");
+    			t65 = space();
+    			div12 = element("div");
+    			label11 = element("label");
+    			label11.textContent = "Initial hand size:";
+    			t67 = space();
+    			input5 = element("input");
+    			t68 = space();
+    			div13 = element("div");
+    			label12 = element("label");
+    			label12.textContent = "Deck size:";
+    			t70 = space();
+    			input6 = element("input");
+    			t71 = space();
+    			div14 = element("div");
+    			label13 = element("label");
+    			label13.textContent = "Number of turns:";
+    			t73 = space();
+    			input7 = element("input");
+    			t74 = space();
     			create_component(turndrawsaccordion.$$.fragment);
     			set_style(h2, "text-align", "center");
-    			add_location(h2, file$5, 117, 0, 3653);
-    			attr_dev(th0, "class", "svelte-19ljjz4");
-    			add_location(th0, file$5, 123, 16, 3842);
+    			add_location(h2, file$5, 117, 0, 3669);
+    			attr_dev(th0, "class", "svelte-jnyg77");
+    			add_location(th0, file$5, 123, 16, 3858);
     			set_style(th1, "width", "18%");
-    			attr_dev(th1, "class", "svelte-19ljjz4");
-    			add_location(th1, file$5, 134, 16, 4851);
+    			attr_dev(th1, "class", "svelte-jnyg77");
+    			add_location(th1, file$5, 134, 16, 4867);
     			set_style(th2, "width", "25%");
-    			attr_dev(th2, "class", "svelte-19ljjz4");
-    			add_location(th2, file$5, 135, 16, 4914);
-    			attr_dev(th3, "class", "svelte-19ljjz4");
-    			add_location(th3, file$5, 145, 16, 5616);
-    			attr_dev(th4, "class", "svelte-19ljjz4");
-    			add_location(th4, file$5, 156, 16, 6570);
-    			add_location(tr0, file$5, 122, 12, 3820);
-    			add_location(thead, file$5, 121, 8, 3799);
-    			attr_dev(button, "class", "svelte-19ljjz4");
-    			add_location(button, file$5, 221, 20, 9645);
+    			attr_dev(th2, "class", "svelte-jnyg77");
+    			add_location(th2, file$5, 135, 16, 4930);
+    			attr_dev(th3, "class", "svelte-jnyg77");
+    			add_location(th3, file$5, 145, 16, 5632);
+    			attr_dev(th4, "class", "svelte-jnyg77");
+    			add_location(th4, file$5, 156, 16, 6586);
+    			add_location(tr0, file$5, 122, 12, 3836);
+    			add_location(thead, file$5, 121, 8, 3815);
+    			attr_dev(button, "class", "svelte-jnyg77");
+    			add_location(button, file$5, 221, 20, 9661);
     			attr_dev(td, "colspan", "5");
-    			attr_dev(td, "class", "svelte-19ljjz4");
-    			add_location(td, file$5, 220, 16, 9574);
-    			add_location(tr1, file$5, 219, 12, 9552);
-    			add_location(tbody, file$5, 159, 8, 6626);
-    			attr_dev(table, "class", "svelte-19ljjz4");
-    			add_location(table, file$5, 120, 4, 3782);
-    			attr_dev(div0, "class", "table-wrapper svelte-19ljjz4");
-    			add_location(div0, file$5, 119, 4, 3749);
+    			attr_dev(td, "class", "svelte-jnyg77");
+    			add_location(td, file$5, 220, 16, 9590);
+    			add_location(tr1, file$5, 219, 12, 9568);
+    			add_location(tbody, file$5, 159, 8, 6642);
+    			attr_dev(table, "class", "svelte-jnyg77");
+    			add_location(table, file$5, 120, 4, 3798);
+    			attr_dev(div0, "class", "table-wrapper svelte-jnyg77");
+    			add_location(div0, file$5, 119, 4, 3765);
     			attr_dev(label0, "for", "mulliganCount");
-    			attr_dev(label0, "class", "svelte-19ljjz4");
-    			add_location(label0, file$5, 235, 12, 9930);
+    			attr_dev(label0, "class", "svelte-jnyg77");
+    			add_location(label0, file$5, 235, 12, 9946);
     			option0.__value = "0";
     			option0.value = option0.__value;
-    			attr_dev(option0, "class", "svelte-19ljjz4");
-    			add_location(option0, file$5, 246, 16, 11230);
+    			attr_dev(option0, "class", "svelte-jnyg77");
+    			add_location(option0, file$5, 246, 16, 11246);
     			option1.__value = "1";
     			option1.value = option1.__value;
-    			attr_dev(option1, "class", "svelte-19ljjz4");
-    			add_location(option1, file$5, 247, 16, 11276);
+    			attr_dev(option1, "class", "svelte-jnyg77");
+    			add_location(option1, file$5, 247, 16, 11292);
     			option2.__value = "2";
     			option2.value = option2.__value;
-    			attr_dev(option2, "class", "svelte-19ljjz4");
-    			add_location(option2, file$5, 248, 16, 11322);
+    			attr_dev(option2, "class", "svelte-jnyg77");
+    			add_location(option2, file$5, 248, 16, 11338);
     			option3.__value = "3";
     			option3.value = option3.__value;
-    			attr_dev(option3, "class", "svelte-19ljjz4");
-    			add_location(option3, file$5, 249, 16, 11368);
+    			attr_dev(option3, "class", "svelte-jnyg77");
+    			add_location(option3, file$5, 249, 16, 11384);
     			option4.__value = "4";
     			option4.value = option4.__value;
-    			attr_dev(option4, "class", "svelte-19ljjz4");
-    			add_location(option4, file$5, 250, 16, 11414);
-    			attr_dev(select, "id", "mulliganCount");
-    			if (/*mulliganCountString*/ ctx[3] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[27].call(select));
-    			add_location(select, file$5, 245, 16, 11090);
-    			attr_dev(div1, "class", "mulligan-selection svelte-19ljjz4");
-    			add_location(div1, file$5, 234, 8, 9884);
-    			attr_dev(label1, "for", "cardsDrawn");
-    			attr_dev(label1, "class", "svelte-19ljjz4");
-    			add_location(label1, file$5, 255, 12, 11540);
-    			attr_dev(input0, "type", "number");
-    			attr_dev(input0, "class", "deckSize svelte-19ljjz4");
-    			attr_dev(input0, "id", "cardsDrawn");
-    			attr_dev(input0, "min", "1");
-    			add_location(input0, file$5, 256, 12, 11604);
-    			attr_dev(div2, "class", "deck-size-container svelte-19ljjz4");
-    			add_location(div2, file$5, 254, 8, 11493);
-    			attr_dev(label2, "for", "deckSize");
-    			attr_dev(label2, "class", "svelte-19ljjz4");
-    			add_location(label2, file$5, 262, 12, 11824);
-    			attr_dev(input1, "type", "number");
-    			attr_dev(input1, "class", "deckSize svelte-19ljjz4");
-    			attr_dev(input1, "id", "deckSize");
-    			attr_dev(input1, "min", "1");
-    			add_location(input1, file$5, 263, 12, 11878);
-    			attr_dev(div3, "class", "deck-size-container svelte-19ljjz4");
-    			add_location(div3, file$5, 261, 8, 11777);
-    			attr_dev(label3, "for", "numberTurns");
-    			attr_dev(label3, "class", "svelte-19ljjz4");
-    			add_location(label3, file$5, 269, 12, 12089);
-    			attr_dev(input2, "type", "number");
-    			attr_dev(input2, "class", "deckSize svelte-19ljjz4");
-    			attr_dev(input2, "id", "numberTurns");
-    			attr_dev(input2, "min", "1");
-    			add_location(input2, file$5, 270, 12, 12152);
-    			attr_dev(div4, "class", "deck-size-container svelte-19ljjz4");
-    			add_location(div4, file$5, 268, 8, 12042);
-    			attr_dev(div5, "class", "controls-container svelte-19ljjz4");
-    			add_location(div5, file$5, 232, 4, 9832);
-    			attr_dev(div6, "class", "parameters svelte-19ljjz4");
-    			add_location(div6, file$5, 118, 0, 3719);
+    			attr_dev(option4, "class", "svelte-jnyg77");
+    			add_location(option4, file$5, 250, 16, 11430);
+    			attr_dev(select0, "id", "mulliganCount");
+    			if (/*mulliganCountString*/ ctx[3] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[28].call(select0));
+    			add_location(select0, file$5, 245, 16, 11106);
+    			attr_dev(div1, "class", "mulligan-selection svelte-jnyg77");
+    			add_location(div1, file$5, 234, 8, 9900);
+    			attr_dev(label1, "class", "svelte-jnyg77");
+    			add_location(label1, file$5, 258, 12, 11534);
+    			if (/*$mulliganConfig*/ ctx[7].maxMulligans === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[30].call(select1));
+    			add_location(select1, file$5, 259, 12, 11577);
+    			add_location(div2, file$5, 257, 8, 11515);
+    			attr_dev(label2, "class", "svelte-jnyg77");
+    			add_location(label2, file$5, 267, 12, 11852);
+    			if (/*$mulliganConfig*/ ctx[7].minLandsInHand === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[31].call(select2));
+    			add_location(select2, file$5, 268, 12, 11899);
+    			add_location(div3, file$5, 266, 8, 11833);
+    			attr_dev(label3, "class", "svelte-jnyg77");
+    			add_location(label3, file$5, 276, 12, 12176);
+    			if (/*$mulliganConfig*/ ctx[7].maxLandsInHand === void 0) add_render_callback(() => /*select3_change_handler*/ ctx[32].call(select3));
+    			add_location(select3, file$5, 277, 12, 12223);
+    			add_location(div4, file$5, 275, 8, 12157);
+    			attr_dev(label4, "class", "svelte-jnyg77");
+    			add_location(label4, file$5, 285, 12, 12500);
+    			attr_dev(input0, "type", "checkbox");
+    			attr_dev(input0, "class", "svelte-jnyg77");
+    			add_location(input0, file$5, 286, 12, 12549);
+    			add_location(div5, file$5, 284, 8, 12481);
+    			attr_dev(label5, "class", "svelte-jnyg77");
+    			add_location(label5, file$5, 290, 12, 12670);
+    			attr_dev(input1, "type", "checkbox");
+    			attr_dev(input1, "class", "svelte-jnyg77");
+    			add_location(input1, file$5, 291, 12, 12747);
+    			add_location(div6, file$5, 289, 8, 12651);
+    			attr_dev(label6, "class", "svelte-jnyg77");
+    			add_location(label6, file$5, 295, 12, 12872);
+    			attr_dev(input2, "type", "checkbox");
+    			attr_dev(input2, "class", "svelte-jnyg77");
+    			add_location(input2, file$5, 296, 12, 12931);
+    			add_location(div7, file$5, 294, 8, 12853);
+    			attr_dev(label7, "class", "svelte-jnyg77");
+    			add_location(label7, file$5, 300, 12, 13064);
+    			option5.__value = "";
+    			option5.value = option5.__value;
+    			attr_dev(option5, "class", "svelte-jnyg77");
+    			add_location(option5, file$5, 302, 16, 13207);
+    			option6.__value = "1";
+    			option6.value = option6.__value;
+    			attr_dev(option6, "class", "svelte-jnyg77");
+    			add_location(option6, file$5, 303, 16, 13255);
+    			option7.__value = "2";
+    			option7.value = option7.__value;
+    			attr_dev(option7, "class", "svelte-jnyg77");
+    			add_location(option7, file$5, 304, 16, 13307);
+    			option8.__value = "3";
+    			option8.value = option8.__value;
+    			attr_dev(option8, "class", "svelte-jnyg77");
+    			add_location(option8, file$5, 305, 16, 13360);
+    			option9.__value = "4";
+    			option9.value = option9.__value;
+    			attr_dev(option9, "class", "svelte-jnyg77");
+    			add_location(option9, file$5, 306, 16, 13413);
+    			option10.__value = "5";
+    			option10.value = option10.__value;
+    			attr_dev(option10, "class", "svelte-jnyg77");
+    			add_location(option10, file$5, 307, 16, 13466);
+    			if (/*$mulliganConfig*/ ctx[7].mulliganIfLandsCanOnlyMake === void 0) add_render_callback(() => /*select4_change_handler*/ ctx[36].call(select4));
+    			add_location(select4, file$5, 301, 12, 13125);
+    			add_location(div8, file$5, 299, 8, 13045);
+    			attr_dev(label8, "class", "svelte-jnyg77");
+    			add_location(label8, file$5, 312, 12, 13579);
+    			option11.__value = "B";
+    			option11.value = option11.__value;
+    			attr_dev(option11, "class", "svelte-jnyg77");
+    			add_location(option11, file$5, 314, 16, 13743);
+    			option12.__value = "U";
+    			option12.value = option12.__value;
+    			attr_dev(option12, "class", "svelte-jnyg77");
+    			add_location(option12, file$5, 315, 16, 13789);
+    			option13.__value = "G";
+    			option13.value = option13.__value;
+    			attr_dev(option13, "class", "svelte-jnyg77");
+    			add_location(option13, file$5, 316, 16, 13835);
+    			option14.__value = "R";
+    			option14.value = option14.__value;
+    			attr_dev(option14, "class", "svelte-jnyg77");
+    			add_location(option14, file$5, 317, 16, 13881);
+    			option15.__value = "W";
+    			option15.value = option15.__value;
+    			attr_dev(option15, "class", "svelte-jnyg77");
+    			add_location(option15, file$5, 318, 16, 13927);
+    			option16.__value = "C";
+    			option16.value = option16.__value;
+    			attr_dev(option16, "class", "svelte-jnyg77");
+    			add_location(option16, file$5, 319, 16, 13973);
+    			select5.multiple = true;
+    			if (/*$mulliganConfig*/ ctx[7].mulliganUnlessOpeningHandCanMake === void 0) add_render_callback(() => /*select5_change_handler*/ ctx[37].call(select5));
+    			add_location(select5, file$5, 313, 12, 13646);
+    			add_location(div9, file$5, 311, 8, 13560);
+    			attr_dev(label9, "class", "svelte-jnyg77");
+    			add_location(label9, file$5, 324, 12, 14079);
+    			attr_dev(input3, "type", "checkbox");
+    			attr_dev(input3, "class", "svelte-jnyg77");
+    			add_location(input3, file$5, 325, 12, 14130);
+    			add_location(div10, file$5, 323, 8, 14060);
+    			attr_dev(label10, "class", "svelte-jnyg77");
+    			add_location(label10, file$5, 329, 12, 14260);
+    			attr_dev(input4, "type", "checkbox");
+    			attr_dev(input4, "class", "svelte-jnyg77");
+    			add_location(input4, file$5, 330, 12, 14304);
+    			add_location(div11, file$5, 328, 8, 14241);
+    			attr_dev(label11, "for", "cardsDrawn");
+    			attr_dev(label11, "class", "svelte-jnyg77");
+    			add_location(label11, file$5, 339, 12, 14466);
+    			attr_dev(input5, "type", "number");
+    			attr_dev(input5, "class", "deckSize svelte-jnyg77");
+    			attr_dev(input5, "id", "cardsDrawn");
+    			attr_dev(input5, "min", "1");
+    			add_location(input5, file$5, 340, 12, 14530);
+    			attr_dev(div12, "class", "deck-size-container svelte-jnyg77");
+    			add_location(div12, file$5, 338, 8, 14419);
+    			attr_dev(label12, "for", "deckSize");
+    			attr_dev(label12, "class", "svelte-jnyg77");
+    			add_location(label12, file$5, 346, 12, 14750);
+    			attr_dev(input6, "type", "number");
+    			attr_dev(input6, "class", "deckSize svelte-jnyg77");
+    			attr_dev(input6, "id", "deckSize");
+    			attr_dev(input6, "min", "1");
+    			add_location(input6, file$5, 347, 12, 14804);
+    			attr_dev(div13, "class", "deck-size-container svelte-jnyg77");
+    			add_location(div13, file$5, 345, 8, 14703);
+    			attr_dev(label13, "for", "numberTurns");
+    			attr_dev(label13, "class", "svelte-jnyg77");
+    			add_location(label13, file$5, 353, 12, 15015);
+    			attr_dev(input7, "type", "number");
+    			attr_dev(input7, "class", "deckSize svelte-jnyg77");
+    			attr_dev(input7, "id", "numberTurns");
+    			attr_dev(input7, "min", "1");
+    			add_location(input7, file$5, 354, 12, 15078);
+    			attr_dev(div14, "class", "deck-size-container svelte-jnyg77");
+    			add_location(div14, file$5, 352, 8, 14968);
+    			attr_dev(div15, "class", "controls-container svelte-jnyg77");
+    			add_location(div15, file$5, 232, 4, 9848);
+    			attr_dev(div16, "class", "parameters svelte-jnyg77");
+    			add_location(div16, file$5, 118, 0, 3735);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -12372,8 +12826,8 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
     			insert_dev(target, t1, anchor);
-    			insert_dev(target, div6, anchor);
-    			append_dev(div6, div0);
+    			insert_dev(target, div16, anchor);
+    			append_dev(div16, div0);
     			append_dev(div0, table);
     			append_dev(table, thead);
     			append_dev(thead, tr0);
@@ -12395,9 +12849,9 @@ var app = (function () {
     			append_dev(table, t10);
     			append_dev(table, tbody);
 
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				if (each_blocks[i]) {
-    					each_blocks[i].m(tbody, null);
+    			for (let i = 0; i < each_blocks_3.length; i += 1) {
+    				if (each_blocks_3[i]) {
+    					each_blocks_3[i].m(tbody, null);
     				}
     			}
 
@@ -12405,57 +12859,160 @@ var app = (function () {
     			append_dev(tbody, tr1);
     			append_dev(tr1, td);
     			append_dev(td, button);
-    			append_dev(div6, t13);
-    			mount_component(monteaccordion, div6, null);
-    			append_dev(div6, t14);
-    			append_dev(div6, div5);
-    			append_dev(div5, div1);
+    			append_dev(div16, t13);
+    			mount_component(monteaccordion, div16, null);
+    			append_dev(div16, t14);
+    			append_dev(div16, div15);
+    			append_dev(div15, div1);
     			append_dev(div1, label0);
     			append_dev(label0, t15);
     			mount_component(popover3, label0, null);
     			append_dev(label0, t16);
     			append_dev(div1, t17);
-    			append_dev(div1, select);
-    			append_dev(select, option0);
-    			append_dev(select, option1);
-    			append_dev(select, option2);
-    			append_dev(select, option3);
-    			append_dev(select, option4);
-    			select_option(select, /*mulliganCountString*/ ctx[3], true);
-    			append_dev(div5, t23);
-    			append_dev(div5, div2);
+    			append_dev(div1, select0);
+    			append_dev(select0, option0);
+    			append_dev(select0, option1);
+    			append_dev(select0, option2);
+    			append_dev(select0, option3);
+    			append_dev(select0, option4);
+    			select_option(select0, /*mulliganCountString*/ ctx[3], true);
+    			append_dev(div15, t23);
+    			append_dev(div15, div2);
     			append_dev(div2, label1);
     			append_dev(div2, t25);
-    			append_dev(div2, input0);
-    			set_input_value(input0, /*InitialDrawSize*/ ctx[2]);
-    			append_dev(div5, t26);
-    			append_dev(div5, div3);
+    			append_dev(div2, select1);
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				if (each_blocks_2[i]) {
+    					each_blocks_2[i].m(select1, null);
+    				}
+    			}
+
+    			select_option(select1, /*$mulliganConfig*/ ctx[7].maxMulligans, true);
+    			append_dev(div15, t26);
+    			append_dev(div15, div3);
     			append_dev(div3, label2);
     			append_dev(div3, t28);
-    			append_dev(div3, input1);
-    			set_input_value(input1, /*deckSize*/ ctx[1]);
-    			append_dev(div5, t29);
-    			append_dev(div5, div4);
+    			append_dev(div3, select2);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				if (each_blocks_1[i]) {
+    					each_blocks_1[i].m(select2, null);
+    				}
+    			}
+
+    			select_option(select2, /*$mulliganConfig*/ ctx[7].minLandsInHand, true);
+    			append_dev(div15, t29);
+    			append_dev(div15, div4);
     			append_dev(div4, label3);
     			append_dev(div4, t31);
-    			append_dev(div4, input2);
-    			set_input_value(input2, /*numberOfTurnsInput*/ ctx[5]);
-    			append_dev(div6, t32);
-    			mount_component(turndrawsaccordion, div6, null);
+    			append_dev(div4, select3);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(select3, null);
+    				}
+    			}
+
+    			select_option(select3, /*$mulliganConfig*/ ctx[7].maxLandsInHand, true);
+    			append_dev(div15, t32);
+    			append_dev(div15, div5);
+    			append_dev(div5, label4);
+    			append_dev(div5, t34);
+    			append_dev(div5, input0);
+    			input0.checked = /*$mulliganConfig*/ ctx[7].firstMulliganFree;
+    			append_dev(div15, t35);
+    			append_dev(div15, div6);
+    			append_dev(div6, label5);
+    			append_dev(div6, t37);
+    			append_dev(div6, input1);
+    			input1.checked = /*$mulliganConfig*/ ctx[7].freeMulliganTillLands;
+    			append_dev(div15, t38);
+    			append_dev(div15, div7);
+    			append_dev(div7, label6);
+    			append_dev(div7, t40);
+    			append_dev(div7, input2);
+    			input2.checked = /*$mulliganConfig*/ ctx[7].allowTwoLandsPlusRamp;
+    			append_dev(div15, t41);
+    			append_dev(div15, div8);
+    			append_dev(div8, label7);
+    			append_dev(div8, t43);
+    			append_dev(div8, select4);
+    			append_dev(select4, option5);
+    			append_dev(select4, option6);
+    			append_dev(select4, option7);
+    			append_dev(select4, option8);
+    			append_dev(select4, option9);
+    			append_dev(select4, option10);
+    			select_option(select4, /*$mulliganConfig*/ ctx[7].mulliganIfLandsCanOnlyMake, true);
+    			append_dev(div15, t50);
+    			append_dev(div15, div9);
+    			append_dev(div9, label8);
+    			append_dev(div9, t52);
+    			append_dev(div9, select5);
+    			append_dev(select5, option11);
+    			append_dev(select5, option12);
+    			append_dev(select5, option13);
+    			append_dev(select5, option14);
+    			append_dev(select5, option15);
+    			append_dev(select5, option16);
+    			select_options(select5, /*$mulliganConfig*/ ctx[7].mulliganUnlessOpeningHandCanMake);
+    			append_dev(div15, t59);
+    			append_dev(div15, div10);
+    			append_dev(div10, label9);
+    			append_dev(div10, t61);
+    			append_dev(div10, input3);
+    			input3.checked = /*$mulliganConfig*/ ctx[7].rampMustBePlayable;
+    			append_dev(div15, t62);
+    			append_dev(div15, div11);
+    			append_dev(div11, label10);
+    			append_dev(div11, t64);
+    			append_dev(div11, input4);
+    			input4.checked = /*$mulliganConfig*/ ctx[7].mustHaveRamp;
+    			append_dev(div15, t65);
+    			append_dev(div15, div12);
+    			append_dev(div12, label11);
+    			append_dev(div12, t67);
+    			append_dev(div12, input5);
+    			set_input_value(input5, /*InitialDrawSize*/ ctx[2]);
+    			append_dev(div15, t68);
+    			append_dev(div15, div13);
+    			append_dev(div13, label12);
+    			append_dev(div13, t70);
+    			append_dev(div13, input6);
+    			set_input_value(input6, /*deckSize*/ ctx[1]);
+    			append_dev(div15, t71);
+    			append_dev(div15, div14);
+    			append_dev(div14, label13);
+    			append_dev(div14, t73);
+    			append_dev(div14, input7);
+    			set_input_value(input7, /*numberOfTurnsInput*/ ctx[5]);
+    			append_dev(div16, t74);
+    			mount_component(turndrawsaccordion, div16, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button, "click", /*handleAddGroupClick*/ ctx[10], false, false, false, false),
-    					listen_dev(select, "change", /*select_change_handler*/ ctx[27]),
-    					listen_dev(select, "change", /*change_handler*/ ctx[28], false, false, false, false),
-    					listen_dev(input0, "input", /*input0_input_handler_1*/ ctx[29]),
-    					listen_dev(input0, "focus", selectInput$1, false, false, false, false),
-    					listen_dev(input1, "input", /*input1_input_handler_1*/ ctx[30]),
-    					listen_dev(input1, "focus", selectInput$1, false, false, false, false),
-    					listen_dev(input2, "input", /*input2_input_handler_1*/ ctx[31]),
-    					listen_dev(input2, "focus", selectInput$1, false, false, false, false),
-    					listen_dev(input2, "change", /*handleNumberOfTurnsChange*/ ctx[8], false, false, false, false)
+    					listen_dev(button, "click", /*handleAddGroupClick*/ ctx[11], false, false, false, false),
+    					listen_dev(select0, "change", /*select0_change_handler*/ ctx[28]),
+    					listen_dev(select0, "change", /*change_handler*/ ctx[29], false, false, false, false),
+    					listen_dev(select1, "change", /*select1_change_handler*/ ctx[30]),
+    					listen_dev(select2, "change", /*select2_change_handler*/ ctx[31]),
+    					listen_dev(select3, "change", /*select3_change_handler*/ ctx[32]),
+    					listen_dev(input0, "change", /*input0_change_handler*/ ctx[33]),
+    					listen_dev(input1, "change", /*input1_change_handler*/ ctx[34]),
+    					listen_dev(input2, "change", /*input2_change_handler*/ ctx[35]),
+    					listen_dev(select4, "change", /*select4_change_handler*/ ctx[36]),
+    					listen_dev(select5, "change", /*select5_change_handler*/ ctx[37]),
+    					listen_dev(input3, "change", /*input3_change_handler*/ ctx[38]),
+    					listen_dev(input4, "change", /*input4_change_handler*/ ctx[39]),
+    					listen_dev(input5, "input", /*input5_input_handler*/ ctx[40]),
+    					listen_dev(input5, "focus", selectInput$1, false, false, false, false),
+    					listen_dev(input6, "input", /*input6_input_handler*/ ctx[41]),
+    					listen_dev(input6, "focus", selectInput$1, false, false, false, false),
+    					listen_dev(input7, "input", /*input7_input_handler*/ ctx[42]),
+    					listen_dev(input7, "focus", selectInput$1, false, false, false, false),
+    					listen_dev(input7, "change", /*handleNumberOfTurnsChange*/ ctx[9], false, false, false, false)
     				];
 
     				mounted = true;
@@ -12464,7 +13021,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover0_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 67108864) {
     				popover0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12477,7 +13034,7 @@ var app = (function () {
     			popover0.$set(popover0_changes);
     			const popover1_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 67108864) {
     				popover1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12490,7 +13047,7 @@ var app = (function () {
     			popover1.$set(popover1_changes);
     			const popover2_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 67108864) {
     				popover2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12502,28 +13059,28 @@ var app = (function () {
 
     			popover2.$set(popover2_changes);
 
-    			if (dirty[0] & /*removeGroup, $groupColors, groups*/ 2113) {
-    				each_value = /*groups*/ ctx[0];
-    				validate_each_argument(each_value);
+    			if (dirty[0] & /*removeGroup, $groupColors, groups*/ 4161) {
+    				each_value_3 = /*groups*/ ctx[0];
+    				validate_each_argument(each_value_3);
     				let i;
 
-    				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$2(ctx, each_value, i);
+    				for (i = 0; i < each_value_3.length; i += 1) {
+    					const child_ctx = get_each_context_3(ctx, each_value_3, i);
 
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(child_ctx, dirty);
-    						transition_in(each_blocks[i], 1);
+    					if (each_blocks_3[i]) {
+    						each_blocks_3[i].p(child_ctx, dirty);
+    						transition_in(each_blocks_3[i], 1);
     					} else {
-    						each_blocks[i] = create_each_block$2(child_ctx);
-    						each_blocks[i].c();
-    						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(tbody, t11);
+    						each_blocks_3[i] = create_each_block_3(child_ctx);
+    						each_blocks_3[i].c();
+    						transition_in(each_blocks_3[i], 1);
+    						each_blocks_3[i].m(tbody, t11);
     					}
     				}
 
     				group_outros();
 
-    				for (i = each_value.length; i < each_blocks.length; i += 1) {
+    				for (i = each_value_3.length; i < each_blocks_3.length; i += 1) {
     					out(i);
     				}
 
@@ -12532,7 +13089,7 @@ var app = (function () {
 
     			const popover3_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 67108864) {
     				popover3_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12545,19 +13102,131 @@ var app = (function () {
     			popover3.$set(popover3_changes);
 
     			if (dirty[0] & /*mulliganCountString*/ 8) {
-    				select_option(select, /*mulliganCountString*/ ctx[3]);
+    				select_option(select0, /*mulliganCountString*/ ctx[3]);
     			}
 
-    			if (dirty[0] & /*InitialDrawSize*/ 4 && to_number(input0.value) !== /*InitialDrawSize*/ ctx[2]) {
-    				set_input_value(input0, /*InitialDrawSize*/ ctx[2]);
+    			if (dirty & /*Array*/ 0) {
+    				each_value_2 = Array(8).fill(0).map(func);
+    				validate_each_argument(each_value_2);
+    				let i;
+
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2$1(ctx, each_value_2, i);
+
+    					if (each_blocks_2[i]) {
+    						each_blocks_2[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks_2[i] = create_each_block_2$1(child_ctx);
+    						each_blocks_2[i].c();
+    						each_blocks_2[i].m(select1, null);
+    					}
+    				}
+
+    				for (; i < each_blocks_2.length; i += 1) {
+    					each_blocks_2[i].d(1);
+    				}
+
+    				each_blocks_2.length = each_value_2.length;
     			}
 
-    			if (dirty[0] & /*deckSize*/ 2 && to_number(input1.value) !== /*deckSize*/ ctx[1]) {
-    				set_input_value(input1, /*deckSize*/ ctx[1]);
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				select_option(select1, /*$mulliganConfig*/ ctx[7].maxMulligans);
     			}
 
-    			if (dirty[0] & /*numberOfTurnsInput*/ 32 && to_number(input2.value) !== /*numberOfTurnsInput*/ ctx[5]) {
-    				set_input_value(input2, /*numberOfTurnsInput*/ ctx[5]);
+    			if (dirty & /*Array*/ 0) {
+    				each_value_1 = Array(8).fill(0).map(func_1);
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1$1(ctx, each_value_1, i);
+
+    					if (each_blocks_1[i]) {
+    						each_blocks_1[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks_1[i] = create_each_block_1$1(child_ctx);
+    						each_blocks_1[i].c();
+    						each_blocks_1[i].m(select2, null);
+    					}
+    				}
+
+    				for (; i < each_blocks_1.length; i += 1) {
+    					each_blocks_1[i].d(1);
+    				}
+
+    				each_blocks_1.length = each_value_1.length;
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				select_option(select2, /*$mulliganConfig*/ ctx[7].minLandsInHand);
+    			}
+
+    			if (dirty & /*Array*/ 0) {
+    				each_value = Array(8).fill(0).map(func_2);
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$2(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$2(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(select3, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				select_option(select3, /*$mulliganConfig*/ ctx[7].maxLandsInHand);
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				input0.checked = /*$mulliganConfig*/ ctx[7].firstMulliganFree;
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				input1.checked = /*$mulliganConfig*/ ctx[7].freeMulliganTillLands;
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				input2.checked = /*$mulliganConfig*/ ctx[7].allowTwoLandsPlusRamp;
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				select_option(select4, /*$mulliganConfig*/ ctx[7].mulliganIfLandsCanOnlyMake);
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				select_options(select5, /*$mulliganConfig*/ ctx[7].mulliganUnlessOpeningHandCanMake);
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				input3.checked = /*$mulliganConfig*/ ctx[7].rampMustBePlayable;
+    			}
+
+    			if (dirty[0] & /*$mulliganConfig*/ 128) {
+    				input4.checked = /*$mulliganConfig*/ ctx[7].mustHaveRamp;
+    			}
+
+    			if (dirty[0] & /*InitialDrawSize*/ 4 && to_number(input5.value) !== /*InitialDrawSize*/ ctx[2]) {
+    				set_input_value(input5, /*InitialDrawSize*/ ctx[2]);
+    			}
+
+    			if (dirty[0] & /*deckSize*/ 2 && to_number(input6.value) !== /*deckSize*/ ctx[1]) {
+    				set_input_value(input6, /*deckSize*/ ctx[1]);
+    			}
+
+    			if (dirty[0] & /*numberOfTurnsInput*/ 32 && to_number(input7.value) !== /*numberOfTurnsInput*/ ctx[5]) {
+    				set_input_value(input7, /*numberOfTurnsInput*/ ctx[5]);
     			}
     		},
     		i: function intro(local) {
@@ -12566,8 +13235,8 @@ var app = (function () {
     			transition_in(popover1.$$.fragment, local);
     			transition_in(popover2.$$.fragment, local);
 
-    			for (let i = 0; i < each_value.length; i += 1) {
-    				transition_in(each_blocks[i]);
+    			for (let i = 0; i < each_value_3.length; i += 1) {
+    				transition_in(each_blocks_3[i]);
     			}
 
     			transition_in(monteaccordion.$$.fragment, local);
@@ -12579,10 +13248,10 @@ var app = (function () {
     			transition_out(popover0.$$.fragment, local);
     			transition_out(popover1.$$.fragment, local);
     			transition_out(popover2.$$.fragment, local);
-    			each_blocks = each_blocks.filter(Boolean);
+    			each_blocks_3 = each_blocks_3.filter(Boolean);
 
-    			for (let i = 0; i < each_blocks.length; i += 1) {
-    				transition_out(each_blocks[i]);
+    			for (let i = 0; i < each_blocks_3.length; i += 1) {
+    				transition_out(each_blocks_3[i]);
     			}
 
     			transition_out(monteaccordion.$$.fragment, local);
@@ -12593,13 +13262,16 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(h2);
     			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div6);
+    			if (detaching) detach_dev(div16);
     			destroy_component(popover0);
     			destroy_component(popover1);
     			destroy_component(popover2);
-    			destroy_each(each_blocks, detaching);
+    			destroy_each(each_blocks_3, detaching);
     			destroy_component(monteaccordion);
     			destroy_component(popover3);
+    			destroy_each(each_blocks_2, detaching);
+    			destroy_each(each_blocks_1, detaching);
+    			destroy_each(each_blocks, detaching);
     			destroy_component(turndrawsaccordion);
     			mounted = false;
     			run_all(dispose);
@@ -12621,10 +13293,17 @@ var app = (function () {
     	event.target.select(); // Selects all text in the input upon focus
     }
 
+    const func = (_, i) => i;
+    const func_1 = (_, i) => i;
+    const func_2 = (_, i) => i;
+
     function instance$5($$self, $$props, $$invalidate) {
     	let $groupColors;
+    	let $mulliganConfig;
     	validate_store(groupColors, 'groupColors');
     	component_subscribe($$self, groupColors, $$value => $$invalidate(6, $groupColors = $$value));
+    	validate_store(mulliganConfig, 'mulliganConfig');
+    	component_subscribe($$self, mulliganConfig, $$value => $$invalidate(7, $mulliganConfig = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('GroupDefinition', slots, []);
     	const dispatch = createEventDispatcher();
@@ -12732,23 +13411,23 @@ var app = (function () {
     		$$invalidate(4, showPopover);
     	}
 
-    	function input0_input_handler(each_value, index) {
-    		each_value[index].name = this.value;
+    	function input0_input_handler(each_value_3, index) {
+    		each_value_3[index].name = this.value;
     		$$invalidate(0, groups);
     	}
 
-    	function input1_input_handler(each_value, index) {
-    		each_value[index].size = to_number(this.value);
+    	function input1_input_handler(each_value_3, index) {
+    		each_value_3[index].size = to_number(this.value);
     		$$invalidate(0, groups);
     	}
 
-    	function input2_input_handler(each_value, index) {
-    		each_value[index].cardsToDraw = to_number(this.value);
+    	function input2_input_handler(each_value_3, index) {
+    		each_value_3[index].cardsToDraw = to_number(this.value);
     		$$invalidate(0, groups);
     	}
 
-    	function input3_input_handler(each_value, index) {
-    		each_value[index].link = this.value;
+    	function input3_input_handler(each_value_3, index) {
+    		each_value_3[index].link = this.value;
     		$$invalidate(0, groups);
     	}
 
@@ -12760,24 +13439,74 @@ var app = (function () {
     		$$invalidate(4, showPopover);
     	}
 
-    	function select_change_handler() {
+    	function select0_change_handler() {
     		mulliganCountString = select_value(this);
     		$$invalidate(3, mulliganCountString);
     	}
 
     	const change_handler = event => handleSelectChange(event.target.value);
 
-    	function input0_input_handler_1() {
+    	function select1_change_handler() {
+    		$mulliganConfig.maxMulligans = select_value(this);
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function select2_change_handler() {
+    		$mulliganConfig.minLandsInHand = select_value(this);
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function select3_change_handler() {
+    		$mulliganConfig.maxLandsInHand = select_value(this);
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function input0_change_handler() {
+    		$mulliganConfig.firstMulliganFree = this.checked;
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function input1_change_handler() {
+    		$mulliganConfig.freeMulliganTillLands = this.checked;
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function input2_change_handler() {
+    		$mulliganConfig.allowTwoLandsPlusRamp = this.checked;
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function select4_change_handler() {
+    		$mulliganConfig.mulliganIfLandsCanOnlyMake = select_value(this);
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function select5_change_handler() {
+    		$mulliganConfig.mulliganUnlessOpeningHandCanMake = select_multiple_value(this);
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function input3_change_handler() {
+    		$mulliganConfig.rampMustBePlayable = this.checked;
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function input4_change_handler() {
+    		$mulliganConfig.mustHaveRamp = this.checked;
+    		mulliganConfig.set($mulliganConfig);
+    	}
+
+    	function input5_input_handler() {
     		InitialDrawSize = to_number(this.value);
     		$$invalidate(2, InitialDrawSize);
     	}
 
-    	function input1_input_handler_1() {
+    	function input6_input_handler() {
     		deckSize = to_number(this.value);
     		$$invalidate(1, deckSize);
     	}
 
-    	function input2_input_handler_1() {
+    	function input7_input_handler() {
     		numberOfTurnsInput = to_number(this.value);
     		$$invalidate(5, numberOfTurnsInput);
     	}
@@ -12786,6 +13515,7 @@ var app = (function () {
     		createEventDispatcher,
     		groupColors,
     		numberOfTurns,
+    		mulliganConfig,
     		Popover,
     		FontAwesomeIcon,
     		faQuestionCircle,
@@ -12812,7 +13542,8 @@ var app = (function () {
     		addGroup,
     		removeGroup,
     		selectInput: selectInput$1,
-    		$groupColors
+    		$groupColors,
+    		$mulliganConfig
     	});
 
     	$$self.$inject_state = $$props => {
@@ -12820,8 +13551,8 @@ var app = (function () {
     		if ('groups' in $$props) $$invalidate(0, groups = $$props.groups);
     		if ('deckSize' in $$props) $$invalidate(1, deckSize = $$props.deckSize);
     		if ('InitialDrawSize' in $$props) $$invalidate(2, InitialDrawSize = $$props.InitialDrawSize);
-    		if ('mulliganCount' in $$props) $$invalidate(12, mulliganCount = $$props.mulliganCount);
-    		if ('colorIndex' in $$props) $$invalidate(13, colorIndex = $$props.colorIndex);
+    		if ('mulliganCount' in $$props) $$invalidate(13, mulliganCount = $$props.mulliganCount);
+    		if ('colorIndex' in $$props) $$invalidate(14, colorIndex = $$props.colorIndex);
     		if ('showPopover' in $$props) $$invalidate(4, showPopover = $$props.showPopover);
     		if ('mulliganCountString' in $$props) $$invalidate(3, mulliganCountString = $$props.mulliganCountString);
     		if ('numberOfTurnsInput' in $$props) $$invalidate(5, numberOfTurnsInput = $$props.numberOfTurnsInput);
@@ -12835,10 +13566,10 @@ var app = (function () {
     		if ($$self.$$.dirty[0] & /*mulliganCountString*/ 8) {
     			//--------------------------------------------
     			// Reactive statement to ensure mulliganCount is always a number
-    			$$invalidate(12, mulliganCount = Number(mulliganCountString));
+    			$$invalidate(13, mulliganCount = Number(mulliganCountString));
     		}
 
-    		if ($$self.$$.dirty[0] & /*groups, colorIndex, deckSize, InitialDrawSize, mulliganCount*/ 12295) {
+    		if ($$self.$$.dirty[0] & /*groups, colorIndex, deckSize, InitialDrawSize, mulliganCount*/ 24583) {
     			{
     				let updatedColors = {};
 
@@ -12848,7 +13579,7 @@ var app = (function () {
     					: group.name;
 
     					if (!updatedColors[key]) {
-    						updatedColors[key] = presetColors[$$invalidate(13, colorIndex++, colorIndex) % presetColors.length];
+    						updatedColors[key] = presetColors[$$invalidate(14, colorIndex++, colorIndex) % presetColors.length];
     					}
     				});
 
@@ -12872,6 +13603,7 @@ var app = (function () {
     		showPopover,
     		numberOfTurnsInput,
     		$groupColors,
+    		$mulliganConfig,
     		handleDrawAmountChange,
     		handleNumberOfTurnsChange,
     		handleSelectChange,
@@ -12892,11 +13624,21 @@ var app = (function () {
     		click_handler_3,
     		click_handler_4,
     		popover3_show_binding,
-    		select_change_handler,
+    		select0_change_handler,
     		change_handler,
-    		input0_input_handler_1,
-    		input1_input_handler_1,
-    		input2_input_handler_1
+    		select1_change_handler,
+    		select2_change_handler,
+    		select3_change_handler,
+    		input0_change_handler,
+    		input1_change_handler,
+    		input2_change_handler,
+    		select4_change_handler,
+    		select5_change_handler,
+    		input3_change_handler,
+    		input4_change_handler,
+    		input5_input_handler,
+    		input6_input_handler,
+    		input7_input_handler
     	];
     }
 
@@ -30135,25 +30877,25 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[37] = list[i];
-    	child_ctx[39] = i;
+    	child_ctx[40] = list[i];
+    	child_ctx[42] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[43] = list[i];
-    	child_ctx[45] = i;
+    	child_ctx[46] = list[i];
+    	child_ctx[48] = i;
     	return child_ctx;
     }
 
-    // (1203:4) {#if hasOutput}
+    // (1399:4) {#if hasOutput}
     function create_if_block_2(ctx) {
     	let p;
     	let i;
@@ -30163,7 +30905,7 @@ var app = (function () {
     	let current;
 
     	function popover_show_binding(value) {
-    		/*popover_show_binding*/ ctx[14](value);
+    		/*popover_show_binding*/ ctx[15](value);
     	}
 
     	let popover_props = {
@@ -30189,10 +30931,10 @@ var app = (function () {
     			i.textContent = "Each column of stacked cards represents a separate opening hand and subsequent draws.";
     			t1 = space();
     			create_component(popover.$$.fragment);
-    			add_location(i, file$4, 1203, 49, 50531);
+    			add_location(i, file$4, 1399, 49, 57912);
     			set_style(p, "margin-top", "0");
     			set_style(p, "text-align", "center");
-    			add_location(p, file$4, 1203, 4, 50486);
+    			add_location(p, file$4, 1399, 4, 57867);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -30204,7 +30946,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 64 | dirty[1] & /*$$scope*/ 32768) {
+    			if (dirty[0] & /*showPopover*/ 64 | dirty[1] & /*$$scope*/ 262144) {
     				popover_changes.$$scope = { dirty, ctx };
     			}
 
@@ -30235,14 +30977,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(1203:4) {#if hasOutput}",
+    		source: "(1399:4) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1206:12) 
+    // (1402:12) 
     function create_trigger_slot$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -30266,7 +31008,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 1205, 12, 50696);
+    			add_location(button, file$4, 1401, 12, 58077);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -30274,7 +31016,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[13], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[14], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -30300,14 +31042,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$1.name,
     		type: "slot",
-    		source: "(1206:12) ",
+    		source: "(1402:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1209:12) 
+    // (1405:12) 
     function create_content_slot$1(ctx) {
     	let div;
     	let p;
@@ -30318,9 +31060,9 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the \"Linked groups\" feature or Advanced section to calculate the probability of drawing cards from different groups.";
     			attr_dev(p, "class", "popover-content svelte-2vp65s");
-    			add_location(p, file$4, 1209, 16, 51013);
+    			add_location(p, file$4, 1405, 16, 58394);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 1208, 12, 50975);
+    			add_location(div, file$4, 1404, 12, 58356);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30336,14 +31078,14 @@ var app = (function () {
     		block,
     		id: create_content_slot$1.name,
     		type: "slot",
-    		source: "(1209:12) ",
+    		source: "(1405:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1244:8) {:else}
+    // (1440:8) {:else}
     function create_else_block(ctx) {
     	let div;
 
@@ -30352,7 +31094,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "Add a group or run a simulation above to show output probabilities.";
     			attr_dev(div, "class", "placeholder svelte-2vp65s");
-    			add_location(div, file$4, 1244, 9, 53136);
+    			add_location(div, file$4, 1440, 9, 60517);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30367,14 +31109,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(1244:8) {:else}",
+    		source: "(1440:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1216:8) {#if hasOutput}
+    // (1412:8) {#if hasOutput}
     function create_if_block$2(ctx) {
     	let each_1_anchor;
     	let each_value = /*generateTurnsArray*/ ctx[3](/*$numberOfTurns*/ ctx[4].length);
@@ -30437,14 +31179,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(1216:8) {#if hasOutput}",
+    		source: "(1412:8) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1218:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}
+    // (1414:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}
     function create_if_block_1$1(ctx) {
     	let div2;
     	let div0;
@@ -30456,16 +31198,16 @@ var app = (function () {
     	let i;
     	let t4;
 
-    	let t5_value = (/*turn*/ ctx[39] === 0
+    	let t5_value = (/*turn*/ ctx[42] === 0
     	? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[39] - 1]}`) + "";
+    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[42] - 1]}`) + "";
 
     	let t5;
     	let t6;
     	let t7;
     	let div1;
     	let t8;
-    	let each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[39]);
+    	let each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -30478,7 +31220,7 @@ var app = (function () {
     			div2 = element("div");
     			div0 = element("div");
     			t0 = text("Turn ");
-    			t1 = text(/*turn*/ ctx[39]);
+    			t1 = text(/*turn*/ ctx[42]);
     			t2 = text(":");
     			br = element("br");
     			t3 = space();
@@ -30494,15 +31236,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 1220, 32, 51694);
+    			add_location(br, file$4, 1416, 32, 59075);
     			attr_dev(i, "class", "svelte-2vp65s");
-    			add_location(i, file$4, 1221, 20, 51720);
+    			add_location(i, file$4, 1417, 20, 59101);
     			attr_dev(div0, "class", "turn-label svelte-2vp65s");
-    			add_location(div0, file$4, 1219, 16, 51636);
+    			add_location(div0, file$4, 1415, 16, 59017);
     			attr_dev(div1, "class", "card-rectangles svelte-2vp65s");
-    			add_location(div1, file$4, 1223, 16, 51848);
+    			add_location(div1, file$4, 1419, 16, 59229);
     			attr_dev(div2, "class", "turn-row svelte-2vp65s");
-    			add_location(div2, file$4, 1218, 12, 51596);
+    			add_location(div2, file$4, 1414, 12, 58977);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -30528,12 +31270,12 @@ var app = (function () {
     			append_dev(div2, t8);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[39] === 0
+    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[42] === 0
     			? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[39] - 1]}`) + "")) set_data_dev(t5, t5_value);
+    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[42] - 1]}`) + "")) set_data_dev(t5, t5_value);
 
     			if (dirty[0] & /*createGroupCards, groups, results, $probabilitiesByTurn*/ 549) {
-    				each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[39]);
+    				each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -30566,14 +31308,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(1218:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}",
+    		source: "(1414:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1234:28) {#each card.isBlank as isBlank, i}
+    // (1430:28) {#each card.isBlank as isBlank, i}
     function create_each_block_2(ctx) {
     	let div;
 
@@ -30581,22 +31323,22 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "stacked-card svelte-2vp65s");
-    			set_style(div, "left", /*i*/ ctx[45] * 4 + "px");
-    			set_style(div, "z-index", -(/*i*/ ctx[45] + 1));
-    			set_style(div, "background-color", /*isBlank*/ ctx[43] ? '#f2efe8' : /*card*/ ctx[40].color);
-    			set_style(div, "border-color", /*isBlank*/ ctx[43] ? '#c1c1c1' : '#666666');
-    			add_location(div, file$4, 1234, 28, 52655);
+    			set_style(div, "left", /*i*/ ctx[48] * 4 + "px");
+    			set_style(div, "z-index", -(/*i*/ ctx[48] + 1));
+    			set_style(div, "background-color", /*isBlank*/ ctx[46] ? '#f2efe8' : /*card*/ ctx[43].color);
+    			set_style(div, "border-color", /*isBlank*/ ctx[46] ? '#c1c1c1' : '#666666');
+    			add_location(div, file$4, 1430, 28, 60036);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div, "background-color", /*isBlank*/ ctx[43] ? '#f2efe8' : /*card*/ ctx[40].color);
+    				set_style(div, "background-color", /*isBlank*/ ctx[46] ? '#f2efe8' : /*card*/ ctx[43].color);
     			}
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div, "border-color", /*isBlank*/ ctx[43] ? '#c1c1c1' : '#666666');
+    				set_style(div, "border-color", /*isBlank*/ ctx[46] ? '#c1c1c1' : '#666666');
     			}
     		},
     		d: function destroy(detaching) {
@@ -30608,36 +31350,36 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(1234:28) {#each card.isBlank as isBlank, i}",
+    		source: "(1430:28) {#each card.isBlank as isBlank, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1225:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
+    // (1421:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
     function create_each_block_1(ctx) {
     	let div6;
     	let div3;
     	let div2;
     	let div0;
 
-    	let t0_value = (/*card*/ ctx[40].probability !== null
-    	? `${/*card*/ ctx[40].probability}%`
+    	let t0_value = (/*card*/ ctx[43].probability !== null
+    	? `${/*card*/ ctx[43].probability}%`
     	: '') + "";
 
     	let t0;
     	let t1;
     	let div1;
-    	let raw_value = /*card*/ ctx[40].ratioText + "";
+    	let raw_value = /*card*/ ctx[43].ratioText + "";
     	let t2;
     	let div4;
     	let t3;
     	let div5;
-    	let t4_value = /*card*/ ctx[40].label + "";
+    	let t4_value = /*card*/ ctx[43].label + "";
     	let t4;
     	let t5;
-    	let each_value_2 = /*card*/ ctx[40].isBlank;
+    	let each_value_2 = /*card*/ ctx[43].isBlank;
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -30666,21 +31408,21 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			attr_dev(div0, "class", "probability svelte-2vp65s");
-    			add_location(div0, file$4, 1228, 32, 52266);
+    			add_location(div0, file$4, 1424, 32, 59647);
     			attr_dev(div1, "class", "card-ratio svelte-2vp65s");
-    			add_location(div1, file$4, 1229, 32, 52388);
+    			add_location(div1, file$4, 1425, 32, 59769);
     			attr_dev(div2, "class", "card-details svelte-2vp65s");
-    			add_location(div2, file$4, 1227, 28, 52206);
+    			add_location(div2, file$4, 1423, 28, 59587);
     			attr_dev(div3, "class", "rectangle svelte-2vp65s");
-    			set_style(div3, "background-color", /*card*/ ctx[40].color);
-    			add_location(div3, file$4, 1226, 24, 52113);
+    			set_style(div3, "background-color", /*card*/ ctx[43].color);
+    			add_location(div3, file$4, 1422, 24, 59494);
     			attr_dev(div4, "class", "stacked-cards svelte-2vp65s");
-    			add_location(div4, file$4, 1232, 24, 52534);
+    			add_location(div4, file$4, 1428, 24, 59915);
     			attr_dev(div5, "class", "card-label svelte-2vp65s");
-    			add_location(div5, file$4, 1236, 24, 52929);
+    			add_location(div5, file$4, 1432, 24, 60310);
     			attr_dev(div6, "class", "card-container svelte-2vp65s");
-    			set_style(div6, "margin-right", 7 + (/*card*/ ctx[40].isBlank.length - 1) * 4 + "px");
-    			add_location(div6, file$4, 1225, 20, 51998);
+    			set_style(div6, "margin-right", 7 + (/*card*/ ctx[43].isBlank.length - 1) * 4 + "px");
+    			add_location(div6, file$4, 1421, 20, 59379);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -30706,17 +31448,17 @@ var app = (function () {
     			append_dev(div6, t5);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t0_value !== (t0_value = (/*card*/ ctx[40].probability !== null
-    			? `${/*card*/ ctx[40].probability}%`
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t0_value !== (t0_value = (/*card*/ ctx[43].probability !== null
+    			? `${/*card*/ ctx[43].probability}%`
     			: '') + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && raw_value !== (raw_value = /*card*/ ctx[40].ratioText + "")) div1.innerHTML = raw_value;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && raw_value !== (raw_value = /*card*/ ctx[43].ratioText + "")) div1.innerHTML = raw_value;
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div3, "background-color", /*card*/ ctx[40].color);
+    				set_style(div3, "background-color", /*card*/ ctx[43].color);
     			}
 
     			if (dirty[0] & /*createGroupCards, groups, results, $probabilitiesByTurn*/ 549) {
-    				each_value_2 = /*card*/ ctx[40].isBlank;
+    				each_value_2 = /*card*/ ctx[43].isBlank;
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -30739,10 +31481,10 @@ var app = (function () {
     				each_blocks.length = each_value_2.length;
     			}
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t4_value !== (t4_value = /*card*/ ctx[40].label + "")) set_data_dev(t4, t4_value);
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t4_value !== (t4_value = /*card*/ ctx[43].label + "")) set_data_dev(t4, t4_value);
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div6, "margin-right", 7 + (/*card*/ ctx[40].isBlank.length - 1) * 4 + "px");
+    				set_style(div6, "margin-right", 7 + (/*card*/ ctx[43].isBlank.length - 1) * 4 + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -30755,16 +31497,16 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(1225:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}",
+    		source: "(1421:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1217:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
+    // (1413:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
     function create_each_block$1(ctx) {
-    	let show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[39]).length > 0;
+    	let show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]).length > 0;
     	let if_block_anchor;
     	let if_block = show_if && create_if_block_1$1(ctx);
 
@@ -30778,7 +31520,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[39]).length > 0;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]).length > 0;
 
     			if (show_if) {
     				if (if_block) {
@@ -30803,7 +31545,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(1217:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
+    		source: "(1413:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
     		ctx
     	});
 
@@ -30837,9 +31579,9 @@ var app = (function () {
     			if_block1.c();
     			set_style(h2, "text-align", "center");
     			set_style(h2, "margin-bottom", "0");
-    			add_location(h2, file$4, 1201, 4, 50392);
+    			add_location(h2, file$4, 1397, 4, 57773);
     			attr_dev(div, "class", "output-diagram svelte-2vp65s");
-    			add_location(div, file$4, 1214, 4, 51371);
+    			add_location(div, file$4, 1410, 4, 58752);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31092,6 +31834,40 @@ var app = (function () {
     	return Object.entries(landGroupSizes).map(([land, count]) => ({ land: JSON.parse(land), count }));
     }
 
+    function prioritizeCardToBottom(hand) {
+    	// Prioritize placing a "dummy" card at the bottom
+    	const dummyIndex = hand.findIndex(card => card.dummy);
+
+    	if (dummyIndex !== -1) {
+    		return hand.splice(dummyIndex, 1)[0];
+    	}
+
+    	// If no dummy card, prioritize placing a duplicate mana card at the bottom
+    	const manaCounts = {};
+
+    	hand.forEach(card => {
+    		const key = JSON.stringify(card);
+    		manaCounts[key] = (manaCounts[key] || 0) + 1;
+    	});
+
+    	for (const key in manaCounts) {
+    		if (manaCounts[key] > 1) {
+    			const duplicateIndex = hand.findIndex(card => JSON.stringify(card) === key);
+
+    			if (duplicateIndex !== -1) {
+    				return hand.splice(duplicateIndex, 1)[0];
+    			}
+    		}
+    	}
+
+    	// If no dummy or duplicate mana card, place the first card at the bottom
+    	return hand.pop();
+    }
+
+    //     if (handMeetsRequirements(AvailableManaThisTurn, $simulationData.preparedCards)) {
+    //     return { AvailableManaThisTurn, meetsRequirements: true };
+    // }
+    // return { AvailableManaThisTurn, meetsRequirements: false };
     function getTotalManaCost(manaCost) {
     	if (!manaCost) return Infinity; // Return a high value if manaCost is undefined or null
     	return Object.values(manaCost).reduce((sum, value) => sum + value, 0);
@@ -31218,17 +31994,20 @@ var app = (function () {
     	let $groupColors;
     	let $monteCarloResults;
     	let $simulationData;
+    	let $mulliganConfig;
     	let $cancelSimulation;
     	validate_store(numberOfTurns, 'numberOfTurns');
     	component_subscribe($$self, numberOfTurns, $$value => $$invalidate(4, $numberOfTurns = $$value));
     	validate_store(groupColors, 'groupColors');
-    	component_subscribe($$self, groupColors, $$value => $$invalidate(17, $groupColors = $$value));
+    	component_subscribe($$self, groupColors, $$value => $$invalidate(18, $groupColors = $$value));
     	validate_store(monteCarloResults, 'monteCarloResults');
-    	component_subscribe($$self, monteCarloResults, $$value => $$invalidate(18, $monteCarloResults = $$value));
+    	component_subscribe($$self, monteCarloResults, $$value => $$invalidate(19, $monteCarloResults = $$value));
     	validate_store(simulationData, 'simulationData');
     	component_subscribe($$self, simulationData, $$value => $$invalidate(12, $simulationData = $$value));
+    	validate_store(mulliganConfig, 'mulliganConfig');
+    	component_subscribe($$self, mulliganConfig, $$value => $$invalidate(13, $mulliganConfig = $$value));
     	validate_store(cancelSimulation, 'cancelSimulation');
-    	component_subscribe($$self, cancelSimulation, $$value => $$invalidate(19, $cancelSimulation = $$value));
+    	component_subscribe($$self, cancelSimulation, $$value => $$invalidate(20, $cancelSimulation = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Calculation', slots, []);
 
@@ -31455,23 +32234,50 @@ var app = (function () {
     	//         runIteration(); // Start the first iteration
     	//     });
     	// }
+    	//---------------------------------------------------------------------
+    	// ORIGINAL HAND MEETS REQUIREMENTS - CHECKING HAND NOT AvailableManaThisTurn
+    	// function handMeetsRequirements(hand, preparedCombinations) {
+    	//      //   console.log('Checking hand against requirements:', hand);
+    	//      //   console.log('Prepared combinations:', preparedCombinations);
+    	//         return preparedCombinations.some(combination => {
+    	//             const landCounts = combination.reduce((counts, land) => {
+    	//                 counts[JSON.stringify(land.land)] = land.count;
+    	//                 return counts;
+    	//             }, {});
+    	//             const handProfile = hand.reduce((profile, land) => {
+    	//                 const key = JSON.stringify(land);
+    	//                 profile[key] = (profile[key] || 0) + 1;
+    	//                 return profile;
+    	//             }, {});
+    	//            // console.log(`Checking hand against requirements:`, handProfile, landCounts);
+    	//             const meetsRequirements = Object.entries(landCounts).every(([land, count]) => {
+    	//                 return handProfile[land] >= count;
+    	//             });
+    	//             if (meetsRequirements) {
+    	//               //  console.log(`Hand meets the combination requirements:`, combination);
+    	//             } else {
+    	//               //  console.log(`Hand does not meet the combination requirements:`, combination);
+    	//             }
+    	//             return meetsRequirements;
+    	//         });
+    	//     }
     	function monteCarloSimulation(
     		preparedCombinations,
     	landGroupSizes,
     	deckSize,
-    	mulliganCount,
+    	mulliganConfig,
     	initialDrawSize,
     	numberOfTurns,
-    	numIterations
+    	numIterations,
+    	neededCombinations
     	) {
     		return new Promise((resolve, reject) => {
+    				console.log('mulliganConfig:', _.cloneDeep(mulliganConfig)); // Log mulliganConfig to verify it's passed correctly
     				const probabilitiesByTurn = Array.from({ length: numberOfTurns.length + 1 }, () => 0); // Updated to use numberOfTurns.length
     				const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
     				const numDummyCards = Math.max(deckSize - totalLands, 0);
     				const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
     				let iteration = 0;
-    				let totalAvailableMana = [];
-    				let totalAvailableRamp = [];
 
     				// Calculate the total mana needed to determine the batch size. this
     				// improves performance 
@@ -31483,10 +32289,6 @@ var app = (function () {
     					batchSize = 50;
     				} else if (totalManaNeeded === 3) {
     					batchSize = 30;
-    				} else if (totalManaNeeded === 4) {
-    					batchSize = 20;
-    				} else if (totalManaNeeded === 5) {
-    					batchSize = 20;
     				} else {
     					batchSize = 20;
     				}
@@ -31497,95 +32299,88 @@ var app = (function () {
     						return;
     					}
 
+    					// Reset totalAvailableMana and totalAvailableRamp for each iteration
+    					let totalAvailableMana = [];
+
+    					let totalAvailableRamp = [];
+    					let hand = _.sampleSize(completeDeck, initialDrawSize);
+    					let remainingDeck = removeDrawnCardsFromDeck(completeDeck, hand);
+
+    					// Perform mulligans
+    					const { finalHand, remainingDeck: updatedDeck } = londonMulligan(hand, remainingDeck);
+
+    					hand = finalHand;
+    					remainingDeck = updatedDeck;
+
+    					// Reset and update available mana
+    					let { AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, 0, neededCombinations);
+
+    					// Check 1: If requirements are met, update probabilities and continue
+    					if (meetsRequirements) {
+    						probabilitiesByTurn[0]++;
+
+    						for (let turn = 1; turn <= numberOfTurns.length; turn++) {
+    							probabilitiesByTurn[turn]++;
+    						}
+    					} else {
+    						for (let turn = 1; turn <= numberOfTurns.length; turn++) {
+    							// Updated to use numberOfTurns.length
+    							const cardsToDraw = numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
+
+    							const newCards = _.sampleSize(remainingDeck, cardsToDraw); // Draw multiple cards based on numberOfTurns
+    							hand.push(...newCards);
+    							remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
+
+    							// Log the card drawn and the hand after drawing
+    							console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
+
+    							console.log('Card(s) Drawn:', _.cloneDeep(newCards));
+    							console.log('Hand after drawing:', _.cloneDeep(hand));
+
+    							// Play lands based on the new rules
+    							playLands(hand, totalAvailableMana);
+
+    							// Log after moving land to mana
+    							console.log('After moving land to mana:');
+
+    							console.log('Total played Mana:', _.cloneDeep(totalAvailableMana));
+    							console.log('Hand:', _.cloneDeep(hand));
+
+    							// Reset and update AvailableManaThisTurn
+    							({ AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, turn, neededCombinations));
+
+    							// Log the updated AvailableManaThisTurn
+    							console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+
+    							// Play ramp cards if possible
+    							playRampCards(hand, AvailableManaThisTurn, totalAvailableRamp, turn);
+
+    							// Log after playing ramp cards
+    							console.log('After playing ramp cards:');
+
+    							console.log('Total played Ramp:', _.cloneDeep(totalAvailableRamp));
+    							console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+    							console.log('Hand:', _.cloneDeep(hand));
+
+    							// Check 2: Compare AvailableManaThisTurn against neededCombinations after all ramp is played
+    							if (meetsRequirements) {
+    								for (let t = turn; t <= numberOfTurns.length; t++) {
+    									probabilitiesByTurn[t]++;
+    								}
+
+    								break; // Stop further drawings for this iteration
+    							}
+    						}
+    					}
+
+    					iteration++;
+    				}
+
+    				function runBatch() {
     					let batchCounter = 0;
 
     					while (batchCounter < batchSize && iteration < numIterations) {
-    						let hand = [];
-    						let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
-    						let metRequirementTurn = -1; // Track when requirements are met
-
-    						// Reset totalAvailableMana and totalAvailableRamp for each iteration
-    						totalAvailableMana = [];
-
-    						totalAvailableRamp = [];
-
-    						// Handle mulligans for turn 0
-    						for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
-    							hand = _.sampleSize(remainingDeck, initialDrawSize);
-    							remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
-
-    							if (handMeetsRequirements(hand, preparedCombinations)) {
-    								probabilitiesByTurn[0]++;
-    								metRequirementTurn = 0;
-    								break;
-    							}
-    						}
-
-    						// Log the state after initial draw
-    						console.log(`Turn 0 - Initial Draw`);
-
-    						console.log('Hand:', _.cloneDeep(hand));
-    						console.log('Total Available Mana:', _.cloneDeep(totalAvailableMana));
-    						console.log('Total Available Ramp:', _.cloneDeep(totalAvailableRamp));
-
-    						// Simulate drawing for subsequent turns if requirements not met in mulligans
-    						if (metRequirementTurn == -1) {
-    							for (let turn = 1; turn <= numberOfTurns.length; turn++) {
-    								// Updated to use numberOfTurns.length
-    								const cardsToDraw = numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
-
-    								const newCards = _.sampleSize(remainingDeck, cardsToDraw); // Draw multiple cards based on numberOfTurns
-    								hand.push(...newCards);
-    								remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
-
-    								// Log the card drawn and the hand after drawing
-    								console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
-
-    								console.log('Card(s) Drawn:', _.cloneDeep(newCards));
-    								console.log('Hand after drawing:', _.cloneDeep(hand));
-
-    								// Play lands based on the new rules
-    								playLands(hand, totalAvailableMana);
-
-    								// Log after moving land to mana
-    								console.log('After moving land to mana:');
-
-    								console.log('Total played Mana:', _.cloneDeep(totalAvailableMana));
-    								console.log('Hand:', _.cloneDeep(hand));
-
-    								// Reset and update AvailableManaThisTurn
-    								let AvailableManaThisTurn = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, turn);
-
-    								// Log the updated AvailableManaThisTurn
-    								console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
-
-    								// Play ramp cards if possible
-    								playRampCards(hand, AvailableManaThisTurn, totalAvailableRamp, turn);
-
-    								// Log after playing ramp cards
-    								console.log('After playing ramp cards:');
-
-    								console.log('Total played Ramp:', _.cloneDeep(totalAvailableRamp));
-    								console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
-    								console.log('Hand:', _.cloneDeep(hand));
-
-    								if (handMeetsRequirements(hand, preparedCombinations)) {
-    									probabilitiesByTurn[turn]++;
-    									metRequirementTurn = turn;
-    									break; // Stop further drawings for this iteration
-    								}
-    							}
-    						}
-
-    						// Mark all subsequent turns as meeting requirements once the requirement is met
-    						if (metRequirementTurn != -1) {
-    							for (let turn = metRequirementTurn + 1; turn <= numberOfTurns.length; turn++) {
-    								// Updated to use numberOfTurns.length
-    								probabilitiesByTurn[turn]++;
-    							}
-    						}
-
-    						iteration++;
+    						runIteration();
     						batchCounter++;
     					}
 
@@ -31593,7 +32388,7 @@ var app = (function () {
     					simulationProgress.set(iteration / numIterations * 100);
 
     					if (iteration < numIterations) {
-    						setTimeout(runIteration, 0); // Schedule the next batch
+    						setTimeout(runBatch, 0); // Schedule the next batch
     					} else {
     						// Set Monte Carlo results in the dedicated store right before resolving the promise
     						monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
@@ -31602,13 +32397,108 @@ var app = (function () {
     					}
     				}
 
-    				runIteration(); // Start the first iteration
+    				runBatch(); // Start the first batch
     			});
+    	}
+
+    	function manaPoolMeetsRequirements(availableMana, neededCombinations) {
+    		console.log('AvailableManaThisTurn:', _.cloneDeep(availableMana));
+    		console.log('neededCombinations:', _.cloneDeep(neededCombinations));
+
+    		const result = neededCombinations.some(combination => {
+    			// Create a copy of availableMana to track used mana
+    			const availableManaCopy = [...availableMana];
+
+    			// Check if every needed mana object in the combination is matched by an available mana object
+    			return combination.every(needed => {
+    				const index = availableManaCopy.findIndex(mana => {
+    					return Object.entries(needed).every(([color, count]) => {
+    						return mana[color] >= count;
+    					});
+    				});
+
+    				if (index !== -1) {
+    					// Remove the matched mana from the copy to prevent reuse
+    					availableManaCopy.splice(index, 1);
+
+    					return true;
+    				}
+
+    				return false;
+    			});
+    		});
+
+    		console.log(`neededCombinations met: ${result ? 'yes' : 'no'}`);
+    		return result;
+    	}
+
+    	function londonMulligan(hand, remainingDeck) {
+    		let mulligansTaken = 0;
+    		let finalHand = hand;
+
+    		// Destructure the mulliganConfig store
+    		const { maxMulligans, firstMulliganFree, freeMulliganTillLands, minLandsInHand, maxLandsInHand } = $mulliganConfig;
+
+    		// Initial draw
+    		finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
+
+    		remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
+
+    		// Log the initial hand and remaining deck
+    		console.log(`Initial Draw: Hand`, _.cloneDeep(finalHand));
+
+    		//   console.log(`Initial Draw: Remaining Deck`, _.cloneDeep(remainingDeck));
+    		// Adjust the loop condition to ignore maxMulligans when freeMulliganTillLands is true
+    		while (freeMulliganTillLands || mulligansTaken <= maxMulligans) {
+    			// Check if the hand meets the land requirements
+    			const landCount = finalHand.filter(card => !card.TotalManaCost && !card.dummy).length;
+
+    			const meetsLandRequirements = landCount >= minLandsInHand && landCount <= maxLandsInHand;
+
+    			// Log the land count and whether the hand meets the land requirements
+    			console.log(`Mulligan ${mulligansTaken}: Land Count`, landCount);
+
+    			console.log(`Mulligan ${mulligansTaken}: Meets Land Requirements`, meetsLandRequirements);
+
+    			if (meetsLandRequirements) {
+    				break;
+    			}
+
+    			if (mulligansTaken > 0 || firstMulliganFree || freeMulliganTillLands && !meetsLandRequirements) {
+    				// Shuffle hand into deck and redraw
+    				remainingDeck = remainingDeck.concat(finalHand);
+
+    				finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
+    				remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
+
+    				// Log the new hand and remaining deck after redraw
+    				console.log(`Mulligan ${mulligansTaken}: Redrawn Hand`, _.cloneDeep(finalHand));
+    			} //   console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(remainingDeck));
+
+    			if (!(firstMulliganFree && mulligansTaken === 0) && !(freeMulliganTillLands && !meetsLandRequirements)) {
+    				// Place cards on the bottom of the deck for each mulligan taken
+    				for (let i = 0; i < mulligansTaken; i++) {
+    					const cardToBottom = prioritizeCardToBottom(finalHand);
+    					remainingDeck.push(cardToBottom);
+
+    					// Log the card placed on the bottom
+    					console.log(`Mulligan ${mulligansTaken}: Card Placed on Bottom`, _.cloneDeep(cardToBottom));
+    				}
+    			}
+
+    			mulligansTaken++;
+    		}
+
+    		// Log the final hand and remaining deck after mulligans
+    		console.log('Final Hand after Mulligans', _.cloneDeep(finalHand));
+
+    		console.log('Remaining Deck after Mulligans', _.cloneDeep(remainingDeck));
+    		return { finalHand, remainingDeck };
     	}
 
     	function playLands(hand, totalAvailableMana) {
     		// Filter out land cards (which do not have TotalManaCost)
-    		const landCards = hand.filter(card => !card.TotalManaCost);
+    		const landCards = hand.filter(card => !card.TotalManaCost && !card.dummy);
 
     		// Calculate the total required mana for each color from all ramp cards in hand
     		const totalRequiredMana = {};
@@ -31635,30 +32525,7 @@ var app = (function () {
     		console.log('Total Required Mana:', totalRequiredMana);
     		console.log('Total Available Mana Count:', totalAvailableManaCount);
 
-    		// Check if we need more of any color to meet the total required mana
-    		for (const color in totalRequiredMana) {
-    			if ((totalAvailableManaCount[color] || 0) < totalRequiredMana[color]) {
-    				// Find a land that can produce the required color
-    				for (let i = 0; i < landCards.length; i++) {
-    					const card = landCards[i];
-
-    					if (card[color] > 0) {
-    						// Move the land card from hand to totalAvailableMana
-    						const landCard = hand.splice(hand.indexOf(card), 1)[0];
-
-    						totalAvailableMana.push(landCard);
-
-    						// Log the land card played and the updated mana
-    						console.log(`Land card played (needed color ${color}):`, landCard);
-
-    						console.log('Total Available Mana after playing land (needed color):', _.cloneDeep(totalAvailableMana));
-    						return; // Exit after playing the land
-    					}
-    				}
-    			}
-    		}
-
-    		// Get the highest priority color for the lowest TotalManaCost ramp card in hand
+    		// Priority 1: Get the highest priority color for the lowest TotalManaCost ramp card in hand
     		const nonLandCards = hand.filter(card => card.TotalManaCost && Object.keys(card.TotalManaCost).some(color => card.TotalManaCost[color] > 0 && color !== 'ANY'));
 
     		nonLandCards.sort((a, b) => getTotalManaCost(a.TotalManaCost) - getTotalManaCost(b.TotalManaCost));
@@ -31740,6 +32607,54 @@ var app = (function () {
     				}
     			}
     		}
+
+    		// Priority 3: Play a land that can produce the most colors
+    		let maxColors = 0;
+
+    		let bestLandCard = null;
+
+    		for (let i = 0; i < landCards.length; i++) {
+    			const card = landCards[i];
+    			const colorCount = Object.keys(card).filter(color => card[color] > 0 && color !== 'ANY').length;
+
+    			if (colorCount > maxColors) {
+    				maxColors = colorCount;
+    				bestLandCard = card;
+    			}
+    		}
+
+    		if (bestLandCard) {
+    			// Move the best land card from hand to totalAvailableMana
+    			const landCard = hand.splice(hand.indexOf(bestLandCard), 1)[0];
+
+    			totalAvailableMana.push(landCard);
+
+    			// Log the land card played and the updated mana
+    			console.log('Land card played (priority 3, most colors):', landCard);
+
+    			console.log('Total Available Mana after playing land (priority 3):', _.cloneDeep(totalAvailableMana));
+    			return; // Exit after playing the land
+    		}
+
+    		// Priority 4: Play a land in the colorPriority order
+    		for (const color of colorPriority) {
+    			for (let i = 0; i < landCards.length; i++) {
+    				const card = landCards[i];
+
+    				if (card[color] > 0) {
+    					// Move the land card from hand to totalAvailableMana
+    					const landCard = hand.splice(hand.indexOf(card), 1)[0];
+
+    					totalAvailableMana.push(landCard);
+
+    					// Log the land card played and the updated mana
+    					console.log(`Land card played (priority 4, color ${color}):`, landCard);
+
+    					console.log('Total Available Mana after playing land (priority 4):', _.cloneDeep(totalAvailableMana));
+    					return; // Exit after playing the land
+    				}
+    			}
+    		}
     	}
 
     	function getHighestPriorityColor(card) {
@@ -31817,7 +32732,8 @@ var app = (function () {
     				}
     			}
     		} while (rampPlayed);
-    	}
+    	} //  Check 2: Compare AvailableManaThisTurn against preparedCombinations after all ramp is played
+    	// NOTE THIS MIGHT be better above - check inbetween each ramp played vs after all played in a turn?
 
     	function canPlayRamp(card, AvailableManaThisTurn) {
     		const manaCost = card.TotalManaCost;
@@ -31845,7 +32761,7 @@ var app = (function () {
     		return true;
     	}
 
-    	function resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, currentTurn) {
+    	function resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, currentTurn, neededCombinations) {
     		let AvailableManaThisTurn = [];
     		AvailableManaThisTurn.push(...totalAvailableMana);
 
@@ -31857,7 +32773,11 @@ var app = (function () {
     		});
 
     		console.log('AvailableManaThisTurn after update:', _.cloneDeep(AvailableManaThisTurn));
-    		return AvailableManaThisTurn;
+
+    		// Check 1: Compare AvailableManaThisTurn against neededCombinations
+    		const meetsRequirements = manaPoolMeetsRequirements(AvailableManaThisTurn, neededCombinations);
+
+    		return { AvailableManaThisTurn, meetsRequirements };
     	}
 
     	function removeDrawnCardsFromDeck(deck, drawnCards) {
@@ -31883,7 +32803,7 @@ var app = (function () {
     		const landGroupSizes = calculateLandGroupSizes(preparedCards);
     		console.log('Prepared combinations:', preparedCombinations); // Ensure this logs after the update
     		console.log('needed combinations:', neededCombinations); // Ensure this logs after the update
-    		let rawProbabilities = await monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, InitialDrawSize, $numberOfTurns, numIterations);
+    		let rawProbabilities = await monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, InitialDrawSize, $numberOfTurns, numIterations, neededCombinations);
     		probabilitiesByTurn.set(rawProbabilities); // Ensure you are using .set() correctly if it's a store
     		simulationRun.set(true); // Set simulation run flag to true
     		console.log('Simulation results:', $probabilitiesByTurn); // Ensure this logs after the update
@@ -32082,6 +33002,7 @@ var app = (function () {
     		cancelSimulation,
     		simulationProgress,
     		shouldResetSimulation,
+    		mulliganConfig,
     		sampleSize: lodashExports.sampleSize,
     		_,
     		onMount,
@@ -32111,6 +33032,9 @@ var app = (function () {
     		prepareCombinationsForAnalysis,
     		calculateLandGroupSizes,
     		monteCarloSimulation,
+    		manaPoolMeetsRequirements,
+    		londonMulligan,
+    		prioritizeCardToBottom,
     		playLands,
     		getHighestPriorityColor,
     		colorPriority,
@@ -32141,6 +33065,7 @@ var app = (function () {
     		$groupColors,
     		$monteCarloResults,
     		$simulationData,
+    		$mulliganConfig,
     		$cancelSimulation
     	});
 
@@ -32167,6 +33092,10 @@ var app = (function () {
     		if ($$self.$$.dirty[0] & /*$numberOfTurns*/ 16) {
     			// Log the value of numberOfTurns
     			console.log('numberOfTurns:', $numberOfTurns);
+    		}
+
+    		if ($$self.$$.dirty[0] & /*$mulliganConfig*/ 8192) {
+    			console.log('Mulligan Configuration:', $mulliganConfig);
     		}
 
     		if ($$self.$$.dirty[0] & /*groups, $numberOfTurns, results*/ 21) {
@@ -32228,6 +33157,7 @@ var app = (function () {
     		deckSize,
     		mulliganCount,
     		$simulationData,
+    		$mulliganConfig,
     		click_handler,
     		popover_show_binding
     	];

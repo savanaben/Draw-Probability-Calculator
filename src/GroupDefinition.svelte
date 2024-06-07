@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import { groupColors, numberOfTurns } from './colorStore.js';
+    import { groupColors, numberOfTurns, mulliganConfig } from './colorStore.js';
     import Popover from './Popover.svelte';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
@@ -252,6 +252,90 @@ function handleAddGroupClick() {
             </select>
         </div>
 
+
+
+
+        <div>
+            <label>Max Mulligans:</label>
+            <select bind:value={$mulliganConfig.maxMulligans}>
+                {#each Array(8).fill(0).map((_, i) => i) as num}
+                    <option value={num}>{num}</option>
+                {/each}
+            </select>
+        </div>
+        
+        <div>
+            <label>Min Lands in Hand:</label>
+            <select bind:value={$mulliganConfig.minLandsInHand}>
+                {#each Array(8).fill(0).map((_, i) => i) as num}
+                    <option value={num}>{num}</option>
+                {/each}
+            </select>
+        </div>
+        
+        <div>
+            <label>Max Lands in Hand:</label>
+            <select bind:value={$mulliganConfig.maxLandsInHand}>
+                {#each Array(8).fill(0).map((_, i) => i) as num}
+                    <option value={num}>{num}</option>
+                {/each}
+            </select>
+        </div>
+        
+        <div>
+            <label>First Mulligan Free:</label>
+            <input type="checkbox" bind:checked={$mulliganConfig.firstMulliganFree} />
+        </div>
+
+        <div>
+            <label>free mulligans until Max/min lands are satisfied</label>
+            <input type="checkbox" bind:checked={$mulliganConfig.freeMulliganTillLands} />
+        </div>
+
+        <div>
+            <label>Allow 2 Lands + Playable Ramp:</label>
+            <input type="checkbox" bind:checked={$mulliganConfig.allowTwoLandsPlusRamp} />
+        </div>
+        
+        <div>
+            <label>Mulligan if Lands Can Only Make:</label>
+            <select bind:value={$mulliganConfig.mulliganIfLandsCanOnlyMake}>
+                <option value="">None</option>
+                <option value="1">1 color</option>
+                <option value="2">2 colors</option>
+                <option value="3">3 colors</option>
+                <option value="4">4 colors</option>
+                <option value="5">5 colors</option>
+            </select>
+        </div>
+        
+        <div>
+            <label>Mulligan Unless Opening Hand Can Make:</label>
+            <select multiple bind:value={$mulliganConfig.mulliganUnlessOpeningHandCanMake}>
+                <option value="B">B</option>
+                <option value="U">U</option>
+                <option value="G">G</option>
+                <option value="R">R</option>
+                <option value="W">W</option>
+                <option value="C">C</option>
+            </select>
+        </div>
+        
+        <div>
+            <label>Ramp Must Be Playable:</label>
+            <input type="checkbox" bind:checked={$mulliganConfig.rampMustBePlayable} />
+        </div>
+        
+        <div>
+            <label>Must Have Ramp:</label>
+            <input type="checkbox" bind:checked={$mulliganConfig.mustHaveRamp} />
+        </div>
+
+
+
+
+        
+
         <div class="deck-size-container">
             <label for="cardsDrawn">Initial hand size:</label>
             <input type="number" class="deckSize" id="cardsDrawn" bind:value={InitialDrawSize} min="1" 
@@ -362,6 +446,7 @@ function handleAddGroupClick() {
         margin-top: 0.5rem;
         column-gap: 2rem;
         row-gap: 0.5rem;
+        flex-wrap: wrap;
     }
 
     @media (max-width: 640px) {

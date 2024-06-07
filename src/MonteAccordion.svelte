@@ -392,22 +392,52 @@ function handleAttributeUpdate(newAttr, oldAttr, cardId) {
 
 
 const rampCards = [
-    {
-        TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
-        ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
-        CanProduce: 2,
-        AbilityCost: 0,
-        AvailableTurnPlayed: 1,
-        amount: 7
-    },
+    // {
+    //     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+    //     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+    //     CanProduce: 2,
+    //     AbilityCost: 0,
+    //     AvailableTurnPlayed: 1,
+    //     amount: 7
+    // },
+    // {
+    //     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+    //     CanProduce: 1,
+    //     AbilityCost: 0,
+    //     AvailableTurnPlayed: 0,
+    //     amount: 25
+    // }
+
+
+
     {
         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-        ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+        ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 1, C: 0, ANY: 1 },
         CanProduce: 1,
         AbilityCost: 0,
         AvailableTurnPlayed: 0,
-        amount: 20
+        amount: 7
+    },
+    {
+        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+        ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+        CanProduce: 1,
+        AbilityCost: 0,
+        AvailableTurnPlayed: 0,
+        amount: 5
     }
+
+
+
+
+
+
+
+
+
+
+
     // {
     //     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 2 },
     //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },

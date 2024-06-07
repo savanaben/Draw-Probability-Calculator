@@ -1,6 +1,6 @@
 <script>
     import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
-    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, shouldResetSimulation } from './colorStore.js';
+    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, shouldResetSimulation, mulliganConfig } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
@@ -13,7 +13,9 @@
 
   // Log the value of numberOfTurns
   $: console.log('numberOfTurns:', $numberOfTurns);
-    
+  $: console.log('Mulligan Configuration:', $mulliganConfig);
+
+
     function selectInput(event) {
     event.target.select(); // Selects all text in the input upon focus
 }
@@ -460,34 +462,68 @@
 //     });
 // }
 
+//---------------------------------------------------------------------
+
+// ORIGINAL HAND MEETS REQUIREMENTS - CHECKING HAND NOT AvailableManaThisTurn
+
+
+// function handMeetsRequirements(hand, preparedCombinations) {
+//      //   console.log('Checking hand against requirements:', hand);
+//      //   console.log('Prepared combinations:', preparedCombinations);
+
+//         return preparedCombinations.some(combination => {
+//             const landCounts = combination.reduce((counts, land) => {
+//                 counts[JSON.stringify(land.land)] = land.count;
+//                 return counts;
+//             }, {});
+    
+//             const handProfile = hand.reduce((profile, land) => {
+//                 const key = JSON.stringify(land);
+//                 profile[key] = (profile[key] || 0) + 1;
+//                 return profile;
+//             }, {});
+    
+//            // console.log(`Checking hand against requirements:`, handProfile, landCounts);
+
+//             const meetsRequirements = Object.entries(landCounts).every(([land, count]) => {
+//                 return handProfile[land] >= count;
+//             });
+    
+//             if (meetsRequirements) {
+//               //  console.log(`Hand meets the combination requirements:`, combination);
+//             } else {
+//               //  console.log(`Hand does not meet the combination requirements:`, combination);
+//             }
+    
+//             return meetsRequirements;
+//         });
+//     }
 
 
 
-function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, initialDrawSize, numberOfTurns, numIterations) {
+
+
+function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganConfig, initialDrawSize, numberOfTurns, numIterations, neededCombinations) {
     return new Promise((resolve, reject) => {
+        console.log('mulliganConfig:', _.cloneDeep(mulliganConfig)); // Log mulliganConfig to verify it's passed correctly
+
         const probabilitiesByTurn = Array.from({ length: numberOfTurns.length + 1 }, () => 0); // Updated to use numberOfTurns.length
         const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
         const numDummyCards = Math.max(deckSize - totalLands, 0);
         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
         let iteration = 0;
         
-
         let totalAvailableMana = [];
         let totalAvailableRamp = [];
 
         // Calculate the total mana needed to determine the batch size. this
         // improves performance 
-
         const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
         let batchSize;
         if (totalManaNeeded <= 2) {
             batchSize = 50;
         } else if (totalManaNeeded === 3) {
             batchSize = 30;
-        } else if (totalManaNeeded === 4) {
-            batchSize = 20;
-        } else if (totalManaNeeded === 5) {
-            batchSize = 20;
         } else {
             batchSize = 20;
         }
@@ -498,92 +534,79 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
                 return;
             }
 
+            // Reset totalAvailableMana and totalAvailableRamp for each iteration
+            let totalAvailableMana = [];
+            let totalAvailableRamp = [];
+
+            let hand = _.sampleSize(completeDeck, initialDrawSize);
+            let remainingDeck = removeDrawnCardsFromDeck(completeDeck, hand);
+
+            // Perform mulligans
+            const { finalHand, remainingDeck: updatedDeck } = londonMulligan(hand, remainingDeck);
+            hand = finalHand;
+            remainingDeck = updatedDeck;
+
+            // Reset and update available mana
+            let { AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, 0, neededCombinations);
+
+            // Check 1: If requirements are met, update probabilities and continue
+            if (meetsRequirements) {
+                probabilitiesByTurn[0]++;
+                for (let turn = 1; turn <= numberOfTurns.length; turn++) {
+                    probabilitiesByTurn[turn]++;
+                }
+            } else {
+                for (let turn = 1; turn <= numberOfTurns.length; turn++) { // Updated to use numberOfTurns.length
+                    const cardsToDraw = numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
+                    const newCards = _.sampleSize(remainingDeck, cardsToDraw); // Draw multiple cards based on numberOfTurns
+                    hand.push(...newCards);
+                    remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
+
+                    // Log the card drawn and the hand after drawing
+                    console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
+                    console.log('Card(s) Drawn:', _.cloneDeep(newCards));
+                    console.log('Hand after drawing:', _.cloneDeep(hand));
+
+                    // Play lands based on the new rules
+                    playLands(hand, totalAvailableMana);
+
+                    // Log after moving land to mana
+                    console.log('After moving land to mana:');
+                    console.log('Total played Mana:', _.cloneDeep(totalAvailableMana));
+                    console.log('Hand:', _.cloneDeep(hand));
+
+                    // Reset and update AvailableManaThisTurn
+                    ({ AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, turn, neededCombinations));
+
+                    // Log the updated AvailableManaThisTurn
+                    console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+
+                    // Play ramp cards if possible
+                    playRampCards(hand, AvailableManaThisTurn, totalAvailableRamp, turn);
+
+                    // Log after playing ramp cards
+                    console.log('After playing ramp cards:');
+                    console.log('Total played Ramp:', _.cloneDeep(totalAvailableRamp));
+                    console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+                    console.log('Hand:', _.cloneDeep(hand));
+
+                    // Check 2: Compare AvailableManaThisTurn against neededCombinations after all ramp is played
+                    if (meetsRequirements) {
+                        for (let t = turn; t <= numberOfTurns.length; t++) {
+                            probabilitiesByTurn[t]++;
+                        }
+                        break; // Stop further drawings for this iteration
+                    }
+                }
+            }
+
+            iteration++;
+        }
+
+        function runBatch() {
             let batchCounter = 0;
             while (batchCounter < batchSize && iteration < numIterations) {
-                let hand = [];
-                let remainingDeck = _.cloneDeep(completeDeck); // Reset the deck for each iteration
-                let metRequirementTurn = -1; // Track when requirements are met
-
-
-                // Reset totalAvailableMana and totalAvailableRamp for each iteration
-                totalAvailableMana = [];
-                totalAvailableRamp = [];
-
-                // Handle mulligans for turn 0
-                for (let mulligan = 0; mulligan <= mulliganCount; mulligan++) {
-                    hand = _.sampleSize(remainingDeck, initialDrawSize);
-                    remainingDeck = removeDrawnCardsFromDeck(remainingDeck, hand);
-                    if (handMeetsRequirements(hand, preparedCombinations)) {
-                        probabilitiesByTurn[0]++;
-                        metRequirementTurn = 0;
-                        break;
-                    }
-                }
-
-
-
-                // Log the state after initial draw
-                console.log(`Turn 0 - Initial Draw`);
-                console.log('Hand:', _.cloneDeep(hand));
-                console.log('Total Available Mana:', _.cloneDeep(totalAvailableMana));
-                console.log('Total Available Ramp:', _.cloneDeep(totalAvailableRamp));
-
-                // Simulate drawing for subsequent turns if requirements not met in mulligans
-                if (metRequirementTurn == -1) {
-                    for (let turn = 1; turn <= numberOfTurns.length; turn++) { // Updated to use numberOfTurns.length
-                        const cardsToDraw = numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
-                        const newCards = _.sampleSize(remainingDeck, cardsToDraw); // Draw multiple cards based on numberOfTurns
-                        hand.push(...newCards);
-                        remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
-
-                        // Log the card drawn and the hand after drawing
-                        console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
-                        console.log('Card(s) Drawn:', _.cloneDeep(newCards));
-                        console.log('Hand after drawing:', _.cloneDeep(hand));
-
-                        // Play lands based on the new rules
-                        playLands(hand, totalAvailableMana);
-
-                        // Log after moving land to mana
-                        console.log('After moving land to mana:');
-                        console.log('Total played Mana:', _.cloneDeep(totalAvailableMana));
-                        console.log('Hand:', _.cloneDeep(hand));
-
-                        // Reset and update AvailableManaThisTurn
-                        let AvailableManaThisTurn = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, turn);
-
-                        // Log the updated AvailableManaThisTurn
-                        console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
-
-                        // Play ramp cards if possible
-                        playRampCards(hand, AvailableManaThisTurn, totalAvailableRamp, turn);
-
-                        // Log after playing ramp cards
-                        console.log('After playing ramp cards:');
-                        console.log('Total played Ramp:', _.cloneDeep(totalAvailableRamp));
-                        console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
-                        console.log('Hand:', _.cloneDeep(hand));
-
-
-
-
-
-                        if (handMeetsRequirements(hand, preparedCombinations)) {
-                            probabilitiesByTurn[turn]++;
-                            metRequirementTurn = turn;
-                            break; // Stop further drawings for this iteration
-                        }
-                    }
-                }
-
-                // Mark all subsequent turns as meeting requirements once the requirement is met
-                if (metRequirementTurn != -1) {
-                    for (let turn = metRequirementTurn + 1; turn <= numberOfTurns.length; turn++) { // Updated to use numberOfTurns.length
-                        probabilitiesByTurn[turn]++;
-                    }
-                }
-
-                iteration++;
+                runIteration();
                 batchCounter++;
             }
 
@@ -591,7 +614,7 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
             simulationProgress.set((iteration / numIterations) * 100);
 
             if (iteration < numIterations) {
-                setTimeout(runIteration, 0); // Schedule the next batch
+                setTimeout(runBatch, 0); // Schedule the next batch
             } else {
                 // Set Monte Carlo results in the dedicated store right before resolving the promise
                 monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
@@ -599,16 +622,147 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
             }
         }
 
-        runIteration(); // Start the first iteration
+        runBatch(); // Start the first batch
     });
 }
 
 
 
 
+function manaPoolMeetsRequirements(availableMana, neededCombinations) {
+    console.log('AvailableManaThisTurn:', _.cloneDeep(availableMana));
+    console.log('neededCombinations:', _.cloneDeep(neededCombinations));
+
+    const result = neededCombinations.some(combination => {
+        // Create a copy of availableMana to track used mana
+        const availableManaCopy = [...availableMana];
+
+        // Check if every needed mana object in the combination is matched by an available mana object
+        return combination.every(needed => {
+            const index = availableManaCopy.findIndex(mana => {
+                return Object.entries(needed).every(([color, count]) => {
+                    return mana[color] >= count;
+                });
+            });
+
+            if (index !== -1) {
+                // Remove the matched mana from the copy to prevent reuse
+                availableManaCopy.splice(index, 1);
+                return true;
+            }
+
+            return false;
+        });
+    });
+
+    console.log(`neededCombinations met: ${result ? 'yes' : 'no'}`);
+    return result;
+}
+
+
+
+
+
+
+
+
+
+function londonMulligan(hand, remainingDeck) {
+    let mulligansTaken = 0;
+    let finalHand = hand;
+
+    // Destructure the mulliganConfig store
+    const { maxMulligans, firstMulliganFree, freeMulliganTillLands, minLandsInHand, maxLandsInHand } = $mulliganConfig;
+
+    // Initial draw
+    finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
+    remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
+
+    // Log the initial hand and remaining deck
+    console.log(`Initial Draw: Hand`, _.cloneDeep(finalHand));
+ //   console.log(`Initial Draw: Remaining Deck`, _.cloneDeep(remainingDeck));
+
+        // Adjust the loop condition to ignore maxMulligans when freeMulliganTillLands is true
+        while (freeMulliganTillLands || mulligansTaken <= maxMulligans) {
+        // Check if the hand meets the land requirements
+        const landCount = finalHand.filter(card => !card.TotalManaCost && !card.dummy).length;
+        const meetsLandRequirements = landCount >= minLandsInHand && landCount <= maxLandsInHand;
+
+        // Log the land count and whether the hand meets the land requirements
+        console.log(`Mulligan ${mulligansTaken}: Land Count`, landCount);
+        console.log(`Mulligan ${mulligansTaken}: Meets Land Requirements`, meetsLandRequirements);
+
+        if (meetsLandRequirements) {
+            break;
+        }
+
+        if (mulligansTaken > 0 || firstMulliganFree || (freeMulliganTillLands && !meetsLandRequirements)) {
+            // Shuffle hand into deck and redraw
+            remainingDeck = remainingDeck.concat(finalHand);
+            finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
+            remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
+
+            // Log the new hand and remaining deck after redraw
+            console.log(`Mulligan ${mulligansTaken}: Redrawn Hand`, _.cloneDeep(finalHand));
+         //   console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(remainingDeck));
+        }
+
+        if (!(firstMulliganFree && mulligansTaken === 0) && !(freeMulliganTillLands && !meetsLandRequirements)) {
+            // Place cards on the bottom of the deck for each mulligan taken
+            for (let i = 0; i < mulligansTaken; i++) {
+                const cardToBottom = prioritizeCardToBottom(finalHand);
+                remainingDeck.push(cardToBottom);
+
+                // Log the card placed on the bottom
+                console.log(`Mulligan ${mulligansTaken}: Card Placed on Bottom`, _.cloneDeep(cardToBottom));
+            }
+        }
+
+        mulligansTaken++;
+    }
+
+    // Log the final hand and remaining deck after mulligans
+    console.log('Final Hand after Mulligans', _.cloneDeep(finalHand));
+    console.log('Remaining Deck after Mulligans', _.cloneDeep(remainingDeck));
+
+    return { finalHand, remainingDeck };
+}
+
+function prioritizeCardToBottom(hand) {
+    // Prioritize placing a "dummy" card at the bottom
+    const dummyIndex = hand.findIndex(card => card.dummy);
+    if (dummyIndex !== -1) {
+        return hand.splice(dummyIndex, 1)[0];
+    }
+
+    // If no dummy card, prioritize placing a duplicate mana card at the bottom
+    const manaCounts = {};
+    hand.forEach(card => {
+        const key = JSON.stringify(card);
+        manaCounts[key] = (manaCounts[key] || 0) + 1;
+    });
+
+    for (const key in manaCounts) {
+        if (manaCounts[key] > 1) {
+            const duplicateIndex = hand.findIndex(card => JSON.stringify(card) === key);
+            if (duplicateIndex !== -1) {
+                return hand.splice(duplicateIndex, 1)[0];
+            }
+        }
+    }
+
+    // If no dummy or duplicate mana card, place the first card at the bottom
+    return hand.pop();
+}
+
+
+
+
+
+
 function playLands(hand, totalAvailableMana) {
     // Filter out land cards (which do not have TotalManaCost)
-    const landCards = hand.filter(card => !card.TotalManaCost);
+    const landCards = hand.filter(card => !card.TotalManaCost && !card.dummy);
 
     // Calculate the total required mana for each color from all ramp cards in hand
     const totalRequiredMana = {};
@@ -633,28 +787,8 @@ function playLands(hand, totalAvailableMana) {
     console.log('Total Required Mana:', totalRequiredMana);
     console.log('Total Available Mana Count:', totalAvailableManaCount);
 
-    // Check if we need more of any color to meet the total required mana
-    for (const color in totalRequiredMana) {
-        if ((totalAvailableManaCount[color] || 0) < totalRequiredMana[color]) {
-            // Find a land that can produce the required color
-            for (let i = 0; i < landCards.length; i++) {
-                const card = landCards[i];
-                if (card[color] > 0) {
-                    // Move the land card from hand to totalAvailableMana
-                    const landCard = hand.splice(hand.indexOf(card), 1)[0];
-                    totalAvailableMana.push(landCard);
-
-                    // Log the land card played and the updated mana
-                    console.log(`Land card played (needed color ${color}):`, landCard);
-                    console.log('Total Available Mana after playing land (needed color):', _.cloneDeep(totalAvailableMana));
-                    return; // Exit after playing the land
-                }
-            }
-        }
-    }
-
-    // Get the highest priority color for the lowest TotalManaCost ramp card in hand
-    const nonLandCards = hand.filter(card => card.TotalManaCost && Object.keys(card.TotalManaCost).some(color => card.TotalManaCost[color] > 0 && color !== 'ANY'));
+  // Priority 1: Get the highest priority color for the lowest TotalManaCost ramp card in hand
+  const nonLandCards = hand.filter(card => card.TotalManaCost && Object.keys(card.TotalManaCost).some(color => card.TotalManaCost[color] > 0 && color !== 'ANY'));
     nonLandCards.sort((a, b) => getTotalManaCost(a.TotalManaCost) - getTotalManaCost(b.TotalManaCost));
     const highestPriorityCard = nonLandCards[0];
     let highestPriorityColor = getHighestPriorityColor(highestPriorityCard);
@@ -699,6 +833,8 @@ function playLands(hand, totalAvailableMana) {
         }
     }
 
+
+
     // Priority 2: Play a land that can produce a color not currently in totalAvailableMana
     const availableColors = new Set();
     totalAvailableMana.forEach(mana => {
@@ -726,7 +862,52 @@ function playLands(hand, totalAvailableMana) {
             }
         }
     }
+
+
+  // Priority 3: Play a land that can produce the most colors
+  let maxColors = 0;
+    let bestLandCard = null;
+    for (let i = 0; i < landCards.length; i++) {
+        const card = landCards[i];
+        const colorCount = Object.keys(card).filter(color => card[color] > 0 && color !== 'ANY').length;
+        if (colorCount > maxColors) {
+            maxColors = colorCount;
+            bestLandCard = card;
+        }
+    }
+
+    if (bestLandCard) {
+        // Move the best land card from hand to totalAvailableMana
+        const landCard = hand.splice(hand.indexOf(bestLandCard), 1)[0];
+        totalAvailableMana.push(landCard);
+
+        // Log the land card played and the updated mana
+        console.log('Land card played (priority 3, most colors):', landCard);
+        console.log('Total Available Mana after playing land (priority 3):', _.cloneDeep(totalAvailableMana));
+        return; // Exit after playing the land
+    }
+
+    // Priority 4: Play a land in the colorPriority order
+    for (const color of colorPriority) {
+        for (let i = 0; i < landCards.length; i++) {
+            const card = landCards[i];
+            if (card[color] > 0) {
+                // Move the land card from hand to totalAvailableMana
+                const landCard = hand.splice(hand.indexOf(card), 1)[0];
+                totalAvailableMana.push(landCard);
+
+                // Log the land card played and the updated mana
+                console.log(`Land card played (priority 4, color ${color}):`, landCard);
+                console.log('Total Available Mana after playing land (priority 4):', _.cloneDeep(totalAvailableMana));
+                return; // Exit after playing the land
+            }
+        }
+    }
 }
+
+
+
+
 
 function getHighestPriorityColor(card) {
     if (!card || !card.TotalManaCost) return null; // Return null if card or TotalManaCost is undefined or null
@@ -801,6 +982,16 @@ function playRampCards(hand, AvailableManaThisTurn, totalAvailableRamp, currentT
             }
         }
     } while (rampPlayed);
+
+    //  Check 2: Compare AvailableManaThisTurn against preparedCombinations after all ramp is played
+    // NOTE THIS MIGHT be better above - check inbetween each ramp played vs after all played in a turn?
+
+    //     if (handMeetsRequirements(AvailableManaThisTurn, $simulationData.preparedCards)) {
+    //     return { AvailableManaThisTurn, meetsRequirements: true };
+    // }
+
+    // return { AvailableManaThisTurn, meetsRequirements: false };
+
 }
 
 
@@ -899,7 +1090,7 @@ function deductMana(AvailableManaThisTurn, manaCost) {
 
 
 
-function resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, currentTurn) {
+function resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, currentTurn, neededCombinations) {
     let AvailableManaThisTurn = [];
     AvailableManaThisTurn.push(...totalAvailableMana);
 
@@ -911,7 +1102,11 @@ function resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, cur
     });
 
     console.log('AvailableManaThisTurn after update:', _.cloneDeep(AvailableManaThisTurn));
-    return AvailableManaThisTurn;
+
+    // Check 1: Compare AvailableManaThisTurn against neededCombinations
+    const meetsRequirements = manaPoolMeetsRequirements(AvailableManaThisTurn, neededCombinations);
+
+    return { AvailableManaThisTurn, meetsRequirements };
 }
 
 
@@ -996,7 +1191,8 @@ async function identifyProfiles(numIterations) {
         mulliganCount,
         InitialDrawSize,
         $numberOfTurns,
-        numIterations
+        numIterations,
+        neededCombinations
     );
 
     probabilitiesByTurn.set(rawProbabilities); // Ensure you are using .set() correctly if it's a store
