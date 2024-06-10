@@ -8,6 +8,8 @@ export const simulationData = writable({
     manaRequirements: {}
 });
 
+export const simplifiedRampMana = writable([]);
+
 export const shouldResetSimulation = writable(false);
 
 export const simulationRun = writable(false);

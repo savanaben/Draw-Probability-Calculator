@@ -6,8 +6,9 @@
   import Popover from './Popover.svelte';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
-  import { simulationData, monteCarloResults, shouldResetSimulation } from './colorStore.js';
+  import { simulationData, simplifiedRampMana, monteCarloResults, shouldResetSimulation } from './colorStore.js';
   import { trackEvent } from './analytics.js';
+  import { writable } from 'svelte/store';
 
 
 import WIcon from './mana-icons/plains.svg';
@@ -411,13 +412,47 @@ const rampCards = [
 
 
 
+
+
+  
+
+
+
+
+
+
+
     {
-        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-        ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 1, C: 0, ANY: 1 },
+        TotalManaCost: { B: 0, U: 0, G: 2, R: 0, W: 0, C: 0, ANY: 1 },
+        ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
         CanProduce: 1,
         AbilityCost: 0,
         AvailableTurnPlayed: 0,
-        amount: 7
+        amount: 4
+    },
+    {
+        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+        ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
+        CanProduce: 1,
+        AbilityCost: 0,
+        AvailableTurnPlayed: 0,
+        amount: 2
+    },
+    {
+        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+        ColorsCanProduce: { B: 0, U: 1, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+        CanProduce: 1,
+        AbilityCost: 0,
+        AvailableTurnPlayed: 1,
+        amount: 5
+    },
+    {
+        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+        ColorsCanProduce: { B: 0, U: 0, G: 0, R: 1, W: 1, C: 0, ANY: 1 },
+        CanProduce: 1,
+        AbilityCost: 0,
+        AvailableTurnPlayed: 1,
+        amount: 5
     },
     {
         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
@@ -425,8 +460,12 @@ const rampCards = [
         CanProduce: 1,
         AbilityCost: 0,
         AvailableTurnPlayed: 0,
-        amount: 5
+        amount: 6
     }
+
+
+
+
 
 
 
@@ -485,10 +524,25 @@ const rampCards = [
 ];
 
 
+// these two functions simplify ramp and prep it for processing combinations
+// with the lands.
 
+function simplifyColorsCanProduce(colorsCanProduce) {
+    return Object.fromEntries(
+        Object.entries(colorsCanProduce)
+            .filter(([color, count]) => count > 0)
+            .map(([color, count]) => [color, 1])
+    );
+}
 
-
-
+function preprocessRampCards(rampCards) {
+    const simplifiedRampManaList = rampCards.flatMap(card => {
+        const simplifiedColors = simplifyColorsCanProduce(card.ColorsCanProduce);
+        return Array(card.amount).fill(simplifiedColors);
+    });
+    simplifiedRampMana.set(simplifiedRampManaList);
+    console.log('Simplified Ramp Mana:', simplifiedRampManaList);
+}
 
 
 
@@ -547,6 +601,8 @@ function logPreparedCards() {
         return acc;
     }, {});
     console.log('Mana Requirements:', filteredManaRequirements);
+
+    preprocessRampCards(rampCards); // Preprocess ramp cards
 
     simulationData.set({
         preparedCards: prepareManaCardsForCalculation(),

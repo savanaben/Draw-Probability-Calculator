@@ -1,6 +1,6 @@
 <script>
     import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
-    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, shouldResetSimulation, mulliganConfig } from './colorStore.js';
+    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
@@ -239,12 +239,16 @@
     
     
     //the following is the start of mana probability calculations -------------------
+    $: {
+    console.log('calculation file Simplified Ramp Mana:', $simplifiedRampMana); // Log the simplified ramp mana
+   }
     
-    
-            function determineNeededCombinations(lands, requirements, totalManaNeeded) {
-                const combinations = getAllCombinations(lands, true, totalManaNeeded);
-                return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
-            }
+    function determineNeededCombinations(lands, requirements, totalManaNeeded) {
+    let combinedLands = [...lands, ...$simplifiedRampMana];
+    console.log('Combined Lands:', combinedLands); // Log the combined lands
+    const combinations = getAllCombinations(combinedLands, true, totalManaNeeded);
+    return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
+}
     
     
     function satisfiesRequirements(combination, requirements, totalManaNeeded) {
@@ -628,6 +632,92 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
 
 
 
+//DEAD END THIS VERSION TRIED TO DO THE COMBINATION CALC DIRECTLY
+
+// function manaPoolMeetsRequirements(availableMana) {
+//     const manaRequirements = $simulationData.manaRequirements;
+//     console.log('manaPoolMeetsRequirements AvailableManaThisTurn:', _.cloneDeep(availableMana));
+//     console.log('manaPoolMeetsRequirements manaRequirements:', _.cloneDeep(manaRequirements));
+
+//     // Convert manaRequirements into an array of single color requirements
+//     const requirementArray = Object.entries(manaRequirements).map(([color, count]) => {
+//         const reqs = [];
+//         for (let i = 0; i < count; i++) {
+//             reqs.push({ [color]: 1 });
+//         }
+//         return reqs;
+//     }).flat();
+
+//     // Helper function to generate all combinations of a specific length
+//     function generateCombinations(arr, length) {
+//         const result = [];
+//         const combination = [];
+
+//         function helper(start) {
+//             if (combination.length === length) {
+//                 result.push(combination.slice());
+//                 return;
+//             }
+//             for (let i = start; i < arr.length; i++) {
+//                 combination.push(arr[i]);
+//                 helper(i + 1);
+//                 combination.pop();
+//             }
+//         }
+
+//         helper(0);
+//         return result;
+//     }
+
+//     // Check if a given combination can meet the mana requirements
+//     function meetsRequirements(combination, requirements) {
+//         console.log('Checking combination:', combination);
+//         const usedSources = new Set();
+//         const requirementList = requirements.slice();
+
+//         for (const requirement of requirementList) {
+//             const [color] = Object.keys(requirement);
+//             let found = false;
+//             for (let i = 0; i < combination.length; i++) {
+//                 if (!usedSources.has(i)) {
+//                     const source = combination[i];
+//                     if (source[color] > 0) {
+//                         usedSources.add(i);
+//                         source[color]--;
+//                         found = true;
+//                         console.log(`Requirement for ${color} met by source ${i}`, source);
+//                         break;
+//                     }
+//                 }
+//             }
+//             if (!found) {
+//                 console.log(`Requirement for ${color} not met`);
+//                 return false;
+//             }
+//         }
+//         return true;
+//     }
+
+//     // Generate all combinations of available mana sources with length equal to the number of different mana requirements
+//     const combinations = generateCombinations(availableMana, requirementArray.length);
+
+//     // Check each combination to see if it meets the mana requirements
+//     for (const combination of combinations) {
+//         if (meetsRequirements(_.cloneDeep(combination), requirementArray)) {
+//             console.log('manaRequirements met: yes');
+//             return true;
+//         }
+//     }
+
+//     console.log('manaRequirements met: no');
+//     return false;
+// }
+
+
+
+
+
+//THIS VRESION WAS using the neededCombinations, not trying to calc directly
 
 function manaPoolMeetsRequirements(availableMana, neededCombinations) {
     console.log('AvailableManaThisTurn:', _.cloneDeep(availableMana));

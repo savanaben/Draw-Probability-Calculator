@@ -1136,6 +1136,8 @@ var app = (function () {
         manaRequirements: {}
     });
 
+    const simplifiedRampMana = writable([]);
+
     const shouldResetSimulation = writable(false);
 
     const simulationRun = writable(false);
@@ -8536,34 +8538,34 @@ var app = (function () {
 
     function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[56] = list[i];
+    	child_ctx[57] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[59] = list[i][0];
-    	child_ctx[60] = list[i][1];
+    	child_ctx[60] = list[i][0];
+    	child_ctx[61] = list[i][1];
     	return child_ctx;
     }
 
     function get_each_context_2$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[63] = list[i];
-    	child_ctx[64] = list;
-    	child_ctx[65] = i;
+    	child_ctx[64] = list[i];
+    	child_ctx[65] = list;
+    	child_ctx[66] = i;
     	return child_ctx;
     }
 
     function get_each_context_3$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[63] = list[i];
-    	child_ctx[66] = list;
-    	child_ctx[67] = i;
+    	child_ctx[64] = list[i];
+    	child_ctx[67] = list;
+    	child_ctx[68] = i;
     	return child_ctx;
     }
 
-    // (746:8) 
+    // (802:8) 
     function create_trigger_slot_2$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -8586,7 +8588,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 745, 8, 20885);
+    			add_location(button, file$7, 801, 8, 22549);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8620,14 +8622,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_2$1.name,
     		type: "slot",
-    		source: "(746:8) ",
+    		source: "(802:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (749:8) 
+    // (805:8) 
     function create_content_slot_2$1(ctx) {
     	let div;
     	let p0;
@@ -8658,18 +8660,18 @@ var app = (function () {
     			p2.textContent = "My research has only come up with one other method to find this kind of probability - the inclusion exclusion principle. And that seemed hella hard to implement, so I went with this.";
     			attr_dev(a0, "href", "https://en.wikipedia.org/wiki/Monte_Carlo_method");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$7, 749, 76, 21229);
+    			add_location(a0, file$7, 805, 76, 22893);
     			attr_dev(a1, "href", "https://en.wikipedia.org/wiki/Hypergeometric_distribution");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$7, 749, 381, 21534);
+    			add_location(a1, file$7, 805, 381, 23198);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 749, 10, 21163);
+    			add_location(p0, file$7, 805, 10, 22827);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 750, 12, 21822);
+    			add_location(p1, file$7, 806, 12, 23486);
     			attr_dev(p2, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p2, file$7, 751, 10, 22098);
+    			add_location(p2, file$7, 807, 10, 23762);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 748, 8, 21131);
+    			add_location(div, file$7, 804, 8, 22795);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8693,14 +8695,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_2$1.name,
     		type: "slot",
-    		source: "(749:8) ",
+    		source: "(805:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (762:8) {#each manaCards as card (card.id)}
+    // (818:8) {#each manaCards as card (card.id)}
     function create_each_block_3$1(key_1, ctx) {
     	let first;
     	let manacard;
@@ -8708,17 +8710,17 @@ var app = (function () {
     	let current;
 
     	function manacard_card_binding(value) {
-    		/*manacard_card_binding*/ ctx[32](value, /*card*/ ctx[63], /*each_value_3*/ ctx[66], /*card_index_1*/ ctx[67]);
+    		/*manacard_card_binding*/ ctx[32](value, /*card*/ ctx[64], /*each_value_3*/ ctx[67], /*card_index_1*/ ctx[68]);
     	}
 
     	function remove_handler() {
-    		return /*remove_handler*/ ctx[33](/*card*/ ctx[63]);
+    		return /*remove_handler*/ ctx[33](/*card*/ ctx[64]);
     	}
 
     	let manacard_props = {};
 
-    	if (/*card*/ ctx[63] !== void 0) {
-    		manacard_props.card = /*card*/ ctx[63];
+    	if (/*card*/ ctx[64] !== void 0) {
+    		manacard_props.card = /*card*/ ctx[64];
     	}
 
     	manacard = new ManaCard({ props: manacard_props, $$inline: true });
@@ -8744,7 +8746,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*manaCards*/ 1) {
     				updating_card = true;
-    				manacard_changes.card = /*card*/ ctx[63];
+    				manacard_changes.card = /*card*/ ctx[64];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -8769,14 +8771,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3$1.name,
     		type: "each",
-    		source: "(762:8) {#each manaCards as card (card.id)}",
+    		source: "(818:8) {#each manaCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (779:3) {#each customCards as card (card.id)}
+    // (835:3) {#each customCards as card (card.id)}
     function create_each_block_2$2(key_1, ctx) {
     	let first;
     	let customcard;
@@ -8784,21 +8786,21 @@ var app = (function () {
     	let current;
 
     	function customcard_card_binding(value) {
-    		/*customcard_card_binding*/ ctx[34](value, /*card*/ ctx[63], /*each_value_2*/ ctx[64], /*card_index*/ ctx[65]);
+    		/*customcard_card_binding*/ ctx[34](value, /*card*/ ctx[64], /*each_value_2*/ ctx[65], /*card_index*/ ctx[66]);
     	}
 
     	function remove_handler_1() {
-    		return /*remove_handler_1*/ ctx[35](/*card*/ ctx[63]);
+    		return /*remove_handler_1*/ ctx[35](/*card*/ ctx[64]);
     	}
 
     	function updateattribute_handler(...args) {
-    		return /*updateattribute_handler*/ ctx[37](/*card*/ ctx[63], ...args);
+    		return /*updateattribute_handler*/ ctx[37](/*card*/ ctx[64], ...args);
     	}
 
     	let customcard_props = {};
 
-    	if (/*card*/ ctx[63] !== void 0) {
-    		customcard_props.card = /*card*/ ctx[63];
+    	if (/*card*/ ctx[64] !== void 0) {
+    		customcard_props.card = /*card*/ ctx[64];
     	}
 
     	customcard = new CustomCard({ props: customcard_props, $$inline: true });
@@ -8827,7 +8829,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*customCards*/ 2) {
     				updating_card = true;
-    				customcard_changes.card = /*card*/ ctx[63];
+    				customcard_changes.card = /*card*/ ctx[64];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -8852,14 +8854,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2$2.name,
     		type: "each",
-    		source: "(779:3) {#each customCards as card (card.id)}",
+    		source: "(835:3) {#each customCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (793:10) 
+    // (849:10) 
     function create_trigger_slot_1$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -8882,7 +8884,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 792, 10, 23797);
+    			add_location(button, file$7, 848, 10, 25461);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8916,14 +8918,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1$1.name,
     		type: "slot",
-    		source: "(793:10) ",
+    		source: "(849:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (796:10) 
+    // (852:10) 
     function create_content_slot_1$1(ctx) {
     	let div;
     	let p0;
@@ -8939,11 +8941,11 @@ var app = (function () {
     			p1 = element("p");
     			p1.textContent = "In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.";
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 796, 12, 24083);
+    			add_location(p0, file$7, 852, 12, 25747);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 797, 12, 24553);
+    			add_location(p1, file$7, 853, 12, 26217);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 795, 10, 24049);
+    			add_location(div, file$7, 851, 10, 25713);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8961,14 +8963,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_1$1.name,
     		type: "slot",
-    		source: "(796:10) ",
+    		source: "(852:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (813:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
+    // (869:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
     function create_if_block$3(ctx) {
     	let div;
     	let label;
@@ -8981,7 +8983,7 @@ var app = (function () {
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*manaIcons*/ ctx[13][/*key*/ ctx[59]]) return create_if_block_1$2;
+    		if (/*manaIcons*/ ctx[13][/*key*/ ctx[60]]) return create_if_block_1$2;
     		return create_else_block$1;
     	}
 
@@ -8989,7 +8991,7 @@ var app = (function () {
     	let if_block = current_block_type(ctx);
 
     	function input_handler(...args) {
-    		return /*input_handler*/ ctx[41](/*key*/ ctx[59], ...args);
+    		return /*input_handler*/ ctx[41](/*key*/ ctx[60], ...args);
     	}
 
     	const block = {
@@ -8999,17 +9001,17 @@ var app = (function () {
     			if_block.c();
     			t = space();
     			input = element("input");
-    			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[59].replace(/\s+/g, '_') + "-requirement"));
+    			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[60].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 814, 12, 25506);
-    			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[59].replace(/\s+/g, '_') + "-requirement"));
+    			add_location(label, file$7, 870, 12, 27170);
+    			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[60].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			input.value = input_value_value = /*manaRequirements*/ ctx[2][/*key*/ ctx[59]];
+    			input.value = input_value_value = /*manaRequirements*/ ctx[2][/*key*/ ctx[60]];
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 821, 12, 25882);
+    			add_location(input, file$7, 877, 12, 27546);
     			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 813, 10, 25462);
+    			add_location(div, file$7, 869, 10, 27126);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9042,15 +9044,15 @@ var app = (function () {
     				}
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 4 && label_for_value !== (label_for_value = "" + (/*key*/ ctx[59].replace(/\s+/g, '_') + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 4 && label_for_value !== (label_for_value = "" + (/*key*/ ctx[60].replace(/\s+/g, '_') + "-requirement"))) {
     				attr_dev(label, "for", label_for_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 4 && input_id_value !== (input_id_value = "" + (/*key*/ ctx[59].replace(/\s+/g, '_') + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 4 && input_id_value !== (input_id_value = "" + (/*key*/ ctx[60].replace(/\s+/g, '_') + "-requirement"))) {
     				attr_dev(input, "id", input_id_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 4 && input_value_value !== (input_value_value = /*manaRequirements*/ ctx[2][/*key*/ ctx[59]]) && input.value !== input_value_value) {
+    			if (dirty[0] & /*manaRequirements*/ 4 && input_value_value !== (input_value_value = /*manaRequirements*/ ctx[2][/*key*/ ctx[60]]) && input.value !== input_value_value) {
     				prop_dev(input, "value", input_value_value);
     			}
     		},
@@ -9066,16 +9068,16 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(813:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
+    		source: "(869:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (818:14) {:else}
+    // (874:14) {:else}
     function create_else_block$1(ctx) {
-    	let t0_value = /*key*/ ctx[59] + "";
+    	let t0_value = /*key*/ ctx[60] + "";
     	let t0;
     	let t1;
 
@@ -9089,7 +9091,7 @@ var app = (function () {
     			insert_dev(target, t1, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*manaRequirements*/ 4 && t0_value !== (t0_value = /*key*/ ctx[59] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*manaRequirements*/ 4 && t0_value !== (t0_value = /*key*/ ctx[60] + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t0);
@@ -9101,14 +9103,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(818:14) {:else}",
+    		source: "(874:14) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (816:14) {#if manaIcons[key]}
+    // (872:14) {#if manaIcons[key]}
     function create_if_block_1$2(ctx) {
     	let img;
     	let img_src_value;
@@ -9120,26 +9122,26 @@ var app = (function () {
     			img = element("img");
     			t = text(" :");
 
-    			if (!src_url_equal(img.src, img_src_value = /*key*/ ctx[59] === 'ANY'
-    			? /*getAnyIcon*/ ctx[14](/*amount*/ ctx[60])
-    			: /*manaIcons*/ ctx[13][/*key*/ ctx[59]])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*key*/ ctx[60] === 'ANY'
+    			? /*getAnyIcon*/ ctx[14](/*amount*/ ctx[61])
+    			: /*manaIcons*/ ctx[13][/*key*/ ctx[60]])) attr_dev(img, "src", img_src_value);
 
-    			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[59] + " mana icon"));
+    			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[60] + " mana icon"));
     			attr_dev(img, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img, file$7, 816, 16, 25612);
+    			add_location(img, file$7, 872, 16, 27276);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
     			insert_dev(target, t, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*manaRequirements*/ 4 && !src_url_equal(img.src, img_src_value = /*key*/ ctx[59] === 'ANY'
-    			? /*getAnyIcon*/ ctx[14](/*amount*/ ctx[60])
-    			: /*manaIcons*/ ctx[13][/*key*/ ctx[59]])) {
+    			if (dirty[0] & /*manaRequirements*/ 4 && !src_url_equal(img.src, img_src_value = /*key*/ ctx[60] === 'ANY'
+    			? /*getAnyIcon*/ ctx[14](/*amount*/ ctx[61])
+    			: /*manaIcons*/ ctx[13][/*key*/ ctx[60]])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 4 && img_alt_value !== (img_alt_value = "" + (/*key*/ ctx[59] + " mana icon"))) {
+    			if (dirty[0] & /*manaRequirements*/ 4 && img_alt_value !== (img_alt_value = "" + (/*key*/ ctx[60] + " mana icon"))) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -9153,20 +9155,20 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(816:14) {#if manaIcons[key]}",
+    		source: "(872:14) {#if manaIcons[key]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (812:6) {#each Object.entries(manaRequirements) as [key, amount]}
+    // (868:6) {#each Object.entries(manaRequirements) as [key, amount]}
     function create_each_block_1$3(ctx) {
-    	let show_if = /*activeManaTypes*/ ctx[8][/*key*/ ctx[59]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
+    	let show_if = /*activeManaTypes*/ ctx[8][/*key*/ ctx[60]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
     	let if_block_anchor;
 
     	function func(...args) {
-    		return /*func*/ ctx[26](/*key*/ ctx[59], ...args);
+    		return /*func*/ ctx[26](/*key*/ ctx[60], ...args);
     	}
 
     	let if_block = show_if && create_if_block$3(ctx);
@@ -9182,7 +9184,7 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*activeManaTypes, manaRequirements, customCards*/ 262) show_if = /*activeManaTypes*/ ctx[8][/*key*/ ctx[59]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
+    			if (dirty[0] & /*activeManaTypes, manaRequirements, customCards*/ 262) show_if = /*activeManaTypes*/ ctx[8][/*key*/ ctx[60]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
 
     			if (show_if) {
     				if (if_block) {
@@ -9207,18 +9209,18 @@ var app = (function () {
     		block,
     		id: create_each_block_1$3.name,
     		type: "each",
-    		source: "(812:6) {#each Object.entries(manaRequirements) as [key, amount]}",
+    		source: "(868:6) {#each Object.entries(manaRequirements) as [key, amount]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (838:8) {#each Array.from(uniqueAttributes) as attr}
+    // (894:8) {#each Array.from(uniqueAttributes) as attr}
     function create_each_block$4(ctx) {
     	let div;
     	let label;
-    	let t0_value = /*attr*/ ctx[56] + "";
+    	let t0_value = /*attr*/ ctx[57] + "";
     	let t0;
     	let t1;
     	let label_for_value;
@@ -9231,7 +9233,7 @@ var app = (function () {
     	let dispose;
 
     	function input_handler_1(...args) {
-    		return /*input_handler_1*/ ctx[42](/*attr*/ ctx[56], ...args);
+    		return /*input_handler_1*/ ctx[42](/*attr*/ ctx[57], ...args);
     	}
 
     	const block = {
@@ -9243,17 +9245,17 @@ var app = (function () {
     			t2 = space();
     			input = element("input");
     			t3 = space();
-    			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[56].replace(/\s+/g, '_'));
+    			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[57].replace(/\s+/g, '_'));
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 839, 10, 26326);
-    			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[56].replace(/\s+/g, '_'));
+    			add_location(label, file$7, 895, 10, 27990);
+    			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[57].replace(/\s+/g, '_'));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			input.value = input_value_value = /*customAttributeRequirements*/ ctx[3][/*attr*/ ctx[56]];
+    			input.value = input_value_value = /*customAttributeRequirements*/ ctx[3][/*attr*/ ctx[57]];
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 840, 10, 26402);
+    			add_location(input, file$7, 896, 10, 28066);
     			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 838, 8, 26284);
+    			add_location(div, file$7, 894, 8, 27948);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9275,17 +9277,17 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*uniqueAttributes*/ 16 && t0_value !== (t0_value = /*attr*/ ctx[56] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*uniqueAttributes*/ 16 && t0_value !== (t0_value = /*attr*/ ctx[57] + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*uniqueAttributes*/ 16 && label_for_value !== (label_for_value = "custom-" + /*attr*/ ctx[56].replace(/\s+/g, '_'))) {
+    			if (dirty[0] & /*uniqueAttributes*/ 16 && label_for_value !== (label_for_value = "custom-" + /*attr*/ ctx[57].replace(/\s+/g, '_'))) {
     				attr_dev(label, "for", label_for_value);
     			}
 
-    			if (dirty[0] & /*uniqueAttributes*/ 16 && input_id_value !== (input_id_value = "custom-" + /*attr*/ ctx[56].replace(/\s+/g, '_'))) {
+    			if (dirty[0] & /*uniqueAttributes*/ 16 && input_id_value !== (input_id_value = "custom-" + /*attr*/ ctx[57].replace(/\s+/g, '_'))) {
     				attr_dev(input, "id", input_id_value);
     			}
 
-    			if (dirty[0] & /*customAttributeRequirements, uniqueAttributes*/ 24 && input_value_value !== (input_value_value = /*customAttributeRequirements*/ ctx[3][/*attr*/ ctx[56]]) && input.value !== input_value_value) {
+    			if (dirty[0] & /*customAttributeRequirements, uniqueAttributes*/ 24 && input_value_value !== (input_value_value = /*customAttributeRequirements*/ ctx[3][/*attr*/ ctx[57]]) && input.value !== input_value_value) {
     				prop_dev(input, "value", input_value_value);
     			}
     		},
@@ -9300,14 +9302,14 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(838:8) {#each Array.from(uniqueAttributes) as attr}",
+    		source: "(894:8) {#each Array.from(uniqueAttributes) as attr}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (871:10) 
+    // (927:10) 
     function create_trigger_slot$3(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -9331,7 +9333,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 870, 10, 27566);
+    			add_location(button, file$7, 926, 10, 29230);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9365,14 +9367,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$3.name,
     		type: "slot",
-    		source: "(871:10) ",
+    		source: "(927:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (874:10) 
+    // (930:10) 
     function create_content_slot$3(ctx) {
     	let div;
     	let p0;
@@ -9389,13 +9391,13 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.";
-    			add_location(b, file$7, 874, 58, 27924);
+    			add_location(b, file$7, 930, 58, 29588);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 874, 12, 27878);
+    			add_location(p0, file$7, 930, 12, 29542);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 875, 12, 27994);
+    			add_location(p1, file$7, 931, 12, 29658);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 873, 10, 27844);
+    			add_location(div, file$7, 929, 10, 29508);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9414,7 +9416,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$3.name,
     		type: "slot",
-    		source: "(874:10) ",
+    		source: "(930:10) ",
     		ctx
     	});
 
@@ -9531,7 +9533,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover0, 'show', popover0_show_binding));
     	let each_value_3 = /*manaCards*/ ctx[0];
     	validate_each_argument(each_value_3);
-    	const get_key = ctx => /*card*/ ctx[63].id;
+    	const get_key = ctx => /*card*/ ctx[64].id;
     	validate_each_keys(ctx, each_value_3, get_each_context_3$1, get_key);
 
     	for (let i = 0; i < each_value_3.length; i += 1) {
@@ -9542,7 +9544,7 @@ var app = (function () {
 
     	let each_value_2 = /*customCards*/ ctx[1];
     	validate_each_argument(each_value_2);
-    	const get_key_1 = ctx => /*card*/ ctx[63].id;
+    	const get_key_1 = ctx => /*card*/ ctx[64].id;
     	validate_each_keys(ctx, each_value_2, get_each_context_2$2, get_key_1);
 
     	for (let i = 0; i < each_value_2.length; i += 1) {
@@ -9706,87 +9708,87 @@ var app = (function () {
     			if (!src_url_equal(img0.src, img0_src_value = img$f)) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "Plains");
     			attr_dev(img0, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img0, file$7, 730, 4, 20051);
+    			add_location(img0, file$7, 786, 4, 21715);
     			if (!src_url_equal(img1.src, img1_src_value = img$e)) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Swamp");
     			attr_dev(img1, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img1, file$7, 731, 4, 20107);
+    			add_location(img1, file$7, 787, 4, 21771);
     			if (!src_url_equal(img2.src, img2_src_value = img$d)) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Island");
     			attr_dev(img2, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img2, file$7, 732, 4, 20162);
+    			add_location(img2, file$7, 788, 4, 21826);
     			if (!src_url_equal(img3.src, img3_src_value = img$c)) attr_dev(img3, "src", img3_src_value);
     			attr_dev(img3, "alt", "Mountain");
     			attr_dev(img3, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img3, file$7, 733, 4, 20218);
+    			add_location(img3, file$7, 789, 4, 21882);
     			if (!src_url_equal(img4.src, img4_src_value = img$b)) attr_dev(img4, "src", img4_src_value);
     			attr_dev(img4, "alt", "Forest");
     			attr_dev(img4, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img4, file$7, 734, 4, 20276);
+    			add_location(img4, file$7, 790, 4, 21940);
     			set_style(h3, "font-size", "18px");
     			set_style(h3, "display", "flex");
     			set_style(h3, "align-items", "center");
     			set_style(h3, "gap", "3px");
     			attr_dev(h3, "class", "svelte-1q4pgtd");
-    			add_location(h3, file$7, 727, 0, 19914);
+    			add_location(h3, file$7, 783, 0, 21578);
     			attr_dev(div0, "class", "accordion-title svelte-1q4pgtd");
     			attr_dev(div0, "tabindex", "0");
-    			add_location(div0, file$7, 720, 4, 19659);
+    			add_location(div0, file$7, 776, 4, 21323);
     			attr_dev(span, "class", "semi-bold svelte-1q4pgtd");
-    			add_location(span, file$7, 743, 115, 20652);
+    			add_location(span, file$7, 799, 115, 22316);
     			set_style(p0, "margin-top", "0.5rem");
     			attr_dev(p0, "class", "svelte-1q4pgtd");
-    			add_location(p0, file$7, 743, 6, 20543);
-    			add_location(strong0, file$7, 759, 37, 22421);
+    			add_location(p0, file$7, 799, 6, 22207);
+    			add_location(strong0, file$7, 815, 37, 24085);
     			set_style(p1, "margin-top", "0.5rem");
     			attr_dev(p1, "class", "svelte-1q4pgtd");
-    			add_location(p1, file$7, 759, 6, 22390);
+    			add_location(p1, file$7, 815, 6, 24054);
     			attr_dev(div1, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div1, file$7, 760, 6, 22634);
-    			add_location(button0, file$7, 769, 8, 22904);
-    			add_location(b0, file$7, 770, 31, 23003);
-    			add_location(div2, file$7, 770, 8, 22980);
+    			add_location(div1, file$7, 816, 6, 24298);
+    			add_location(button0, file$7, 825, 8, 24568);
+    			add_location(b0, file$7, 826, 31, 24667);
+    			add_location(div2, file$7, 826, 8, 24644);
     			attr_dev(div3, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div3, file$7, 768, 6, 22859);
+    			add_location(div3, file$7, 824, 6, 24523);
     			attr_dev(hr0, "class", "secondary-divider svelte-1q4pgtd");
-    			add_location(hr0, file$7, 775, 6, 23100);
+    			add_location(hr0, file$7, 831, 6, 24764);
     			attr_dev(div4, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div4, file$7, 777, 6, 23140);
-    			add_location(button1, file$7, 790, 6, 23657);
-    			add_location(b1, file$7, 800, 33, 24828);
-    			add_location(div5, file$7, 800, 8, 24803);
+    			add_location(div4, file$7, 833, 6, 24804);
+    			add_location(button1, file$7, 846, 6, 25321);
+    			add_location(b1, file$7, 856, 33, 26492);
+    			add_location(div5, file$7, 856, 8, 26467);
     			attr_dev(div6, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div6, file$7, 789, 4, 23614);
+    			add_location(div6, file$7, 845, 4, 25278);
     			attr_dev(hr1, "class", "primary-divider svelte-1q4pgtd");
-    			add_location(hr1, file$7, 804, 9, 24974);
-    			add_location(strong1, file$7, 809, 9, 25060);
+    			add_location(hr1, file$7, 860, 9, 26638);
+    			add_location(strong1, file$7, 865, 9, 26724);
     			attr_dev(p2, "class", "svelte-1q4pgtd");
-    			add_location(p2, file$7, 809, 6, 25057);
+    			add_location(p2, file$7, 865, 6, 26721);
     			attr_dev(div7, "class", "mana-requirements-container svelte-1q4pgtd");
-    			add_location(div7, file$7, 810, 4, 25232);
+    			add_location(div7, file$7, 866, 4, 26896);
     			attr_dev(button2, "class", "primary-btn");
     			button2.disabled = button2_disabled_value = !/*enableSimulationButton*/ ctx[12];
-    			add_location(button2, file$7, 856, 8, 26823);
+    			add_location(button2, file$7, 912, 8, 28487);
     			attr_dev(label, "for", "iterations");
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 865, 8, 27285);
+    			add_location(label, file$7, 921, 8, 28949);
     			set_style(input, "width", "90px");
     			attr_dev(input, "id", "iterations");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "1");
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 866, 8, 27359);
+    			add_location(input, file$7, 922, 8, 29023);
     			attr_dev(div8, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div8, file$7, 864, 8, 27245);
+    			add_location(div8, file$7, 920, 8, 28909);
     			attr_dev(div9, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div9, file$7, 855, 6, 26778);
+    			add_location(div9, file$7, 911, 6, 28442);
     			attr_dev(div10, "class", "answer svelte-1q4pgtd");
     			set_style(div10, "height", /*openItem*/ ctx[5] === 0 ? 'auto' : '0');
-    			add_location(div10, file$7, 737, 6, 20353);
+    			add_location(div10, file$7, 793, 6, 22017);
     			attr_dev(div11, "class", "accordion-item svelte-1q4pgtd");
-    			add_location(div11, file$7, 719, 2, 19625);
+    			add_location(div11, file$7, 775, 2, 21289);
     			attr_dev(div12, "class", div12_class_value = "accordion " + (/*isHovering*/ ctx[9] ? 'hovering' : '') + " svelte-1q4pgtd");
-    			add_location(div12, file$7, 716, 0, 19448);
+    			add_location(div12, file$7, 772, 0, 21112);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9911,7 +9913,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover0_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 64 | dirty[2] & /*$$scope*/ 64) {
+    			if (dirty[0] & /*showPopover*/ 64 | dirty[2] & /*$$scope*/ 128) {
     				popover0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -9945,7 +9947,7 @@ var app = (function () {
 
     			const popover1_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 64 | dirty[2] & /*$$scope*/ 64) {
+    			if (dirty[0] & /*showPopover*/ 64 | dirty[2] & /*$$scope*/ 128) {
     				popover1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -10016,7 +10018,7 @@ var app = (function () {
 
     			const popover2_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 64 | dirty[2] & /*$$scope*/ 64) {
+    			if (dirty[0] & /*showPopover*/ 64 | dirty[2] & /*$$scope*/ 128) {
     				popover2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -10113,6 +10115,10 @@ var app = (function () {
     	});
 
     	return block;
+    }
+
+    function simplifyColorsCanProduce(colorsCanProduce) {
+    	return Object.fromEntries(Object.entries(colorsCanProduce).filter(([color, count]) => count > 0).map(([color, count]) => [color, 1]));
     }
 
     function selectInput$2(event) {
@@ -10381,6 +10387,78 @@ var app = (function () {
     			TotalManaCost: {
     				B: 0,
     				U: 0,
+    				G: 2,
+    				R: 0,
+    				W: 0,
+    				C: 0,
+    				ANY: 1
+    			},
+    			ColorsCanProduce: {
+    				B: 1,
+    				U: 1,
+    				G: 1,
+    				R: 1,
+    				W: 1,
+    				C: 0,
+    				ANY: 1
+    			},
+    			CanProduce: 1,
+    			AbilityCost: 0,
+    			AvailableTurnPlayed: 0,
+    			amount: 4
+    		},
+    		{
+    			TotalManaCost: {
+    				B: 0,
+    				U: 0,
+    				G: 1,
+    				R: 0,
+    				W: 0,
+    				C: 0,
+    				ANY: 1
+    			},
+    			ColorsCanProduce: {
+    				B: 1,
+    				U: 1,
+    				G: 1,
+    				R: 1,
+    				W: 1,
+    				C: 0,
+    				ANY: 1
+    			},
+    			CanProduce: 1,
+    			AbilityCost: 0,
+    			AvailableTurnPlayed: 0,
+    			amount: 2
+    		},
+    		{
+    			TotalManaCost: {
+    				B: 0,
+    				U: 0,
+    				G: 1,
+    				R: 0,
+    				W: 0,
+    				C: 0,
+    				ANY: 1
+    			},
+    			ColorsCanProduce: {
+    				B: 0,
+    				U: 1,
+    				G: 1,
+    				R: 1,
+    				W: 0,
+    				C: 0,
+    				ANY: 1
+    			},
+    			CanProduce: 1,
+    			AbilityCost: 0,
+    			AvailableTurnPlayed: 1,
+    			amount: 5
+    		},
+    		{
+    			TotalManaCost: {
+    				B: 0,
+    				U: 0,
     				G: 1,
     				R: 0,
     				W: 0,
@@ -10390,16 +10468,16 @@ var app = (function () {
     			ColorsCanProduce: {
     				B: 0,
     				U: 0,
-    				G: 1,
-    				R: 0,
+    				G: 0,
+    				R: 1,
     				W: 1,
     				C: 0,
     				ANY: 1
     			},
     			CanProduce: 1,
     			AbilityCost: 0,
-    			AvailableTurnPlayed: 0,
-    			amount: 7
+    			AvailableTurnPlayed: 1,
+    			amount: 5
     		},
     		{
     			TotalManaCost: {
@@ -10423,53 +10501,22 @@ var app = (function () {
     			CanProduce: 1,
     			AbilityCost: 0,
     			AvailableTurnPlayed: 0,
-    			amount: 5
+    			amount: 6
     		}
     	]; // {
     	//     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 2 },
     	//     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
 
-    	//     CanProduce: 1,
-    	//     AbilityCost: 0,
-    	//     AvailableTurnPlayed: 0,
-    	//     amount: 7
-    	// },
-    	// {
-    	//     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
-    	//     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-    	//     CanProduce: 1,
-    	//     AbilityCost: 0,
-    	//     AvailableTurnPlayed: 0,
-    	//     amount: 7
-    	// }
-    	// {
-    	//     TotalManaCost: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 0 },
-    	//     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 0 },
-    	//     CanProduce: 2,
-    	//     AbilityCost: 1,
-    	//     amount: 1
-    	// },
-    	// {
-    	//     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 1, C: 1, ANY: 0 },
-    	//     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 1, C: 1, ANY: 0 },
-    	//     CanProduce: 2,
-    	//     AbilityCost: 1,
-    	//     amount: 1
-    	// },
-    	// {
-    	//     TotalManaCost: { B: 1, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
-    	//     ColorsCanProduce: { B: 1, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
-    	//     CanProduce: 2,
-    	//     AbilityCost: 1,
-    	//     amount: 1
-    	// },
-    	// {
-    	//     TotalManaCost: { B: 0, U: 1, G: 0, R: 1, W: 0, C: 0, ANY: 0 },
-    	//     ColorsCanProduce: { B: 0, U: 1, G: 0, R: 1, W: 0, C: 0, ANY: 0 },
-    	//     CanProduce: 2,
-    	//     AbilityCost: 1,
-    	//     amount: 1
-    	// }
+    	function preprocessRampCards(rampCards) {
+    		const simplifiedRampManaList = rampCards.flatMap(card => {
+    			const simplifiedColors = simplifyColorsCanProduce(card.ColorsCanProduce);
+    			return Array(card.amount).fill(simplifiedColors);
+    		});
+
+    		simplifiedRampMana.set(simplifiedRampManaList);
+    		console.log('Simplified Ramp Mana:', simplifiedRampManaList);
+    	}
+
     	function prepareManaCardsForCalculation() {
     		let preparedCards = [];
 
@@ -10525,6 +10572,7 @@ var app = (function () {
     		);
 
     		console.log('Mana Requirements:', filteredManaRequirements);
+    		preprocessRampCards(rampCards); // Preprocess ramp cards
 
     		simulationData.set({
     			preparedCards: prepareManaCardsForCalculation(),
@@ -10606,9 +10654,11 @@ var app = (function () {
     		FontAwesomeIcon,
     		faQuestionCircle,
     		simulationData,
+    		simplifiedRampMana,
     		monteCarloResults,
     		shouldResetSimulation,
     		trackEvent,
+    		writable,
     		WIcon: img$f,
     		UIcon: img$e,
     		BIcon: img$d,
@@ -10656,6 +10706,8 @@ var app = (function () {
     		updateCustomAttributeRequirements,
     		handleAttributeUpdate,
     		rampCards,
+    		simplifyColorsCanProduce,
+    		preprocessRampCards,
     		prepareManaCardsForCalculation,
     		logPreparedCards,
     		handleInput,
@@ -30877,25 +30929,25 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
-    	child_ctx[42] = i;
+    	child_ctx[42] = list[i];
+    	child_ctx[44] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[43] = list[i];
+    	child_ctx[45] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[46] = list[i];
-    	child_ctx[48] = i;
+    	child_ctx[48] = list[i];
+    	child_ctx[50] = i;
     	return child_ctx;
     }
 
-    // (1399:4) {#if hasOutput}
+    // (1489:4) {#if hasOutput}
     function create_if_block_2(ctx) {
     	let p;
     	let i;
@@ -30905,7 +30957,7 @@ var app = (function () {
     	let current;
 
     	function popover_show_binding(value) {
-    		/*popover_show_binding*/ ctx[15](value);
+    		/*popover_show_binding*/ ctx[16](value);
     	}
 
     	let popover_props = {
@@ -30931,10 +30983,10 @@ var app = (function () {
     			i.textContent = "Each column of stacked cards represents a separate opening hand and subsequent draws.";
     			t1 = space();
     			create_component(popover.$$.fragment);
-    			add_location(i, file$4, 1399, 49, 57912);
+    			add_location(i, file$4, 1489, 49, 61467);
     			set_style(p, "margin-top", "0");
     			set_style(p, "text-align", "center");
-    			add_location(p, file$4, 1399, 4, 57867);
+    			add_location(p, file$4, 1489, 4, 61422);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -30946,7 +30998,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 64 | dirty[1] & /*$$scope*/ 262144) {
+    			if (dirty[0] & /*showPopover*/ 64 | dirty[1] & /*$$scope*/ 1048576) {
     				popover_changes.$$scope = { dirty, ctx };
     			}
 
@@ -30977,14 +31029,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(1399:4) {#if hasOutput}",
+    		source: "(1489:4) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1402:12) 
+    // (1492:12) 
     function create_trigger_slot$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -31008,7 +31060,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 1401, 12, 58077);
+    			add_location(button, file$4, 1491, 12, 61632);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -31016,7 +31068,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[14], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[15], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -31042,14 +31094,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$1.name,
     		type: "slot",
-    		source: "(1402:12) ",
+    		source: "(1492:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1405:12) 
+    // (1495:12) 
     function create_content_slot$1(ctx) {
     	let div;
     	let p;
@@ -31060,9 +31112,9 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the \"Linked groups\" feature or Advanced section to calculate the probability of drawing cards from different groups.";
     			attr_dev(p, "class", "popover-content svelte-2vp65s");
-    			add_location(p, file$4, 1405, 16, 58394);
+    			add_location(p, file$4, 1495, 16, 61949);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 1404, 12, 58356);
+    			add_location(div, file$4, 1494, 12, 61911);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -31078,14 +31130,14 @@ var app = (function () {
     		block,
     		id: create_content_slot$1.name,
     		type: "slot",
-    		source: "(1405:12) ",
+    		source: "(1495:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1440:8) {:else}
+    // (1530:8) {:else}
     function create_else_block(ctx) {
     	let div;
 
@@ -31094,7 +31146,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "Add a group or run a simulation above to show output probabilities.";
     			attr_dev(div, "class", "placeholder svelte-2vp65s");
-    			add_location(div, file$4, 1440, 9, 60517);
+    			add_location(div, file$4, 1530, 9, 64072);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -31109,14 +31161,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(1440:8) {:else}",
+    		source: "(1530:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1412:8) {#if hasOutput}
+    // (1502:8) {#if hasOutput}
     function create_if_block$2(ctx) {
     	let each_1_anchor;
     	let each_value = /*generateTurnsArray*/ ctx[3](/*$numberOfTurns*/ ctx[4].length);
@@ -31179,14 +31231,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(1412:8) {#if hasOutput}",
+    		source: "(1502:8) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1414:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}
+    // (1504:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}
     function create_if_block_1$1(ctx) {
     	let div2;
     	let div0;
@@ -31198,16 +31250,16 @@ var app = (function () {
     	let i;
     	let t4;
 
-    	let t5_value = (/*turn*/ ctx[42] === 0
+    	let t5_value = (/*turn*/ ctx[44] === 0
     	? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[42] - 1]}`) + "";
+    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[44] - 1]}`) + "";
 
     	let t5;
     	let t6;
     	let t7;
     	let div1;
     	let t8;
-    	let each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]);
+    	let each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[44]);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -31220,7 +31272,7 @@ var app = (function () {
     			div2 = element("div");
     			div0 = element("div");
     			t0 = text("Turn ");
-    			t1 = text(/*turn*/ ctx[42]);
+    			t1 = text(/*turn*/ ctx[44]);
     			t2 = text(":");
     			br = element("br");
     			t3 = space();
@@ -31236,15 +31288,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 1416, 32, 59075);
+    			add_location(br, file$4, 1506, 32, 62630);
     			attr_dev(i, "class", "svelte-2vp65s");
-    			add_location(i, file$4, 1417, 20, 59101);
+    			add_location(i, file$4, 1507, 20, 62656);
     			attr_dev(div0, "class", "turn-label svelte-2vp65s");
-    			add_location(div0, file$4, 1415, 16, 59017);
+    			add_location(div0, file$4, 1505, 16, 62572);
     			attr_dev(div1, "class", "card-rectangles svelte-2vp65s");
-    			add_location(div1, file$4, 1419, 16, 59229);
+    			add_location(div1, file$4, 1509, 16, 62784);
     			attr_dev(div2, "class", "turn-row svelte-2vp65s");
-    			add_location(div2, file$4, 1414, 12, 58977);
+    			add_location(div2, file$4, 1504, 12, 62532);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -31270,12 +31322,12 @@ var app = (function () {
     			append_dev(div2, t8);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[42] === 0
+    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[44] === 0
     			? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[42] - 1]}`) + "")) set_data_dev(t5, t5_value);
+    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[44] - 1]}`) + "")) set_data_dev(t5, t5_value);
 
     			if (dirty[0] & /*createGroupCards, groups, results, $probabilitiesByTurn*/ 549) {
-    				each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]);
+    				each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[44]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -31308,14 +31360,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(1414:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}",
+    		source: "(1504:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1430:28) {#each card.isBlank as isBlank, i}
+    // (1520:28) {#each card.isBlank as isBlank, i}
     function create_each_block_2(ctx) {
     	let div;
 
@@ -31323,22 +31375,22 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "stacked-card svelte-2vp65s");
-    			set_style(div, "left", /*i*/ ctx[48] * 4 + "px");
-    			set_style(div, "z-index", -(/*i*/ ctx[48] + 1));
-    			set_style(div, "background-color", /*isBlank*/ ctx[46] ? '#f2efe8' : /*card*/ ctx[43].color);
-    			set_style(div, "border-color", /*isBlank*/ ctx[46] ? '#c1c1c1' : '#666666');
-    			add_location(div, file$4, 1430, 28, 60036);
+    			set_style(div, "left", /*i*/ ctx[50] * 4 + "px");
+    			set_style(div, "z-index", -(/*i*/ ctx[50] + 1));
+    			set_style(div, "background-color", /*isBlank*/ ctx[48] ? '#f2efe8' : /*card*/ ctx[45].color);
+    			set_style(div, "border-color", /*isBlank*/ ctx[48] ? '#c1c1c1' : '#666666');
+    			add_location(div, file$4, 1520, 28, 63591);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div, "background-color", /*isBlank*/ ctx[46] ? '#f2efe8' : /*card*/ ctx[43].color);
+    				set_style(div, "background-color", /*isBlank*/ ctx[48] ? '#f2efe8' : /*card*/ ctx[45].color);
     			}
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div, "border-color", /*isBlank*/ ctx[46] ? '#c1c1c1' : '#666666');
+    				set_style(div, "border-color", /*isBlank*/ ctx[48] ? '#c1c1c1' : '#666666');
     			}
     		},
     		d: function destroy(detaching) {
@@ -31350,36 +31402,36 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(1430:28) {#each card.isBlank as isBlank, i}",
+    		source: "(1520:28) {#each card.isBlank as isBlank, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1421:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
+    // (1511:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
     function create_each_block_1(ctx) {
     	let div6;
     	let div3;
     	let div2;
     	let div0;
 
-    	let t0_value = (/*card*/ ctx[43].probability !== null
-    	? `${/*card*/ ctx[43].probability}%`
+    	let t0_value = (/*card*/ ctx[45].probability !== null
+    	? `${/*card*/ ctx[45].probability}%`
     	: '') + "";
 
     	let t0;
     	let t1;
     	let div1;
-    	let raw_value = /*card*/ ctx[43].ratioText + "";
+    	let raw_value = /*card*/ ctx[45].ratioText + "";
     	let t2;
     	let div4;
     	let t3;
     	let div5;
-    	let t4_value = /*card*/ ctx[43].label + "";
+    	let t4_value = /*card*/ ctx[45].label + "";
     	let t4;
     	let t5;
-    	let each_value_2 = /*card*/ ctx[43].isBlank;
+    	let each_value_2 = /*card*/ ctx[45].isBlank;
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -31408,21 +31460,21 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			attr_dev(div0, "class", "probability svelte-2vp65s");
-    			add_location(div0, file$4, 1424, 32, 59647);
+    			add_location(div0, file$4, 1514, 32, 63202);
     			attr_dev(div1, "class", "card-ratio svelte-2vp65s");
-    			add_location(div1, file$4, 1425, 32, 59769);
+    			add_location(div1, file$4, 1515, 32, 63324);
     			attr_dev(div2, "class", "card-details svelte-2vp65s");
-    			add_location(div2, file$4, 1423, 28, 59587);
+    			add_location(div2, file$4, 1513, 28, 63142);
     			attr_dev(div3, "class", "rectangle svelte-2vp65s");
-    			set_style(div3, "background-color", /*card*/ ctx[43].color);
-    			add_location(div3, file$4, 1422, 24, 59494);
+    			set_style(div3, "background-color", /*card*/ ctx[45].color);
+    			add_location(div3, file$4, 1512, 24, 63049);
     			attr_dev(div4, "class", "stacked-cards svelte-2vp65s");
-    			add_location(div4, file$4, 1428, 24, 59915);
+    			add_location(div4, file$4, 1518, 24, 63470);
     			attr_dev(div5, "class", "card-label svelte-2vp65s");
-    			add_location(div5, file$4, 1432, 24, 60310);
+    			add_location(div5, file$4, 1522, 24, 63865);
     			attr_dev(div6, "class", "card-container svelte-2vp65s");
-    			set_style(div6, "margin-right", 7 + (/*card*/ ctx[43].isBlank.length - 1) * 4 + "px");
-    			add_location(div6, file$4, 1421, 20, 59379);
+    			set_style(div6, "margin-right", 7 + (/*card*/ ctx[45].isBlank.length - 1) * 4 + "px");
+    			add_location(div6, file$4, 1511, 20, 62934);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -31448,17 +31500,17 @@ var app = (function () {
     			append_dev(div6, t5);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t0_value !== (t0_value = (/*card*/ ctx[43].probability !== null
-    			? `${/*card*/ ctx[43].probability}%`
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t0_value !== (t0_value = (/*card*/ ctx[45].probability !== null
+    			? `${/*card*/ ctx[45].probability}%`
     			: '') + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && raw_value !== (raw_value = /*card*/ ctx[43].ratioText + "")) div1.innerHTML = raw_value;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && raw_value !== (raw_value = /*card*/ ctx[45].ratioText + "")) div1.innerHTML = raw_value;
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div3, "background-color", /*card*/ ctx[43].color);
+    				set_style(div3, "background-color", /*card*/ ctx[45].color);
     			}
 
     			if (dirty[0] & /*createGroupCards, groups, results, $probabilitiesByTurn*/ 549) {
-    				each_value_2 = /*card*/ ctx[43].isBlank;
+    				each_value_2 = /*card*/ ctx[45].isBlank;
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -31481,10 +31533,10 @@ var app = (function () {
     				each_blocks.length = each_value_2.length;
     			}
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t4_value !== (t4_value = /*card*/ ctx[43].label + "")) set_data_dev(t4, t4_value);
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t4_value !== (t4_value = /*card*/ ctx[45].label + "")) set_data_dev(t4, t4_value);
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div6, "margin-right", 7 + (/*card*/ ctx[43].isBlank.length - 1) * 4 + "px");
+    				set_style(div6, "margin-right", 7 + (/*card*/ ctx[45].isBlank.length - 1) * 4 + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -31497,16 +31549,16 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(1421:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}",
+    		source: "(1511:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1413:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
+    // (1503:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
     function create_each_block$1(ctx) {
-    	let show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]).length > 0;
+    	let show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[44]).length > 0;
     	let if_block_anchor;
     	let if_block = show_if && create_if_block_1$1(ctx);
 
@@ -31520,7 +31572,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[42]).length > 0;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[44]).length > 0;
 
     			if (show_if) {
     				if (if_block) {
@@ -31545,7 +31597,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(1413:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
+    		source: "(1503:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
     		ctx
     	});
 
@@ -31579,9 +31631,9 @@ var app = (function () {
     			if_block1.c();
     			set_style(h2, "text-align", "center");
     			set_style(h2, "margin-bottom", "0");
-    			add_location(h2, file$4, 1397, 4, 57773);
+    			add_location(h2, file$4, 1487, 4, 61328);
     			attr_dev(div, "class", "output-diagram svelte-2vp65s");
-    			add_location(div, file$4, 1410, 4, 58752);
+    			add_location(div, file$4, 1500, 4, 62307);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31706,12 +31758,6 @@ var app = (function () {
     	}
 
     	return Math.min(1, calculate(0, cardsDrawn, 1));
-    }
-
-    //the following is the start of mana probability calculations -------------------
-    function determineNeededCombinations(lands, requirements, totalManaNeeded) {
-    	const combinations = getAllCombinations(lands, true, totalManaNeeded);
-    	return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
     }
 
     function satisfiesRequirements(combination, requirements, totalManaNeeded) {
@@ -31996,18 +32042,21 @@ var app = (function () {
     	let $simulationData;
     	let $mulliganConfig;
     	let $cancelSimulation;
+    	let $simplifiedRampMana;
     	validate_store(numberOfTurns, 'numberOfTurns');
     	component_subscribe($$self, numberOfTurns, $$value => $$invalidate(4, $numberOfTurns = $$value));
     	validate_store(groupColors, 'groupColors');
-    	component_subscribe($$self, groupColors, $$value => $$invalidate(18, $groupColors = $$value));
+    	component_subscribe($$self, groupColors, $$value => $$invalidate(19, $groupColors = $$value));
     	validate_store(monteCarloResults, 'monteCarloResults');
-    	component_subscribe($$self, monteCarloResults, $$value => $$invalidate(19, $monteCarloResults = $$value));
+    	component_subscribe($$self, monteCarloResults, $$value => $$invalidate(20, $monteCarloResults = $$value));
     	validate_store(simulationData, 'simulationData');
     	component_subscribe($$self, simulationData, $$value => $$invalidate(12, $simulationData = $$value));
     	validate_store(mulliganConfig, 'mulliganConfig');
     	component_subscribe($$self, mulliganConfig, $$value => $$invalidate(13, $mulliganConfig = $$value));
     	validate_store(cancelSimulation, 'cancelSimulation');
-    	component_subscribe($$self, cancelSimulation, $$value => $$invalidate(20, $cancelSimulation = $$value));
+    	component_subscribe($$self, cancelSimulation, $$value => $$invalidate(21, $cancelSimulation = $$value));
+    	validate_store(simplifiedRampMana, 'simplifiedRampMana');
+    	component_subscribe($$self, simplifiedRampMana, $$value => $$invalidate(14, $simplifiedRampMana = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Calculation', slots, []);
 
@@ -32143,6 +32192,13 @@ var app = (function () {
 
     		$$invalidate(2, results[group.name] = groupResults, results);
     		console.log(`Group Results for ${group.name}:`, groupResults);
+    	}
+
+    	function determineNeededCombinations(lands, requirements, totalManaNeeded) {
+    		let combinedLands = [...lands, ...$simplifiedRampMana];
+    		console.log('Combined Lands:', combinedLands); // Log the combined lands
+    		const combinations = getAllCombinations(combinedLands, true, totalManaNeeded);
+    		return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
     	}
 
     	// function transformCombinationForLinkedGroups(combination, landGroupSizes) {
@@ -32401,6 +32457,77 @@ var app = (function () {
     			});
     	}
 
+    	//DEAD END THIS VERSION TRIED TO DO THE COMBINATION CALC DIRECTLY
+    	// function manaPoolMeetsRequirements(availableMana) {
+    	//     const manaRequirements = $simulationData.manaRequirements;
+    	//     console.log('manaPoolMeetsRequirements AvailableManaThisTurn:', _.cloneDeep(availableMana));
+    	//     console.log('manaPoolMeetsRequirements manaRequirements:', _.cloneDeep(manaRequirements));
+    	//     // Convert manaRequirements into an array of single color requirements
+    	//     const requirementArray = Object.entries(manaRequirements).map(([color, count]) => {
+    	//         const reqs = [];
+    	//         for (let i = 0; i < count; i++) {
+    	//             reqs.push({ [color]: 1 });
+    	//         }
+    	//         return reqs;
+    	//     }).flat();
+    	//     // Helper function to generate all combinations of a specific length
+    	//     function generateCombinations(arr, length) {
+    	//         const result = [];
+    	//         const combination = [];
+    	//         function helper(start) {
+    	//             if (combination.length === length) {
+    	//                 result.push(combination.slice());
+    	//                 return;
+    	//             }
+    	//             for (let i = start; i < arr.length; i++) {
+    	//                 combination.push(arr[i]);
+    	//                 helper(i + 1);
+    	//                 combination.pop();
+    	//             }
+    	//         }
+    	//         helper(0);
+    	//         return result;
+    	//     }
+    	//     // Check if a given combination can meet the mana requirements
+    	//     function meetsRequirements(combination, requirements) {
+    	//         console.log('Checking combination:', combination);
+    	//         const usedSources = new Set();
+    	//         const requirementList = requirements.slice();
+    	//         for (const requirement of requirementList) {
+    	//             const [color] = Object.keys(requirement);
+    	//             let found = false;
+    	//             for (let i = 0; i < combination.length; i++) {
+    	//                 if (!usedSources.has(i)) {
+    	//                     const source = combination[i];
+    	//                     if (source[color] > 0) {
+    	//                         usedSources.add(i);
+    	//                         source[color]--;
+    	//                         found = true;
+    	//                         console.log(`Requirement for ${color} met by source ${i}`, source);
+    	//                         break;
+    	//                     }
+    	//                 }
+    	//             }
+    	//             if (!found) {
+    	//                 console.log(`Requirement for ${color} not met`);
+    	//                 return false;
+    	//             }
+    	//         }
+    	//         return true;
+    	//     }
+    	//     // Generate all combinations of available mana sources with length equal to the number of different mana requirements
+    	//     const combinations = generateCombinations(availableMana, requirementArray.length);
+    	//     // Check each combination to see if it meets the mana requirements
+    	//     for (const combination of combinations) {
+    	//         if (meetsRequirements(_.cloneDeep(combination), requirementArray)) {
+    	//             console.log('manaRequirements met: yes');
+    	//             return true;
+    	//         }
+    	//     }
+    	//     console.log('manaRequirements met: no');
+    	//     return false;
+    	// }
+    	//THIS VRESION WAS using the neededCombinations, not trying to calc directly
     	function manaPoolMeetsRequirements(availableMana, neededCombinations) {
     		console.log('AvailableManaThisTurn:', _.cloneDeep(availableMana));
     		console.log('neededCombinations:', _.cloneDeep(neededCombinations));
@@ -33003,6 +33130,7 @@ var app = (function () {
     		simulationProgress,
     		shouldResetSimulation,
     		mulliganConfig,
+    		simplifiedRampMana,
     		sampleSize: lodashExports.sampleSize,
     		_,
     		onMount,
@@ -33066,7 +33194,8 @@ var app = (function () {
     		$monteCarloResults,
     		$simulationData,
     		$mulliganConfig,
-    		$cancelSimulation
+    		$cancelSimulation,
+    		$simplifiedRampMana
     	});
 
     	$$self.$inject_state = $$props => {
@@ -33103,6 +33232,13 @@ var app = (function () {
     			if (groups.length > 0 || $numberOfTurns) {
     				calculateProbabilities();
     				console.log('Results after calculateProbabilities:', results);
+    			}
+    		}
+
+    		if ($$self.$$.dirty[0] & /*$simplifiedRampMana*/ 16384) {
+    			//the following is the start of mana probability calculations -------------------
+    			{
+    				console.log('calculation file Simplified Ramp Mana:', $simplifiedRampMana); // Log the simplified ramp mana
     			}
     		}
 
@@ -33158,6 +33294,7 @@ var app = (function () {
     		mulliganCount,
     		$simulationData,
     		$mulliganConfig,
+    		$simplifiedRampMana,
     		click_handler,
     		popover_show_binding
     	];
