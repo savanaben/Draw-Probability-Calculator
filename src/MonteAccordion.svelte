@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import ManaCard from './ManaCard.svelte';
+  import RampCard from './RampCard.svelte';
   import CustomCard from './CustomCard.svelte';
   import { slide } from 'svelte/transition';
   import Popover from './Popover.svelte';
@@ -46,6 +47,7 @@ const manaIcons = {
   const dispatch = createEventDispatcher();
   let manaCards = [];
   let customCards = [];
+  let rampCards = [];
   let manaRequirements = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0, ANY:0 }; // Initialize mana requirements
   let iterations = 8000; // Default number of iterations
   let customAttributeRequirements = {}; // New variable for custom attributes
@@ -96,6 +98,14 @@ function handleAddManaGroupClick() {
     });
 }
 
+function handleAddRampGroupClick() {
+    addRampCard();
+    trackEvent('add_ramp_group_click', {
+      'event_label': 'User clicked Add Ramp Group button'
+    });
+  }
+
+
 function handleAddCustomGroupClick() {
     addCustomCard(); // Call the original function to add a custom group
     trackEvent('add_custom_group_click', {
@@ -136,6 +146,27 @@ function removeCard(id) {
 }
 
 
+
+function addRampCard() {
+    const newRampCard = {
+      id: Date.now(),
+      TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 0 },
+      ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 0 },
+      CanProduce: 1,
+      AbilityCost: 0,
+      AvailableTurnPlayed: 0,
+      amount: 0
+    };
+    rampCards = [...rampCards, newRampCard];
+    console.log('Added ramp card:', newRampCard);
+  }
+
+  function removeRampCard(id) {
+    rampCards = rampCards.filter(card => card.id !== id);
+  }
+
+
+
 function addCustomCard() {
     const newCustomCard = { 
         id: Date.now(), 
@@ -145,8 +176,6 @@ function addCustomCard() {
     };
     customCards = [...customCards, newCustomCard];
 }
-
-
 
 
 function removeCustomCard(id) {
@@ -204,6 +233,9 @@ $: {
         }
     });
 
+    mergeCustomAttributesIntoManaRequirements(); // Ensure merging custom attributes
+
+
     console.log("Updated manaRequirements:", manaRequirements);
 
 }
@@ -222,6 +254,10 @@ $: {
             delete manaRequirements[key];
         }
     });
+
+    mergeCustomAttributesIntoManaRequirements(); // Ensure merging custom attributes
+
+
 }
 
 
@@ -236,6 +272,7 @@ $: {
         });
     });
 
+    mergeCustomAttributesIntoManaRequirements(); // Ensure merging custom attributes
 
     console.log("Updated manaRequirements (attributes):", manaRequirements);
 
@@ -253,6 +290,8 @@ $: {
 }
 
 $: totalAmount = manaCards.reduce((sum, card) => sum + card.amount, 0);
+
+$: totalRampAmount = rampCards.reduce((sum, card) => sum + card.amount, 0);
 
 $: totalCustomAmount = customCards.reduce((sum, card) => sum + card.amount, 0);
 
@@ -315,6 +354,7 @@ $: {
 function updateCustomAttribute(attr, value) {
     console.log(`Updating custom attribute ${attr} to value:`, value);
     customAttributeRequirements[attr] = Number(value);
+    updateCustomAttributeRequirements(); // Ensure updating custom attribute requirements
     console.log(`Updated customAttributeRequirements:`, customAttributeRequirements);
 }
 
@@ -350,6 +390,8 @@ function updateCustomAttributeRequirements() {
         // This is hypothetical and may need adjustment:
         handleAttributeUpdate(attr, attr);
     });
+    
+    mergeCustomAttributesIntoManaRequirements(); // Ensure merging custom attributes
 
     console.log('Updated customAttributeRequirements:', customAttributeRequirements);
 }
@@ -392,23 +434,23 @@ function handleAttributeUpdate(newAttr, oldAttr, cardId) {
 
 
 
-const rampCards = [
-    // {
-    //     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
-    //     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
-    //     CanProduce: 2,
-    //     AbilityCost: 0,
-    //     AvailableTurnPlayed: 1,
-    //     amount: 7
-    // },
-    // {
-    //     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-    //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
-    //     CanProduce: 1,
-    //     AbilityCost: 0,
-    //     AvailableTurnPlayed: 0,
-    //     amount: 25
-    // }
+// const rampCards = [
+//     // {
+//     //     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+//     //     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+//     //     CanProduce: 2,
+//     //     AbilityCost: 0,
+//     //     AvailableTurnPlayed: 1,
+//     //     amount: 7
+//     // },
+//     // {
+//     //     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+//     //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+//     //     CanProduce: 1,
+//     //     AbilityCost: 0,
+//     //     AvailableTurnPlayed: 0,
+//     //     amount: 25
+//     // }
 
 
 
@@ -422,46 +464,46 @@ const rampCards = [
 
 
 
-    {
-        TotalManaCost: { B: 0, U: 0, G: 2, R: 0, W: 0, C: 0, ANY: 1 },
-        ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
-        CanProduce: 1,
-        AbilityCost: 0,
-        AvailableTurnPlayed: 0,
-        amount: 4
-    },
-    {
-        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-        ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
-        CanProduce: 1,
-        AbilityCost: 0,
-        AvailableTurnPlayed: 0,
-        amount: 2
-    },
-    {
-        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-        ColorsCanProduce: { B: 0, U: 1, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
-        CanProduce: 1,
-        AbilityCost: 0,
-        AvailableTurnPlayed: 1,
-        amount: 5
-    },
-    {
-        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-        ColorsCanProduce: { B: 0, U: 0, G: 0, R: 1, W: 1, C: 0, ANY: 1 },
-        CanProduce: 1,
-        AbilityCost: 0,
-        AvailableTurnPlayed: 1,
-        amount: 5
-    },
-    {
-        TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
-        ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
-        CanProduce: 1,
-        AbilityCost: 0,
-        AvailableTurnPlayed: 0,
-        amount: 6
-    }
+//     {
+//         TotalManaCost: { B: 0, U: 0, G: 2, R: 0, W: 0, C: 0, ANY: 1 },
+//         ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
+//         CanProduce: 1,
+//         AbilityCost: 0,
+//         AvailableTurnPlayed: 0,
+//         amount: 4
+//     },
+//     {
+//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+//         ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
+//         CanProduce: 1,
+//         AbilityCost: 0,
+//         AvailableTurnPlayed: 0,
+//         amount: 2
+//     },
+//     {
+//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+//         ColorsCanProduce: { B: 0, U: 1, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+//         CanProduce: 1,
+//         AbilityCost: 0,
+//         AvailableTurnPlayed: 1,
+//         amount: 5
+//     },
+//     {
+//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+//         ColorsCanProduce: { B: 0, U: 0, G: 0, R: 1, W: 1, C: 0, ANY: 1 },
+//         CanProduce: 1,
+//         AbilityCost: 0,
+//         AvailableTurnPlayed: 1,
+//         amount: 5
+//     },
+//     {
+//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+//         ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+//         CanProduce: 1,
+//         AbilityCost: 0,
+//         AvailableTurnPlayed: 0,
+//         amount: 6
+//     }
 
 
 
@@ -521,7 +563,7 @@ const rampCards = [
     //     AbilityCost: 1,
     //     amount: 1
     // }
-];
+// ];
 
 
 // these two functions simplify ramp and prep it for processing combinations
@@ -781,7 +823,7 @@ function selectInput(event) {
       on:mouseleave={() => isHovering = false}
       tabindex="0"
       >
-<h3 style="font-size:18px; display: flex; align-items: center; gap:3px">
+<h3 style="font-size:18px; display: flex; align-items: center; gap:4px">
     Advanced mana and attribute probabilities
     &nbsp;
     <img src={WIcon} alt="Plains" class="mana-icon" />
@@ -813,7 +855,7 @@ function selectInput(event) {
 
 
 
-      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the lands (and/or mana producing cards) in your deck and what mana they produce. You can also add custom groups (see the custom groups (?) button for more details).</p>
+      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. You can also add custom groups (see the custom groups (?) button for more details).</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -823,13 +865,33 @@ function selectInput(event) {
       {/each}
       </div>
       <div class="land-group-parameters">
-        <button on:click={handleAddManaGroupClick}>Add Mana Group</button>
-        <div>Total mana cards: <b>{totalAmount}</b></div>
+        <button on:click={handleAddManaGroupClick}>Add Land Group</button>
+        <div>Total land cards: <b>{totalAmount}</b></div>
     </div>
 
 
       <!-- Horizontal Rule for Separation -->
       <hr class="secondary-divider">
+
+
+      <div class="mana-cards-container">
+        {#each rampCards as card (card.id)}
+          <RampCard
+            bind:card={card}
+            on:remove={() => removeRampCard(card.id)}
+          />
+        {/each}
+      </div>
+
+
+      <div class="land-group-parameters">
+        <button on:click={handleAddRampGroupClick}>Add Ramp Group</button>
+        <div>Total ramp cards: <b>{totalRampAmount}</b></div>      
+      </div>
+
+      <!-- Horizontal Rule for Separation -->
+      <hr class="secondary-divider">
+
 
       <div class="mana-cards-container">
    {#each customCards as card (card.id)}
@@ -854,8 +916,9 @@ function selectInput(event) {
             <p class="popover-content popover-text-fixer">In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.</p>
           </div>
         </Popover>
-        <div>Total custom cards: <b>{totalCustomAmount}</b></div> <!-- Display the total amount here -->
+        <div>Total custom cards: <b>{totalCustomAmount}</b></div> 
     </div>
+    <p style="margin-top: 8px;"><i>Custom cards can only be used for hand simulations.</i></p>
 
          <!-- Horizontal Rule for Separation -->
          <hr class="primary-divider">

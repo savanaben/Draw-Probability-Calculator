@@ -182,7 +182,7 @@ width: inherit;
 
   <div class="mana-card">
     <div class="mana-card-header">
-      <p style="margin: 0.2rem 0 0.2rem 0;">Mana&nbsp;card(s)</p>
+      <p style="margin: 0.2rem 0 0.2rem 0;">Land&nbsp;card(s)</p>
      
                <!-- the following method was a dropdown, which I eventually cut for buttons. might be
           better on mobile... -->

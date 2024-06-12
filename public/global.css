@@ -151,6 +151,7 @@ h3 {
 	  padding: 0 !important;
 	  margin-left: 5px !important;
 	  height: 28px;
+	  max-width: 40px;
   }
 
   .remove-button:hover {
