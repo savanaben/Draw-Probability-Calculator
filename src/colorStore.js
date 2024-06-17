@@ -14,6 +14,8 @@ export const shouldResetSimulation = writable(false);
 
 export const simulationRun = writable(false);
 export const simulationProgress = writable(0); // Tracks the progress of the simulation
+export const combinationProgress = writable(0); // New store for getAllCombinations progress
+
 export const cancelSimulation = writable(false);  // This store manages the cancellation state.
 export const monteCarloResults = writable([]); // Store for Monte Carlo results
 

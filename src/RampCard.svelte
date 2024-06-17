@@ -169,7 +169,7 @@
     }
 
     .title-input {
-        min-width: 130px;
+        min-width: 133px;
     }
 
     .mana-icon {

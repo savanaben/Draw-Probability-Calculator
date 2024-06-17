@@ -1,6 +1,6 @@
 <script>
     import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
-    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana } from './colorStore.js';
+    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
@@ -270,6 +270,8 @@
         });
     }
     
+
+    
     function generateAllSelections(possibleManaProfiles, index = 0, currentSelection = []) {
         if (index === possibleManaProfiles.length) {
             return [currentSelection.slice()];
@@ -287,35 +289,158 @@
     }
     
     
-    
-            function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
-                const combinations = [];
-                const landCounts = lands.reduce((counts, land) => {
-                    const key = JSON.stringify(land);
-                    counts[key] = (counts[key] || 0) + 1;
-                    return counts;
-                }, {});
-    
-                const generateCombinations = (index, currentCombination, currentCounts) => {
-                    if (currentCombination.length > totalManaNeeded) return;
-                    if (index === lands.length) {
-                        const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
-                        combinations.push(combinationKey);
-                        return;
-                    }
-                    generateCombinations(index + 1, currentCombination, currentCounts);
-                    const land = lands[index];
-                    const landKey = JSON.stringify(land);
-                    if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
-                        const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
-                        generateCombinations(index + 1, [...currentCombination, land], newCounts);
-                    }
-                };
-                generateCombinations(0, [], {});
-    
-                return Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
-            }
-    
+    // Function to calculate the binomial coefficient
+function binomialCoefficient(n, k) {
+    if (k > n) return 0;
+    if (k === 0 || k === n) return 1;
+    k = Math.min(k, n - k); // Take advantage of symmetry
+    let c = 1;
+    for (let i = 0; i < k; i++) {
+        c = c * (n - i) / (i + 1);
+    }
+    return c;
+}
+
+
+
+
+
+
+
+
+
+// function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
+//     return new Promise((resolve, reject) => {
+//         // Reset the progress bar at the start of the simulation
+//         combinationProgress.set(0);
+
+//         const combinations = [];
+//         const landCounts = lands.reduce((counts, land) => {
+//             const key = JSON.stringify(land);
+//             counts[key] = (counts[key] || 0) + 1;
+//             return counts;
+//         }, {});
+
+//         const totalLands = lands.length; // Total number of lands for progress calculation
+//         const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
+//         console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
+//         let currentIteration = 0; // Track the current iteration
+
+//         const stack = [{ index: 0, currentCombination: [], currentCounts: {} }];
+//         const batchSize = 100; // Number of iterations to process before yielding control
+
+//         function processBatch() {
+//             let batchCounter = 0;
+
+//             while (stack.length > 0 && batchCounter < batchSize) {
+//                 const { index, currentCombination, currentCounts } = stack.pop();
+
+//                 if (currentCombination.length > totalManaNeeded) continue;
+//                 if (index === lands.length) {
+//                     const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
+//                     combinations.push(combinationKey);
+//                     currentIteration++;
+//                     continue;
+//                 }
+
+//                 // Update progress based on the current iteration and estimated total combinations
+//                 const progress = (currentIteration / estimatedTotalCombinations) * 100;
+//                 combinationProgress.set(progress);
+
+//                 stack.push({ index: index + 1, currentCombination, currentCounts });
+//                 const land = lands[index];
+//                 const landKey = JSON.stringify(land);
+//                 if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
+//                     const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
+//                     stack.push({ index: index + 1, currentCombination: [...currentCombination, land], currentCounts: newCounts });
+//                 }
+
+//                 batchCounter++;
+//             }
+
+//             if (stack.length > 0) {
+//                 setTimeout(processBatch, 0); // Yield control back to the UI
+//             } else {
+//                 // All batches are complete, resolve the promise with the final combinations
+//                 const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+//                 console.log(`Total Combinations Generated: ${combinations.length}`);
+//                 console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+//                 resolve(finalCombinations);
+//             }
+//         }
+
+//         processBatch();
+//     });
+// }
+
+
+
+
+
+//BEFORE MASSIVE CHANGES ATTEMPT TO BATCH
+
+function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
+    // Reset the progress bar at the start of the simulation
+    combinationProgress.set(0);
+
+    const combinations = [];
+    const landCounts = lands.reduce((counts, land) => {
+        const key = JSON.stringify(land);
+        counts[key] = (counts[key] || 0) + 1;
+        return counts;
+    }, {});
+
+    const totalLands = lands.length; // Total number of lands for progress calculation
+    const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
+    console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
+    let currentIteration = 0; // Track the current iteration
+
+
+    const generateCombinations = (index, currentCombination, currentCounts) => {
+      //  console.log(`Index: ${index}, Current Combination: ${JSON.stringify(currentCombination)}, Current Counts: ${JSON.stringify(currentCounts)}`);
+        
+        if (currentCombination.length > totalManaNeeded) return;
+        if (index === lands.length) {
+            const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
+            combinations.push(combinationKey);
+        //    console.log(`Added Combination: ${combinationKey}`);
+        currentIteration++;
+        return;
+        }
+
+
+
+        // Update progress based on the current iteration and estimated total combinations
+        
+        const progress = (currentIteration / estimatedTotalCombinations) * 100;
+        combinationProgress.set(progress);
+        console.log(`Progress: ${progress}%`);
+
+
+
+        generateCombinations(index + 1, currentCombination, currentCounts);
+        const land = lands[index];
+        const landKey = JSON.stringify(land);
+        if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
+            const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
+            generateCombinations(index + 1, [...currentCombination, land], newCounts);
+        }
+    };
+
+    generateCombinations(0, [], {});
+
+    const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+    console.log(`Total Combinations Generated: ${combinations.length}`);
+    console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+    return finalCombinations;
+}
+
+
+
+
+
+
+            
             function combineProfiles(profiles) {
                 return profiles.reduce((combinedProfile, profile) => {
                     Object.entries(profile).forEach(([color, amount]) => {
@@ -326,7 +451,7 @@
             }
     
     
-            function prepareCombinationsForAnalysis(combinations) {
+    function prepareCombinationsForAnalysis(combinations) {
         return combinations.map(combination => {
             const landCounts = combination.reduce((counts, land) => {
                 const key = JSON.stringify(land);
@@ -533,10 +658,6 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
         }
 
         function runIteration() {
-            if ($cancelSimulation) {
-                reject(new Error("Simulation canceled by user"));
-                return;
-            }
 
             // Reset totalAvailableMana and totalAvailableRamp for each iteration
             let totalAvailableMana = [];
@@ -608,11 +729,15 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
         }
 
         function runBatch() {
-            let batchCounter = 0;
-            while (batchCounter < batchSize && iteration < numIterations) {
-                runIteration();
-                batchCounter++;
-            }
+    let batchCounter = 0;
+    while (batchCounter < batchSize && iteration < numIterations) {
+        if ($cancelSimulation) {
+            reject(new Error("Simulation canceled by user"));
+            return;
+        }
+        runIteration();
+        batchCounter++;
+    }
 
             // Update the progress of the simulation
             simulationProgress.set((iteration / numIterations) * 100);
@@ -1271,7 +1396,7 @@ async function identifyProfiles(numIterations) {
 
 
     console.log('Prepared combinations:', preparedCombinations); // Ensure this logs after the update
-    console.log('needed combinations:', neededCombinations); // Ensure this logs after the update
+    console.log('needed combinations:', preparedCombinations); // Ensure this logs after the update
 
 
     let rawProbabilities = await monteCarloSimulation(

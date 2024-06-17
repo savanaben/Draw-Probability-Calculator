@@ -1,12 +1,15 @@
 <!-- SimulationModal.svelte -->
 <script>
   import { afterUpdate } from 'svelte';
-  import { simulationRun, cancelSimulation, neededCombinationsCount, simulationProgress } from './colorStore.js';
+  import { simulationRun, cancelSimulation, neededCombinationsCount, simulationProgress, combinationProgress } from './colorStore.js';
 
   let cancelButton;
 
   // Reactive statement to handle simulation run state changes
   $: if ($simulationRun) {
+
+      // Reset progress bars when simulation starts
+        combinationProgress.set(0);
     // Use afterUpdate to ensure DOM updates have been processed
     afterUpdate(() => {
       // Check if the cancelButton is rendered and focusable
@@ -38,6 +41,7 @@ function formatCount(count) {
         <p><i>Simulations with large amounts of cards, desired cards, or possible combinations can be slower to start.</i></p>
         <p><i>Your desired cards can be drawn through <strong>{formatCount($neededCombinationsCount)}&nbsp;</strong>combination(s).</i></p>
         <p><i>If it's taking too long, you can try decreasing the iteration value. This will reduce probability accuracy.</i></p>
+        <progress value="{$combinationProgress}" max="100"> {$combinationProgress}% </progress>
         <progress value="{$simulationProgress}" max="100"> {$simulationProgress}% </progress>
         <button on:click={handleCancel} bind:this={cancelButton}>Cancel Simulation</button>
     </div>
