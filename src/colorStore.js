@@ -11,6 +11,7 @@ export const simulationData = writable({
 export const simplifiedRampMana = writable([]);
 
 export const shouldResetSimulation = writable(false);
+export const simulationType = writable('full'); // hand vs field simulation flag
 
 export const simulationRun = writable(false);
 export const simulationProgress = writable(0); // Tracks the progress of the simulation
@@ -18,6 +19,7 @@ export const combinationProgress = writable(0); // New store for getAllCombinati
 
 export const cancelSimulation = writable(false);  // This store manages the cancellation state.
 export const monteCarloResults = writable([]); // Store for Monte Carlo results
+export const monteCarloHandResults = writable([]); // Store for Monte Carlo results
 
 export const neededCombinationsCount = writable(0);  // Store for the count of needed combinations
 

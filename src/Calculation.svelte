@@ -1,6 +1,6 @@
 <script>
     import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
-    import { simulationData, monteCarloResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana } from './colorStore.js';
+    import { simulationData, monteCarloResults, monteCarloHandResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana, simulationType } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
@@ -403,7 +403,7 @@ function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
         if (index === lands.length) {
             const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
             combinations.push(combinationKey);
-        //    console.log(`Added Combination: ${combinationKey}`);
+        //  console.log(`Added Combination: ${combinationKey}`);
         currentIteration++;
         return;
         }
@@ -414,7 +414,7 @@ function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
         
         const progress = (currentIteration / estimatedTotalCombinations) * 100;
         combinationProgress.set(progress);
-        console.log(`Progress: ${progress}%`);
+      //  console.log(`Progress: ${progress}%`);
 
 
 
@@ -631,7 +631,6 @@ function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
 
 
 
-
 function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganConfig, initialDrawSize, numberOfTurns, numIterations, neededCombinations) {
     return new Promise((resolve, reject) => {
         console.log('mulliganConfig:', _.cloneDeep(mulliganConfig)); // Log mulliganConfig to verify it's passed correctly
@@ -728,16 +727,16 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
             iteration++;
         }
 
-        function runBatch() {
-    let batchCounter = 0;
-    while (batchCounter < batchSize && iteration < numIterations) {
-        if ($cancelSimulation) {
-            reject(new Error("Simulation canceled by user"));
-            return;
-        }
-        runIteration();
-        batchCounter++;
-    }
+        async function runBatch() {
+            let batchCounter = 0;
+            while (batchCounter < batchSize && iteration < numIterations) {
+                if ($cancelSimulation) {
+                    reject(new Error("Simulation canceled by user"));
+                    return;
+                }
+                await runIteration();
+                batchCounter++;
+            }
 
             // Update the progress of the simulation
             simulationProgress.set((iteration / numIterations) * 100);
@@ -747,15 +746,252 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
             } else {
                 // Set Monte Carlo results in the dedicated store right before resolving the promise
                 monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
-                resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+                console.log('Probabilities by Turn:', probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+                resolve({
+                    probabilitiesByTurn: probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1))
+                });
             }
         }
 
-        runBatch(); // Start the first batch
+        runBatch();
+    });
+}
+
+function monteCarloSimulationHand(preparedCombinations, landGroupSizes, deckSize, mulliganConfig, initialDrawSize, numberOfTurns, numIterations) {
+    return new Promise((resolve, reject) => {
+        const probabilitiesByTurnHand = Array.from({ length: numberOfTurns.length + 1 }, () => 0); // Track success based on hand
+        const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
+        const numDummyCards = Math.max(deckSize - totalLands, 0);
+        const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
+        let iteration = 0;
+
+        // Calculate the total mana needed to determine the batch size. this
+        // improves performance 
+        const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+        let batchSize;
+        if (totalManaNeeded <= 2) {
+            batchSize = 50;
+        } else if (totalManaNeeded === 3) {
+            batchSize = 30;
+        } else {
+            batchSize = 20;
+        }
+
+        function runIteration() {
+            let hand = _.sampleSize(completeDeck, initialDrawSize);
+            let remainingDeck = removeDrawnCardsFromDeck(completeDeck, hand);
+
+            // Perform mulligans
+            const { finalHand, remainingDeck: updatedDeck } = londonMulligan(hand, remainingDeck);
+            hand = finalHand;
+            remainingDeck = updatedDeck;
+
+            // Check if the hand meets the requirements after mulligans
+            let meetsRequirements = handMeetsRequirements(hand, preparedCombinations);
+            if (meetsRequirements) {
+                for (let turn = 0; turn <= numberOfTurns.length; turn++) {
+                    probabilitiesByTurnHand[turn]++;
+                }
+            } else {
+                for (let turn = 1; turn <= numberOfTurns.length; turn++) {
+                    const cardsToDraw = numberOfTurns[turn - 1];
+                    const newCards = _.sampleSize(remainingDeck, cardsToDraw);
+                    hand.push(...newCards);
+                    remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
+
+                    // Log the card drawn and the hand after drawing
+                    console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
+                    console.log('Card(s) Drawn:', _.cloneDeep(newCards));
+                    console.log('Hand after drawing:', _.cloneDeep(hand));
+
+                    if (handMeetsRequirements(hand, preparedCombinations)) {
+                        for (let t = turn; t <= numberOfTurns.length; t++) {
+                            probabilitiesByTurnHand[t]++;
+                        }
+                        console.log(`Turn ${turn} - Parallel hand meets requirements`);
+                        break; // Stop further drawings for this iteration
+                    }
+                }
+            }
+
+            iteration++;
+        }
+
+        function runBatch() {
+            let batchCounter = 0;
+            while (batchCounter < batchSize && iteration < numIterations) {
+                if ($cancelSimulation) {
+                    reject(new Error("Simulation canceled by user"));
+                    return;
+                }
+                runIteration();
+                batchCounter++;
+            }
+
+            // Update the progress of the simulation
+            simulationProgress.set((iteration / numIterations) * 100);
+
+            if (iteration < numIterations) {
+                setTimeout(runBatch, 0); // Schedule the next batch
+            } else {
+                // Set Monte Carlo hand results in the dedicated store right before resolving the promise
+                monteCarloHandResults.set(probabilitiesByTurnHand.map(prob => (prob / numIterations * 100).toFixed(1)));
+                console.log('Probabilities by Turn (Hand):', probabilitiesByTurnHand.map(prob => (prob / numIterations * 100).toFixed(1)));
+                resolve({
+                    probabilitiesByTurnHand: probabilitiesByTurnHand.map(prob => (prob / numIterations * 100).toFixed(1))
+                });
+            }
+        }
+
+        runBatch();
     });
 }
 
 
+function handMeetsRequirements(hand, preparedCombinations) {
+    return preparedCombinations.some(combination => {
+        const landCounts = combination.reduce((counts, land) => {
+            counts[JSON.stringify(land.land)] = land.count;
+            return counts;
+        }, {});
+
+        const handProfile = hand.reduce((profile, land) => {
+            const key = JSON.stringify(land);
+            profile[key] = (profile[key] || 0) + 1;
+            return profile;
+        }, {});
+
+        return Object.entries(landCounts).every(([land, count]) => {
+            return handProfile[land] >= count;
+        });
+    });
+}
+//MonTE CARLO SIM BEFORE HAND AND FIELD MERGE ATTEMPT-------------------------------
+
+// function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganConfig, initialDrawSize, numberOfTurns, numIterations, neededCombinations) {
+//     return new Promise((resolve, reject) => {
+//         console.log('mulliganConfig:', _.cloneDeep(mulliganConfig)); // Log mulliganConfig to verify it's passed correctly
+
+//         const probabilitiesByTurn = Array.from({ length: numberOfTurns.length + 1 }, () => 0); // Updated to use numberOfTurns.length
+//         const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
+//         const numDummyCards = Math.max(deckSize - totalLands, 0);
+//         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
+//         let iteration = 0;
+        
+//         let totalAvailableMana = [];
+//         let totalAvailableRamp = [];
+
+//         // Calculate the total mana needed to determine the batch size. this
+//         // improves performance 
+//         const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+//         let batchSize;
+//         if (totalManaNeeded <= 2) {
+//             batchSize = 50;
+//         } else if (totalManaNeeded === 3) {
+//             batchSize = 30;
+//         } else {
+//             batchSize = 20;
+//         }
+
+//         function runIteration() {
+
+//             // Reset totalAvailableMana and totalAvailableRamp for each iteration
+//             let totalAvailableMana = [];
+//             let totalAvailableRamp = [];
+
+//             let hand = _.sampleSize(completeDeck, initialDrawSize);
+//             let remainingDeck = removeDrawnCardsFromDeck(completeDeck, hand);
+
+//             // Perform mulligans
+//             const { finalHand, remainingDeck: updatedDeck } = londonMulligan(hand, remainingDeck);
+//             hand = finalHand;
+//             remainingDeck = updatedDeck;
+
+//             // Reset and update available mana
+//             let { AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, 0, neededCombinations);
+
+//             // Check 1: If requirements are met, update probabilities and continue
+//             if (meetsRequirements) {
+//                 probabilitiesByTurn[0]++;
+//                 for (let turn = 1; turn <= numberOfTurns.length; turn++) {
+//                     probabilitiesByTurn[turn]++;
+//                 }
+//             } else {
+//                 for (let turn = 1; turn <= numberOfTurns.length; turn++) { // Updated to use numberOfTurns.length
+//                     const cardsToDraw = numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
+//                     const newCards = _.sampleSize(remainingDeck, cardsToDraw); // Draw multiple cards based on numberOfTurns
+//                     hand.push(...newCards);
+//                     remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
+
+//                     // Log the card drawn and the hand after drawing
+//                     console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
+//                     console.log('Card(s) Drawn:', _.cloneDeep(newCards));
+//                     console.log('Hand after drawing:', _.cloneDeep(hand));
+
+//                     // Play lands based on the new rules
+//                     playLands(hand, totalAvailableMana);
+
+//                     // Log after moving land to mana
+//                     console.log('After moving land to mana:');
+//                     console.log('Total played Mana:', _.cloneDeep(totalAvailableMana));
+//                     console.log('Hand:', _.cloneDeep(hand));
+
+//                     // Reset and update AvailableManaThisTurn
+//                     ({ AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, turn, neededCombinations));
+
+//                     // Log the updated AvailableManaThisTurn
+//                     console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+
+//                     // Play ramp cards if possible
+//                     playRampCards(hand, AvailableManaThisTurn, totalAvailableRamp, turn);
+
+//                     // Log after playing ramp cards
+//                     console.log('After playing ramp cards:');
+//                     console.log('Total played Ramp:', _.cloneDeep(totalAvailableRamp));
+//                     console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+//                     console.log('Hand:', _.cloneDeep(hand));
+
+//                     // Check 2: Compare AvailableManaThisTurn against neededCombinations after all ramp is played
+//                     if (meetsRequirements) {
+//                         for (let t = turn; t <= numberOfTurns.length; t++) {
+//                             probabilitiesByTurn[t]++;
+//                         }
+//                         break; // Stop further drawings for this iteration
+//                     }
+//                 }
+//             }
+
+//             iteration++;
+//         }
+
+//         function runBatch() {
+//     let batchCounter = 0;
+//     while (batchCounter < batchSize && iteration < numIterations) {
+//         if ($cancelSimulation) {
+//             reject(new Error("Simulation canceled by user"));
+//             return;
+//         }
+//         runIteration();
+//         batchCounter++;
+//     }
+
+//             // Update the progress of the simulation
+//             simulationProgress.set((iteration / numIterations) * 100);
+
+//             if (iteration < numIterations) {
+//                 setTimeout(runBatch, 0); // Schedule the next batch
+//             } else {
+//                 // Set Monte Carlo results in the dedicated store right before resolving the promise
+//                 monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+//                 resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+//             }
+//         }
+
+//         runBatch(); // Start the first batch
+//     });
+// }
+
+//---------------------------------------------------
 
 //DEAD END THIS VERSION TRIED TO DO THE COMBINATION CALC DIRECTLY
 
@@ -1342,38 +1578,39 @@ function resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, cur
     }
     
     
-    
-    function handMeetsRequirements(hand, preparedCombinations) {
-     //   console.log('Checking hand against requirements:', hand);
-     //   console.log('Prepared combinations:', preparedCombinations);
+    //OLD HAND MEETS REQ - prolly delete, does not factor played cards etc anymore
 
-        return preparedCombinations.some(combination => {
-            const landCounts = combination.reduce((counts, land) => {
-                counts[JSON.stringify(land.land)] = land.count;
-                return counts;
-            }, {});
-    
-            const handProfile = hand.reduce((profile, land) => {
-                const key = JSON.stringify(land);
-                profile[key] = (profile[key] || 0) + 1;
-                return profile;
-            }, {});
-    
-           // console.log(`Checking hand against requirements:`, handProfile, landCounts);
+    // function handMeetsRequirements(hand, preparedCombinations) {
+    //  //   console.log('Checking hand against requirements:', hand);
+    //  //   console.log('Prepared combinations:', preparedCombinations);
 
-            const meetsRequirements = Object.entries(landCounts).every(([land, count]) => {
-                return handProfile[land] >= count;
-            });
+    //     return preparedCombinations.some(combination => {
+    //         const landCounts = combination.reduce((counts, land) => {
+    //             counts[JSON.stringify(land.land)] = land.count;
+    //             return counts;
+    //         }, {});
     
-            if (meetsRequirements) {
-              //  console.log(`Hand meets the combination requirements:`, combination);
-            } else {
-              //  console.log(`Hand does not meet the combination requirements:`, combination);
-            }
+    //         const handProfile = hand.reduce((profile, land) => {
+    //             const key = JSON.stringify(land);
+    //             profile[key] = (profile[key] || 0) + 1;
+    //             return profile;
+    //         }, {});
     
-            return meetsRequirements;
-        });
-    }
+    //        // console.log(`Checking hand against requirements:`, handProfile, landCounts);
+
+    //         const meetsRequirements = Object.entries(landCounts).every(([land, count]) => {
+    //             return handProfile[land] >= count;
+    //         });
+    
+    //         if (meetsRequirements) {
+    //           //  console.log(`Hand meets the combination requirements:`, combination);
+    //         } else {
+    //           //  console.log(`Hand does not meet the combination requirements:`, combination);
+    //         }
+    
+    //         return meetsRequirements;
+    //     });
+    // }
     
     
     
@@ -1399,16 +1636,30 @@ async function identifyProfiles(numIterations) {
     console.log('needed combinations:', preparedCombinations); // Ensure this logs after the update
 
 
-    let rawProbabilities = await monteCarloSimulation(
-        preparedCombinations,
-        landGroupSizes,
-        deckSize,
-        mulliganCount,
-        InitialDrawSize,
-        $numberOfTurns,
-        numIterations,
-        neededCombinations
-    );
+    let rawProbabilities;
+        if ($simulationType === 'hand') {
+            rawProbabilities = await monteCarloSimulationHand(
+                preparedCombinations,
+                landGroupSizes,
+                deckSize,
+                mulliganConfig,
+                InitialDrawSize,
+                $numberOfTurns,
+                numIterations
+            );
+        } else {
+            rawProbabilities = await monteCarloSimulation(
+                preparedCombinations,
+                landGroupSizes,
+                deckSize,
+                mulliganConfig,
+                InitialDrawSize,
+                $numberOfTurns,
+                numIterations,
+                neededCombinations
+            );
+        }
+        
 
     probabilitiesByTurn.set(rawProbabilities); // Ensure you are using .set() correctly if it's a store
     simulationRun.set(true); // Set simulation run flag to true
@@ -1469,7 +1720,7 @@ async function identifyProfiles(numIterations) {
 
 
 
-function createGroupCards(groups, results, probabilitiesByTurn, turn) {
+function createGroupCards(groups, results, probabilitiesByTurn, turn, simulationType = 'full', excludeGroups = false) {
     let cards = [];
     let linkedGroupData = {}; // To hold accumulated data for linked groups
 
@@ -1477,22 +1728,36 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
     const effectiveDrawSize = InitialDrawSize - mulliganCount + turn - 1;
 
     // If Monte Carlo results are available, use them to calculate blanks
-    if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
+    if (simulationType === 'full' && $monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
         let turnTotalProbability = parseFloat($monteCarloResults[turn]);
         // Calculate the total number of cards required by manaRequirements
         let totalManaCards = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Subtract one to account for the top card
         let blanksToAdd = Math.max(effectiveDrawSize - totalManaCards, 0);
         cards.push({
             probability: turnTotalProbability,
-            label: 'Simulation',
-            color: '#fff', // A distinct color for Monte Carlo results
+            label: 'Field Simulation',
+            color: '#FCF5EE', // A distinct color for Monte Carlo results
+            ratioText: convertPercentToRatio(turnTotalProbability),
+            stackedCards: totalManaCards,
+            isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)) // Include actual and blank cards
+        });
+    } else if (simulationType === 'hand' && $monteCarloHandResults.length > 0 && $monteCarloHandResults[turn] !== undefined) {
+        let turnTotalProbability = parseFloat($monteCarloHandResults[turn]);
+        // Calculate the total number of cards required by manaRequirements
+        let totalManaCards = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Subtract one to account for the top card
+        let blanksToAdd = Math.max(effectiveDrawSize - totalManaCards, 0);
+        cards.push({
+            probability: turnTotalProbability,
+            label: 'Hand Simulation',
+            color: '#FCF5EE', // A distinct color for Hand Simulation results
             ratioText: convertPercentToRatio(turnTotalProbability),
             stackedCards: totalManaCards,
             isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)) // Include actual and blank cards
         });
     }
 
-    // Process all groups
+    // Process all groups if not excluded
+  if (!excludeGroups) {
     groups.forEach(group => {
         let groupName = group.link ? group.link : group.name;
         let groupResult = results[groupName];
@@ -1540,7 +1805,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn) {
             isBlank: Array(actualCardsToDraw).fill(false).concat(Array(blanksToAdd).fill(true)) // Include actual and blank cards
         });
     });
-
+}
     return cards;
 }
 
@@ -1606,7 +1871,24 @@ $: generateTurnsArray = () => {
     return array;
 }
     
-    
+    //this is a helper function that removes groups redundancy in the output. 
+    //prolly a better way to do this!
+    function getCombinedResults(groups, results, probabilitiesByTurn, monteCarloHandResults, turn) {
+    const fullResults = createGroupCards(groups, results, probabilitiesByTurn, turn);
+    const handResults = createGroupCards(groups, results, monteCarloHandResults, turn, 'hand', true); // Exclude groups
+    const combinedResults = [...handResults, ...fullResults];
+
+    // Sort to ensure hand simulation results are always first or second
+    combinedResults.sort((a, b) => {
+        if (a.label === 'Hand Simulation') return -1;
+        if (b.label === 'Hand Simulation') return 1;
+        return 0;
+    });
+
+    return combinedResults;
+}
+
+
     </script>
     
 
@@ -1626,30 +1908,31 @@ $: generateTurnsArray = () => {
     <div class="output-diagram">
         {#if hasOutput}
         {#each generateTurnsArray($numberOfTurns.length) as _, turn}
-        {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}
-            <div class="turn-row">
-                <div class="turn-label">
-                    Turn {turn}:<br>
-                    <i>({turn === 0 ? `Draw ${InitialDrawSize}` : `Draw ${$numberOfTurns[turn - 1]}`})</i>
-                </div>
-                <div class="card-rectangles">
-                    {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
-                    <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
-                        <div class="rectangle" style="background-color: {card.color};">
-                            <div class="card-details">
-                                <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
-                                <div class="card-ratio">{@html card.ratioText}</div>
-                            </div>
-                        </div>
-                        <div class="stacked-cards">
-                            {#each card.isBlank as isBlank, i}
-                            <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>                            {/each}
-                        </div>
-                        <div class="card-label">{card.label}</div>
+            {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
+                <div class="turn-row">
+                    <div class="turn-label">
+                        Turn {turn}:<br>
+                        <i>({turn === 0 ? `Draw ${InitialDrawSize}` : `Draw ${$numberOfTurns[turn - 1]}`})</i>
                     </div>
-                    {/each}
+                    <div class="card-rectangles">
+                        {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
+                        <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
+                            <div class="rectangle" style="background-color: {card.color};">
+                                <div class="card-details">
+                                    <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
+                                    <div class="card-ratio">{@html card.ratioText}</div>
+                                </div>
+                            </div>
+                            <div class="stacked-cards">
+                                {#each card.isBlank as isBlank, i}
+                                <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
+                                {/each}
+                            </div>
+                            <div class="card-label">{card.label}</div>
+                        </div>
+                        {/each}
+                    </div>
                 </div>
-            </div>
             {/if}
         {/each}
         {:else}

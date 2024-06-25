@@ -1139,6 +1139,7 @@ var app = (function () {
     const simplifiedRampMana = writable([]);
 
     const shouldResetSimulation = writable(false);
+    const simulationType = writable('full'); // hand vs field simulation flag
 
     const simulationRun = writable(false);
     const simulationProgress = writable(0); // Tracks the progress of the simulation
@@ -1146,6 +1147,7 @@ var app = (function () {
 
     const cancelSimulation = writable(false);  // This store manages the cancellation state.
     const monteCarloResults = writable([]); // Store for Monte Carlo results
+    const monteCarloHandResults = writable([]); // Store for Monte Carlo results
 
     const neededCombinationsCount = writable(0);  // Store for the count of needed combinations
 
@@ -9339,42 +9341,42 @@ var app = (function () {
 
     function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[63] = list[i];
+    	child_ctx[64] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[66] = list[i][0];
-    	child_ctx[67] = list[i][1];
+    	child_ctx[67] = list[i][0];
+    	child_ctx[68] = list[i][1];
     	return child_ctx;
     }
 
     function get_each_context_2$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[70] = list[i];
-    	child_ctx[71] = list;
-    	child_ctx[72] = i;
+    	child_ctx[71] = list[i];
+    	child_ctx[72] = list;
+    	child_ctx[73] = i;
     	return child_ctx;
     }
 
     function get_each_context_3$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[70] = list[i];
-    	child_ctx[73] = list;
-    	child_ctx[74] = i;
+    	child_ctx[71] = list[i];
+    	child_ctx[74] = list;
+    	child_ctx[75] = i;
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[70] = list[i];
-    	child_ctx[75] = list;
-    	child_ctx[76] = i;
+    	child_ctx[71] = list[i];
+    	child_ctx[76] = list;
+    	child_ctx[77] = i;
     	return child_ctx;
     }
 
-    // (844:8) 
+    // (854:8) 
     function create_trigger_slot_2$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -9397,7 +9399,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 843, 8, 24023);
+    			add_location(button, file$7, 853, 8, 24378);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9405,7 +9407,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[34], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[35], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -9431,14 +9433,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_2$1.name,
     		type: "slot",
-    		source: "(844:8) ",
+    		source: "(854:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (847:8) 
+    // (857:8) 
     function create_content_slot_2$1(ctx) {
     	let div;
     	let p0;
@@ -9469,18 +9471,18 @@ var app = (function () {
     			p2.textContent = "My research has only come up with one other method to find this kind of probability - the inclusion exclusion principle. And that seemed hella hard to implement, so I went with this.";
     			attr_dev(a0, "href", "https://en.wikipedia.org/wiki/Monte_Carlo_method");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$7, 847, 76, 24367);
+    			add_location(a0, file$7, 857, 76, 24722);
     			attr_dev(a1, "href", "https://en.wikipedia.org/wiki/Hypergeometric_distribution");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$7, 847, 381, 24672);
+    			add_location(a1, file$7, 857, 381, 25027);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 847, 10, 24301);
+    			add_location(p0, file$7, 857, 10, 24656);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 848, 12, 24960);
+    			add_location(p1, file$7, 858, 12, 25315);
     			attr_dev(p2, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p2, file$7, 849, 10, 25236);
+    			add_location(p2, file$7, 859, 10, 25591);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 846, 8, 24269);
+    			add_location(div, file$7, 856, 8, 24624);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9504,14 +9506,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_2$1.name,
     		type: "slot",
-    		source: "(847:8) ",
+    		source: "(857:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (860:8) {#each manaCards as card (card.id)}
+    // (870:8) {#each manaCards as card (card.id)}
     function create_each_block_4(key_1, ctx) {
     	let first;
     	let manacard;
@@ -9519,17 +9521,17 @@ var app = (function () {
     	let current;
 
     	function manacard_card_binding(value) {
-    		/*manacard_card_binding*/ ctx[36](value, /*card*/ ctx[70], /*each_value_4*/ ctx[75], /*card_index_2*/ ctx[76]);
+    		/*manacard_card_binding*/ ctx[37](value, /*card*/ ctx[71], /*each_value_4*/ ctx[76], /*card_index_2*/ ctx[77]);
     	}
 
     	function remove_handler() {
-    		return /*remove_handler*/ ctx[37](/*card*/ ctx[70]);
+    		return /*remove_handler*/ ctx[38](/*card*/ ctx[71]);
     	}
 
     	let manacard_props = {};
 
-    	if (/*card*/ ctx[70] !== void 0) {
-    		manacard_props.card = /*card*/ ctx[70];
+    	if (/*card*/ ctx[71] !== void 0) {
+    		manacard_props.card = /*card*/ ctx[71];
     	}
 
     	manacard = new ManaCard({ props: manacard_props, $$inline: true });
@@ -9555,7 +9557,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*manaCards*/ 1) {
     				updating_card = true;
-    				manacard_changes.card = /*card*/ ctx[70];
+    				manacard_changes.card = /*card*/ ctx[71];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -9580,14 +9582,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(860:8) {#each manaCards as card (card.id)}",
+    		source: "(870:8) {#each manaCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (878:8) {#each rampCards as card (card.id)}
+    // (888:8) {#each rampCards as card (card.id)}
     function create_each_block_3$1(key_1, ctx) {
     	let first;
     	let rampcard;
@@ -9595,17 +9597,17 @@ var app = (function () {
     	let current;
 
     	function rampcard_card_binding(value) {
-    		/*rampcard_card_binding*/ ctx[38](value, /*card*/ ctx[70], /*each_value_3*/ ctx[73], /*card_index_1*/ ctx[74]);
+    		/*rampcard_card_binding*/ ctx[39](value, /*card*/ ctx[71], /*each_value_3*/ ctx[74], /*card_index_1*/ ctx[75]);
     	}
 
     	function remove_handler_1() {
-    		return /*remove_handler_1*/ ctx[39](/*card*/ ctx[70]);
+    		return /*remove_handler_1*/ ctx[40](/*card*/ ctx[71]);
     	}
 
     	let rampcard_props = {};
 
-    	if (/*card*/ ctx[70] !== void 0) {
-    		rampcard_props.card = /*card*/ ctx[70];
+    	if (/*card*/ ctx[71] !== void 0) {
+    		rampcard_props.card = /*card*/ ctx[71];
     	}
 
     	rampcard = new RampCard({ props: rampcard_props, $$inline: true });
@@ -9631,7 +9633,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*rampCards*/ 4) {
     				updating_card = true;
-    				rampcard_changes.card = /*card*/ ctx[70];
+    				rampcard_changes.card = /*card*/ ctx[71];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -9656,14 +9658,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3$1.name,
     		type: "each",
-    		source: "(878:8) {#each rampCards as card (card.id)}",
+    		source: "(888:8) {#each rampCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (897:3) {#each customCards as card (card.id)}
+    // (907:3) {#each customCards as card (card.id)}
     function create_each_block_2$2(key_1, ctx) {
     	let first;
     	let customcard;
@@ -9671,29 +9673,29 @@ var app = (function () {
     	let current;
 
     	function customcard_card_binding(value) {
-    		/*customcard_card_binding*/ ctx[40](value, /*card*/ ctx[70], /*each_value_2*/ ctx[71], /*card_index*/ ctx[72]);
+    		/*customcard_card_binding*/ ctx[41](value, /*card*/ ctx[71], /*each_value_2*/ ctx[72], /*card_index*/ ctx[73]);
     	}
 
     	function remove_handler_2() {
-    		return /*remove_handler_2*/ ctx[41](/*card*/ ctx[70]);
+    		return /*remove_handler_2*/ ctx[42](/*card*/ ctx[71]);
     	}
 
     	function updateattribute_handler(...args) {
-    		return /*updateattribute_handler*/ ctx[43](/*card*/ ctx[70], ...args);
+    		return /*updateattribute_handler*/ ctx[44](/*card*/ ctx[71], ...args);
     	}
 
     	let customcard_props = {};
 
-    	if (/*card*/ ctx[70] !== void 0) {
-    		customcard_props.card = /*card*/ ctx[70];
+    	if (/*card*/ ctx[71] !== void 0) {
+    		customcard_props.card = /*card*/ ctx[71];
     	}
 
     	customcard = new CustomCard({ props: customcard_props, $$inline: true });
     	binding_callbacks.push(() => bind(customcard, 'card', customcard_card_binding));
     	customcard.$on("remove", remove_handler_2);
-    	customcard.$on("removeattribute", /*removeattribute_handler*/ ctx[42]);
+    	customcard.$on("removeattribute", /*removeattribute_handler*/ ctx[43]);
     	customcard.$on("updateattribute", updateattribute_handler);
-    	customcard.$on("addattribute", /*addattribute_handler*/ ctx[44]);
+    	customcard.$on("addattribute", /*addattribute_handler*/ ctx[45]);
 
     	const block = {
     		key: key_1,
@@ -9714,7 +9716,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*customCards*/ 2) {
     				updating_card = true;
-    				customcard_changes.card = /*card*/ ctx[70];
+    				customcard_changes.card = /*card*/ ctx[71];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -9739,14 +9741,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2$2.name,
     		type: "each",
-    		source: "(897:3) {#each customCards as card (card.id)}",
+    		source: "(907:3) {#each customCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (911:10) 
+    // (921:10) 
     function create_trigger_slot_1$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -9769,7 +9771,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 910, 10, 27430);
+    			add_location(button, file$7, 920, 10, 27785);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9777,7 +9779,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[45], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[46], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -9803,14 +9805,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1$1.name,
     		type: "slot",
-    		source: "(911:10) ",
+    		source: "(921:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (914:10) 
+    // (924:10) 
     function create_content_slot_1$1(ctx) {
     	let div;
     	let p0;
@@ -9826,11 +9828,11 @@ var app = (function () {
     			p1 = element("p");
     			p1.textContent = "In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.";
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 914, 12, 27716);
+    			add_location(p0, file$7, 924, 12, 28071);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 915, 12, 28186);
+    			add_location(p1, file$7, 925, 12, 28541);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 913, 10, 27682);
+    			add_location(div, file$7, 923, 10, 28037);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9848,14 +9850,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_1$1.name,
     		type: "slot",
-    		source: "(914:10) ",
+    		source: "(924:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (932:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
+    // (942:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
     function create_if_block$3(ctx) {
     	let div;
     	let label;
@@ -9868,7 +9870,7 @@ var app = (function () {
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*manaIcons*/ ctx[15][/*key*/ ctx[66]]) return create_if_block_1$2;
+    		if (/*manaIcons*/ ctx[15][/*key*/ ctx[67]]) return create_if_block_1$2;
     		return create_else_block$1;
     	}
 
@@ -9876,7 +9878,7 @@ var app = (function () {
     	let if_block = current_block_type(ctx);
 
     	function input_handler(...args) {
-    		return /*input_handler*/ ctx[47](/*key*/ ctx[66], ...args);
+    		return /*input_handler*/ ctx[48](/*key*/ ctx[67], ...args);
     	}
 
     	const block = {
@@ -9886,17 +9888,17 @@ var app = (function () {
     			if_block.c();
     			t = space();
     			input = element("input");
-    			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[66].replace(/\s+/g, '_') + "-requirement"));
+    			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 933, 12, 29197);
-    			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[66].replace(/\s+/g, '_') + "-requirement"));
+    			add_location(label, file$7, 943, 12, 29552);
+    			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			input.value = input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[66]];
+    			input.value = input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[67]];
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 940, 12, 29573);
+    			add_location(input, file$7, 950, 12, 29928);
     			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 932, 10, 29153);
+    			add_location(div, file$7, 942, 10, 29508);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9929,15 +9931,15 @@ var app = (function () {
     				}
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && label_for_value !== (label_for_value = "" + (/*key*/ ctx[66].replace(/\s+/g, '_') + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && label_for_value !== (label_for_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"))) {
     				attr_dev(label, "for", label_for_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && input_id_value !== (input_id_value = "" + (/*key*/ ctx[66].replace(/\s+/g, '_') + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && input_id_value !== (input_id_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"))) {
     				attr_dev(input, "id", input_id_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && input_value_value !== (input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[66]]) && input.value !== input_value_value) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && input_value_value !== (input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[67]]) && input.value !== input_value_value) {
     				prop_dev(input, "value", input_value_value);
     			}
     		},
@@ -9953,16 +9955,16 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(932:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
+    		source: "(942:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (937:14) {:else}
+    // (947:14) {:else}
     function create_else_block$1(ctx) {
-    	let t0_value = /*key*/ ctx[66] + "";
+    	let t0_value = /*key*/ ctx[67] + "";
     	let t0;
     	let t1;
 
@@ -9976,7 +9978,7 @@ var app = (function () {
     			insert_dev(target, t1, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*manaRequirements*/ 8 && t0_value !== (t0_value = /*key*/ ctx[66] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*manaRequirements*/ 8 && t0_value !== (t0_value = /*key*/ ctx[67] + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t0);
@@ -9988,14 +9990,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(937:14) {:else}",
+    		source: "(947:14) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (935:14) {#if manaIcons[key]}
+    // (945:14) {#if manaIcons[key]}
     function create_if_block_1$2(ctx) {
     	let img;
     	let img_src_value;
@@ -10007,26 +10009,26 @@ var app = (function () {
     			img = element("img");
     			t = text(" :");
 
-    			if (!src_url_equal(img.src, img_src_value = /*key*/ ctx[66] === 'ANY'
-    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[67])
-    			: /*manaIcons*/ ctx[15][/*key*/ ctx[66]])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*key*/ ctx[67] === 'ANY'
+    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[68])
+    			: /*manaIcons*/ ctx[15][/*key*/ ctx[67]])) attr_dev(img, "src", img_src_value);
 
-    			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[66] + " mana icon"));
+    			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[67] + " mana icon"));
     			attr_dev(img, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img, file$7, 935, 16, 29303);
+    			add_location(img, file$7, 945, 16, 29658);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
     			insert_dev(target, t, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*manaRequirements*/ 8 && !src_url_equal(img.src, img_src_value = /*key*/ ctx[66] === 'ANY'
-    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[67])
-    			: /*manaIcons*/ ctx[15][/*key*/ ctx[66]])) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && !src_url_equal(img.src, img_src_value = /*key*/ ctx[67] === 'ANY'
+    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[68])
+    			: /*manaIcons*/ ctx[15][/*key*/ ctx[67]])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && img_alt_value !== (img_alt_value = "" + (/*key*/ ctx[66] + " mana icon"))) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && img_alt_value !== (img_alt_value = "" + (/*key*/ ctx[67] + " mana icon"))) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -10040,20 +10042,20 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(935:14) {#if manaIcons[key]}",
+    		source: "(945:14) {#if manaIcons[key]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (931:6) {#each Object.entries(manaRequirements) as [key, amount]}
+    // (941:6) {#each Object.entries(manaRequirements) as [key, amount]}
     function create_each_block_1$3(ctx) {
-    	let show_if = /*activeManaTypes*/ ctx[9][/*key*/ ctx[66]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
+    	let show_if = /*activeManaTypes*/ ctx[9][/*key*/ ctx[67]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
     	let if_block_anchor;
 
     	function func(...args) {
-    		return /*func*/ ctx[30](/*key*/ ctx[66], ...args);
+    		return /*func*/ ctx[31](/*key*/ ctx[67], ...args);
     	}
 
     	let if_block = show_if && create_if_block$3(ctx);
@@ -10069,7 +10071,7 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*activeManaTypes, manaRequirements, customCards*/ 522) show_if = /*activeManaTypes*/ ctx[9][/*key*/ ctx[66]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
+    			if (dirty[0] & /*activeManaTypes, manaRequirements, customCards*/ 522) show_if = /*activeManaTypes*/ ctx[9][/*key*/ ctx[67]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
 
     			if (show_if) {
     				if (if_block) {
@@ -10094,18 +10096,18 @@ var app = (function () {
     		block,
     		id: create_each_block_1$3.name,
     		type: "each",
-    		source: "(931:6) {#each Object.entries(manaRequirements) as [key, amount]}",
+    		source: "(941:6) {#each Object.entries(manaRequirements) as [key, amount]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (957:8) {#each Array.from(uniqueAttributes) as attr}
+    // (967:8) {#each Array.from(uniqueAttributes) as attr}
     function create_each_block$4(ctx) {
     	let div;
     	let label;
-    	let t0_value = /*attr*/ ctx[63] + "";
+    	let t0_value = /*attr*/ ctx[64] + "";
     	let t0;
     	let t1;
     	let label_for_value;
@@ -10118,7 +10120,7 @@ var app = (function () {
     	let dispose;
 
     	function input_handler_1(...args) {
-    		return /*input_handler_1*/ ctx[48](/*attr*/ ctx[63], ...args);
+    		return /*input_handler_1*/ ctx[49](/*attr*/ ctx[64], ...args);
     	}
 
     	const block = {
@@ -10130,17 +10132,17 @@ var app = (function () {
     			t2 = space();
     			input = element("input");
     			t3 = space();
-    			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[63].replace(/\s+/g, '_'));
+    			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'));
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 958, 10, 30017);
-    			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[63].replace(/\s+/g, '_'));
+    			add_location(label, file$7, 968, 10, 30372);
+    			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			input.value = input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[63]];
+    			input.value = input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[64]];
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 959, 10, 30093);
+    			add_location(input, file$7, 969, 10, 30448);
     			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 957, 8, 29975);
+    			add_location(div, file$7, 967, 8, 30330);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10162,17 +10164,17 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*uniqueAttributes*/ 32 && t0_value !== (t0_value = /*attr*/ ctx[63] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*uniqueAttributes*/ 32 && t0_value !== (t0_value = /*attr*/ ctx[64] + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*uniqueAttributes*/ 32 && label_for_value !== (label_for_value = "custom-" + /*attr*/ ctx[63].replace(/\s+/g, '_'))) {
+    			if (dirty[0] & /*uniqueAttributes*/ 32 && label_for_value !== (label_for_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'))) {
     				attr_dev(label, "for", label_for_value);
     			}
 
-    			if (dirty[0] & /*uniqueAttributes*/ 32 && input_id_value !== (input_id_value = "custom-" + /*attr*/ ctx[63].replace(/\s+/g, '_'))) {
+    			if (dirty[0] & /*uniqueAttributes*/ 32 && input_id_value !== (input_id_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'))) {
     				attr_dev(input, "id", input_id_value);
     			}
 
-    			if (dirty[0] & /*customAttributeRequirements, uniqueAttributes*/ 48 && input_value_value !== (input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[63]]) && input.value !== input_value_value) {
+    			if (dirty[0] & /*customAttributeRequirements, uniqueAttributes*/ 48 && input_value_value !== (input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[64]]) && input.value !== input_value_value) {
     				prop_dev(input, "value", input_value_value);
     			}
     		},
@@ -10187,14 +10189,14 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(957:8) {#each Array.from(uniqueAttributes) as attr}",
+    		source: "(967:8) {#each Array.from(uniqueAttributes) as attr}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (990:10) 
+    // (1005:10) 
     function create_trigger_slot$3(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -10218,7 +10220,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 989, 10, 31257);
+    			add_location(button, file$7, 1004, 10, 31790);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -10226,7 +10228,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[50], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[51], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -10252,14 +10254,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$3.name,
     		type: "slot",
-    		source: "(990:10) ",
+    		source: "(1005:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (993:10) 
+    // (1008:10) 
     function create_content_slot$3(ctx) {
     	let div;
     	let p0;
@@ -10276,13 +10278,13 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.";
-    			add_location(b, file$7, 993, 58, 31615);
+    			add_location(b, file$7, 1008, 58, 32148);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 993, 12, 31569);
+    			add_location(p0, file$7, 1008, 12, 32102);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 994, 12, 31685);
+    			add_location(p1, file$7, 1009, 12, 32218);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 992, 10, 31535);
+    			add_location(div, file$7, 1007, 10, 32068);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10301,7 +10303,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$3.name,
     		type: "slot",
-    		source: "(993:10) ",
+    		source: "(1008:10) ",
     		ctx
     	});
 
@@ -10401,11 +10403,15 @@ var app = (function () {
     	let t42;
     	let button3_disabled_value;
     	let t43;
+    	let button4;
+    	let t44;
+    	let button4_disabled_value;
+    	let t45;
     	let div11;
     	let label;
-    	let t45;
+    	let t47;
     	let input;
-    	let t46;
+    	let t48;
     	let popover2;
     	let updating_show_2;
     	let div13_transition;
@@ -10415,7 +10421,7 @@ var app = (function () {
     	let dispose;
 
     	function popover0_show_binding(value) {
-    		/*popover0_show_binding*/ ctx[35](value);
+    		/*popover0_show_binding*/ ctx[36](value);
     	}
 
     	let popover0_props = {
@@ -10435,7 +10441,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover0, 'show', popover0_show_binding));
     	let each_value_4 = /*manaCards*/ ctx[0];
     	validate_each_argument(each_value_4);
-    	const get_key = ctx => /*card*/ ctx[70].id;
+    	const get_key = ctx => /*card*/ ctx[71].id;
     	validate_each_keys(ctx, each_value_4, get_each_context_4, get_key);
 
     	for (let i = 0; i < each_value_4.length; i += 1) {
@@ -10446,7 +10452,7 @@ var app = (function () {
 
     	let each_value_3 = /*rampCards*/ ctx[2];
     	validate_each_argument(each_value_3);
-    	const get_key_1 = ctx => /*card*/ ctx[70].id;
+    	const get_key_1 = ctx => /*card*/ ctx[71].id;
     	validate_each_keys(ctx, each_value_3, get_each_context_3$1, get_key_1);
 
     	for (let i = 0; i < each_value_3.length; i += 1) {
@@ -10457,7 +10463,7 @@ var app = (function () {
 
     	let each_value_2 = /*customCards*/ ctx[1];
     	validate_each_argument(each_value_2);
-    	const get_key_2 = ctx => /*card*/ ctx[70].id;
+    	const get_key_2 = ctx => /*card*/ ctx[71].id;
     	validate_each_keys(ctx, each_value_2, get_each_context_2$2, get_key_2);
 
     	for (let i = 0; i < each_value_2.length; i += 1) {
@@ -10467,7 +10473,7 @@ var app = (function () {
     	}
 
     	function popover1_show_binding(value) {
-    		/*popover1_show_binding*/ ctx[46](value);
+    		/*popover1_show_binding*/ ctx[47](value);
     	}
 
     	let popover1_props = {
@@ -10502,7 +10508,7 @@ var app = (function () {
     	}
 
     	function popover2_show_binding(value) {
-    		/*popover2_show_binding*/ ctx[51](value);
+    		/*popover2_show_binding*/ ctx[52](value);
     	}
 
     	let popover2_props = {
@@ -10631,112 +10637,118 @@ var app = (function () {
     			t41 = space();
     			div12 = element("div");
     			button3 = element("button");
-    			t42 = text("Run Simulation");
+    			t42 = text("Run Hand Simulation");
     			t43 = space();
+    			button4 = element("button");
+    			t44 = text("Run Field Simulation");
+    			t45 = space();
     			div11 = element("div");
     			label = element("label");
     			label.textContent = "Simulation iterations (caution):";
-    			t45 = space();
+    			t47 = space();
     			input = element("input");
-    			t46 = space();
+    			t48 = space();
     			create_component(popover2.$$.fragment);
     			if (!src_url_equal(img0.src, img0_src_value = img$f)) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "Plains");
     			attr_dev(img0, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img0, file$7, 828, 4, 23189);
+    			add_location(img0, file$7, 838, 4, 23544);
     			if (!src_url_equal(img1.src, img1_src_value = img$e)) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Swamp");
     			attr_dev(img1, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img1, file$7, 829, 4, 23245);
+    			add_location(img1, file$7, 839, 4, 23600);
     			if (!src_url_equal(img2.src, img2_src_value = img$d)) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Island");
     			attr_dev(img2, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img2, file$7, 830, 4, 23300);
+    			add_location(img2, file$7, 840, 4, 23655);
     			if (!src_url_equal(img3.src, img3_src_value = img$c)) attr_dev(img3, "src", img3_src_value);
     			attr_dev(img3, "alt", "Mountain");
     			attr_dev(img3, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img3, file$7, 831, 4, 23356);
+    			add_location(img3, file$7, 841, 4, 23711);
     			if (!src_url_equal(img4.src, img4_src_value = img$b)) attr_dev(img4, "src", img4_src_value);
     			attr_dev(img4, "alt", "Forest");
     			attr_dev(img4, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img4, file$7, 832, 4, 23414);
+    			add_location(img4, file$7, 842, 4, 23769);
     			set_style(h3, "font-size", "18px");
     			set_style(h3, "display", "flex");
     			set_style(h3, "align-items", "center");
     			set_style(h3, "gap", "4px");
     			attr_dev(h3, "class", "svelte-1q4pgtd");
-    			add_location(h3, file$7, 825, 0, 23052);
+    			add_location(h3, file$7, 835, 0, 23407);
     			attr_dev(div0, "class", "accordion-title svelte-1q4pgtd");
     			attr_dev(div0, "tabindex", "0");
-    			add_location(div0, file$7, 818, 4, 22797);
+    			add_location(div0, file$7, 828, 4, 23152);
     			attr_dev(span, "class", "semi-bold svelte-1q4pgtd");
-    			add_location(span, file$7, 841, 115, 23790);
+    			add_location(span, file$7, 851, 115, 24145);
     			set_style(p0, "margin-top", "0.5rem");
     			attr_dev(p0, "class", "svelte-1q4pgtd");
-    			add_location(p0, file$7, 841, 6, 23681);
-    			add_location(strong0, file$7, 857, 37, 25559);
+    			add_location(p0, file$7, 851, 6, 24036);
+    			add_location(strong0, file$7, 867, 37, 25914);
     			set_style(p1, "margin-top", "0.5rem");
     			attr_dev(p1, "class", "svelte-1q4pgtd");
-    			add_location(p1, file$7, 857, 6, 25528);
+    			add_location(p1, file$7, 867, 6, 25883);
     			attr_dev(div1, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div1, file$7, 858, 6, 25730);
-    			add_location(button0, file$7, 867, 8, 26000);
-    			add_location(b0, file$7, 868, 31, 26099);
-    			add_location(div2, file$7, 868, 8, 26076);
+    			add_location(div1, file$7, 868, 6, 26085);
+    			add_location(button0, file$7, 877, 8, 26355);
+    			add_location(b0, file$7, 878, 31, 26454);
+    			add_location(div2, file$7, 878, 8, 26431);
     			attr_dev(div3, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div3, file$7, 866, 6, 25955);
+    			add_location(div3, file$7, 876, 6, 26310);
     			attr_dev(hr0, "class", "secondary-divider svelte-1q4pgtd");
-    			add_location(hr0, file$7, 873, 6, 26196);
+    			add_location(hr0, file$7, 883, 6, 26551);
     			attr_dev(div4, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div4, file$7, 876, 6, 26238);
-    			add_location(button1, file$7, 887, 8, 26525);
-    			add_location(b1, file$7, 888, 31, 26624);
-    			add_location(div5, file$7, 888, 8, 26601);
+    			add_location(div4, file$7, 886, 6, 26593);
+    			add_location(button1, file$7, 897, 8, 26880);
+    			add_location(b1, file$7, 898, 31, 26979);
+    			add_location(div5, file$7, 898, 8, 26956);
     			attr_dev(div6, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div6, file$7, 886, 6, 26480);
+    			add_location(div6, file$7, 896, 6, 26835);
     			attr_dev(hr1, "class", "secondary-divider svelte-1q4pgtd");
-    			add_location(hr1, file$7, 892, 6, 26731);
+    			add_location(hr1, file$7, 902, 6, 27086);
     			attr_dev(div7, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div7, file$7, 895, 6, 26773);
-    			add_location(button2, file$7, 908, 6, 27290);
-    			add_location(b2, file$7, 918, 33, 28461);
-    			add_location(div8, file$7, 918, 8, 28436);
+    			add_location(div7, file$7, 905, 6, 27128);
+    			add_location(button2, file$7, 918, 6, 27645);
+    			add_location(b2, file$7, 928, 33, 28816);
+    			add_location(div8, file$7, 928, 8, 28791);
     			attr_dev(div9, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div9, file$7, 907, 4, 27247);
-    			add_location(i, file$7, 920, 32, 28540);
+    			add_location(div9, file$7, 917, 4, 27602);
+    			add_location(i, file$7, 930, 32, 28895);
     			set_style(p2, "margin-top", "8px");
     			attr_dev(p2, "class", "svelte-1q4pgtd");
-    			add_location(p2, file$7, 920, 4, 28512);
+    			add_location(p2, file$7, 930, 4, 28867);
     			attr_dev(hr2, "class", "primary-divider svelte-1q4pgtd");
-    			add_location(hr2, file$7, 923, 9, 28665);
-    			add_location(strong1, file$7, 928, 9, 28751);
+    			add_location(hr2, file$7, 933, 9, 29020);
+    			add_location(strong1, file$7, 938, 9, 29106);
     			attr_dev(p3, "class", "svelte-1q4pgtd");
-    			add_location(p3, file$7, 928, 6, 28748);
+    			add_location(p3, file$7, 938, 6, 29103);
     			attr_dev(div10, "class", "mana-requirements-container svelte-1q4pgtd");
-    			add_location(div10, file$7, 929, 4, 28923);
+    			add_location(div10, file$7, 939, 4, 29278);
     			attr_dev(button3, "class", "primary-btn");
     			button3.disabled = button3_disabled_value = !/*enableSimulationButton*/ ctx[14];
-    			add_location(button3, file$7, 975, 8, 30514);
+    			add_location(button3, file$7, 986, 8, 30876);
+    			attr_dev(button4, "class", "primary-btn");
+    			button4.disabled = button4_disabled_value = !/*enableSimulationButton*/ ctx[14];
+    			add_location(button4, file$7, 990, 8, 31047);
     			attr_dev(label, "for", "iterations");
     			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 984, 8, 30976);
+    			add_location(label, file$7, 999, 8, 31509);
     			set_style(input, "width", "90px");
     			attr_dev(input, "id", "iterations");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "1");
     			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 985, 8, 31050);
+    			add_location(input, file$7, 1000, 8, 31583);
     			attr_dev(div11, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div11, file$7, 983, 8, 30936);
+    			add_location(div11, file$7, 998, 8, 31469);
     			attr_dev(div12, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div12, file$7, 974, 6, 30469);
+    			add_location(div12, file$7, 984, 6, 30824);
     			attr_dev(div13, "class", "answer svelte-1q4pgtd");
     			set_style(div13, "height", /*openItem*/ ctx[6] === 0 ? 'auto' : '0');
-    			add_location(div13, file$7, 835, 6, 23491);
+    			add_location(div13, file$7, 845, 6, 23846);
     			attr_dev(div14, "class", "accordion-item svelte-1q4pgtd");
-    			add_location(div14, file$7, 817, 2, 22763);
+    			add_location(div14, file$7, 827, 2, 23118);
     			attr_dev(div15, "class", div15_class_value = "accordion " + (/*isHovering*/ ctx[10] ? 'hovering' : '') + " svelte-1q4pgtd");
-    			add_location(div15, file$7, 814, 0, 22586);
+    			add_location(div15, file$7, 824, 0, 22941);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -10855,26 +10867,30 @@ var app = (function () {
     			append_dev(div12, button3);
     			append_dev(button3, t42);
     			append_dev(div12, t43);
+    			append_dev(div12, button4);
+    			append_dev(button4, t44);
+    			append_dev(div12, t45);
     			append_dev(div12, div11);
     			append_dev(div11, label);
-    			append_dev(div11, t45);
+    			append_dev(div11, t47);
     			append_dev(div11, input);
     			set_input_value(input, /*iterations*/ ctx[8]);
-    			append_dev(div11, t46);
+    			append_dev(div11, t48);
     			mount_component(popover2, div11, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div0, "click", /*handleToggleAccordionClick*/ ctx[18], false, false, false, false),
-    					listen_dev(div0, "keydown", /*keydown_handler*/ ctx[31], false, false, false, false),
-    					listen_dev(div0, "mouseenter", /*mouseenter_handler*/ ctx[32], false, false, false, false),
-    					listen_dev(div0, "mouseleave", /*mouseleave_handler*/ ctx[33], false, false, false, false),
-    					listen_dev(button0, "click", /*handleAddManaGroupClick*/ ctx[19], false, false, false, false),
-    					listen_dev(button1, "click", /*handleAddRampGroupClick*/ ctx[20], false, false, false, false),
-    					listen_dev(button2, "click", /*handleAddCustomGroupClick*/ ctx[21], false, false, false, false),
-    					listen_dev(button3, "click", /*handleRunSimulationClick*/ ctx[17], false, false, false, false),
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[49]),
+    					listen_dev(div0, "click", /*handleToggleAccordionClick*/ ctx[19], false, false, false, false),
+    					listen_dev(div0, "keydown", /*keydown_handler*/ ctx[32], false, false, false, false),
+    					listen_dev(div0, "mouseenter", /*mouseenter_handler*/ ctx[33], false, false, false, false),
+    					listen_dev(div0, "mouseleave", /*mouseleave_handler*/ ctx[34], false, false, false, false),
+    					listen_dev(button0, "click", /*handleAddManaGroupClick*/ ctx[20], false, false, false, false),
+    					listen_dev(button1, "click", /*handleAddRampGroupClick*/ ctx[21], false, false, false, false),
+    					listen_dev(button2, "click", /*handleAddCustomGroupClick*/ ctx[22], false, false, false, false),
+    					listen_dev(button3, "click", /*handleRunHandSimulationClick*/ ctx[18], false, false, false, false),
+    					listen_dev(button4, "click", /*handleRunSimulationClick*/ ctx[17], false, false, false, false),
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[50]),
     					listen_dev(input, "focus", selectInput$2, false, false, false, false)
     				];
 
@@ -10884,7 +10900,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover0_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 128 | dirty[2] & /*$$scope*/ 32768) {
+    			if (dirty[0] & /*showPopover*/ 128 | dirty[2] & /*$$scope*/ 65536) {
     				popover0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -10896,7 +10912,7 @@ var app = (function () {
 
     			popover0.$set(popover0_changes);
 
-    			if (dirty[0] & /*manaCards, removeCard*/ 8388609) {
+    			if (dirty[0] & /*manaCards, removeCard*/ 16777217) {
     				each_value_4 = /*manaCards*/ ctx[0];
     				validate_each_argument(each_value_4);
     				group_outros();
@@ -10907,7 +10923,7 @@ var app = (function () {
 
     			if (!current || dirty[0] & /*totalAmount*/ 8192) set_data_dev(t17, /*totalAmount*/ ctx[13]);
 
-    			if (dirty[0] & /*rampCards, removeRampCard*/ 16777220) {
+    			if (dirty[0] & /*rampCards, removeRampCard*/ 33554436) {
     				each_value_3 = /*rampCards*/ ctx[2];
     				validate_each_argument(each_value_3);
     				group_outros();
@@ -10918,7 +10934,7 @@ var app = (function () {
 
     			if (!current || dirty[0] & /*totalRampAmount*/ 4096) set_data_dev(t24, /*totalRampAmount*/ ctx[12]);
 
-    			if (dirty[0] & /*customCards, removeCustomCard, updateCustomAttributeRequirements, handleAttributeUpdate*/ 436207618) {
+    			if (dirty[0] & /*customCards, removeCustomCard, updateCustomAttributeRequirements, handleAttributeUpdate*/ 872415234) {
     				each_value_2 = /*customCards*/ ctx[1];
     				validate_each_argument(each_value_2);
     				group_outros();
@@ -10929,7 +10945,7 @@ var app = (function () {
 
     			const popover1_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 128 | dirty[2] & /*$$scope*/ 32768) {
+    			if (dirty[0] & /*showPopover*/ 128 | dirty[2] & /*$$scope*/ 65536) {
     				popover1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -10942,7 +10958,7 @@ var app = (function () {
     			popover1.$set(popover1_changes);
     			if (!current || dirty[0] & /*totalCustomAmount*/ 2048) set_data_dev(t32, /*totalCustomAmount*/ ctx[11]);
 
-    			if (dirty[0] & /*manaRequirements, handleInput, getAnyIcon, manaIcons, activeManaTypes, customCards*/ 536969738) {
+    			if (dirty[0] & /*manaRequirements, handleInput, getAnyIcon, manaIcons, activeManaTypes, customCards*/ 1073840650) {
     				each_value_1 = Object.entries(/*manaRequirements*/ ctx[3]);
     				validate_each_argument(each_value_1);
     				let i;
@@ -10966,7 +10982,7 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty[0] & /*uniqueAttributes, customAttributeRequirements, updateCustomAttribute*/ 67108912) {
+    			if (dirty[0] & /*uniqueAttributes, customAttributeRequirements, updateCustomAttribute*/ 134217776) {
     				each_value = Array.from(/*uniqueAttributes*/ ctx[5]);
     				validate_each_argument(each_value);
     				let i;
@@ -10994,13 +11010,17 @@ var app = (function () {
     				prop_dev(button3, "disabled", button3_disabled_value);
     			}
 
+    			if (!current || dirty[0] & /*enableSimulationButton*/ 16384 && button4_disabled_value !== (button4_disabled_value = !/*enableSimulationButton*/ ctx[14])) {
+    				prop_dev(button4, "disabled", button4_disabled_value);
+    			}
+
     			if (dirty[0] & /*iterations*/ 256 && to_number(input.value) !== /*iterations*/ ctx[8]) {
     				set_input_value(input, /*iterations*/ ctx[8]);
     			}
 
     			const popover2_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 128 | dirty[2] & /*$$scope*/ 32768) {
+    			if (dirty[0] & /*showPopover*/ 128 | dirty[2] & /*$$scope*/ 65536) {
     				popover2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -11192,6 +11212,14 @@ var app = (function () {
 
     		trackEvent('run_simulation_click', {
     			'event_label': 'User clicked Run Simulation button'
+    		});
+    	}
+
+    	function handleRunHandSimulationClick() {
+    		logPreparedCards('hand'); // Pass 'hand' to indicate hand simulation
+
+    		trackEvent('run_hand_simulation_click', {
+    			'event_label': 'User clicked Run Hand Simulation button'
     		});
     	}
 
@@ -11458,7 +11486,7 @@ var app = (function () {
     		return preparedCards;
     	}
 
-    	function logPreparedCards() {
+    	function logPreparedCards(type = 'full') {
     		const preparedCards = prepareManaCardsForCalculation();
     		console.log('Prepared Cards:', preparedCards);
 
@@ -11479,6 +11507,8 @@ var app = (function () {
     			manaRequirements: filteredManaRequirements,
     			iterations
     		});
+
+    		simulationType.set(type); // Set the simulation type
     	}
 
     	function handleInput(key, value) {
@@ -11562,6 +11592,7 @@ var app = (function () {
     		FontAwesomeIcon,
     		faQuestionCircle,
     		simulationData,
+    		simulationType,
     		simplifiedRampMana,
     		monteCarloResults,
     		shouldResetSimulation,
@@ -11600,6 +11631,7 @@ var app = (function () {
     		totalCustomAmount,
     		getAnyIcon,
     		handleRunSimulationClick,
+    		handleRunHandSimulationClick,
     		handleToggleAccordionClick,
     		handleAddManaGroupClick,
     		handleAddRampGroupClick,
@@ -11839,6 +11871,7 @@ var app = (function () {
     		manaIcons,
     		getAnyIcon,
     		handleRunSimulationClick,
+    		handleRunHandSimulationClick,
     		handleToggleAccordionClick,
     		handleAddManaGroupClick,
     		handleAddRampGroupClick,
@@ -31857,25 +31890,25 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[43] = list[i];
-    	child_ctx[45] = i;
+    	child_ctx[47] = list[i];
+    	child_ctx[49] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[46] = list[i];
+    	child_ctx[50] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[49] = list[i];
-    	child_ctx[51] = i;
+    	child_ctx[53] = list[i];
+    	child_ctx[55] = i;
     	return child_ctx;
     }
 
-    // (1614:4) {#if hasOutput}
+    // (1896:4) {#if hasOutput}
     function create_if_block_2(ctx) {
     	let p;
     	let i;
@@ -31885,7 +31918,7 @@ var app = (function () {
     	let current;
 
     	function popover_show_binding(value) {
-    		/*popover_show_binding*/ ctx[16](value);
+    		/*popover_show_binding*/ ctx[18](value);
     	}
 
     	let popover_props = {
@@ -31911,10 +31944,10 @@ var app = (function () {
     			i.textContent = "Each column of stacked cards represents a separate opening hand and subsequent draws.";
     			t1 = space();
     			create_component(popover.$$.fragment);
-    			add_location(i, file$4, 1614, 49, 66018);
+    			add_location(i, file$4, 1896, 49, 80161);
     			set_style(p, "margin-top", "0");
     			set_style(p, "text-align", "center");
-    			add_location(p, file$4, 1614, 4, 65973);
+    			add_location(p, file$4, 1896, 4, 80116);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -31926,7 +31959,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 64 | dirty[1] & /*$$scope*/ 2097152) {
+    			if (dirty[0] & /*showPopover*/ 64 | dirty[1] & /*$$scope*/ 33554432) {
     				popover_changes.$$scope = { dirty, ctx };
     			}
 
@@ -31957,14 +31990,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(1614:4) {#if hasOutput}",
+    		source: "(1896:4) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1617:12) 
+    // (1899:12) 
     function create_trigger_slot$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -31988,7 +32021,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 1616, 12, 66183);
+    			add_location(button, file$4, 1898, 12, 80326);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -31996,7 +32029,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[15], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[17], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -32022,14 +32055,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$1.name,
     		type: "slot",
-    		source: "(1617:12) ",
+    		source: "(1899:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1620:12) 
+    // (1902:12) 
     function create_content_slot$1(ctx) {
     	let div;
     	let p;
@@ -32040,9 +32073,9 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the \"Linked groups\" feature or Advanced section to calculate the probability of drawing cards from different groups.";
     			attr_dev(p, "class", "popover-content svelte-2vp65s");
-    			add_location(p, file$4, 1620, 16, 66500);
+    			add_location(p, file$4, 1902, 16, 80643);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 1619, 12, 66462);
+    			add_location(div, file$4, 1901, 12, 80605);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32058,14 +32091,14 @@ var app = (function () {
     		block,
     		id: create_content_slot$1.name,
     		type: "slot",
-    		source: "(1620:12) ",
+    		source: "(1902:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1655:8) {:else}
+    // (1938:8) {:else}
     function create_else_block(ctx) {
     	let div;
 
@@ -32074,7 +32107,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "Add a group or run a simulation above to show output probabilities.";
     			attr_dev(div, "class", "placeholder svelte-2vp65s");
-    			add_location(div, file$4, 1655, 9, 68623);
+    			add_location(div, file$4, 1938, 9, 82980);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32089,14 +32122,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(1655:8) {:else}",
+    		source: "(1938:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1627:8) {#if hasOutput}
+    // (1909:8) {#if hasOutput}
     function create_if_block$2(ctx) {
     	let each_1_anchor;
     	let each_value = /*generateTurnsArray*/ ctx[3](/*$numberOfTurns*/ ctx[4].length);
@@ -32125,7 +32158,7 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*createGroupCards, groups, results, $probabilitiesByTurn, InitialDrawSize, $numberOfTurns, generateTurnsArray*/ 575) {
+    			if (dirty[0] & /*getCombinedResults, groups, results, $probabilitiesByTurn, $monteCarloHandResults, InitialDrawSize, $numberOfTurns, createGroupCards, generateTurnsArray*/ 3391) {
     				each_value = /*generateTurnsArray*/ ctx[3](/*$numberOfTurns*/ ctx[4].length);
     				validate_each_argument(each_value);
     				let i;
@@ -32159,14 +32192,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(1627:8) {#if hasOutput}",
+    		source: "(1909:8) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1629:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}
+    // (1911:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
     function create_if_block_1$1(ctx) {
     	let div2;
     	let div0;
@@ -32178,16 +32211,16 @@ var app = (function () {
     	let i;
     	let t4;
 
-    	let t5_value = (/*turn*/ ctx[45] === 0
+    	let t5_value = (/*turn*/ ctx[49] === 0
     	? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[45] - 1]}`) + "";
+    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[49] - 1]}`) + "";
 
     	let t5;
     	let t6;
     	let t7;
     	let div1;
     	let t8;
-    	let each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[45]);
+    	let each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*$monteCarloHandResults*/ ctx[8], /*turn*/ ctx[49]);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -32200,7 +32233,7 @@ var app = (function () {
     			div2 = element("div");
     			div0 = element("div");
     			t0 = text("Turn ");
-    			t1 = text(/*turn*/ ctx[45]);
+    			t1 = text(/*turn*/ ctx[49]);
     			t2 = text(":");
     			br = element("br");
     			t3 = space();
@@ -32216,15 +32249,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 1631, 32, 67181);
+    			add_location(br, file$4, 1913, 36, 81426);
     			attr_dev(i, "class", "svelte-2vp65s");
-    			add_location(i, file$4, 1632, 20, 67207);
+    			add_location(i, file$4, 1914, 24, 81456);
     			attr_dev(div0, "class", "turn-label svelte-2vp65s");
-    			add_location(div0, file$4, 1630, 16, 67123);
+    			add_location(div0, file$4, 1912, 20, 81364);
     			attr_dev(div1, "class", "card-rectangles svelte-2vp65s");
-    			add_location(div1, file$4, 1634, 16, 67335);
+    			add_location(div1, file$4, 1916, 20, 81592);
     			attr_dev(div2, "class", "turn-row svelte-2vp65s");
-    			add_location(div2, file$4, 1629, 12, 67083);
+    			add_location(div2, file$4, 1911, 16, 81320);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -32250,12 +32283,12 @@ var app = (function () {
     			append_dev(div2, t8);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[45] === 0
+    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[49] === 0
     			? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[45] - 1]}`) + "")) set_data_dev(t5, t5_value);
+    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[49] - 1]}`) + "")) set_data_dev(t5, t5_value);
 
-    			if (dirty[0] & /*createGroupCards, groups, results, $probabilitiesByTurn*/ 549) {
-    				each_value_1 = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[45]);
+    			if (dirty[0] & /*getCombinedResults, groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 2341) {
+    				each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*$monteCarloHandResults*/ ctx[8], /*turn*/ ctx[49]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -32288,14 +32321,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(1629:8) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0}",
+    		source: "(1911:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1645:28) {#each card.isBlank as isBlank, i}
+    // (1927:32) {#each card.isBlank as isBlank, i}
     function create_each_block_2(ctx) {
     	let div;
 
@@ -32303,22 +32336,22 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "stacked-card svelte-2vp65s");
-    			set_style(div, "left", /*i*/ ctx[51] * 4 + "px");
-    			set_style(div, "z-index", -(/*i*/ ctx[51] + 1));
-    			set_style(div, "background-color", /*isBlank*/ ctx[49] ? '#f2efe8' : /*card*/ ctx[46].color);
-    			set_style(div, "border-color", /*isBlank*/ ctx[49] ? '#c1c1c1' : '#666666');
-    			add_location(div, file$4, 1645, 28, 68142);
+    			set_style(div, "left", /*i*/ ctx[55] * 4 + "px");
+    			set_style(div, "z-index", -(/*i*/ ctx[55] + 1));
+    			set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
+    			set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
+    			add_location(div, file$4, 1927, 32, 82469);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div, "background-color", /*isBlank*/ ctx[49] ? '#f2efe8' : /*card*/ ctx[46].color);
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293) {
+    				set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
     			}
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div, "border-color", /*isBlank*/ ctx[49] ? '#c1c1c1' : '#666666');
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293) {
+    				set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
     			}
     		},
     		d: function destroy(detaching) {
@@ -32330,36 +32363,36 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(1645:28) {#each card.isBlank as isBlank, i}",
+    		source: "(1927:32) {#each card.isBlank as isBlank, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1636:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}
+    // (1918:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
     function create_each_block_1(ctx) {
     	let div6;
     	let div3;
     	let div2;
     	let div0;
 
-    	let t0_value = (/*card*/ ctx[46].probability !== null
-    	? `${/*card*/ ctx[46].probability}%`
+    	let t0_value = (/*card*/ ctx[50].probability !== null
+    	? `${/*card*/ ctx[50].probability}%`
     	: '') + "";
 
     	let t0;
     	let t1;
     	let div1;
-    	let raw_value = /*card*/ ctx[46].ratioText + "";
+    	let raw_value = /*card*/ ctx[50].ratioText + "";
     	let t2;
     	let div4;
     	let t3;
     	let div5;
-    	let t4_value = /*card*/ ctx[46].label + "";
+    	let t4_value = /*card*/ ctx[50].label + "";
     	let t4;
     	let t5;
-    	let each_value_2 = /*card*/ ctx[46].isBlank;
+    	let each_value_2 = /*card*/ ctx[50].isBlank;
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -32388,21 +32421,21 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			attr_dev(div0, "class", "probability svelte-2vp65s");
-    			add_location(div0, file$4, 1639, 32, 67753);
+    			add_location(div0, file$4, 1921, 36, 82056);
     			attr_dev(div1, "class", "card-ratio svelte-2vp65s");
-    			add_location(div1, file$4, 1640, 32, 67875);
+    			add_location(div1, file$4, 1922, 36, 82182);
     			attr_dev(div2, "class", "card-details svelte-2vp65s");
-    			add_location(div2, file$4, 1638, 28, 67693);
+    			add_location(div2, file$4, 1920, 32, 81992);
     			attr_dev(div3, "class", "rectangle svelte-2vp65s");
-    			set_style(div3, "background-color", /*card*/ ctx[46].color);
-    			add_location(div3, file$4, 1637, 24, 67600);
+    			set_style(div3, "background-color", /*card*/ ctx[50].color);
+    			add_location(div3, file$4, 1919, 28, 81895);
     			attr_dev(div4, "class", "stacked-cards svelte-2vp65s");
-    			add_location(div4, file$4, 1643, 24, 68021);
+    			add_location(div4, file$4, 1925, 28, 82340);
     			attr_dev(div5, "class", "card-label svelte-2vp65s");
-    			add_location(div5, file$4, 1647, 24, 68416);
+    			add_location(div5, file$4, 1930, 28, 82757);
     			attr_dev(div6, "class", "card-container svelte-2vp65s");
-    			set_style(div6, "margin-right", 7 + (/*card*/ ctx[46].isBlank.length - 1) * 4 + "px");
-    			add_location(div6, file$4, 1636, 20, 67485);
+    			set_style(div6, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
+    			add_location(div6, file$4, 1918, 24, 81776);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -32428,17 +32461,17 @@ var app = (function () {
     			append_dev(div6, t5);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t0_value !== (t0_value = (/*card*/ ctx[46].probability !== null
-    			? `${/*card*/ ctx[46].probability}%`
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293 && t0_value !== (t0_value = (/*card*/ ctx[50].probability !== null
+    			? `${/*card*/ ctx[50].probability}%`
     			: '') + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && raw_value !== (raw_value = /*card*/ ctx[46].ratioText + "")) div1.innerHTML = raw_value;
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div3, "background-color", /*card*/ ctx[46].color);
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293 && raw_value !== (raw_value = /*card*/ ctx[50].ratioText + "")) div1.innerHTML = raw_value;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293) {
+    				set_style(div3, "background-color", /*card*/ ctx[50].color);
     			}
 
-    			if (dirty[0] & /*createGroupCards, groups, results, $probabilitiesByTurn*/ 549) {
-    				each_value_2 = /*card*/ ctx[46].isBlank;
+    			if (dirty[0] & /*getCombinedResults, groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 2341) {
+    				each_value_2 = /*card*/ ctx[50].isBlank;
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -32461,10 +32494,10 @@ var app = (function () {
     				each_blocks.length = each_value_2.length;
     			}
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37 && t4_value !== (t4_value = /*card*/ ctx[46].label + "")) set_data_dev(t4, t4_value);
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293 && t4_value !== (t4_value = /*card*/ ctx[50].label + "")) set_data_dev(t4, t4_value);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) {
-    				set_style(div6, "margin-right", 7 + (/*card*/ ctx[46].isBlank.length - 1) * 4 + "px");
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293) {
+    				set_style(div6, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -32477,16 +32510,16 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(1636:20) {#each createGroupCards(groups, results, $probabilitiesByTurn, turn) as card}",
+    		source: "(1918:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1628:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
+    // (1910:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
     function create_each_block$1(ctx) {
-    	let show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[45]).length > 0;
+    	let show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[49]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[8], /*turn*/ ctx[49], 'hand').length > 0;
     	let if_block_anchor;
     	let if_block = show_if && create_if_block_1$1(ctx);
 
@@ -32500,7 +32533,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn*/ 37) show_if = /*createGroupCards*/ ctx[9](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[45]).length > 0;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 293) show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[5], /*turn*/ ctx[49]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[8], /*turn*/ ctx[49], 'hand').length > 0;
 
     			if (show_if) {
     				if (if_block) {
@@ -32525,7 +32558,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(1628:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
+    		source: "(1910:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
     		ctx
     	});
 
@@ -32559,9 +32592,9 @@ var app = (function () {
     			if_block1.c();
     			set_style(h2, "text-align", "center");
     			set_style(h2, "margin-bottom", "0");
-    			add_location(h2, file$4, 1612, 4, 65879);
+    			add_location(h2, file$4, 1894, 4, 80022);
     			attr_dev(div, "class", "output-diagram svelte-2vp65s");
-    			add_location(div, file$4, 1625, 4, 66858);
+    			add_location(div, file$4, 1907, 4, 81001);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -32783,6 +32816,31 @@ var app = (function () {
     	return Object.entries(landGroupSizes).map(([land, count]) => ({ land: JSON.parse(land), count }));
     }
 
+    function handMeetsRequirements(hand, preparedCombinations) {
+    	return preparedCombinations.some(combination => {
+    		const landCounts = combination.reduce(
+    			(counts, land) => {
+    				counts[JSON.stringify(land.land)] = land.count;
+    				return counts;
+    			},
+    			{}
+    		);
+
+    		const handProfile = hand.reduce(
+    			(profile, land) => {
+    				const key = JSON.stringify(land);
+    				profile[key] = (profile[key] || 0) + 1;
+    				return profile;
+    			},
+    			{}
+    		);
+
+    		return Object.entries(landCounts).every(([land, count]) => {
+    			return handProfile[land] >= count;
+    		});
+    	});
+    }
+
     function prioritizeCardToBottom(hand) {
     	// Prioritize placing a "dummy" card at the bottom
     	const dummyIndex = hand.findIndex(card => card.dummy);
@@ -32895,37 +32953,6 @@ var app = (function () {
     	}
     }
 
-    function handMeetsRequirements(hand, preparedCombinations) {
-    	//   console.log('Checking hand against requirements:', hand);
-    	//   console.log('Prepared combinations:', preparedCombinations);
-    	return preparedCombinations.some(combination => {
-    		const landCounts = combination.reduce(
-    			(counts, land) => {
-    				counts[JSON.stringify(land.land)] = land.count;
-    				return counts;
-    			},
-    			{}
-    		);
-
-    		const handProfile = hand.reduce(
-    			(profile, land) => {
-    				const key = JSON.stringify(land);
-    				profile[key] = (profile[key] || 0) + 1;
-    				return profile;
-    			},
-    			{}
-    		);
-
-    		// console.log(`Checking hand against requirements:`, handProfile, landCounts);
-    		const meetsRequirements = Object.entries(landCounts).every(([land, count]) => {
-    			return handProfile[land] >= count;
-    		});
-    		//  console.log(`Hand does not meet the combination requirements:`, combination);
-
-    		return meetsRequirements;
-    	});
-    }
-
     function convertPercentToRatio(percent) {
     	if (percent === null) return '';
 
@@ -32941,25 +32968,31 @@ var app = (function () {
     	let $numberOfTurns;
     	let $probabilitiesByTurn;
     	let $groupColors;
+    	let $monteCarloHandResults;
     	let $monteCarloResults;
     	let $simulationData;
+    	let $simulationType;
     	let $mulliganConfig;
     	let $cancelSimulation;
     	let $simplifiedRampMana;
     	validate_store(numberOfTurns, 'numberOfTurns');
     	component_subscribe($$self, numberOfTurns, $$value => $$invalidate(4, $numberOfTurns = $$value));
     	validate_store(groupColors, 'groupColors');
-    	component_subscribe($$self, groupColors, $$value => $$invalidate(19, $groupColors = $$value));
+    	component_subscribe($$self, groupColors, $$value => $$invalidate(21, $groupColors = $$value));
+    	validate_store(monteCarloHandResults, 'monteCarloHandResults');
+    	component_subscribe($$self, monteCarloHandResults, $$value => $$invalidate(8, $monteCarloHandResults = $$value));
     	validate_store(monteCarloResults, 'monteCarloResults');
-    	component_subscribe($$self, monteCarloResults, $$value => $$invalidate(20, $monteCarloResults = $$value));
+    	component_subscribe($$self, monteCarloResults, $$value => $$invalidate(22, $monteCarloResults = $$value));
     	validate_store(simulationData, 'simulationData');
-    	component_subscribe($$self, simulationData, $$value => $$invalidate(12, $simulationData = $$value));
+    	component_subscribe($$self, simulationData, $$value => $$invalidate(14, $simulationData = $$value));
+    	validate_store(simulationType, 'simulationType');
+    	component_subscribe($$self, simulationType, $$value => $$invalidate(23, $simulationType = $$value));
     	validate_store(mulliganConfig, 'mulliganConfig');
-    	component_subscribe($$self, mulliganConfig, $$value => $$invalidate(13, $mulliganConfig = $$value));
+    	component_subscribe($$self, mulliganConfig, $$value => $$invalidate(15, $mulliganConfig = $$value));
     	validate_store(cancelSimulation, 'cancelSimulation');
-    	component_subscribe($$self, cancelSimulation, $$value => $$invalidate(21, $cancelSimulation = $$value));
+    	component_subscribe($$self, cancelSimulation, $$value => $$invalidate(24, $cancelSimulation = $$value));
     	validate_store(simplifiedRampMana, 'simplifiedRampMana');
-    	component_subscribe($$self, simplifiedRampMana, $$value => $$invalidate(14, $simplifiedRampMana = $$value));
+    	component_subscribe($$self, simplifiedRampMana, $$value => $$invalidate(16, $simplifiedRampMana = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Calculation', slots, []);
 
@@ -33185,7 +33218,7 @@ var app = (function () {
     				const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
     				combinations.push(combinationKey);
 
-    				//    console.log(`Added Combination: ${combinationKey}`);
+    				//  console.log(`Added Combination: ${combinationKey}`);
     				currentIteration++;
 
     				return;
@@ -33195,8 +33228,10 @@ var app = (function () {
     			const progress = currentIteration / estimatedTotalCombinations * 100;
 
     			combinationProgress.set(progress);
-    			console.log(`Progress: ${progress}%`);
+
+    			//  console.log(`Progress: ${progress}%`);
     			generateCombinations(index + 1, currentCombination, currentCounts);
+
     			const land = lands[index];
     			const landKey = JSON.stringify(land);
 
@@ -33443,6 +33478,114 @@ var app = (function () {
     					iteration++;
     				}
 
+    				async function runBatch() {
+    					let batchCounter = 0;
+
+    					while (batchCounter < batchSize && iteration < numIterations) {
+    						if ($cancelSimulation) {
+    							reject(new Error("Simulation canceled by user"));
+    							return;
+    						}
+
+    						await runIteration();
+    						batchCounter++;
+    					}
+
+    					// Update the progress of the simulation
+    					simulationProgress.set(iteration / numIterations * 100);
+
+    					if (iteration < numIterations) {
+    						setTimeout(runBatch, 0); // Schedule the next batch
+    					} else {
+    						// Set Monte Carlo results in the dedicated store right before resolving the promise
+    						monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+
+    						console.log('Probabilities by Turn:', probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+
+    						resolve({
+    							probabilitiesByTurn: probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1))
+    						});
+    					}
+    				}
+
+    				runBatch();
+    			});
+    	}
+
+    	function monteCarloSimulationHand(
+    		preparedCombinations,
+    	landGroupSizes,
+    	deckSize,
+    	mulliganConfig,
+    	initialDrawSize,
+    	numberOfTurns,
+    	numIterations
+    	) {
+    		return new Promise((resolve, reject) => {
+    				const probabilitiesByTurnHand = Array.from({ length: numberOfTurns.length + 1 }, () => 0); // Track success based on hand
+    				const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
+    				const numDummyCards = Math.max(deckSize - totalLands, 0);
+    				const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
+    				let iteration = 0;
+
+    				// Calculate the total mana needed to determine the batch size. this
+    				// improves performance 
+    				const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+
+    				let batchSize;
+
+    				if (totalManaNeeded <= 2) {
+    					batchSize = 50;
+    				} else if (totalManaNeeded === 3) {
+    					batchSize = 30;
+    				} else {
+    					batchSize = 20;
+    				}
+
+    				function runIteration() {
+    					let hand = _.sampleSize(completeDeck, initialDrawSize);
+    					let remainingDeck = removeDrawnCardsFromDeck(completeDeck, hand);
+
+    					// Perform mulligans
+    					const { finalHand, remainingDeck: updatedDeck } = londonMulligan(hand, remainingDeck);
+
+    					hand = finalHand;
+    					remainingDeck = updatedDeck;
+
+    					// Check if the hand meets the requirements after mulligans
+    					let meetsRequirements = handMeetsRequirements(hand, preparedCombinations);
+
+    					if (meetsRequirements) {
+    						for (let turn = 0; turn <= numberOfTurns.length; turn++) {
+    							probabilitiesByTurnHand[turn]++;
+    						}
+    					} else {
+    						for (let turn = 1; turn <= numberOfTurns.length; turn++) {
+    							const cardsToDraw = numberOfTurns[turn - 1];
+    							const newCards = _.sampleSize(remainingDeck, cardsToDraw);
+    							hand.push(...newCards);
+    							remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
+
+    							// Log the card drawn and the hand after drawing
+    							console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
+
+    							console.log('Card(s) Drawn:', _.cloneDeep(newCards));
+    							console.log('Hand after drawing:', _.cloneDeep(hand));
+
+    							if (handMeetsRequirements(hand, preparedCombinations)) {
+    								for (let t = turn; t <= numberOfTurns.length; t++) {
+    									probabilitiesByTurnHand[t]++;
+    								}
+
+    								console.log(`Turn ${turn} - Parallel hand meets requirements`);
+    								break; // Stop further drawings for this iteration
+    							}
+    						}
+    					}
+
+    					iteration++;
+    				}
+
     				function runBatch() {
     					let batchCounter = 0;
 
@@ -33462,17 +33605,123 @@ var app = (function () {
     					if (iteration < numIterations) {
     						setTimeout(runBatch, 0); // Schedule the next batch
     					} else {
-    						// Set Monte Carlo results in the dedicated store right before resolving the promise
-    						monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+    						// Set Monte Carlo hand results in the dedicated store right before resolving the promise
+    						monteCarloHandResults.set(probabilitiesByTurnHand.map(prob => (prob / numIterations * 100).toFixed(1)));
 
-    						resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+    						console.log('Probabilities by Turn (Hand):', probabilitiesByTurnHand.map(prob => (prob / numIterations * 100).toFixed(1)));
+
+    						resolve({
+    							probabilitiesByTurnHand: probabilitiesByTurnHand.map(prob => (prob / numIterations * 100).toFixed(1))
+    						});
     					}
     				}
 
-    				runBatch(); // Start the first batch
+    				runBatch();
     			});
     	}
 
+    	//MonTE CARLO SIM BEFORE HAND AND FIELD MERGE ATTEMPT-------------------------------
+    	// function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganConfig, initialDrawSize, numberOfTurns, numIterations, neededCombinations) {
+    	//     return new Promise((resolve, reject) => {
+    	//         console.log('mulliganConfig:', _.cloneDeep(mulliganConfig)); // Log mulliganConfig to verify it's passed correctly
+    	//         const probabilitiesByTurn = Array.from({ length: numberOfTurns.length + 1 }, () => 0); // Updated to use numberOfTurns.length
+    	//         const totalLands = landGroupSizes.reduce((sum, land) => sum + land.count, 0);
+    	//         const numDummyCards = Math.max(deckSize - totalLands, 0);
+    	//         const completeDeck = landGroupSizes.flatMap(land => Array(land.count).fill(land.land)).concat(Array(numDummyCards).fill({ dummy: 1 }));
+    	//         let iteration = 0;
+    	//         let totalAvailableMana = [];
+    	//         let totalAvailableRamp = [];
+    	//         // Calculate the total mana needed to determine the batch size. this
+    	//         // improves performance 
+    	//         const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
+    	//         let batchSize;
+    	//         if (totalManaNeeded <= 2) {
+    	//             batchSize = 50;
+    	//         } else if (totalManaNeeded === 3) {
+    	//             batchSize = 30;
+    	//         } else {
+    	//             batchSize = 20;
+    	//         }
+    	//         function runIteration() {
+    	//             // Reset totalAvailableMana and totalAvailableRamp for each iteration
+    	//             let totalAvailableMana = [];
+    	//             let totalAvailableRamp = [];
+    	//             let hand = _.sampleSize(completeDeck, initialDrawSize);
+    	//             let remainingDeck = removeDrawnCardsFromDeck(completeDeck, hand);
+    	//             // Perform mulligans
+    	//             const { finalHand, remainingDeck: updatedDeck } = londonMulligan(hand, remainingDeck);
+    	//             hand = finalHand;
+    	//             remainingDeck = updatedDeck;
+    	//             // Reset and update available mana
+    	//             let { AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, 0, neededCombinations);
+    	//             // Check 1: If requirements are met, update probabilities and continue
+    	//             if (meetsRequirements) {
+    	//                 probabilitiesByTurn[0]++;
+    	//                 for (let turn = 1; turn <= numberOfTurns.length; turn++) {
+    	//                     probabilitiesByTurn[turn]++;
+    	//                 }
+    	//             } else {
+    	//                 for (let turn = 1; turn <= numberOfTurns.length; turn++) { // Updated to use numberOfTurns.length
+    	//                     const cardsToDraw = numberOfTurns[turn - 1]; // Use the number of cards drawn for each turn
+    	//                     const newCards = _.sampleSize(remainingDeck, cardsToDraw); // Draw multiple cards based on numberOfTurns
+    	//                     hand.push(...newCards);
+    	//                     remainingDeck = removeDrawnCardsFromDeck(remainingDeck, newCards);
+    	//                     // Log the card drawn and the hand after drawing
+    	//                     console.log(`Turn ${turn} - Draw ${cardsToDraw}`);
+    	//                     console.log('Card(s) Drawn:', _.cloneDeep(newCards));
+    	//                     console.log('Hand after drawing:', _.cloneDeep(hand));
+    	//                     // Play lands based on the new rules
+    	//                     playLands(hand, totalAvailableMana);
+    	//                     // Log after moving land to mana
+    	//                     console.log('After moving land to mana:');
+    	//                     console.log('Total played Mana:', _.cloneDeep(totalAvailableMana));
+    	//                     console.log('Hand:', _.cloneDeep(hand));
+    	//                     // Reset and update AvailableManaThisTurn
+    	//                     ({ AvailableManaThisTurn, meetsRequirements } = resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, turn, neededCombinations));
+    	//                     // Log the updated AvailableManaThisTurn
+    	//                     console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+    	//                     // Play ramp cards if possible
+    	//                     playRampCards(hand, AvailableManaThisTurn, totalAvailableRamp, turn);
+    	//                     // Log after playing ramp cards
+    	//                     console.log('After playing ramp cards:');
+    	//                     console.log('Total played Ramp:', _.cloneDeep(totalAvailableRamp));
+    	//                     console.log('AvailableManaThisTurn:', _.cloneDeep(AvailableManaThisTurn));
+    	//                     console.log('Hand:', _.cloneDeep(hand));
+    	//                     // Check 2: Compare AvailableManaThisTurn against neededCombinations after all ramp is played
+    	//                     if (meetsRequirements) {
+    	//                         for (let t = turn; t <= numberOfTurns.length; t++) {
+    	//                             probabilitiesByTurn[t]++;
+    	//                         }
+    	//                         break; // Stop further drawings for this iteration
+    	//                     }
+    	//                 }
+    	//             }
+    	//             iteration++;
+    	//         }
+    	//         function runBatch() {
+    	//     let batchCounter = 0;
+    	//     while (batchCounter < batchSize && iteration < numIterations) {
+    	//         if ($cancelSimulation) {
+    	//             reject(new Error("Simulation canceled by user"));
+    	//             return;
+    	//         }
+    	//         runIteration();
+    	//         batchCounter++;
+    	//     }
+    	//             // Update the progress of the simulation
+    	//             simulationProgress.set((iteration / numIterations) * 100);
+    	//             if (iteration < numIterations) {
+    	//                 setTimeout(runBatch, 0); // Schedule the next batch
+    	//             } else {
+    	//                 // Set Monte Carlo results in the dedicated store right before resolving the promise
+    	//                 monteCarloResults.set(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+    	//                 resolve(probabilitiesByTurn.map(prob => (prob / numIterations * 100).toFixed(1)));
+    	//             }
+    	//         }
+    	//         runBatch(); // Start the first batch
+    	//     });
+    	// }
+    	//---------------------------------------------------
     	//DEAD END THIS VERSION TRIED TO DO THE COMBINATION CALC DIRECTLY
     	// function manaPoolMeetsRequirements(availableMana) {
     	//     const manaRequirements = $simulationData.manaRequirements;
@@ -33937,6 +34186,32 @@ var app = (function () {
     		return tempDeck;
     	}
 
+    	//OLD HAND MEETS REQ - prolly delete, does not factor played cards etc anymore
+    	// function handMeetsRequirements(hand, preparedCombinations) {
+    	//  //   console.log('Checking hand against requirements:', hand);
+    	//  //   console.log('Prepared combinations:', preparedCombinations);
+    	//     return preparedCombinations.some(combination => {
+    	//         const landCounts = combination.reduce((counts, land) => {
+    	//             counts[JSON.stringify(land.land)] = land.count;
+    	//             return counts;
+    	//         }, {});
+    	//         const handProfile = hand.reduce((profile, land) => {
+    	//             const key = JSON.stringify(land);
+    	//             profile[key] = (profile[key] || 0) + 1;
+    	//             return profile;
+    	//         }, {});
+    	//        // console.log(`Checking hand against requirements:`, handProfile, landCounts);
+    	//         const meetsRequirements = Object.entries(landCounts).every(([land, count]) => {
+    	//             return handProfile[land] >= count;
+    	//         });
+    	//         if (meetsRequirements) {
+    	//           //  console.log(`Hand meets the combination requirements:`, combination);
+    	//         } else {
+    	//           //  console.log(`Hand does not meet the combination requirements:`, combination);
+    	//         }
+    	//         return meetsRequirements;
+    	//     });
+    	// }
     	// Inside identifyProfiles function
     	async function identifyProfiles(numIterations) {
     		const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
@@ -33946,7 +34221,14 @@ var app = (function () {
     		const landGroupSizes = calculateLandGroupSizes(preparedCards);
     		console.log('Prepared combinations:', preparedCombinations); // Ensure this logs after the update
     		console.log('needed combinations:', preparedCombinations); // Ensure this logs after the update
-    		let rawProbabilities = await monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganCount, InitialDrawSize, $numberOfTurns, numIterations, neededCombinations);
+    		let rawProbabilities;
+
+    		if ($simulationType === 'hand') {
+    			rawProbabilities = await monteCarloSimulationHand(preparedCombinations, landGroupSizes, deckSize, mulliganConfig, InitialDrawSize, $numberOfTurns, numIterations);
+    		} else {
+    			rawProbabilities = await monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mulliganConfig, InitialDrawSize, $numberOfTurns, numIterations, neededCombinations);
+    		}
+
     		probabilitiesByTurn.set(rawProbabilities); // Ensure you are using .set() correctly if it's a store
     		simulationRun.set(true); // Set simulation run flag to true
     		console.log('Simulation results:', $probabilitiesByTurn); // Ensure this logs after the update
@@ -33987,7 +34269,14 @@ var app = (function () {
     		); // Timeout set to 0 to push to end of execution queue
     	}
 
-    	function createGroupCards(groups, results, probabilitiesByTurn, turn) {
+    	function createGroupCards(
+    		groups,
+    	results,
+    	probabilitiesByTurn,
+    	turn,
+    	simulationType = 'full',
+    	excludeGroups = false
+    	) {
     		let cards = [];
     		let linkedGroupData = {}; // To hold accumulated data for linked groups
 
@@ -33995,7 +34284,7 @@ var app = (function () {
     		const effectiveDrawSize = InitialDrawSize - mulliganCount + turn - 1;
 
     		// If Monte Carlo results are available, use them to calculate blanks
-    		if ($monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
+    		if (simulationType === 'full' && $monteCarloResults.length > 0 && $monteCarloResults[turn] !== undefined) {
     			let turnTotalProbability = parseFloat($monteCarloResults[turn]);
 
     			// Calculate the total number of cards required by manaRequirements
@@ -34005,8 +34294,25 @@ var app = (function () {
 
     			cards.push({
     				probability: turnTotalProbability,
-    				label: 'Simulation',
-    				color: '#fff', // A distinct color for Monte Carlo results
+    				label: 'Field Simulation',
+    				color: '#FCF5EE', // A distinct color for Monte Carlo results
+    				ratioText: convertPercentToRatio(turnTotalProbability),
+    				stackedCards: totalManaCards,
+    				isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)), // Include actual and blank cards
+    				
+    			});
+    		} else if (simulationType === 'hand' && $monteCarloHandResults.length > 0 && $monteCarloHandResults[turn] !== undefined) {
+    			let turnTotalProbability = parseFloat($monteCarloHandResults[turn]);
+
+    			// Calculate the total number of cards required by manaRequirements
+    			let totalManaCards = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0) - 1; // Subtract one to account for the top card
+
+    			let blanksToAdd = Math.max(effectiveDrawSize - totalManaCards, 0);
+
+    			cards.push({
+    				probability: turnTotalProbability,
+    				label: 'Hand Simulation',
+    				color: '#FCF5EE', // A distinct color for Hand Simulation results
     				ratioText: convertPercentToRatio(turnTotalProbability),
     				stackedCards: totalManaCards,
     				isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)), // Include actual and blank cards
@@ -34014,65 +34320,67 @@ var app = (function () {
     			});
     		}
 
-    		// Process all groups
-    		groups.forEach(group => {
-    			let groupName = group.link ? group.link : group.name;
-    			let groupResult = results[groupName];
+    		// Process all groups if not excluded
+    		if (!excludeGroups) {
+    			groups.forEach(group => {
+    				let groupName = group.link ? group.link : group.name;
+    				let groupResult = results[groupName];
 
-    			let probabilityPercent = groupResult && turn < groupResult.length
-    			? Math.round(groupResult[turn].probability * 1000) / 10
-    			: null;
+    				let probabilityPercent = groupResult && turn < groupResult.length
+    				? Math.round(groupResult[turn].probability * 1000) / 10
+    				: null;
 
-    			let color = $groupColors[groupName] || '#e5e5e5';
+    				let color = $groupColors[groupName] || '#e5e5e5';
 
-    			if (group.link) {
-    				if (!linkedGroupData[group.link]) {
-    					linkedGroupData[group.link] = {
-    						totalCardsToDraw: 0,
+    				if (group.link) {
+    					if (!linkedGroupData[group.link]) {
+    						linkedGroupData[group.link] = {
+    							totalCardsToDraw: 0,
+    							probability: probabilityPercent,
+    							label: group.link,
+    							color,
+    							ratioText: convertPercentToRatio(probabilityPercent)
+    						};
+    					}
+
+    					// Accumulate total cards to draw for linked groups
+    					linkedGroupData[group.link].totalCardsToDraw += group.cardsToDraw;
+    				} else {
+    					// For individual groups, subtract one to account for the top card
+    					let actualCardsToDraw = Math.max(group.cardsToDraw - 1, 0);
+
+    					let blanksToAdd = Math.max(effectiveDrawSize - actualCardsToDraw, 0);
+
+    					cards.push({
     						probability: probabilityPercent,
-    						label: group.link,
+    						label: group.name,
     						color,
-    						ratioText: convertPercentToRatio(probabilityPercent)
-    					};
+    						ratioText: convertPercentToRatio(probabilityPercent),
+    						stackedCards: actualCardsToDraw,
+    						isBlank: Array(actualCardsToDraw).fill(false).concat(Array(blanksToAdd).fill(true)), // Include actual and blank cards
+    						
+    					});
     				}
+    			});
 
-    				// Accumulate total cards to draw for linked groups
-    				linkedGroupData[group.link].totalCardsToDraw += group.cardsToDraw;
-    			} else {
-    				// For individual groups, subtract one to account for the top card
-    				let actualCardsToDraw = Math.max(group.cardsToDraw - 1, 0);
+    			// Process linked groups
+    			Object.values(linkedGroupData).forEach(group => {
+    				// Correctly adjust for the top card in linked groups
+    				let actualCardsToDraw = Math.max(group.totalCardsToDraw - 1, 0);
 
     				let blanksToAdd = Math.max(effectiveDrawSize - actualCardsToDraw, 0);
 
     				cards.push({
-    					probability: probabilityPercent,
-    					label: group.name,
-    					color,
-    					ratioText: convertPercentToRatio(probabilityPercent),
+    					probability: group.probability,
+    					label: group.label,
+    					color: group.color,
+    					ratioText: convertPercentToRatio(group.probability),
     					stackedCards: actualCardsToDraw,
     					isBlank: Array(actualCardsToDraw).fill(false).concat(Array(blanksToAdd).fill(true)), // Include actual and blank cards
     					
     				});
-    			}
-    		});
-
-    		// Process linked groups
-    		Object.values(linkedGroupData).forEach(group => {
-    			// Correctly adjust for the top card in linked groups
-    			let actualCardsToDraw = Math.max(group.totalCardsToDraw - 1, 0);
-
-    			let blanksToAdd = Math.max(effectiveDrawSize - actualCardsToDraw, 0);
-
-    			cards.push({
-    				probability: group.probability,
-    				label: group.label,
-    				color: group.color,
-    				ratioText: convertPercentToRatio(group.probability),
-    				stackedCards: actualCardsToDraw,
-    				isBlank: Array(actualCardsToDraw).fill(false).concat(Array(blanksToAdd).fill(true)), // Include actual and blank cards
-    				
     			});
-    		});
+    		}
 
     		return cards;
     	}
@@ -34099,6 +34407,23 @@ var app = (function () {
     		});
 
     		groupColors.set(updatedColors); // Update the store with new color mappings
+    	}
+
+    	//this is a helper function that removes groups redundancy in the output. 
+    	//prolly a better way to do this!
+    	function getCombinedResults(groups, results, probabilitiesByTurn, monteCarloHandResults, turn) {
+    		const fullResults = createGroupCards(groups, results, probabilitiesByTurn, turn);
+    		const handResults = createGroupCards(groups, results, monteCarloHandResults, turn, 'hand', true); // Exclude groups
+    		const combinedResults = [...handResults, ...fullResults];
+
+    		// Sort to ensure hand simulation results are always first or second
+    		combinedResults.sort((a, b) => {
+    			if (a.label === 'Hand Simulation') return -1;
+    			if (b.label === 'Hand Simulation') return 1;
+    			return 0;
+    		});
+
+    		return combinedResults;
     	}
 
     	$$self.$$.on_mount.push(function () {
@@ -34130,8 +34455,8 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ('groups' in $$props) $$invalidate(0, groups = $$props.groups);
-    		if ('deckSize' in $$props) $$invalidate(10, deckSize = $$props.deckSize);
-    		if ('mulliganCount' in $$props) $$invalidate(11, mulliganCount = $$props.mulliganCount);
+    		if ('deckSize' in $$props) $$invalidate(12, deckSize = $$props.deckSize);
+    		if ('mulliganCount' in $$props) $$invalidate(13, mulliganCount = $$props.mulliganCount);
     		if ('InitialDrawSize' in $$props) $$invalidate(1, InitialDrawSize = $$props.InitialDrawSize);
     	};
 
@@ -34141,6 +34466,7 @@ var app = (function () {
     		numberOfTurns,
     		simulationData,
     		monteCarloResults,
+    		monteCarloHandResults,
     		simulationRun,
     		cancelSimulation,
     		simulationProgress,
@@ -34148,6 +34474,7 @@ var app = (function () {
     		shouldResetSimulation,
     		mulliganConfig,
     		simplifiedRampMana,
+    		simulationType,
     		sampleSize: lodashExports.sampleSize,
     		_,
     		onMount,
@@ -34178,6 +34505,8 @@ var app = (function () {
     		prepareCombinationsForAnalysis,
     		calculateLandGroupSizes,
     		monteCarloSimulation,
+    		monteCarloSimulationHand,
+    		handMeetsRequirements,
     		manaPoolMeetsRequirements,
     		londonMulligan,
     		prioritizeCardToBottom,
@@ -34193,7 +34522,6 @@ var app = (function () {
     		deductMana,
     		resetAndUpdateAvailableMana,
     		removeDrawnCardsFromDeck,
-    		handMeetsRequirements,
     		identifyProfiles,
     		preparedCards,
     		manaRequirements,
@@ -34204,13 +34532,16 @@ var app = (function () {
     		convertPercentToRatio,
     		presetColors,
     		assignGroupColors,
+    		getCombinedResults,
     		generateTurnsArray,
     		hasOutput,
     		$numberOfTurns,
     		$probabilitiesByTurn,
     		$groupColors,
+    		$monteCarloHandResults,
     		$monteCarloResults,
     		$simulationData,
+    		$simulationType,
     		$mulliganConfig,
     		$cancelSimulation,
     		$simplifiedRampMana
@@ -34218,14 +34549,14 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ('groups' in $$props) $$invalidate(0, groups = $$props.groups);
-    		if ('deckSize' in $$props) $$invalidate(10, deckSize = $$props.deckSize);
-    		if ('mulliganCount' in $$props) $$invalidate(11, mulliganCount = $$props.mulliganCount);
+    		if ('deckSize' in $$props) $$invalidate(12, deckSize = $$props.deckSize);
+    		if ('mulliganCount' in $$props) $$invalidate(13, mulliganCount = $$props.mulliganCount);
     		if ('InitialDrawSize' in $$props) $$invalidate(1, InitialDrawSize = $$props.InitialDrawSize);
     		if ('results' in $$props) $$invalidate(2, results = $$props.results);
     		if ('showPopover' in $$props) $$invalidate(6, showPopover = $$props.showPopover);
     		if ('preparedCards' in $$props) preparedCards = $$props.preparedCards;
     		if ('manaRequirements' in $$props) manaRequirements = $$props.manaRequirements;
-    		if ('probabilitiesByTurn' in $$props) $$invalidate(8, probabilitiesByTurn = $$props.probabilitiesByTurn);
+    		if ('probabilitiesByTurn' in $$props) $$invalidate(9, probabilitiesByTurn = $$props.probabilitiesByTurn);
     		if ('currentTurn' in $$props) currentTurn = $$props.currentTurn;
     		if ('generateTurnsArray' in $$props) $$invalidate(3, generateTurnsArray = $$props.generateTurnsArray);
     		if ('hasOutput' in $$props) $$invalidate(7, hasOutput = $$props.hasOutput);
@@ -34241,7 +34572,7 @@ var app = (function () {
     			console.log('numberOfTurns:', $numberOfTurns);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$mulliganConfig*/ 8192) {
+    		if ($$self.$$.dirty[0] & /*$mulliganConfig*/ 32768) {
     			console.log('Mulligan Configuration:', $mulliganConfig);
     		}
 
@@ -34253,14 +34584,14 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*$simplifiedRampMana*/ 16384) {
+    		if ($$self.$$.dirty[0] & /*$simplifiedRampMana*/ 65536) {
     			//the following is the start of mana probability calculations -------------------
     			{
     				console.log('calculation file Simplified Ramp Mana:', $simplifiedRampMana); // Log the simplified ramp mana
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*$simulationData*/ 4096) {
+    		if ($$self.$$.dirty[0] & /*$simulationData*/ 16384) {
     			// Reactive statement to update the component's data whenever the store changes
     			{
     				preparedCards = $simulationData.preparedCards;
@@ -34269,7 +34600,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*$simulationData*/ 4096) {
+    		if ($$self.$$.dirty[0] & /*$simulationData*/ 16384) {
     			if ($simulationData && $simulationData.preparedCards.length > 0 && Object.values($simulationData.manaRequirements).some(value => value > 0)) {
     				runSimulation();
     			}
@@ -34306,8 +34637,10 @@ var app = (function () {
     		$probabilitiesByTurn,
     		showPopover,
     		hasOutput,
+    		$monteCarloHandResults,
     		probabilitiesByTurn,
     		createGroupCards,
+    		getCombinedResults,
     		deckSize,
     		mulliganCount,
     		$simulationData,
@@ -34330,8 +34663,8 @@ var app = (function () {
     			safe_not_equal,
     			{
     				groups: 0,
-    				deckSize: 10,
-    				mulliganCount: 11,
+    				deckSize: 12,
+    				mulliganCount: 13,
     				InitialDrawSize: 1
     			},
     			null,

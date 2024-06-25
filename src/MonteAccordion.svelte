@@ -7,7 +7,7 @@
   import Popover from './Popover.svelte';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
-  import { simulationData, simplifiedRampMana, monteCarloResults, shouldResetSimulation } from './colorStore.js';
+  import { simulationData, simulationType, simplifiedRampMana, monteCarloResults, shouldResetSimulation } from './colorStore.js';
   import { trackEvent } from './analytics.js';
   import { writable } from 'svelte/store';
 
@@ -83,6 +83,14 @@ function handleRunSimulationClick() {
         'event_label': 'User clicked Run Simulation button'
     });
 }
+
+function handleRunHandSimulationClick() {
+        logPreparedCards('hand'); // Pass 'hand' to indicate hand simulation
+        trackEvent('run_hand_simulation_click', {
+            'event_label': 'User clicked Run Hand Simulation button'
+        });
+    }
+
 
 function handleToggleAccordionClick() {
     toggleItem(0); // Assuming toggleItem toggles the visibility of accordion item
@@ -633,7 +641,7 @@ function prepareManaCardsForCalculation() {
 }
 
 
-function logPreparedCards() {
+function logPreparedCards(type = 'full') {
     const preparedCards = prepareManaCardsForCalculation();
     console.log('Prepared Cards:', preparedCards);
 
@@ -651,6 +659,8 @@ function logPreparedCards() {
         manaRequirements: filteredManaRequirements,
         iterations: iterations
     });
+
+    simulationType.set(type); // Set the simulation type
 }
 
 
@@ -973,10 +983,15 @@ function selectInput(event) {
 
 
       <div class="land-group-parameters">
-        <button class="primary-btn" on:click={handleRunSimulationClick} disabled={!enableSimulationButton}>
-          Run Simulation
-        </button>  
+     
+        <button class="primary-btn" on:click={handleRunHandSimulationClick} disabled={!enableSimulationButton}>
+          Run Hand Simulation
+       </button>
        
+        <button class="primary-btn" on:click={handleRunSimulationClick} disabled={!enableSimulationButton}>
+          Run Field Simulation
+        </button>  
+ 
         <!-- I could not get this to work. need to somehow re-run the simulation or 
         createGroupCards. function                                            -->
         <!-- <button on:click={ClearSimulation}>Clear Simulation</button>  -->
