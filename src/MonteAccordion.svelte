@@ -779,6 +779,7 @@ function selectInput(event) {
 .land-group-parameters {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 0.5rem;
   gap: 10px;
@@ -810,7 +811,7 @@ function selectInput(event) {
   }
 
   .primary-divider {
-    margin-top: 15px; /* Add some space above the inputs */
+
     border: none;
     height: 2px;
     background-color: #ccc;
@@ -870,7 +871,7 @@ function selectInput(event) {
       tabindex="0"
       >
 <h3 style="font-size:18px; display: flex; align-items: center; gap:4px">
-    Advanced mana and attribute probabilities
+    Monte Carlo Simulation
     &nbsp;
     <img src={WIcon} alt="Plains" class="mana-icon" />
     <img src={UIcon} alt="Swamp" class="mana-icon" />
@@ -885,7 +886,7 @@ function selectInput(event) {
       style:height="{openItem === 0 ? 'auto' : '0'}"
        >
       <!-- Mana Cards and Add Button -->
-      <p style="margin-top: 0.5rem;">This section allows you to consider card attributes, like mana and abilities. <span class="semi-bold">Probabilities from this section do not take into account cards from the above section.</span> To learn more, click the info button ->       
+      <p style="margin-top: 0.5rem;">Simulate the chance you'll get the colors you need in your hand or on the field. <span class="semi-bold">Probabilities from this section do not take into account cards from the above Hypergeometric Calculator.</span> To learn more, click the info button ->       
         <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
           <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
@@ -901,7 +902,7 @@ function selectInput(event) {
 
 
 
-      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. You can also add custom groups (see the custom groups (?) button for more details).</p>
+      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. Custom groups only work in hand simulations (see the custom groups (?) button for more details).</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -964,7 +965,7 @@ function selectInput(event) {
         </Popover>
         <div>Total custom cards: <b>{totalCustomAmount}</b></div> 
     </div>
-    <p style="margin-top: 8px;"><i>Custom cards can only be used for hand simulations.</i></p>
+    <p style="margin: 8px 8px 16px 0px;"><i>Custom cards can only be used for hand simulations.</i></p>
 
          <!-- Horizontal Rule for Separation -->
          <hr class="primary-divider">
@@ -1015,7 +1016,13 @@ function selectInput(event) {
     {/each}
   </div>
     
-    
+             <!-- Horizontal Rule for Separation -->
+             <hr class="primary-divider">
+
+
+
+             <!-- Mana Requirements Fields -->
+             <p><strong>Step 3</strong> - Run the simulation. You can add advanced mulligan logic too. </p>
 
 
       <div class="land-group-parameters">

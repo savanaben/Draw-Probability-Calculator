@@ -1155,7 +1155,6 @@ var app = (function () {
 
     const numberOfTurns = writable([1, 1, 1, 1, 1]); // Default to drawing 1 card per turn for 5 turns
 
-
     let idCounter = 0;
 
     function getNextUniqueId() {
@@ -10233,7 +10232,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (890:8) 
+    // (891:8) 
     function create_trigger_slot_2$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -10256,7 +10255,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 889, 8, 25645);
+    			add_location(button, file$7, 890, 8, 25608);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -10290,14 +10289,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_2$1.name,
     		type: "slot",
-    		source: "(890:8) ",
+    		source: "(891:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (893:8) 
+    // (894:8) 
     function create_content_slot_2$1(ctx) {
     	let div;
     	let p0;
@@ -10328,18 +10327,18 @@ var app = (function () {
     			p2.textContent = "My research has only come up with one other method to find this kind of probability - the inclusion exclusion principle. And that seemed hella hard to implement, so I went with this.";
     			attr_dev(a0, "href", "https://en.wikipedia.org/wiki/Monte_Carlo_method");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$7, 893, 76, 25989);
+    			add_location(a0, file$7, 894, 76, 25952);
     			attr_dev(a1, "href", "https://en.wikipedia.org/wiki/Hypergeometric_distribution");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$7, 893, 381, 26294);
-    			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 893, 10, 25923);
-    			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 894, 12, 26582);
-    			attr_dev(p2, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p2, file$7, 895, 10, 26858);
+    			add_location(a1, file$7, 894, 381, 26257);
+    			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-edgrwr");
+    			add_location(p0, file$7, 894, 10, 25886);
+    			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-edgrwr");
+    			add_location(p1, file$7, 895, 12, 26545);
+    			attr_dev(p2, "class", "popover-content popover-text-fixer svelte-edgrwr");
+    			add_location(p2, file$7, 896, 10, 26821);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 892, 8, 25891);
+    			add_location(div, file$7, 893, 8, 25854);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10363,14 +10362,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_2$1.name,
     		type: "slot",
-    		source: "(893:8) ",
+    		source: "(894:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (906:8) {#each manaCards as card (card.id)}
+    // (907:8) {#each manaCards as card (card.id)}
     function create_each_block_4(key_1, ctx) {
     	let first;
     	let manacard;
@@ -10439,14 +10438,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(906:8) {#each manaCards as card (card.id)}",
+    		source: "(907:8) {#each manaCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (924:8) {#each rampCards as card (card.id)}
+    // (925:8) {#each rampCards as card (card.id)}
     function create_each_block_3(key_1, ctx) {
     	let first;
     	let rampcard;
@@ -10515,14 +10514,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(924:8) {#each rampCards as card (card.id)}",
+    		source: "(925:8) {#each rampCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (943:3) {#each customCards as card (card.id)}
+    // (944:3) {#each customCards as card (card.id)}
     function create_each_block_2$1(key_1, ctx) {
     	let first;
     	let customcard;
@@ -10598,14 +10597,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2$1.name,
     		type: "each",
-    		source: "(943:3) {#each customCards as card (card.id)}",
+    		source: "(944:3) {#each customCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (957:10) 
+    // (958:10) 
     function create_trigger_slot_1$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -10628,7 +10627,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 956, 10, 29052);
+    			add_location(button, file$7, 957, 10, 29028);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -10662,14 +10661,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1$1.name,
     		type: "slot",
-    		source: "(957:10) ",
+    		source: "(958:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (960:10) 
+    // (961:10) 
     function create_content_slot_1$1(ctx) {
     	let div;
     	let p0;
@@ -10684,12 +10683,12 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.";
-    			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 960, 12, 29338);
-    			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 961, 12, 29808);
+    			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-edgrwr");
+    			add_location(p0, file$7, 961, 12, 29314);
+    			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-edgrwr");
+    			add_location(p1, file$7, 962, 12, 29784);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 959, 10, 29304);
+    			add_location(div, file$7, 960, 10, 29280);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10707,14 +10706,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_1$1.name,
     		type: "slot",
-    		source: "(960:10) ",
+    		source: "(961:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (978:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
+    // (979:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
     function create_if_block$3(ctx) {
     	let div;
     	let label;
@@ -10746,16 +10745,16 @@ var app = (function () {
     			t = space();
     			input = element("input");
     			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"));
-    			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 979, 12, 30819);
+    			attr_dev(label, "class", "svelte-edgrwr");
+    			add_location(label, file$7, 980, 12, 30804);
     			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
     			input.value = input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[67]];
-    			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 986, 12, 31195);
-    			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 978, 10, 30775);
+    			attr_dev(input, "class", "svelte-edgrwr");
+    			add_location(input, file$7, 987, 12, 31180);
+    			attr_dev(div, "class", "mana-requirement svelte-edgrwr");
+    			add_location(div, file$7, 979, 10, 30760);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10812,14 +10811,14 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(978:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
+    		source: "(979:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (983:14) {:else}
+    // (984:14) {:else}
     function create_else_block$1(ctx) {
     	let t0_value = /*key*/ ctx[67] + "";
     	let t0;
@@ -10847,14 +10846,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(983:14) {:else}",
+    		source: "(984:14) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (981:14) {#if manaIcons[key]}
+    // (982:14) {#if manaIcons[key]}
     function create_if_block_1$2(ctx) {
     	let img;
     	let img_src_value;
@@ -10871,8 +10870,8 @@ var app = (function () {
     			: /*manaIcons*/ ctx[15][/*key*/ ctx[67]])) attr_dev(img, "src", img_src_value);
 
     			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[67] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img, file$7, 981, 16, 30925);
+    			attr_dev(img, "class", "mana-icon svelte-edgrwr");
+    			add_location(img, file$7, 982, 16, 30910);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -10899,14 +10898,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(981:14) {#if manaIcons[key]}",
+    		source: "(982:14) {#if manaIcons[key]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (977:6) {#each Object.entries(manaRequirements) as [key, amount]}
+    // (978:6) {#each Object.entries(manaRequirements) as [key, amount]}
     function create_each_block_1$2(ctx) {
     	let show_if = /*activeManaTypes*/ ctx[6][/*key*/ ctx[67]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
     	let if_block_anchor;
@@ -10953,14 +10952,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1$2.name,
     		type: "each",
-    		source: "(977:6) {#each Object.entries(manaRequirements) as [key, amount]}",
+    		source: "(978:6) {#each Object.entries(manaRequirements) as [key, amount]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1003:8) {#each Array.from(uniqueAttributes) as attr}
+    // (1004:8) {#each Array.from(uniqueAttributes) as attr}
     function create_each_block$4(ctx) {
     	let div;
     	let label;
@@ -10990,16 +10989,16 @@ var app = (function () {
     			input = element("input");
     			t3 = space();
     			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'));
-    			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 1004, 10, 31639);
+    			attr_dev(label, "class", "svelte-edgrwr");
+    			add_location(label, file$7, 1005, 10, 31624);
     			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
     			input.value = input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[64]];
-    			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 1005, 10, 31715);
-    			attr_dev(div, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div, file$7, 1003, 8, 31597);
+    			attr_dev(input, "class", "svelte-edgrwr");
+    			add_location(input, file$7, 1006, 10, 31700);
+    			attr_dev(div, "class", "mana-requirement svelte-edgrwr");
+    			add_location(div, file$7, 1004, 8, 31582);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11046,14 +11045,14 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(1003:8) {#each Array.from(uniqueAttributes) as attr}",
+    		source: "(1004:8) {#each Array.from(uniqueAttributes) as attr}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1041:10) 
+    // (1048:10) 
     function create_trigger_slot$3(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -11077,7 +11076,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 1040, 10, 33057);
+    			add_location(button, file$7, 1047, 10, 33296);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -11111,14 +11110,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$3.name,
     		type: "slot",
-    		source: "(1041:10) ",
+    		source: "(1048:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1044:10) 
+    // (1051:10) 
     function create_content_slot$3(ctx) {
     	let div;
     	let p0;
@@ -11135,13 +11134,13 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.";
-    			add_location(b, file$7, 1044, 58, 33415);
-    			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p0, file$7, 1044, 12, 33369);
-    			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-1q4pgtd");
-    			add_location(p1, file$7, 1045, 12, 33485);
+    			add_location(b, file$7, 1051, 58, 33654);
+    			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-edgrwr");
+    			add_location(p0, file$7, 1051, 12, 33608);
+    			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-edgrwr");
+    			add_location(p1, file$7, 1052, 12, 33724);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 1043, 10, 33335);
+    			add_location(div, file$7, 1050, 10, 33574);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11160,7 +11159,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$3.name,
     		type: "slot",
-    		source: "(1044:10) ",
+    		source: "(1051:10) ",
     		ctx
     	});
 
@@ -11255,23 +11254,29 @@ var app = (function () {
     	let div10;
     	let t40;
     	let t41;
+    	let hr3;
+    	let t42;
+    	let p4;
+    	let strong2;
+    	let t44;
+    	let t45;
     	let div12;
     	let button3;
-    	let t42;
+    	let t46;
     	let button3_disabled_value;
-    	let t43;
+    	let t47;
     	let button4;
-    	let t44;
+    	let t48;
     	let button4_disabled_value;
-    	let t45;
+    	let t49;
     	let div11;
     	let label;
-    	let t47;
+    	let t51;
     	let input;
-    	let t48;
+    	let t52;
     	let popover2;
     	let updating_show_2;
-    	let t49;
+    	let t53;
     	let simulationmulligansaccordion;
     	let div13_transition;
     	let div15_class_value;
@@ -11393,7 +11398,7 @@ var app = (function () {
     			div14 = element("div");
     			div0 = element("div");
     			h3 = element("h3");
-    			t0 = text("Advanced mana and attribute probabilities\r\n     \r\n    ");
+    			t0 = text("Monte Carlo Simulation\r\n     \r\n    ");
     			img0 = element("img");
     			t1 = space();
     			img1 = element("img");
@@ -11406,16 +11411,16 @@ var app = (function () {
     			t5 = space();
     			div13 = element("div");
     			p0 = element("p");
-    			t6 = text("This section allows you to consider card attributes, like mana and abilities. ");
+    			t6 = text("Simulate the chance you'll get the colors you need in your hand or on the field. ");
     			span = element("span");
-    			span.textContent = "Probabilities from this section do not take into account cards from the above section.";
+    			span.textContent = "Probabilities from this section do not take into account cards from the above Hypergeometric Calculator.";
     			t8 = text(" To learn more, click the info button ->       \r\n        ");
     			create_component(popover0.$$.fragment);
     			t9 = space();
     			p1 = element("p");
     			strong0 = element("strong");
     			strong0.textContent = "Step 1";
-    			t11 = text(" - Add all of the mana producing cards in your deck. You can also add custom groups (see the custom groups (?) button for more details).");
+    			t11 = text(" - Add all of the mana producing cards in your deck. Custom groups only work in hand simulations (see the custom groups (?) button for more details).");
     			t12 = space();
     			div1 = element("div");
 
@@ -11495,122 +11500,134 @@ var app = (function () {
     			}
 
     			t41 = space();
+    			hr3 = element("hr");
+    			t42 = space();
+    			p4 = element("p");
+    			strong2 = element("strong");
+    			strong2.textContent = "Step 3";
+    			t44 = text(" - Run the simulation. You can add advanced mulligan logic too.");
+    			t45 = space();
     			div12 = element("div");
     			button3 = element("button");
-    			t42 = text("Run Hand Simulation");
-    			t43 = space();
+    			t46 = text("Run Hand Simulation");
+    			t47 = space();
     			button4 = element("button");
-    			t44 = text("Run Field Simulation");
-    			t45 = space();
+    			t48 = text("Run Field Simulation");
+    			t49 = space();
     			div11 = element("div");
     			label = element("label");
     			label.textContent = "Simulation iterations (caution):";
-    			t47 = space();
+    			t51 = space();
     			input = element("input");
-    			t48 = space();
+    			t52 = space();
     			create_component(popover2.$$.fragment);
-    			t49 = space();
+    			t53 = space();
     			create_component(simulationmulligansaccordion.$$.fragment);
     			if (!src_url_equal(img0.src, img0_src_value = img$f)) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "Plains");
-    			attr_dev(img0, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img0, file$7, 874, 4, 24811);
+    			attr_dev(img0, "class", "mana-icon svelte-edgrwr");
+    			add_location(img0, file$7, 875, 4, 24753);
     			if (!src_url_equal(img1.src, img1_src_value = img$e)) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Swamp");
-    			attr_dev(img1, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img1, file$7, 875, 4, 24867);
+    			attr_dev(img1, "class", "mana-icon svelte-edgrwr");
+    			add_location(img1, file$7, 876, 4, 24809);
     			if (!src_url_equal(img2.src, img2_src_value = img$d)) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Island");
-    			attr_dev(img2, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img2, file$7, 876, 4, 24922);
+    			attr_dev(img2, "class", "mana-icon svelte-edgrwr");
+    			add_location(img2, file$7, 877, 4, 24864);
     			if (!src_url_equal(img3.src, img3_src_value = img$c)) attr_dev(img3, "src", img3_src_value);
     			attr_dev(img3, "alt", "Mountain");
-    			attr_dev(img3, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img3, file$7, 877, 4, 24978);
+    			attr_dev(img3, "class", "mana-icon svelte-edgrwr");
+    			add_location(img3, file$7, 878, 4, 24920);
     			if (!src_url_equal(img4.src, img4_src_value = img$b)) attr_dev(img4, "src", img4_src_value);
     			attr_dev(img4, "alt", "Forest");
-    			attr_dev(img4, "class", "mana-icon svelte-1q4pgtd");
-    			add_location(img4, file$7, 878, 4, 25036);
+    			attr_dev(img4, "class", "mana-icon svelte-edgrwr");
+    			add_location(img4, file$7, 879, 4, 24978);
     			set_style(h3, "font-size", "18px");
     			set_style(h3, "display", "flex");
     			set_style(h3, "align-items", "center");
     			set_style(h3, "gap", "4px");
-    			attr_dev(h3, "class", "svelte-1q4pgtd");
-    			add_location(h3, file$7, 871, 0, 24674);
-    			attr_dev(div0, "class", "accordion-title svelte-1q4pgtd");
+    			attr_dev(h3, "class", "svelte-edgrwr");
+    			add_location(h3, file$7, 872, 0, 24635);
+    			attr_dev(div0, "class", "accordion-title svelte-edgrwr");
     			attr_dev(div0, "tabindex", "0");
-    			add_location(div0, file$7, 864, 4, 24419);
-    			attr_dev(span, "class", "semi-bold svelte-1q4pgtd");
-    			add_location(span, file$7, 887, 115, 25412);
+    			add_location(div0, file$7, 865, 4, 24380);
+    			attr_dev(span, "class", "semi-bold svelte-edgrwr");
+    			add_location(span, file$7, 888, 118, 25357);
     			set_style(p0, "margin-top", "0.5rem");
-    			attr_dev(p0, "class", "svelte-1q4pgtd");
-    			add_location(p0, file$7, 887, 6, 25303);
-    			add_location(strong0, file$7, 903, 37, 27181);
+    			attr_dev(p0, "class", "svelte-edgrwr");
+    			add_location(p0, file$7, 888, 6, 25245);
+    			add_location(strong0, file$7, 904, 37, 27144);
     			set_style(p1, "margin-top", "0.5rem");
-    			attr_dev(p1, "class", "svelte-1q4pgtd");
-    			add_location(p1, file$7, 903, 6, 27150);
-    			attr_dev(div1, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div1, file$7, 904, 6, 27352);
-    			add_location(button0, file$7, 913, 8, 27622);
-    			add_location(b0, file$7, 914, 31, 27721);
-    			add_location(div2, file$7, 914, 8, 27698);
-    			attr_dev(div3, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div3, file$7, 912, 6, 27577);
-    			attr_dev(hr0, "class", "secondary-divider svelte-1q4pgtd");
-    			add_location(hr0, file$7, 919, 6, 27818);
-    			attr_dev(div4, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div4, file$7, 922, 6, 27860);
-    			add_location(button1, file$7, 933, 8, 28147);
-    			add_location(b1, file$7, 934, 31, 28246);
-    			add_location(div5, file$7, 934, 8, 28223);
-    			attr_dev(div6, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div6, file$7, 932, 6, 28102);
-    			attr_dev(hr1, "class", "secondary-divider svelte-1q4pgtd");
-    			add_location(hr1, file$7, 938, 6, 28353);
-    			attr_dev(div7, "class", "mana-cards-container svelte-1q4pgtd");
-    			add_location(div7, file$7, 941, 6, 28395);
-    			add_location(button2, file$7, 954, 6, 28912);
-    			add_location(b2, file$7, 964, 33, 30083);
-    			add_location(div8, file$7, 964, 8, 30058);
-    			attr_dev(div9, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div9, file$7, 953, 4, 28869);
-    			add_location(i, file$7, 966, 32, 30162);
-    			set_style(p2, "margin-top", "8px");
-    			attr_dev(p2, "class", "svelte-1q4pgtd");
-    			add_location(p2, file$7, 966, 4, 30134);
-    			attr_dev(hr2, "class", "primary-divider svelte-1q4pgtd");
-    			add_location(hr2, file$7, 969, 9, 30287);
-    			add_location(strong1, file$7, 974, 9, 30373);
-    			attr_dev(p3, "class", "svelte-1q4pgtd");
-    			add_location(p3, file$7, 974, 6, 30370);
-    			attr_dev(div10, "class", "mana-requirements-container svelte-1q4pgtd");
-    			add_location(div10, file$7, 975, 4, 30545);
+    			attr_dev(p1, "class", "svelte-edgrwr");
+    			add_location(p1, file$7, 904, 6, 27113);
+    			attr_dev(div1, "class", "mana-cards-container svelte-edgrwr");
+    			add_location(div1, file$7, 905, 6, 27328);
+    			add_location(button0, file$7, 914, 8, 27598);
+    			add_location(b0, file$7, 915, 31, 27697);
+    			add_location(div2, file$7, 915, 8, 27674);
+    			attr_dev(div3, "class", "land-group-parameters svelte-edgrwr");
+    			add_location(div3, file$7, 913, 6, 27553);
+    			attr_dev(hr0, "class", "secondary-divider svelte-edgrwr");
+    			add_location(hr0, file$7, 920, 6, 27794);
+    			attr_dev(div4, "class", "mana-cards-container svelte-edgrwr");
+    			add_location(div4, file$7, 923, 6, 27836);
+    			add_location(button1, file$7, 934, 8, 28123);
+    			add_location(b1, file$7, 935, 31, 28222);
+    			add_location(div5, file$7, 935, 8, 28199);
+    			attr_dev(div6, "class", "land-group-parameters svelte-edgrwr");
+    			add_location(div6, file$7, 933, 6, 28078);
+    			attr_dev(hr1, "class", "secondary-divider svelte-edgrwr");
+    			add_location(hr1, file$7, 939, 6, 28329);
+    			attr_dev(div7, "class", "mana-cards-container svelte-edgrwr");
+    			add_location(div7, file$7, 942, 6, 28371);
+    			add_location(button2, file$7, 955, 6, 28888);
+    			add_location(b2, file$7, 965, 33, 30059);
+    			add_location(div8, file$7, 965, 8, 30034);
+    			attr_dev(div9, "class", "land-group-parameters svelte-edgrwr");
+    			add_location(div9, file$7, 954, 4, 28845);
+    			add_location(i, file$7, 967, 41, 30147);
+    			set_style(p2, "margin", "8px 8px 16px 0px");
+    			attr_dev(p2, "class", "svelte-edgrwr");
+    			add_location(p2, file$7, 967, 4, 30110);
+    			attr_dev(hr2, "class", "primary-divider svelte-edgrwr");
+    			add_location(hr2, file$7, 970, 9, 30272);
+    			add_location(strong1, file$7, 975, 9, 30358);
+    			attr_dev(p3, "class", "svelte-edgrwr");
+    			add_location(p3, file$7, 975, 6, 30355);
+    			attr_dev(div10, "class", "mana-requirements-container svelte-edgrwr");
+    			add_location(div10, file$7, 976, 4, 30530);
+    			attr_dev(hr3, "class", "primary-divider svelte-edgrwr");
+    			add_location(hr3, file$7, 1019, 13, 32127);
+    			add_location(strong2, file$7, 1024, 16, 32227);
+    			attr_dev(p4, "class", "svelte-edgrwr");
+    			add_location(p4, file$7, 1024, 13, 32224);
     			attr_dev(button3, "class", "primary-btn");
     			button3.disabled = button3_disabled_value = !/*enableSimulationButton*/ ctx[14];
-    			add_location(button3, file$7, 1022, 8, 32143);
+    			add_location(button3, file$7, 1029, 8, 32382);
     			attr_dev(button4, "class", "primary-btn");
     			button4.disabled = button4_disabled_value = !/*enableSimulationButton*/ ctx[14];
-    			add_location(button4, file$7, 1026, 8, 32314);
+    			add_location(button4, file$7, 1033, 8, 32553);
     			attr_dev(label, "for", "iterations");
-    			attr_dev(label, "class", "svelte-1q4pgtd");
-    			add_location(label, file$7, 1035, 8, 32776);
+    			attr_dev(label, "class", "svelte-edgrwr");
+    			add_location(label, file$7, 1042, 8, 33015);
     			set_style(input, "width", "90px");
     			attr_dev(input, "id", "iterations");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "1");
-    			attr_dev(input, "class", "svelte-1q4pgtd");
-    			add_location(input, file$7, 1036, 8, 32850);
-    			attr_dev(div11, "class", "mana-requirement svelte-1q4pgtd");
-    			add_location(div11, file$7, 1034, 8, 32736);
-    			attr_dev(div12, "class", "land-group-parameters svelte-1q4pgtd");
-    			add_location(div12, file$7, 1020, 6, 32091);
-    			attr_dev(div13, "class", "answer svelte-1q4pgtd");
+    			attr_dev(input, "class", "svelte-edgrwr");
+    			add_location(input, file$7, 1043, 8, 33089);
+    			attr_dev(div11, "class", "mana-requirement svelte-edgrwr");
+    			add_location(div11, file$7, 1041, 8, 32975);
+    			attr_dev(div12, "class", "land-group-parameters svelte-edgrwr");
+    			add_location(div12, file$7, 1027, 6, 32330);
+    			attr_dev(div13, "class", "answer svelte-edgrwr");
     			set_style(div13, "height", /*openItem*/ ctx[7] === 0 ? 'auto' : '0');
-    			add_location(div13, file$7, 881, 6, 25113);
-    			attr_dev(div14, "class", "accordion-item svelte-1q4pgtd");
-    			add_location(div14, file$7, 863, 2, 24385);
-    			attr_dev(div15, "class", div15_class_value = "accordion " + (/*isHovering*/ ctx[10] ? 'hovering' : '') + " svelte-1q4pgtd");
-    			add_location(div15, file$7, 860, 0, 24208);
+    			add_location(div13, file$7, 882, 6, 25055);
+    			attr_dev(div14, "class", "accordion-item svelte-edgrwr");
+    			add_location(div14, file$7, 864, 2, 24346);
+    			attr_dev(div15, "class", div15_class_value = "accordion " + (/*isHovering*/ ctx[10] ? 'hovering' : '') + " svelte-edgrwr");
+    			add_location(div15, file$7, 861, 0, 24169);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -11725,21 +11742,27 @@ var app = (function () {
     			}
 
     			append_dev(div13, t41);
+    			append_dev(div13, hr3);
+    			append_dev(div13, t42);
+    			append_dev(div13, p4);
+    			append_dev(p4, strong2);
+    			append_dev(p4, t44);
+    			append_dev(div13, t45);
     			append_dev(div13, div12);
     			append_dev(div12, button3);
-    			append_dev(button3, t42);
-    			append_dev(div12, t43);
+    			append_dev(button3, t46);
+    			append_dev(div12, t47);
     			append_dev(div12, button4);
-    			append_dev(button4, t44);
-    			append_dev(div12, t45);
+    			append_dev(button4, t48);
+    			append_dev(div12, t49);
     			append_dev(div12, div11);
     			append_dev(div11, label);
-    			append_dev(div11, t47);
+    			append_dev(div11, t51);
     			append_dev(div11, input);
     			set_input_value(input, /*iterations*/ ctx[9]);
-    			append_dev(div11, t48);
+    			append_dev(div11, t52);
     			mount_component(popover2, div11, null);
-    			append_dev(div13, t49);
+    			append_dev(div13, t53);
     			mount_component(simulationmulligansaccordion, div13, null);
     			current = true;
 
@@ -11900,7 +11923,7 @@ var app = (function () {
     				set_style(div13, "height", /*openItem*/ ctx[7] === 0 ? 'auto' : '0');
     			}
 
-    			if (!current || dirty[0] & /*isHovering*/ 1024 && div15_class_value !== (div15_class_value = "accordion " + (/*isHovering*/ ctx[10] ? 'hovering' : '') + " svelte-1q4pgtd")) {
+    			if (!current || dirty[0] & /*isHovering*/ 1024 && div15_class_value !== (div15_class_value = "accordion " + (/*isHovering*/ ctx[10] ? 'hovering' : '') + " svelte-edgrwr")) {
     				attr_dev(div15, "class", div15_class_value);
     			}
     		},
@@ -13271,13 +13294,13 @@ var app = (function () {
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[36] = list[i];
-    	child_ctx[37] = list;
-    	child_ctx[38] = i;
+    	child_ctx[42] = list[i];
+    	child_ctx[43] = list;
+    	child_ctx[44] = i;
     	return child_ctx;
     }
 
-    // (126:24) 
+    // (148:24) 
     function create_trigger_slot_3(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -13297,10 +13320,10 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
+    			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 125, 24, 3960);
+    			add_location(button, file$5, 147, 24, 5491);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -13308,7 +13331,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[14], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[20], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -13334,14 +13357,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_3.name,
     		type: "slot",
-    		source: "(126:24) ",
+    		source: "(148:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (129:24) 
+    // (151:24) 
     function create_content_slot_3(ctx) {
     	let div;
     	let p0;
@@ -13360,13 +13383,13 @@ var app = (function () {
     			b = element("b");
     			b.textContent = "Each group must have a unique text name";
     			t3 = text(" for the tool to work (some day I'll figure out indexing...)");
-    			attr_dev(p0, "class", "popover-content svelte-jnyg77");
-    			add_location(p0, file$5, 129, 26, 4305);
-    			add_location(b, file$5, 130, 53, 4635);
-    			attr_dev(p1, "class", "popover-content svelte-jnyg77");
-    			add_location(p1, file$5, 130, 26, 4608);
+    			attr_dev(p0, "class", "popover-content svelte-1lfiur4");
+    			add_location(p0, file$5, 151, 26, 5836);
+    			add_location(b, file$5, 152, 53, 6166);
+    			attr_dev(p1, "class", "popover-content svelte-1lfiur4");
+    			add_location(p1, file$5, 152, 26, 6139);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 128, 24, 4257);
+    			add_location(div, file$5, 150, 24, 5788);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13386,14 +13409,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_3.name,
     		type: "slot",
-    		source: "(129:24) ",
+    		source: "(151:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (138:24) 
+    // (160:24) 
     function create_trigger_slot_2(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -13413,10 +13436,10 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
+    			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 137, 24, 5058);
+    			add_location(button, file$5, 159, 24, 6589);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -13424,7 +13447,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[16], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[22], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -13450,14 +13473,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_2.name,
     		type: "slot",
-    		source: "(138:24) ",
+    		source: "(160:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (141:24) 
+    // (163:24) 
     function create_content_slot_2(ctx) {
     	let div;
     	let p;
@@ -13473,11 +13496,11 @@ var app = (function () {
     			i = element("i");
     			i.textContent = "at least";
     			t2 = text(" this many cards from this group.");
-    			add_location(i, file$5, 141, 82, 5459);
-    			attr_dev(p, "class", "popover-content svelte-jnyg77");
-    			add_location(p, file$5, 141, 28, 5405);
+    			add_location(i, file$5, 163, 82, 6990);
+    			attr_dev(p, "class", "popover-content svelte-1lfiur4");
+    			add_location(p, file$5, 163, 28, 6936);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 140, 24, 5355);
+    			add_location(div, file$5, 162, 24, 6886);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13496,14 +13519,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_2.name,
     		type: "slot",
-    		source: "(141:24) ",
+    		source: "(163:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (148:24) 
+    // (170:24) 
     function create_trigger_slot_1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -13523,10 +13546,10 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
-    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
+    			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 147, 24, 5730);
+    			add_location(button, file$5, 169, 24, 7261);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -13534,7 +13557,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[18], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_3*/ ctx[24], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -13560,14 +13583,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1.name,
     		type: "slot",
-    		source: "(148:24) ",
+    		source: "(170:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (151:24) 
+    // (173:24) 
     function create_content_slot_1(ctx) {
     	let div;
     	let p0;
@@ -13590,14 +13613,14 @@ var app = (function () {
     			p1 = element("p");
     			b = element("b");
     			b.textContent = "Groups must have the exact same link name (keyword match). The tool does not support linking more than 4 groups together currently.";
-    			add_location(i, file$5, 151, 188, 6237);
-    			attr_dev(p0, "class", "popover-content svelte-jnyg77");
-    			add_location(p0, file$5, 151, 28, 6077);
-    			add_location(b, file$5, 152, 55, 6323);
-    			attr_dev(p1, "class", "popover-content svelte-jnyg77");
-    			add_location(p1, file$5, 152, 28, 6296);
+    			add_location(i, file$5, 173, 188, 7768);
+    			attr_dev(p0, "class", "popover-content svelte-1lfiur4");
+    			add_location(p0, file$5, 173, 28, 7608);
+    			add_location(b, file$5, 174, 55, 7854);
+    			attr_dev(p1, "class", "popover-content svelte-1lfiur4");
+    			add_location(p1, file$5, 174, 28, 7827);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 150, 24, 6027);
+    			add_location(div, file$5, 172, 24, 7558);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13619,14 +13642,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_1.name,
     		type: "slot",
-    		source: "(151:24) ",
+    		source: "(173:24) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (161:12) {#each groups as group, index}
+    // (183:12) {#each groups as group, index}
     function create_each_block$2(ctx) {
     	let tr;
     	let td0;
@@ -13644,30 +13667,31 @@ var app = (function () {
     	let td4;
     	let button;
     	let fontawesomeicon;
+    	let t4;
     	let current;
     	let mounted;
     	let dispose;
 
     	function input0_input_handler() {
-    		/*input0_input_handler*/ ctx[20].call(input0, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input0_input_handler*/ ctx[26].call(input0, /*each_value*/ ctx[43], /*index*/ ctx[44]);
     	}
 
     	function input1_input_handler() {
-    		/*input1_input_handler*/ ctx[21].call(input1, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input1_input_handler*/ ctx[27].call(input1, /*each_value*/ ctx[43], /*index*/ ctx[44]);
     	}
 
     	function input2_input_handler() {
-    		/*input2_input_handler*/ ctx[22].call(input2, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input2_input_handler*/ ctx[28].call(input2, /*each_value*/ ctx[43], /*index*/ ctx[44]);
     	}
 
     	function input3_input_handler() {
-    		/*input3_input_handler*/ ctx[23].call(input3, /*each_value*/ ctx[37], /*index*/ ctx[38]);
+    		/*input3_input_handler*/ ctx[29].call(input3, /*each_value*/ ctx[43], /*index*/ ctx[44]);
     	}
 
     	fontawesomeicon = new FontAwesomeIcon({ props: { icon: faTimes }, $$inline: true });
 
-    	function click_handler_3() {
-    		return /*click_handler_3*/ ctx[24](/*index*/ ctx[38]);
+    	function click_handler_4() {
+    		return /*click_handler_4*/ ctx[30](/*index*/ ctx[44]);
     	}
 
     	const block = {
@@ -13688,84 +13712,86 @@ var app = (function () {
     			td4 = element("td");
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
+    			t4 = space();
     			attr_dev(input0, "aria-label", "Group unique name");
-    			attr_dev(input0, "class", "input-group svelte-jnyg77");
+    			attr_dev(input0, "class", "input-group svelte-1lfiur4");
 
-    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input0, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    			? /*group*/ ctx[42].link
+    			: /*group*/ ctx[42].name]);
 
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "draw, ramp, removal, etc");
-    			add_location(input0, file$5, 163, 24, 6751);
-    			attr_dev(td0, "class", "svelte-jnyg77");
-    			add_location(td0, file$5, 162, 20, 6721);
+    			add_location(input0, file$5, 185, 24, 8282);
+    			attr_dev(td0, "class", "svelte-1lfiur4");
+    			add_location(td0, file$5, 184, 20, 8252);
     			attr_dev(input1, "aria-label", "Number of cards in group");
-    			attr_dev(input1, "class", "input-group svelte-jnyg77");
+    			attr_dev(input1, "class", "input-group svelte-1lfiur4");
 
-    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input1, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    			? /*group*/ ctx[42].link
+    			: /*group*/ ctx[42].name]);
 
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", "1");
     			attr_dev(input1, "max", "99");
-    			add_location(input1, file$5, 180, 24, 7582);
-    			attr_dev(td1, "class", "svelte-jnyg77");
-    			add_location(td1, file$5, 179, 20, 7552);
+    			add_location(input1, file$5, 202, 24, 9113);
+    			attr_dev(td1, "class", "svelte-1lfiur4");
+    			add_location(td1, file$5, 201, 20, 9083);
     			attr_dev(input2, "aria-label", "Minimum number of desired cards from group");
-    			attr_dev(input2, "class", "input-group svelte-jnyg77");
+    			attr_dev(input2, "class", "input-group svelte-1lfiur4");
 
-    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input2, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    			? /*group*/ ctx[42].link
+    			: /*group*/ ctx[42].name]);
 
     			attr_dev(input2, "type", "number");
     			attr_dev(input2, "min", "1");
     			attr_dev(input2, "max", "99");
-    			add_location(input2, file$5, 192, 24, 8169);
-    			attr_dev(td2, "class", "svelte-jnyg77");
-    			add_location(td2, file$5, 191, 20, 8139);
+    			add_location(input2, file$5, 214, 24, 9700);
+    			attr_dev(td2, "class", "svelte-1lfiur4");
+    			add_location(td2, file$5, 213, 20, 9670);
     			attr_dev(input3, "aria-label", "Linked group name");
-    			attr_dev(input3, "class", "input-group svelte-jnyg77");
+    			attr_dev(input3, "class", "input-group svelte-1lfiur4");
 
-    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    			? /*group*/ ctx[36].link
-    			: /*group*/ ctx[36].name]);
+    			set_style(input3, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    			? /*group*/ ctx[42].link
+    			: /*group*/ ctx[42].name]);
 
     			attr_dev(input3, "type", "text");
     			attr_dev(input3, "placeholder", "Link via keyword matching...");
-    			add_location(input3, file$5, 204, 24, 8781);
-    			attr_dev(td3, "class", "svelte-jnyg77");
-    			add_location(td3, file$5, 203, 20, 8751);
+    			add_location(input3, file$5, 226, 24, 10312);
+    			attr_dev(td3, "class", "svelte-1lfiur4");
+    			add_location(td3, file$5, 225, 20, 10282);
     			attr_dev(button, "aria-label", "Remove group");
-    			attr_dev(button, "class", "group-remove-button svelte-jnyg77");
-    			add_location(button, file$5, 213, 24, 9270);
-    			attr_dev(td4, "class", "svelte-jnyg77");
-    			add_location(td4, file$5, 212, 20, 9240);
-    			add_location(tr, file$5, 161, 16, 6695);
+    			attr_dev(button, "class", "group-remove-button svelte-1lfiur4");
+    			add_location(button, file$5, 235, 24, 10801);
+    			attr_dev(td4, "class", "svelte-1lfiur4");
+    			add_location(td4, file$5, 234, 20, 10771);
+    			add_location(tr, file$5, 183, 16, 8226);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
     			append_dev(tr, td0);
     			append_dev(td0, input0);
-    			set_input_value(input0, /*group*/ ctx[36].name);
+    			set_input_value(input0, /*group*/ ctx[42].name);
     			append_dev(tr, t0);
     			append_dev(tr, td1);
     			append_dev(td1, input1);
-    			set_input_value(input1, /*group*/ ctx[36].size);
+    			set_input_value(input1, /*group*/ ctx[42].size);
     			append_dev(tr, t1);
     			append_dev(tr, td2);
     			append_dev(td2, input2);
-    			set_input_value(input2, /*group*/ ctx[36].cardsToDraw);
+    			set_input_value(input2, /*group*/ ctx[42].cardsToDraw);
     			append_dev(tr, t2);
     			append_dev(tr, td3);
     			append_dev(td3, input3);
-    			set_input_value(input3, /*group*/ ctx[36].link);
+    			set_input_value(input3, /*group*/ ctx[42].link);
     			append_dev(tr, t3);
     			append_dev(tr, td4);
     			append_dev(td4, button);
     			mount_component(fontawesomeicon, button, null);
+    			append_dev(tr, t4);
     			current = true;
 
     			if (!mounted) {
@@ -13777,7 +13803,7 @@ var app = (function () {
     					listen_dev(input2, "input", input2_input_handler),
     					listen_dev(input2, "focus", selectInput$1, false, false, false, false),
     					listen_dev(input3, "input", input3_input_handler),
-    					listen_dev(button, "click", click_handler_3, false, false, false, false)
+    					listen_dev(button, "click", click_handler_4, false, false, false, false)
     				];
 
     				mounted = true;
@@ -13786,44 +13812,44 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
+    			if (!current || dirty[0] & /*$groupColors, groups*/ 257) {
+    				set_style(input0, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    				? /*group*/ ctx[42].link
+    				: /*group*/ ctx[42].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && input0.value !== /*group*/ ctx[36].name) {
-    				set_input_value(input0, /*group*/ ctx[36].name);
+    			if (dirty[0] & /*groups*/ 1 && input0.value !== /*group*/ ctx[42].name) {
+    				set_input_value(input0, /*group*/ ctx[42].name);
     			}
 
-    			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
+    			if (!current || dirty[0] & /*$groupColors, groups*/ 257) {
+    				set_style(input1, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    				? /*group*/ ctx[42].link
+    				: /*group*/ ctx[42].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[36].size) {
-    				set_input_value(input1, /*group*/ ctx[36].size);
+    			if (dirty[0] & /*groups*/ 1 && to_number(input1.value) !== /*group*/ ctx[42].size) {
+    				set_input_value(input1, /*group*/ ctx[42].size);
     			}
 
-    			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
+    			if (!current || dirty[0] & /*$groupColors, groups*/ 257) {
+    				set_style(input2, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    				? /*group*/ ctx[42].link
+    				: /*group*/ ctx[42].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[36].cardsToDraw) {
-    				set_input_value(input2, /*group*/ ctx[36].cardsToDraw);
+    			if (dirty[0] & /*groups*/ 1 && to_number(input2.value) !== /*group*/ ctx[42].cardsToDraw) {
+    				set_input_value(input2, /*group*/ ctx[42].cardsToDraw);
     			}
 
-    			if (!current || dirty[0] & /*$groupColors, groups*/ 65) {
-    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[6][/*group*/ ctx[36].link && /*group*/ ctx[36].link.trim()
-    				? /*group*/ ctx[36].link
-    				: /*group*/ ctx[36].name]);
+    			if (!current || dirty[0] & /*$groupColors, groups*/ 257) {
+    				set_style(input3, "--bg-color", /*$groupColors*/ ctx[8][/*group*/ ctx[42].link && /*group*/ ctx[42].link.trim()
+    				? /*group*/ ctx[42].link
+    				: /*group*/ ctx[42].name]);
     			}
 
-    			if (dirty[0] & /*groups*/ 1 && input3.value !== /*group*/ ctx[36].link) {
-    				set_input_value(input3, /*group*/ ctx[36].link);
+    			if (dirty[0] & /*groups*/ 1 && input3.value !== /*group*/ ctx[42].link) {
+    				set_input_value(input3, /*group*/ ctx[42].link);
     			}
     		},
     		i: function intro(local) {
@@ -13847,14 +13873,14 @@ var app = (function () {
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(161:12) {#each groups as group, index}",
+    		source: "(183:12) {#each groups as group, index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (237:20) 
+    // (250:16) 
     function create_trigger_slot$2(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -13876,10 +13902,10 @@ var app = (function () {
     			button = element("button");
     			create_component(fontawesomeicon.$$.fragment);
     			t = space();
-    			attr_dev(button, "class", "moreInfo svelte-jnyg77");
+    			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 236, 20, 10038);
+    			add_location(button, file$5, 249, 16, 11401);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -13888,7 +13914,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_4*/ ctx[25], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_5*/ ctx[31], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -13914,14 +13940,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$2.name,
     		type: "slot",
-    		source: "(237:20) ",
+    		source: "(250:16) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (240:20) 
+    // (253:16) 
     function create_content_slot$2(ctx) {
     	let div;
     	let p0;
@@ -13937,7 +13963,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			p0 = element("p");
-    			p0.textContent = "The London mulligan feature derives the cumulative probability of your initial draw, mulligans, and subsequent draw-1 turns.\r\n                        ";
+    			p0.textContent = "The London mulligan feature derives the cumulative probability of your initial draw, mulligans, and subsequent draw-1 turns.\r\n                    ";
     			p1 = element("p");
     			p1.textContent = "See the FAQs (bottom of this page) and github if you want to help confirm this logic (mulligan calculations have not been confirmed for setups with more than 1 desired card).";
     			t2 = space();
@@ -13947,17 +13973,17 @@ var app = (function () {
     			a.textContent = "this post";
     			t5 = text(".");
     			t6 = space();
-    			attr_dev(p0, "class", "popover-content svelte-jnyg77");
-    			add_location(p0, file$5, 240, 24, 10369);
-    			attr_dev(p1, "class", "popover-content svelte-jnyg77");
-    			add_location(p1, file$5, 241, 24, 10546);
+    			attr_dev(p0, "class", "popover-content svelte-1lfiur4");
+    			add_location(p0, file$5, 253, 20, 11716);
+    			attr_dev(p1, "class", "popover-content svelte-1lfiur4");
+    			add_location(p1, file$5, 254, 20, 11889);
     			attr_dev(a, "href", "https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html");
     			attr_dev(a, "target", "_blank");
-    			add_location(a, file$5, 242, 129, 10882);
-    			attr_dev(p2, "class", "popover-content svelte-jnyg77");
-    			add_location(p2, file$5, 242, 24, 10777);
+    			add_location(a, file$5, 255, 125, 12221);
+    			attr_dev(p2, "class", "popover-content svelte-1lfiur4");
+    			add_location(p2, file$5, 255, 20, 12116);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 239, 20, 10323);
+    			add_location(div, file$5, 252, 16, 11674);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13980,7 +14006,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$2.name,
     		type: "slot",
-    		source: "(240:20) ",
+    		source: "(253:16) ",
     		ctx
     	});
 
@@ -13990,75 +14016,91 @@ var app = (function () {
     function create_fragment$5(ctx) {
     	let h2;
     	let t1;
+    	let p0;
+    	let t3;
+    	let p1;
+    	let t4;
+    	let a;
+    	let t6;
+    	let t7;
+    	let div11;
     	let div6;
+    	let div5;
     	let div0;
+    	let h3;
+    	let t9;
+    	let div4;
+    	let p2;
+    	let t11;
+    	let div1;
     	let table;
     	let thead;
-    	let tr0;
+    	let tr;
     	let th0;
-    	let t2;
+    	let t12;
     	let popover0;
     	let updating_show;
-    	let t3;
+    	let t13;
     	let th1;
-    	let t5;
+    	let t15;
     	let th2;
-    	let t6;
+    	let t16;
     	let popover1;
     	let updating_show_1;
-    	let t7;
+    	let t17;
     	let th3;
-    	let t8;
+    	let t18;
     	let popover2;
     	let updating_show_2;
-    	let t9;
+    	let t19;
     	let th4;
-    	let t10;
+    	let t20;
     	let tbody;
-    	let t11;
-    	let tr1;
-    	let td;
+    	let t21;
+    	let div3;
     	let button;
-    	let t13;
-    	let monteaccordion;
-    	let t14;
-    	let div5;
-    	let div1;
+    	let t23;
+    	let div2;
     	let label0;
-    	let t15;
+    	let t24;
     	let popover3;
     	let updating_show_3;
-    	let t16;
-    	let t17;
+    	let t25;
+    	let t26;
     	let select;
     	let option0;
     	let option1;
     	let option2;
     	let option3;
     	let option4;
-    	let t23;
-    	let div2;
-    	let label1;
-    	let t25;
-    	let input0;
-    	let t26;
-    	let div3;
-    	let label2;
-    	let t28;
-    	let input1;
-    	let t29;
-    	let div4;
-    	let label3;
-    	let t31;
-    	let input2;
+    	let div4_transition;
+    	let div6_class_value;
     	let t32;
+    	let monteaccordion;
+    	let t33;
+    	let div10;
+    	let div7;
+    	let label1;
+    	let t35;
+    	let input0;
+    	let t36;
+    	let div8;
+    	let label2;
+    	let t38;
+    	let input1;
+    	let t39;
+    	let div9;
+    	let label3;
+    	let t41;
+    	let input2;
+    	let t42;
     	let turndrawsaccordion;
     	let current;
     	let mounted;
     	let dispose;
 
     	function popover0_show_binding(value) {
-    		/*popover0_show_binding*/ ctx[15](value);
+    		/*popover0_show_binding*/ ctx[21](value);
     	}
 
     	let popover0_props = {
@@ -14078,7 +14120,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover0, 'show', popover0_show_binding));
 
     	function popover1_show_binding(value) {
-    		/*popover1_show_binding*/ ctx[17](value);
+    		/*popover1_show_binding*/ ctx[23](value);
     	}
 
     	let popover1_props = {
@@ -14098,7 +14140,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover1, 'show', popover1_show_binding));
 
     	function popover2_show_binding(value) {
-    		/*popover2_show_binding*/ ctx[19](value);
+    		/*popover2_show_binding*/ ctx[25](value);
     	}
 
     	let popover2_props = {
@@ -14128,10 +14170,8 @@ var app = (function () {
     		each_blocks[i] = null;
     	});
 
-    	monteaccordion = new MonteAccordion({ $$inline: true });
-
     	function popover3_show_binding(value) {
-    		/*popover3_show_binding*/ ctx[26](value);
+    		/*popover3_show_binding*/ ctx[32](value);
     	}
 
     	let popover3_props = {
@@ -14149,57 +14189,73 @@ var app = (function () {
 
     	popover3 = new Popover({ props: popover3_props, $$inline: true });
     	binding_callbacks.push(() => bind(popover3, 'show', popover3_show_binding));
+    	monteaccordion = new MonteAccordion({ $$inline: true });
     	turndrawsaccordion = new TurnDrawsAccordion({ $$inline: true });
-    	turndrawsaccordion.$on("drawAmountChange", /*handleDrawAmountChange*/ ctx[7]);
+    	turndrawsaccordion.$on("drawAmountChange", /*handleDrawAmountChange*/ ctx[9]);
 
     	const block = {
     		c: function create() {
     			h2 = element("h2");
     			h2.textContent = "Deck inputs and card groups";
     			t1 = space();
+    			p0 = element("p");
+    			p0.textContent = "The Hypergeometric Calulator is best for simulating the chance you'll get non-mana-based cards in your hand. The Monte Carlo Simulation will run advanced simulations that factor mana colors and ramp both in your hand and on the field.";
+    			t3 = space();
+    			p1 = element("p");
+    			t4 = text("Simulation results per turn will output in the ");
+    			a = element("a");
+    			a.textContent = "Probabilities";
+    			t6 = text(" section below.");
+    			t7 = space();
+    			div11 = element("div");
     			div6 = element("div");
+    			div5 = element("div");
     			div0 = element("div");
+    			h3 = element("h3");
+    			h3.textContent = "Hypergeometric Calculator";
+    			t9 = space();
+    			div4 = element("div");
+    			p2 = element("p");
+    			p2.textContent = "This section let's you perform calculations based on hypergeometric math.";
+    			t11 = space();
+    			div1 = element("div");
     			table = element("table");
     			thead = element("thead");
-    			tr0 = element("tr");
+    			tr = element("tr");
     			th0 = element("th");
-    			t2 = text("Group unique name\r\n                    ");
+    			t12 = text("Group unique name\r\n                    ");
     			create_component(popover0.$$.fragment);
-    			t3 = space();
+    			t13 = space();
     			th1 = element("th");
     			th1.textContent = "# Cards in group";
-    			t5 = space();
+    			t15 = space();
     			th2 = element("th");
-    			t6 = text("Minimum # desired cards\r\n                    ");
+    			t16 = text("Minimum # desired cards\r\n                    ");
     			create_component(popover1.$$.fragment);
-    			t7 = space();
+    			t17 = space();
     			th3 = element("th");
-    			t8 = text("Linked groups\r\n                    ");
+    			t18 = text("Linked groups\r\n                    ");
     			create_component(popover2.$$.fragment);
-    			t9 = space();
+    			t19 = space();
     			th4 = element("th");
-    			t10 = space();
+    			t20 = space();
     			tbody = element("tbody");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t11 = space();
-    			tr1 = element("tr");
-    			td = element("td");
+    			t21 = space();
+    			div3 = element("div");
     			button = element("button");
     			button.textContent = "Add Group";
-    			t13 = space();
-    			create_component(monteaccordion.$$.fragment);
-    			t14 = space();
-    			div5 = element("div");
-    			div1 = element("div");
+    			t23 = space();
+    			div2 = element("div");
     			label0 = element("label");
-    			t15 = text("Mulligans ");
+    			t24 = text("Hypergeometric Mulligans ");
     			create_component(popover3.$$.fragment);
-    			t16 = text(":");
-    			t17 = space();
+    			t25 = text(":");
+    			t26 = space();
     			select = element("select");
     			option0 = element("option");
     			option0.textContent = "0";
@@ -14211,115 +14267,137 @@ var app = (function () {
     			option3.textContent = "3";
     			option4 = element("option");
     			option4.textContent = "4";
-    			t23 = space();
-    			div2 = element("div");
+    			t32 = space();
+    			create_component(monteaccordion.$$.fragment);
+    			t33 = space();
+    			div10 = element("div");
+    			div7 = element("div");
     			label1 = element("label");
     			label1.textContent = "Initial hand size:";
-    			t25 = space();
+    			t35 = space();
     			input0 = element("input");
-    			t26 = space();
-    			div3 = element("div");
+    			t36 = space();
+    			div8 = element("div");
     			label2 = element("label");
     			label2.textContent = "Deck size:";
-    			t28 = space();
+    			t38 = space();
     			input1 = element("input");
-    			t29 = space();
-    			div4 = element("div");
+    			t39 = space();
+    			div9 = element("div");
     			label3 = element("label");
     			label3.textContent = "Number of turns:";
-    			t31 = space();
+    			t41 = space();
     			input2 = element("input");
-    			t32 = space();
+    			t42 = space();
     			create_component(turndrawsaccordion.$$.fragment);
     			set_style(h2, "text-align", "center");
-    			add_location(h2, file$5, 117, 0, 3653);
-    			attr_dev(th0, "class", "svelte-jnyg77");
-    			add_location(th0, file$5, 123, 16, 3842);
+    			add_location(h2, file$5, 119, 0, 3853);
+    			attr_dev(p0, "class", "larger-text");
+    			add_location(p0, file$5, 120, 0, 3919);
+    			attr_dev(a, "href", "#probabilities-jump");
+    			add_location(a, file$5, 121, 70, 4252);
+    			attr_dev(p1, "class", "larger-text");
+    			add_location(p1, file$5, 121, 0, 4182);
+    			set_style(h3, "font-weight", "500");
+    			set_style(h3, "font-size", "18px");
+    			add_location(h3, file$5, 135, 16, 4971);
+    			attr_dev(div0, "class", "accordion-title svelte-1lfiur4");
+    			attr_dev(div0, "tabindex", "0");
+    			add_location(div0, file$5, 129, 12, 4602);
+    			add_location(p2, file$5, 139, 0, 5192);
+    			attr_dev(th0, "class", "svelte-1lfiur4");
+    			add_location(th0, file$5, 145, 16, 5373);
     			set_style(th1, "width", "18%");
-    			attr_dev(th1, "class", "svelte-jnyg77");
-    			add_location(th1, file$5, 134, 16, 4851);
-    			set_style(th2, "width", "25%");
-    			attr_dev(th2, "class", "svelte-jnyg77");
-    			add_location(th2, file$5, 135, 16, 4914);
-    			attr_dev(th3, "class", "svelte-jnyg77");
-    			add_location(th3, file$5, 145, 16, 5616);
-    			attr_dev(th4, "class", "svelte-jnyg77");
-    			add_location(th4, file$5, 156, 16, 6570);
-    			add_location(tr0, file$5, 122, 12, 3820);
-    			add_location(thead, file$5, 121, 8, 3799);
-    			attr_dev(button, "class", "svelte-jnyg77");
-    			add_location(button, file$5, 221, 20, 9645);
-    			attr_dev(td, "colspan", "5");
-    			attr_dev(td, "class", "svelte-jnyg77");
-    			add_location(td, file$5, 220, 16, 9574);
-    			add_location(tr1, file$5, 219, 12, 9552);
-    			add_location(tbody, file$5, 159, 8, 6626);
-    			attr_dev(table, "class", "svelte-jnyg77");
-    			add_location(table, file$5, 120, 4, 3782);
-    			attr_dev(div0, "class", "table-wrapper svelte-jnyg77");
-    			add_location(div0, file$5, 119, 4, 3749);
+    			attr_dev(th1, "class", "svelte-1lfiur4");
+    			add_location(th1, file$5, 156, 16, 6382);
+    			set_style(th2, "width", "26%");
+    			attr_dev(th2, "class", "svelte-1lfiur4");
+    			add_location(th2, file$5, 157, 16, 6445);
+    			attr_dev(th3, "class", "svelte-1lfiur4");
+    			add_location(th3, file$5, 167, 16, 7147);
+    			attr_dev(th4, "class", "svelte-1lfiur4");
+    			add_location(th4, file$5, 178, 16, 8101);
+    			add_location(tr, file$5, 144, 12, 5351);
+    			add_location(thead, file$5, 143, 8, 5330);
+    			add_location(tbody, file$5, 181, 8, 8157);
+    			attr_dev(table, "class", "svelte-1lfiur4");
+    			add_location(table, file$5, 142, 4, 5313);
+    			attr_dev(div1, "class", "table-wrapper svelte-1lfiur4");
+    			add_location(div1, file$5, 141, 4, 5280);
+    			attr_dev(button, "class", "svelte-1lfiur4");
+    			add_location(button, file$5, 246, 4, 11177);
     			attr_dev(label0, "for", "mulliganCount");
-    			attr_dev(label0, "class", "svelte-jnyg77");
-    			add_location(label0, file$5, 235, 12, 9930);
+    			attr_dev(label0, "class", "svelte-1lfiur4");
+    			add_location(label0, file$5, 248, 8, 11282);
     			option0.__value = "0";
     			option0.value = option0.__value;
-    			attr_dev(option0, "class", "svelte-jnyg77");
-    			add_location(option0, file$5, 246, 16, 11230);
+    			attr_dev(option0, "class", "svelte-1lfiur4");
+    			add_location(option0, file$5, 259, 12, 12553);
     			option1.__value = "1";
     			option1.value = option1.__value;
-    			attr_dev(option1, "class", "svelte-jnyg77");
-    			add_location(option1, file$5, 247, 16, 11276);
+    			attr_dev(option1, "class", "svelte-1lfiur4");
+    			add_location(option1, file$5, 260, 12, 12595);
     			option2.__value = "2";
     			option2.value = option2.__value;
-    			attr_dev(option2, "class", "svelte-jnyg77");
-    			add_location(option2, file$5, 248, 16, 11322);
+    			attr_dev(option2, "class", "svelte-1lfiur4");
+    			add_location(option2, file$5, 261, 12, 12637);
     			option3.__value = "3";
     			option3.value = option3.__value;
-    			attr_dev(option3, "class", "svelte-jnyg77");
-    			add_location(option3, file$5, 249, 16, 11368);
+    			attr_dev(option3, "class", "svelte-1lfiur4");
+    			add_location(option3, file$5, 262, 12, 12679);
     			option4.__value = "4";
     			option4.value = option4.__value;
-    			attr_dev(option4, "class", "svelte-jnyg77");
-    			add_location(option4, file$5, 250, 16, 11414);
+    			attr_dev(option4, "class", "svelte-1lfiur4");
+    			add_location(option4, file$5, 263, 12, 12721);
     			attr_dev(select, "id", "mulliganCount");
-    			if (/*mulliganCountString*/ ctx[3] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[27].call(select));
-    			add_location(select, file$5, 245, 16, 11090);
-    			attr_dev(div1, "class", "mulligan-selection svelte-jnyg77");
-    			add_location(div1, file$5, 234, 8, 9884);
+    			if (/*mulliganCountString*/ ctx[3] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[33].call(select));
+    			add_location(select, file$5, 258, 12, 12417);
+    			attr_dev(div2, "class", "mulligan-selection svelte-1lfiur4");
+    			add_location(div2, file$5, 247, 4, 11240);
+    			attr_dev(div3, "class", "controls-container svelte-1lfiur4");
+    			set_style(div3, "margin-left", "8px");
+    			add_location(div3, file$5, 245, 0, 11113);
+    			attr_dev(div4, "class", "answer svelte-1lfiur4");
+    			set_style(div4, "height", /*openHypergeo*/ ctx[6] ? 'auto' : '0');
+    			add_location(div4, file$5, 137, 8, 5080);
+    			attr_dev(div5, "class", "accordion-item svelte-1lfiur4");
+    			add_location(div5, file$5, 128, 8, 4560);
+    			attr_dev(div6, "class", div6_class_value = "accordion " + (/*isHoveringHypergeo*/ ctx[7] ? 'hovering' : '') + " svelte-1lfiur4");
+    			add_location(div6, file$5, 125, 4, 4358);
     			attr_dev(label1, "for", "cardsDrawn");
-    			attr_dev(label1, "class", "svelte-jnyg77");
-    			add_location(label1, file$5, 257, 12, 11544);
+    			attr_dev(label1, "class", "svelte-1lfiur4");
+    			add_location(label1, file$5, 277, 12, 12959);
     			attr_dev(input0, "type", "number");
-    			attr_dev(input0, "class", "deckSize svelte-jnyg77");
+    			attr_dev(input0, "class", "deckSize svelte-1lfiur4");
     			attr_dev(input0, "id", "cardsDrawn");
     			attr_dev(input0, "min", "1");
-    			add_location(input0, file$5, 258, 12, 11608);
-    			attr_dev(div2, "class", "deck-size-container svelte-jnyg77");
-    			add_location(div2, file$5, 256, 8, 11497);
+    			add_location(input0, file$5, 278, 12, 13023);
+    			attr_dev(div7, "class", "deck-size-container svelte-1lfiur4");
+    			add_location(div7, file$5, 276, 8, 12912);
     			attr_dev(label2, "for", "deckSize");
-    			attr_dev(label2, "class", "svelte-jnyg77");
-    			add_location(label2, file$5, 264, 12, 11828);
+    			attr_dev(label2, "class", "svelte-1lfiur4");
+    			add_location(label2, file$5, 284, 12, 13243);
     			attr_dev(input1, "type", "number");
-    			attr_dev(input1, "class", "deckSize svelte-jnyg77");
+    			attr_dev(input1, "class", "deckSize svelte-1lfiur4");
     			attr_dev(input1, "id", "deckSize");
     			attr_dev(input1, "min", "1");
-    			add_location(input1, file$5, 265, 12, 11882);
-    			attr_dev(div3, "class", "deck-size-container svelte-jnyg77");
-    			add_location(div3, file$5, 263, 8, 11781);
+    			add_location(input1, file$5, 285, 12, 13297);
+    			attr_dev(div8, "class", "deck-size-container svelte-1lfiur4");
+    			add_location(div8, file$5, 283, 8, 13196);
     			attr_dev(label3, "for", "numberTurns");
-    			attr_dev(label3, "class", "svelte-jnyg77");
-    			add_location(label3, file$5, 271, 12, 12093);
+    			attr_dev(label3, "class", "svelte-1lfiur4");
+    			add_location(label3, file$5, 291, 12, 13508);
     			attr_dev(input2, "type", "number");
-    			attr_dev(input2, "class", "deckSize svelte-jnyg77");
+    			attr_dev(input2, "class", "deckSize svelte-1lfiur4");
     			attr_dev(input2, "id", "numberTurns");
     			attr_dev(input2, "min", "1");
-    			add_location(input2, file$5, 272, 12, 12156);
-    			attr_dev(div4, "class", "deck-size-container svelte-jnyg77");
-    			add_location(div4, file$5, 270, 8, 12046);
-    			attr_dev(div5, "class", "controls-container svelte-jnyg77");
-    			add_location(div5, file$5, 232, 4, 9832);
-    			attr_dev(div6, "class", "parameters svelte-jnyg77");
-    			add_location(div6, file$5, 118, 0, 3719);
+    			add_location(input2, file$5, 292, 12, 13571);
+    			attr_dev(div9, "class", "deck-size-container svelte-1lfiur4");
+    			add_location(div9, file$5, 290, 8, 13461);
+    			attr_dev(div10, "class", "controls-container svelte-1lfiur4");
+    			add_location(div10, file$5, 273, 4, 12850);
+    			attr_dev(div11, "class", "parameters svelte-1lfiur4");
+    			add_location(div11, file$5, 123, 0, 4322);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -14327,27 +14405,42 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
     			insert_dev(target, t1, anchor);
-    			insert_dev(target, div6, anchor);
-    			append_dev(div6, div0);
-    			append_dev(div0, table);
+    			insert_dev(target, p0, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, p1, anchor);
+    			append_dev(p1, t4);
+    			append_dev(p1, a);
+    			append_dev(p1, t6);
+    			insert_dev(target, t7, anchor);
+    			insert_dev(target, div11, anchor);
+    			append_dev(div11, div6);
+    			append_dev(div6, div5);
+    			append_dev(div5, div0);
+    			append_dev(div0, h3);
+    			append_dev(div5, t9);
+    			append_dev(div5, div4);
+    			append_dev(div4, p2);
+    			append_dev(div4, t11);
+    			append_dev(div4, div1);
+    			append_dev(div1, table);
     			append_dev(table, thead);
-    			append_dev(thead, tr0);
-    			append_dev(tr0, th0);
-    			append_dev(th0, t2);
+    			append_dev(thead, tr);
+    			append_dev(tr, th0);
+    			append_dev(th0, t12);
     			mount_component(popover0, th0, null);
-    			append_dev(tr0, t3);
-    			append_dev(tr0, th1);
-    			append_dev(tr0, t5);
-    			append_dev(tr0, th2);
-    			append_dev(th2, t6);
+    			append_dev(tr, t13);
+    			append_dev(tr, th1);
+    			append_dev(tr, t15);
+    			append_dev(tr, th2);
+    			append_dev(th2, t16);
     			mount_component(popover1, th2, null);
-    			append_dev(tr0, t7);
-    			append_dev(tr0, th3);
-    			append_dev(th3, t8);
+    			append_dev(tr, t17);
+    			append_dev(tr, th3);
+    			append_dev(th3, t18);
     			mount_component(popover2, th3, null);
-    			append_dev(tr0, t9);
-    			append_dev(tr0, th4);
-    			append_dev(table, t10);
+    			append_dev(tr, t19);
+    			append_dev(tr, th4);
+    			append_dev(table, t20);
     			append_dev(table, tbody);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -14356,61 +14449,64 @@ var app = (function () {
     				}
     			}
 
-    			append_dev(tbody, t11);
-    			append_dev(tbody, tr1);
-    			append_dev(tr1, td);
-    			append_dev(td, button);
-    			append_dev(div6, t13);
-    			mount_component(monteaccordion, div6, null);
-    			append_dev(div6, t14);
-    			append_dev(div6, div5);
-    			append_dev(div5, div1);
-    			append_dev(div1, label0);
-    			append_dev(label0, t15);
+    			append_dev(div4, t21);
+    			append_dev(div4, div3);
+    			append_dev(div3, button);
+    			append_dev(div3, t23);
+    			append_dev(div3, div2);
+    			append_dev(div2, label0);
+    			append_dev(label0, t24);
     			mount_component(popover3, label0, null);
-    			append_dev(label0, t16);
-    			append_dev(div1, t17);
-    			append_dev(div1, select);
+    			append_dev(label0, t25);
+    			append_dev(div2, t26);
+    			append_dev(div2, select);
     			append_dev(select, option0);
     			append_dev(select, option1);
     			append_dev(select, option2);
     			append_dev(select, option3);
     			append_dev(select, option4);
     			select_option(select, /*mulliganCountString*/ ctx[3], true);
-    			append_dev(div5, t23);
-    			append_dev(div5, div2);
-    			append_dev(div2, label1);
-    			append_dev(div2, t25);
-    			append_dev(div2, input0);
+    			append_dev(div11, t32);
+    			mount_component(monteaccordion, div11, null);
+    			append_dev(div11, t33);
+    			append_dev(div11, div10);
+    			append_dev(div10, div7);
+    			append_dev(div7, label1);
+    			append_dev(div7, t35);
+    			append_dev(div7, input0);
     			set_input_value(input0, /*InitialDrawSize*/ ctx[2]);
-    			append_dev(div5, t26);
-    			append_dev(div5, div3);
-    			append_dev(div3, label2);
-    			append_dev(div3, t28);
-    			append_dev(div3, input1);
+    			append_dev(div10, t36);
+    			append_dev(div10, div8);
+    			append_dev(div8, label2);
+    			append_dev(div8, t38);
+    			append_dev(div8, input1);
     			set_input_value(input1, /*deckSize*/ ctx[1]);
-    			append_dev(div5, t29);
-    			append_dev(div5, div4);
-    			append_dev(div4, label3);
-    			append_dev(div4, t31);
-    			append_dev(div4, input2);
+    			append_dev(div10, t39);
+    			append_dev(div10, div9);
+    			append_dev(div9, label3);
+    			append_dev(div9, t41);
+    			append_dev(div9, input2);
     			set_input_value(input2, /*numberOfTurnsInput*/ ctx[5]);
-    			append_dev(div6, t32);
-    			mount_component(turndrawsaccordion, div6, null);
+    			append_dev(div11, t42);
+    			mount_component(turndrawsaccordion, div11, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button, "click", /*handleAddGroupClick*/ ctx[10], false, false, false, false),
-    					listen_dev(select, "change", /*select_change_handler*/ ctx[27]),
-    					listen_dev(select, "change", /*change_handler*/ ctx[28], false, false, false, false),
-    					listen_dev(input0, "input", /*input0_input_handler_1*/ ctx[29]),
+    					listen_dev(div0, "click", /*click_handler*/ ctx[16], false, false, false, false),
+    					listen_dev(div0, "keydown", /*keydown_handler*/ ctx[17], false, false, false, false),
+    					listen_dev(div0, "mouseenter", /*mouseenter_handler*/ ctx[18], false, false, false, false),
+    					listen_dev(div0, "mouseleave", /*mouseleave_handler*/ ctx[19], false, false, false, false),
+    					listen_dev(button, "click", /*handleAddGroupClick*/ ctx[12], false, false, false, false),
+    					listen_dev(select, "change", /*select_change_handler*/ ctx[33]),
+    					listen_dev(select, "change", /*change_handler*/ ctx[34], false, false, false, false),
+    					listen_dev(input0, "input", /*input0_input_handler_1*/ ctx[35]),
     					listen_dev(input0, "focus", selectInput$1, false, false, false, false),
-    					listen_dev(input1, "input", /*input1_input_handler_1*/ ctx[30]),
+    					listen_dev(input1, "input", /*input1_input_handler_1*/ ctx[36]),
     					listen_dev(input1, "focus", selectInput$1, false, false, false, false),
-    					listen_dev(input2, "input", /*input2_input_handler_1*/ ctx[31]),
+    					listen_dev(input2, "input", /*input2_input_handler_1*/ ctx[37]),
     					listen_dev(input2, "focus", selectInput$1, false, false, false, false),
-    					listen_dev(input2, "change", /*handleNumberOfTurnsChange*/ ctx[8], false, false, false, false)
+    					listen_dev(input2, "change", /*handleNumberOfTurnsChange*/ ctx[10], false, false, false, false)
     				];
 
     				mounted = true;
@@ -14419,7 +14515,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover0_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 16384) {
     				popover0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -14432,7 +14528,7 @@ var app = (function () {
     			popover0.$set(popover0_changes);
     			const popover1_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 16384) {
     				popover1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -14445,7 +14541,7 @@ var app = (function () {
     			popover1.$set(popover1_changes);
     			const popover2_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 16384) {
     				popover2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -14457,7 +14553,7 @@ var app = (function () {
 
     			popover2.$set(popover2_changes);
 
-    			if (dirty[0] & /*removeGroup, $groupColors, groups*/ 2113) {
+    			if (dirty[0] & /*removeGroup, $groupColors, groups*/ 8449) {
     				each_value = /*groups*/ ctx[0];
     				validate_each_argument(each_value);
     				let i;
@@ -14472,7 +14568,7 @@ var app = (function () {
     						each_blocks[i] = create_each_block$2(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(tbody, t11);
+    						each_blocks[i].m(tbody, null);
     					}
     				}
 
@@ -14487,7 +14583,7 @@ var app = (function () {
 
     			const popover3_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 256) {
+    			if (dirty[0] & /*showPopover*/ 16 | dirty[1] & /*$$scope*/ 16384) {
     				popover3_changes.$$scope = { dirty, ctx };
     			}
 
@@ -14501,6 +14597,14 @@ var app = (function () {
 
     			if (dirty[0] & /*mulliganCountString*/ 8) {
     				select_option(select, /*mulliganCountString*/ ctx[3]);
+    			}
+
+    			if (dirty[0] & /*openHypergeo*/ 64) {
+    				set_style(div4, "height", /*openHypergeo*/ ctx[6] ? 'auto' : '0');
+    			}
+
+    			if (!current || dirty[0] & /*isHoveringHypergeo*/ 128 && div6_class_value !== (div6_class_value = "accordion " + (/*isHoveringHypergeo*/ ctx[7] ? 'hovering' : '') + " svelte-1lfiur4")) {
+    				attr_dev(div6, "class", div6_class_value);
     			}
 
     			if (dirty[0] & /*InitialDrawSize*/ 4 && to_number(input0.value) !== /*InitialDrawSize*/ ctx[2]) {
@@ -14525,8 +14629,17 @@ var app = (function () {
     				transition_in(each_blocks[i]);
     			}
 
-    			transition_in(monteaccordion.$$.fragment, local);
     			transition_in(popover3.$$.fragment, local);
+
+    			if (local) {
+    				add_render_callback(() => {
+    					if (!current) return;
+    					if (!div4_transition) div4_transition = create_bidirectional_transition(div4, slide, { duration: 250 }, true);
+    					div4_transition.run(1);
+    				});
+    			}
+
+    			transition_in(monteaccordion.$$.fragment, local);
     			transition_in(turndrawsaccordion.$$.fragment, local);
     			current = true;
     		},
@@ -14540,21 +14653,32 @@ var app = (function () {
     				transition_out(each_blocks[i]);
     			}
 
-    			transition_out(monteaccordion.$$.fragment, local);
     			transition_out(popover3.$$.fragment, local);
+
+    			if (local) {
+    				if (!div4_transition) div4_transition = create_bidirectional_transition(div4, slide, { duration: 250 }, false);
+    				div4_transition.run(0);
+    			}
+
+    			transition_out(monteaccordion.$$.fragment, local);
     			transition_out(turndrawsaccordion.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(h2);
     			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div6);
+    			if (detaching) detach_dev(p0);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(p1);
+    			if (detaching) detach_dev(t7);
+    			if (detaching) detach_dev(div11);
     			destroy_component(popover0);
     			destroy_component(popover1);
     			destroy_component(popover2);
     			destroy_each(each_blocks, detaching);
-    			destroy_component(monteaccordion);
     			destroy_component(popover3);
+    			if (detaching && div4_transition) div4_transition.end();
+    			destroy_component(monteaccordion);
     			destroy_component(turndrawsaccordion);
     			mounted = false;
     			run_all(dispose);
@@ -14579,7 +14703,7 @@ var app = (function () {
     function instance$5($$self, $$props, $$invalidate) {
     	let $groupColors;
     	validate_store(groupColors, 'groupColors');
-    	component_subscribe($$self, groupColors, $$value => $$invalidate(6, $groupColors = $$value));
+    	component_subscribe($$self, groupColors, $$value => $$invalidate(8, $groupColors = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('GroupDefinition', slots, []);
     	const dispatch = createEventDispatcher();
@@ -14602,6 +14726,8 @@ var app = (function () {
     	let showPopover = false;
     	let mulliganCountString = "0"; // Use a string for the binding
     	let numberOfTurnsInput = 5; // Default value
+    	let openHypergeo = false; // Add this line to manage the accordion state
+    	let isHoveringHypergeo = false; // Add this line to manage hover state
 
     	// Function to handle draw amount changes
     	function handleDrawAmountChange(event) {
@@ -14666,21 +14792,25 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<GroupDefinition> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => $$invalidate(4, showPopover = !showPopover);
+    	const click_handler = () => $$invalidate(6, openHypergeo = !openHypergeo);
+    	const keydown_handler = event => event.key === 'Enter' && $$invalidate(6, openHypergeo = !openHypergeo);
+    	const mouseenter_handler = () => $$invalidate(7, isHoveringHypergeo = true);
+    	const mouseleave_handler = () => $$invalidate(7, isHoveringHypergeo = false);
+    	const click_handler_1 = () => $$invalidate(4, showPopover = !showPopover);
 
     	function popover0_show_binding(value) {
     		showPopover = value;
     		$$invalidate(4, showPopover);
     	}
 
-    	const click_handler_1 = () => $$invalidate(4, showPopover = !showPopover);
+    	const click_handler_2 = () => $$invalidate(4, showPopover = !showPopover);
 
     	function popover1_show_binding(value) {
     		showPopover = value;
     		$$invalidate(4, showPopover);
     	}
 
-    	const click_handler_2 = () => $$invalidate(4, showPopover = !showPopover);
+    	const click_handler_3 = () => $$invalidate(4, showPopover = !showPopover);
 
     	function popover2_show_binding(value) {
     		showPopover = value;
@@ -14707,8 +14837,8 @@ var app = (function () {
     		$$invalidate(0, groups);
     	}
 
-    	const click_handler_3 = index => removeGroup(index);
-    	const click_handler_4 = () => $$invalidate(4, showPopover = !showPopover);
+    	const click_handler_4 = index => removeGroup(index);
+    	const click_handler_5 = () => $$invalidate(4, showPopover = !showPopover);
 
     	function popover3_show_binding(value) {
     		showPopover = value;
@@ -14749,6 +14879,7 @@ var app = (function () {
     		trackEvent,
     		TurnDrawsAccordion,
     		writable,
+    		slide,
     		dispatch,
     		nextIndex,
     		groups,
@@ -14759,6 +14890,8 @@ var app = (function () {
     		showPopover,
     		mulliganCountString,
     		numberOfTurnsInput,
+    		openHypergeo,
+    		isHoveringHypergeo,
     		handleDrawAmountChange,
     		handleNumberOfTurnsChange,
     		handleSelectChange,
@@ -14775,11 +14908,13 @@ var app = (function () {
     		if ('groups' in $$props) $$invalidate(0, groups = $$props.groups);
     		if ('deckSize' in $$props) $$invalidate(1, deckSize = $$props.deckSize);
     		if ('InitialDrawSize' in $$props) $$invalidate(2, InitialDrawSize = $$props.InitialDrawSize);
-    		if ('mulliganCount' in $$props) $$invalidate(12, mulliganCount = $$props.mulliganCount);
-    		if ('colorIndex' in $$props) $$invalidate(13, colorIndex = $$props.colorIndex);
+    		if ('mulliganCount' in $$props) $$invalidate(14, mulliganCount = $$props.mulliganCount);
+    		if ('colorIndex' in $$props) $$invalidate(15, colorIndex = $$props.colorIndex);
     		if ('showPopover' in $$props) $$invalidate(4, showPopover = $$props.showPopover);
     		if ('mulliganCountString' in $$props) $$invalidate(3, mulliganCountString = $$props.mulliganCountString);
     		if ('numberOfTurnsInput' in $$props) $$invalidate(5, numberOfTurnsInput = $$props.numberOfTurnsInput);
+    		if ('openHypergeo' in $$props) $$invalidate(6, openHypergeo = $$props.openHypergeo);
+    		if ('isHoveringHypergeo' in $$props) $$invalidate(7, isHoveringHypergeo = $$props.isHoveringHypergeo);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -14790,10 +14925,10 @@ var app = (function () {
     		if ($$self.$$.dirty[0] & /*mulliganCountString*/ 8) {
     			//--------------------------------------------
     			// Reactive statement to ensure mulliganCount is always a number
-    			$$invalidate(12, mulliganCount = Number(mulliganCountString));
+    			$$invalidate(14, mulliganCount = Number(mulliganCountString));
     		}
 
-    		if ($$self.$$.dirty[0] & /*groups, colorIndex, deckSize, InitialDrawSize, mulliganCount*/ 12295) {
+    		if ($$self.$$.dirty[0] & /*groups, colorIndex, deckSize, InitialDrawSize, mulliganCount*/ 49159) {
     			{
     				let updatedColors = {};
 
@@ -14803,7 +14938,7 @@ var app = (function () {
     					: group.name;
 
     					if (!updatedColors[key]) {
-    						updatedColors[key] = presetColors[$$invalidate(13, colorIndex++, colorIndex) % presetColors.length];
+    						updatedColors[key] = presetColors[$$invalidate(15, colorIndex++, colorIndex) % presetColors.length];
     					}
     				});
 
@@ -14826,6 +14961,8 @@ var app = (function () {
     		mulliganCountString,
     		showPopover,
     		numberOfTurnsInput,
+    		openHypergeo,
+    		isHoveringHypergeo,
     		$groupColors,
     		handleDrawAmountChange,
     		handleNumberOfTurnsChange,
@@ -14835,17 +14972,21 @@ var app = (function () {
     		mulliganCount,
     		colorIndex,
     		click_handler,
-    		popover0_show_binding,
+    		keydown_handler,
+    		mouseenter_handler,
+    		mouseleave_handler,
     		click_handler_1,
-    		popover1_show_binding,
+    		popover0_show_binding,
     		click_handler_2,
+    		popover1_show_binding,
+    		click_handler_3,
     		popover2_show_binding,
     		input0_input_handler,
     		input1_input_handler,
     		input2_input_handler,
     		input3_input_handler,
-    		click_handler_3,
     		click_handler_4,
+    		click_handler_5,
     		popover3_show_binding,
     		select_change_handler,
     		change_handler,
@@ -32144,10 +32285,10 @@ var app = (function () {
     			i.textContent = "Each column of stacked cards represents a separate opening hand and subsequent draws.";
     			t1 = space();
     			create_component(popover.$$.fragment);
-    			add_location(i, file$4, 1935, 49, 81573);
+    			add_location(i, file$4, 1935, 49, 81597);
     			set_style(p, "margin-top", "0");
     			set_style(p, "text-align", "center");
-    			add_location(p, file$4, 1935, 4, 81528);
+    			add_location(p, file$4, 1935, 4, 81552);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -32221,7 +32362,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 1937, 12, 81738);
+    			add_location(button, file$4, 1937, 12, 81762);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -32273,9 +32414,9 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the \"Linked groups\" feature or Advanced section to calculate the probability of drawing cards from different groups.";
     			attr_dev(p, "class", "popover-content svelte-2vp65s");
-    			add_location(p, file$4, 1941, 16, 82055);
+    			add_location(p, file$4, 1941, 16, 82079);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 1940, 12, 82017);
+    			add_location(div, file$4, 1940, 12, 82041);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32307,7 +32448,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "Add a group or run a simulation above to show output probabilities.";
     			attr_dev(div, "class", "placeholder svelte-2vp65s");
-    			add_location(div, file$4, 1977, 9, 84392);
+    			add_location(div, file$4, 1977, 9, 84416);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32449,15 +32590,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 1952, 36, 82838);
+    			add_location(br, file$4, 1952, 36, 82862);
     			attr_dev(i, "class", "svelte-2vp65s");
-    			add_location(i, file$4, 1953, 24, 82868);
+    			add_location(i, file$4, 1953, 24, 82892);
     			attr_dev(div0, "class", "turn-label svelte-2vp65s");
-    			add_location(div0, file$4, 1951, 20, 82776);
+    			add_location(div0, file$4, 1951, 20, 82800);
     			attr_dev(div1, "class", "card-rectangles svelte-2vp65s");
-    			add_location(div1, file$4, 1955, 20, 83004);
+    			add_location(div1, file$4, 1955, 20, 83028);
     			attr_dev(div2, "class", "turn-row svelte-2vp65s");
-    			add_location(div2, file$4, 1950, 16, 82732);
+    			add_location(div2, file$4, 1950, 16, 82756);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -32540,7 +32681,7 @@ var app = (function () {
     			set_style(div, "z-index", -(/*i*/ ctx[55] + 1));
     			set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
     			set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
-    			add_location(div, file$4, 1966, 32, 83881);
+    			add_location(div, file$4, 1966, 32, 83905);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32621,21 +32762,21 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			attr_dev(div0, "class", "probability svelte-2vp65s");
-    			add_location(div0, file$4, 1960, 36, 83468);
+    			add_location(div0, file$4, 1960, 36, 83492);
     			attr_dev(div1, "class", "card-ratio svelte-2vp65s");
-    			add_location(div1, file$4, 1961, 36, 83594);
+    			add_location(div1, file$4, 1961, 36, 83618);
     			attr_dev(div2, "class", "card-details svelte-2vp65s");
-    			add_location(div2, file$4, 1959, 32, 83404);
+    			add_location(div2, file$4, 1959, 32, 83428);
     			attr_dev(div3, "class", "rectangle svelte-2vp65s");
     			set_style(div3, "background-color", /*card*/ ctx[50].color);
-    			add_location(div3, file$4, 1958, 28, 83307);
+    			add_location(div3, file$4, 1958, 28, 83331);
     			attr_dev(div4, "class", "stacked-cards svelte-2vp65s");
-    			add_location(div4, file$4, 1964, 28, 83752);
+    			add_location(div4, file$4, 1964, 28, 83776);
     			attr_dev(div5, "class", "card-label svelte-2vp65s");
-    			add_location(div5, file$4, 1969, 28, 84169);
+    			add_location(div5, file$4, 1969, 28, 84193);
     			attr_dev(div6, "class", "card-container svelte-2vp65s");
     			set_style(div6, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
-    			add_location(div6, file$4, 1957, 24, 83188);
+    			add_location(div6, file$4, 1957, 24, 83212);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -32790,11 +32931,12 @@ var app = (function () {
     			t2 = space();
     			div = element("div");
     			if_block1.c();
+    			attr_dev(h2, "id", "probabilities-jump");
     			set_style(h2, "text-align", "center");
     			set_style(h2, "margin-bottom", "0");
     			add_location(h2, file$4, 1933, 4, 81434);
     			attr_dev(div, "class", "output-diagram svelte-2vp65s");
-    			add_location(div, file$4, 1946, 4, 82413);
+    			add_location(div, file$4, 1946, 4, 82437);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -35419,11 +35561,11 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "venmoing me half a coffee";
     			attr_dev(button, "id", "moreInfo");
-    			attr_dev(button, "class", "moreInfo svelte-1r3zdn3");
+    			attr_dev(button, "class", "moreInfo svelte-lzaaod");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "donate to me if you want!");
-    			add_location(button, file$2, 39, 8, 3559);
+    			add_location(button, file$2, 39, 8, 3579);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -35478,18 +35620,18 @@ var app = (function () {
     			a1.textContent = "Open in mobile app";
     			if (!src_url_equal(img.src, img_src_value = "venmo_qrcode.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Coffee Image");
-    			add_location(img, file$2, 44, 10, 3849);
+    			add_location(img, file$2, 44, 10, 3869);
     			attr_dev(a0, "href", "https://venmo.com/u/Benjamin-Gross-10");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$2, 46, 12, 3912);
-    			add_location(br, file$2, 46, 91, 3991);
+    			add_location(a0, file$2, 46, 12, 3932);
+    			add_location(br, file$2, 46, 91, 4011);
     			attr_dev(a1, "href", "venmo://paycharge?txn=pay&recipients=Benjamin-Gross-10&amount=2.5&note=half-a-coffee");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$2, 47, 12, 4009);
-    			attr_dev(div0, "class", "popover-group svelte-1r3zdn3");
-    			add_location(div0, file$2, 43, 10, 3808);
+    			add_location(a1, file$2, 47, 12, 4029);
+    			attr_dev(div0, "class", "popover-group svelte-lzaaod");
+    			add_location(div0, file$2, 43, 10, 3828);
     			attr_dev(div1, "slot", "content");
-    			add_location(div1, file$2, 42, 8, 3776);
+    			add_location(div1, file$2, 42, 8, 3796);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -35578,11 +35720,11 @@ var app = (function () {
     			attr_dev(link, "href", "https://fonts.googleapis.com/css2?family=Vollkorn:wght@700&display=swap");
     			attr_dev(link, "rel", "stylesheet");
     			add_location(link, file$2, 31, 2, 2816);
-    			attr_dev(h1, "class", "title svelte-1r3zdn3");
+    			attr_dev(h1, "class", "title svelte-lzaaod");
     			add_location(h1, file$2, 35, 4, 2959);
-    			attr_dev(p, "class", "svelte-1r3zdn3");
+    			attr_dev(p, "class", "larger-text");
     			add_location(p, file$2, 36, 4, 3015);
-    			attr_dev(div, "class", "intro-section svelte-1r3zdn3");
+    			attr_dev(div, "class", "intro-section svelte-lzaaod");
     			add_location(div, file$2, 34, 2, 2926);
     		},
     		l: function claim(nodes) {

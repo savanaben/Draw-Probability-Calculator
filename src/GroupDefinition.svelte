@@ -9,7 +9,7 @@
     import { trackEvent } from './analytics.js';
     import TurnDrawsAccordion from './TurnDrawsAccordion.svelte';
     import { writable } from 'svelte/store';
-
+    import { slide } from 'svelte/transition';
 
 
     const dispatch = createEventDispatcher();
@@ -23,6 +23,8 @@
     let mulliganCountString = "0"; // Use a string for the binding
     let numberOfTurnsInput = 5; // Default value
 
+    let openHypergeo = false; // Add this line to manage the accordion state
+    let isHoveringHypergeo = false; // Add this line to manage hover state
 
 
     // Function to handle draw amount changes
@@ -116,7 +118,27 @@ function handleAddGroupClick() {
 
 
 <h2 style="text-align: center;">Deck inputs and card groups</h2>
+<p class="larger-text">The Hypergeometric Calulator is best for simulating the chance you'll get non-mana-based cards in your hand. The Monte Carlo Simulation will run advanced simulations that factor mana colors and ramp both in your hand and on the field.</p>
+<p class="larger-text">Simulation results per turn will output in the <a href="#probabilities-jump">Probabilities</a> section below.</p>
+
 <div class="parameters">
+    
+    <div class="accordion {isHoveringHypergeo ? 'hovering' : ''}">
+        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div class="accordion-item">
+            <div class="accordion-title" 
+                on:click={() => openHypergeo = !openHypergeo}
+                on:keydown={(event) => event.key === 'Enter' && (openHypergeo = !openHypergeo)}
+                on:mouseenter={() => isHoveringHypergeo = true}
+                on:mouseleave={() => isHoveringHypergeo = false}
+                tabindex="0">
+                <h3 style="font-weight:500; font-size:18px">Hypergeometric Calculator</h3>    
+            </div> 
+        <div class="answer" transition:slide|local={{ duration: 250 }} style:height="{openHypergeo ? 'auto' : '0'}">
+
+<p>This section let's you perform calculations based on hypergeometric math.</p>
+
     <div class="table-wrapper">
     <table>
         <thead>
@@ -133,7 +155,7 @@ function handleAddGroupClick() {
                     </Popover>
                 </th>
                 <th style="width: 18%;"># Cards in group</th>
-                <th style="width: 25%;">Minimum # desired cards
+                <th style="width: 26%;">Minimum # desired cards
                     <Popover bind:show={showPopover} placement="top">
                         <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
                             <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
@@ -217,43 +239,41 @@ function handleAddGroupClick() {
                     </td>
                 </tr>
             {/each}
-            <tr>
-                <td colspan="5"> <!-- Span across all columns -->
-                    <button on:click={handleAddGroupClick}>Add Group</button>
-                </td>
-            </tr>
+
         </tbody>
     </table>
-
-  
+</div>
+<div class="controls-container" style="margin-left: 8px;">
+    <button on:click={handleAddGroupClick}>Add Group</button>
+    <div class="mulligan-selection">
+        <label for="mulliganCount">Hypergeometric Mulligans <Popover bind:show={showPopover} placement="top">
+                <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
+                    <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
+                </button>
+                <div slot="content">
+                    <p class="popover-content">The London mulligan feature derives the cumulative probability of your initial draw, mulligans, and subsequent draw-1 turns.
+                    <p class="popover-content">See the FAQs (bottom of this page) and github if you want to help confirm this logic (mulligan calculations have not been confirmed for setups with more than 1 desired card).</p>
+                    <p class="popover-content">Special thanks to Michael Moore for helping me understand the mathematics via <a href='https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html' target='_blank'>this post</a>.</p>
+                </div>
+            </Popover>:</label>
+            <select id="mulliganCount" bind:value={mulliganCountString} on:change="{event => handleSelectChange(event.target.value)}">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
     </div>
+</div>
+</div>
+</div>
+</div>
     
     <MonteAccordion />
 
     <div class="controls-container">
         
-        <div class="mulligan-selection">
-            <label for="mulliganCount">Mulligans <Popover bind:show={showPopover} placement="top">
-                    <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
-                        <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
-                    </button>
-                    <div slot="content">
-                        <p class="popover-content">The London mulligan feature derives the cumulative probability of your initial draw, mulligans, and subsequent draw-1 turns.
-                        <p class="popover-content">See the FAQs (bottom of this page) and github if you want to help confirm this logic (mulligan calculations have not been confirmed for setups with more than 1 desired card).</p>
-                        <p class="popover-content">Special thanks to Michael Moore for helping me understand the mathematics via <a href='https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html' target='_blank'>this post</a>.</p>
-                    </div>
-                </Popover>:</label>
-                <select id="mulliganCount" bind:value={mulliganCountString} on:change="{event => handleSelectChange(event.target.value)}">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
-
-
-
+        
         <div class="deck-size-container">
             <label for="cardsDrawn">Initial hand size:</label>
             <input type="number" class="deckSize" id="cardsDrawn" bind:value={InitialDrawSize} min="1" 
@@ -293,8 +313,9 @@ function handleAddGroupClick() {
     max-width: 100%; /* Ensures the wrapper does not exceed the parent width */
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: #888 #e0e0e0; /* For Firefox */
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    /* border: 1px solid #ccc;
+    border-radius: 6px; */
+    margin-top: 12px;
 }
     
 .table-wrapper::-webkit-scrollbar {
@@ -425,6 +446,45 @@ max-width: 65px;
         margin:0;
         border-radius: 0px;
     }
+
+
+    .accordion {
+        max-width: 100%;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-top: .5rem;
+    }
+
+    .accordion.hovering {
+        border-color: #8a8a8a;
+        box-shadow: 0px 2px 0px 0px rgb(231, 231, 231);
+    }
+
+    .accordion-item {
+        padding: 0.7rem;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .answer {
+        overflow: hidden;
+    }
+
+    .accordion-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        margin: -0.7rem;
+        padding: 0.7rem;
+    }
+
+
 
 
 </style>

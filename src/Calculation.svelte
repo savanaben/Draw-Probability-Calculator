@@ -1931,7 +1931,7 @@ $: generateTurnsArray = () => {
     </script>
     
 
-    <h2 style="text-align: center; margin-bottom:0;">Probabilities</h2>
+    <h2 id="probabilities-jump" style="text-align: center; margin-bottom:0;">Probabilities</h2>
     {#if hasOutput}
     <p style="margin-top:0; text-align: center;"><i>Each column of stacked cards represents a separate opening hand and subsequent draws.</i>
         <Popover bind:show={showPopover} placement="top">

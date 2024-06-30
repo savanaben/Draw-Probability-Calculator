@@ -34,7 +34,7 @@
 
   <div class="intro-section">
     <h1 class="title">Draw Probability Calculator</h1>
-    <p>This tool is made to answer questions like, "what are the chances I draw one ramp spell and two lands in my opening hand." You can also take this a step further and calculate the chances you'll get certain mana or ability combinations in your opening turns. While I designed this tool in the frame of Commander Magic, it should work for any card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider 
+    <p class="larger-text">This tool is made to answer questions like, "what are the chances I draw one ramp spell and two lands in my opening hand." You can also take this a step further and calculate the chances you'll get certain mana or ability combinations in your opening turns. While I designed this tool in the frame of Commander Magic, it should work for any card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider 
       
       <Popover bind:show={showPopover} placement="bottom">
         <button id="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="donate to me if you want!">
@@ -64,7 +64,7 @@
   .intro-section {
     max-width: 658px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     color: #333;
   }
 
@@ -99,17 +99,6 @@
     margin-bottom: 20px;
   }
 
-  p {
-    font-size: 20px;
-    line-height: 1.6;
-    margin-bottom: 0px;
-  }
-  
-  @media (max-width: 768px) {
-p {
-  font-size: 18px;
-}
-}
 
 button {
 padding: 4px;
@@ -130,10 +119,6 @@ border: none;
 
     .subtitle {
       font-size: 20px;
-    }
-
-    p {
-      font-size: 16px;
     }
 
   }
