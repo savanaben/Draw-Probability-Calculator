@@ -848,18 +848,53 @@ function monteCarloSimulationHand(preparedCombinations, landGroupSizes, deckSize
 }
 
 
+function preprocessRampCards(hand) {
+    let processedRampCards = [];
+
+    hand.forEach(card => {
+        if (card.ColorsCanProduce && card.CanProduce) {
+            for (let i = 0; i < card.CanProduce; i++) {
+                let processedCard = {};
+                Object.entries(card.ColorsCanProduce).forEach(([color, count]) => {
+                    if (count > 0) {
+                        processedCard[color] = count;
+                    }
+                });
+                processedRampCards.push(processedCard);
+            }
+        }
+    });
+
+    return processedRampCards;
+}
+
 function handMeetsRequirements(hand, preparedCombinations) {
+    // Preprocess ramp cards
+    const processedRampCards = preprocessRampCards(hand);
+
+    // Combine lands and processed ramp cards
+    const combinedHand = hand.filter(card => !card.ColorsCanProduce).concat(processedRampCards);
+
+    // Log the processed ramp cards and combined hand
+  //  console.log('Processed Ramp Cards:', processedRampCards);
+  //  console.log('Combined Hand:', combinedHand);
+
+
     return preparedCombinations.some(combination => {
         const landCounts = combination.reduce((counts, land) => {
             counts[JSON.stringify(land.land)] = land.count;
             return counts;
         }, {});
 
-        const handProfile = hand.reduce((profile, land) => {
+        const handProfile = combinedHand.reduce((profile, land) => {
             const key = JSON.stringify(land);
             profile[key] = (profile[key] || 0) + 1;
             return profile;
         }, {});
+
+      // Log the hand profile and land counts
+    //  console.log('Hand Profile:', handProfile);
+    //  console.log('Land Counts:', landCounts);
 
         return Object.entries(landCounts).every(([land, count]) => {
             return handProfile[land] >= count;
@@ -1212,8 +1247,9 @@ function prioritizeCardToBottom(hand) {
 
 
 function playLands(hand, totalAvailableMana) {
-    // Filter out land cards (which do not have TotalManaCost)
-    const landCards = hand.filter(card => !card.TotalManaCost && !card.dummy);
+    // Filter out land cards (which do not have TotalManaCost and dummy, and have ANY attribute)
+    //this is shakey logic - custom cards could be named ANY or dummy
+    const landCards = hand.filter(card => !card.TotalManaCost && !card.dummy && card.ANY !== undefined);
 
     // Calculate the total required mana for each color from all ramp cards in hand
     const totalRequiredMana = {};
@@ -1736,7 +1772,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
         cards.push({
             probability: turnTotalProbability,
             label: 'Field Simulation',
-            color: '#FCF5EE', // A distinct color for Monte Carlo results
+            color: '#fff', // A distinct color for Monte Carlo results
             ratioText: convertPercentToRatio(turnTotalProbability),
             stackedCards: totalManaCards,
             isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)) // Include actual and blank cards
@@ -1749,7 +1785,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
         cards.push({
             probability: turnTotalProbability,
             label: 'Hand Simulation',
-            color: '#FCF5EE', // A distinct color for Hand Simulation results
+            color: '#fff', // A distinct color for Hand Simulation results
             ratioText: convertPercentToRatio(turnTotalProbability),
             stackedCards: totalManaCards,
             isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)) // Include actual and blank cards
@@ -1862,8 +1898,11 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
         }
     
      // Reactive statement to check if there's any output to display
-     $: hasOutput = generateTurnsArray($numberOfTurns).some(turn => createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0);
-
+     $: hasOutput = generateTurnsArray($numberOfTurns).some(turn => 
+    createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || 
+    createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0
+  );
+  
 // Function to generate turns array
 $: generateTurnsArray = () => {
     const array = Array.from({ length: $numberOfTurns.length + 1 }, (_, i) => i);

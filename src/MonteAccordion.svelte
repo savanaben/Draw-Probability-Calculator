@@ -10,6 +10,8 @@
   import { simulationData, simulationType, simplifiedRampMana, monteCarloResults, shouldResetSimulation } from './colorStore.js';
   import { trackEvent } from './analytics.js';
   import { writable } from 'svelte/store';
+  import SimulationMulligansAccordion from './SimulationMulligansAccordion.svelte';
+
 
 
 import WIcon from './mana-icons/plains.svg';
@@ -41,7 +43,7 @@ const manaIcons = {
 };
 
 
-  let openItem = null;
+  let openItem = 0; // this sets the accordion to open on page load. can set to "null" to be closed on page load. 
   let showPopover = false;
   
   const dispatch = createEventDispatcher();
@@ -214,16 +216,50 @@ $: {
       Object.keys(card.mana).forEach(type => {
         if (card.mana[type]) {
           types[type] = true;
-          anyActive = true; // Set to true if any mana type is true
+          if (type !== 'ANY') {
+            anyActive = true; // Set to true if any specific mana type is true
+          }
         }
       });
     });
 
-    // Only set ANY active if any mana type is active, ignoring custom cards for ANY visibility
+    // Only set ANY active if any specific mana type is active, ignoring custom cards for ANY visibility
     types.ANY = anyActive;
 
     activeManaTypes = types;
   }
+
+  // Reactive statement to update mana requirements
+  $: {
+    // Remove mana types from manaRequirements if they are no longer active and not part of custom groups
+    Object.keys(manaRequirements).forEach(color => {
+      if (!activeManaTypes[color] && !customCards.some(card => card.title === color || card.attributes.includes(color))) {
+        delete manaRequirements[color];
+      }
+    });
+
+    // Ensure all active mana types are present in manaRequirements
+    Object.keys(activeManaTypes).forEach(color => {
+      if (activeManaTypes[color] && !(color in manaRequirements)) {
+        manaRequirements[color] = 0;
+      }
+    });
+
+    // Ensure custom groups are present in manaRequirements
+    customCards.forEach(card => {
+      if (!(card.title in manaRequirements)) {
+        manaRequirements[card.title] = 0;
+      }
+      card.attributes.forEach(attr => {
+        if (!(attr in manaRequirements)) {
+          manaRequirements[attr] = 0;
+        }
+      });
+    });
+  }
+
+
+  
 
 
 $: {
@@ -1010,9 +1046,9 @@ function selectInput(event) {
             <p class="popover-content popover-text-fixer">This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.</p>
           </div>
         </Popover>
-
       </div>
   </div>
+  <SimulationMulligansAccordion/>
     </div>
   </div>
 </div>
