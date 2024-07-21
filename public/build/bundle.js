@@ -7885,19 +7885,19 @@ var app = (function () {
 
     function get_each_context$7(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
+    	child_ctx[17] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
-    	child_ctx[16] = list;
-    	child_ctx[17] = i;
+    	child_ctx[17] = list[i];
+    	child_ctx[20] = list;
+    	child_ctx[21] = i;
     	return child_ctx;
     }
 
-    // (220:24) {:else}
+    // (246:24) {:else}
     function create_else_block$2(ctx) {
     	let img;
     	let img_src_value;
@@ -7905,10 +7905,10 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			img = element("img");
-    			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[1][/*mana*/ ctx[13]].icon)) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "" + (/*mana*/ ctx[13] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon svelte-1qvc7z8");
-    			add_location(img, file$a, 220, 28, 6341);
+    			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[2][/*mana*/ ctx[17]].icon)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "" + (/*mana*/ ctx[17] + " mana icon"));
+    			attr_dev(img, "class", "mana-icon svelte-1a8pjz2");
+    			add_location(img, file$a, 246, 28, 7105);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -7923,14 +7923,14 @@ var app = (function () {
     		block,
     		id: create_else_block$2.name,
     		type: "else",
-    		source: "(220:24) {:else}",
+    		source: "(246:24) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (218:24) {#if mana === 'ANY'}
+    // (244:24) {#if mana === 'ANY'}
     function create_if_block$4(ctx) {
     	let img;
     	let img_src_value;
@@ -7938,16 +7938,16 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			img = element("img");
-    			if (!src_url_equal(img.src, img_src_value = /*getAnyIcon*/ ctx[4](/*card*/ ctx[0].TotalManaCost.ANY))) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "" + (/*mana*/ ctx[13] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon svelte-1qvc7z8");
-    			add_location(img, file$a, 218, 28, 6189);
+    			if (!src_url_equal(img.src, img_src_value = /*getAnyIcon*/ ctx[5](/*card*/ ctx[0].TotalManaCost.ANY))) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "" + (/*mana*/ ctx[17] + " mana icon"));
+    			attr_dev(img, "class", "mana-icon svelte-1a8pjz2");
+    			add_location(img, file$a, 244, 28, 6953);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*card*/ 1 && !src_url_equal(img.src, img_src_value = /*getAnyIcon*/ ctx[4](/*card*/ ctx[0].TotalManaCost.ANY))) {
+    			if (dirty & /*card*/ 1 && !src_url_equal(img.src, img_src_value = /*getAnyIcon*/ ctx[5](/*card*/ ctx[0].TotalManaCost.ANY))) {
     				attr_dev(img, "src", img_src_value);
     			}
     		},
@@ -7960,26 +7960,27 @@ var app = (function () {
     		block,
     		id: create_if_block$4.name,
     		type: "if",
-    		source: "(218:24) {#if mana === 'ANY'}",
+    		source: "(244:24) {#if mana === 'ANY'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (215:12) {#each Object.keys(manaIcons) as mana}
+    // (241:12) {#each Object.keys(manaIcons) as mana}
     function create_each_block_1$4(ctx) {
     	let div;
     	let label;
     	let t0;
     	let t1;
     	let input;
+    	let input_disabled_value;
     	let t2;
     	let mounted;
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*mana*/ ctx[13] === 'ANY') return create_if_block$4;
+    		if (/*mana*/ ctx[17] === 'ANY') return create_if_block$4;
     		return create_else_block$2;
     	}
 
@@ -7987,7 +7988,7 @@ var app = (function () {
     	let if_block = current_block_type(ctx);
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[6].call(input, /*mana*/ ctx[13]);
+    		/*input_input_handler*/ ctx[7].call(input, /*mana*/ ctx[17]);
     	}
 
     	const block = {
@@ -7999,16 +8000,17 @@ var app = (function () {
     			t1 = space();
     			input = element("input");
     			t2 = space();
-    			attr_dev(label, "for", "" + (/*mana*/ ctx[13] + "-cost"));
-    			attr_dev(label, "class", "svelte-1qvc7z8");
-    			add_location(label, file$a, 216, 20, 6088);
-    			attr_dev(input, "id", "" + (/*mana*/ ctx[13] + "-cost"));
+    			attr_dev(label, "for", "" + (/*mana*/ ctx[17] + "-cost"));
+    			attr_dev(label, "class", "svelte-1a8pjz2");
+    			add_location(label, file$a, 242, 20, 6852);
+    			attr_dev(input, "id", "" + (/*mana*/ ctx[17] + "-cost"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			attr_dev(input, "class", "svelte-1qvc7z8");
-    			add_location(input, file$a, 224, 20, 6532);
-    			attr_dev(div, "class", "mana-input svelte-1qvc7z8");
-    			add_location(div, file$a, 215, 16, 6042);
+    			input.disabled = input_disabled_value = /*card*/ ctx[0].isSignet && /*mana*/ ctx[17] !== 'ANY';
+    			attr_dev(input, "class", "svelte-1a8pjz2");
+    			add_location(input, file$a, 250, 20, 7296);
+    			attr_dev(div, "class", "mana-input svelte-1a8pjz2");
+    			add_location(div, file$a, 241, 16, 6806);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8017,7 +8019,7 @@ var app = (function () {
     			append_dev(label, t0);
     			append_dev(div, t1);
     			append_dev(div, input);
-    			set_input_value(input, /*card*/ ctx[0].TotalManaCost[/*mana*/ ctx[13]]);
+    			set_input_value(input, /*card*/ ctx[0].TotalManaCost[/*mana*/ ctx[17]]);
     			append_dev(div, t2);
 
     			if (!mounted) {
@@ -8033,8 +8035,12 @@ var app = (function () {
     			ctx = new_ctx;
     			if_block.p(ctx, dirty);
 
-    			if (dirty & /*card, Object, manaIcons*/ 3 && to_number(input.value) !== /*card*/ ctx[0].TotalManaCost[/*mana*/ ctx[13]]) {
-    				set_input_value(input, /*card*/ ctx[0].TotalManaCost[/*mana*/ ctx[13]]);
+    			if (dirty & /*card*/ 1 && input_disabled_value !== (input_disabled_value = /*card*/ ctx[0].isSignet && /*mana*/ ctx[17] !== 'ANY')) {
+    				prop_dev(input, "disabled", input_disabled_value);
+    			}
+
+    			if (dirty & /*card, Object, manaIcons*/ 5 && to_number(input.value) !== /*card*/ ctx[0].TotalManaCost[/*mana*/ ctx[17]]) {
+    				set_input_value(input, /*card*/ ctx[0].TotalManaCost[/*mana*/ ctx[17]]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -8049,14 +8055,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1$4.name,
     		type: "each",
-    		source: "(215:12) {#each Object.keys(manaIcons) as mana}",
+    		source: "(241:12) {#each Object.keys(manaIcons) as mana}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (234:8) {#each Object.keys(manaIcons).filter(mana => mana !== 'ANY') as mana}
+    // (260:8) {#each Object.keys(manaIcons).filter(mana => mana !== 'ANY') as mana}
     function create_each_block$7(ctx) {
     	let button;
     	let img;
@@ -8068,7 +8074,7 @@ var app = (function () {
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[7](/*mana*/ ctx[13]);
+    		return /*click_handler*/ ctx[8](/*mana*/ ctx[17]);
     	}
 
     	const block = {
@@ -8076,23 +8082,23 @@ var app = (function () {
     			button = element("button");
     			img = element("img");
     			t = space();
-    			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[1][/*mana*/ ctx[13]].icon)) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "" + (/*mana*/ ctx[13] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon-large svelte-1qvc7z8");
-    			add_location(img, file$a, 240, 16, 7290);
+    			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[2][/*mana*/ ctx[17]].icon)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "" + (/*mana*/ ctx[17] + " mana icon"));
+    			attr_dev(img, "class", "mana-icon-large svelte-1a8pjz2");
+    			add_location(img, file$a, 266, 16, 8097);
 
-    			attr_dev(button, "class", button_class_value = "mana-symbol " + (/*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[13]] === 1
+    			attr_dev(button, "class", button_class_value = "mana-symbol " + (/*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[17]] === 1
     			? 'active'
-    			: '') + " svelte-1qvc7z8");
+    			: '') + " svelte-1a8pjz2");
 
     			attr_dev(button, "tabindex", "0");
-    			attr_dev(button, "aria-label", /*manaIcons*/ ctx[1][/*mana*/ ctx[13]].label + ' mana');
+    			attr_dev(button, "aria-label", /*manaIcons*/ ctx[2][/*mana*/ ctx[17]].label + ' mana');
 
-    			attr_dev(button, "aria-pressed", button_aria_pressed_value = /*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[13]] === 1
+    			attr_dev(button, "aria-pressed", button_aria_pressed_value = /*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[17]] === 1
     			? 'true'
     			: 'false');
 
-    			add_location(button, file$a, 234, 12, 6937);
+    			add_location(button, file$a, 260, 12, 7744);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -8107,13 +8113,13 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*card*/ 1 && button_class_value !== (button_class_value = "mana-symbol " + (/*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[13]] === 1
+    			if (dirty & /*card*/ 1 && button_class_value !== (button_class_value = "mana-symbol " + (/*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[17]] === 1
     			? 'active'
-    			: '') + " svelte-1qvc7z8")) {
+    			: '') + " svelte-1a8pjz2")) {
     				attr_dev(button, "class", button_class_value);
     			}
 
-    			if (dirty & /*card*/ 1 && button_aria_pressed_value !== (button_aria_pressed_value = /*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[13]] === 1
+    			if (dirty & /*card*/ 1 && button_aria_pressed_value !== (button_aria_pressed_value = /*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[17]] === 1
     			? 'true'
     			: 'false')) {
     				attr_dev(button, "aria-pressed", button_aria_pressed_value);
@@ -8130,7 +8136,128 @@ var app = (function () {
     		block,
     		id: create_each_block$7.name,
     		type: "each",
-    		source: "(234:8) {#each Object.keys(manaIcons).filter(mana => mana !== 'ANY') as mana}",
+    		source: "(260:8) {#each Object.keys(manaIcons).filter(mana => mana !== 'ANY') as mana}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (294:12) 
+    function create_trigger_slot$5(ctx) {
+    	let button;
+    	let fontawesomeicon;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	fontawesomeicon = new FontAwesomeIcon({
+    			props: {
+    				style: "height: 1.2em; vertical-align: -0.155em; color:#0066e9;",
+    				icon: faQuestionCircle
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			create_component(fontawesomeicon.$$.fragment);
+    			attr_dev(button, "id", "moreInfo");
+    			attr_dev(button, "class", "moreInfo");
+    			attr_dev(button, "slot", "trigger");
+    			attr_dev(button, "tabindex", "-1");
+    			add_location(button, file$a, 293, 12, 9459);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			mount_component(fontawesomeicon, button, null);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[13], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop$3,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(fontawesomeicon.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(fontawesomeicon.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			destroy_component(fontawesomeicon);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_trigger_slot$5.name,
+    		type: "slot",
+    		source: "(294:12) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (297:12) 
+    function create_content_slot$5(ctx) {
+    	let div;
+    	let p;
+    	let t1;
+    	let ol;
+    	let li0;
+    	let t3;
+    	let li1;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			p = element("p");
+    			p.textContent = "Signet's are a complex, as we have to simulate what mana is used to pay the 1 colorless.";
+    			t1 = space();
+    			ol = element("ol");
+    			li0 = element("li");
+    			li0.textContent = "If there is mana that can only produce colorless available, that will be used to pay the 1.";
+    			t3 = space();
+    			li1 = element("li");
+    			li1.textContent = "If there is no colorless mana mana available, then the color you can produce the most of is used to pay the 1.";
+    			attr_dev(p, "class", "popover-content svelte-1a8pjz2");
+    			add_location(p, file$a, 297, 16, 9770);
+    			add_location(li0, file$a, 299, 18, 9931);
+    			add_location(li1, file$a, 300, 18, 10051);
+    			add_location(ol, file$a, 298, 16, 9907);
+    			attr_dev(div, "slot", "content");
+    			add_location(div, file$a, 296, 12, 9732);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, p);
+    			append_dev(div, t1);
+    			append_dev(div, ol);
+    			append_dev(ol, li0);
+    			append_dev(ol, t3);
+    			append_dev(ol, li1);
+    		},
+    		p: noop$3,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_content_slot$5.name,
+    		type: "slot",
+    		source: "(297:12) ",
     		ctx
     	});
 
@@ -8138,7 +8265,7 @@ var app = (function () {
     }
 
     function create_fragment$a(ctx) {
-    	let div9;
+    	let div10;
     	let div1;
     	let div0;
     	let label0;
@@ -8162,21 +8289,31 @@ var app = (function () {
     	let label1;
     	let t11;
     	let input1;
+    	let input1_disabled_value;
     	let t12;
     	let div7;
     	let label2;
     	let t14;
     	let input2;
+    	let input2_disabled_value;
     	let t15;
     	let div8;
     	let label3;
     	let t17;
     	let input3;
+    	let t18;
+    	let popover;
+    	let updating_show;
+    	let t19;
+    	let div9;
+    	let label4;
+    	let t21;
+    	let input4;
     	let current;
     	let mounted;
     	let dispose;
     	fontawesomeicon = new FontAwesomeIcon({ props: { icon: faTimes }, $$inline: true });
-    	let each_value_1 = Object.keys(/*manaIcons*/ ctx[1]);
+    	let each_value_1 = Object.keys(/*manaIcons*/ ctx[2]);
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -8184,7 +8321,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$4(get_each_context_1$4(ctx, each_value_1, i));
     	}
 
-    	let each_value = Object.keys(/*manaIcons*/ ctx[1]).filter(func$2);
+    	let each_value = Object.keys(/*manaIcons*/ ctx[2]).filter(func$2);
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -8192,9 +8329,29 @@ var app = (function () {
     		each_blocks[i] = create_each_block$7(get_each_context$7(ctx, each_value, i));
     	}
 
+    	function popover_show_binding(value) {
+    		/*popover_show_binding*/ ctx[14](value);
+    	}
+
+    	let popover_props = {
+    		placement: "top",
+    		$$slots: {
+    			content: [create_content_slot$5],
+    			trigger: [create_trigger_slot$5]
+    		},
+    		$$scope: { ctx }
+    	};
+
+    	if (/*showPopover*/ ctx[1] !== void 0) {
+    		popover_props.show = /*showPopover*/ ctx[1];
+    	}
+
+    	popover = new Popover({ props: popover_props, $$inline: true });
+    	binding_callbacks.push(() => bind(popover, 'show', popover_show_binding));
+
     	const block = {
     		c: function create() {
-    			div9 = element("div");
+    			div10 = element("div");
     			div1 = element("div");
     			div0 = element("div");
     			label0 = element("label");
@@ -8241,73 +8398,92 @@ var app = (function () {
     			t15 = space();
     			div8 = element("div");
     			label3 = element("label");
-    			label3.textContent = "Amount of ramp cards with these same attributes:";
+    			label3.textContent = "Is Signet:";
     			t17 = space();
     			input3 = element("input");
+    			t18 = space();
+    			create_component(popover.$$.fragment);
+    			t19 = space();
+    			div9 = element("div");
+    			label4 = element("label");
+    			label4.textContent = "Amount of ramp cards with these same attributes:";
+    			t21 = space();
+    			input4 = element("input");
     			attr_dev(label0, "for", "title-input");
-    			add_location(label0, file$a, 202, 8, 5478);
+    			add_location(label0, file$a, 228, 8, 6242);
     			attr_dev(input0, "aria-label", "ramp card title");
-    			attr_dev(input0, "class", "title-input svelte-1qvc7z8");
+    			attr_dev(input0, "class", "title-input svelte-1a8pjz2");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Optional name...");
-    			add_location(input0, file$a, 203, 8, 5533);
-    			attr_dev(div0, "class", "one-line svelte-1qvc7z8");
-    			add_location(div0, file$a, 201, 4, 5446);
+    			add_location(input0, file$a, 229, 8, 6297);
+    			attr_dev(div0, "class", "one-line svelte-1a8pjz2");
+    			add_location(div0, file$a, 227, 4, 6210);
     			attr_dev(button, "aria-label", "Remove ramp card");
     			attr_dev(button, "class", "remove-button");
-    			add_location(button, file$a, 206, 6, 5708);
-    			attr_dev(div1, "class", "ramp-card-header svelte-1qvc7z8");
-    			add_location(div1, file$a, 200, 4, 5410);
-    			attr_dev(p0, "class", "mana-label svelte-1qvc7z8");
-    			add_location(p0, file$a, 212, 8, 5901);
-    			attr_dev(div2, "class", "mana-inputs svelte-1qvc7z8");
-    			add_location(div2, file$a, 213, 8, 5947);
+    			add_location(button, file$a, 232, 6, 6472);
+    			attr_dev(div1, "class", "ramp-card-header svelte-1a8pjz2");
+    			add_location(div1, file$a, 226, 4, 6174);
+    			attr_dev(p0, "class", "mana-label svelte-1a8pjz2");
+    			add_location(p0, file$a, 238, 8, 6665);
+    			attr_dev(div2, "class", "mana-inputs svelte-1a8pjz2");
+    			add_location(div2, file$a, 239, 8, 6711);
     			attr_dev(div3, "class", "mana-section");
-    			add_location(div3, file$a, 211, 4, 5865);
-    			attr_dev(p1, "class", "mana-label svelte-1qvc7z8");
-    			add_location(p1, file$a, 231, 8, 6760);
-    			attr_dev(div4, "class", "mana-input svelte-1qvc7z8");
-    			add_location(div4, file$a, 232, 8, 6820);
+    			add_location(div3, file$a, 237, 4, 6629);
+    			attr_dev(p1, "class", "mana-label svelte-1a8pjz2");
+    			add_location(p1, file$a, 257, 8, 7567);
+    			attr_dev(div4, "class", "mana-input svelte-1a8pjz2");
+    			add_location(div4, file$a, 258, 8, 7627);
     			attr_dev(div5, "class", "mana-section");
-    			add_location(div5, file$a, 230, 4, 6724);
+    			add_location(div5, file$a, 256, 4, 7531);
     			attr_dev(label1, "for", "can-produce");
     			attr_dev(label1, "class", "can-produce-label");
-    			add_location(label1, file$a, 248, 8, 7477);
+    			add_location(label1, file$a, 274, 8, 8284);
     			attr_dev(input1, "id", "can-produce");
-    			attr_dev(input1, "class", "can-produce-input svelte-1qvc7z8");
+    			attr_dev(input1, "class", "can-produce-input svelte-1a8pjz2");
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", "0");
-    			add_location(input1, file$a, 249, 8, 7574);
-    			attr_dev(div6, "class", "one-line svelte-1qvc7z8");
-    			add_location(div6, file$a, 247, 4, 7445);
+    			input1.disabled = input1_disabled_value = /*card*/ ctx[0].isSignet;
+    			add_location(input1, file$a, 275, 8, 8381);
+    			attr_dev(div6, "class", "one-line svelte-1a8pjz2");
+    			add_location(div6, file$a, 273, 4, 8252);
     			attr_dev(label2, "for", "available-turn-played");
     			attr_dev(label2, "class", "available-turn-played-label");
-    			add_location(label2, file$a, 258, 8, 8042);
+    			add_location(label2, file$a, 284, 8, 8874);
     			attr_dev(input2, "id", "available-turn-played");
     			attr_dev(input2, "type", "checkbox");
-    			attr_dev(input2, "class", "svelte-1qvc7z8");
-    			add_location(input2, file$a, 259, 8, 8161);
-    			attr_dev(div7, "class", "one-line svelte-1qvc7z8");
-    			add_location(div7, file$a, 257, 4, 8010);
-    			attr_dev(label3, "for", "amount");
-    			attr_dev(label3, "class", "amount-label");
-    			add_location(label3, file$a, 263, 8, 8389);
-    			attr_dev(input3, "id", "amount");
-    			attr_dev(input3, "class", "amount-input svelte-1qvc7z8");
-    			attr_dev(input3, "type", "number");
-    			attr_dev(input3, "min", "0");
-    			add_location(input3, file$a, 264, 8, 8496);
-    			attr_dev(div8, "class", "amount-section");
-    			add_location(div8, file$a, 262, 4, 8351);
-    			attr_dev(div9, "class", "ramp-card svelte-1qvc7z8");
-    			add_location(div9, file$a, 199, 0, 5381);
+    			input2.disabled = input2_disabled_value = /*card*/ ctx[0].isSignet;
+    			attr_dev(input2, "class", "svelte-1a8pjz2");
+    			add_location(input2, file$a, 285, 8, 8993);
+    			attr_dev(div7, "class", "one-line svelte-1a8pjz2");
+    			add_location(div7, file$a, 283, 4, 8842);
+    			attr_dev(label3, "for", "is-signet");
+    			attr_dev(label3, "class", "is-signet-label");
+    			add_location(label3, file$a, 289, 8, 9240);
+    			attr_dev(input3, "id", "is-signet");
+    			attr_dev(input3, "type", "checkbox");
+    			attr_dev(input3, "class", "svelte-1a8pjz2");
+    			add_location(input3, file$a, 290, 8, 9315);
+    			attr_dev(div8, "class", "one-line svelte-1a8pjz2");
+    			add_location(div8, file$a, 288, 4, 9208);
+    			attr_dev(label4, "for", "amount");
+    			attr_dev(label4, "class", "amount-label");
+    			add_location(label4, file$a, 308, 8, 10295);
+    			attr_dev(input4, "id", "amount");
+    			attr_dev(input4, "class", "amount-input svelte-1a8pjz2");
+    			attr_dev(input4, "type", "number");
+    			attr_dev(input4, "min", "0");
+    			add_location(input4, file$a, 309, 8, 10402);
+    			attr_dev(div9, "class", "amount-section");
+    			add_location(div9, file$a, 307, 4, 10257);
+    			attr_dev(div10, "class", "ramp-card svelte-1a8pjz2");
+    			add_location(div10, file$a, 225, 0, 6145);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div9, anchor);
-    			append_dev(div9, div1);
+    			insert_dev(target, div10, anchor);
+    			append_dev(div10, div1);
     			append_dev(div1, div0);
     			append_dev(div0, label0);
     			append_dev(div0, t1);
@@ -8316,8 +8492,8 @@ var app = (function () {
     			append_dev(div1, t2);
     			append_dev(div1, button);
     			mount_component(fontawesomeicon, button, null);
-    			append_dev(div9, t3);
-    			append_dev(div9, div3);
+    			append_dev(div10, t3);
+    			append_dev(div10, div3);
     			append_dev(div3, p0);
     			append_dev(div3, t5);
     			append_dev(div3, div2);
@@ -8328,8 +8504,8 @@ var app = (function () {
     				}
     			}
 
-    			append_dev(div9, t6);
-    			append_dev(div9, div5);
+    			append_dev(div10, t6);
+    			append_dev(div10, div5);
     			append_dev(div5, p1);
     			append_dev(div5, t8);
     			append_dev(div5, div4);
@@ -8340,37 +8516,46 @@ var app = (function () {
     				}
     			}
 
-    			append_dev(div9, t9);
-    			append_dev(div9, div6);
+    			append_dev(div10, t9);
+    			append_dev(div10, div6);
     			append_dev(div6, label1);
     			append_dev(div6, t11);
     			append_dev(div6, input1);
     			set_input_value(input1, /*card*/ ctx[0].CanProduce);
-    			append_dev(div9, t12);
-    			append_dev(div9, div7);
+    			append_dev(div10, t12);
+    			append_dev(div10, div7);
     			append_dev(div7, label2);
     			append_dev(div7, t14);
     			append_dev(div7, input2);
     			input2.checked = /*card*/ ctx[0].AvailableTurnPlayed;
-    			append_dev(div9, t15);
-    			append_dev(div9, div8);
+    			append_dev(div10, t15);
+    			append_dev(div10, div8);
     			append_dev(div8, label3);
     			append_dev(div8, t17);
     			append_dev(div8, input3);
-    			set_input_value(input3, /*card*/ ctx[0].amount);
+    			input3.checked = /*card*/ ctx[0].isSignet;
+    			append_dev(div8, t18);
+    			mount_component(popover, div8, null);
+    			append_dev(div10, t19);
+    			append_dev(div10, div9);
+    			append_dev(div9, label4);
+    			append_dev(div9, t21);
+    			append_dev(div9, input4);
+    			set_input_value(input4, /*card*/ ctx[0].amount);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[5]),
+    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[6]),
     					listen_dev(input0, "focus", selectInput$4, false, false, false, false),
-    					listen_dev(button, "click", /*remove*/ ctx[2], false, false, false, false),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[8]),
+    					listen_dev(button, "click", /*remove*/ ctx[3], false, false, false, false),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[9]),
     					listen_dev(input1, "focus", selectInput$4, false, false, false, false),
-    					listen_dev(input2, "change", /*input2_change_handler*/ ctx[9]),
-    					listen_dev(input2, "change", /*change_handler*/ ctx[10], false, false, false, false),
-    					listen_dev(input3, "input", /*input3_input_handler*/ ctx[11]),
-    					listen_dev(input3, "focus", selectInput$4, false, false, false, false)
+    					listen_dev(input2, "change", /*input2_change_handler*/ ctx[10]),
+    					listen_dev(input2, "change", /*change_handler*/ ctx[11], false, false, false, false),
+    					listen_dev(input3, "change", /*input3_change_handler*/ ctx[12]),
+    					listen_dev(input4, "input", /*input4_input_handler*/ ctx[15]),
+    					listen_dev(input4, "focus", selectInput$4, false, false, false, false)
     				];
 
     				mounted = true;
@@ -8381,8 +8566,8 @@ var app = (function () {
     				set_input_value(input0, /*card*/ ctx[0].title);
     			}
 
-    			if (dirty & /*Object, manaIcons, card, selectInput, getAnyIcon*/ 19) {
-    				each_value_1 = Object.keys(/*manaIcons*/ ctx[1]);
+    			if (dirty & /*Object, manaIcons, card, selectInput, getAnyIcon*/ 37) {
+    				each_value_1 = Object.keys(/*manaIcons*/ ctx[2]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -8405,8 +8590,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*card, Object, manaIcons, toggleManaProduce*/ 11) {
-    				each_value = Object.keys(/*manaIcons*/ ctx[1]).filter(func$2);
+    			if (dirty & /*card, Object, manaIcons, toggleManaProduce*/ 21) {
+    				each_value = Object.keys(/*manaIcons*/ ctx[2]).filter(func$2);
     				validate_each_argument(each_value);
     				let i;
 
@@ -8429,32 +8614,61 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
+    			if (!current || dirty & /*card*/ 1 && input1_disabled_value !== (input1_disabled_value = /*card*/ ctx[0].isSignet)) {
+    				prop_dev(input1, "disabled", input1_disabled_value);
+    			}
+
     			if (dirty & /*card*/ 1 && to_number(input1.value) !== /*card*/ ctx[0].CanProduce) {
     				set_input_value(input1, /*card*/ ctx[0].CanProduce);
+    			}
+
+    			if (!current || dirty & /*card*/ 1 && input2_disabled_value !== (input2_disabled_value = /*card*/ ctx[0].isSignet)) {
+    				prop_dev(input2, "disabled", input2_disabled_value);
     			}
 
     			if (dirty & /*card*/ 1) {
     				input2.checked = /*card*/ ctx[0].AvailableTurnPlayed;
     			}
 
-    			if (dirty & /*card*/ 1 && to_number(input3.value) !== /*card*/ ctx[0].amount) {
-    				set_input_value(input3, /*card*/ ctx[0].amount);
+    			if (dirty & /*card*/ 1) {
+    				input3.checked = /*card*/ ctx[0].isSignet;
+    			}
+
+    			const popover_changes = {};
+
+    			if (dirty & /*$$scope, showPopover*/ 4194306) {
+    				popover_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_show && dirty & /*showPopover*/ 2) {
+    				updating_show = true;
+    				popover_changes.show = /*showPopover*/ ctx[1];
+    				add_flush_callback(() => updating_show = false);
+    			}
+
+    			popover.$set(popover_changes);
+
+    			if (dirty & /*card*/ 1 && to_number(input4.value) !== /*card*/ ctx[0].amount) {
+    				set_input_value(input4, /*card*/ ctx[0].amount);
     			}
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(fontawesomeicon.$$.fragment, local);
+    			transition_in(popover.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(fontawesomeicon.$$.fragment, local);
+    			transition_out(popover.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div9);
+    			if (detaching) detach_dev(div10);
     			destroy_component(fontawesomeicon);
     			destroy_each(each_blocks_1, detaching);
     			destroy_each(each_blocks, detaching);
+    			destroy_component(popover);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -8480,6 +8694,7 @@ var app = (function () {
     function instance$a($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('RampCard', slots, []);
+    	let showPopover = false;
 
     	const manaIcons = {
     		W: { icon: img$f, label: 'Plains' },
@@ -8527,7 +8742,9 @@ var app = (function () {
     		CanProduce: 0,
     		AbilityCost: 0,
     		AvailableTurnPlayed: 0,
-    		amount: 0
+    		amount: 0,
+    		isSignet: false, // New property to indicate if the card is a signet
+    		
     	} } = $$props;
 
     	function remove() {
@@ -8590,7 +8807,19 @@ var app = (function () {
 
     	const change_handler = () => $$invalidate(0, card.AvailableTurnPlayed = card.AvailableTurnPlayed ? 1 : 0, card);
 
-    	function input3_input_handler() {
+    	function input3_change_handler() {
+    		card.isSignet = this.checked;
+    		$$invalidate(0, card);
+    	}
+
+    	const click_handler_1 = () => $$invalidate(1, showPopover = !showPopover);
+
+    	function popover_show_binding(value) {
+    		showPopover = value;
+    		$$invalidate(1, showPopover);
+    	}
+
+    	function input4_input_handler() {
     		card.amount = to_number(this.value);
     		$$invalidate(0, card);
     	}
@@ -8603,6 +8832,8 @@ var app = (function () {
     		createEventDispatcher,
     		faTimes,
     		FontAwesomeIcon,
+    		Popover,
+    		faQuestionCircle,
     		WIcon: img$f,
     		UIcon: img$e,
     		BIcon: img$d,
@@ -8619,6 +8850,7 @@ var app = (function () {
     		AnyIcon7: img$2,
     		AnyIcon8: img$1,
     		AnyIcon9: img,
+    		showPopover,
     		manaIcons,
     		dispatch,
     		card,
@@ -8629,6 +8861,7 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
+    		if ('showPopover' in $$props) $$invalidate(1, showPopover = $$props.showPopover);
     		if ('card' in $$props) $$invalidate(0, card = $$props.card);
     	};
 
@@ -8636,8 +8869,28 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*card*/ 1) {
+    			// Update the card object to include CustomRamp: 'signet' if isSignet is true
+    			if (card.isSignet) {
+    				$$invalidate(0, card.CustomRamp = 'signet', card);
+
+    				Object.keys(card.TotalManaCost).forEach(key => {
+    					$$invalidate(0, card.TotalManaCost[key] = 0, card);
+    				});
+
+    				$$invalidate(0, card.TotalManaCost.ANY = 2, card);
+    				$$invalidate(0, card.CanProduce = 2, card);
+    				$$invalidate(0, card.AvailableTurnPlayed = 1, card);
+    			} else {
+    				delete card.CustomRamp;
+    			}
+    		}
+    	};
+
     	return [
     		card,
+    		showPopover,
     		manaIcons,
     		remove,
     		toggleManaProduce,
@@ -8648,7 +8901,10 @@ var app = (function () {
     		input1_input_handler,
     		input2_change_handler,
     		change_handler,
-    		input3_input_handler
+    		input3_change_handler,
+    		click_handler_1,
+    		popover_show_binding,
+    		input4_input_handler
     	];
     }
 
@@ -10197,42 +10453,42 @@ var app = (function () {
 
     function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[64] = list[i];
+    	child_ctx[66] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[67] = list[i][0];
-    	child_ctx[68] = list[i][1];
+    	child_ctx[69] = list[i][0];
+    	child_ctx[70] = list[i][1];
     	return child_ctx;
     }
 
     function get_each_context_2$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[71] = list[i];
-    	child_ctx[72] = list;
-    	child_ctx[73] = i;
-    	return child_ctx;
-    }
-
-    function get_each_context_3(ctx, list, i) {
-    	const child_ctx = ctx.slice();
-    	child_ctx[71] = list[i];
+    	child_ctx[73] = list[i];
     	child_ctx[74] = list;
     	child_ctx[75] = i;
     	return child_ctx;
     }
 
-    function get_each_context_4(ctx, list, i) {
+    function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[71] = list[i];
+    	child_ctx[73] = list[i];
     	child_ctx[76] = list;
     	child_ctx[77] = i;
     	return child_ctx;
     }
 
-    // (891:8) 
+    function get_each_context_4(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[73] = list[i];
+    	child_ctx[78] = list;
+    	child_ctx[79] = i;
+    	return child_ctx;
+    }
+
+    // (920:8) 
     function create_trigger_slot_2$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -10255,7 +10511,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 890, 8, 25608);
+    			add_location(button, file$7, 919, 8, 26614);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -10289,14 +10545,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_2$1.name,
     		type: "slot",
-    		source: "(891:8) ",
+    		source: "(920:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (894:8) 
+    // (923:8) 
     function create_content_slot_2$1(ctx) {
     	let div;
     	let p0;
@@ -10327,18 +10583,18 @@ var app = (function () {
     			p2.textContent = "My research has only come up with one other method to find this kind of probability - the inclusion exclusion principle. And that seemed hella hard to implement, so I went with this.";
     			attr_dev(a0, "href", "https://en.wikipedia.org/wiki/Monte_Carlo_method");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$7, 894, 76, 25952);
+    			add_location(a0, file$7, 923, 76, 26958);
     			attr_dev(a1, "href", "https://en.wikipedia.org/wiki/Hypergeometric_distribution");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$7, 894, 381, 26257);
+    			add_location(a1, file$7, 923, 381, 27263);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-edgrwr");
-    			add_location(p0, file$7, 894, 10, 25886);
+    			add_location(p0, file$7, 923, 10, 26892);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-edgrwr");
-    			add_location(p1, file$7, 895, 12, 26545);
+    			add_location(p1, file$7, 924, 12, 27551);
     			attr_dev(p2, "class", "popover-content popover-text-fixer svelte-edgrwr");
-    			add_location(p2, file$7, 896, 10, 26821);
+    			add_location(p2, file$7, 925, 10, 27827);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 893, 8, 25854);
+    			add_location(div, file$7, 922, 8, 26860);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10362,14 +10618,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_2$1.name,
     		type: "slot",
-    		source: "(894:8) ",
+    		source: "(923:8) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (907:8) {#each manaCards as card (card.id)}
+    // (936:8) {#each manaCards as card (card.id)}
     function create_each_block_4(key_1, ctx) {
     	let first;
     	let manacard;
@@ -10377,17 +10633,17 @@ var app = (function () {
     	let current;
 
     	function manacard_card_binding(value) {
-    		/*manacard_card_binding*/ ctx[37](value, /*card*/ ctx[71], /*each_value_4*/ ctx[76], /*card_index_2*/ ctx[77]);
+    		/*manacard_card_binding*/ ctx[37](value, /*card*/ ctx[73], /*each_value_4*/ ctx[78], /*card_index_2*/ ctx[79]);
     	}
 
     	function remove_handler() {
-    		return /*remove_handler*/ ctx[38](/*card*/ ctx[71]);
+    		return /*remove_handler*/ ctx[38](/*card*/ ctx[73]);
     	}
 
     	let manacard_props = {};
 
-    	if (/*card*/ ctx[71] !== void 0) {
-    		manacard_props.card = /*card*/ ctx[71];
+    	if (/*card*/ ctx[73] !== void 0) {
+    		manacard_props.card = /*card*/ ctx[73];
     	}
 
     	manacard = new ManaCard({ props: manacard_props, $$inline: true });
@@ -10413,7 +10669,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*manaCards*/ 1) {
     				updating_card = true;
-    				manacard_changes.card = /*card*/ ctx[71];
+    				manacard_changes.card = /*card*/ ctx[73];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -10438,14 +10694,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4.name,
     		type: "each",
-    		source: "(907:8) {#each manaCards as card (card.id)}",
+    		source: "(936:8) {#each manaCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (925:8) {#each rampCards as card (card.id)}
+    // (954:8) {#each rampCards as card (card.id)}
     function create_each_block_3(key_1, ctx) {
     	let first;
     	let rampcard;
@@ -10453,17 +10709,17 @@ var app = (function () {
     	let current;
 
     	function rampcard_card_binding(value) {
-    		/*rampcard_card_binding*/ ctx[39](value, /*card*/ ctx[71], /*each_value_3*/ ctx[74], /*card_index_1*/ ctx[75]);
+    		/*rampcard_card_binding*/ ctx[39](value, /*card*/ ctx[73], /*each_value_3*/ ctx[76], /*card_index_1*/ ctx[77]);
     	}
 
     	function remove_handler_1() {
-    		return /*remove_handler_1*/ ctx[40](/*card*/ ctx[71]);
+    		return /*remove_handler_1*/ ctx[40](/*card*/ ctx[73]);
     	}
 
     	let rampcard_props = {};
 
-    	if (/*card*/ ctx[71] !== void 0) {
-    		rampcard_props.card = /*card*/ ctx[71];
+    	if (/*card*/ ctx[73] !== void 0) {
+    		rampcard_props.card = /*card*/ ctx[73];
     	}
 
     	rampcard = new RampCard({ props: rampcard_props, $$inline: true });
@@ -10489,7 +10745,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*rampCards*/ 4) {
     				updating_card = true;
-    				rampcard_changes.card = /*card*/ ctx[71];
+    				rampcard_changes.card = /*card*/ ctx[73];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -10514,14 +10770,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(925:8) {#each rampCards as card (card.id)}",
+    		source: "(954:8) {#each rampCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (944:3) {#each customCards as card (card.id)}
+    // (973:3) {#each customCards as card (card.id)}
     function create_each_block_2$1(key_1, ctx) {
     	let first;
     	let customcard;
@@ -10529,21 +10785,21 @@ var app = (function () {
     	let current;
 
     	function customcard_card_binding(value) {
-    		/*customcard_card_binding*/ ctx[41](value, /*card*/ ctx[71], /*each_value_2*/ ctx[72], /*card_index*/ ctx[73]);
+    		/*customcard_card_binding*/ ctx[41](value, /*card*/ ctx[73], /*each_value_2*/ ctx[74], /*card_index*/ ctx[75]);
     	}
 
     	function remove_handler_2() {
-    		return /*remove_handler_2*/ ctx[42](/*card*/ ctx[71]);
+    		return /*remove_handler_2*/ ctx[42](/*card*/ ctx[73]);
     	}
 
     	function updateattribute_handler(...args) {
-    		return /*updateattribute_handler*/ ctx[44](/*card*/ ctx[71], ...args);
+    		return /*updateattribute_handler*/ ctx[44](/*card*/ ctx[73], ...args);
     	}
 
     	let customcard_props = {};
 
-    	if (/*card*/ ctx[71] !== void 0) {
-    		customcard_props.card = /*card*/ ctx[71];
+    	if (/*card*/ ctx[73] !== void 0) {
+    		customcard_props.card = /*card*/ ctx[73];
     	}
 
     	customcard = new CustomCard({ props: customcard_props, $$inline: true });
@@ -10572,7 +10828,7 @@ var app = (function () {
 
     			if (!updating_card && dirty[0] & /*customCards*/ 2) {
     				updating_card = true;
-    				customcard_changes.card = /*card*/ ctx[71];
+    				customcard_changes.card = /*card*/ ctx[73];
     				add_flush_callback(() => updating_card = false);
     			}
 
@@ -10597,14 +10853,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2$1.name,
     		type: "each",
-    		source: "(944:3) {#each customCards as card (card.id)}",
+    		source: "(973:3) {#each customCards as card (card.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (958:10) 
+    // (987:10) 
     function create_trigger_slot_1$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -10627,7 +10883,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 957, 10, 29028);
+    			add_location(button, file$7, 986, 10, 30034);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -10661,14 +10917,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot_1$1.name,
     		type: "slot",
-    		source: "(958:10) ",
+    		source: "(987:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (961:10) 
+    // (990:10) 
     function create_content_slot_1$1(ctx) {
     	let div;
     	let p0;
@@ -10684,11 +10940,11 @@ var app = (function () {
     			p1 = element("p");
     			p1.textContent = "In Step 2, you can select that you want a certain number of cards from a custom group, as well as a certain number of cards that include some attribute.";
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-edgrwr");
-    			add_location(p0, file$7, 961, 12, 29314);
+    			add_location(p0, file$7, 990, 12, 30320);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-edgrwr");
-    			add_location(p1, file$7, 962, 12, 29784);
+    			add_location(p1, file$7, 991, 12, 30790);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 960, 10, 29280);
+    			add_location(div, file$7, 989, 10, 30286);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10706,14 +10962,14 @@ var app = (function () {
     		block,
     		id: create_content_slot_1$1.name,
     		type: "slot",
-    		source: "(961:10) ",
+    		source: "(990:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (979:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
+    // (1008:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}
     function create_if_block$3(ctx) {
     	let div;
     	let label;
@@ -10726,7 +10982,7 @@ var app = (function () {
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*manaIcons*/ ctx[15][/*key*/ ctx[67]]) return create_if_block_1$2;
+    		if (/*manaIcons*/ ctx[15][/*key*/ ctx[69]]) return create_if_block_1$2;
     		return create_else_block$1;
     	}
 
@@ -10734,7 +10990,7 @@ var app = (function () {
     	let if_block = current_block_type(ctx);
 
     	function input_handler(...args) {
-    		return /*input_handler*/ ctx[48](/*key*/ ctx[67], ...args);
+    		return /*input_handler*/ ctx[48](/*key*/ ctx[69], ...args);
     	}
 
     	const block = {
@@ -10744,17 +11000,17 @@ var app = (function () {
     			if_block.c();
     			t = space();
     			input = element("input");
-    			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"));
+    			attr_dev(label, "for", label_for_value = "" + (/*key*/ ctx[69].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(label, "class", "svelte-edgrwr");
-    			add_location(label, file$7, 980, 12, 30804);
-    			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"));
+    			add_location(label, file$7, 1009, 12, 31810);
+    			attr_dev(input, "id", input_id_value = "" + (/*key*/ ctx[69].replace(/\s+/g, '_') + "-requirement"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			input.value = input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[67]];
+    			input.value = input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[69]];
     			attr_dev(input, "class", "svelte-edgrwr");
-    			add_location(input, file$7, 987, 12, 31180);
+    			add_location(input, file$7, 1016, 12, 32186);
     			attr_dev(div, "class", "mana-requirement svelte-edgrwr");
-    			add_location(div, file$7, 979, 10, 30760);
+    			add_location(div, file$7, 1008, 10, 31766);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10787,15 +11043,15 @@ var app = (function () {
     				}
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && label_for_value !== (label_for_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && label_for_value !== (label_for_value = "" + (/*key*/ ctx[69].replace(/\s+/g, '_') + "-requirement"))) {
     				attr_dev(label, "for", label_for_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && input_id_value !== (input_id_value = "" + (/*key*/ ctx[67].replace(/\s+/g, '_') + "-requirement"))) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && input_id_value !== (input_id_value = "" + (/*key*/ ctx[69].replace(/\s+/g, '_') + "-requirement"))) {
     				attr_dev(input, "id", input_id_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && input_value_value !== (input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[67]]) && input.value !== input_value_value) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && input_value_value !== (input_value_value = /*manaRequirements*/ ctx[3][/*key*/ ctx[69]]) && input.value !== input_value_value) {
     				prop_dev(input, "value", input_value_value);
     			}
     		},
@@ -10811,16 +11067,16 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(979:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
+    		source: "(1008:8) {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (984:14) {:else}
+    // (1013:14) {:else}
     function create_else_block$1(ctx) {
-    	let t0_value = /*key*/ ctx[67] + "";
+    	let t0_value = /*key*/ ctx[69] + "";
     	let t0;
     	let t1;
 
@@ -10834,7 +11090,7 @@ var app = (function () {
     			insert_dev(target, t1, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*manaRequirements*/ 8 && t0_value !== (t0_value = /*key*/ ctx[67] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*manaRequirements*/ 8 && t0_value !== (t0_value = /*key*/ ctx[69] + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t0);
@@ -10846,14 +11102,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(984:14) {:else}",
+    		source: "(1013:14) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (982:14) {#if manaIcons[key]}
+    // (1011:14) {#if manaIcons[key]}
     function create_if_block_1$2(ctx) {
     	let img;
     	let img_src_value;
@@ -10865,26 +11121,26 @@ var app = (function () {
     			img = element("img");
     			t = text(" :");
 
-    			if (!src_url_equal(img.src, img_src_value = /*key*/ ctx[67] === 'ANY'
-    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[68])
-    			: /*manaIcons*/ ctx[15][/*key*/ ctx[67]])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*key*/ ctx[69] === 'ANY'
+    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[70])
+    			: /*manaIcons*/ ctx[15][/*key*/ ctx[69]])) attr_dev(img, "src", img_src_value);
 
-    			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[67] + " mana icon"));
+    			attr_dev(img, "alt", img_alt_value = "" + (/*key*/ ctx[69] + " mana icon"));
     			attr_dev(img, "class", "mana-icon svelte-edgrwr");
-    			add_location(img, file$7, 982, 16, 30910);
+    			add_location(img, file$7, 1011, 16, 31916);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
     			insert_dev(target, t, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*manaRequirements*/ 8 && !src_url_equal(img.src, img_src_value = /*key*/ ctx[67] === 'ANY'
-    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[68])
-    			: /*manaIcons*/ ctx[15][/*key*/ ctx[67]])) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && !src_url_equal(img.src, img_src_value = /*key*/ ctx[69] === 'ANY'
+    			? /*getAnyIcon*/ ctx[16](/*amount*/ ctx[70])
+    			: /*manaIcons*/ ctx[15][/*key*/ ctx[69]])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty[0] & /*manaRequirements*/ 8 && img_alt_value !== (img_alt_value = "" + (/*key*/ ctx[67] + " mana icon"))) {
+    			if (dirty[0] & /*manaRequirements*/ 8 && img_alt_value !== (img_alt_value = "" + (/*key*/ ctx[69] + " mana icon"))) {
     				attr_dev(img, "alt", img_alt_value);
     			}
     		},
@@ -10898,20 +11154,20 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(982:14) {#if manaIcons[key]}",
+    		source: "(1011:14) {#if manaIcons[key]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (978:6) {#each Object.entries(manaRequirements) as [key, amount]}
+    // (1007:6) {#each Object.entries(manaRequirements) as [key, amount]}
     function create_each_block_1$2(ctx) {
-    	let show_if = /*activeManaTypes*/ ctx[6][/*key*/ ctx[67]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
+    	let show_if = /*activeManaTypes*/ ctx[6][/*key*/ ctx[69]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
     	let if_block_anchor;
 
     	function func(...args) {
-    		return /*func*/ ctx[31](/*key*/ ctx[67], ...args);
+    		return /*func*/ ctx[31](/*key*/ ctx[69], ...args);
     	}
 
     	let if_block = show_if && create_if_block$3(ctx);
@@ -10927,7 +11183,7 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*activeManaTypes, manaRequirements, customCards*/ 74) show_if = /*activeManaTypes*/ ctx[6][/*key*/ ctx[67]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
+    			if (dirty[0] & /*activeManaTypes, manaRequirements, customCards*/ 74) show_if = /*activeManaTypes*/ ctx[6][/*key*/ ctx[69]] || /*customCards*/ ctx[1].length > 0 && /*customCards*/ ctx[1].some(func);
 
     			if (show_if) {
     				if (if_block) {
@@ -10952,18 +11208,18 @@ var app = (function () {
     		block,
     		id: create_each_block_1$2.name,
     		type: "each",
-    		source: "(978:6) {#each Object.entries(manaRequirements) as [key, amount]}",
+    		source: "(1007:6) {#each Object.entries(manaRequirements) as [key, amount]}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1004:8) {#each Array.from(uniqueAttributes) as attr}
+    // (1033:8) {#each Array.from(uniqueAttributes) as attr}
     function create_each_block$4(ctx) {
     	let div;
     	let label;
-    	let t0_value = /*attr*/ ctx[64] + "";
+    	let t0_value = /*attr*/ ctx[66] + "";
     	let t0;
     	let t1;
     	let label_for_value;
@@ -10976,7 +11232,7 @@ var app = (function () {
     	let dispose;
 
     	function input_handler_1(...args) {
-    		return /*input_handler_1*/ ctx[49](/*attr*/ ctx[64], ...args);
+    		return /*input_handler_1*/ ctx[49](/*attr*/ ctx[66], ...args);
     	}
 
     	const block = {
@@ -10988,17 +11244,17 @@ var app = (function () {
     			t2 = space();
     			input = element("input");
     			t3 = space();
-    			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'));
+    			attr_dev(label, "for", label_for_value = "custom-" + /*attr*/ ctx[66].replace(/\s+/g, '_'));
     			attr_dev(label, "class", "svelte-edgrwr");
-    			add_location(label, file$7, 1005, 10, 31624);
-    			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'));
+    			add_location(label, file$7, 1034, 10, 32630);
+    			attr_dev(input, "id", input_id_value = "custom-" + /*attr*/ ctx[66].replace(/\s+/g, '_'));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
-    			input.value = input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[64]];
+    			input.value = input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[66]];
     			attr_dev(input, "class", "svelte-edgrwr");
-    			add_location(input, file$7, 1006, 10, 31700);
+    			add_location(input, file$7, 1035, 10, 32706);
     			attr_dev(div, "class", "mana-requirement svelte-edgrwr");
-    			add_location(div, file$7, 1004, 8, 31582);
+    			add_location(div, file$7, 1033, 8, 32588);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11020,17 +11276,17 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*uniqueAttributes*/ 32 && t0_value !== (t0_value = /*attr*/ ctx[64] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*uniqueAttributes*/ 32 && t0_value !== (t0_value = /*attr*/ ctx[66] + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*uniqueAttributes*/ 32 && label_for_value !== (label_for_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'))) {
+    			if (dirty[0] & /*uniqueAttributes*/ 32 && label_for_value !== (label_for_value = "custom-" + /*attr*/ ctx[66].replace(/\s+/g, '_'))) {
     				attr_dev(label, "for", label_for_value);
     			}
 
-    			if (dirty[0] & /*uniqueAttributes*/ 32 && input_id_value !== (input_id_value = "custom-" + /*attr*/ ctx[64].replace(/\s+/g, '_'))) {
+    			if (dirty[0] & /*uniqueAttributes*/ 32 && input_id_value !== (input_id_value = "custom-" + /*attr*/ ctx[66].replace(/\s+/g, '_'))) {
     				attr_dev(input, "id", input_id_value);
     			}
 
-    			if (dirty[0] & /*customAttributeRequirements, uniqueAttributes*/ 48 && input_value_value !== (input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[64]]) && input.value !== input_value_value) {
+    			if (dirty[0] & /*customAttributeRequirements, uniqueAttributes*/ 48 && input_value_value !== (input_value_value = /*customAttributeRequirements*/ ctx[4][/*attr*/ ctx[66]]) && input.value !== input_value_value) {
     				prop_dev(input, "value", input_value_value);
     			}
     		},
@@ -11045,14 +11301,14 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(1004:8) {#each Array.from(uniqueAttributes) as attr}",
+    		source: "(1033:8) {#each Array.from(uniqueAttributes) as attr}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1048:10) 
+    // (1077:10) 
     function create_trigger_slot$3(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -11076,7 +11332,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$7, 1047, 10, 33296);
+    			add_location(button, file$7, 1076, 10, 34302);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -11110,14 +11366,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$3.name,
     		type: "slot",
-    		source: "(1048:10) ",
+    		source: "(1077:10) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1051:10) 
+    // (1080:10) 
     function create_content_slot$3(ctx) {
     	let div;
     	let p0;
@@ -11134,13 +11390,13 @@ var app = (function () {
     			t1 = space();
     			p1 = element("p");
     			p1.textContent = "This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.";
-    			add_location(b, file$7, 1051, 58, 33654);
+    			add_location(b, file$7, 1080, 58, 34660);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-edgrwr");
-    			add_location(p0, file$7, 1051, 12, 33608);
+    			add_location(p0, file$7, 1080, 12, 34614);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-edgrwr");
-    			add_location(p1, file$7, 1052, 12, 33724);
+    			add_location(p1, file$7, 1081, 12, 34730);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$7, 1050, 10, 33574);
+    			add_location(div, file$7, 1079, 10, 34580);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11159,7 +11415,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$3.name,
     		type: "slot",
-    		source: "(1051:10) ",
+    		source: "(1080:10) ",
     		ctx
     	});
 
@@ -11305,7 +11561,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(popover0, 'show', popover0_show_binding));
     	let each_value_4 = /*manaCards*/ ctx[0];
     	validate_each_argument(each_value_4);
-    	const get_key = ctx => /*card*/ ctx[71].id;
+    	const get_key = ctx => /*card*/ ctx[73].id;
     	validate_each_keys(ctx, each_value_4, get_each_context_4, get_key);
 
     	for (let i = 0; i < each_value_4.length; i += 1) {
@@ -11316,7 +11572,7 @@ var app = (function () {
 
     	let each_value_3 = /*rampCards*/ ctx[2];
     	validate_each_argument(each_value_3);
-    	const get_key_1 = ctx => /*card*/ ctx[71].id;
+    	const get_key_1 = ctx => /*card*/ ctx[73].id;
     	validate_each_keys(ctx, each_value_3, get_each_context_3, get_key_1);
 
     	for (let i = 0; i < each_value_3.length; i += 1) {
@@ -11327,7 +11583,7 @@ var app = (function () {
 
     	let each_value_2 = /*customCards*/ ctx[1];
     	validate_each_argument(each_value_2);
-    	const get_key_2 = ctx => /*card*/ ctx[71].id;
+    	const get_key_2 = ctx => /*card*/ ctx[73].id;
     	validate_each_keys(ctx, each_value_2, get_each_context_2$1, get_key_2);
 
     	for (let i = 0; i < each_value_2.length; i += 1) {
@@ -11526,108 +11782,108 @@ var app = (function () {
     			if (!src_url_equal(img0.src, img0_src_value = img$f)) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "Plains");
     			attr_dev(img0, "class", "mana-icon svelte-edgrwr");
-    			add_location(img0, file$7, 875, 4, 24753);
+    			add_location(img0, file$7, 904, 4, 25759);
     			if (!src_url_equal(img1.src, img1_src_value = img$e)) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Swamp");
     			attr_dev(img1, "class", "mana-icon svelte-edgrwr");
-    			add_location(img1, file$7, 876, 4, 24809);
+    			add_location(img1, file$7, 905, 4, 25815);
     			if (!src_url_equal(img2.src, img2_src_value = img$d)) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Island");
     			attr_dev(img2, "class", "mana-icon svelte-edgrwr");
-    			add_location(img2, file$7, 877, 4, 24864);
+    			add_location(img2, file$7, 906, 4, 25870);
     			if (!src_url_equal(img3.src, img3_src_value = img$c)) attr_dev(img3, "src", img3_src_value);
     			attr_dev(img3, "alt", "Mountain");
     			attr_dev(img3, "class", "mana-icon svelte-edgrwr");
-    			add_location(img3, file$7, 878, 4, 24920);
+    			add_location(img3, file$7, 907, 4, 25926);
     			if (!src_url_equal(img4.src, img4_src_value = img$b)) attr_dev(img4, "src", img4_src_value);
     			attr_dev(img4, "alt", "Forest");
     			attr_dev(img4, "class", "mana-icon svelte-edgrwr");
-    			add_location(img4, file$7, 879, 4, 24978);
+    			add_location(img4, file$7, 908, 4, 25984);
     			set_style(h3, "font-size", "18px");
     			set_style(h3, "display", "flex");
     			set_style(h3, "align-items", "center");
     			set_style(h3, "gap", "4px");
     			attr_dev(h3, "class", "svelte-edgrwr");
-    			add_location(h3, file$7, 872, 0, 24635);
+    			add_location(h3, file$7, 901, 0, 25641);
     			attr_dev(div0, "class", "accordion-title svelte-edgrwr");
     			attr_dev(div0, "tabindex", "0");
-    			add_location(div0, file$7, 865, 4, 24380);
+    			add_location(div0, file$7, 894, 4, 25386);
     			attr_dev(span, "class", "semi-bold svelte-edgrwr");
-    			add_location(span, file$7, 888, 118, 25357);
+    			add_location(span, file$7, 917, 118, 26363);
     			set_style(p0, "margin-top", "0.5rem");
     			attr_dev(p0, "class", "svelte-edgrwr");
-    			add_location(p0, file$7, 888, 6, 25245);
-    			add_location(strong0, file$7, 904, 37, 27144);
+    			add_location(p0, file$7, 917, 6, 26251);
+    			add_location(strong0, file$7, 933, 37, 28150);
     			set_style(p1, "margin-top", "0.5rem");
     			attr_dev(p1, "class", "svelte-edgrwr");
-    			add_location(p1, file$7, 904, 6, 27113);
+    			add_location(p1, file$7, 933, 6, 28119);
     			attr_dev(div1, "class", "mana-cards-container svelte-edgrwr");
-    			add_location(div1, file$7, 905, 6, 27328);
-    			add_location(button0, file$7, 914, 8, 27598);
-    			add_location(b0, file$7, 915, 31, 27697);
-    			add_location(div2, file$7, 915, 8, 27674);
+    			add_location(div1, file$7, 934, 6, 28334);
+    			add_location(button0, file$7, 943, 8, 28604);
+    			add_location(b0, file$7, 944, 31, 28703);
+    			add_location(div2, file$7, 944, 8, 28680);
     			attr_dev(div3, "class", "land-group-parameters svelte-edgrwr");
-    			add_location(div3, file$7, 913, 6, 27553);
+    			add_location(div3, file$7, 942, 6, 28559);
     			attr_dev(hr0, "class", "secondary-divider svelte-edgrwr");
-    			add_location(hr0, file$7, 920, 6, 27794);
+    			add_location(hr0, file$7, 949, 6, 28800);
     			attr_dev(div4, "class", "mana-cards-container svelte-edgrwr");
-    			add_location(div4, file$7, 923, 6, 27836);
-    			add_location(button1, file$7, 934, 8, 28123);
-    			add_location(b1, file$7, 935, 31, 28222);
-    			add_location(div5, file$7, 935, 8, 28199);
+    			add_location(div4, file$7, 952, 6, 28842);
+    			add_location(button1, file$7, 963, 8, 29129);
+    			add_location(b1, file$7, 964, 31, 29228);
+    			add_location(div5, file$7, 964, 8, 29205);
     			attr_dev(div6, "class", "land-group-parameters svelte-edgrwr");
-    			add_location(div6, file$7, 933, 6, 28078);
+    			add_location(div6, file$7, 962, 6, 29084);
     			attr_dev(hr1, "class", "secondary-divider svelte-edgrwr");
-    			add_location(hr1, file$7, 939, 6, 28329);
+    			add_location(hr1, file$7, 968, 6, 29335);
     			attr_dev(div7, "class", "mana-cards-container svelte-edgrwr");
-    			add_location(div7, file$7, 942, 6, 28371);
-    			add_location(button2, file$7, 955, 6, 28888);
-    			add_location(b2, file$7, 965, 33, 30059);
-    			add_location(div8, file$7, 965, 8, 30034);
+    			add_location(div7, file$7, 971, 6, 29377);
+    			add_location(button2, file$7, 984, 6, 29894);
+    			add_location(b2, file$7, 994, 33, 31065);
+    			add_location(div8, file$7, 994, 8, 31040);
     			attr_dev(div9, "class", "land-group-parameters svelte-edgrwr");
-    			add_location(div9, file$7, 954, 4, 28845);
-    			add_location(i, file$7, 967, 41, 30147);
+    			add_location(div9, file$7, 983, 4, 29851);
+    			add_location(i, file$7, 996, 41, 31153);
     			set_style(p2, "margin", "8px 8px 16px 0px");
     			attr_dev(p2, "class", "svelte-edgrwr");
-    			add_location(p2, file$7, 967, 4, 30110);
+    			add_location(p2, file$7, 996, 4, 31116);
     			attr_dev(hr2, "class", "primary-divider svelte-edgrwr");
-    			add_location(hr2, file$7, 970, 9, 30272);
-    			add_location(strong1, file$7, 975, 9, 30358);
+    			add_location(hr2, file$7, 999, 9, 31278);
+    			add_location(strong1, file$7, 1004, 9, 31364);
     			attr_dev(p3, "class", "svelte-edgrwr");
-    			add_location(p3, file$7, 975, 6, 30355);
+    			add_location(p3, file$7, 1004, 6, 31361);
     			attr_dev(div10, "class", "mana-requirements-container svelte-edgrwr");
-    			add_location(div10, file$7, 976, 4, 30530);
+    			add_location(div10, file$7, 1005, 4, 31536);
     			attr_dev(hr3, "class", "primary-divider svelte-edgrwr");
-    			add_location(hr3, file$7, 1019, 13, 32127);
-    			add_location(strong2, file$7, 1024, 16, 32227);
+    			add_location(hr3, file$7, 1048, 13, 33133);
+    			add_location(strong2, file$7, 1053, 16, 33233);
     			attr_dev(p4, "class", "svelte-edgrwr");
-    			add_location(p4, file$7, 1024, 13, 32224);
+    			add_location(p4, file$7, 1053, 13, 33230);
     			attr_dev(button3, "class", "primary-btn");
     			button3.disabled = button3_disabled_value = !/*enableSimulationButton*/ ctx[14];
-    			add_location(button3, file$7, 1029, 8, 32382);
+    			add_location(button3, file$7, 1058, 8, 33388);
     			attr_dev(button4, "class", "primary-btn");
     			button4.disabled = button4_disabled_value = !/*enableSimulationButton*/ ctx[14];
-    			add_location(button4, file$7, 1033, 8, 32553);
+    			add_location(button4, file$7, 1062, 8, 33559);
     			attr_dev(label, "for", "iterations");
     			attr_dev(label, "class", "svelte-edgrwr");
-    			add_location(label, file$7, 1042, 8, 33015);
+    			add_location(label, file$7, 1071, 8, 34021);
     			set_style(input, "width", "90px");
     			attr_dev(input, "id", "iterations");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "1");
     			attr_dev(input, "class", "svelte-edgrwr");
-    			add_location(input, file$7, 1043, 8, 33089);
+    			add_location(input, file$7, 1072, 8, 34095);
     			attr_dev(div11, "class", "mana-requirement svelte-edgrwr");
-    			add_location(div11, file$7, 1041, 8, 32975);
+    			add_location(div11, file$7, 1070, 8, 33981);
     			attr_dev(div12, "class", "land-group-parameters svelte-edgrwr");
-    			add_location(div12, file$7, 1027, 6, 32330);
+    			add_location(div12, file$7, 1056, 6, 33336);
     			attr_dev(div13, "class", "answer svelte-edgrwr");
     			set_style(div13, "height", /*openItem*/ ctx[7] === 0 ? 'auto' : '0');
-    			add_location(div13, file$7, 882, 6, 25055);
+    			add_location(div13, file$7, 911, 6, 26061);
     			attr_dev(div14, "class", "accordion-item svelte-edgrwr");
-    			add_location(div14, file$7, 864, 2, 24346);
+    			add_location(div14, file$7, 893, 2, 25352);
     			attr_dev(div15, "class", div15_class_value = "accordion " + (/*isHovering*/ ctx[10] ? 'hovering' : '') + " svelte-edgrwr");
-    			add_location(div15, file$7, 861, 0, 24169);
+    			add_location(div15, file$7, 890, 0, 25175);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -11787,7 +12043,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover0_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 256 | dirty[2] & /*$$scope*/ 65536) {
+    			if (dirty[0] & /*showPopover*/ 256 | dirty[2] & /*$$scope*/ 262144) {
     				popover0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -11832,7 +12088,7 @@ var app = (function () {
 
     			const popover1_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 256 | dirty[2] & /*$$scope*/ 65536) {
+    			if (dirty[0] & /*showPopover*/ 256 | dirty[2] & /*$$scope*/ 262144) {
     				popover1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -11907,7 +12163,7 @@ var app = (function () {
 
     			const popover2_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 256 | dirty[2] & /*$$scope*/ 65536) {
+    			if (dirty[0] & /*showPopover*/ 256 | dirty[2] & /*$$scope*/ 262144) {
     				popover2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -12325,16 +12581,146 @@ var app = (function () {
     		console.log('Updated customAttributeRequirements:', customAttributeRequirements);
     	}
 
+    	// const rampCards = [
+    	//     // {
+    	//     //     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+    	//     //     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 0, C: 0, ANY: 1 },
+    	//     //     CanProduce: 2,
+    	//     //     AbilityCost: 0,
+    	//     //     AvailableTurnPlayed: 1,
+    	//     //     amount: 7
+    	//     // },
+    	//     // {
+    	//     //     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    	//     //     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+    	//     //     CanProduce: 1,
+    	//     //     AbilityCost: 0,
+    	//     //     AvailableTurnPlayed: 0,
+    	//     //     amount: 25
+    	//     // }
+    	//     {
+    	//         TotalManaCost: { B: 0, U: 0, G: 2, R: 0, W: 0, C: 0, ANY: 1 },
+    	//         ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
+    	//         CanProduce: 1,
+    	//         AbilityCost: 0,
+    	//         AvailableTurnPlayed: 0,
+    	//         amount: 4
+    	//     },
+    	//     {
+    	//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    	//         ColorsCanProduce: { B: 1, U: 1, G: 1, R: 1, W: 1, C: 0, ANY: 1 },
+    	//         CanProduce: 1,
+    	//         AbilityCost: 0,
+    	//         AvailableTurnPlayed: 0,
+    	//         amount: 2
+    	//     },
+    	//     {
+    	//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    	//         ColorsCanProduce: { B: 0, U: 1, G: 1, R: 1, W: 0, C: 0, ANY: 1 },
+    	//         CanProduce: 1,
+    	//         AbilityCost: 0,
+    	//         AvailableTurnPlayed: 1,
+    	//         amount: 5
+    	//     },
+    	//     {
+    	//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    	//         ColorsCanProduce: { B: 0, U: 0, G: 0, R: 1, W: 1, C: 0, ANY: 1 },
+    	//         CanProduce: 1,
+    	//         AbilityCost: 0,
+    	//         AvailableTurnPlayed: 1,
+    	//         amount: 5
+    	//     },
+    	//     {
+    	//         TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+    	//         ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    	//         CanProduce: 1,
+    	//         AbilityCost: 0,
+    	//         AvailableTurnPlayed: 0,
+    	//         amount: 6
+    	//     }
+    	// {
+    	//     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 2 },
+    	//     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    	//     CanProduce: 1,
+    	//     AbilityCost: 0,
+    	//     AvailableTurnPlayed: 0,
+    	//     amount: 7
+    	// },
+    	// {
+    	//     TotalManaCost: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+    	//     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 1 },
+    	//     CanProduce: 1,
+    	//     AbilityCost: 0,
+    	//     AvailableTurnPlayed: 0,
+    	//     amount: 7
+    	// }
+    	// {
+    	//     TotalManaCost: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 0 },
+    	//     ColorsCanProduce: { B: 0, U: 0, G: 1, R: 1, W: 0, C: 0, ANY: 0 },
+    	//     CanProduce: 2,
+    	//     AbilityCost: 1,
+    	//     amount: 1
+    	// },
+    	// {
+    	//     TotalManaCost: { B: 0, U: 0, G: 0, R: 0, W: 1, C: 1, ANY: 0 },
+    	//     ColorsCanProduce: { B: 0, U: 0, G: 0, R: 0, W: 1, C: 1, ANY: 0 },
+    	//     CanProduce: 2,
+    	//     AbilityCost: 1,
+    	//     amount: 1
+    	// },
+    	// {
+    	//     TotalManaCost: { B: 1, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+    	//     ColorsCanProduce: { B: 1, U: 0, G: 1, R: 0, W: 0, C: 0, ANY: 0 },
+    	//     CanProduce: 2,
+    	//     AbilityCost: 1,
+    	//     amount: 1
+    	// },
+    	// {
+    	//     TotalManaCost: { B: 0, U: 1, G: 0, R: 1, W: 0, C: 0, ANY: 0 },
+    	//     ColorsCanProduce: { B: 0, U: 1, G: 0, R: 1, W: 0, C: 0, ANY: 0 },
+    	//     CanProduce: 2,
+    	//     AbilityCost: 1,
+    	//     amount: 1
+    	// }
+    	// ];
+    	// these two functions simplify ramp and prep it for processing combinations
+    	// with the lands.
+    	const manaOrder = ['ANY', 'W', 'U', 'B', 'R', 'G', 'C'];
+
+    	function normalizeObject(obj) {
+    		const orderedObj = {};
+
+    		manaOrder.forEach(key => {
+    			if (obj[key] !== undefined) {
+    				orderedObj[key] = obj[key];
+    			}
+    		});
+
+    		return orderedObj;
+    	}
+
     	function preprocessRampCards(rampCards) {
     		const simplifiedRampManaList = rampCards.flatMap(card => {
     			const simplifiedColors = simplifyColorsCanProduce(card.ColorsCanProduce);
-    			return Array(card.amount).fill(simplifiedColors);
+    			const normalizedColors = normalizeObject(simplifiedColors);
+    			return Array(card.amount).fill(normalizedColors);
     		});
 
     		simplifiedRampMana.set(simplifiedRampManaList);
     		console.log('Simplified Ramp Mana:', simplifiedRampManaList);
     	}
 
+    	//this preprocess is before I added normalizeObject step to ensure
+    	//mana properties order matches between ramp and lands. need to confirm
+    	//new logic does not mess with manapoolmeetsrequirements function
+    	// function preprocessRampCards(rampCards) {
+    	//     const simplifiedRampManaList = rampCards.flatMap(card => {
+    	//         const simplifiedColors = simplifyColorsCanProduce(card.ColorsCanProduce);
+    	//         return Array(card.amount).fill(simplifiedColors);
+    	//     });
+    	//     simplifiedRampMana.set(simplifiedRampManaList);
+    	//     console.log('Simplified Ramp Mana:', simplifiedRampManaList);
+    	// }
     	function prepareManaCardsForCalculation() {
     		let preparedCards = [];
 
@@ -12540,6 +12926,8 @@ var app = (function () {
     		mergeCustomAttributesIntoManaRequirements,
     		updateCustomAttributeRequirements,
     		handleAttributeUpdate,
+    		manaOrder,
+    		normalizeObject,
     		simplifyColorsCanProduce,
     		preprocessRampCards,
     		prepareManaCardsForCalculation,
@@ -32249,8 +32637,8 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (1935:4) {#if hasOutput}
-    function create_if_block_2(ctx) {
+    // (2021:4) {#if hasOutput}
+    function create_if_block_3(ctx) {
     	let p;
     	let i;
     	let t1;
@@ -32285,10 +32673,10 @@ var app = (function () {
     			i.textContent = "Each column of stacked cards represents a separate opening hand and subsequent draws.";
     			t1 = space();
     			create_component(popover.$$.fragment);
-    			add_location(i, file$4, 1935, 49, 81597);
+    			add_location(i, file$4, 2021, 49, 85108);
     			set_style(p, "margin-top", "0");
     			set_style(p, "text-align", "center");
-    			add_location(p, file$4, 1935, 4, 81552);
+    			add_location(p, file$4, 2021, 4, 85063);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -32329,16 +32717,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2.name,
+    		id: create_if_block_3.name,
     		type: "if",
-    		source: "(1935:4) {#if hasOutput}",
+    		source: "(2021:4) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1938:12) 
+    // (2024:12) 
     function create_trigger_slot$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -32362,7 +32750,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 1937, 12, 81762);
+    			add_location(button, file$4, 2023, 12, 85273);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -32396,14 +32784,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$1.name,
     		type: "slot",
-    		source: "(1938:12) ",
+    		source: "(2024:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1941:12) 
+    // (2027:12) 
     function create_content_slot$1(ctx) {
     	let div;
     	let p;
@@ -32413,10 +32801,10 @@ var app = (function () {
     			div = element("div");
     			p = element("p");
     			p.textContent = "This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the \"Linked groups\" feature or Advanced section to calculate the probability of drawing cards from different groups.";
-    			attr_dev(p, "class", "popover-content svelte-2vp65s");
-    			add_location(p, file$4, 1941, 16, 82079);
+    			attr_dev(p, "class", "popover-content svelte-1osxkv");
+    			add_location(p, file$4, 2027, 16, 85590);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 1940, 12, 82041);
+    			add_location(div, file$4, 2026, 12, 85552);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32432,14 +32820,14 @@ var app = (function () {
     		block,
     		id: create_content_slot$1.name,
     		type: "slot",
-    		source: "(1941:12) ",
+    		source: "(2027:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1977:8) {:else}
+    // (2067:8) {:else}
     function create_else_block(ctx) {
     	let div;
 
@@ -32447,8 +32835,8 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			div.textContent = "Add a group or run a simulation above to show output probabilities.";
-    			attr_dev(div, "class", "placeholder svelte-2vp65s");
-    			add_location(div, file$4, 1977, 9, 84416);
+    			attr_dev(div, "class", "placeholder svelte-1osxkv");
+    			add_location(div, file$4, 2067, 9, 88146);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32463,14 +32851,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(1977:8) {:else}",
+    		source: "(2067:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1948:8) {#if hasOutput}
+    // (2034:8) {#if hasOutput}
     function create_if_block$2(ctx) {
     	let each_1_anchor;
     	let each_value = /*generateTurnsArray*/ ctx[3](/*$numberOfTurns*/ ctx[4].length);
@@ -32533,14 +32921,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(1948:8) {#if hasOutput}",
+    		source: "(2034:8) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1950:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
+    // (2036:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
     function create_if_block_1$1(ctx) {
     	let div2;
     	let div0;
@@ -32590,15 +32978,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 1952, 36, 82862);
-    			attr_dev(i, "class", "svelte-2vp65s");
-    			add_location(i, file$4, 1953, 24, 82892);
-    			attr_dev(div0, "class", "turn-label svelte-2vp65s");
-    			add_location(div0, file$4, 1951, 20, 82800);
-    			attr_dev(div1, "class", "card-rectangles svelte-2vp65s");
-    			add_location(div1, file$4, 1955, 20, 83028);
-    			attr_dev(div2, "class", "turn-row svelte-2vp65s");
-    			add_location(div2, file$4, 1950, 16, 82756);
+    			add_location(br, file$4, 2038, 36, 86373);
+    			attr_dev(i, "class", "svelte-1osxkv");
+    			add_location(i, file$4, 2039, 24, 86403);
+    			attr_dev(div0, "class", "turn-label svelte-1osxkv");
+    			add_location(div0, file$4, 2037, 20, 86311);
+    			attr_dev(div1, "class", "card-rectangles svelte-1osxkv");
+    			add_location(div1, file$4, 2041, 20, 86539);
+    			attr_dev(div2, "class", "turn-row svelte-1osxkv");
+    			add_location(div2, file$4, 2036, 16, 86267);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -32662,26 +33050,62 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(1950:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}",
+    		source: "(2036:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1966:32) {#each card.isBlank as isBlank, i}
+    // (2045:28) {#if turn === 0}
+    function create_if_block_2(ctx) {
+    	let div;
+    	let t_value = /*card*/ ctx[50].label + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t = text(t_value);
+    			attr_dev(div, "class", "card-label svelte-1osxkv");
+    			add_location(div, file$4, 2045, 32, 86827);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t_value !== (t_value = /*card*/ ctx[50].label + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(2045:28) {#if turn === 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (2056:36) {#each card.isBlank as isBlank, i}
     function create_each_block_2(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "stacked-card svelte-2vp65s");
+    			attr_dev(div, "class", "stacked-card svelte-1osxkv");
     			set_style(div, "left", /*i*/ ctx[55] * 4 + "px");
     			set_style(div, "z-index", -(/*i*/ ctx[55] + 1));
     			set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
     			set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
-    			add_location(div, file$4, 1966, 32, 83905);
+    			add_location(div, file$4, 2056, 40, 87667);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32704,35 +33128,34 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(1966:32) {#each card.isBlank as isBlank, i}",
+    		source: "(2056:36) {#each card.isBlank as isBlank, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1957:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
+    // (2043:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
     function create_each_block_1(ctx) {
     	let div6;
+    	let t0;
+    	let div5;
     	let div3;
     	let div2;
     	let div0;
 
-    	let t0_value = (/*card*/ ctx[50].probability !== null
+    	let t1_value = (/*card*/ ctx[50].probability !== null
     	? `${/*card*/ ctx[50].probability}%`
     	: '') + "";
 
-    	let t0;
     	let t1;
+    	let t2;
     	let div1;
     	let raw_value = /*card*/ ctx[50].ratioText + "";
-    	let t2;
-    	let div4;
     	let t3;
-    	let div5;
-    	let t4_value = /*card*/ ctx[50].label + "";
+    	let div4;
     	let t4;
-    	let t5;
+    	let if_block = /*turn*/ ctx[49] === 0 && create_if_block_2(ctx);
     	let each_value_2 = /*card*/ ctx[50].isBlank;
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
@@ -32744,51 +33167,54 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div6 = element("div");
+    			if (if_block) if_block.c();
+    			t0 = space();
+    			div5 = element("div");
     			div3 = element("div");
     			div2 = element("div");
     			div0 = element("div");
-    			t0 = text(t0_value);
-    			t1 = space();
-    			div1 = element("div");
+    			t1 = text(t1_value);
     			t2 = space();
+    			div1 = element("div");
+    			t3 = space();
     			div4 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t3 = space();
-    			div5 = element("div");
-    			t4 = text(t4_value);
-    			t5 = space();
-    			attr_dev(div0, "class", "probability svelte-2vp65s");
-    			add_location(div0, file$4, 1960, 36, 83492);
-    			attr_dev(div1, "class", "card-ratio svelte-2vp65s");
-    			add_location(div1, file$4, 1961, 36, 83618);
-    			attr_dev(div2, "class", "card-details svelte-2vp65s");
-    			add_location(div2, file$4, 1959, 32, 83428);
-    			attr_dev(div3, "class", "rectangle svelte-2vp65s");
+    			t4 = space();
+    			attr_dev(div0, "class", "probability svelte-1osxkv");
+    			add_location(div0, file$4, 2050, 40, 87226);
+    			attr_dev(div1, "class", "card-ratio svelte-1osxkv");
+    			add_location(div1, file$4, 2051, 40, 87356);
+    			attr_dev(div2, "class", "card-details svelte-1osxkv");
+    			add_location(div2, file$4, 2049, 36, 87158);
+    			attr_dev(div3, "class", "rectangle svelte-1osxkv");
     			set_style(div3, "background-color", /*card*/ ctx[50].color);
-    			add_location(div3, file$4, 1958, 28, 83331);
-    			attr_dev(div4, "class", "stacked-cards svelte-2vp65s");
-    			add_location(div4, file$4, 1964, 28, 83776);
-    			attr_dev(div5, "class", "card-label svelte-2vp65s");
-    			add_location(div5, file$4, 1969, 28, 84193);
-    			attr_dev(div6, "class", "card-container svelte-2vp65s");
-    			set_style(div6, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
-    			add_location(div6, file$4, 1957, 24, 83212);
+    			add_location(div3, file$4, 2048, 32, 87057);
+    			attr_dev(div4, "class", "stacked-cards svelte-1osxkv");
+    			add_location(div4, file$4, 2054, 32, 87526);
+    			attr_dev(div5, "class", "card-container svelte-1osxkv");
+    			set_style(div5, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
+    			add_location(div5, file$4, 2047, 28, 86934);
+    			attr_dev(div6, "class", "card-group svelte-1osxkv");
+    			add_location(div6, file$4, 2043, 24, 86723);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
-    			append_dev(div6, div3);
+    			if (if_block) if_block.m(div6, null);
+    			append_dev(div6, t0);
+    			append_dev(div6, div5);
+    			append_dev(div5, div3);
     			append_dev(div3, div2);
     			append_dev(div2, div0);
-    			append_dev(div0, t0);
-    			append_dev(div2, t1);
+    			append_dev(div0, t1);
+    			append_dev(div2, t2);
     			append_dev(div2, div1);
     			div1.innerHTML = raw_value;
-    			append_dev(div6, t2);
-    			append_dev(div6, div4);
+    			append_dev(div5, t3);
+    			append_dev(div5, div4);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
@@ -32796,15 +33222,14 @@ var app = (function () {
     				}
     			}
 
-    			append_dev(div6, t3);
-    			append_dev(div6, div5);
-    			append_dev(div5, t4);
-    			append_dev(div6, t5);
+    			append_dev(div6, t4);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t0_value !== (t0_value = (/*card*/ ctx[50].probability !== null
+    			if (/*turn*/ ctx[49] === 0) if_block.p(ctx, dirty);
+
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t1_value !== (t1_value = (/*card*/ ctx[50].probability !== null
     			? `${/*card*/ ctx[50].probability}%`
-    			: '') + "")) set_data_dev(t0, t0_value);
+    			: '') + "")) set_data_dev(t1, t1_value);
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && raw_value !== (raw_value = /*card*/ ctx[50].ratioText + "")) div1.innerHTML = raw_value;
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
@@ -32835,14 +33260,13 @@ var app = (function () {
     				each_blocks.length = each_value_2.length;
     			}
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t4_value !== (t4_value = /*card*/ ctx[50].label + "")) set_data_dev(t4, t4_value);
-
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div6, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
+    				set_style(div5, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div6);
+    			if (if_block) if_block.d();
     			destroy_each(each_blocks, detaching);
     		}
     	};
@@ -32851,14 +33275,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(1957:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}",
+    		source: "(2043:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1949:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
+    // (2035:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
     function create_each_block$1(ctx) {
     	let show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[49]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49], 'hand').length > 0;
     	let if_block_anchor;
@@ -32899,7 +33323,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(1949:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
+    		source: "(2035:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
     		ctx
     	});
 
@@ -32912,7 +33336,7 @@ var app = (function () {
     	let t2;
     	let div;
     	let current;
-    	let if_block0 = /*hasOutput*/ ctx[8] && create_if_block_2(ctx);
+    	let if_block0 = /*hasOutput*/ ctx[8] && create_if_block_3(ctx);
 
     	function select_block_type(ctx, dirty) {
     		if (/*hasOutput*/ ctx[8]) return create_if_block$2;
@@ -32934,9 +33358,9 @@ var app = (function () {
     			attr_dev(h2, "id", "probabilities-jump");
     			set_style(h2, "text-align", "center");
     			set_style(h2, "margin-bottom", "0");
-    			add_location(h2, file$4, 1933, 4, 81434);
-    			attr_dev(div, "class", "output-diagram svelte-2vp65s");
-    			add_location(div, file$4, 1946, 4, 82437);
+    			add_location(h2, file$4, 2019, 4, 84945);
+    			attr_dev(div, "class", "output-diagram svelte-1osxkv");
+    			add_location(div, file$4, 2032, 4, 85948);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -32959,7 +33383,7 @@ var app = (function () {
     						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block0 = create_if_block_2(ctx);
+    					if_block0 = create_if_block_3(ctx);
     					if_block0.c();
     					transition_in(if_block0, 1);
     					if_block0.m(t2.parentNode, t2);
@@ -33257,8 +33681,85 @@ var app = (function () {
     }
 
     function addRampManaToAvailable(rampCard, AvailableManaThisTurn) {
-    	const simplifiedMana = simplifyManaProduction(rampCard.ColorsCanProduce, rampCard.CanProduce);
-    	AvailableManaThisTurn.push(...simplifiedMana);
+    	if (rampCard.CustomRamp === 'signet') {
+    		// Handle signet logic
+    		if (removeManaForSignet(AvailableManaThisTurn)) {
+    			const signetMana = simplifySignetManaProduction(rampCard.ColorsCanProduce);
+    			AvailableManaThisTurn.push(...signetMana);
+    		}
+    	} else {
+    		// Existing logic for other ramp cards
+    		const simplifiedMana = simplifyManaProduction(rampCard.ColorsCanProduce, rampCard.CanProduce);
+
+    		AvailableManaThisTurn.push(...simplifiedMana);
+    	}
+    }
+
+    function removeManaForSignet(AvailableManaThisTurn) {
+    	// Prioritize removing mana that produces "C" and "ANY"
+    	let indexToRemove = AvailableManaThisTurn.findIndex(mana => mana.C && mana.ANY);
+
+    	if (indexToRemove === -1) {
+    		// Calculate the total count of each color (excluding "ANY")
+    		const colorTotals = {};
+
+    		AvailableManaThisTurn.forEach(mana => {
+    			Object.entries(mana).forEach(([color, value]) => {
+    				if (color !== 'ANY') {
+    					colorTotals[color] = (colorTotals[color] || 0) + value;
+    				}
+    			});
+    		});
+
+    		console.log('Color Totals:', colorTotals);
+
+    		// Find the color with the highest total count
+    		let maxColor = null;
+
+    		let maxCount = 0;
+
+    		Object.entries(colorTotals).forEach(([color, count]) => {
+    			if (count > maxCount) {
+    				maxColor = color;
+    				maxCount = count;
+    			}
+    		});
+
+    		console.log('Max Color:', maxColor, 'Max Count:', maxCount);
+
+    		// Find the mana to remove based on the most common color and least number of different colors
+    		let minColors = Infinity;
+
+    		AvailableManaThisTurn.forEach((mana, index) => {
+    			if (mana[maxColor]) {
+    				const colorCount = Object.keys(mana).filter(color => color !== 'ANY').length;
+
+    				if (colorCount < minColors) {
+    					minColors = colorCount;
+    					indexToRemove = index;
+    				}
+    			}
+    		});
+    	}
+
+    	if (indexToRemove !== -1) {
+    		console.log('Removing mana for signet:', AvailableManaThisTurn[indexToRemove]);
+    		AvailableManaThisTurn.splice(indexToRemove, 1);
+    		return true;
+    	}
+
+    	return false;
+    }
+
+    function simplifySignetManaProduction(ColorsCanProduce) {
+    	const simplified = [];
+    	const strippedColors = Object.fromEntries(Object.entries(ColorsCanProduce).filter(([color, value]) => value > 0 && color !== 'ANY'));
+
+    	Object.keys(strippedColors).forEach(color => {
+    		simplified.push({ [color]: 1, ANY: 1 });
+    	});
+
+    	return simplified;
     }
 
     function simplifyManaProduction(ColorsCanProduce, CanProduce) {
@@ -34175,18 +34676,23 @@ var app = (function () {
 
     		const result = neededCombinations.some(combination => {
     			// Create a copy of availableMana to track used mana
-    			const availableManaCopy = [...availableMana];
+    			const availableManaCopy = _.cloneDeep(availableMana);
 
+    			// console.log('Checking combination:', combination);
     			// Check if every needed mana object in the combination is matched by an available mana object
-    			return combination.every(needed => {
+    			const combinationResult = combination.every(needed => {
     				const index = availableManaCopy.findIndex(mana => {
-    					return Object.entries(needed).every(([color, count]) => {
-    						return mana[color] >= count;
+    					const match = Object.keys(needed).length === Object.keys(mana).length && Object.entries(needed).every(([color, count]) => {
+    						return mana[color] === count;
     					});
+
+    					// console.log(`Needed: ${JSON.stringify(needed)}, Mana: ${JSON.stringify(mana)}, Match: ${match}`);
+    					return match;
     				});
 
     				if (index !== -1) {
     					// Remove the matched mana from the copy to prevent reuse
+    					// console.log(`Matched and removing: ${JSON.stringify(availableManaCopy[index])}`);
     					availableManaCopy.splice(index, 1);
 
     					return true;
@@ -34194,6 +34700,9 @@ var app = (function () {
 
     				return false;
     			});
+
+    			// console.log(`Combination result: ${combinationResult}`);
+    			return combinationResult;
     		});
 
     		console.log(`neededCombinations met: ${result ? 'yes' : 'no'}`);
@@ -34895,6 +35404,8 @@ var app = (function () {
     		playRampCards,
     		getTotalManaCost,
     		addRampManaToAvailable,
+    		removeManaForSignet,
+    		simplifySignetManaProduction,
     		simplifyManaProduction,
     		canPlayRamp,
     		deductMana,

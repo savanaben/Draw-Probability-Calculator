@@ -1116,35 +1116,43 @@ function handMeetsRequirements(hand, preparedCombinations) {
 //THIS VRESION WAS using the neededCombinations, not trying to calc directly
 
 function manaPoolMeetsRequirements(availableMana, neededCombinations) {
-    console.log('AvailableManaThisTurn:', _.cloneDeep(availableMana));
-    console.log('neededCombinations:', _.cloneDeep(neededCombinations));
+        console.log('AvailableManaThisTurn:', _.cloneDeep(availableMana));
+        console.log('neededCombinations:', _.cloneDeep(neededCombinations));
 
-    const result = neededCombinations.some(combination => {
-        // Create a copy of availableMana to track used mana
-        const availableManaCopy = [...availableMana];
+        const result = neededCombinations.some(combination => {
+            // Create a copy of availableMana to track used mana
+            const availableManaCopy = _.cloneDeep(availableMana);
 
-        // Check if every needed mana object in the combination is matched by an available mana object
-        return combination.every(needed => {
-            const index = availableManaCopy.findIndex(mana => {
-                return Object.entries(needed).every(([color, count]) => {
-                    return mana[color] >= count;
+            // console.log('Checking combination:', combination);
+
+            // Check if every needed mana object in the combination is matched by an available mana object
+            const combinationResult = combination.every(needed => {
+                const index = availableManaCopy.findIndex(mana => {
+                    const match = Object.keys(needed).length === Object.keys(mana).length &&
+                                  Object.entries(needed).every(([color, count]) => {
+                                      return mana[color] === count;
+                                  });
+                    // console.log(`Needed: ${JSON.stringify(needed)}, Mana: ${JSON.stringify(mana)}, Match: ${match}`);
+                    return match;
                 });
+
+                if (index !== -1) {
+                    // Remove the matched mana from the copy to prevent reuse
+                    // console.log(`Matched and removing: ${JSON.stringify(availableManaCopy[index])}`);
+                    availableManaCopy.splice(index, 1);
+                    return true;
+                }
+
+                return false;
             });
 
-            if (index !== -1) {
-                // Remove the matched mana from the copy to prevent reuse
-                availableManaCopy.splice(index, 1);
-                return true;
-            }
-
-            return false;
+            // console.log(`Combination result: ${combinationResult}`);
+            return combinationResult;
         });
-    });
 
-    console.log(`neededCombinations met: ${result ? 'yes' : 'no'}`);
-    return result;
-}
-
+        console.log(`neededCombinations met: ${result ? 'yes' : 'no'}`);
+        return result;
+    }
 
 
 
@@ -1488,9 +1496,86 @@ function getTotalManaCost(manaCost) {
 }
 
 function addRampManaToAvailable(rampCard, AvailableManaThisTurn) {
-    const simplifiedMana = simplifyManaProduction(rampCard.ColorsCanProduce, rampCard.CanProduce);
-    AvailableManaThisTurn.push(...simplifiedMana);
-}
+        if (rampCard.CustomRamp === 'signet') {
+            // Handle signet logic
+            if (removeManaForSignet(AvailableManaThisTurn)) {
+                const signetMana = simplifySignetManaProduction(rampCard.ColorsCanProduce);
+                AvailableManaThisTurn.push(...signetMana);
+            }
+        } else {
+            // Existing logic for other ramp cards
+            const simplifiedMana = simplifyManaProduction(rampCard.ColorsCanProduce, rampCard.CanProduce);
+            AvailableManaThisTurn.push(...simplifiedMana);
+        }
+    }
+
+
+
+    function removeManaForSignet(AvailableManaThisTurn) {
+        // Prioritize removing mana that produces "C" and "ANY"
+        let indexToRemove = AvailableManaThisTurn.findIndex(mana => mana.C && mana.ANY);
+
+        if (indexToRemove === -1) {
+            // Calculate the total count of each color (excluding "ANY")
+            const colorTotals = {};
+            AvailableManaThisTurn.forEach(mana => {
+                Object.entries(mana).forEach(([color, value]) => {
+                    if (color !== 'ANY') {
+                        colorTotals[color] = (colorTotals[color] || 0) + value;
+                    }
+                });
+            });
+
+            console.log('Color Totals:', colorTotals);
+
+            // Find the color with the highest total count
+            let maxColor = null;
+            let maxCount = 0;
+            Object.entries(colorTotals).forEach(([color, count]) => {
+                if (count > maxCount) {
+                    maxColor = color;
+                    maxCount = count;
+                }
+            });
+
+            console.log('Max Color:', maxColor, 'Max Count:', maxCount);
+
+            // Find the mana to remove based on the most common color and least number of different colors
+            let minColors = Infinity;
+            AvailableManaThisTurn.forEach((mana, index) => {
+                if (mana[maxColor]) {
+                    const colorCount = Object.keys(mana).filter(color => color !== 'ANY').length;
+                    if (colorCount < minColors) {
+                        minColors = colorCount;
+                        indexToRemove = index;
+                    }
+                }
+            });
+        }
+
+        if (indexToRemove !== -1) {
+            console.log('Removing mana for signet:', AvailableManaThisTurn[indexToRemove]);
+            AvailableManaThisTurn.splice(indexToRemove, 1);
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+function simplifySignetManaProduction(ColorsCanProduce) {
+        const simplified = [];
+        const strippedColors = Object.fromEntries(Object.entries(ColorsCanProduce).filter(([color, value]) => value > 0 && color !== 'ANY'));
+
+        Object.keys(strippedColors).forEach(color => {
+            simplified.push({ [color]: 1, ANY: 1 });
+        });
+
+        return simplified;
+    }
+
+
 
 function simplifyManaProduction(ColorsCanProduce, CanProduce) {
     const simplified = [];
@@ -1502,6 +1587,7 @@ function simplifyManaProduction(ColorsCanProduce, CanProduce) {
 
     return simplified;
 }
+
 
 function canPlayRamp(card, AvailableManaThisTurn) {
     const manaCost = card.TotalManaCost;
@@ -1955,21 +2041,25 @@ $: generateTurnsArray = () => {
                     </div>
                     <div class="card-rectangles">
                         {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
-                        <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
-                            <div class="rectangle" style="background-color: {card.color};">
-                                <div class="card-details">
-                                    <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
-                                    <div class="card-ratio">{@html card.ratioText}</div>
+                        <div class="card-group">
+                            {#if turn === 0}
+                                <div class="card-label">{card.label}</div>
+                            {/if}
+                            <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
+                                <div class="rectangle" style="background-color: {card.color};">
+                                    <div class="card-details">
+                                        <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
+                                        <div class="card-ratio">{@html card.ratioText}</div>
+                                    </div>
+                                </div>
+                                <div class="stacked-cards">
+                                    {#each card.isBlank as isBlank, i}
+                                        <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
+                                    {/each}
                                 </div>
                             </div>
-                            <div class="stacked-cards">
-                                {#each card.isBlank as isBlank, i}
-                                <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
-                                {/each}
-                            </div>
-                            <div class="card-label">{card.label}</div>
                         </div>
-                        {/each}
+                    {/each}
                     </div>
                 </div>
             {/if}
@@ -2080,6 +2170,13 @@ $: generateTurnsArray = () => {
         position: sticky;
     }
     
+    .card-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
     .rectangle {
         position: relative;
         width: 40px;
@@ -2120,13 +2217,17 @@ $: generateTurnsArray = () => {
     
     .card-label {
         font-size: 0.7em;
-        padding-top: 2px;
+        padding-bottom: 12px;
         text-align: center;
         width: 54px;
         word-wrap: break-word;
         hyphens: auto;
         text-wrap: balance;
         overflow-wrap: break-word;
+        height: 2em; /* Set a fixed height */
+        align-items: center;
+        justify-content: center;
+        
     }
   
 .popover-content {

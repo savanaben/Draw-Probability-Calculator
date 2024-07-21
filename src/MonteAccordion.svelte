@@ -613,6 +613,19 @@ function handleAttributeUpdate(newAttr, oldAttr, cardId) {
 // these two functions simplify ramp and prep it for processing combinations
 // with the lands.
 
+
+const manaOrder = ['ANY', 'W', 'U', 'B', 'R', 'G', 'C'];
+
+function normalizeObject(obj) {
+    const orderedObj = {};
+    manaOrder.forEach(key => {
+        if (obj[key] !== undefined) {
+            orderedObj[key] = obj[key];
+        }
+    });
+    return orderedObj;
+}
+
 function simplifyColorsCanProduce(colorsCanProduce) {
     return Object.fromEntries(
         Object.entries(colorsCanProduce)
@@ -621,14 +634,30 @@ function simplifyColorsCanProduce(colorsCanProduce) {
     );
 }
 
+
 function preprocessRampCards(rampCards) {
-    const simplifiedRampManaList = rampCards.flatMap(card => {
-        const simplifiedColors = simplifyColorsCanProduce(card.ColorsCanProduce);
-        return Array(card.amount).fill(simplifiedColors);
-    });
-    simplifiedRampMana.set(simplifiedRampManaList);
-    console.log('Simplified Ramp Mana:', simplifiedRampManaList);
-}
+        const simplifiedRampManaList = rampCards.flatMap(card => {
+            const simplifiedColors = simplifyColorsCanProduce(card.ColorsCanProduce);
+            const normalizedColors = normalizeObject(simplifiedColors);
+            return Array(card.amount).fill(normalizedColors);
+        });
+        simplifiedRampMana.set(simplifiedRampManaList);
+        console.log('Simplified Ramp Mana:', simplifiedRampManaList);
+    }
+
+//this preprocess is before I added normalizeObject step to ensure
+//mana properties order matches between ramp and lands. need to confirm
+//new logic does not mess with manapoolmeetsrequirements function
+
+
+// function preprocessRampCards(rampCards) {
+//     const simplifiedRampManaList = rampCards.flatMap(card => {
+//         const simplifiedColors = simplifyColorsCanProduce(card.ColorsCanProduce);
+//         return Array(card.amount).fill(simplifiedColors);
+//     });
+//     simplifiedRampMana.set(simplifiedRampManaList);
+//     console.log('Simplified Ramp Mana:', simplifiedRampManaList);
+// }
 
 
 

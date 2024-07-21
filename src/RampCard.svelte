@@ -4,7 +4,9 @@
     import { createEventDispatcher } from 'svelte';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-    
+    import Popover from './Popover.svelte';
+    import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+
     import WIcon from './mana-icons/plains.svg';
     import UIcon from './mana-icons/swamp.svg';
     import BIcon from './mana-icons/island.svg';
@@ -21,6 +23,8 @@
     import AnyIcon7 from './mana-icons/any-7.svg';
     import AnyIcon8 from './mana-icons/any-8.svg';
     import AnyIcon9 from './mana-icons/any-9plus.svg';
+
+    let showPopover = false;
 
     const manaIcons = {
         W: { icon: WIcon, label: 'Plains' },
@@ -41,7 +45,8 @@
         CanProduce: 0,
         AbilityCost: 0,
         AvailableTurnPlayed: 0,
-        amount: 0
+        amount: 0,
+        isSignet: false // New property to indicate if the card is a signet
     };
 
     function remove() {
@@ -71,6 +76,18 @@
         return manaIcons.ANY[0]; // Default to AnyIcon0 if none of the conditions match
     }
 
+    // Update the card object to include CustomRamp: 'signet' if isSignet is true
+    $: if (card.isSignet) {
+        card.CustomRamp = 'signet';
+        Object.keys(card.TotalManaCost).forEach(key => {
+            card.TotalManaCost[key] = 0;
+        });
+        card.TotalManaCost.ANY = 2;
+        card.CanProduce = 2;
+        card.AvailableTurnPlayed = 1;
+    } else {
+        delete card.CustomRamp;
+    }
 
 </script>
 <style>
@@ -193,6 +210,15 @@
     max-width: 60px;
    }
 
+.popover-content:first-child {
+  margin-top: 0;
+}
+
+.popover-content:last-child {
+  margin-bottom: 0;
+}
+
+
 </style>
 
 
@@ -222,7 +248,7 @@
                         {/if}
                         &nbsp;:
                     </label>
-                    <input id="{mana}-cost" type="number" min="0" bind:value={card.TotalManaCost[mana]} on:focus="{selectInput}" />
+                    <input id="{mana}-cost" type="number" min="0" bind:value={card.TotalManaCost[mana]} on:focus="{selectInput}" disabled={card.isSignet && mana !== 'ANY'} />
                 </div>
             {/each}
         </div>
@@ -247,7 +273,7 @@
 
     <div class="one-line">
         <label for="can-produce" class="can-produce-label">Total mana ramp can produce:</label>
-        <input id="can-produce" class="can-produce-input" type="number" min="0" bind:value={card.CanProduce} on:focus="{selectInput}" />
+        <input id="can-produce" class="can-produce-input" type="number" min="0" bind:value={card.CanProduce} on:focus="{selectInput}" disabled={card.isSignet} />
     </div>
 
     <!-- <div class="ability-cost-section">
@@ -257,7 +283,26 @@
 
     <div class="one-line">
         <label for="available-turn-played" class="available-turn-played-label">Mana is available turn played:</label>
-        <input id="available-turn-played" type="checkbox" bind:checked={card.AvailableTurnPlayed} on:change={() => card.AvailableTurnPlayed = card.AvailableTurnPlayed ? 1 : 0} />
+        <input id="available-turn-played" type="checkbox" bind:checked={card.AvailableTurnPlayed} on:change={() => card.AvailableTurnPlayed = card.AvailableTurnPlayed ? 1 : 0} disabled={card.isSignet} />
+    </div>
+
+    <div class="one-line">
+        <label for="is-signet" class="is-signet-label">Is Signet:</label>
+        <input id="is-signet" type="checkbox" bind:checked={card.isSignet} />
+
+        <Popover bind:show={showPopover} placement="top">
+            <button id ="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
+              <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
+            </button>
+            <div slot="content">
+                <p class="popover-content">Signet's are a complex, as we have to simulate what mana is used to pay the 1 colorless.</p>
+                <ol>
+                  <li>If there is mana that can only produce colorless available, that will be used to pay the 1.</li>
+                  <li>If there is no colorless mana mana available, then the color you can produce the most of is used to pay the 1.</li>
+                </ol>
+            </div>
+          </Popover>
+
     </div>
 
     <div class="amount-section">
