@@ -243,35 +243,143 @@
     console.log('calculation file Simplified Ramp Mana:', $simplifiedRampMana); // Log the simplified ramp mana
    }
     
-    function determineNeededCombinations(lands, requirements, totalManaNeeded) {
+// //the following is the old less efficient combination code
+// //still undergoing full testing to verify new code is accurate before delete this
+
+//     function determineNeededCombinations(lands, requirements, totalManaNeeded) {
+//     let combinedLands = [...lands, ...$simplifiedRampMana];
+//     console.log('Combined Lands:', combinedLands); // Log the combined lands
+//     const combinations = getAllCombinations(combinedLands, true, totalManaNeeded);
+//     return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
+// }
+    
+    
+//     function satisfiesRequirements(combination, requirements, totalManaNeeded) {
+//         if (combination.length < totalManaNeeded) return false;
+    
+//         // Create a list of all possible mana profiles this combination can produce
+//         let possibleManaProfiles = combination.map(land => Object.keys(land));
+    
+//         // Generate all possible selections of mana from these profiles
+//         let allSelections = generateAllSelections(possibleManaProfiles);
+    
+//         // Check if any selection satisfies the requirements
+//         return allSelections.some(selection => {
+//             let manaProfile = selection.reduce((profile, color) => {
+//                 profile[color] = (profile[color] || 0) + 1;
+//                 return profile;
+//             }, {});
+//             return Object.entries(requirements).every(([color, amount]) => manaProfile[color] >= amount);
+//         });
+//     }
+    
+// //BEFORE MASSIVE CHANGES ATTEMPT TO BATCH
+// function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
+//     // Reset the progress bar at the start of the simulation
+//     combinationProgress.set(0);
+
+//     const combinations = [];
+//     const landCounts = lands.reduce((counts, land) => {
+//         const key = JSON.stringify(land);
+//         counts[key] = (counts[key] || 0) + 1;
+//         return counts;
+//     }, {});
+
+//     const totalLands = lands.length; // Total number of lands for progress calculation
+//     const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
+//     console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
+//     let currentIteration = 0; // Track the current iteration
+
+
+//     const generateCombinations = (index, currentCombination, currentCounts) => {
+//       //  console.log(`Index: ${index}, Current Combination: ${JSON.stringify(currentCombination)}, Current Counts: ${JSON.stringify(currentCounts)}`);
+        
+//         if (currentCombination.length > totalManaNeeded) return;
+//         if (index === lands.length) {
+//             const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
+//             combinations.push(combinationKey);
+//         //  console.log(`Added Combination: ${combinationKey}`);
+//         currentIteration++;
+//         return;
+//         }
+
+//         // Update progress based on the current iteration and estimated total combinations
+        
+//         const progress = (currentIteration / estimatedTotalCombinations) * 100;
+//         combinationProgress.set(progress);
+//       //  console.log(`Progress: ${progress}%`);
+
+//         generateCombinations(index + 1, currentCombination, currentCounts);
+//         const land = lands[index];
+//         const landKey = JSON.stringify(land);
+//         if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
+//             const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
+//             generateCombinations(index + 1, [...currentCombination, land], newCounts);
+//         }
+//     };
+
+//     generateCombinations(0, [], {});
+
+//     const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+//     console.log(`Total Combinations Generated: ${combinations.length}`);
+//     console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+//     return finalCombinations;
+// }
+
+//------------------------------------------------------------------------------------
+
+
+//the following is updated more efficient combination code. some day maybe try changing this to a bipartite matching approach.
+//still undergoing full testing to verify accuracy. Replaced the recursive combination generation with a dynamic programming approach.This approach uses a 2D array (dp) where dp[i] contains sets of combinations of size i. For each land, it iterates backward through dp to update possible combinations efficiently
+function determineNeededCombinations(lands, requirements, totalManaNeeded) {
     let combinedLands = [...lands, ...$simplifiedRampMana];
     console.log('Combined Lands:', combinedLands); // Log the combined lands
-    const combinations = getAllCombinations(combinedLands, true, totalManaNeeded);
-    return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
+    const combinations = getAllCombinations(combinedLands, totalManaNeeded);
+    return combinations.filter(combination => satisfiesRequirements(combination, requirements));
 }
-    
-    
-    function satisfiesRequirements(combination, requirements, totalManaNeeded) {
-        if (combination.length < totalManaNeeded) return false;
-    
-        // Create a list of all possible mana profiles this combination can produce
-        let possibleManaProfiles = combination.map(land => Object.keys(land));
-    
-        // Generate all possible selections of mana from these profiles
-        let allSelections = generateAllSelections(possibleManaProfiles);
-    
-        // Check if any selection satisfies the requirements
-        return allSelections.some(selection => {
-            let manaProfile = selection.reduce((profile, color) => {
-                profile[color] = (profile[color] || 0) + 1;
-                return profile;
-            }, {});
-            return Object.entries(requirements).every(([color, amount]) => manaProfile[color] >= amount);
-        });
+
+function satisfiesRequirements(combination, requirements) {
+    // Create a list of all possible mana profiles this combination can produce
+    let possibleManaProfiles = combination.map(land => Object.keys(land));
+
+    // Generate all possible selections of mana from these profiles
+    let allSelections = generateAllSelections(possibleManaProfiles);
+
+    // Check if any selection satisfies the requirements
+    return allSelections.some(selection => {
+        let manaProfile = selection.reduce((profile, color) => {
+            profile[color] = (profile[color] || 0) + 1;
+            return profile;
+        }, {});
+        return Object.entries(requirements).every(([color, amount]) => manaProfile[color] >= amount);
+    });
+}
+
+
+function getAllCombinations(lands, totalManaNeeded) {
+    const dp = Array(totalManaNeeded + 1).fill(null).map(() => new Set());
+    dp[0].add(JSON.stringify([]));
+
+    for (let land of lands) {
+        const landStr = JSON.stringify(land);
+        for (let i = totalManaNeeded; i > 0; i--) {
+            for (let combination of dp[i - 1]) {
+                const newCombination = JSON.parse(combination).concat(landStr).sort();
+                dp[i].add(JSON.stringify(newCombination));
+            }
+        }
     }
+
+    const finalCombinations = Array.from(dp[totalManaNeeded]).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+    console.log(`Total Combinations Generated: ${finalCombinations.length}`);
+    console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+    return finalCombinations;
+}
+
+
+//-------------------------------------------
     
 
-    
     function generateAllSelections(possibleManaProfiles, index = 0, currentSelection = []) {
         if (index === possibleManaProfiles.length) {
             return [currentSelection.slice()];
@@ -289,7 +397,7 @@
     }
     
     
-    // Function to calculate the binomial coefficient
+// Function to calculate the binomial coefficient
 function binomialCoefficient(n, k) {
     if (k > n) return 0;
     if (k === 0 || k === n) return 1;
@@ -372,70 +480,6 @@ function binomialCoefficient(n, k) {
 //         processBatch();
 //     });
 // }
-
-
-
-
-
-//BEFORE MASSIVE CHANGES ATTEMPT TO BATCH
-
-function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
-    // Reset the progress bar at the start of the simulation
-    combinationProgress.set(0);
-
-    const combinations = [];
-    const landCounts = lands.reduce((counts, land) => {
-        const key = JSON.stringify(land);
-        counts[key] = (counts[key] || 0) + 1;
-        return counts;
-    }, {});
-
-    const totalLands = lands.length; // Total number of lands for progress calculation
-    const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
-    console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
-    let currentIteration = 0; // Track the current iteration
-
-
-    const generateCombinations = (index, currentCombination, currentCounts) => {
-      //  console.log(`Index: ${index}, Current Combination: ${JSON.stringify(currentCombination)}, Current Counts: ${JSON.stringify(currentCounts)}`);
-        
-        if (currentCombination.length > totalManaNeeded) return;
-        if (index === lands.length) {
-            const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
-            combinations.push(combinationKey);
-        //  console.log(`Added Combination: ${combinationKey}`);
-        currentIteration++;
-        return;
-        }
-
-
-
-        // Update progress based on the current iteration and estimated total combinations
-        
-        const progress = (currentIteration / estimatedTotalCombinations) * 100;
-        combinationProgress.set(progress);
-      //  console.log(`Progress: ${progress}%`);
-
-
-
-        generateCombinations(index + 1, currentCombination, currentCounts);
-        const land = lands[index];
-        const landKey = JSON.stringify(land);
-        if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
-            const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
-            generateCombinations(index + 1, [...currentCombination, land], newCounts);
-        }
-    };
-
-    generateCombinations(0, [], {});
-
-    const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
-    console.log(`Total Combinations Generated: ${combinations.length}`);
-    console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
-    return finalCombinations;
-}
-
-
 
 
 

@@ -32619,25 +32619,25 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[47] = list[i];
-    	child_ctx[49] = i;
+    	child_ctx[46] = list[i];
+    	child_ctx[48] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[50] = list[i];
+    	child_ctx[49] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[53] = list[i];
-    	child_ctx[55] = i;
+    	child_ctx[52] = list[i];
+    	child_ctx[54] = i;
     	return child_ctx;
     }
 
-    // (2021:4) {#if hasOutput}
+    // (2065:4) {#if hasOutput}
     function create_if_block_3(ctx) {
     	let p;
     	let i;
@@ -32673,10 +32673,10 @@ var app = (function () {
     			i.textContent = "Each column of stacked cards represents a separate opening hand and subsequent draws.";
     			t1 = space();
     			create_component(popover.$$.fragment);
-    			add_location(i, file$4, 2021, 49, 85108);
+    			add_location(i, file$4, 2065, 49, 88010);
     			set_style(p, "margin-top", "0");
     			set_style(p, "text-align", "center");
-    			add_location(p, file$4, 2021, 4, 85063);
+    			add_location(p, file$4, 2065, 4, 87965);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -32688,7 +32688,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 128 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*showPopover*/ 128 | dirty[1] & /*$$scope*/ 16777216) {
     				popover_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32719,14 +32719,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(2021:4) {#if hasOutput}",
+    		source: "(2065:4) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2024:12) 
+    // (2068:12) 
     function create_trigger_slot$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -32750,7 +32750,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 2023, 12, 85273);
+    			add_location(button, file$4, 2067, 12, 88175);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -32784,14 +32784,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$1.name,
     		type: "slot",
-    		source: "(2024:12) ",
+    		source: "(2068:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2027:12) 
+    // (2071:12) 
     function create_content_slot$1(ctx) {
     	let div;
     	let p;
@@ -32802,9 +32802,9 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the \"Linked groups\" feature or Advanced section to calculate the probability of drawing cards from different groups.";
     			attr_dev(p, "class", "popover-content svelte-1osxkv");
-    			add_location(p, file$4, 2027, 16, 85590);
+    			add_location(p, file$4, 2071, 16, 88492);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 2026, 12, 85552);
+    			add_location(div, file$4, 2070, 12, 88454);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32820,14 +32820,14 @@ var app = (function () {
     		block,
     		id: create_content_slot$1.name,
     		type: "slot",
-    		source: "(2027:12) ",
+    		source: "(2071:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2067:8) {:else}
+    // (2111:8) {:else}
     function create_else_block(ctx) {
     	let div;
 
@@ -32836,7 +32836,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = "Add a group or run a simulation above to show output probabilities.";
     			attr_dev(div, "class", "placeholder svelte-1osxkv");
-    			add_location(div, file$4, 2067, 9, 88146);
+    			add_location(div, file$4, 2111, 9, 91048);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32851,14 +32851,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(2067:8) {:else}",
+    		source: "(2111:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2034:8) {#if hasOutput}
+    // (2078:8) {#if hasOutput}
     function create_if_block$2(ctx) {
     	let each_1_anchor;
     	let each_value = /*generateTurnsArray*/ ctx[3](/*$numberOfTurns*/ ctx[4].length);
@@ -32921,14 +32921,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(2034:8) {#if hasOutput}",
+    		source: "(2078:8) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2036:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
+    // (2080:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
     function create_if_block_1$1(ctx) {
     	let div2;
     	let div0;
@@ -32940,16 +32940,16 @@ var app = (function () {
     	let i;
     	let t4;
 
-    	let t5_value = (/*turn*/ ctx[49] === 0
+    	let t5_value = (/*turn*/ ctx[48] === 0
     	? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[49] - 1]}`) + "";
+    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[48] - 1]}`) + "";
 
     	let t5;
     	let t6;
     	let t7;
     	let div1;
     	let t8;
-    	let each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49]);
+    	let each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48]);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -32962,7 +32962,7 @@ var app = (function () {
     			div2 = element("div");
     			div0 = element("div");
     			t0 = text("Turn ");
-    			t1 = text(/*turn*/ ctx[49]);
+    			t1 = text(/*turn*/ ctx[48]);
     			t2 = text(":");
     			br = element("br");
     			t3 = space();
@@ -32978,15 +32978,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 2038, 36, 86373);
+    			add_location(br, file$4, 2082, 36, 89275);
     			attr_dev(i, "class", "svelte-1osxkv");
-    			add_location(i, file$4, 2039, 24, 86403);
+    			add_location(i, file$4, 2083, 24, 89305);
     			attr_dev(div0, "class", "turn-label svelte-1osxkv");
-    			add_location(div0, file$4, 2037, 20, 86311);
+    			add_location(div0, file$4, 2081, 20, 89213);
     			attr_dev(div1, "class", "card-rectangles svelte-1osxkv");
-    			add_location(div1, file$4, 2041, 20, 86539);
+    			add_location(div1, file$4, 2085, 20, 89441);
     			attr_dev(div2, "class", "turn-row svelte-1osxkv");
-    			add_location(div2, file$4, 2036, 16, 86267);
+    			add_location(div2, file$4, 2080, 16, 89169);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -33012,12 +33012,12 @@ var app = (function () {
     			append_dev(div2, t8);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[49] === 0
+    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[48] === 0
     			? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[49] - 1]}`) + "")) set_data_dev(t5, t5_value);
+    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[48] - 1]}`) + "")) set_data_dev(t5, t5_value);
 
     			if (dirty[0] & /*getCombinedResults, groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 2149) {
-    				each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49]);
+    				each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -33050,17 +33050,17 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(2036:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}",
+    		source: "(2080:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2045:28) {#if turn === 0}
+    // (2089:28) {#if turn === 0}
     function create_if_block_2(ctx) {
     	let div;
-    	let t_value = /*card*/ ctx[50].label + "";
+    	let t_value = /*card*/ ctx[49].label + "";
     	let t;
 
     	const block = {
@@ -33068,14 +33068,14 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "card-label svelte-1osxkv");
-    			add_location(div, file$4, 2045, 32, 86827);
+    			add_location(div, file$4, 2089, 32, 89729);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t_value !== (t_value = /*card*/ ctx[50].label + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t_value !== (t_value = /*card*/ ctx[49].label + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -33086,14 +33086,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(2045:28) {#if turn === 0}",
+    		source: "(2089:28) {#if turn === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2056:36) {#each card.isBlank as isBlank, i}
+    // (2100:36) {#each card.isBlank as isBlank, i}
     function create_each_block_2(ctx) {
     	let div;
 
@@ -33101,22 +33101,22 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "stacked-card svelte-1osxkv");
-    			set_style(div, "left", /*i*/ ctx[55] * 4 + "px");
-    			set_style(div, "z-index", -(/*i*/ ctx[55] + 1));
-    			set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
-    			set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
-    			add_location(div, file$4, 2056, 40, 87667);
+    			set_style(div, "left", /*i*/ ctx[54] * 4 + "px");
+    			set_style(div, "z-index", -(/*i*/ ctx[54] + 1));
+    			set_style(div, "background-color", /*isBlank*/ ctx[52] ? '#f2efe8' : /*card*/ ctx[49].color);
+    			set_style(div, "border-color", /*isBlank*/ ctx[52] ? '#c1c1c1' : '#666666');
+    			add_location(div, file$4, 2100, 40, 90569);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
+    				set_style(div, "background-color", /*isBlank*/ ctx[52] ? '#f2efe8' : /*card*/ ctx[49].color);
     			}
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
+    				set_style(div, "border-color", /*isBlank*/ ctx[52] ? '#c1c1c1' : '#666666');
     			}
     		},
     		d: function destroy(detaching) {
@@ -33128,14 +33128,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(2056:36) {#each card.isBlank as isBlank, i}",
+    		source: "(2100:36) {#each card.isBlank as isBlank, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2043:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
+    // (2087:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
     function create_each_block_1(ctx) {
     	let div6;
     	let t0;
@@ -33144,19 +33144,19 @@ var app = (function () {
     	let div2;
     	let div0;
 
-    	let t1_value = (/*card*/ ctx[50].probability !== null
-    	? `${/*card*/ ctx[50].probability}%`
+    	let t1_value = (/*card*/ ctx[49].probability !== null
+    	? `${/*card*/ ctx[49].probability}%`
     	: '') + "";
 
     	let t1;
     	let t2;
     	let div1;
-    	let raw_value = /*card*/ ctx[50].ratioText + "";
+    	let raw_value = /*card*/ ctx[49].ratioText + "";
     	let t3;
     	let div4;
     	let t4;
-    	let if_block = /*turn*/ ctx[49] === 0 && create_if_block_2(ctx);
-    	let each_value_2 = /*card*/ ctx[50].isBlank;
+    	let if_block = /*turn*/ ctx[48] === 0 && create_if_block_2(ctx);
+    	let each_value_2 = /*card*/ ctx[49].isBlank;
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -33185,21 +33185,21 @@ var app = (function () {
 
     			t4 = space();
     			attr_dev(div0, "class", "probability svelte-1osxkv");
-    			add_location(div0, file$4, 2050, 40, 87226);
+    			add_location(div0, file$4, 2094, 40, 90128);
     			attr_dev(div1, "class", "card-ratio svelte-1osxkv");
-    			add_location(div1, file$4, 2051, 40, 87356);
+    			add_location(div1, file$4, 2095, 40, 90258);
     			attr_dev(div2, "class", "card-details svelte-1osxkv");
-    			add_location(div2, file$4, 2049, 36, 87158);
+    			add_location(div2, file$4, 2093, 36, 90060);
     			attr_dev(div3, "class", "rectangle svelte-1osxkv");
-    			set_style(div3, "background-color", /*card*/ ctx[50].color);
-    			add_location(div3, file$4, 2048, 32, 87057);
+    			set_style(div3, "background-color", /*card*/ ctx[49].color);
+    			add_location(div3, file$4, 2092, 32, 89959);
     			attr_dev(div4, "class", "stacked-cards svelte-1osxkv");
-    			add_location(div4, file$4, 2054, 32, 87526);
+    			add_location(div4, file$4, 2098, 32, 90428);
     			attr_dev(div5, "class", "card-container svelte-1osxkv");
-    			set_style(div5, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
-    			add_location(div5, file$4, 2047, 28, 86934);
+    			set_style(div5, "margin-right", 7 + (/*card*/ ctx[49].isBlank.length - 1) * 4 + "px");
+    			add_location(div5, file$4, 2091, 28, 89836);
     			attr_dev(div6, "class", "card-group svelte-1osxkv");
-    			add_location(div6, file$4, 2043, 24, 86723);
+    			add_location(div6, file$4, 2087, 24, 89625);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -33225,19 +33225,19 @@ var app = (function () {
     			append_dev(div6, t4);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*turn*/ ctx[49] === 0) if_block.p(ctx, dirty);
+    			if (/*turn*/ ctx[48] === 0) if_block.p(ctx, dirty);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t1_value !== (t1_value = (/*card*/ ctx[50].probability !== null
-    			? `${/*card*/ ctx[50].probability}%`
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t1_value !== (t1_value = (/*card*/ ctx[49].probability !== null
+    			? `${/*card*/ ctx[49].probability}%`
     			: '') + "")) set_data_dev(t1, t1_value);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && raw_value !== (raw_value = /*card*/ ctx[50].ratioText + "")) div1.innerHTML = raw_value;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && raw_value !== (raw_value = /*card*/ ctx[49].ratioText + "")) div1.innerHTML = raw_value;
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div3, "background-color", /*card*/ ctx[50].color);
+    				set_style(div3, "background-color", /*card*/ ctx[49].color);
     			}
 
     			if (dirty[0] & /*getCombinedResults, groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 2149) {
-    				each_value_2 = /*card*/ ctx[50].isBlank;
+    				each_value_2 = /*card*/ ctx[49].isBlank;
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -33261,7 +33261,7 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div5, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
+    				set_style(div5, "margin-right", 7 + (/*card*/ ctx[49].isBlank.length - 1) * 4 + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -33275,16 +33275,16 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(2043:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}",
+    		source: "(2087:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2035:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
+    // (2079:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
     function create_each_block$1(ctx) {
-    	let show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[49]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49], 'hand').length > 0;
+    	let show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[48]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48], 'hand').length > 0;
     	let if_block_anchor;
     	let if_block = show_if && create_if_block_1$1(ctx);
 
@@ -33298,7 +33298,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[49]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49], 'hand').length > 0;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[48]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48], 'hand').length > 0;
 
     			if (show_if) {
     				if (if_block) {
@@ -33323,7 +33323,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(2035:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
+    		source: "(2079:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
     		ctx
     	});
 
@@ -33358,9 +33358,9 @@ var app = (function () {
     			attr_dev(h2, "id", "probabilities-jump");
     			set_style(h2, "text-align", "center");
     			set_style(h2, "margin-bottom", "0");
-    			add_location(h2, file$4, 2019, 4, 84945);
+    			add_location(h2, file$4, 2063, 4, 87847);
     			attr_dev(div, "class", "output-diagram svelte-1osxkv");
-    			add_location(div, file$4, 2032, 4, 85948);
+    			add_location(div, file$4, 2076, 4, 88850);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33487,9 +33487,7 @@ var app = (function () {
     	return Math.min(1, calculate(0, cardsDrawn, 1));
     }
 
-    function satisfiesRequirements(combination, requirements, totalManaNeeded) {
-    	if (combination.length < totalManaNeeded) return false;
-
+    function satisfiesRequirements(combination, requirements) {
     	// Create a list of all possible mana profiles this combination can produce
     	let possibleManaProfiles = combination.map(land => Object.keys(land));
 
@@ -33510,6 +33508,28 @@ var app = (function () {
     	});
     }
 
+    function getAllCombinations(lands, totalManaNeeded) {
+    	const dp = Array(totalManaNeeded + 1).fill(null).map(() => new Set());
+    	dp[0].add(JSON.stringify([]));
+
+    	for (let land of lands) {
+    		const landStr = JSON.stringify(land);
+
+    		for (let i = totalManaNeeded; i > 0; i--) {
+    			for (let combination of dp[i - 1]) {
+    				const newCombination = JSON.parse(combination).concat(landStr).sort();
+    				dp[i].add(JSON.stringify(newCombination));
+    			}
+    		}
+    	}
+
+    	const finalCombinations = Array.from(dp[totalManaNeeded]).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+    	console.log(`Total Combinations Generated: ${finalCombinations.length}`);
+    	console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+    	return finalCombinations;
+    }
+
+    //-------------------------------------------
     function generateAllSelections(possibleManaProfiles, index = 0, currentSelection = []) {
     	if (index === possibleManaProfiles.length) {
     		return [currentSelection.slice()];
@@ -33540,6 +33560,58 @@ var app = (function () {
     	return c;
     }
 
+    // function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
+    //     return new Promise((resolve, reject) => {
+    //         // Reset the progress bar at the start of the simulation
+    //         combinationProgress.set(0);
+    //         const combinations = [];
+    //         const landCounts = lands.reduce((counts, land) => {
+    //             const key = JSON.stringify(land);
+    //             counts[key] = (counts[key] || 0) + 1;
+    //             return counts;
+    //         }, {});
+    //         const totalLands = lands.length; // Total number of lands for progress calculation
+    //         const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
+    //         console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
+    //         let currentIteration = 0; // Track the current iteration
+    //         const stack = [{ index: 0, currentCombination: [], currentCounts: {} }];
+    //         const batchSize = 100; // Number of iterations to process before yielding control
+    //         function processBatch() {
+    //             let batchCounter = 0;
+    //             while (stack.length > 0 && batchCounter < batchSize) {
+    //                 const { index, currentCombination, currentCounts } = stack.pop();
+    //                 if (currentCombination.length > totalManaNeeded) continue;
+    //                 if (index === lands.length) {
+    //                     const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
+    //                     combinations.push(combinationKey);
+    //                     currentIteration++;
+    //                     continue;
+    //                 }
+    //                 // Update progress based on the current iteration and estimated total combinations
+    //                 const progress = (currentIteration / estimatedTotalCombinations) * 100;
+    //                 combinationProgress.set(progress);
+    //                 stack.push({ index: index + 1, currentCombination, currentCounts });
+    //                 const land = lands[index];
+    //                 const landKey = JSON.stringify(land);
+    //                 if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
+    //                     const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
+    //                     stack.push({ index: index + 1, currentCombination: [...currentCombination, land], currentCounts: newCounts });
+    //                 }
+    //                 batchCounter++;
+    //             }
+    //             if (stack.length > 0) {
+    //                 setTimeout(processBatch, 0); // Yield control back to the UI
+    //             } else {
+    //                 // All batches are complete, resolve the promise with the final combinations
+    //                 const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+    //                 console.log(`Total Combinations Generated: ${combinations.length}`);
+    //                 console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+    //                 resolve(finalCombinations);
+    //             }
+    //         }
+    //         processBatch();
+    //     });
+    // }
     function combineProfiles(profiles) {
     	return profiles.reduce(
     		(combinedProfile, profile) => {
@@ -34007,126 +34079,79 @@ var app = (function () {
     		console.log(`Group Results for ${group.name}:`, groupResults);
     	}
 
+    	// //the following is the old less efficient combination code
+    	// //still undergoing full testing to verify new code is accurate before delete this
+    	//     function determineNeededCombinations(lands, requirements, totalManaNeeded) {
+    	//     let combinedLands = [...lands, ...$simplifiedRampMana];
+    	//     console.log('Combined Lands:', combinedLands); // Log the combined lands
+    	//     const combinations = getAllCombinations(combinedLands, true, totalManaNeeded);
+    	//     return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
+    	// }
+    	//     function satisfiesRequirements(combination, requirements, totalManaNeeded) {
+    	//         if (combination.length < totalManaNeeded) return false;
+    	//         // Create a list of all possible mana profiles this combination can produce
+    	//         let possibleManaProfiles = combination.map(land => Object.keys(land));
+    	//         // Generate all possible selections of mana from these profiles
+    	//         let allSelections = generateAllSelections(possibleManaProfiles);
+    	//         // Check if any selection satisfies the requirements
+    	//         return allSelections.some(selection => {
+    	//             let manaProfile = selection.reduce((profile, color) => {
+    	//                 profile[color] = (profile[color] || 0) + 1;
+    	//                 return profile;
+    	//             }, {});
+    	//             return Object.entries(requirements).every(([color, amount]) => manaProfile[color] >= amount);
+    	//         });
+    	//     }
+    	// //BEFORE MASSIVE CHANGES ATTEMPT TO BATCH
+    	// function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
+    	//     // Reset the progress bar at the start of the simulation
+    	//     combinationProgress.set(0);
+    	//     const combinations = [];
+    	//     const landCounts = lands.reduce((counts, land) => {
+    	//         const key = JSON.stringify(land);
+    	//         counts[key] = (counts[key] || 0) + 1;
+    	//         return counts;
+    	//     }, {});
+    	//     const totalLands = lands.length; // Total number of lands for progress calculation
+    	//     const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
+    	//     console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
+    	//     let currentIteration = 0; // Track the current iteration
+    	//     const generateCombinations = (index, currentCombination, currentCounts) => {
+    	//       //  console.log(`Index: ${index}, Current Combination: ${JSON.stringify(currentCombination)}, Current Counts: ${JSON.stringify(currentCounts)}`);
+    	//         if (currentCombination.length > totalManaNeeded) return;
+    	//         if (index === lands.length) {
+    	//             const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
+    	//             combinations.push(combinationKey);
+    	//         //  console.log(`Added Combination: ${combinationKey}`);
+    	//         currentIteration++;
+    	//         return;
+    	//         }
+    	//         // Update progress based on the current iteration and estimated total combinations
+    	//         const progress = (currentIteration / estimatedTotalCombinations) * 100;
+    	//         combinationProgress.set(progress);
+    	//       //  console.log(`Progress: ${progress}%`);
+    	//         generateCombinations(index + 1, currentCombination, currentCounts);
+    	//         const land = lands[index];
+    	//         const landKey = JSON.stringify(land);
+    	//         if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
+    	//             const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
+    	//             generateCombinations(index + 1, [...currentCombination, land], newCounts);
+    	//         }
+    	//     };
+    	//     generateCombinations(0, [], {});
+    	//     const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+    	//     console.log(`Total Combinations Generated: ${combinations.length}`);
+    	//     console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+    	//     return finalCombinations;
+    	// }
+    	//------------------------------------------------------------------------------------
+    	//the following is updated more efficient combination code. some day maybe try changing this to a bipartite matching approach.
+    	//still undergoing full testing to verify accuracy. Replaced the recursive combination generation with a dynamic programming approach.This approach uses a 2D array (dp) where dp[i] contains sets of combinations of size i. For each land, it iterates backward through dp to update possible combinations efficiently
     	function determineNeededCombinations(lands, requirements, totalManaNeeded) {
     		let combinedLands = [...lands, ...$simplifiedRampMana];
     		console.log('Combined Lands:', combinedLands); // Log the combined lands
-    		const combinations = getAllCombinations(combinedLands, true, totalManaNeeded);
-    		return combinations.filter(combination => satisfiesRequirements(combination, requirements, totalManaNeeded));
-    	}
-
-    	// function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
-    	//     return new Promise((resolve, reject) => {
-    	//         // Reset the progress bar at the start of the simulation
-    	//         combinationProgress.set(0);
-    	//         const combinations = [];
-    	//         const landCounts = lands.reduce((counts, land) => {
-    	//             const key = JSON.stringify(land);
-    	//             counts[key] = (counts[key] || 0) + 1;
-    	//             return counts;
-    	//         }, {});
-    	//         const totalLands = lands.length; // Total number of lands for progress calculation
-    	//         const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
-    	//         console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
-    	//         let currentIteration = 0; // Track the current iteration
-    	//         const stack = [{ index: 0, currentCombination: [], currentCounts: {} }];
-    	//         const batchSize = 100; // Number of iterations to process before yielding control
-    	//         function processBatch() {
-    	//             let batchCounter = 0;
-    	//             while (stack.length > 0 && batchCounter < batchSize) {
-    	//                 const { index, currentCombination, currentCounts } = stack.pop();
-    	//                 if (currentCombination.length > totalManaNeeded) continue;
-    	//                 if (index === lands.length) {
-    	//                     const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
-    	//                     combinations.push(combinationKey);
-    	//                     currentIteration++;
-    	//                     continue;
-    	//                 }
-    	//                 // Update progress based on the current iteration and estimated total combinations
-    	//                 const progress = (currentIteration / estimatedTotalCombinations) * 100;
-    	//                 combinationProgress.set(progress);
-    	//                 stack.push({ index: index + 1, currentCombination, currentCounts });
-    	//                 const land = lands[index];
-    	//                 const landKey = JSON.stringify(land);
-    	//                 if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
-    	//                     const newCounts = { ...currentCounts, [landKey]: (currentCounts[landKey] || 0) + 1 };
-    	//                     stack.push({ index: index + 1, currentCombination: [...currentCombination, land], currentCounts: newCounts });
-    	//                 }
-    	//                 batchCounter++;
-    	//             }
-    	//             if (stack.length > 0) {
-    	//                 setTimeout(processBatch, 0); // Yield control back to the UI
-    	//             } else {
-    	//                 // All batches are complete, resolve the promise with the final combinations
-    	//                 const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
-    	//                 console.log(`Total Combinations Generated: ${combinations.length}`);
-    	//                 console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
-    	//                 resolve(finalCombinations);
-    	//             }
-    	//         }
-    	//         processBatch();
-    	//     });
-    	// }
-    	//BEFORE MASSIVE CHANGES ATTEMPT TO BATCH
-    	function getAllCombinations(lands, allowDuplicates, totalManaNeeded) {
-    		// Reset the progress bar at the start of the simulation
-    		combinationProgress.set(0);
-
-    		const combinations = [];
-
-    		const landCounts = lands.reduce(
-    			(counts, land) => {
-    				const key = JSON.stringify(land);
-    				counts[key] = (counts[key] || 0) + 1;
-    				return counts;
-    			},
-    			{}
-    		);
-
-    		const totalLands = lands.length; // Total number of lands for progress calculation
-    		const estimatedTotalCombinations = binomialCoefficient(totalLands, totalManaNeeded); // Estimate total combinations
-    		console.log(`Estimated Total Combinations: ${estimatedTotalCombinations}`);
-    		let currentIteration = 0; // Track the current iteration
-
-    		const generateCombinations = (index, currentCombination, currentCounts) => {
-    			//  console.log(`Index: ${index}, Current Combination: ${JSON.stringify(currentCombination)}, Current Counts: ${JSON.stringify(currentCounts)}`);
-    			if (currentCombination.length > totalManaNeeded) return;
-
-    			if (index === lands.length) {
-    				const combinationKey = JSON.stringify(currentCombination.map(land => JSON.stringify(land)).sort());
-    				combinations.push(combinationKey);
-
-    				//  console.log(`Added Combination: ${combinationKey}`);
-    				currentIteration++;
-
-    				return;
-    			}
-
-    			// Update progress based on the current iteration and estimated total combinations
-    			const progress = currentIteration / estimatedTotalCombinations * 100;
-
-    			combinationProgress.set(progress);
-
-    			//  console.log(`Progress: ${progress}%`);
-    			generateCombinations(index + 1, currentCombination, currentCounts);
-
-    			const land = lands[index];
-    			const landKey = JSON.stringify(land);
-
-    			if (!currentCounts[landKey] || currentCounts[landKey] < landCounts[landKey]) {
-    				const newCounts = {
-    					...currentCounts,
-    					[landKey]: (currentCounts[landKey] || 0) + 1
-    				};
-
-    				generateCombinations(index + 1, [...currentCombination, land], newCounts);
-    			}
-    		};
-
-    		generateCombinations(0, [], {});
-    		const finalCombinations = Array.from(new Set(combinations)).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
-    		console.log(`Total Combinations Generated: ${combinations.length}`);
-    		console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
-    		return finalCombinations;
+    		const combinations = getAllCombinations(combinedLands, totalManaNeeded);
+    		return combinations.filter(combination => satisfiesRequirements(combination, requirements));
     	}
 
     	// function transformCombinationForLinkedGroups(combination, landGroupSizes) {
@@ -35384,9 +35409,9 @@ var app = (function () {
     		calculateSingleGroup,
     		determineNeededCombinations,
     		satisfiesRequirements,
+    		getAllCombinations,
     		generateAllSelections,
     		binomialCoefficient,
-    		getAllCombinations,
     		combineProfiles,
     		prepareCombinationsForAnalysis,
     		calculateLandGroupSizes,
