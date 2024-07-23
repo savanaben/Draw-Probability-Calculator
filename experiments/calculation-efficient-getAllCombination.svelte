@@ -1,4 +1,28 @@
+
+
 <script>
+
+
+
+
+
+
+//THIS version had the most efficient getAllCombinations code, but that code is not
+//yielding to the UI. can't find a way to keep this efficiency while periodic
+//yield to UI. 
+
+
+
+
+
+
+
+
+
+
+
+
+
     import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
     import { simulationData, monteCarloResults, monteCarloHandResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana, simulationType } from './colorStore.js';
     // Additional imports for randomness
@@ -332,15 +356,11 @@
 //the following is updated more efficient combination code. some day maybe try changing this to a bipartite matching approach.
 //still undergoing full testing to verify accuracy. Replaced the recursive combination generation with a dynamic programming approach.This approach uses a 2D array (dp) where dp[i] contains sets of combinations of size i. For each land, it iterates backward through dp to update possible combinations efficiently
 function determineNeededCombinations(lands, requirements, totalManaNeeded) {
-    return new Promise((resolve) => {
-        let combinedLands = [...lands, ...$simplifiedRampMana];
-        console.log('Combined Lands:', combinedLands); // Log the combined lands
-        getAllCombinations(combinedLands, totalManaNeeded, resolve);
-    }).then(combinations => {
-        return combinations.filter(combination => satisfiesRequirements(combination, requirements));
-    });
+    let combinedLands = [...lands, ...$simplifiedRampMana];
+    console.log('Combined Lands:', combinedLands); // Log the combined lands
+    const combinations = getAllCombinations(combinedLands, totalManaNeeded);
+    return combinations.filter(combination => satisfiesRequirements(combination, requirements));
 }
-
 
 function satisfiesRequirements(combination, requirements) {
     // Create a list of all possible mana profiles this combination can produce
@@ -359,62 +379,26 @@ function satisfiesRequirements(combination, requirements) {
     });
 }
 
-function getAllCombinations(lands, totalManaNeeded, resolve) {
+
+function getAllCombinations(lands, totalManaNeeded) {
     const dp = Array(totalManaNeeded + 1).fill(null).map(() => new Set());
-    dp[0].add("[]");
+    dp[0].add(JSON.stringify([]));
 
-    const estimatedTotalCombinations = binomialCoefficient(lands.length, totalManaNeeded);
-    let processedCombinations = 0;
-
-    const stack = [{ index: 0, currentCombination: [], currentCounts: new Map() }];
-    const iterationsPerFrame = 500000; // Adjust this size based on performance needs
-
-    function processChunk() {
-        let iterations = 0;
-
-        while (stack.length > 0 && iterations < iterationsPerFrame) {
-            const { index, currentCombination, currentCounts } = stack.pop();
-
-            if (currentCombination.length >= totalManaNeeded) {
-                if (currentCombination.length === totalManaNeeded) {
-                    dp[totalManaNeeded].add(JSON.stringify(currentCombination.map(land => land).sort()));
-                    processedCombinations++;
-                }
-                continue;
+    for (let land of lands) {
+        const landStr = JSON.stringify(land);
+        for (let i = totalManaNeeded; i > 0; i--) {
+            for (let combination of dp[i - 1]) {
+                const newCombination = JSON.parse(combination).concat(landStr).sort();
+                dp[i].add(JSON.stringify(newCombination));
             }
-
-            if (index < lands.length) {
-                stack.push({ index: index + 1, currentCombination, currentCounts });
-
-                const land = lands[index];
-                const landKey = JSON.stringify(land);
-                const count = currentCounts.get(landKey) || 0;
-
-                const newCounts = new Map(currentCounts);
-                newCounts.set(landKey, count + 1);
-                stack.push({ index: index + 1, currentCombination: currentCombination.concat(land), currentCounts: newCounts });
-            }
-
-            iterations++;
-        }
-
-        const progress = (processedCombinations / estimatedTotalCombinations) * 100;
-        combinationProgress.set(progress);
-        console.log(`Progress: ${progress}%`);
-
-        if (stack.length > 0) {
-            requestAnimationFrame(processChunk); // Yield control back to the UI
-        } else {
-            const finalCombinations = Array.from(dp[totalManaNeeded]).map(key => JSON.parse(key));
-            console.log(`Total Combinations Generated: ${finalCombinations.length}`);
-            console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
-            resolve(finalCombinations);
         }
     }
 
-    processChunk();
+    const finalCombinations = Array.from(dp[totalManaNeeded]).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
+    console.log(`Total Combinations Generated: ${finalCombinations.length}`);
+    console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+    return finalCombinations;
 }
-
 
 
 //-------------------------------------------
@@ -733,11 +717,11 @@ function monteCarloSimulation(preparedCombinations, landGroupSizes, deckSize, mu
         const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
         let batchSize;
         if (totalManaNeeded <= 2) {
-            batchSize = 20;
+            batchSize = 50;
         } else if (totalManaNeeded === 3) {
-            batchSize = 10;
+            batchSize = 30;
         } else {
-            batchSize = 10;
+            batchSize = 20;
         }
 
         function runIteration() {
@@ -1829,7 +1813,7 @@ function resetAndUpdateAvailableMana(totalAvailableMana, totalAvailableRamp, cur
 // Inside identifyProfiles function
 async function identifyProfiles(numIterations) {
     const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
-    const neededCombinations = await determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);  // Wait for the promise to resolve
+    const neededCombinations = determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);
    
     neededCombinationsCount.set(neededCombinations.length);  // Update the store with the count
 

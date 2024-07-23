@@ -61,6 +61,7 @@
     .accordion {
      max-width: 55em;
       padding: 1em;
+      margin: auto;
     }
 
       /* Media query for mobile devices */

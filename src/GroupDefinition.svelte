@@ -119,7 +119,7 @@ function handleAddGroupClick() {
 
 <h2 style="text-align: center;">Deck inputs and card groups</h2>
 <p class="larger-text">The Hypergeometric Calulator is best for simulating the chance you'll get non-mana-based cards in your hand. The Monte Carlo Simulation will run advanced simulations that factor mana colors and ramp both in your hand and on the field.</p>
-<p class="larger-text">Simulation results per turn will output in the <a href="#probabilities-jump">Probabilities</a> section below.</p>
+<p class="larger-text">Simulation results per turn will output in the <a href="#probabilities-jump">Probabilities</a> section.</p>
 
 <div class="parameters">
     
@@ -264,17 +264,18 @@ function handleAddGroupClick() {
             <option value="4">4</option>
         </select>
     </div>
+  <label><i>Additional global parameters <a href="#global-params-jump">below</a>.</i></label>
 </div>
 </div>
 </div>
 </div>
     
     <MonteAccordion />
-
+    <h4>Global Parameters</h4>
     <div class="controls-container">
         
         
-        <div class="deck-size-container">
+        <div class="deck-size-container" id="global-params-jump">
             <label for="cardsDrawn">Initial hand size:</label>
             <input type="number" class="deckSize" id="cardsDrawn" bind:value={InitialDrawSize} min="1" 
             on:focus="{selectInput}"

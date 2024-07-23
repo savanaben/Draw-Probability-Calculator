@@ -93,7 +93,7 @@
 <style>
     .ramp-card {
         width: 100%;
-        max-width: 400px;
+        max-width: 361px;
         height: auto;
         background-color: #f0f0f0;
         margin: 5px;

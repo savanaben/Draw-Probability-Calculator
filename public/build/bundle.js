@@ -1163,8 +1163,8 @@ var app = (function () {
 
     // Mulligan configuration store
     const mulliganConfig = writable({
-        maxMulligans: 3, // Max amount of mulligans (0 to 7)
-        firstMulliganFree: false, // First mulligan is free (true/false)
+        maxMulligans: 0, // Max amount of mulligans (0 to 7)
+        firstMulliganFree: true, // First mulligan is free (true/false)
         freeMulliganTillLands: false, // mulligan until meeting min/max land requirements (true/false)
         minLandsInHand: 2, // Min amount of lands in hand (0 to 7)
         maxLandsInHand: 5, // Max amount of lands in hand (0 to 7)
@@ -7907,7 +7907,7 @@ var app = (function () {
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[2][/*mana*/ ctx[17]].icon)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "" + (/*mana*/ ctx[17] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon svelte-1a8pjz2");
+    			attr_dev(img, "class", "mana-icon svelte-r5bi5a");
     			add_location(img, file$a, 246, 28, 7105);
     		},
     		m: function mount(target, anchor) {
@@ -7940,7 +7940,7 @@ var app = (function () {
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = /*getAnyIcon*/ ctx[5](/*card*/ ctx[0].TotalManaCost.ANY))) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "" + (/*mana*/ ctx[17] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon svelte-1a8pjz2");
+    			attr_dev(img, "class", "mana-icon svelte-r5bi5a");
     			add_location(img, file$a, 244, 28, 6953);
     		},
     		m: function mount(target, anchor) {
@@ -8001,15 +8001,15 @@ var app = (function () {
     			input = element("input");
     			t2 = space();
     			attr_dev(label, "for", "" + (/*mana*/ ctx[17] + "-cost"));
-    			attr_dev(label, "class", "svelte-1a8pjz2");
+    			attr_dev(label, "class", "svelte-r5bi5a");
     			add_location(label, file$a, 242, 20, 6852);
     			attr_dev(input, "id", "" + (/*mana*/ ctx[17] + "-cost"));
     			attr_dev(input, "type", "number");
     			attr_dev(input, "min", "0");
     			input.disabled = input_disabled_value = /*card*/ ctx[0].isSignet && /*mana*/ ctx[17] !== 'ANY';
-    			attr_dev(input, "class", "svelte-1a8pjz2");
+    			attr_dev(input, "class", "svelte-r5bi5a");
     			add_location(input, file$a, 250, 20, 7296);
-    			attr_dev(div, "class", "mana-input svelte-1a8pjz2");
+    			attr_dev(div, "class", "mana-input svelte-r5bi5a");
     			add_location(div, file$a, 241, 16, 6806);
     		},
     		m: function mount(target, anchor) {
@@ -8084,12 +8084,12 @@ var app = (function () {
     			t = space();
     			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[2][/*mana*/ ctx[17]].icon)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "" + (/*mana*/ ctx[17] + " mana icon"));
-    			attr_dev(img, "class", "mana-icon-large svelte-1a8pjz2");
+    			attr_dev(img, "class", "mana-icon-large svelte-r5bi5a");
     			add_location(img, file$a, 266, 16, 8097);
 
     			attr_dev(button, "class", button_class_value = "mana-symbol " + (/*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[17]] === 1
     			? 'active'
-    			: '') + " svelte-1a8pjz2");
+    			: '') + " svelte-r5bi5a");
 
     			attr_dev(button, "tabindex", "0");
     			attr_dev(button, "aria-label", /*manaIcons*/ ctx[2][/*mana*/ ctx[17]].label + ' mana');
@@ -8115,7 +8115,7 @@ var app = (function () {
 
     			if (dirty & /*card*/ 1 && button_class_value !== (button_class_value = "mana-symbol " + (/*card*/ ctx[0].ColorsCanProduce[/*mana*/ ctx[17]] === 1
     			? 'active'
-    			: '') + " svelte-1a8pjz2")) {
+    			: '') + " svelte-r5bi5a")) {
     				attr_dev(button, "class", button_class_value);
     			}
 
@@ -8230,7 +8230,7 @@ var app = (function () {
     			t3 = space();
     			li1 = element("li");
     			li1.textContent = "If there is no colorless mana mana available, then the color you can produce the most of is used to pay the 1.";
-    			attr_dev(p, "class", "popover-content svelte-1a8pjz2");
+    			attr_dev(p, "class", "popover-content svelte-r5bi5a");
     			add_location(p, file$a, 297, 16, 9770);
     			add_location(li0, file$a, 299, 18, 9931);
     			add_location(li1, file$a, 300, 18, 10051);
@@ -8412,26 +8412,26 @@ var app = (function () {
     			attr_dev(label0, "for", "title-input");
     			add_location(label0, file$a, 228, 8, 6242);
     			attr_dev(input0, "aria-label", "ramp card title");
-    			attr_dev(input0, "class", "title-input svelte-1a8pjz2");
+    			attr_dev(input0, "class", "title-input svelte-r5bi5a");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Optional name...");
     			add_location(input0, file$a, 229, 8, 6297);
-    			attr_dev(div0, "class", "one-line svelte-1a8pjz2");
+    			attr_dev(div0, "class", "one-line svelte-r5bi5a");
     			add_location(div0, file$a, 227, 4, 6210);
     			attr_dev(button, "aria-label", "Remove ramp card");
     			attr_dev(button, "class", "remove-button");
     			add_location(button, file$a, 232, 6, 6472);
-    			attr_dev(div1, "class", "ramp-card-header svelte-1a8pjz2");
+    			attr_dev(div1, "class", "ramp-card-header svelte-r5bi5a");
     			add_location(div1, file$a, 226, 4, 6174);
-    			attr_dev(p0, "class", "mana-label svelte-1a8pjz2");
+    			attr_dev(p0, "class", "mana-label svelte-r5bi5a");
     			add_location(p0, file$a, 238, 8, 6665);
-    			attr_dev(div2, "class", "mana-inputs svelte-1a8pjz2");
+    			attr_dev(div2, "class", "mana-inputs svelte-r5bi5a");
     			add_location(div2, file$a, 239, 8, 6711);
     			attr_dev(div3, "class", "mana-section");
     			add_location(div3, file$a, 237, 4, 6629);
-    			attr_dev(p1, "class", "mana-label svelte-1a8pjz2");
+    			attr_dev(p1, "class", "mana-label svelte-r5bi5a");
     			add_location(p1, file$a, 257, 8, 7567);
-    			attr_dev(div4, "class", "mana-input svelte-1a8pjz2");
+    			attr_dev(div4, "class", "mana-input svelte-r5bi5a");
     			add_location(div4, file$a, 258, 8, 7627);
     			attr_dev(div5, "class", "mana-section");
     			add_location(div5, file$a, 256, 4, 7531);
@@ -8439,12 +8439,12 @@ var app = (function () {
     			attr_dev(label1, "class", "can-produce-label");
     			add_location(label1, file$a, 274, 8, 8284);
     			attr_dev(input1, "id", "can-produce");
-    			attr_dev(input1, "class", "can-produce-input svelte-1a8pjz2");
+    			attr_dev(input1, "class", "can-produce-input svelte-r5bi5a");
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", "0");
     			input1.disabled = input1_disabled_value = /*card*/ ctx[0].isSignet;
     			add_location(input1, file$a, 275, 8, 8381);
-    			attr_dev(div6, "class", "one-line svelte-1a8pjz2");
+    			attr_dev(div6, "class", "one-line svelte-r5bi5a");
     			add_location(div6, file$a, 273, 4, 8252);
     			attr_dev(label2, "for", "available-turn-played");
     			attr_dev(label2, "class", "available-turn-played-label");
@@ -8452,30 +8452,30 @@ var app = (function () {
     			attr_dev(input2, "id", "available-turn-played");
     			attr_dev(input2, "type", "checkbox");
     			input2.disabled = input2_disabled_value = /*card*/ ctx[0].isSignet;
-    			attr_dev(input2, "class", "svelte-1a8pjz2");
+    			attr_dev(input2, "class", "svelte-r5bi5a");
     			add_location(input2, file$a, 285, 8, 8993);
-    			attr_dev(div7, "class", "one-line svelte-1a8pjz2");
+    			attr_dev(div7, "class", "one-line svelte-r5bi5a");
     			add_location(div7, file$a, 283, 4, 8842);
     			attr_dev(label3, "for", "is-signet");
     			attr_dev(label3, "class", "is-signet-label");
     			add_location(label3, file$a, 289, 8, 9240);
     			attr_dev(input3, "id", "is-signet");
     			attr_dev(input3, "type", "checkbox");
-    			attr_dev(input3, "class", "svelte-1a8pjz2");
+    			attr_dev(input3, "class", "svelte-r5bi5a");
     			add_location(input3, file$a, 290, 8, 9315);
-    			attr_dev(div8, "class", "one-line svelte-1a8pjz2");
+    			attr_dev(div8, "class", "one-line svelte-r5bi5a");
     			add_location(div8, file$a, 288, 4, 9208);
     			attr_dev(label4, "for", "amount");
     			attr_dev(label4, "class", "amount-label");
     			add_location(label4, file$a, 308, 8, 10295);
     			attr_dev(input4, "id", "amount");
-    			attr_dev(input4, "class", "amount-input svelte-1a8pjz2");
+    			attr_dev(input4, "class", "amount-input svelte-r5bi5a");
     			attr_dev(input4, "type", "number");
     			attr_dev(input4, "min", "0");
     			add_location(input4, file$a, 309, 8, 10402);
     			attr_dev(div9, "class", "amount-section");
     			add_location(div9, file$a, 307, 4, 10257);
-    			attr_dev(div10, "class", "ramp-card svelte-1a8pjz2");
+    			attr_dev(div10, "class", "ramp-card svelte-r5bi5a");
     			add_location(div10, file$a, 225, 0, 6145);
     		},
     		l: function claim(nodes) {
@@ -9622,7 +9622,7 @@ var app = (function () {
     			t = text(t_value);
     			option.__value = /*num*/ ctx[18];
     			option.value = option.__value;
-    			add_location(option, file$8, 105, 28, 2753);
+    			add_location(option, file$8, 105, 28, 2762);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -9657,7 +9657,7 @@ var app = (function () {
     			t = text(t_value);
     			option.__value = /*num*/ ctx[18];
     			option.value = option.__value;
-    			add_location(option, file$8, 114, 28, 3149);
+    			add_location(option, file$8, 114, 28, 3158);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -9692,7 +9692,7 @@ var app = (function () {
     			t = text(t_value);
     			option.__value = /*num*/ ctx[18];
     			option.value = option.__value;
-    			add_location(option, file$8, 123, 28, 3545);
+    			add_location(option, file$8, 123, 28, 3554);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -9722,42 +9722,40 @@ var app = (function () {
     	let h3;
     	let t1;
     	let div12;
-    	let p;
-    	let t3;
     	let div11;
     	let div1;
     	let label0;
-    	let t5;
+    	let t3;
     	let select0;
-    	let t6;
+    	let t4;
     	let div2;
     	let label1;
-    	let t8;
+    	let t6;
     	let select1;
-    	let t9;
+    	let t7;
     	let div3;
     	let label2;
-    	let t11;
+    	let t9;
     	let select2;
-    	let t12;
+    	let t10;
     	let div4;
     	let label3;
-    	let t14;
+    	let t12;
     	let input0;
-    	let t15;
+    	let t13;
     	let div5;
     	let label4;
-    	let t17;
+    	let t15;
     	let input1;
-    	let t18;
+    	let t16;
     	let div6;
     	let label5;
-    	let t20;
+    	let t18;
     	let input2;
-    	let t21;
+    	let t19;
     	let div7;
     	let label6;
-    	let t23;
+    	let t21;
     	let select3;
     	let option0;
     	let option1;
@@ -9765,10 +9763,10 @@ var app = (function () {
     	let option3;
     	let option4;
     	let option5;
-    	let t30;
+    	let t28;
     	let div8;
     	let label7;
-    	let t32;
+    	let t30;
     	let select4;
     	let option6;
     	let option7;
@@ -9776,15 +9774,15 @@ var app = (function () {
     	let option9;
     	let option10;
     	let option11;
-    	let t39;
+    	let t37;
     	let div9;
     	let label8;
-    	let t41;
+    	let t39;
     	let input3;
-    	let t42;
+    	let t40;
     	let div10;
     	let label9;
-    	let t44;
+    	let t42;
     	let input4;
     	let div12_transition;
     	let div14_class_value;
@@ -9824,65 +9822,62 @@ var app = (function () {
     			h3.textContent = "Add mulligan logic to simulations";
     			t1 = space();
     			div12 = element("div");
-    			p = element("p");
-    			p.textContent = "Change the number of cards you draw on any given turn. You can adjust the initial hand size above.";
-    			t3 = space();
     			div11 = element("div");
     			div1 = element("div");
     			label0 = element("label");
     			label0.textContent = "Max Mulligans:";
-    			t5 = space();
+    			t3 = space();
     			select0 = element("select");
 
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
     				each_blocks_2[i].c();
     			}
 
-    			t6 = space();
+    			t4 = space();
     			div2 = element("div");
     			label1 = element("label");
     			label1.textContent = "Min Lands in Hand:";
-    			t8 = space();
+    			t6 = space();
     			select1 = element("select");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t9 = space();
+    			t7 = space();
     			div3 = element("div");
     			label2 = element("label");
     			label2.textContent = "Max Lands in Hand:";
-    			t11 = space();
+    			t9 = space();
     			select2 = element("select");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t12 = space();
+    			t10 = space();
     			div4 = element("div");
     			label3 = element("label");
     			label3.textContent = "First Mulligan Free:";
-    			t14 = space();
+    			t12 = space();
     			input0 = element("input");
-    			t15 = space();
+    			t13 = space();
     			div5 = element("div");
     			label4 = element("label");
     			label4.textContent = "free mulligans until Max/min lands are satisfied";
-    			t17 = space();
+    			t15 = space();
     			input1 = element("input");
-    			t18 = space();
+    			t16 = space();
     			div6 = element("div");
     			label5 = element("label");
     			label5.textContent = "Allow 2 Lands + Playable Ramp:";
-    			t20 = space();
+    			t18 = space();
     			input2 = element("input");
-    			t21 = space();
+    			t19 = space();
     			div7 = element("div");
     			label6 = element("label");
     			label6.textContent = "Mulligan if Lands Can Only Make:";
-    			t23 = space();
+    			t21 = space();
     			select3 = element("select");
     			option0 = element("option");
     			option0.textContent = "None";
@@ -9896,11 +9891,11 @@ var app = (function () {
     			option4.textContent = "4 colors";
     			option5 = element("option");
     			option5.textContent = "5 colors";
-    			t30 = space();
+    			t28 = space();
     			div8 = element("div");
     			label7 = element("label");
     			label7.textContent = "Mulligan Unless Opening Hand Can Make:";
-    			t32 = space();
+    			t30 = space();
     			select4 = element("select");
     			option6 = element("option");
     			option6.textContent = "B";
@@ -9914,17 +9909,17 @@ var app = (function () {
     			option10.textContent = "W";
     			option11 = element("option");
     			option11.textContent = "C";
-    			t39 = space();
+    			t37 = space();
     			div9 = element("div");
     			label8 = element("label");
     			label8.textContent = "Ramp Must Be Playable:";
-    			t41 = space();
+    			t39 = space();
     			input3 = element("input");
-    			t42 = space();
+    			t40 = space();
     			div10 = element("div");
     			label9 = element("label");
     			label9.textContent = "Must Have Ramp:";
-    			t44 = space();
+    			t42 = space();
     			input4 = element("input");
     			set_style(h3, "font-weight", "400");
     			attr_dev(h3, "class", "svelte-9l4i42");
@@ -9932,88 +9927,85 @@ var app = (function () {
     			attr_dev(div0, "class", "accordion-title svelte-9l4i42");
     			attr_dev(div0, "tabindex", "0");
     			add_location(div0, file$8, 89, 8, 1788);
-    			set_style(p, "margin-top", "0.5rem");
-    			attr_dev(p, "class", "svelte-9l4i42");
-    			add_location(p, file$8, 98, 12, 2317);
-    			add_location(label0, file$8, 102, 20, 2548);
+    			add_location(label0, file$8, 102, 20, 2557);
     			if (/*$mulliganConfig*/ ctx[2].maxMulligans === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[7].call(select0));
-    			add_location(select0, file$8, 103, 20, 2599);
-    			add_location(div1, file$8, 101, 16, 2521);
-    			add_location(label1, file$8, 111, 20, 2938);
+    			add_location(select0, file$8, 103, 20, 2608);
+    			add_location(div1, file$8, 101, 16, 2530);
+    			add_location(label1, file$8, 111, 20, 2947);
     			if (/*$mulliganConfig*/ ctx[2].minLandsInHand === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[8].call(select1));
-    			add_location(select1, file$8, 112, 20, 2993);
-    			add_location(div2, file$8, 110, 16, 2911);
-    			add_location(label2, file$8, 120, 20, 3334);
+    			add_location(select1, file$8, 112, 20, 3002);
+    			add_location(div2, file$8, 110, 16, 2920);
+    			add_location(label2, file$8, 120, 20, 3343);
     			if (/*$mulliganConfig*/ ctx[2].maxLandsInHand === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[9].call(select2));
-    			add_location(select2, file$8, 121, 20, 3389);
-    			add_location(div3, file$8, 119, 16, 3307);
-    			add_location(label3, file$8, 129, 20, 3730);
+    			add_location(select2, file$8, 121, 20, 3398);
+    			add_location(div3, file$8, 119, 16, 3316);
+    			add_location(label3, file$8, 129, 20, 3739);
     			attr_dev(input0, "type", "checkbox");
-    			add_location(input0, file$8, 130, 20, 3787);
-    			add_location(div4, file$8, 128, 16, 3703);
-    			add_location(label4, file$8, 134, 20, 3940);
+    			add_location(input0, file$8, 130, 20, 3796);
+    			add_location(div4, file$8, 128, 16, 3712);
+    			add_location(label4, file$8, 134, 20, 3949);
     			attr_dev(input1, "type", "checkbox");
-    			add_location(input1, file$8, 135, 20, 4025);
-    			add_location(div5, file$8, 133, 16, 3913);
-    			add_location(label5, file$8, 139, 20, 4182);
+    			add_location(input1, file$8, 135, 20, 4034);
+    			add_location(div5, file$8, 133, 16, 3922);
+    			add_location(label5, file$8, 139, 20, 4191);
     			attr_dev(input2, "type", "checkbox");
-    			add_location(input2, file$8, 140, 20, 4249);
-    			add_location(div6, file$8, 138, 16, 4155);
-    			add_location(label6, file$8, 144, 20, 4414);
+    			add_location(input2, file$8, 140, 20, 4258);
+    			add_location(div6, file$8, 138, 16, 4164);
+    			add_location(label6, file$8, 144, 20, 4423);
     			option0.__value = "";
     			option0.value = option0.__value;
-    			add_location(option0, file$8, 146, 24, 4573);
+    			add_location(option0, file$8, 146, 24, 4582);
     			option1.__value = "1";
     			option1.value = option1.__value;
-    			add_location(option1, file$8, 147, 24, 4629);
+    			add_location(option1, file$8, 147, 24, 4638);
     			option2.__value = "2";
     			option2.value = option2.__value;
-    			add_location(option2, file$8, 148, 24, 4689);
+    			add_location(option2, file$8, 148, 24, 4698);
     			option3.__value = "3";
     			option3.value = option3.__value;
-    			add_location(option3, file$8, 149, 24, 4750);
+    			add_location(option3, file$8, 149, 24, 4759);
     			option4.__value = "4";
     			option4.value = option4.__value;
-    			add_location(option4, file$8, 150, 24, 4811);
+    			add_location(option4, file$8, 150, 24, 4820);
     			option5.__value = "5";
     			option5.value = option5.__value;
-    			add_location(option5, file$8, 151, 24, 4872);
+    			add_location(option5, file$8, 151, 24, 4881);
     			if (/*$mulliganConfig*/ ctx[2].mulliganIfLandsCanOnlyMake === void 0) add_render_callback(() => /*select3_change_handler*/ ctx[13].call(select3));
-    			add_location(select3, file$8, 145, 20, 4483);
-    			add_location(div7, file$8, 143, 16, 4387);
-    			add_location(label7, file$8, 156, 20, 5025);
+    			add_location(select3, file$8, 145, 20, 4492);
+    			add_location(div7, file$8, 143, 16, 4396);
+    			add_location(label7, file$8, 156, 20, 5034);
     			option6.__value = "B";
     			option6.value = option6.__value;
-    			add_location(option6, file$8, 158, 24, 5205);
+    			add_location(option6, file$8, 158, 24, 5214);
     			option7.__value = "U";
     			option7.value = option7.__value;
-    			add_location(option7, file$8, 159, 24, 5259);
+    			add_location(option7, file$8, 159, 24, 5268);
     			option8.__value = "G";
     			option8.value = option8.__value;
-    			add_location(option8, file$8, 160, 24, 5313);
+    			add_location(option8, file$8, 160, 24, 5322);
     			option9.__value = "R";
     			option9.value = option9.__value;
-    			add_location(option9, file$8, 161, 24, 5367);
+    			add_location(option9, file$8, 161, 24, 5376);
     			option10.__value = "W";
     			option10.value = option10.__value;
-    			add_location(option10, file$8, 162, 24, 5421);
+    			add_location(option10, file$8, 162, 24, 5430);
     			option11.__value = "C";
     			option11.value = option11.__value;
-    			add_location(option11, file$8, 163, 24, 5475);
+    			add_location(option11, file$8, 163, 24, 5484);
     			select4.multiple = true;
     			if (/*$mulliganConfig*/ ctx[2].mulliganUnlessOpeningHandCanMake === void 0) add_render_callback(() => /*select4_change_handler*/ ctx[14].call(select4));
-    			add_location(select4, file$8, 157, 20, 5100);
-    			add_location(div8, file$8, 155, 16, 4998);
-    			add_location(label8, file$8, 168, 20, 5621);
+    			add_location(select4, file$8, 157, 20, 5109);
+    			add_location(div8, file$8, 155, 16, 5007);
+    			add_location(label8, file$8, 168, 20, 5630);
     			attr_dev(input3, "type", "checkbox");
-    			add_location(input3, file$8, 169, 20, 5680);
-    			add_location(div9, file$8, 167, 16, 5594);
-    			add_location(label9, file$8, 173, 20, 5842);
+    			add_location(input3, file$8, 169, 20, 5689);
+    			add_location(div9, file$8, 167, 16, 5603);
+    			add_location(label9, file$8, 173, 20, 5851);
     			attr_dev(input4, "type", "checkbox");
-    			add_location(input4, file$8, 174, 20, 5894);
-    			add_location(div10, file$8, 172, 16, 5815);
+    			add_location(input4, file$8, 174, 20, 5903);
+    			add_location(div10, file$8, 172, 16, 5824);
     			attr_dev(div11, "class", "draw-amounts-container svelte-9l4i42");
-    			add_location(div11, file$8, 99, 12, 2465);
+    			add_location(div11, file$8, 99, 12, 2474);
     			attr_dev(div12, "class", "answer svelte-9l4i42");
     			set_style(div12, "height", /*openItem*/ ctx[0] ? 'auto' : '0');
     			add_location(div12, file$8, 97, 8, 2199);
@@ -10032,12 +10024,10 @@ var app = (function () {
     			append_dev(div0, h3);
     			append_dev(div13, t1);
     			append_dev(div13, div12);
-    			append_dev(div12, p);
-    			append_dev(div12, t3);
     			append_dev(div12, div11);
     			append_dev(div11, div1);
     			append_dev(div1, label0);
-    			append_dev(div1, t5);
+    			append_dev(div1, t3);
     			append_dev(div1, select0);
 
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
@@ -10047,10 +10037,10 @@ var app = (function () {
     			}
 
     			select_option(select0, /*$mulliganConfig*/ ctx[2].maxMulligans, true);
-    			append_dev(div11, t6);
+    			append_dev(div11, t4);
     			append_dev(div11, div2);
     			append_dev(div2, label1);
-    			append_dev(div2, t8);
+    			append_dev(div2, t6);
     			append_dev(div2, select1);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
@@ -10060,10 +10050,10 @@ var app = (function () {
     			}
 
     			select_option(select1, /*$mulliganConfig*/ ctx[2].minLandsInHand, true);
-    			append_dev(div11, t9);
+    			append_dev(div11, t7);
     			append_dev(div11, div3);
     			append_dev(div3, label2);
-    			append_dev(div3, t11);
+    			append_dev(div3, t9);
     			append_dev(div3, select2);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -10073,28 +10063,28 @@ var app = (function () {
     			}
 
     			select_option(select2, /*$mulliganConfig*/ ctx[2].maxLandsInHand, true);
-    			append_dev(div11, t12);
+    			append_dev(div11, t10);
     			append_dev(div11, div4);
     			append_dev(div4, label3);
-    			append_dev(div4, t14);
+    			append_dev(div4, t12);
     			append_dev(div4, input0);
     			input0.checked = /*$mulliganConfig*/ ctx[2].firstMulliganFree;
-    			append_dev(div11, t15);
+    			append_dev(div11, t13);
     			append_dev(div11, div5);
     			append_dev(div5, label4);
-    			append_dev(div5, t17);
+    			append_dev(div5, t15);
     			append_dev(div5, input1);
     			input1.checked = /*$mulliganConfig*/ ctx[2].freeMulliganTillLands;
-    			append_dev(div11, t18);
+    			append_dev(div11, t16);
     			append_dev(div11, div6);
     			append_dev(div6, label5);
-    			append_dev(div6, t20);
+    			append_dev(div6, t18);
     			append_dev(div6, input2);
     			input2.checked = /*$mulliganConfig*/ ctx[2].allowTwoLandsPlusRamp;
-    			append_dev(div11, t21);
+    			append_dev(div11, t19);
     			append_dev(div11, div7);
     			append_dev(div7, label6);
-    			append_dev(div7, t23);
+    			append_dev(div7, t21);
     			append_dev(div7, select3);
     			append_dev(select3, option0);
     			append_dev(select3, option1);
@@ -10103,10 +10093,10 @@ var app = (function () {
     			append_dev(select3, option4);
     			append_dev(select3, option5);
     			select_option(select3, /*$mulliganConfig*/ ctx[2].mulliganIfLandsCanOnlyMake, true);
-    			append_dev(div11, t30);
+    			append_dev(div11, t28);
     			append_dev(div11, div8);
     			append_dev(div8, label7);
-    			append_dev(div8, t32);
+    			append_dev(div8, t30);
     			append_dev(div8, select4);
     			append_dev(select4, option6);
     			append_dev(select4, option7);
@@ -10115,16 +10105,16 @@ var app = (function () {
     			append_dev(select4, option10);
     			append_dev(select4, option11);
     			select_options(select4, /*$mulliganConfig*/ ctx[2].mulliganUnlessOpeningHandCanMake);
-    			append_dev(div11, t39);
+    			append_dev(div11, t37);
     			append_dev(div11, div9);
     			append_dev(div9, label8);
-    			append_dev(div9, t41);
+    			append_dev(div9, t39);
     			append_dev(div9, input3);
     			input3.checked = /*$mulliganConfig*/ ctx[2].rampMustBePlayable;
-    			append_dev(div11, t42);
+    			append_dev(div11, t40);
     			append_dev(div11, div10);
     			append_dev(div10, label9);
-    			append_dev(div10, t44);
+    			append_dev(div10, t42);
     			append_dev(div10, input4);
     			input4.checked = /*$mulliganConfig*/ ctx[2].mustHaveRamp;
     			current = true;
@@ -12331,7 +12321,7 @@ var app = (function () {
     		ANY: 0
     	}; // Initialize mana requirements
 
-    	let iterations = 8000; // Default number of iterations
+    	let iterations = 5000; // Default number of iterations
     	let customAttributeRequirements = {}; // New variable for custom attributes
     	let uniqueAttributes = new Set();
     	let activeManaTypes = {};
@@ -13711,7 +13701,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 147, 24, 5491);
+    			add_location(button, file$5, 147, 24, 5485);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -13772,12 +13762,12 @@ var app = (function () {
     			b.textContent = "Each group must have a unique text name";
     			t3 = text(" for the tool to work (some day I'll figure out indexing...)");
     			attr_dev(p0, "class", "popover-content svelte-1lfiur4");
-    			add_location(p0, file$5, 151, 26, 5836);
-    			add_location(b, file$5, 152, 53, 6166);
+    			add_location(p0, file$5, 151, 26, 5830);
+    			add_location(b, file$5, 152, 53, 6160);
     			attr_dev(p1, "class", "popover-content svelte-1lfiur4");
-    			add_location(p1, file$5, 152, 26, 6139);
+    			add_location(p1, file$5, 152, 26, 6133);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 150, 24, 5788);
+    			add_location(div, file$5, 150, 24, 5782);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13827,7 +13817,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 159, 24, 6589);
+    			add_location(button, file$5, 159, 24, 6583);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -13884,11 +13874,11 @@ var app = (function () {
     			i = element("i");
     			i.textContent = "at least";
     			t2 = text(" this many cards from this group.");
-    			add_location(i, file$5, 163, 82, 6990);
+    			add_location(i, file$5, 163, 82, 6984);
     			attr_dev(p, "class", "popover-content svelte-1lfiur4");
-    			add_location(p, file$5, 163, 28, 6936);
+    			add_location(p, file$5, 163, 28, 6930);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 162, 24, 6886);
+    			add_location(div, file$5, 162, 24, 6880);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13937,7 +13927,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 169, 24, 7261);
+    			add_location(button, file$5, 169, 24, 7255);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -14001,14 +13991,14 @@ var app = (function () {
     			p1 = element("p");
     			b = element("b");
     			b.textContent = "Groups must have the exact same link name (keyword match). The tool does not support linking more than 4 groups together currently.";
-    			add_location(i, file$5, 173, 188, 7768);
+    			add_location(i, file$5, 173, 188, 7762);
     			attr_dev(p0, "class", "popover-content svelte-1lfiur4");
-    			add_location(p0, file$5, 173, 28, 7608);
-    			add_location(b, file$5, 174, 55, 7854);
+    			add_location(p0, file$5, 173, 28, 7602);
+    			add_location(b, file$5, 174, 55, 7848);
     			attr_dev(p1, "class", "popover-content svelte-1lfiur4");
-    			add_location(p1, file$5, 174, 28, 7827);
+    			add_location(p1, file$5, 174, 28, 7821);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 172, 24, 7558);
+    			add_location(div, file$5, 172, 24, 7552);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14110,9 +14100,9 @@ var app = (function () {
 
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "draw, ramp, removal, etc");
-    			add_location(input0, file$5, 185, 24, 8282);
+    			add_location(input0, file$5, 185, 24, 8276);
     			attr_dev(td0, "class", "svelte-1lfiur4");
-    			add_location(td0, file$5, 184, 20, 8252);
+    			add_location(td0, file$5, 184, 20, 8246);
     			attr_dev(input1, "aria-label", "Number of cards in group");
     			attr_dev(input1, "class", "input-group svelte-1lfiur4");
 
@@ -14123,9 +14113,9 @@ var app = (function () {
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "min", "1");
     			attr_dev(input1, "max", "99");
-    			add_location(input1, file$5, 202, 24, 9113);
+    			add_location(input1, file$5, 202, 24, 9107);
     			attr_dev(td1, "class", "svelte-1lfiur4");
-    			add_location(td1, file$5, 201, 20, 9083);
+    			add_location(td1, file$5, 201, 20, 9077);
     			attr_dev(input2, "aria-label", "Minimum number of desired cards from group");
     			attr_dev(input2, "class", "input-group svelte-1lfiur4");
 
@@ -14136,9 +14126,9 @@ var app = (function () {
     			attr_dev(input2, "type", "number");
     			attr_dev(input2, "min", "1");
     			attr_dev(input2, "max", "99");
-    			add_location(input2, file$5, 214, 24, 9700);
+    			add_location(input2, file$5, 214, 24, 9694);
     			attr_dev(td2, "class", "svelte-1lfiur4");
-    			add_location(td2, file$5, 213, 20, 9670);
+    			add_location(td2, file$5, 213, 20, 9664);
     			attr_dev(input3, "aria-label", "Linked group name");
     			attr_dev(input3, "class", "input-group svelte-1lfiur4");
 
@@ -14148,15 +14138,15 @@ var app = (function () {
 
     			attr_dev(input3, "type", "text");
     			attr_dev(input3, "placeholder", "Link via keyword matching...");
-    			add_location(input3, file$5, 226, 24, 10312);
+    			add_location(input3, file$5, 226, 24, 10306);
     			attr_dev(td3, "class", "svelte-1lfiur4");
-    			add_location(td3, file$5, 225, 20, 10282);
+    			add_location(td3, file$5, 225, 20, 10276);
     			attr_dev(button, "aria-label", "Remove group");
     			attr_dev(button, "class", "group-remove-button svelte-1lfiur4");
-    			add_location(button, file$5, 235, 24, 10801);
+    			add_location(button, file$5, 235, 24, 10795);
     			attr_dev(td4, "class", "svelte-1lfiur4");
-    			add_location(td4, file$5, 234, 20, 10771);
-    			add_location(tr, file$5, 183, 16, 8226);
+    			add_location(td4, file$5, 234, 20, 10765);
+    			add_location(tr, file$5, 183, 16, 8220);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -14293,7 +14283,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo svelte-1lfiur4");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$5, 249, 16, 11401);
+    			add_location(button, file$5, 249, 16, 11395);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -14362,16 +14352,16 @@ var app = (function () {
     			t5 = text(".");
     			t6 = space();
     			attr_dev(p0, "class", "popover-content svelte-1lfiur4");
-    			add_location(p0, file$5, 253, 20, 11716);
+    			add_location(p0, file$5, 253, 20, 11710);
     			attr_dev(p1, "class", "popover-content svelte-1lfiur4");
-    			add_location(p1, file$5, 254, 20, 11889);
+    			add_location(p1, file$5, 254, 20, 11883);
     			attr_dev(a, "href", "https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html");
     			attr_dev(a, "target", "_blank");
-    			add_location(a, file$5, 255, 125, 12221);
+    			add_location(a, file$5, 255, 125, 12215);
     			attr_dev(p2, "class", "popover-content svelte-1lfiur4");
-    			add_location(p2, file$5, 255, 20, 12116);
+    			add_location(p2, file$5, 255, 20, 12110);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$5, 252, 16, 11674);
+    			add_location(div, file$5, 252, 16, 11668);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14408,7 +14398,7 @@ var app = (function () {
     	let t3;
     	let p1;
     	let t4;
-    	let a;
+    	let a0;
     	let t6;
     	let t7;
     	let div11;
@@ -14461,27 +14451,35 @@ var app = (function () {
     	let option2;
     	let option3;
     	let option4;
+    	let t32;
+    	let label1;
+    	let i;
+    	let t33;
+    	let a1;
+    	let t35;
     	let div4_transition;
     	let div6_class_value;
-    	let t32;
+    	let t36;
     	let monteaccordion;
-    	let t33;
+    	let t37;
+    	let h4;
+    	let t39;
     	let div10;
     	let div7;
-    	let label1;
-    	let t35;
-    	let input0;
-    	let t36;
-    	let div8;
     	let label2;
-    	let t38;
-    	let input1;
-    	let t39;
-    	let div9;
-    	let label3;
     	let t41;
-    	let input2;
+    	let input0;
     	let t42;
+    	let div8;
+    	let label3;
+    	let t44;
+    	let input1;
+    	let t45;
+    	let div9;
+    	let label4;
+    	let t47;
+    	let input2;
+    	let t48;
     	let turndrawsaccordion;
     	let current;
     	let mounted;
@@ -14591,9 +14589,9 @@ var app = (function () {
     			t3 = space();
     			p1 = element("p");
     			t4 = text("Simulation results per turn will output in the ");
-    			a = element("a");
-    			a.textContent = "Probabilities";
-    			t6 = text(" section below.");
+    			a0 = element("a");
+    			a0.textContent = "Probabilities";
+    			t6 = text(" section.");
     			t7 = space();
     			div11 = element("div");
     			div6 = element("div");
@@ -14656,136 +14654,153 @@ var app = (function () {
     			option4 = element("option");
     			option4.textContent = "4";
     			t32 = space();
+    			label1 = element("label");
+    			i = element("i");
+    			t33 = text("Additional global parameters ");
+    			a1 = element("a");
+    			a1.textContent = "below";
+    			t35 = text(".");
+    			t36 = space();
     			create_component(monteaccordion.$$.fragment);
-    			t33 = space();
+    			t37 = space();
+    			h4 = element("h4");
+    			h4.textContent = "Global Parameters";
+    			t39 = space();
     			div10 = element("div");
     			div7 = element("div");
-    			label1 = element("label");
-    			label1.textContent = "Initial hand size:";
-    			t35 = space();
-    			input0 = element("input");
-    			t36 = space();
-    			div8 = element("div");
     			label2 = element("label");
-    			label2.textContent = "Deck size:";
-    			t38 = space();
-    			input1 = element("input");
-    			t39 = space();
-    			div9 = element("div");
-    			label3 = element("label");
-    			label3.textContent = "Number of turns:";
+    			label2.textContent = "Initial hand size:";
     			t41 = space();
-    			input2 = element("input");
+    			input0 = element("input");
     			t42 = space();
+    			div8 = element("div");
+    			label3 = element("label");
+    			label3.textContent = "Deck size:";
+    			t44 = space();
+    			input1 = element("input");
+    			t45 = space();
+    			div9 = element("div");
+    			label4 = element("label");
+    			label4.textContent = "Number of turns:";
+    			t47 = space();
+    			input2 = element("input");
+    			t48 = space();
     			create_component(turndrawsaccordion.$$.fragment);
     			set_style(h2, "text-align", "center");
     			add_location(h2, file$5, 119, 0, 3853);
     			attr_dev(p0, "class", "larger-text");
     			add_location(p0, file$5, 120, 0, 3919);
-    			attr_dev(a, "href", "#probabilities-jump");
-    			add_location(a, file$5, 121, 70, 4252);
+    			attr_dev(a0, "href", "#probabilities-jump");
+    			add_location(a0, file$5, 121, 70, 4252);
     			attr_dev(p1, "class", "larger-text");
     			add_location(p1, file$5, 121, 0, 4182);
     			set_style(h3, "font-weight", "500");
     			set_style(h3, "font-size", "18px");
-    			add_location(h3, file$5, 135, 16, 4971);
+    			add_location(h3, file$5, 135, 16, 4965);
     			attr_dev(div0, "class", "accordion-title svelte-1lfiur4");
     			attr_dev(div0, "tabindex", "0");
-    			add_location(div0, file$5, 129, 12, 4602);
-    			add_location(p2, file$5, 139, 0, 5192);
+    			add_location(div0, file$5, 129, 12, 4596);
+    			add_location(p2, file$5, 139, 0, 5186);
     			attr_dev(th0, "class", "svelte-1lfiur4");
-    			add_location(th0, file$5, 145, 16, 5373);
+    			add_location(th0, file$5, 145, 16, 5367);
     			set_style(th1, "width", "18%");
     			attr_dev(th1, "class", "svelte-1lfiur4");
-    			add_location(th1, file$5, 156, 16, 6382);
+    			add_location(th1, file$5, 156, 16, 6376);
     			set_style(th2, "width", "26%");
     			attr_dev(th2, "class", "svelte-1lfiur4");
-    			add_location(th2, file$5, 157, 16, 6445);
+    			add_location(th2, file$5, 157, 16, 6439);
     			attr_dev(th3, "class", "svelte-1lfiur4");
-    			add_location(th3, file$5, 167, 16, 7147);
+    			add_location(th3, file$5, 167, 16, 7141);
     			attr_dev(th4, "class", "svelte-1lfiur4");
-    			add_location(th4, file$5, 178, 16, 8101);
-    			add_location(tr, file$5, 144, 12, 5351);
-    			add_location(thead, file$5, 143, 8, 5330);
-    			add_location(tbody, file$5, 181, 8, 8157);
+    			add_location(th4, file$5, 178, 16, 8095);
+    			add_location(tr, file$5, 144, 12, 5345);
+    			add_location(thead, file$5, 143, 8, 5324);
+    			add_location(tbody, file$5, 181, 8, 8151);
     			attr_dev(table, "class", "svelte-1lfiur4");
-    			add_location(table, file$5, 142, 4, 5313);
+    			add_location(table, file$5, 142, 4, 5307);
     			attr_dev(div1, "class", "table-wrapper svelte-1lfiur4");
-    			add_location(div1, file$5, 141, 4, 5280);
+    			add_location(div1, file$5, 141, 4, 5274);
     			attr_dev(button, "class", "svelte-1lfiur4");
-    			add_location(button, file$5, 246, 4, 11177);
+    			add_location(button, file$5, 246, 4, 11171);
     			attr_dev(label0, "for", "mulliganCount");
     			attr_dev(label0, "class", "svelte-1lfiur4");
-    			add_location(label0, file$5, 248, 8, 11282);
+    			add_location(label0, file$5, 248, 8, 11276);
     			option0.__value = "0";
     			option0.value = option0.__value;
     			attr_dev(option0, "class", "svelte-1lfiur4");
-    			add_location(option0, file$5, 259, 12, 12553);
+    			add_location(option0, file$5, 259, 12, 12547);
     			option1.__value = "1";
     			option1.value = option1.__value;
     			attr_dev(option1, "class", "svelte-1lfiur4");
-    			add_location(option1, file$5, 260, 12, 12595);
+    			add_location(option1, file$5, 260, 12, 12589);
     			option2.__value = "2";
     			option2.value = option2.__value;
     			attr_dev(option2, "class", "svelte-1lfiur4");
-    			add_location(option2, file$5, 261, 12, 12637);
+    			add_location(option2, file$5, 261, 12, 12631);
     			option3.__value = "3";
     			option3.value = option3.__value;
     			attr_dev(option3, "class", "svelte-1lfiur4");
-    			add_location(option3, file$5, 262, 12, 12679);
+    			add_location(option3, file$5, 262, 12, 12673);
     			option4.__value = "4";
     			option4.value = option4.__value;
     			attr_dev(option4, "class", "svelte-1lfiur4");
-    			add_location(option4, file$5, 263, 12, 12721);
+    			add_location(option4, file$5, 263, 12, 12715);
     			attr_dev(select, "id", "mulliganCount");
     			if (/*mulliganCountString*/ ctx[3] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[33].call(select));
-    			add_location(select, file$5, 258, 12, 12417);
+    			add_location(select, file$5, 258, 12, 12411);
     			attr_dev(div2, "class", "mulligan-selection svelte-1lfiur4");
-    			add_location(div2, file$5, 247, 4, 11240);
+    			add_location(div2, file$5, 247, 4, 11234);
+    			attr_dev(a1, "href", "#global-params-jump");
+    			add_location(a1, file$5, 266, 41, 12817);
+    			add_location(i, file$5, 266, 9, 12785);
+    			attr_dev(label1, "class", "svelte-1lfiur4");
+    			add_location(label1, file$5, 266, 2, 12778);
     			attr_dev(div3, "class", "controls-container svelte-1lfiur4");
     			set_style(div3, "margin-left", "8px");
-    			add_location(div3, file$5, 245, 0, 11113);
+    			add_location(div3, file$5, 245, 0, 11107);
     			attr_dev(div4, "class", "answer svelte-1lfiur4");
     			set_style(div4, "height", /*openHypergeo*/ ctx[6] ? 'auto' : '0');
-    			add_location(div4, file$5, 137, 8, 5080);
+    			add_location(div4, file$5, 137, 8, 5074);
     			attr_dev(div5, "class", "accordion-item svelte-1lfiur4");
-    			add_location(div5, file$5, 128, 8, 4560);
+    			add_location(div5, file$5, 128, 8, 4554);
     			attr_dev(div6, "class", div6_class_value = "accordion " + (/*isHoveringHypergeo*/ ctx[7] ? 'hovering' : '') + " svelte-1lfiur4");
-    			add_location(div6, file$5, 125, 4, 4358);
-    			attr_dev(label1, "for", "cardsDrawn");
-    			attr_dev(label1, "class", "svelte-1lfiur4");
-    			add_location(label1, file$5, 277, 12, 12959);
+    			add_location(div6, file$5, 125, 4, 4352);
+    			add_location(h4, file$5, 273, 4, 12937);
+    			attr_dev(label2, "for", "cardsDrawn");
+    			attr_dev(label2, "class", "svelte-1lfiur4");
+    			add_location(label2, file$5, 278, 12, 13102);
     			attr_dev(input0, "type", "number");
     			attr_dev(input0, "class", "deckSize svelte-1lfiur4");
     			attr_dev(input0, "id", "cardsDrawn");
     			attr_dev(input0, "min", "1");
-    			add_location(input0, file$5, 278, 12, 13023);
+    			add_location(input0, file$5, 279, 12, 13166);
     			attr_dev(div7, "class", "deck-size-container svelte-1lfiur4");
-    			add_location(div7, file$5, 276, 8, 12912);
-    			attr_dev(label2, "for", "deckSize");
-    			attr_dev(label2, "class", "svelte-1lfiur4");
-    			add_location(label2, file$5, 284, 12, 13243);
+    			attr_dev(div7, "id", "global-params-jump");
+    			add_location(div7, file$5, 277, 8, 13031);
+    			attr_dev(label3, "for", "deckSize");
+    			attr_dev(label3, "class", "svelte-1lfiur4");
+    			add_location(label3, file$5, 285, 12, 13386);
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "class", "deckSize svelte-1lfiur4");
     			attr_dev(input1, "id", "deckSize");
     			attr_dev(input1, "min", "1");
-    			add_location(input1, file$5, 285, 12, 13297);
+    			add_location(input1, file$5, 286, 12, 13440);
     			attr_dev(div8, "class", "deck-size-container svelte-1lfiur4");
-    			add_location(div8, file$5, 283, 8, 13196);
-    			attr_dev(label3, "for", "numberTurns");
-    			attr_dev(label3, "class", "svelte-1lfiur4");
-    			add_location(label3, file$5, 291, 12, 13508);
+    			add_location(div8, file$5, 284, 8, 13339);
+    			attr_dev(label4, "for", "numberTurns");
+    			attr_dev(label4, "class", "svelte-1lfiur4");
+    			add_location(label4, file$5, 292, 12, 13651);
     			attr_dev(input2, "type", "number");
     			attr_dev(input2, "class", "deckSize svelte-1lfiur4");
     			attr_dev(input2, "id", "numberTurns");
     			attr_dev(input2, "min", "1");
-    			add_location(input2, file$5, 292, 12, 13571);
+    			add_location(input2, file$5, 293, 12, 13714);
     			attr_dev(div9, "class", "deck-size-container svelte-1lfiur4");
-    			add_location(div9, file$5, 290, 8, 13461);
+    			add_location(div9, file$5, 291, 8, 13604);
     			attr_dev(div10, "class", "controls-container svelte-1lfiur4");
-    			add_location(div10, file$5, 273, 4, 12850);
+    			add_location(div10, file$5, 274, 4, 12969);
     			attr_dev(div11, "class", "parameters svelte-1lfiur4");
-    			add_location(div11, file$5, 123, 0, 4322);
+    			add_location(div11, file$5, 123, 0, 4316);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -14797,7 +14812,7 @@ var app = (function () {
     			insert_dev(target, t3, anchor);
     			insert_dev(target, p1, anchor);
     			append_dev(p1, t4);
-    			append_dev(p1, a);
+    			append_dev(p1, a0);
     			append_dev(p1, t6);
     			insert_dev(target, t7, anchor);
     			insert_dev(target, div11, anchor);
@@ -14854,28 +14869,36 @@ var app = (function () {
     			append_dev(select, option3);
     			append_dev(select, option4);
     			select_option(select, /*mulliganCountString*/ ctx[3], true);
-    			append_dev(div11, t32);
+    			append_dev(div3, t32);
+    			append_dev(div3, label1);
+    			append_dev(label1, i);
+    			append_dev(i, t33);
+    			append_dev(i, a1);
+    			append_dev(i, t35);
+    			append_dev(div11, t36);
     			mount_component(monteaccordion, div11, null);
-    			append_dev(div11, t33);
+    			append_dev(div11, t37);
+    			append_dev(div11, h4);
+    			append_dev(div11, t39);
     			append_dev(div11, div10);
     			append_dev(div10, div7);
-    			append_dev(div7, label1);
-    			append_dev(div7, t35);
+    			append_dev(div7, label2);
+    			append_dev(div7, t41);
     			append_dev(div7, input0);
     			set_input_value(input0, /*InitialDrawSize*/ ctx[2]);
-    			append_dev(div10, t36);
+    			append_dev(div10, t42);
     			append_dev(div10, div8);
-    			append_dev(div8, label2);
-    			append_dev(div8, t38);
+    			append_dev(div8, label3);
+    			append_dev(div8, t44);
     			append_dev(div8, input1);
     			set_input_value(input1, /*deckSize*/ ctx[1]);
-    			append_dev(div10, t39);
+    			append_dev(div10, t45);
     			append_dev(div10, div9);
-    			append_dev(div9, label3);
-    			append_dev(div9, t41);
+    			append_dev(div9, label4);
+    			append_dev(div9, t47);
     			append_dev(div9, input2);
     			set_input_value(input2, /*numberOfTurnsInput*/ ctx[5]);
-    			append_dev(div11, t42);
+    			append_dev(div11, t48);
     			mount_component(turndrawsaccordion, div11, null);
     			current = true;
 
@@ -32619,25 +32642,25 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[46] = list[i];
-    	child_ctx[48] = i;
+    	child_ctx[47] = list[i];
+    	child_ctx[49] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[49] = list[i];
+    	child_ctx[50] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[52] = list[i];
-    	child_ctx[54] = i;
+    	child_ctx[53] = list[i];
+    	child_ctx[55] = i;
     	return child_ctx;
     }
 
-    // (2065:4) {#if hasOutput}
+    // (2105:4) {#if hasOutput}
     function create_if_block_3(ctx) {
     	let p;
     	let i;
@@ -32673,10 +32696,10 @@ var app = (function () {
     			i.textContent = "Each column of stacked cards represents a separate opening hand and subsequent draws.";
     			t1 = space();
     			create_component(popover.$$.fragment);
-    			add_location(i, file$4, 2065, 49, 88010);
+    			add_location(i, file$4, 2105, 49, 89581);
     			set_style(p, "margin-top", "0");
     			set_style(p, "text-align", "center");
-    			add_location(p, file$4, 2065, 4, 87965);
+    			add_location(p, file$4, 2105, 4, 89536);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -32688,7 +32711,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const popover_changes = {};
 
-    			if (dirty[0] & /*showPopover*/ 128 | dirty[1] & /*$$scope*/ 16777216) {
+    			if (dirty[0] & /*showPopover*/ 128 | dirty[1] & /*$$scope*/ 33554432) {
     				popover_changes.$$scope = { dirty, ctx };
     			}
 
@@ -32719,14 +32742,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(2065:4) {#if hasOutput}",
+    		source: "(2105:4) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2068:12) 
+    // (2108:12) 
     function create_trigger_slot$1(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -32750,7 +32773,7 @@ var app = (function () {
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "Help");
-    			add_location(button, file$4, 2067, 12, 88175);
+    			add_location(button, file$4, 2107, 12, 89746);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -32784,14 +32807,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$1.name,
     		type: "slot",
-    		source: "(2068:12) ",
+    		source: "(2108:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2071:12) 
+    // (2111:12) 
     function create_content_slot$1(ctx) {
     	let div;
     	let p;
@@ -32802,9 +32825,9 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the \"Linked groups\" feature or Advanced section to calculate the probability of drawing cards from different groups.";
     			attr_dev(p, "class", "popover-content svelte-1osxkv");
-    			add_location(p, file$4, 2071, 16, 88492);
+    			add_location(p, file$4, 2111, 16, 90063);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$4, 2070, 12, 88454);
+    			add_location(div, file$4, 2110, 12, 90025);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32820,23 +32843,23 @@ var app = (function () {
     		block,
     		id: create_content_slot$1.name,
     		type: "slot",
-    		source: "(2071:12) ",
+    		source: "(2111:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2111:8) {:else}
+    // (2151:8) {:else}
     function create_else_block(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			div.textContent = "Add a group or run a simulation above to show output probabilities.";
+    			div.textContent = "Add a hypergeometric group or run a monte carlo simulation to show output probabilities.";
     			attr_dev(div, "class", "placeholder svelte-1osxkv");
-    			add_location(div, file$4, 2111, 9, 91048);
+    			add_location(div, file$4, 2151, 9, 92619);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32851,14 +32874,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(2111:8) {:else}",
+    		source: "(2151:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2078:8) {#if hasOutput}
+    // (2118:8) {#if hasOutput}
     function create_if_block$2(ctx) {
     	let each_1_anchor;
     	let each_value = /*generateTurnsArray*/ ctx[3](/*$numberOfTurns*/ ctx[4].length);
@@ -32921,14 +32944,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(2078:8) {#if hasOutput}",
+    		source: "(2118:8) {#if hasOutput}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2080:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
+    // (2120:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
     function create_if_block_1$1(ctx) {
     	let div2;
     	let div0;
@@ -32940,16 +32963,16 @@ var app = (function () {
     	let i;
     	let t4;
 
-    	let t5_value = (/*turn*/ ctx[48] === 0
+    	let t5_value = (/*turn*/ ctx[49] === 0
     	? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[48] - 1]}`) + "";
+    	: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[49] - 1]}`) + "";
 
     	let t5;
     	let t6;
     	let t7;
     	let div1;
     	let t8;
-    	let each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48]);
+    	let each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49]);
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -32962,7 +32985,7 @@ var app = (function () {
     			div2 = element("div");
     			div0 = element("div");
     			t0 = text("Turn ");
-    			t1 = text(/*turn*/ ctx[48]);
+    			t1 = text(/*turn*/ ctx[49]);
     			t2 = text(":");
     			br = element("br");
     			t3 = space();
@@ -32978,15 +33001,15 @@ var app = (function () {
     			}
 
     			t8 = space();
-    			add_location(br, file$4, 2082, 36, 89275);
+    			add_location(br, file$4, 2122, 36, 90846);
     			attr_dev(i, "class", "svelte-1osxkv");
-    			add_location(i, file$4, 2083, 24, 89305);
+    			add_location(i, file$4, 2123, 24, 90876);
     			attr_dev(div0, "class", "turn-label svelte-1osxkv");
-    			add_location(div0, file$4, 2081, 20, 89213);
+    			add_location(div0, file$4, 2121, 20, 90784);
     			attr_dev(div1, "class", "card-rectangles svelte-1osxkv");
-    			add_location(div1, file$4, 2085, 20, 89441);
+    			add_location(div1, file$4, 2125, 20, 91012);
     			attr_dev(div2, "class", "turn-row svelte-1osxkv");
-    			add_location(div2, file$4, 2080, 16, 89169);
+    			add_location(div2, file$4, 2120, 16, 90740);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -33012,12 +33035,12 @@ var app = (function () {
     			append_dev(div2, t8);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[48] === 0
+    			if (dirty[0] & /*InitialDrawSize, $numberOfTurns*/ 18 && t5_value !== (t5_value = (/*turn*/ ctx[49] === 0
     			? `Draw ${/*InitialDrawSize*/ ctx[1]}`
-    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[48] - 1]}`) + "")) set_data_dev(t5, t5_value);
+    			: `Draw ${/*$numberOfTurns*/ ctx[4][/*turn*/ ctx[49] - 1]}`) + "")) set_data_dev(t5, t5_value);
 
     			if (dirty[0] & /*getCombinedResults, groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 2149) {
-    				each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48]);
+    				each_value_1 = /*getCombinedResults*/ ctx[11](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49]);
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -33050,17 +33073,17 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(2080:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}",
+    		source: "(2120:12) {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2089:28) {#if turn === 0}
+    // (2129:28) {#if turn === 0}
     function create_if_block_2(ctx) {
     	let div;
-    	let t_value = /*card*/ ctx[49].label + "";
+    	let t_value = /*card*/ ctx[50].label + "";
     	let t;
 
     	const block = {
@@ -33068,14 +33091,14 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "card-label svelte-1osxkv");
-    			add_location(div, file$4, 2089, 32, 89729);
+    			add_location(div, file$4, 2129, 32, 91300);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t_value !== (t_value = /*card*/ ctx[49].label + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t_value !== (t_value = /*card*/ ctx[50].label + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -33086,14 +33109,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(2089:28) {#if turn === 0}",
+    		source: "(2129:28) {#if turn === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2100:36) {#each card.isBlank as isBlank, i}
+    // (2140:36) {#each card.isBlank as isBlank, i}
     function create_each_block_2(ctx) {
     	let div;
 
@@ -33101,22 +33124,22 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "stacked-card svelte-1osxkv");
-    			set_style(div, "left", /*i*/ ctx[54] * 4 + "px");
-    			set_style(div, "z-index", -(/*i*/ ctx[54] + 1));
-    			set_style(div, "background-color", /*isBlank*/ ctx[52] ? '#f2efe8' : /*card*/ ctx[49].color);
-    			set_style(div, "border-color", /*isBlank*/ ctx[52] ? '#c1c1c1' : '#666666');
-    			add_location(div, file$4, 2100, 40, 90569);
+    			set_style(div, "left", /*i*/ ctx[55] * 4 + "px");
+    			set_style(div, "z-index", -(/*i*/ ctx[55] + 1));
+    			set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
+    			set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
+    			add_location(div, file$4, 2140, 40, 92140);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div, "background-color", /*isBlank*/ ctx[52] ? '#f2efe8' : /*card*/ ctx[49].color);
+    				set_style(div, "background-color", /*isBlank*/ ctx[53] ? '#f2efe8' : /*card*/ ctx[50].color);
     			}
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div, "border-color", /*isBlank*/ ctx[52] ? '#c1c1c1' : '#666666');
+    				set_style(div, "border-color", /*isBlank*/ ctx[53] ? '#c1c1c1' : '#666666');
     			}
     		},
     		d: function destroy(detaching) {
@@ -33128,14 +33151,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(2100:36) {#each card.isBlank as isBlank, i}",
+    		source: "(2140:36) {#each card.isBlank as isBlank, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2087:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
+    // (2127:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
     function create_each_block_1(ctx) {
     	let div6;
     	let t0;
@@ -33144,19 +33167,19 @@ var app = (function () {
     	let div2;
     	let div0;
 
-    	let t1_value = (/*card*/ ctx[49].probability !== null
-    	? `${/*card*/ ctx[49].probability}%`
+    	let t1_value = (/*card*/ ctx[50].probability !== null
+    	? `${/*card*/ ctx[50].probability}%`
     	: '') + "";
 
     	let t1;
     	let t2;
     	let div1;
-    	let raw_value = /*card*/ ctx[49].ratioText + "";
+    	let raw_value = /*card*/ ctx[50].ratioText + "";
     	let t3;
     	let div4;
     	let t4;
-    	let if_block = /*turn*/ ctx[48] === 0 && create_if_block_2(ctx);
-    	let each_value_2 = /*card*/ ctx[49].isBlank;
+    	let if_block = /*turn*/ ctx[49] === 0 && create_if_block_2(ctx);
+    	let each_value_2 = /*card*/ ctx[50].isBlank;
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -33185,21 +33208,21 @@ var app = (function () {
 
     			t4 = space();
     			attr_dev(div0, "class", "probability svelte-1osxkv");
-    			add_location(div0, file$4, 2094, 40, 90128);
+    			add_location(div0, file$4, 2134, 40, 91699);
     			attr_dev(div1, "class", "card-ratio svelte-1osxkv");
-    			add_location(div1, file$4, 2095, 40, 90258);
+    			add_location(div1, file$4, 2135, 40, 91829);
     			attr_dev(div2, "class", "card-details svelte-1osxkv");
-    			add_location(div2, file$4, 2093, 36, 90060);
+    			add_location(div2, file$4, 2133, 36, 91631);
     			attr_dev(div3, "class", "rectangle svelte-1osxkv");
-    			set_style(div3, "background-color", /*card*/ ctx[49].color);
-    			add_location(div3, file$4, 2092, 32, 89959);
+    			set_style(div3, "background-color", /*card*/ ctx[50].color);
+    			add_location(div3, file$4, 2132, 32, 91530);
     			attr_dev(div4, "class", "stacked-cards svelte-1osxkv");
-    			add_location(div4, file$4, 2098, 32, 90428);
+    			add_location(div4, file$4, 2138, 32, 91999);
     			attr_dev(div5, "class", "card-container svelte-1osxkv");
-    			set_style(div5, "margin-right", 7 + (/*card*/ ctx[49].isBlank.length - 1) * 4 + "px");
-    			add_location(div5, file$4, 2091, 28, 89836);
+    			set_style(div5, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
+    			add_location(div5, file$4, 2131, 28, 91407);
     			attr_dev(div6, "class", "card-group svelte-1osxkv");
-    			add_location(div6, file$4, 2087, 24, 89625);
+    			add_location(div6, file$4, 2127, 24, 91196);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -33225,19 +33248,19 @@ var app = (function () {
     			append_dev(div6, t4);
     		},
     		p: function update(ctx, dirty) {
-    			if (/*turn*/ ctx[48] === 0) if_block.p(ctx, dirty);
+    			if (/*turn*/ ctx[49] === 0) if_block.p(ctx, dirty);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t1_value !== (t1_value = (/*card*/ ctx[49].probability !== null
-    			? `${/*card*/ ctx[49].probability}%`
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && t1_value !== (t1_value = (/*card*/ ctx[50].probability !== null
+    			? `${/*card*/ ctx[50].probability}%`
     			: '') + "")) set_data_dev(t1, t1_value);
 
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && raw_value !== (raw_value = /*card*/ ctx[49].ratioText + "")) div1.innerHTML = raw_value;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101 && raw_value !== (raw_value = /*card*/ ctx[50].ratioText + "")) div1.innerHTML = raw_value;
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div3, "background-color", /*card*/ ctx[49].color);
+    				set_style(div3, "background-color", /*card*/ ctx[50].color);
     			}
 
     			if (dirty[0] & /*getCombinedResults, groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 2149) {
-    				each_value_2 = /*card*/ ctx[49].isBlank;
+    				each_value_2 = /*card*/ ctx[50].isBlank;
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -33261,7 +33284,7 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) {
-    				set_style(div5, "margin-right", 7 + (/*card*/ ctx[49].isBlank.length - 1) * 4 + "px");
+    				set_style(div5, "margin-right", 7 + (/*card*/ ctx[50].isBlank.length - 1) * 4 + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -33275,16 +33298,16 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(2087:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}",
+    		source: "(2127:24) {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (2079:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
+    // (2119:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}
     function create_each_block$1(ctx) {
-    	let show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[48]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48], 'hand').length > 0;
+    	let show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[49]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49], 'hand').length > 0;
     	let if_block_anchor;
     	let if_block = show_if && create_if_block_1$1(ctx);
 
@@ -33298,7 +33321,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[48]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[48], 'hand').length > 0;
+    			if (dirty[0] & /*groups, results, $probabilitiesByTurn, $monteCarloHandResults*/ 101) show_if = /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$probabilitiesByTurn*/ ctx[6], /*turn*/ ctx[49]).length > 0 || /*createGroupCards*/ ctx[10](/*groups*/ ctx[0], /*results*/ ctx[2], /*$monteCarloHandResults*/ ctx[5], /*turn*/ ctx[49], 'hand').length > 0;
 
     			if (show_if) {
     				if (if_block) {
@@ -33323,7 +33346,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(2079:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
+    		source: "(2119:8) {#each generateTurnsArray($numberOfTurns.length) as _, turn}",
     		ctx
     	});
 
@@ -33358,9 +33381,9 @@ var app = (function () {
     			attr_dev(h2, "id", "probabilities-jump");
     			set_style(h2, "text-align", "center");
     			set_style(h2, "margin-bottom", "0");
-    			add_location(h2, file$4, 2063, 4, 87847);
+    			add_location(h2, file$4, 2103, 4, 89418);
     			attr_dev(div, "class", "output-diagram svelte-1osxkv");
-    			add_location(div, file$4, 2076, 4, 88850);
+    			add_location(div, file$4, 2116, 4, 90421);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33506,27 +33529,6 @@ var app = (function () {
 
     		return Object.entries(requirements).every(([color, amount]) => manaProfile[color] >= amount);
     	});
-    }
-
-    function getAllCombinations(lands, totalManaNeeded) {
-    	const dp = Array(totalManaNeeded + 1).fill(null).map(() => new Set());
-    	dp[0].add(JSON.stringify([]));
-
-    	for (let land of lands) {
-    		const landStr = JSON.stringify(land);
-
-    		for (let i = totalManaNeeded; i > 0; i--) {
-    			for (let combination of dp[i - 1]) {
-    				const newCombination = JSON.parse(combination).concat(landStr).sort();
-    				dp[i].add(JSON.stringify(newCombination));
-    			}
-    		}
-    	}
-
-    	const finalCombinations = Array.from(dp[totalManaNeeded]).map(key => JSON.parse(key).map(landStr => JSON.parse(landStr)));
-    	console.log(`Total Combinations Generated: ${finalCombinations.length}`);
-    	console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
-    	return finalCombinations;
     }
 
     //-------------------------------------------
@@ -34148,10 +34150,84 @@ var app = (function () {
     	//the following is updated more efficient combination code. some day maybe try changing this to a bipartite matching approach.
     	//still undergoing full testing to verify accuracy. Replaced the recursive combination generation with a dynamic programming approach.This approach uses a 2D array (dp) where dp[i] contains sets of combinations of size i. For each land, it iterates backward through dp to update possible combinations efficiently
     	function determineNeededCombinations(lands, requirements, totalManaNeeded) {
-    		let combinedLands = [...lands, ...$simplifiedRampMana];
-    		console.log('Combined Lands:', combinedLands); // Log the combined lands
-    		const combinations = getAllCombinations(combinedLands, totalManaNeeded);
-    		return combinations.filter(combination => satisfiesRequirements(combination, requirements));
+    		return new Promise(resolve => {
+    				let combinedLands = [...lands, ...$simplifiedRampMana];
+    				console.log('Combined Lands:', combinedLands); // Log the combined lands
+    				getAllCombinations(combinedLands, totalManaNeeded, resolve);
+    			}).then(combinations => {
+    			return combinations.filter(combination => satisfiesRequirements(combination, requirements));
+    		});
+    	}
+
+    	function getAllCombinations(lands, totalManaNeeded, resolve) {
+    		const dp = Array(totalManaNeeded + 1).fill(null).map(() => new Set());
+    		dp[0].add("[]");
+    		const estimatedTotalCombinations = binomialCoefficient(lands.length, totalManaNeeded);
+    		let processedCombinations = 0;
+
+    		const stack = [
+    			{
+    				index: 0,
+    				currentCombination: [],
+    				currentCounts: new Map()
+    			}
+    		];
+
+    		const iterationsPerFrame = 500000; // Adjust this size based on performance needs
+
+    		function processChunk() {
+    			let iterations = 0;
+
+    			while (stack.length > 0 && iterations < iterationsPerFrame) {
+    				const { index, currentCombination, currentCounts } = stack.pop();
+
+    				if (currentCombination.length >= totalManaNeeded) {
+    					if (currentCombination.length === totalManaNeeded) {
+    						dp[totalManaNeeded].add(JSON.stringify(currentCombination.map(land => land).sort()));
+    						processedCombinations++;
+    					}
+
+    					continue;
+    				}
+
+    				if (index < lands.length) {
+    					stack.push({
+    						index: index + 1,
+    						currentCombination,
+    						currentCounts
+    					});
+
+    					const land = lands[index];
+    					const landKey = JSON.stringify(land);
+    					const count = currentCounts.get(landKey) || 0;
+    					const newCounts = new Map(currentCounts);
+    					newCounts.set(landKey, count + 1);
+
+    					stack.push({
+    						index: index + 1,
+    						currentCombination: currentCombination.concat(land),
+    						currentCounts: newCounts
+    					});
+    				}
+
+    				iterations++;
+    			}
+
+    			const progress = processedCombinations / estimatedTotalCombinations * 100;
+    			combinationProgress.set(progress);
+    			console.log(`Progress: ${progress}%`);
+
+    			if (stack.length > 0) {
+    				requestAnimationFrame(processChunk); // Yield control back to the UI
+    			} else {
+    				const finalCombinations = Array.from(dp[totalManaNeeded]).map(key => JSON.parse(key));
+    				console.log(`Total Combinations Generated: ${finalCombinations.length}`);
+    				console.log(`Final Combinations: ${JSON.stringify(finalCombinations)}`);
+    				resolve(finalCombinations);
+    			}
+    		}
+
+    		processChunk();
     	}
 
     	// function transformCombinationForLinkedGroups(combination, landGroupSizes) {
@@ -34295,11 +34371,11 @@ var app = (function () {
     				let batchSize;
 
     				if (totalManaNeeded <= 2) {
-    					batchSize = 50;
-    				} else if (totalManaNeeded === 3) {
-    					batchSize = 30;
-    				} else {
     					batchSize = 20;
+    				} else if (totalManaNeeded === 3) {
+    					batchSize = 10;
+    				} else {
+    					batchSize = 10;
     				}
 
     				function runIteration() {
@@ -35126,7 +35202,7 @@ var app = (function () {
     	// Inside identifyProfiles function
     	async function identifyProfiles(numIterations) {
     		const totalManaNeeded = Object.values(manaRequirements).reduce((sum, amount) => sum + amount, 0);
-    		const neededCombinations = determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded);
+    		const neededCombinations = await determineNeededCombinations(preparedCards, manaRequirements, totalManaNeeded); // Wait for the promise to resolve
     		neededCombinationsCount.set(neededCombinations.length); // Update the store with the count
     		const preparedCombinations = prepareCombinationsForAnalysis(neededCombinations);
     		const landGroupSizes = calculateLandGroupSizes(preparedCards);
@@ -35642,7 +35718,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (126:12) {#if openItem === index}
+    // (127:12) {#if openItem === index}
     function create_if_block$1(ctx) {
     	let div;
     	let html_tag;
@@ -35659,8 +35735,8 @@ var app = (function () {
     			t = space();
     			if (if_block) if_block.c();
     			html_tag.a = t;
-    			attr_dev(div, "class", "answer svelte-gfcjkh");
-    			add_location(div, file$3, 126, 16, 3442);
+    			attr_dev(div, "class", "answer svelte-11sck9f");
+    			add_location(div, file$3, 127, 16, 3463);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -35717,14 +35793,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(126:12) {#if openItem === index}",
+    		source: "(127:12) {#if openItem === index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (129:20) {#if copySuccessMessage}
+    // (130:20) {#if copySuccessMessage}
     function create_if_block_1(ctx) {
     	let p;
     	let t;
@@ -35733,8 +35809,8 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*copySuccessMessage*/ ctx[2]);
-    			attr_dev(p, "class", "copy-success svelte-gfcjkh");
-    			add_location(p, file$3, 129, 24, 3611);
+    			attr_dev(p, "class", "copy-success svelte-11sck9f");
+    			add_location(p, file$3, 130, 24, 3632);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -35752,14 +35828,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(129:20) {#if copySuccessMessage}",
+    		source: "(130:20) {#if copySuccessMessage}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (119:4) {#each faqs as {question, answer}
+    // (120:4) {#each faqs as {question, answer}
     function create_each_block(ctx) {
     	let div;
     	let h3;
@@ -35787,15 +35863,15 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			t2 = space();
-    			add_location(h3, file$3, 124, 12, 3367);
-    			attr_dev(div, "class", "accordion-item svelte-gfcjkh");
+    			add_location(h3, file$3, 125, 12, 3388);
+    			attr_dev(div, "class", "accordion-item svelte-11sck9f");
 
     			set_style(div, "background-color", /*openItem*/ ctx[1] === /*index*/ ctx[13]
     			? 'white'
     			: 'transparent');
 
     			attr_dev(div, "tabindex", "0");
-    			add_location(div, file$3, 119, 8, 3078);
+    			add_location(div, file$3, 120, 8, 3099);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -35859,7 +35935,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(119:4) {#each faqs as {question, answer}",
+    		source: "(120:4) {#each faqs as {question, answer}",
     		ctx
     	});
 
@@ -35884,8 +35960,8 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "accordion svelte-gfcjkh");
-    			add_location(div, file$3, 117, 2, 2998);
+    			attr_dev(div, "class", "accordion svelte-11sck9f");
+    			add_location(div, file$3, 118, 2, 3019);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -36416,14 +36492,18 @@ var app = (function () {
     	let p2;
     	let i2;
     	let t10;
-    	let progress0;
-    	let t11;
+    	let p3;
     	let t12;
+    	let progress0;
     	let t13;
-    	let progress1;
     	let t14;
     	let t15;
-    	let t16;
+    	let p4;
+    	let t17;
+    	let progress1;
+    	let t18;
+    	let t19;
+    	let t20;
     	let button;
     	let mounted;
     	let dispose;
@@ -36451,38 +36531,51 @@ var app = (function () {
     			i2 = element("i");
     			i2.textContent = "If it's taking too long, you can try decreasing the iteration value. This will reduce probability accuracy.";
     			t10 = space();
+    			p3 = element("p");
+    			p3.textContent = "Calculate combinations";
+    			t12 = space();
     			progress0 = element("progress");
-    			t11 = text(/*$combinationProgress*/ ctx[3]);
-    			t12 = text("%");
-    			t13 = space();
+    			t13 = text(/*$combinationProgress*/ ctx[3]);
+    			t14 = text("%");
+    			t15 = space();
+    			p4 = element("p");
+    			p4.textContent = "Simulate draws and turns";
+    			t17 = space();
     			progress1 = element("progress");
-    			t14 = text(/*$simulationProgress*/ ctx[4]);
-    			t15 = text("%");
-    			t16 = space();
+    			t18 = text(/*$simulationProgress*/ ctx[4]);
+    			t19 = text("%");
+    			t20 = space();
     			button = element("button");
     			button.textContent = "Cancel Simulation";
-    			attr_dev(h2, "class", "svelte-q5bu08");
+    			attr_dev(h2, "class", "svelte-4ub2o8");
     			add_location(h2, file$1, 39, 8, 947);
     			add_location(i0, file$1, 40, 11, 994);
+    			attr_dev(p0, "class", "svelte-4ub2o8");
     			add_location(p0, file$1, 40, 8, 991);
     			add_location(strong, file$1, 41, 54, 1165);
     			add_location(i1, file$1, 41, 11, 1122);
+    			attr_dev(p1, "class", "svelte-4ub2o8");
     			add_location(p1, file$1, 41, 8, 1119);
     			add_location(i2, file$1, 42, 11, 1263);
+    			attr_dev(p2, "class", "svelte-4ub2o8");
     			add_location(p2, file$1, 42, 8, 1260);
+    			attr_dev(p3, "class", "svelte-4ub2o8");
+    			add_location(p3, file$1, 43, 8, 1391);
+    			attr_dev(progress0, "class", "progress-bar svelte-4ub2o8");
     			progress0.value = /*$combinationProgress*/ ctx[3];
     			attr_dev(progress0, "max", "100");
-    			attr_dev(progress0, "class", "svelte-q5bu08");
-    			add_location(progress0, file$1, 43, 8, 1391);
+    			add_location(progress0, file$1, 44, 8, 1430);
+    			attr_dev(p4, "class", "svelte-4ub2o8");
+    			add_location(p4, file$1, 45, 8, 1548);
+    			attr_dev(progress1, "class", "progress-bar svelte-4ub2o8");
     			progress1.value = /*$simulationProgress*/ ctx[4];
     			attr_dev(progress1, "max", "100");
-    			attr_dev(progress1, "class", "svelte-q5bu08");
-    			add_location(progress1, file$1, 44, 8, 1488);
-    			attr_dev(button, "class", "svelte-q5bu08");
-    			add_location(button, file$1, 45, 8, 1583);
-    			attr_dev(div0, "class", "modal-content svelte-q5bu08");
+    			add_location(progress1, file$1, 46, 8, 1589);
+    			attr_dev(button, "class", "svelte-4ub2o8");
+    			add_location(button, file$1, 47, 8, 1705);
+    			attr_dev(div0, "class", "modal-content svelte-4ub2o8");
     			add_location(div0, file$1, 38, 4, 910);
-    			attr_dev(div1, "class", "modal svelte-q5bu08");
+    			attr_dev(div1, "class", "modal svelte-4ub2o8");
     			add_location(div1, file$1, 37, 0, 885);
     		},
     		m: function mount(target, anchor) {
@@ -36504,14 +36597,18 @@ var app = (function () {
     			append_dev(div0, p2);
     			append_dev(p2, i2);
     			append_dev(div0, t10);
+    			append_dev(div0, p3);
+    			append_dev(div0, t12);
     			append_dev(div0, progress0);
-    			append_dev(progress0, t11);
-    			append_dev(progress0, t12);
-    			append_dev(div0, t13);
+    			append_dev(progress0, t13);
+    			append_dev(progress0, t14);
+    			append_dev(div0, t15);
+    			append_dev(div0, p4);
+    			append_dev(div0, t17);
     			append_dev(div0, progress1);
-    			append_dev(progress1, t14);
-    			append_dev(progress1, t15);
-    			append_dev(div0, t16);
+    			append_dev(progress1, t18);
+    			append_dev(progress1, t19);
+    			append_dev(div0, t20);
     			append_dev(div0, button);
     			/*button_binding*/ ctx[6](button);
 
@@ -36522,13 +36619,13 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*$neededCombinationsCount*/ 4 && t5_value !== (t5_value = formatCount(/*$neededCombinationsCount*/ ctx[2]) + "")) set_data_dev(t5, t5_value);
-    			if (dirty & /*$combinationProgress*/ 8) set_data_dev(t11, /*$combinationProgress*/ ctx[3]);
+    			if (dirty & /*$combinationProgress*/ 8) set_data_dev(t13, /*$combinationProgress*/ ctx[3]);
 
     			if (dirty & /*$combinationProgress*/ 8) {
     				prop_dev(progress0, "value", /*$combinationProgress*/ ctx[3]);
     			}
 
-    			if (dirty & /*$simulationProgress*/ 16) set_data_dev(t14, /*$simulationProgress*/ ctx[4]);
+    			if (dirty & /*$simulationProgress*/ 16) set_data_dev(t18, /*$simulationProgress*/ ctx[4]);
 
     			if (dirty & /*$simulationProgress*/ 16) {
     				prop_dev(progress1, "value", /*$simulationProgress*/ ctx[4]);
@@ -36721,8 +36818,11 @@ var app = (function () {
     	let t0;
     	let intro;
     	let t1;
+    	let div2;
+    	let div0;
     	let groupdefinition;
     	let t2;
+    	let div1;
     	let calculation;
     	let t3;
     	let faq;
@@ -36754,12 +36854,21 @@ var app = (function () {
     			t0 = space();
     			create_component(intro.$$.fragment);
     			t1 = space();
+    			div2 = element("div");
+    			div0 = element("div");
     			create_component(groupdefinition.$$.fragment);
     			t2 = space();
+    			div1 = element("div");
     			create_component(calculation.$$.fragment);
     			t3 = space();
     			create_component(faq.$$.fragment);
-    			attr_dev(main, "class", "parameters svelte-9fdvpb");
+    			attr_dev(div0, "class", "left-column svelte-1aqw2sj");
+    			add_location(div0, file, 73, 8, 5567);
+    			attr_dev(div1, "class", "right-column svelte-1aqw2sj");
+    			add_location(div1, file, 76, 8, 5687);
+    			attr_dev(div2, "class", "content svelte-1aqw2sj");
+    			add_location(div2, file, 72, 4, 5536);
+    			attr_dev(main, "class", "parameters svelte-1aqw2sj");
     			add_location(main, file, 69, 0, 5465);
     		},
     		l: function claim(nodes) {
@@ -36771,9 +36880,12 @@ var app = (function () {
     			append_dev(main, t0);
     			mount_component(intro, main, null);
     			append_dev(main, t1);
-    			mount_component(groupdefinition, main, null);
-    			append_dev(main, t2);
-    			mount_component(calculation, main, null);
+    			append_dev(main, div2);
+    			append_dev(div2, div0);
+    			mount_component(groupdefinition, div0, null);
+    			append_dev(div2, t2);
+    			append_dev(div2, div1);
+    			mount_component(calculation, div1, null);
     			append_dev(main, t3);
     			mount_component(faq, main, null);
     			current = true;

@@ -96,7 +96,7 @@
             <h3 style="font-weight:400;">Add mulligan logic to simulations</h3>    
         </div> 
         <div class="answer" transition:slide|local={{ duration: 250 }} style:height="{openItem ? 'auto' : '0'}">
-            <p style="margin-top: 0.5rem;">Change the number of cards you draw on any given turn. You can adjust the initial hand size above.</p> 
+            <!-- <p style="margin-top: 0.5rem;">Change the number of cards you draw on any given turn. You can adjust the initial hand size above.</p>  -->
             <div class="draw-amounts-container">
 
                 <div>

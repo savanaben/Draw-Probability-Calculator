@@ -70,16 +70,55 @@
 <main class="parameters">
     <SimulationModal />
     <Intro />
-    <GroupDefinition on:updateGroups={handleGroupUpdate} />
-    <Calculation {groups} {deckSize} {InitialDrawSize} {mulliganCount} />
+    <div class="content">
+        <div class="left-column">
+            <GroupDefinition on:updateGroups={handleGroupUpdate} />
+        </div>
+        <div class="right-column">
+            <Calculation {groups} {deckSize} {InitialDrawSize} {mulliganCount} />
+        </div>
+    </div>
 	<FAQ {faqs} />
 </main>
 
 <!-- Your styles here -->
 <style>
 .parameters {
-	max-width: 60rem;
+	max-width: 100rem;
 	margin: auto; /* Centers the container */
 	padding-bottom: 2.5rem; /* Centers the container */
 }
+
+
+.content {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    column-gap: 2.5rem;
+    justify-content: center;
+    margin: 0rem 3rem;
+}
+
+.left-column {
+    overflow-y: auto;
+}
+
+.right-column {
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 1100px) {
+    .content {
+        grid-template-columns: 1fr;
+        margin: auto;
+    }
+
+    .right-column {
+        position: static;
+        max-height: none;
+    }
+}
+
 </style>

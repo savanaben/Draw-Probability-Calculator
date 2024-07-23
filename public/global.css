@@ -141,6 +141,13 @@ h3 {
     color: #0066e9;
 }
 
+h4 {
+	font-size: 18px;
+	font-weight: 500;
+    margin-bottom: 0;
+	margin-top: 1rem;
+    color: #000000;
+}
 
 .remove-button {
 	width: 30%;

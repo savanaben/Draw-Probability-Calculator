@@ -41,8 +41,10 @@ function formatCount(count) {
         <p><i>Simulations with large amounts of cards, desired cards, or possible combinations can be slower to start.</i></p>
         <p><i>Your desired cards can be drawn through <strong>{formatCount($neededCombinationsCount)}&nbsp;</strong>combination(s).</i></p>
         <p><i>If it's taking too long, you can try decreasing the iteration value. This will reduce probability accuracy.</i></p>
-        <progress value="{$combinationProgress}" max="100"> {$combinationProgress}% </progress>
-        <progress value="{$simulationProgress}" max="100"> {$simulationProgress}% </progress>
+        <p>Calculate combinations</p>
+        <progress class="progress-bar" value="{$combinationProgress}" max="100"> {$combinationProgress}% </progress>
+        <p>Simulate draws and turns</p>
+        <progress class="progress-bar" value="{$simulationProgress}" max="100"> {$simulationProgress}% </progress>
         <button on:click={handleCancel} bind:this={cancelButton}>Cancel Simulation</button>
     </div>
 </div>
@@ -50,6 +52,15 @@ function formatCount(count) {
 
 
 <style>
+    p {
+      margin-bottom: 0px;
+    }
+    
+.progress-bar {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
     .modal {
         position: fixed;
         top: 0;
