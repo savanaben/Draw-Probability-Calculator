@@ -37,7 +37,7 @@ export function getNextUniqueId() {
 // Mulligan configuration store
 export const mulliganConfig = writable({
     maxMulligans: 0, // Max amount of mulligans (0 to 7)
-    firstMulliganFree: true, // First mulligan is free (true/false)
+    firstMulliganFree: false, // First mulligan is free (true/false)
     freeMulliganTillLands: false, // mulligan until meeting min/max land requirements (true/false)
     minLandsInHand: 2, // Min amount of lands in hand (0 to 7)
     maxLandsInHand: 5, // Max amount of lands in hand (0 to 7)
