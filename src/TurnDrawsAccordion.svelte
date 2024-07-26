@@ -3,6 +3,8 @@
     import { slide } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
     import { numberOfTurns } from './colorStore.js';
+    import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+    import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 
     let drawAmounts = Array.from({ length: $numberOfTurns + 1 }, () => 1); // Initialize draw amounts
 
@@ -71,7 +73,7 @@
     .draw-amounts-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 18px;
         padding-top: 12px;
     }
 
@@ -99,7 +101,14 @@
             on:mouseenter={() => isHovering = true}
             on:mouseleave={() => isHovering = false}
             tabindex="0">
-            <h3 style="font-weight:400;">Customize number of cards drawn each turn</h3>    
+            <h3 style="font-weight:400;">Customize number of cards drawn each turn</h3>  
+            
+            {#if openItem}
+            <FontAwesomeIcon icon={faChevronUp} class="chevron-icon" />
+          {:else}
+            <FontAwesomeIcon icon={faChevronDown} class="chevron-icon" />
+          {/if}  
+
         </div> 
         <div class="answer" transition:slide|local={{ duration: 250 }} style:height="{openItem ? 'auto' : '0'}">
             <p style="margin-top: 0.5rem;">Change the number of cards you draw on any given turn. You can adjust the initial hand size above.</p> 

@@ -4,6 +4,7 @@
     import Popover from './Popover.svelte';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+    import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import MonteAccordion from './MonteAccordion.svelte';
     import { trackEvent } from './analytics.js';
@@ -21,7 +22,7 @@
     let colorIndex = 0;
     let showPopover = false;
     let mulliganCountString = "0"; // Use a string for the binding
-    let numberOfTurnsInput = 5; // Default value
+    let numberOfTurnsInput = 6; // Default value
 
     let openHypergeo = false; // Add this line to manage the accordion state
     let isHoveringHypergeo = false; // Add this line to manage hover state
@@ -75,7 +76,7 @@ function handleAddGroupClick() {
 
 
     const presetColors = [
-        "#DCEDC8", "#B2DFDB", "#FFE0B2", "#E1BEE7", "#B3E5FC", "#FFCCBC", "#C5CAE9"
+        "#e4f5d0", "#c9f1ee", "#FFE0B2", "#edd7f1", "#cbedfd", "#ffdbd0", "#e0e5ff"
     ];
    
 
@@ -133,7 +134,14 @@ function handleAddGroupClick() {
                 on:mouseenter={() => isHoveringHypergeo = true}
                 on:mouseleave={() => isHoveringHypergeo = false}
                 tabindex="0">
-                <h3 style="font-weight:500; font-size:18px">Hypergeometric Calculator</h3>    
+                <h3 style="font-weight:500; font-size:18px">Hypergeometric Calculator</h3>
+                
+                {#if openHypergeo}
+                <FontAwesomeIcon icon={faChevronUp} class="chevron-icon" />
+              {:else}
+                <FontAwesomeIcon icon={faChevronDown} class="chevron-icon" />
+              {/if}  
+
             </div> 
         <div class="answer" transition:slide|local={{ duration: 250 }} style:height="{openHypergeo ? 'auto' : '0'}">
 

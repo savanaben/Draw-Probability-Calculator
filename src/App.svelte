@@ -84,7 +84,7 @@
 <!-- Your styles here -->
 <style>
 .parameters {
-	max-width: 100rem;
+	max-width: 104rem;
 	margin: auto; /* Centers the container */
 	padding-bottom: 2.5rem; /* Centers the container */
 }

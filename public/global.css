@@ -56,6 +56,14 @@ input, button, select, textarea {
 	border-radius: 2px;
 }
 
+input[type="checkbox" i] {
+	height: 22px;
+	width: 22px;
+	min-width: auto;
+	margin: 0;
+	cursor: pointer;
+ }
+
 input:disabled {
 	color: #ccc;
 }
@@ -107,19 +115,38 @@ button:hover {
 	border: none;
 }
 
+.secondary-btn {
+margin: 0;
+color: #0066e9;
+background-color: #ffffff;
+padding: 6px 8px 6px 8px;
+border: 1px solid #0066e9;
+font-weight: 500;
+}
+
+.secondary-btn:hover {
+	margin: 0;
+	color: #0066e9;
+	background-color: #ffffff;
+	padding: 6px 8px 6px 8px;
+	border: 1px solid #0066e9;
+	font-weight: 500;
+	}
+
 .primary-btn:hover {
 	background-color: #1a7dff;
 	box-shadow: none;
 }
 
 
-.primary-btn:disabled {
+.primary-btn:disabled, .secondary-btn:disabled {
 	/* Disabled button styles */
 	color: rgb(146, 146, 146);
 	cursor: default;
 	background-color: rgb(233, 233, 233);
 	border-color: rgba(255, 255, 255, 0);
 	box-shadow: none;
+	font-weight: 400;
   }
 
 input:hover {
@@ -239,4 +266,11 @@ h4 {
 		  padding: 0px 10px 0px 10px;
 		}
 	
+	  }
+
+
+
+	  .chevron-icon {
+		margin-left: auto; /* Push the chevron to the right */
+		color: #0066e9;
 	  }

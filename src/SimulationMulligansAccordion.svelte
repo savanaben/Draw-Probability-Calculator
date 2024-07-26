@@ -3,7 +3,8 @@
     import { slide } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
     import { mulliganConfig } from './colorStore.js';
-
+    import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+    import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 
     const dispatch = createEventDispatcher();
 
@@ -66,22 +67,40 @@
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        padding-top: 12px;
+        margin-top: 12px;
+        border-radius: 6px;
+        padding: 12px;
+        background-color: #f5f5f5;
     }
 
     .draw-amount {
-        display: flex;
-        align-items: baseline;
-    }
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 6px;
+    flex-wrap: wrap;
+    text-align: right;
+  }
 
-    .draw-amount label {
-        margin-right: 4px;
-    }
 
-    .draw-amount select {
-        width: 50px;
-    }
+  .draw-amount label {
+    flex-shrink: 0; /* Prevent shrinking */
+    flex-grow: 1; /* Allow growing */
+    min-width: 70px; /* Minimum width */
+    max-width: 120px; /* Maximum width */
+    word-wrap: break-word; /* Break long words */
+  }
+
+  .draw-amount select, .draw-amount input {
+    flex-shrink: 0; /* Prevent shrinking */
+    flex-grow: 1; /* Allow growing */
+
+  }
 </style>
+
+
 
 <div class="accordion {isHovering ? 'hovering' : ''}">
     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -93,14 +112,20 @@
             on:mouseenter={() => isHovering = true}
             on:mouseleave={() => isHovering = false}
             tabindex="0">
-            <h3 style="font-weight:400;">Add mulligan logic to simulations</h3>    
+            <h3 style="font-weight:400;">Add mulligan logic to simulations</h3> 
+            {#if openItem}
+            <FontAwesomeIcon icon={faChevronUp} class="chevron-icon" />
+          {:else}
+            <FontAwesomeIcon icon={faChevronDown} class="chevron-icon" />
+          {/if}     
         </div> 
         <div class="answer" transition:slide|local={{ duration: 250 }} style:height="{openItem ? 'auto' : '0'}">
             <!-- <p style="margin-top: 0.5rem;">Change the number of cards you draw on any given turn. You can adjust the initial hand size above.</p>  -->
             <div class="draw-amounts-container">
 
-                <div>
-                    <label>Max Mulligans:</label>
+                
+                <div class="draw-amount">
+                    <label><b>Max mulligans:</b> (not including free mulligan)</label>
                     <select bind:value={$mulliganConfig.maxMulligans}>
                         {#each Array(8).fill(0).map((_, i) => i) as num}
                             <option value={num}>{num}</option>
@@ -108,8 +133,8 @@
                     </select>
                 </div>
                 
-                <div>
-                    <label>Min Lands in Hand:</label>
+                <div class="draw-amount">
+                    <label>Min Lands to keep:</label>
                     <select bind:value={$mulliganConfig.minLandsInHand}>
                         {#each Array(8).fill(0).map((_, i) => i) as num}
                             <option value={num}>{num}</option>
@@ -117,8 +142,8 @@
                     </select>
                 </div>
                 
-                <div>
-                    <label>Max Lands in Hand:</label>
+                <div class="draw-amount">
+                    <label>Max Lands to keep:</label>
                     <select bind:value={$mulliganConfig.maxLandsInHand}>
                         {#each Array(8).fill(0).map((_, i) => i) as num}
                             <option value={num}>{num}</option>
@@ -126,25 +151,20 @@
                     </select>
                 </div>
                 
-                <div>
+                <div class="draw-amount">
                     <label>First Mulligan Free:</label>
                     <input type="checkbox" bind:checked={$mulliganConfig.firstMulliganFree} />
                 </div>
         
-                <div>
-                    <label>free mulligans until Max/min lands are satisfied</label>
+                <div class="draw-amount">
+                    <label>Free mulligans until max/min lands are satisfied</label>
                     <input type="checkbox" bind:checked={$mulliganConfig.freeMulliganTillLands} />
                 </div>
-        
-                <div>
-                    <label>Allow 2 Lands + Playable Ramp:</label>
-                    <input type="checkbox" bind:checked={$mulliganConfig.allowTwoLandsPlusRamp} />
-                </div>
                 
-                <div>
-                    <label>Mulligan if Lands Can Only Make:</label>
-                    <select bind:value={$mulliganConfig.mulliganIfLandsCanOnlyMake}>
-                        <option value="">None</option>
+                <div class="draw-amount">
+                    <label>Mulligan unless ramp + lands can make at least:</label>
+                    <select bind:value={$mulliganConfig.mulliganIfLandsRampCanOnlyMake}>
+                        <option value=""></option>
                         <option value="1">1 color</option>
                         <option value="2">2 colors</option>
                         <option value="3">3 colors</option>
@@ -152,8 +172,13 @@
                         <option value="5">5 colors</option>
                     </select>
                 </div>
+
+                <div class="draw-amount">
+                    <label>Allow 2 Lands + Playable Ramp:</label>
+                    <input type="checkbox" bind:checked={$mulliganConfig.allowTwoLandsPlusRamp} />
+                </div>
                 
-                <div>
+                <div class="draw-amount">
                     <label>Mulligan Unless Opening Hand Can Make:</label>
                     <select multiple bind:value={$mulliganConfig.mulliganUnlessOpeningHandCanMake}>
                         <option value="B">B</option>
@@ -165,13 +190,11 @@
                     </select>
                 </div>
                 
-                <div>
-                    <label>Ramp Must Be Playable:</label>
+                <div class="draw-amount">                    <label>Ramp Must Be Playable:</label>
                     <input type="checkbox" bind:checked={$mulliganConfig.rampMustBePlayable} />
                 </div>
                 
-                <div>
-                    <label>Must Have Ramp:</label>
+                <div class="draw-amount">                    <label>Must Have Ramp:</label>
                     <input type="checkbox" bind:checked={$mulliganConfig.mustHaveRamp} />
                 </div>
 

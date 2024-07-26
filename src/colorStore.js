@@ -25,7 +25,7 @@ export const neededCombinationsCount = writable(0);  // Store for the count of n
 
 export const activePopover = writable(null);
 
-export const numberOfTurns = writable([1, 1, 1, 1, 1]); // Default to drawing 1 card per turn for 5 turns
+export const numberOfTurns = writable([1, 1, 1, 1, 1, 1]); // Default to drawing 1 card per turn for 5 turns
 export const labelChecker = writable(false);
 
 let idCounter = 0;
@@ -42,7 +42,7 @@ export const mulliganConfig = writable({
     minLandsInHand: 2, // Min amount of lands in hand (0 to 7)
     maxLandsInHand: 5, // Max amount of lands in hand (0 to 7)
     allowTwoLandsPlusRamp: false, // Allow 2 lands + playable ramp (true/false)
-    mulliganIfLandsCanOnlyMake: '', // Mulligan if lands can only make (color)
+    mulliganIfLandsRampCanOnlyMake: '', // Mulligan if lands can only make (color)
     mulliganUnlessOpeningHandCanMake: [], // Mulligan unless opening hand can make (array of colors)
     rampMustBePlayable: false, // If ramp drawn, must be playable (true/false)
     mustHaveRamp: false // Must have ramp (true/false)

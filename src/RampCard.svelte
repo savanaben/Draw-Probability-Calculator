@@ -157,11 +157,6 @@
         column-gap: 10px;
     }
 
-    input[type="checkbox" i] {
-       height: 22px;
-       width: 22px;
-       min-width: auto;
-    }
 
     .mana-inputs {
         display: flex;
@@ -236,7 +231,7 @@
     </div>
 
     <div class="mana-section">
-        <p class="mana-label">Mana cost:</p>
+        <p class="mana-label">Ramp mana cost (cmc):</p>
         <div class="mana-inputs">
             {#each Object.keys(manaIcons) as mana}
                 <div class="mana-input">
@@ -287,7 +282,7 @@
     </div>
 
     <div class="one-line">
-        <label for="is-signet" class="is-signet-label">Is Signet:</label>
+        <label for="is-signet" class="is-signet-label">Is signet:</label>
         <input id="is-signet" type="checkbox" bind:checked={card.isSignet} />
 
         <Popover bind:show={showPopover} placement="top">

@@ -7,6 +7,7 @@
   import Popover from './Popover.svelte';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+  import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
   import { simulationData, simulationType, simplifiedRampMana, monteCarloResults, shouldResetSimulation } from './colorStore.js';
   import { trackEvent } from './analytics.js';
   import { writable } from 'svelte/store';
@@ -44,6 +45,7 @@ const manaIcons = {
 
 
   let openItem = 0; // this sets the accordion to open on page load. can set to "null" to be closed on page load. 
+  let isOpen = true; // Track the open/close state
   let showPopover = false;
   
   const dispatch = createEventDispatcher();
@@ -137,7 +139,10 @@ function ClearSimulation() {
 
   function toggleItem(index) {
     openItem = openItem === index ? null : index;
+    isOpen = !isOpen; // Toggle the open/close state
   }
+
+
 
   function handleKeydown(event, index) {
     if (event.key === 'Enter') {
@@ -907,8 +912,13 @@ function selectInput(event) {
     <img src={BIcon} alt="Island" class="mana-icon" />
     <img src={RIcon} alt="Mountain" class="mana-icon" />
     <img src={GIcon} alt="Forest" class="mana-icon" />
-</h3>
-    </div>
+  </h3>
+  {#if isOpen}
+  <FontAwesomeIcon icon={faChevronUp} class="chevron-icon" />
+{:else}
+  <FontAwesomeIcon icon={faChevronDown} class="chevron-icon" />
+{/if}    
+</div>
       <div
       class="answer"
       transition:slide|local={{ duration: 250 }}
@@ -1055,15 +1065,15 @@ function selectInput(event) {
 
 
       <div class="land-group-parameters">
-     
-        <button class="primary-btn" on:click={handleRunHandSimulationClick} disabled={!enableSimulationButton}>
-          Run Hand Simulation
-       </button>
-       
+      
         <button class="primary-btn" on:click={handleRunSimulationClick} disabled={!enableSimulationButton}>
           Run Field Simulation
         </button>  
  
+        <button class="secondary-btn" on:click={handleRunHandSimulationClick} disabled={!enableSimulationButton}>
+          Run Hand Simulation
+       </button>
+
         <!-- I could not get this to work. need to somehow re-run the simulation or 
         createGroupCards. function                                            -->
         <!-- <button on:click={ClearSimulation}>Clear Simulation</button>  -->

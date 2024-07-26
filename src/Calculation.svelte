@@ -20,6 +20,20 @@
     event.target.select(); // Selects all text in the input upon focus
 }
 
+
+
+ // Function to calculate the total mana requirements for specified keys
+ function calculateTotalManaRequirements(manaRequirements) {
+    const keysToInclude = ['W', 'U', 'B', 'R', 'G', 'C', 'ANY'];
+    return Object.entries(manaRequirements)
+      .filter(([key]) => keysToInclude.includes(key))
+      .reduce((total, [, value]) => total + value, 0);
+  }
+
+  // Calculate the total mana requirements
+  $: totalManaRequirements = calculateTotalManaRequirements(manaRequirements);
+
+
     
         // Function to calculate combinations (n choose k)
         function choose(n, k) {
@@ -333,13 +347,15 @@
 //still undergoing full testing to verify accuracy. Replaced the recursive combination generation with a dynamic programming approach.This approach uses a 2D array (dp) where dp[i] contains sets of combinations of size i. For each land, it iterates backward through dp to update possible combinations efficiently
 function determineNeededCombinations(lands, requirements, totalManaNeeded) {
     return new Promise((resolve) => {
-        let combinedLands = [...lands, ...$simplifiedRampMana];
+        // Filter out ramp spells from lands
+        const filteredLands = lands.filter(land => !land.ColorsCanProduce);
+        let combinedLands = [...filteredLands, ...$simplifiedRampMana];
         console.log('Combined Lands:', combinedLands); // Log the combined lands
         getAllCombinations(combinedLands, totalManaNeeded, resolve);
     }).then(combinations => {
         return combinations.filter(combination => satisfiesRequirements(combination, requirements));
     });
-}
+  }
 
 
 function satisfiesRequirements(combination, requirements) {
@@ -377,7 +393,8 @@ function getAllCombinations(lands, totalManaNeeded, resolve) {
 
             if (currentCombination.length >= totalManaNeeded) {
                 if (currentCombination.length === totalManaNeeded) {
-                    dp[totalManaNeeded].add(JSON.stringify(currentCombination.map(land => land).sort()));
+                    const sortedCombination = currentCombination.map(land => land).sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+                    dp[totalManaNeeded].add(JSON.stringify(sortedCombination));
                     processedCombinations++;
                 }
                 continue;
@@ -1245,12 +1262,12 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
 
 
 
-function londonMulligan(hand, remainingDeck) {
+    function londonMulligan(hand, remainingDeck) {
     let mulligansTaken = 0;
     let finalHand = hand;
 
     // Destructure the mulliganConfig store
-    const { maxMulligans, firstMulliganFree, freeMulliganTillLands, minLandsInHand, maxLandsInHand } = $mulliganConfig;
+    const { maxMulligans, firstMulliganFree, freeMulliganTillLands, minLandsInHand, maxLandsInHand, mulliganIfLandsRampCanOnlyMake } = $mulliganConfig;
 
     // Initial draw
     finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
@@ -1258,53 +1275,151 @@ function londonMulligan(hand, remainingDeck) {
 
     // Log the initial hand and remaining deck
     console.log(`Initial Draw: Hand`, _.cloneDeep(finalHand));
- //   console.log(`Initial Draw: Remaining Deck`, _.cloneDeep(remainingDeck));
+   // console.log(`Initial Draw: Remaining Deck`, _.cloneDeep(remainingDeck));
 
-        // Adjust the loop condition to ignore maxMulligans when freeMulliganTillLands is true
-        while (freeMulliganTillLands || mulligansTaken <= maxMulligans) {
-        // Check if the hand meets the land requirements
-        const landCount = finalHand.filter(card => !card.TotalManaCost && !card.dummy).length;
-        const meetsLandRequirements = landCount >= minLandsInHand && landCount <= maxLandsInHand;
 
-        // Log the land count and whether the hand meets the land requirements
-        console.log(`Mulligan ${mulligansTaken}: Land Count`, landCount);
-        console.log(`Mulligan ${mulligansTaken}: Meets Land Requirements`, meetsLandRequirements);
-
-        if (meetsLandRequirements) {
-            break;
-        }
-
-        if (mulligansTaken > 0 || firstMulliganFree || (freeMulliganTillLands && !meetsLandRequirements)) {
-            // Shuffle hand into deck and redraw
-            remainingDeck = remainingDeck.concat(finalHand);
-            finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
-            remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
-
-            // Log the new hand and remaining deck after redraw
-            console.log(`Mulligan ${mulligansTaken}: Redrawn Hand`, _.cloneDeep(finalHand));
-         //   console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(remainingDeck));
-        }
-
-        if (!(firstMulliganFree && mulligansTaken === 0) && !(freeMulliganTillLands && !meetsLandRequirements)) {
-            // Place cards on the bottom of the deck for each mulligan taken
-            for (let i = 0; i < mulligansTaken; i++) {
-                const cardToBottom = prioritizeCardToBottom(finalHand);
-                remainingDeck.push(cardToBottom);
-
-                // Log the card placed on the bottom
-                console.log(`Mulligan ${mulligansTaken}: Card Placed on Bottom`, _.cloneDeep(cardToBottom));
+    // Function to count the total number of colors the hand can produce
+    function countTotalColors(hand) {
+      const uniqueColors = new Set();
+      const validColors = ['W', 'U', 'B', 'R', 'G'];
+      hand.forEach(card => {
+        if (card.ColorsCanProduce) {
+          Object.keys(card.ColorsCanProduce).forEach(color => {
+            if (card.ColorsCanProduce[color] > 0 && validColors.includes(color)) {
+              uniqueColors.add(color);
             }
+          });
+        } else {
+          Object.keys(card).forEach(color => {
+            if (card[color] > 0 && validColors.includes(color)) {
+              uniqueColors.add(color);
+            }
+          });
         }
+      });
+      return uniqueColors.size;
+    }
 
-        mulligansTaken++;
+    // Adjust the loop condition to ignore maxMulligans when freeMulliganTillLands is true
+    while (freeMulliganTillLands || mulligansTaken <= maxMulligans) {
+      // Check if the hand meets the land requirements
+      const landCount = finalHand.filter(card => !card.TotalManaCost && !card.dummy).length;
+      const meetsLandRequirements = landCount >= minLandsInHand && landCount <= maxLandsInHand;
+
+      // Log the land count and whether the hand meets the land requirements
+      console.log(`Mulligan ${mulligansTaken}: Land Count`, landCount);
+      console.log(`Mulligan ${mulligansTaken}: Meets Land Requirements`, meetsLandRequirements);
+
+      // Check if the hand meets the color requirements
+      const totalColors = countTotalColors(finalHand);
+      const meetsColorRequirements = !mulliganIfLandsRampCanOnlyMake || totalColors >= mulliganIfLandsRampCanOnlyMake;
+
+      // Log the total colors and whether the hand meets the color requirements
+      console.log(`Mulligan ${mulligansTaken}: Total Colors`, totalColors);
+      console.log(`Mulligan ${mulligansTaken}: Meets Color Requirements`, meetsColorRequirements);
+
+      if (meetsLandRequirements && meetsColorRequirements) {
+        break;
+      }
+
+      if (mulligansTaken > 0 || firstMulliganFree || (freeMulliganTillLands && (!meetsLandRequirements || !meetsColorRequirements))) {
+        // Shuffle hand into deck and redraw
+        remainingDeck = remainingDeck.concat(finalHand);
+        finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
+        remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
+
+        // Log the new hand and remaining deck after redraw
+        console.log(`Mulligan ${mulligansTaken}: Redrawn Hand`, _.cloneDeep(finalHand));
+       // console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(remainingDeck));
+      }
+
+      if (!(firstMulliganFree && mulligansTaken === 0) && !(freeMulliganTillLands && (!meetsLandRequirements || !meetsColorRequirements))) {
+        // Place cards on the bottom of the deck for each mulligan taken
+        for (let i = 0; i < mulligansTaken; i++) {
+          const cardToBottom = prioritizeCardToBottom(finalHand);
+          remainingDeck.push(cardToBottom);
+
+          // Log the card placed on the bottom
+          console.log(`Mulligan ${mulligansTaken}: Card Placed on Bottom`, _.cloneDeep(cardToBottom));
+        }
+      }
+
+      mulligansTaken++;
     }
 
     // Log the final hand and remaining deck after mulligans
     console.log('Final Hand after Mulligans', _.cloneDeep(finalHand));
-    console.log('Remaining Deck after Mulligans', _.cloneDeep(remainingDeck));
+    //console.log('Remaining Deck after Mulligans', _.cloneDeep(remainingDeck));
 
     return { finalHand, remainingDeck };
-}
+  }
+
+
+//THIS IS BEFORE ADDED LESS CONFIRMED logic, such as color check, etc
+
+//   function londonMulligan(hand, remainingDeck) {
+//     let mulligansTaken = 0;
+//     let finalHand = hand;
+
+//     // Destructure the mulliganConfig store
+//     const { maxMulligans, firstMulliganFree, freeMulliganTillLands, minLandsInHand, maxLandsInHand } = $mulliganConfig;
+
+//     // Initial draw
+//     finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
+//     remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
+
+//     // Log the initial hand and remaining deck
+//     console.log(`Initial Draw: Hand`, _.cloneDeep(finalHand));
+//  //   console.log(`Initial Draw: Remaining Deck`, _.cloneDeep(remainingDeck));
+
+//         // Adjust the loop condition to ignore maxMulligans when freeMulliganTillLands is true
+//         while (freeMulliganTillLands || mulligansTaken <= maxMulligans) {
+//         // Check if the hand meets the land requirements
+//         const landCount = finalHand.filter(card => !card.TotalManaCost && !card.dummy).length;
+//         const meetsLandRequirements = landCount >= minLandsInHand && landCount <= maxLandsInHand;
+
+//         // Log the land count and whether the hand meets the land requirements
+//         console.log(`Mulligan ${mulligansTaken}: Land Count`, landCount);
+//         console.log(`Mulligan ${mulligansTaken}: Meets Land Requirements`, meetsLandRequirements);
+
+//         if (meetsLandRequirements) {
+//             break;
+//         }
+
+//         if (mulligansTaken > 0 || firstMulliganFree || (freeMulliganTillLands && !meetsLandRequirements)) {
+//             // Shuffle hand into deck and redraw
+//             remainingDeck = remainingDeck.concat(finalHand);
+//             finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
+//             remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
+
+//             // Log the new hand and remaining deck after redraw
+//             console.log(`Mulligan ${mulligansTaken}: Redrawn Hand`, _.cloneDeep(finalHand));
+//          //   console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(remainingDeck));
+//         }
+
+//         if (!(firstMulliganFree && mulligansTaken === 0) && !(freeMulliganTillLands && !meetsLandRequirements)) {
+//             // Place cards on the bottom of the deck for each mulligan taken
+//             for (let i = 0; i < mulligansTaken; i++) {
+//                 const cardToBottom = prioritizeCardToBottom(finalHand);
+//                 remainingDeck.push(cardToBottom);
+
+//                 // Log the card placed on the bottom
+//                 console.log(`Mulligan ${mulligansTaken}: Card Placed on Bottom`, _.cloneDeep(cardToBottom));
+//             }
+//         }
+
+//         mulligansTaken++;
+//     }
+
+//     // Log the final hand and remaining deck after mulligans
+//     console.log('Final Hand after Mulligans', _.cloneDeep(finalHand));
+//     console.log('Remaining Deck after Mulligans', _.cloneDeep(remainingDeck));
+
+//     return { finalHand, remainingDeck };
+// }
+
+
+
 
 function prioritizeCardToBottom(hand) {
     // Prioritize placing a "dummy" card at the bottom
@@ -1945,7 +2060,8 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
             color: '#fff', // A distinct color for Monte Carlo results
             ratioText: convertPercentToRatio(turnTotalProbability),
             stackedCards: totalManaCards,
-            isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)) // Include actual and blank cards
+            isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)), // Include actual and blank cards
+            source: 'monteCarloResults' // Add source property
         });
     } else if (simulationType === 'hand' && $monteCarloHandResults.length > 0 && $monteCarloHandResults[turn] !== undefined) {
         let turnTotalProbability = parseFloat($monteCarloHandResults[turn]);
@@ -1958,7 +2074,9 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
             color: '#fff', // A distinct color for Hand Simulation results
             ratioText: convertPercentToRatio(turnTotalProbability),
             stackedCards: totalManaCards,
-            isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)) // Include actual and blank cards
+            isBlank: Array(totalManaCards).fill(false).concat(Array(blanksToAdd).fill(true)), // Include actual and blank cards
+            source: 'monteCarloHandResults' // Add source property
+
         });
     }
 
@@ -2030,13 +2148,13 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
     
     
     const presetColors = [
-        "#DCEDC8", // Example colors
-        "#B2DFDB",
+        "#e4f5d0", // Example colors
+        "#c9f1ee",
         "#FFE0B2",
-        "#E1BEE7",
-        "#B3E5FC",
-        "#FFCCBC",
-        "#C5CAE9"
+        "#edd7f1",
+        "#cbedfd",
+        "#ffdbd0",
+        "#e0e5ff"
     ];
     
     
@@ -2097,13 +2215,28 @@ $: generateTurnsArray = () => {
     return combinedResults;
 }
 
+//changes the percent output based on probability percent, to align to Frank K values
+//https://www.channelfireball.com/article/How-Many-Sources-Do-You-Need-to-Consistently-Cast-Your-Spells-A-2022-Update/dc23a7d2-0a16-4c0b-ad36-586fcca03ad8/
+
+function getProbabilityColor(probability) {
+    if (probability >= 0 && probability < 75) {
+      return '#a35800';
+    } else if (probability >= 75 && probability < 90) {
+      return '#7a6e00';
+    } else if (probability >= 90 && probability <= 100) {
+      return '#0c7a00';
+    }
+    return 'black'; // Default color
+  }
+
+
 
     </script>
     
 
     <h2 id="probabilities-jump" style="text-align: center; margin-bottom:0;">Probabilities</h2>
     {#if hasOutput}
-    <p style="margin-top:0; text-align: center;"><i>Each column of stacked cards represents a separate opening hand and subsequent draws.</i>
+    <p style="padding:0.5rem;text-align: center;max-width: 500px;margin: auto;"><i>Each column of stacked cards represents a separate opening hand and subsequent draws.</i>
         <Popover bind:show={showPopover} placement="top">
             <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                 <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
@@ -2125,24 +2258,52 @@ $: generateTurnsArray = () => {
                     </div>
                     <div class="card-rectangles">
                         {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
-                        <div class="card-group">
+                        {#if (card.source === 'monteCarloResults' || card.source === 'monteCarloHandResults') && totalManaRequirements > 0}
+                        <div class="card-group {turn === totalManaRequirements ? 'on-curve' : ''}">
                             {#if turn === 0}
-                                <div class="card-label">{card.label}</div>
+                              <div class="card-label">{card.label}</div>
+                            {/if}
+                            {#if turn === totalManaRequirements}
+                              <div class="on-curve-label">on-curve turn</div>
                             {/if}
                             <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
-                                <div class="rectangle" style="background-color: {card.color};">
-                                    <div class="card-details">
-                                        <div class="probability">{card.probability !== null ? `${card.probability}%` : ''}</div>
-                                        <div class="card-ratio">{@html card.ratioText}</div>
-                                    </div>
+                              <div class="rectangle" style="background-color: {card.color};">
+                                <div class="card-details">
+                                    <div class="probability" style="color: {getProbabilityColor(card.probability)};">
+                                        {card.probability !== null ? `${card.probability}%` : ''}
+                                      </div>
+                                  <div class="card-ratio">{@html card.ratioText}</div>
                                 </div>
-                                <div class="stacked-cards">
-                                    {#each card.isBlank as isBlank, i}
-                                        <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
-                                    {/each}
-                                </div>
+                              </div>
+                              <div class="stacked-cards">
+                                {#each card.isBlank as isBlank, i}
+                                  <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
+                                {/each}
+                              </div>
                             </div>
-                        </div>
+                          </div>
+                        {:else}
+                          <div class="card-group">
+                            {#if turn === 0}
+                              <div class="card-label">{card.label}</div>
+                            {/if}
+                            <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
+                              <div class="rectangle" style="background-color: {card.color};">
+                                <div class="card-details">
+                                    <div class="probability" style="color: {getProbabilityColor(card.probability)};">
+                                        {card.probability !== null ? `${card.probability}%` : ''}
+                                      </div>
+                                  <div class="card-ratio">{@html card.ratioText}</div>
+                                </div>
+                              </div>
+                              <div class="stacked-cards">
+                                {#each card.isBlank as isBlank, i}
+                                  <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
+                                {/each}
+                              </div>
+                            </div>
+                          </div>
+                        {/if}
                     {/each}
                     </div>
                 </div>
@@ -2258,6 +2419,8 @@ $: generateTurnsArray = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-width: 90px;
 }
 
 
@@ -2300,10 +2463,11 @@ $: generateTurnsArray = () => {
     }
     
     .card-label {
-        font-size: 0.7em;
+        font-size: 0.8em;
         padding-bottom: 12px;
         text-align: center;
-        width: 54px;
+        width: 64px;
+        font-weight: 500;
         word-wrap: break-word;
         hyphens: auto;
         text-wrap: balance;
@@ -2313,6 +2477,24 @@ $: generateTurnsArray = () => {
         justify-content: center;
         
     }
+
+    .on-curve {
+        border-top: 1px solid grey;
+    padding: 0px 0px 8px 0px;
+    border-bottom: 1px solid #808080;
+  }
+
+  .on-curve-label {
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 4px;
+    word-wrap: break-word;
+    font-size: 0.81rem;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+    line-height: 1.1;
+    margin-top: 3px;
+  }
   
 .popover-content {
   text-align: left;
@@ -2332,12 +2514,13 @@ $: generateTurnsArray = () => {
     width: fit-content;
     margin: auto;
     background-color: #f0f0f0;
-    color: #888;
+    color: #6c6c6c;
     padding: 1rem;
     border-radius: 4px;
     font-style: italic;
     flex-wrap: nowrap;
     flex-direction: row;
+    max-width: 450px;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     white-space: normal;
