@@ -844,20 +844,6 @@ function selectInput(event) {
     width: 50px;
   }
 
-  .primary-divider {
-
-    border: none;
-    height: 2px;
-    background-color: #ccc;
-  }
-
-  .secondary-divider {
-    margin-top: 15px; /* Add some space above the inputs */
-    border: none;
-    height: 1px;
-    background-color: #d9d9d9;
-  }
-
 
 
 .semi-bold {

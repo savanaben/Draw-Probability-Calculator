@@ -112,7 +112,8 @@ button:hover {
 	color: white;
 	background-color: #0066e9;
 	padding: 6px 8px 6px 8px;
-	border: none;
+	border: 1px solid #0066e9;
+	font-weight: 500;
 }
 
 .secondary-btn {
@@ -129,12 +130,13 @@ font-weight: 500;
 	color: #0066e9;
 	background-color: #ffffff;
 	padding: 6px 8px 6px 8px;
-	border: 1px solid #0066e9;
+	border: 1px solid #1a7dff;
 	font-weight: 500;
 	}
 
 .primary-btn:hover {
 	background-color: #1a7dff;
+	border: 1px solid #1a7dff;
 	box-shadow: none;
 }
 
@@ -144,9 +146,9 @@ font-weight: 500;
 	color: rgb(146, 146, 146);
 	cursor: default;
 	background-color: rgb(233, 233, 233);
-	border-color: rgba(255, 255, 255, 0);
+	border: 1px solid rgb(233, 233, 233);
 	box-shadow: none;
-	font-weight: 400;
+	font-weight: 500;
   }
 
 input:hover {
@@ -273,4 +275,20 @@ h4 {
 	  .chevron-icon {
 		margin-left: auto; /* Push the chevron to the right */
 		color: #0066e9;
+	  }
+
+
+	  .primary-divider {
+
+		border: none;
+		height: 2px;
+		background-color: #ccc;
+	  }
+	
+	  .secondary-divider {
+		margin-top: 15px; /* Add some space above the inputs */
+		border: none;
+		height: 1px;
+		width: 100%;
+		background-color: #d9d9d9;
 	  }

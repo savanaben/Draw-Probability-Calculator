@@ -134,6 +134,11 @@
                 </div>
                 
                 <div class="draw-amount">
+                    <label>First Mulligan Free:</label>
+                    <input type="checkbox" bind:checked={$mulliganConfig.firstMulliganFree} />
+                </div>
+
+                <div class="draw-amount">
                     <label>Min Lands to keep:</label>
                     <select bind:value={$mulliganConfig.minLandsInHand}>
                         {#each Array(8).fill(0).map((_, i) => i) as num}
@@ -150,12 +155,11 @@
                         {/each}
                     </select>
                 </div>
-                
-                <div class="draw-amount">
-                    <label>First Mulligan Free:</label>
-                    <input type="checkbox" bind:checked={$mulliganConfig.firstMulliganFree} />
-                </div>
         
+                <div class="draw-amount">                    <label>Must have playable ramp:</label>
+                    <input type="checkbox" bind:checked={$mulliganConfig.mustHavePlayableRamp} />
+                </div>
+
                 <div class="draw-amount">
                     <label>Free mulligans until max/min lands are satisfied</label>
                     <input type="checkbox" bind:checked={$mulliganConfig.freeMulliganTillLands} />
@@ -173,7 +177,7 @@
                     </select>
                 </div>
 
-                <div class="draw-amount">
+                <!-- <div class="draw-amount">
                     <label>Allow 2 Lands + Playable Ramp:</label>
                     <input type="checkbox" bind:checked={$mulliganConfig.allowTwoLandsPlusRamp} />
                 </div>
@@ -188,16 +192,12 @@
                         <option value="W">W</option>
                         <option value="C">C</option>
                     </select>
-                </div>
+                </div> -->
                 
-                <div class="draw-amount">                    <label>Ramp Must Be Playable:</label>
+                <!-- <div class="draw-amount">                    <label>Ramp Must Be Playable:</label>
                     <input type="checkbox" bind:checked={$mulliganConfig.rampMustBePlayable} />
-                </div>
+                </div> -->
                 
-                <div class="draw-amount">                    <label>Must Have Ramp:</label>
-                    <input type="checkbox" bind:checked={$mulliganConfig.mustHaveRamp} />
-                </div>
-
 
             </div>
         </div>

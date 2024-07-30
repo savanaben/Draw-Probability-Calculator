@@ -45,5 +45,5 @@ export const mulliganConfig = writable({
     mulliganIfLandsRampCanOnlyMake: '', // Mulligan if lands can only make (color)
     mulliganUnlessOpeningHandCanMake: [], // Mulligan unless opening hand can make (array of colors)
     rampMustBePlayable: false, // If ramp drawn, must be playable (true/false)
-    mustHaveRamp: false // Must have ramp (true/false)
+    mustHavePlayableRamp: false // Must have ramp (true/false)
 });

@@ -101,7 +101,6 @@
         row-gap: 12px;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* Align items to the start (left) */
         justify-content: space-between;
         border-radius: 4px;
         overflow: hidden;
@@ -201,7 +200,6 @@
     input {
     padding: 6px;
     margin: 0px;
-    min-width: 45px;
     max-width: 60px;
    }
 
@@ -211,6 +209,17 @@
 
 .popover-content:last-child {
   margin-bottom: 0;
+}
+
+.amount-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 6px;
+    text-align: right;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: -0.3rem;
 }
 
 
@@ -299,9 +308,9 @@
           </Popover>
 
     </div>
-
+<hr class="secondary-divider" style="margin: 0px; background-color:#cecece">
     <div class="amount-section">
-        <label for="amount" class="amount-label">Amount of ramp cards with these same attributes:</label>
+        <label for="amount" class="amount-label" style="max-width: 200px;">Amount of ramp cards with these same attributes:</label>
         <input id="amount" class="amount-input" type="number" min="0" bind:value={card.amount} on:focus="{selectInput}" />
     </div>
 </div>

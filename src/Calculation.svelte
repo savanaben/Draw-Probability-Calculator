@@ -1267,7 +1267,7 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
     let finalHand = hand;
 
     // Destructure the mulliganConfig store
-    const { maxMulligans, firstMulliganFree, freeMulliganTillLands, minLandsInHand, maxLandsInHand, mulliganIfLandsRampCanOnlyMake } = $mulliganConfig;
+    const { maxMulligans, firstMulliganFree, freeMulliganTillLands, minLandsInHand, maxLandsInHand, mulliganIfLandsRampCanOnlyMake, mustHavePlayableRamp } = $mulliganConfig;
 
     // Initial draw
     finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
@@ -1278,10 +1278,13 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
    // console.log(`Initial Draw: Remaining Deck`, _.cloneDeep(remainingDeck));
 
 
+    // Define valid colors
+    const validColors = ['W', 'U', 'B', 'R', 'G'];
+    const validColorsWithAny = ['W', 'U', 'B', 'R', 'G', 'C', 'ANY'];
+
     // Function to count the total number of colors the hand can produce
     function countTotalColors(hand) {
       const uniqueColors = new Set();
-      const validColors = ['W', 'U', 'B', 'R', 'G'];
       hand.forEach(card => {
         if (card.ColorsCanProduce) {
           Object.keys(card.ColorsCanProduce).forEach(color => {
@@ -1300,10 +1303,47 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
       return uniqueColors.size;
     }
 
+    // Function to check if the hand has a playable ramp card
+    function hasPlayableRamp(hand) {
+      const lands = hand.filter(card => Object.keys(card).some(key => validColorsWithAny.includes(key)));
+      const rampCards = hand.filter(card => card.ColorsCanProduce && card.TotalManaCost);
+
+      console.log('Lands in hand:', lands);
+      console.log('Ramp cards in hand:', rampCards);
+
+      if (rampCards.length === 0) {
+        console.log('No ramp cards in hand.');
+        return false; // No ramp cards in hand
+      }
+
+      return rampCards.some(rampCard => {
+        const totalManaCost = Object.values(rampCard.TotalManaCost).reduce((sum, value) => sum + value, 0);
+        if (lands.length < totalManaCost) {
+          console.log(`Not enough lands to play ramp card: ${JSON.stringify(rampCard)}`);
+          return false; // Not enough lands to play the ramp card
+        }
+
+        // Check if the lands can produce the required colors
+        const requiredColors = Object.entries(rampCard.TotalManaCost).filter(([color, count]) => count > 0);
+        const availableColors = lands.reduce((acc, land) => {
+            Object.keys(land).forEach(color => {
+                if (land[color] > 0 && validColorsWithAny.includes(color)) { // Include 'ANY' here
+                    acc[color] = (acc[color] || 0) + land[color];
+                }
+            });
+            return acc;
+        }, {});
+
+        const canPlayRamp = requiredColors.every(([color, count]) => (availableColors[color] || 0) >= count);
+        console.log(`Can play ramp card ${JSON.stringify(rampCard)}: ${canPlayRamp}`);
+        return canPlayRamp;
+      });
+    }
+
     // Adjust the loop condition to ignore maxMulligans when freeMulliganTillLands is true
     while (freeMulliganTillLands || mulligansTaken <= maxMulligans) {
       // Check if the hand meets the land requirements
-      const landCount = finalHand.filter(card => !card.TotalManaCost && !card.dummy).length;
+      const landCount = finalHand.filter(card => Object.keys(card).some(key => validColorsWithAny.includes(key))).length;
       const meetsLandRequirements = landCount >= minLandsInHand && landCount <= maxLandsInHand;
 
       // Log the land count and whether the hand meets the land requirements
@@ -1318,11 +1358,17 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
       console.log(`Mulligan ${mulligansTaken}: Total Colors`, totalColors);
       console.log(`Mulligan ${mulligansTaken}: Meets Color Requirements`, meetsColorRequirements);
 
-      if (meetsLandRequirements && meetsColorRequirements) {
+      // Check if the hand has a playable ramp card
+      const meetsRampRequirements = !mustHavePlayableRamp || hasPlayableRamp(finalHand);
+
+      // Log whether the hand meets the ramp requirements
+      console.log(`Mulligan ${mulligansTaken}: Meets Ramp Requirements`, meetsRampRequirements);
+
+      if (meetsLandRequirements && meetsColorRequirements && meetsRampRequirements) {
         break;
       }
 
-      if (mulligansTaken > 0 || firstMulliganFree || (freeMulliganTillLands && (!meetsLandRequirements || !meetsColorRequirements))) {
+      if (mulligansTaken > 0 || firstMulliganFree || (freeMulliganTillLands && (!meetsLandRequirements || !meetsColorRequirements || !meetsRampRequirements))) {
         // Shuffle hand into deck and redraw
         remainingDeck = remainingDeck.concat(finalHand);
         finalHand = _.sampleSize(remainingDeck, InitialDrawSize);
@@ -1330,10 +1376,10 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
 
         // Log the new hand and remaining deck after redraw
         console.log(`Mulligan ${mulligansTaken}: Redrawn Hand`, _.cloneDeep(finalHand));
-       // console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(remainingDeck));
+        // console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(finalHand));
       }
 
-      if (!(firstMulliganFree && mulligansTaken === 0) && !(freeMulliganTillLands && (!meetsLandRequirements || !meetsColorRequirements))) {
+      if (!(firstMulliganFree && mulligansTaken === 0) && !(freeMulliganTillLands && (!meetsLandRequirements || !meetsColorRequirements || !meetsRampRequirements))) {
         // Place cards on the bottom of the deck for each mulligan taken
         for (let i = 0; i < mulligansTaken; i++) {
           const cardToBottom = prioritizeCardToBottom(finalHand);
@@ -1349,7 +1395,7 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
 
     // Log the final hand and remaining deck after mulligans
     console.log('Final Hand after Mulligans', _.cloneDeep(finalHand));
-    //console.log('Remaining Deck after Mulligans', _.cloneDeep(remainingDeck));
+    // console.log('Remaining Deck after Mulligans', _.cloneDeep(finalHand));
 
     return { finalHand, remainingDeck };
   }
