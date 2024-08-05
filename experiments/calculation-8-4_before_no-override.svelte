@@ -1,22 +1,17 @@
 <script>
-    import { groupColors, neededCombinationsCount, numberOfTurns, activeTab } from './colorStore.js';
-    import { simulationData, monteCarloResults, monteCarloHandResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana, simulationType, clonedOutputDiagrams } from './colorStore.js';
+    import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
+    import { simulationData, monteCarloResults, monteCarloHandResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana, simulationType } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
-    import { onMount, tick } from 'svelte';
+    import { onMount } from 'svelte';
     import { writable } from 'svelte/store';
     import Popover from './Popover.svelte';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-    import Tabs from './Tabs.svelte';
 
-
-    let hasOutput = false;
-    let outputDiagram;
-    let clonedOutputContainer; // Declare the variable
-
+    
   // Log the value of numberOfTurns
   $: console.log('numberOfTurns:', $numberOfTurns);
   $: console.log('Mulligan Configuration:', $mulliganConfig);
@@ -2243,44 +2238,11 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
             calculateProbabilities();
         }
     
-    // Reactive statement to check if there's any output to display
-    $: {
-        hasOutput = generateTurnsArray($numberOfTurns).some(turn => 
-            createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || 
-            createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0
-        );
-
-        if (hasOutput) {
-            console.log('hasOutput is true, calling saveOutputDiagram');
-            saveOutputDiagram();
-        }
-    }
-
-    async function saveOutputDiagram() {
-        await tick(); // Wait for the DOM to update
-        if (outputDiagram) {
-            console.log('Cloning outputDiagram:', outputDiagram);
-            const clone = outputDiagram.cloneNode(true);
-            const uniqueId = Date.now(); // Use a timestamp as a unique identifier
-            clonedOutputDiagrams.update(diagrams => [...diagrams, { id: uniqueId, node: clone }]);
-            console.log('Cloned outputDiagram added to store');
-        } else {
-            console.log('outputDiagram is not defined');
-        }
-    }
-
-
-    $: tabs = ['Live results', ...$clonedOutputDiagrams.map((_, index) => `Trial ${index + 1}`)];
-
-
-    $: if ($clonedOutputDiagrams) {
-        $clonedOutputDiagrams.forEach(({ id, node }) => {
-            const wrapper = document.querySelector(`.cloned-output-wrapper[data-id="${id}"]`);
-            if (wrapper && !wrapper.hasChildNodes()) {
-                wrapper.appendChild(node);
-            }
-        });
-    }
+     // Reactive statement to check if there's any output to display
+     $: hasOutput = generateTurnsArray($numberOfTurns).some(turn => 
+    createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || 
+    createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0
+  );
   
 // Function to generate turns array
 $: generateTurnsArray = () => {
@@ -2302,9 +2264,6 @@ $: generateTurnsArray = () => {
         if (b.label === 'Hand Simulation') return 1;
         return 0;
     });
-
-    console.log('Combined Results:', combinedResults);
-
 
     return combinedResults;
 }
@@ -2341,11 +2300,7 @@ function getProbabilityColor(probability) {
         </Popover>
     </p>
     {/if}
-
-    <Tabs {tabs} {activeTab} >
-        <div slot="content">
-            <div class="tab-content" style="display: {$activeTab === 0 ? 'block' : 'none'};">
-                <div bind:this={outputDiagram} class="output-diagram">
+    <div class="output-diagram">
         {#if hasOutput}
         {#each generateTurnsArray($numberOfTurns.length) as _, turn}
             {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
@@ -2414,14 +2369,6 @@ function getProbabilityColor(probability) {
         {/if}
     </div>
     
-</div>
-{#each $clonedOutputDiagrams as { id, node }, index}
-<div class="tab-content" style="display: {$activeTab === index + 1 ? 'block' : 'none'};" bind:this={clonedOutputContainer}>
-    <div class="cloned-output-wrapper" data-id={id}></div>
-</div>
-{/each}
-</div>
-</Tabs>
 
     <style>
     

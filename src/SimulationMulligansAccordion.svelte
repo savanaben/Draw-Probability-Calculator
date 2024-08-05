@@ -89,7 +89,7 @@
     flex-shrink: 0; /* Prevent shrinking */
     flex-grow: 1; /* Allow growing */
     min-width: 70px; /* Minimum width */
-    max-width: 120px; /* Maximum width */
+    max-width: 200px; /* Maximum width */
     word-wrap: break-word; /* Break long words */
   }
 
@@ -123,10 +123,9 @@
             <!-- <p style="margin-top: 0.5rem;">Change the number of cards you draw on any given turn. You can adjust the initial hand size above.</p>  -->
             <div class="draw-amounts-container">
 
-                
                 <div class="draw-amount">
-                    <label><b>Max mulligans:</b> (not including free mulligan)</label>
-                    <select bind:value={$mulliganConfig.maxMulligans}>
+                    <label for="max-mulligans"><b>Max mulligans:</b> (not including free mulligan)</label>
+                    <select id="max-mulligans" bind:value={$mulliganConfig.maxMulligans}>
                         {#each Array(8).fill(0).map((_, i) => i) as num}
                             <option value={num}>{num}</option>
                         {/each}
@@ -134,13 +133,13 @@
                 </div>
                 
                 <div class="draw-amount">
-                    <label>First Mulligan Free:</label>
-                    <input type="checkbox" bind:checked={$mulliganConfig.firstMulliganFree} />
+                    <label for="first-mulligan-free">First Mulligan Free:</label>
+                    <input id="first-mulligan-free" type="checkbox" bind:checked={$mulliganConfig.firstMulliganFree} />
                 </div>
 
                 <div class="draw-amount">
-                    <label>Min Lands to keep:</label>
-                    <select bind:value={$mulliganConfig.minLandsInHand}>
+                    <label for="min-lands">Min Lands to keep:</label>
+                    <select id="min-lands" bind:value={$mulliganConfig.minLandsInHand}>
                         {#each Array(8).fill(0).map((_, i) => i) as num}
                             <option value={num}>{num}</option>
                         {/each}
@@ -148,26 +147,27 @@
                 </div>
                 
                 <div class="draw-amount">
-                    <label>Max Lands to keep:</label>
-                    <select bind:value={$mulliganConfig.maxLandsInHand}>
+                    <label for="max-lands">Max Lands to keep:</label>
+                    <select id="max-lands" bind:value={$mulliganConfig.maxLandsInHand}>
                         {#each Array(8).fill(0).map((_, i) => i) as num}
                             <option value={num}>{num}</option>
                         {/each}
                     </select>
                 </div>
         
-                <div class="draw-amount">                    <label>Must have playable ramp:</label>
-                    <input type="checkbox" bind:checked={$mulliganConfig.mustHavePlayableRamp} />
+                <div class="draw-amount">
+                    <label for="playable-ramp">Must have playable ramp:</label>
+                    <input id="playable-ramp" type="checkbox" bind:checked={$mulliganConfig.mustHavePlayableRamp} />
                 </div>
 
                 <div class="draw-amount">
-                    <label>Free mulligans until max/min lands are satisfied</label>
-                    <input type="checkbox" bind:checked={$mulliganConfig.freeMulliganTillLands} />
+                    <label for="free-mulligan-lands">Free mulligans until max/min lands are satisfied</label>
+                    <input id="free-mulligan-lands" type="checkbox" bind:checked={$mulliganConfig.freeMulliganTillLands} />
                 </div>
                 
                 <div class="draw-amount">
-                    <label>Mulligan unless ramp + lands can make at least:</label>
-                    <select bind:value={$mulliganConfig.mulliganIfLandsRampCanOnlyMake}>
+                    <label for="mulligan-colors">Mulligan unless ramp + lands can make at least:</label>
+                    <select id="mulligan-colors" bind:value={$mulliganConfig.mulliganIfLandsRampCanOnlyMake}>
                         <option value=""></option>
                         <option value="1">1 color</option>
                         <option value="2">2 colors</option>
@@ -198,7 +198,6 @@
                     <input type="checkbox" bind:checked={$mulliganConfig.rampMustBePlayable} />
                 </div> -->
                 
-
             </div>
         </div>
     </div>

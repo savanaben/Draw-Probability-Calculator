@@ -1,21 +1,26 @@
+
 <script>
-    import { groupColors, neededCombinationsCount, numberOfTurns, activeTab } from './colorStore.js';
-    import { simulationData, monteCarloResults, monteCarloHandResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana, simulationType, clonedOutputDiagrams } from './colorStore.js';
+
+//this file could could not solve duplicating the outputs - 
+//it was not reading each array in allSimulationResults and displacing them
+//seperately. only displaying the most recent calculations.
+
+
+    import { groupColors, neededCombinationsCount, numberOfTurns } from './colorStore.js';
+    import { simulationData, monteCarloResults, monteCarloHandResults, simulationRun, cancelSimulation, simulationProgress, combinationProgress, shouldResetSimulation, mulliganConfig, simplifiedRampMana, simulationType } from './colorStore.js';
     // Additional imports for randomness
     import { sampleSize } from 'lodash';
     import _ from 'lodash';
-    import { onMount, tick } from 'svelte';
+    import { onMount } from 'svelte';
     import { writable } from 'svelte/store';
     import Popover from './Popover.svelte';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
     import { faTimes } from '@fortawesome/free-solid-svg-icons';
     import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-    import Tabs from './Tabs.svelte';
 
 
-    let hasOutput = false;
-    let outputDiagram;
-    let clonedOutputContainer; // Declare the variable
+    let allSimulationResults = writable([]);
+
 
   // Log the value of numberOfTurns
   $: console.log('numberOfTurns:', $numberOfTurns);
@@ -2075,24 +2080,37 @@ async function identifyProfiles(numIterations) {
 
 
     async function runSimulation() {
-    simulationRun.set(true);  // Enable the modal
+    simulationRun.set(true); // Enable the modal
     cancelSimulation.set(false); // Ensure cancellation flag is reset before starting
     neededCombinationsCount.set(null); // Set the count to a loading placeholder
 
     // Use setTimeout to defer the simulation start until after the UI has updated
     setTimeout(async () => {
-        const numIterations = $simulationData.iterations || 8000;
-        try {
-            await identifyProfiles(numIterations);
-        } catch (error) {
-            console.error("Simulation was canceled or an error occurred:", error);
-        } finally {
-            simulationRun.set(false); // Disable the modal once complete
-            cancelSimulation.set(false); // Reset cancellation state
-            simulationProgress.set(0); // Reset progress to 0 after finishing the simulation
-        }
+      const numIterations = $simulationData.iterations || 8000;
+      try {
+        await identifyProfiles(numIterations);
+        // Append the new results to the allSimulationResults array
+        allSimulationResults.update(results => [
+          ...results,
+          {
+            id: Date.now(), // Use a unique identifier for each set of results
+            turnResults: _.cloneDeep($probabilitiesByTurn),
+            handResults: _.cloneDeep($monteCarloHandResults)
+          }
+        ]);
+        console.log('Updated allSimulationResults:', $allSimulationResults);
+      } catch (error) {
+        console.error("Simulation was canceled or an error occurred:", error);
+      } finally {
+        simulationRun.set(false); // Disable the modal once complete
+        cancelSimulation.set(false); // Reset cancellation state
+        simulationProgress.set(0); // Reset progress to 0 after finishing the simulation
+      }
     }, 0); // Timeout set to 0 to push to end of execution queue
-}
+  }
+
+  // Reactive statement to check if there's any output to display
+  $: hasOutput = $allSimulationResults.length > 0;
 
 
 
@@ -2243,44 +2261,7 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
             calculateProbabilities();
         }
     
-    // Reactive statement to check if there's any output to display
-    $: {
-        hasOutput = generateTurnsArray($numberOfTurns).some(turn => 
-            createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || 
-            createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0
-        );
 
-        if (hasOutput) {
-            console.log('hasOutput is true, calling saveOutputDiagram');
-            saveOutputDiagram();
-        }
-    }
-
-    async function saveOutputDiagram() {
-        await tick(); // Wait for the DOM to update
-        if (outputDiagram) {
-            console.log('Cloning outputDiagram:', outputDiagram);
-            const clone = outputDiagram.cloneNode(true);
-            const uniqueId = Date.now(); // Use a timestamp as a unique identifier
-            clonedOutputDiagrams.update(diagrams => [...diagrams, { id: uniqueId, node: clone }]);
-            console.log('Cloned outputDiagram added to store');
-        } else {
-            console.log('outputDiagram is not defined');
-        }
-    }
-
-
-    $: tabs = ['Live results', ...$clonedOutputDiagrams.map((_, index) => `Trial ${index + 1}`)];
-
-
-    $: if ($clonedOutputDiagrams) {
-        $clonedOutputDiagrams.forEach(({ id, node }) => {
-            const wrapper = document.querySelector(`.cloned-output-wrapper[data-id="${id}"]`);
-            if (wrapper && !wrapper.hasChildNodes()) {
-                wrapper.appendChild(node);
-            }
-        });
-    }
   
 // Function to generate turns array
 $: generateTurnsArray = () => {
@@ -2291,10 +2272,15 @@ $: generateTurnsArray = () => {
     
     //this is a helper function that removes groups redundancy in the output. 
     //prolly a better way to do this!
-    function getCombinedResults(groups, results, probabilitiesByTurn, monteCarloHandResults, turn) {
-    const fullResults = createGroupCards(groups, results, probabilitiesByTurn, turn);
-    const handResults = createGroupCards(groups, results, monteCarloHandResults, turn, 'hand', true); // Exclude groups
-    const combinedResults = [...handResults, ...fullResults];
+    function getCombinedResults(groups, results, allSimulationResults, turn) {
+    console.log('getCombinedResults called with:', { groups, results, allSimulationResults, turn });
+    let combinedResults = [];
+
+    allSimulationResults.forEach(result => {
+        const fullResults = createGroupCards(groups, results, result.turnResults.probabilitiesByTurn, turn);
+        const handResults = createGroupCards(groups, results, result.handResults, turn, 'hand', true); // Exclude groups
+        combinedResults = [...combinedResults, ...handResults, ...fullResults];
+    });
 
     // Sort to ensure hand simulation results are always first or second
     combinedResults.sort((a, b) => {
@@ -2303,9 +2289,7 @@ $: generateTurnsArray = () => {
         return 0;
     });
 
-    console.log('Combined Results:', combinedResults);
-
-
+    console.log('Combined results:', combinedResults);
     return combinedResults;
 }
 
@@ -2341,87 +2325,51 @@ function getProbabilityColor(probability) {
         </Popover>
     </p>
     {/if}
-
-    <Tabs {tabs} {activeTab} >
-        <div slot="content">
-            <div class="tab-content" style="display: {$activeTab === 0 ? 'block' : 'none'};">
-                <div bind:this={outputDiagram} class="output-diagram">
+    <div class="output-diagram">
         {#if hasOutput}
-        {#each generateTurnsArray($numberOfTurns.length) as _, turn}
-            {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
-                <div class="turn-row">
-                    <div class="turn-label">
-                        Turn {turn}:<br>
-                        <i>({turn === 0 ? `Draw ${InitialDrawSize}` : `Draw ${$numberOfTurns[turn - 1]}`})</i>
-                    </div>
-                    <div class="card-rectangles">
-                        {#each getCombinedResults(groups, results, $probabilitiesByTurn, $monteCarloHandResults, turn) as card}
-                        {#if (card.source === 'monteCarloResults' || card.source === 'monteCarloHandResults') && totalManaRequirements > 0}
-                        <div class="card-group {turn === totalManaRequirements ? 'on-curve' : ''}">
-                            {#if turn === 0}
-                              <div class="card-label">{card.label}</div>
-                            {/if}
-                            {#if turn === totalManaRequirements}
-                              <div class="on-curve-label">on-curve turn</div>
-                            {/if}
-                            <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
-                              <div class="rectangle" style="background-color: {card.color};">
-                                <div class="card-details">
-                                    <div class="probability" style="color: {getProbabilityColor(card.probability)};">
-                                        {card.probability !== null ? `${card.probability}%` : ''}
-                                      </div>
-                                  <div class="card-ratio">{@html card.ratioText}</div>
+            {#each generateTurnsArray($numberOfTurns.length) as _, turn}
+                {#if createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0}
+                    <div class="turn-row">
+                        <div class="turn-label">
+                            Turn {turn}:<br>
+                            <i>({turn === 0 ? `Draw ${InitialDrawSize}` : `Draw ${$numberOfTurns[turn - 1]}`})</i>
+                        </div>
+                        <div class="card-rectangles">
+                            {#each getCombinedResults(groups, results, $allSimulationResults, turn) as card}
+                                <div class="card-group {turn === totalManaRequirements ? 'on-curve' : ''}">
+                                    {#if turn === 0}
+                                        <div class="card-label">{card.label}</div>
+                                    {/if}
+                                    {#if turn === totalManaRequirements}
+                                        <div class="on-curve-label">on-curve turn</div>
+                                    {/if}
+                                    <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
+                                        <div class="rectangle" style="background-color: {card.color};">
+                                            <div class="card-details">
+                                                <div class="probability" style="color: {getProbabilityColor(card.probability)};">
+                                                    {card.probability !== null ? `${card.probability}%` : ''}
+                                                </div>
+                                                <div class="card-ratio">{@html card.ratioText}</div>
+                                            </div>
+                                        </div>
+                                        <div class="stacked-cards">
+                                            {#each card.isBlank as isBlank, i}
+                                                <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
+                                            {/each}
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="stacked-cards">
-                                {#each card.isBlank as isBlank, i}
-                                  <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
-                                {/each}
-                              </div>
-                            </div>
-                          </div>
-                        {:else}
-                          <div class="card-group">
-                            {#if turn === 0}
-                              <div class="card-label">{card.label}</div>
-                            {/if}
-                            <div class="card-container" style="margin-right: {7 + (card.isBlank.length - 1) * 4}px;">
-                              <div class="rectangle" style="background-color: {card.color};">
-                                <div class="card-details">
-                                    <div class="probability" style="color: {getProbabilityColor(card.probability)};">
-                                        {card.probability !== null ? `${card.probability}%` : ''}
-                                      </div>
-                                  <div class="card-ratio">{@html card.ratioText}</div>
-                                </div>
-                              </div>
-                              <div class="stacked-cards">
-                                {#each card.isBlank as isBlank, i}
-                                  <div class="stacked-card" style="left: {i * 4}px; z-index: {-(i + 1)}; background-color: {isBlank ? '#f2efe8' : card.color}; border-color: {isBlank ? '#c1c1c1' : '#666666'};"></div>
-                                {/each}
-                              </div>
-                            </div>
-                          </div>
-                        {/if}
-                    {/each}
+                            {/each}
+                        </div>
                     </div>
-                </div>
-            {/if}
-        {/each}
+                {/if}
+            {/each}
         {:else}
-         <div class="placeholder">
-               Add a hypergeometric group or run a monte carlo simulation to show output probabilities.
-         </div>
+            <div class="placeholder">
+                Add a hypergeometric group or run a monte carlo simulation to show output probabilities.
+            </div>
         {/if}
     </div>
-    
-</div>
-{#each $clonedOutputDiagrams as { id, node }, index}
-<div class="tab-content" style="display: {$activeTab === index + 1 ? 'block' : 'none'};" bind:this={clonedOutputContainer}>
-    <div class="cloned-output-wrapper" data-id={id}></div>
-</div>
-{/each}
-</div>
-</Tabs>
 
     <style>
     

@@ -92,10 +92,9 @@
 
 .content {
     display: grid;
-    grid-template-columns: 60% 40%;
-    column-gap: 2.5rem;
+    grid-template-columns: 59% 39%;
+    column-gap: 2%;
     justify-content: center;
-    margin: 0rem 3rem;
 }
 
 .left-column {

@@ -10,6 +10,8 @@ export const simulationData = writable({
 
 export const simplifiedRampMana = writable([]);
 
+export const clonedOutputDiagrams = writable([]);
+
 export const shouldResetSimulation = writable(false);
 export const simulationType = writable('full'); // hand vs field simulation flag
 
@@ -27,6 +29,10 @@ export const activePopover = writable(null);
 
 export const numberOfTurns = writable([1, 1, 1, 1, 1, 1]); // Default to drawing 1 card per turn for 5 turns
 export const labelChecker = writable(false);
+
+export const activeTab = writable(0); // Store for the active tab
+
+
 
 let idCounter = 0;
 

@@ -7,6 +7,7 @@
     import Popover from './Popover.svelte';
     import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 
+
     import WIcon from './mana-icons/plains.svg';
     import UIcon from './mana-icons/swamp.svg';
     import BIcon from './mana-icons/island.svg';
@@ -25,6 +26,9 @@
     import AnyIcon9 from './mana-icons/any-9plus.svg';
 
     let showPopover = false;
+
+    const uniqueId = `ramp-card-${Date.now()}`; // Generate a unique ID using current date/time
+
 
     const manaIcons = {
         W: { icon: WIcon, label: 'Plains' },
@@ -244,7 +248,7 @@
         <div class="mana-inputs">
             {#each Object.keys(manaIcons) as mana}
                 <div class="mana-input">
-                    <label for="{mana}-cost">
+                    <label for="{uniqueId}-{mana}-cost">
                         {#if mana === 'ANY'}
                             <img src={getAnyIcon(card.TotalManaCost.ANY)} alt="{mana} mana icon" class="mana-icon" />
                         {:else}
@@ -252,7 +256,7 @@
                         {/if}
                         &nbsp;:
                     </label>
-                    <input id="{mana}-cost" type="number" min="0" bind:value={card.TotalManaCost[mana]} on:focus="{selectInput}" disabled={card.isSignet && mana !== 'ANY'} />
+                    <input id="{uniqueId}-{mana}-cost" type="number" min="0" bind:value={card.TotalManaCost[mana]} on:focus="{selectInput}" disabled={card.isSignet && mana !== 'ANY'} /> <!-- Use uniqueId here -->
                 </div>
             {/each}
         </div>
@@ -276,8 +280,8 @@
 
 
     <div class="one-line">
-        <label for="can-produce" class="can-produce-label">Total mana ramp can produce:</label>
-        <input id="can-produce" class="can-produce-input" type="number" min="0" bind:value={card.CanProduce} on:focus="{selectInput}" disabled={card.isSignet} />
+        <label for="{uniqueId}-can-produce" class="can-produce-label">Total mana ramp can produce:</label> <!-- Use uniqueId here -->
+        <input id="{uniqueId}-can-produce" class="can-produce-input" type="number" min="0" bind:value={card.CanProduce} on:focus="{selectInput}" disabled={card.isSignet} /> <!-- Use uniqueId here -->
     </div>
 
     <!-- <div class="ability-cost-section">
@@ -286,13 +290,13 @@
     </div> -->
 
     <div class="one-line">
-        <label for="available-turn-played" class="available-turn-played-label">Mana is available turn played:</label>
-        <input id="available-turn-played" type="checkbox" bind:checked={card.AvailableTurnPlayed} on:change={() => card.AvailableTurnPlayed = card.AvailableTurnPlayed ? 1 : 0} disabled={card.isSignet} />
+        <label for="{uniqueId}-available-turn-played" class="available-turn-played-label">Mana is available turn played:</label> <!-- Use uniqueId here -->
+        <input id="{uniqueId}-available-turn-played" type="checkbox" bind:checked={card.AvailableTurnPlayed} on:change={() => card.AvailableTurnPlayed = card.AvailableTurnPlayed ? 1 : 0} disabled={card.isSignet} /> <!-- Use uniqueId here -->
     </div>
 
     <div class="one-line">
-        <label for="is-signet" class="is-signet-label">Is signet:</label>
-        <input id="is-signet" type="checkbox" bind:checked={card.isSignet} />
+        <label for="{uniqueId}-is-signet" class="is-signet-label">Is signet:</label> 
+        <input id="{uniqueId}-is-signet" type="checkbox" bind:checked={card.isSignet} /> 
 
         <Popover bind:show={showPopover} placement="top">
             <button id ="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
@@ -310,9 +314,9 @@
     </div>
 <hr class="secondary-divider" style="margin: 0px; background-color:#cecece">
     <div class="amount-section">
-        <label for="amount" class="amount-label" style="max-width: 200px;">Amount of ramp cards with these same attributes:</label>
-        <input id="amount" class="amount-input" type="number" min="0" bind:value={card.amount} on:focus="{selectInput}" />
-    </div>
+        <label for="{uniqueId}-amount" class="amount-label" style="max-width: 200px;">Amount of ramp cards with these same attributes:</label> <!-- Use uniqueId here -->
+        <input id="{uniqueId}-amount" class="amount-input" type="number" min="0" bind:value={card.amount} on:focus="{selectInput}" /> <!-- Use uniqueId here -->
+</div>
 </div>
 
 
