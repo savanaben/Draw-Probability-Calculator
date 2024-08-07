@@ -2044,10 +2044,13 @@ async function identifyProfiles(numIterations) {
     simulationRun.set(true); // Set simulation run flag to true
 
     console.log('Simulation results:', $probabilitiesByTurn); // Ensure this logs after the update
-    // Call or trigger createGroupCards here if necessary, or ensure it's part of a reactive chain that will catch this update
+    
+    // Call saveOutputDiagram after setting the simulation results. this ensures only trials
+    // are saved on simulation run, not hypergeometic changes too
+    tick().then(() => {
+        saveOutputDiagram();
+    });
 }
-
-
 
     
     
@@ -2243,18 +2246,10 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
             calculateProbabilities();
         }
     
-    // Reactive statement to check if there's any output to display
-    $: {
-        hasOutput = generateTurnsArray($numberOfTurns).some(turn => 
-            createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || 
-            createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0
-        );
 
-        if (hasOutput) {
-            console.log('hasOutput is true, calling saveOutputDiagram');
-            saveOutputDiagram();
-        }
-    }
+
+
+
 
     async function saveOutputDiagram() {
         await tick(); // Wait for the DOM to update
@@ -2263,22 +2258,37 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
             const clone = outputDiagram.cloneNode(true);
             const uniqueId = Date.now(); // Use a timestamp as a unique identifier
             clonedOutputDiagrams.update(diagrams => [...diagrams, { id: uniqueId, node: clone }]);
-            console.log('Cloned outputDiagram added to store');
+            console.log('Cloned outputDiagram added to store:', { id: uniqueId, node: clone });
         } else {
             console.log('outputDiagram is not defined');
         }
     }
 
 
-    $: tabs = ['Live results', ...$clonedOutputDiagrams.map((_, index) => `Trial ${index + 1}`)];
+    // Reactive statement to check if there's any output to display
+    $: {
+        hasOutput = generateTurnsArray($numberOfTurns).some(turn => 
+            createGroupCards(groups, results, $probabilitiesByTurn, turn).length > 0 || 
+            createGroupCards(groups, results, $monteCarloHandResults, turn, 'hand').length > 0
+        );
+    }
 
+    $: tabs = ['Live results', ...$clonedOutputDiagrams.map((_, index) => `Trial ${index + 1}`).reverse()];
 
-    $: if ($clonedOutputDiagrams) {
-        $clonedOutputDiagrams.forEach(({ id, node }) => {
-            const wrapper = document.querySelector(`.cloned-output-wrapper[data-id="${id}"]`);
-            if (wrapper && !wrapper.hasChildNodes()) {
-                wrapper.appendChild(node);
-            }
+    $: if ($clonedOutputDiagrams.length > 0) {
+        console.log('clonedOutputDiagrams:', $clonedOutputDiagrams);
+        // Use tick to ensure the DOM is updated before appending nodes
+        tick().then(() => {
+            $clonedOutputDiagrams.forEach(({ id, node }, index) => {
+                const wrapper = document.querySelector(`.cloned-output-wrapper[data-id="${id}"]`);
+                console.log(`Appending node to wrapper with id ${id}:`, wrapper);
+                if (wrapper && !wrapper.hasChildNodes()) {
+                    wrapper.appendChild(node);
+                    console.log(`Node appended to wrapper with id ${id}`);
+                } else {
+                    console.log(`Wrapper with id ${id} already has child nodes or does not exist`);
+                }
+            });
         });
     }
   
@@ -2289,6 +2299,9 @@ $: generateTurnsArray = () => {
     return array;
 }
     
+
+
+
     //this is a helper function that removes groups redundancy in the output. 
     //prolly a better way to do this!
     function getCombinedResults(groups, results, probabilitiesByTurn, monteCarloHandResults, turn) {
