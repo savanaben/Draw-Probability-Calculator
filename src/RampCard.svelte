@@ -282,6 +282,15 @@
     <div class="one-line">
         <label for="{uniqueId}-can-produce" class="can-produce-label">Total mana ramp can produce:</label> <!-- Use uniqueId here -->
         <input id="{uniqueId}-can-produce" class="can-produce-input" type="number" min="0" bind:value={card.CanProduce} on:focus="{selectInput}" disabled={card.isSignet} /> <!-- Use uniqueId here -->
+        <Popover bind:show={showPopover} placement="top">
+            <button id ="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
+              <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
+            </button>
+            <div slot="content">
+                <p class="popover-content">This total mana ramp can produce assumes each mana can be any color set above. For example, say you set that ramp can produce G, R, and B, and set the total mana to 2. The simulation assumes you now essentially have 2 lands that can each produce G, R, or B.</p>
+                <p class="popover-content">I know this doesn't cover everything, sorry!</p>
+            </div>
+          </Popover>
     </div>
 
     <!-- <div class="ability-cost-section">

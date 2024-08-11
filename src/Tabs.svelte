@@ -111,8 +111,12 @@
         cursor: pointer;
         white-space: nowrap;
         border: 1px solid #ccc;
-        border-radius: 4px 4px 0px 0px;
+        border-radius: 6px 6px 0px 0px;
         background-color: #f3eede;
+    }
+
+    .tab:not(:last-child) {
+        border-right: none; /* Remove right border for all tabs except the last one */
     }
 
     .tab:hover {

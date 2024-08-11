@@ -7,6 +7,7 @@ import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
+import replace from '@rollup/plugin-replace';
 
 
 
@@ -77,7 +78,13 @@ export default {
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
 		production && terser(),
-		postcss()
+		postcss(),
+
+		// Replace environment variables
+		replace({
+			preventAssignment: true,
+			'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development')
+		})
 	],
 	watch: {
 		clearScreen: false

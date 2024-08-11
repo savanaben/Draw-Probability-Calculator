@@ -34,8 +34,14 @@
 
   <div class="intro-section">
     <h1 class="title">Draw Probability Calculator</h1>
-    <p class="larger-text">This tool is made to answer questions like, "what are the chances I draw one ramp spell and two lands in my opening hand." You can also take this a step further and calculate the chances you'll get certain mana or ability combinations in your opening turns. While I designed this tool in the frame of Commander Magic, it should work for any card game that draws a set number of cards to start, and then one card per turn after. If you find this helpful, consider 
-      
+    <p class="larger-text">This page offers two primary tools: </p>
+      <ul class="larger-text list-adjuster">
+        <li>A <strong>monte carlo simulator</strong> customized for magic the gathering. This simulator runs thousands of hand draws to calculate more complex probabilities, such as the chance you'll get the right colors of mana. The most advanced feature I recommend trying out is the ability to add ramp cards. See the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how the simulation logic works.
+        </li>
+        <li>A <strong>hypergeometric</strong> probability calculator, which provides exact probabilities for questions like, "what are the chances I draw one draw spell and two lands in my opening hand." This tool is comparable to others, but provides some added features in the way of mulligans, variable draws per turn, and group linking.</li>
+     </ul>
+    <p class="larger-text">
+      If you find this helpful, consider emailing me with feedback or
       <Popover bind:show={showPopover} placement="bottom">
         <button id="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="donate to me if you want!">
           venmoing me half a coffee
@@ -51,7 +57,7 @@
     </Popover>
    🙂.
   </p>
-   <FAQ customClass="reduced-padding" faqs={example}/> 
+   <!-- <FAQ customClass="reduced-padding" faqs={example}/>  -->
   </div>
   
 
@@ -62,7 +68,7 @@
 
 
   .intro-section {
-    max-width: 658px;
+    max-width: 740px;
     margin: 0 auto;
     padding: 20px 20px 0px 20px;
     color: #333;
@@ -76,7 +82,10 @@
     line-height: 1.1;
   }
 
-
+.list-adjuster {
+  padding: 0px 45px 0px 45px;
+  margin-top: 0.2rem;
+}
 
   #moreInfo {
   border-radius: 5px;

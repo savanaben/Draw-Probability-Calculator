@@ -116,7 +116,7 @@
                 {#each $numberOfTurns as drawAmount, turn}
                 <div class="draw-amount">
                     <label for="drawAmount-{turn}">Turn {turn + 1}:</label>                    <select id="drawAmount-{turn}" value={drawAmount} on:change="{(event) => handleDrawAmountChange(turn, event)}">
-                        {#each Array.from({ length: 7 }, (_, i) => i + 1) as option}
+                        {#each Array.from({ length: 7 }, (_, i) => i) as option}
                             <option value={option} selected={option === drawAmount}>{option}</option>
                         {/each}
                     </select>

@@ -911,7 +911,8 @@ function selectInput(event) {
       style:height="{openItem === 0 ? 'auto' : '0'}"
        >
       <!-- Mana Cards and Add Button -->
-      <p style="margin-top: 0.5rem;">Simulate the chance you'll get the colors you need in your hand or on the field. <span class="semi-bold">Probabilities from this section do not take into account cards from the above Hypergeometric Calculator.</span> To learn more, click the info button ->       
+      <p style="margin-top: 0.5rem;">Simulate the chance you'll get the colors you need in your hand or on the field. check out the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how this works. 
+        <!-- To learn more, click the info button ->       
         <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
           <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
@@ -921,13 +922,13 @@ function selectInput(event) {
             <p class="popover-content popover-text-fixer">First, we calculate all of the possible combinations of cards that can achieve your desired results. Then, the simulation draws the deck thousands of times, checking if any combination is achieved across each turn.</p>
           <p class="popover-content popover-text-fixer">My research has only come up with one other method to find this kind of probability - the inclusion exclusion principle. And that seemed hella hard to implement, so I went with this.</p>
         </div>
-      </Popover>
+      </Popover> -->
     </p>
 
 
 
 
-      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. Custom groups only work in hand simulations (see the custom groups (?) button for more details).</p>
+      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. Custom groups only work in Hand Simulations.</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -998,7 +999,7 @@ function selectInput(event) {
 
 
       <!-- Mana Requirements Fields -->
-      <p><strong>Step 2</strong> - Specify the amount of each mana, card, or attribute you would like. Note that this assumes a separate card for each mana/card/attribute.</p>
+      <p><strong>Step 2</strong> - Specify the amount of each mana, card, or attribute you would like. This assumes a separate card for each mana/card/attribute.</p>
     <div class="mana-requirements-container">
       {#each Object.entries(manaRequirements) as [key, amount]}
         {#if activeManaTypes[key] || (customCards.length > 0 && customCards.some(card => card.title === key))}

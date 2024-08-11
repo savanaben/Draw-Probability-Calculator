@@ -116,25 +116,32 @@
   
 
 
-  <div class="accordion">
-    {#each faqs as {question, answer}, index}
-        <div class="accordion-item"
+  <div id="monte-carlo-faq" class="accordion">
+    {#each faqs as {question, answerParts}, index}
+      <div class="accordion-item"
         style="background-color: {openItem === index ? 'white' : 'transparent'};"
         tabindex="0" 
-             on:click={(event) => handleAccordionItemClick(event, index)}
-             on:keydown={(event) => handleKeydown(event, index)}>
-            <h3>{question}</h3>
-            {#if openItem === index}
-                <div class="answer" transition:slide|local={{duration: 250}}>
-                    {@html answer}
-                    {#if copySuccessMessage}
-                        <p class="copy-success">{copySuccessMessage}</p>
-                    {/if}
-                </div>
+        on:click={(event) => handleAccordionItemClick(event, index)}
+        on:keydown={(event) => handleKeydown(event, index)}>
+        <h3>{question}</h3>
+        {#if openItem === index}
+          <div class="answer" transition:slide|local={{duration: 250}}>
+            {#each answerParts as part}
+              {#if part.html}
+                {@html part.html}
+              {/if}
+              {#if part.component}
+                <svelte:component this={part.component} {...part.props} />
+              {/if}
+            {/each}
+            {#if copySuccessMessage}
+              <p class="copy-success">{copySuccessMessage}</p>
             {/if}
-        </div>
+          </div>
+        {/if}
+      </div>
     {/each}
-</div>
+  </div>
 
 
   

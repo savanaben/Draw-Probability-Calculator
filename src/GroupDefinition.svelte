@@ -11,7 +11,7 @@
     import TurnDrawsAccordion from './TurnDrawsAccordion.svelte';
     import { writable } from 'svelte/store';
     import { slide } from 'svelte/transition';
-
+    import { onMount } from 'svelte';
 
     const dispatch = createEventDispatcher();
     let nextIndex = 1; // Initialize the counter for group indexes
@@ -114,13 +114,27 @@ function handleAddGroupClick() {
 }
     
 
+let isBelowBreakpoint = false;
+
+function checkWidth() {
+    isBelowBreakpoint = window.innerWidth < 1100;
+}
+
+onMount(() => {
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    return () => window.removeEventListener('resize', checkWidth);
+});
+
+
 </script>
 
 
 
-<h2 style="text-align: center;">Deck inputs and card groups</h2>
-<p class="larger-text">The Hypergeometric Calulator is best for simulating the chance you'll get non-mana-based cards in your hand. The Monte Carlo Simulation will run advanced simulations that factor mana colors and ramp both in your hand and on the field.</p>
-<p class="larger-text">Simulation results per turn will output in the <a href="#probabilities-jump">Probabilities</a> section.</p>
+<h2 style="text-align: center;">Deck Inputs</h2>
+{#if isBelowBreakpoint}
+    <p class="larger-text">Simulation results per turn will output in the <a href="#probabilities-jump">Probabilities</a> section below.</p>
+{/if}
 
 <div class="parameters">
     
@@ -259,7 +273,8 @@ function handleAddGroupClick() {
                     <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
                 </button>
                 <div slot="content">
-                    <p class="popover-content">The London mulligan feature derives the cumulative probability of your initial draw, mulligans, and subsequent draw-1 turns.
+                    <p class="popover-content">The London mulligan feature derives the cumulative probability of your initial draw, mulligans, and subsequent draw-1 turns.</p>
+                    <p class="popover-content">This does not support first mulligan free logic, but I don't think a lack of this logic will significantly impact results. Mulliganing adds impact based on seeing new hands (I believe cards placed on the bottom of the library should not impact probabilities, as they are the farthest away and might as well still be in your hand...) </p>
                     <p class="popover-content">See the FAQs (bottom of this page) and github if you want to help confirm this logic (mulligan calculations have not been confirmed for setups with more than 1 desired card).</p>
                     <p class="popover-content">Special thanks to Michael Moore for helping me understand the mathematics via <a href='https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html' target='_blank'>this post</a>.</p>
                 </div>

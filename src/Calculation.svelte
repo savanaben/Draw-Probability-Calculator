@@ -1387,7 +1387,7 @@ function manaPoolMeetsRequirements(availableMana, neededCombinations) {
         remainingDeck = removeDrawnCardsFromDeck(remainingDeck, finalHand);
 
         // Log the new hand and remaining deck after redraw
-        console.log(`Mulligan ${mulligansTaken}: Redrawn Hand`, _.cloneDeep(finalHand));
+        console.log(`Mulligan ${mulligansTaken + 1}: Redrawn Hand`, _.cloneDeep(finalHand));
         // console.log(`Mulligan ${mulligansTaken}: Remaining Deck`, _.cloneDeep(finalHand));
       }
 
@@ -2275,22 +2275,22 @@ function createGroupCards(groups, results, probabilitiesByTurn, turn, simulation
 
     $: tabs = ['Live results', ...$clonedOutputDiagrams.map((_, index) => `Trial ${index + 1}`).reverse()];
 
-    $: if ($clonedOutputDiagrams.length > 0) {
-        console.log('clonedOutputDiagrams:', $clonedOutputDiagrams);
-        // Use tick to ensure the DOM is updated before appending nodes
-        tick().then(() => {
-            $clonedOutputDiagrams.forEach(({ id, node }, index) => {
-                const wrapper = document.querySelector(`.cloned-output-wrapper[data-id="${id}"]`);
-                console.log(`Appending node to wrapper with id ${id}:`, wrapper);
-                if (wrapper && !wrapper.hasChildNodes()) {
-                    wrapper.appendChild(node);
-                    console.log(`Node appended to wrapper with id ${id}`);
-                } else {
-                    console.log(`Wrapper with id ${id} already has child nodes or does not exist`);
-                }
-            });
+$: if ($clonedOutputDiagrams.length > 0) {
+    console.log('clonedOutputDiagrams:', $clonedOutputDiagrams);
+    // Use tick to ensure the DOM is updated before appending nodes
+    tick().then(() => {
+        $clonedOutputDiagrams.forEach(({ id, node }, index) => {
+            const wrapper = document.querySelector(`.cloned-output-wrapper[data-id="${id}"]`);
+            console.log(`Appending node to wrapper with id ${id}:`, wrapper);
+            if (wrapper && !wrapper.hasChildNodes()) {
+                wrapper.appendChild(node);
+                console.log(`Node appended to wrapper with id ${id}`);
+            } else {
+                console.log(`Wrapper with id ${id} already has child nodes or does not exist`);
+            }
         });
-    }
+    });
+}
   
 // Function to generate turns array
 $: generateTurnsArray = () => {
@@ -2343,13 +2343,23 @@ function getProbabilityColor(probability) {
 
     <h2 id="probabilities-jump" style="text-align: center; margin-bottom:0;">Probabilities</h2>
     {#if hasOutput}
-    <p style="padding:0.5rem;text-align: center;max-width: 500px;margin: auto;"><i>Each column of stacked cards represents a separate opening hand and subsequent draws.</i>
+    <p style="padding:0.5rem;text-align: center;max-width: 500px;margin: auto;"><i>Output information ➜ </i>
         <Popover bind:show={showPopover} placement="top">
             <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                 <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
             </button>
             <div slot="content">
-                <p class="popover-content">This tool lets you set up multiple individual probability calculations. It's important to know that not all of the inputs above are linked. Use the "Linked groups" feature or Advanced section to calculate the probability of drawing cards from different groups.</p>
+                <p class="popover-content">This tool lets you set up multiple individual probability calculations. It's important to know that each column represents a separate game (the hypergeomentric and monte carlo results are not linked in any way).</p>
+                <ol style="text-align: left;">
+                    <li>The colors represent target probabilities. and are roughly based on Frank Karsten's <a href='https://www.channelfireball.com/article/How-Many-Sources-Do-You-Need-to-Consistently-Cast-Your-Spells-A-2022-Update/dc23a7d2-0a16-4c0b-ad36-586fcca03ad8/' target='_blank'>logic described here</a>.
+                        <ol>
+                            <li><span style="color: #0c7a00; font-weight:bold;">90-100% (Green)</span> = Great odds!</li>
+                            <li><span style="color: #7a6e00; font-weight:bold;">75-89% (Orange)</span> = Somewhat okay (my own judgement, not Franks)</li>
+                            <li><span style="color: #a35800; font-weight:bold;">0-74% (Red)</span> = Not reliable (my own judgement, not Franks)</li>
+                        </ol>
+                    </li>
+                    <li>For monte carlo simulations, the "on curve turn" is equal to the total amount of mana you specified in Step 2. This can help get a sense of if you're able to cast the card you want on-curve (assuming playing one land per turn, so a 5cmc card ideally is cast turn 5).</li>
+                  </ol>
             </div>
         </Popover>
     </p>
@@ -2428,11 +2438,11 @@ function getProbabilityColor(probability) {
     </div>
     
 </div>
-{#each $clonedOutputDiagrams as { id, node }, index}
-<div class="tab-content" style="display: {$activeTab === index + 1 ? 'block' : 'none'};" bind:this={clonedOutputContainer}>
-    <div class="cloned-output-wrapper" data-id={id}></div>
-</div>
-{/each}
+        {#each $clonedOutputDiagrams.slice().reverse() as { id }, index}
+            <div class="tab-content" style="display: {$activeTab === index + 1 ? 'block' : 'none'};">
+                <div class="cloned-output-wrapper" data-id={id}></div>
+            </div>
+        {/each}
 </div>
 </Tabs>
 
@@ -2639,7 +2649,7 @@ function getProbabilityColor(probability) {
     font-style: italic;
     flex-wrap: nowrap;
     flex-direction: row;
-    max-width: 450px;
+    max-width: 430px;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     white-space: normal;

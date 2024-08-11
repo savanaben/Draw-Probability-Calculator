@@ -3,18 +3,27 @@ A draw probability calculator customized for card games like Magic the Gathering
 
 https://savanaben.github.io/Draw-Probability-Calculator/
 
-This tool applies hypergeometric and monte carlo methods of calculation to determine probabilities. For magic, this tool also supports london mulligans. Probably the most unique aspect of this tool is the monte carlo calculation, which can factor card attributes and overlap (something that the hypergeometric method can't do). Parts of this tool are more confirmed mathematically than others, which are outlined below. 
+This tool applies hypergeometric and monte carlo methods of calculation to determine probabilities. For magic, this tool also supports london mulligans. Probably the most unique aspect of this tool is the monte carlo calculation, which can simulate mana sources with multiple colors (a single card with multiple attributes, which hypergeometric math cannot handle) and casting ramp spells based on complex logic.
 
-## Mathematical accuracy
+## The holy grail
+[mtgoncurve](https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html) uses [maximum bipartite matching](https://github.com/mtgoncurve/landlord/blob/master/lib/src/bipartite.rs) logic to handle mana sources with multiple colors. I don't know how this works! My method is more brute-force by calculating all possible combinations, and is much less efficient. 
+
+A refactor of monte carlo simulation logic to somehow use bipartite matching method would drastically reduce load-times and increase accuracy.
+
+## Mathematical accuracy checks
 - hypergeometric and multivatiate math is confirmed
-- mulligan math is mostly confirmed, though not in complex situations with linked (multivariate) groups. 
+- hypergeometric mulligan math is mostly confirmed, though not in complex situations with linked (multivariate) groups. 
 - Monte carlo advanced simulation
 
- ## Notes/to do
- - Fix category name method so it's index-based, and does not require unique text names. 
- - ~~Figure our accurate london mulligan method for multivariate calculations.~~
+ ## Notes/wishlist
+ - Support lands that enter tapped for monte simulation.
+ - Inputting your deck via copy/paste. This is a lofty goal, all ramp spells would have to be mapped to simplified logic. 
+ - The gray background cards in the output were a cool idea to give a sense of your hand/cards seen, but are not reliable. They don't factor variable draws per turn or playing cards in monte simulations. And they mess with the layout. Probably something to just remove. 
+ - Fix hypergeometric group and link naming method so it's index-based, and does not require unique text names. 
+ - ~~Figure out accurate london mulligan method for multivariate calculations.~~
+ - Custom cards should not be allowed to be named "ANY" or "W", "U", "B", "R", "G", or "C", or else they are calculated as lands. Really, lands arrays should not be "naked" (maybe wrap in a better structure so this kind of problem does not happen).
  - Extend linking logic so it's not capped at 4 categories.
- - Extend mulligan support (maybe go up to like 5/6 mulligans).
+ - Extend hypergeometric mulligan support (maybe go up to like 5/6 mulligans).
  - ~~Support adding more turns.~~ 
  - ~~support advanced mana probability calculations~~
 
