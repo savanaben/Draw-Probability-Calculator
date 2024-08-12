@@ -22,7 +22,7 @@ const manaIcons = {
 };
 
 
-
+const uniqueId = `mana-card-${Date.now()}`; // Generate a unique ID using current date/time
 
 
     let dropdownOpen = false;
@@ -216,10 +216,8 @@ width: inherit;
   </div>
 
     <div class="mana-card-header">
-        <label for="manaAmount" class="amount-label">Amount:</label>
-        <input id="manaAmount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 
-        on:focus="{selectInput}"
-        />
+      <label for="{uniqueId}-amount" class="amount-label">Amount:</label>
+      <input id="{uniqueId}-amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} on:focus="{selectInput}" />
     </div>
 </div>
 

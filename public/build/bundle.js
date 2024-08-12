@@ -7539,7 +7539,7 @@ var app = (function () {
 
     function get_each_context$a(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
+    	child_ctx[10] = list[i];
     	return child_ctx;
     }
 
@@ -7555,7 +7555,7 @@ var app = (function () {
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[4](/*mana*/ ctx[9]);
+    		return /*click_handler*/ ctx[5](/*mana*/ ctx[10]);
     	}
 
     	const block = {
@@ -7563,15 +7563,19 @@ var app = (function () {
     			button = element("button");
     			img = element("img");
     			t = space();
-    			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[1][/*mana*/ ctx[9]].icon)) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "" + (/*mana*/ ctx[9] + " mana icon"));
+    			if (!src_url_equal(img.src, img_src_value = /*manaIcons*/ ctx[1][/*mana*/ ctx[10]].icon)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "" + (/*mana*/ ctx[10] + " mana icon"));
     			attr_dev(img, "class", "mana-icon");
-    			add_location(img, file$d, 212, 10, 5075);
-    			attr_dev(button, "class", button_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[9]] ? 'active' : '') + " svelte-1a4o2rc");
+    			add_location(img, file$d, 212, 10, 5166);
+    			attr_dev(button, "class", button_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[10]] ? 'active' : '') + " svelte-1a4o2rc");
     			attr_dev(button, "tabindex", "0");
-    			attr_dev(button, "aria-label", /*manaIcons*/ ctx[1][/*mana*/ ctx[9]].label + ' mana');
-    			attr_dev(button, "aria-pressed", button_aria_pressed_value = /*card*/ ctx[0].mana[/*mana*/ ctx[9]] ? 'true' : 'false');
-    			add_location(button, file$d, 206, 6, 4811);
+    			attr_dev(button, "aria-label", /*manaIcons*/ ctx[1][/*mana*/ ctx[10]].label + ' mana');
+
+    			attr_dev(button, "aria-pressed", button_aria_pressed_value = /*card*/ ctx[0].mana[/*mana*/ ctx[10]]
+    			? 'true'
+    			: 'false');
+
+    			add_location(button, file$d, 206, 6, 4902);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -7586,11 +7590,13 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*card*/ 1 && button_class_value !== (button_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[9]] ? 'active' : '') + " svelte-1a4o2rc")) {
+    			if (dirty & /*card*/ 1 && button_class_value !== (button_class_value = "mana-symbol " + (/*card*/ ctx[0].mana[/*mana*/ ctx[10]] ? 'active' : '') + " svelte-1a4o2rc")) {
     				attr_dev(button, "class", button_class_value);
     			}
 
-    			if (dirty & /*card*/ 1 && button_aria_pressed_value !== (button_aria_pressed_value = /*card*/ ctx[0].mana[/*mana*/ ctx[9]] ? 'true' : 'false')) {
+    			if (dirty & /*card*/ 1 && button_aria_pressed_value !== (button_aria_pressed_value = /*card*/ ctx[0].mana[/*mana*/ ctx[10]]
+    			? 'true'
+    			: 'false')) {
     				attr_dev(button, "aria-pressed", button_aria_pressed_value);
     			}
     		},
@@ -7624,6 +7630,7 @@ var app = (function () {
     	let t3;
     	let div2;
     	let label;
+    	let t4;
     	let t5;
     	let input;
     	let current;
@@ -7657,31 +7664,31 @@ var app = (function () {
     			t3 = space();
     			div2 = element("div");
     			label = element("label");
-    			label.textContent = "Amount:";
+    			t4 = text("Amount:");
     			t5 = space();
     			input = element("input");
     			set_style(p, "margin", "0.2rem 0 0.2rem 0");
-    			add_location(p, file$d, 184, 6, 3816);
+    			add_location(p, file$d, 184, 6, 3907);
     			attr_dev(button, "aria-label", "Remove mana group");
     			attr_dev(button, "class", "remove-button svelte-1a4o2rc");
-    			add_location(button, file$d, 199, 8, 4571);
+    			add_location(button, file$d, 199, 8, 4662);
     			attr_dev(div0, "class", "mana-card-header svelte-1a4o2rc");
-    			add_location(div0, file$d, 183, 4, 3778);
+    			add_location(div0, file$d, 183, 4, 3869);
     			attr_dev(div1, "class", "mana-symbols svelte-1a4o2rc");
-    			add_location(div1, file$d, 204, 2, 4733);
-    			attr_dev(label, "for", "manaAmount");
+    			add_location(div1, file$d, 204, 2, 4824);
+    			attr_dev(label, "for", "" + (/*uniqueId*/ ctx[2] + "-amount"));
     			attr_dev(label, "class", "amount-label svelte-1a4o2rc");
-    			add_location(label, file$d, 218, 8, 5238);
-    			attr_dev(input, "id", "manaAmount");
+    			add_location(label, file$d, 218, 6, 5327);
+    			attr_dev(input, "id", "" + (/*uniqueId*/ ctx[2] + "-amount"));
     			attr_dev(input, "class", "amount-input svelte-1a4o2rc");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "placeholder", "Amount");
     			attr_dev(input, "min", "0");
-    			add_location(input, file$d, 219, 8, 5308);
+    			add_location(input, file$d, 219, 6, 5402);
     			attr_dev(div2, "class", "mana-card-header svelte-1a4o2rc");
-    			add_location(div2, file$d, 217, 4, 5198);
+    			add_location(div2, file$d, 217, 4, 5289);
     			attr_dev(div3, "class", "mana-card svelte-1a4o2rc");
-    			add_location(div3, file$d, 182, 2, 3749);
+    			add_location(div3, file$d, 182, 2, 3840);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7705,6 +7712,7 @@ var app = (function () {
     			append_dev(div3, t3);
     			append_dev(div3, div2);
     			append_dev(div2, label);
+    			append_dev(label, t4);
     			append_dev(div2, t5);
     			append_dev(div2, input);
     			set_input_value(input, /*card*/ ctx[0].amount);
@@ -7712,8 +7720,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(button, "click", /*remove*/ ctx[2], false, false, false, false),
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[5]),
+    					listen_dev(button, "click", /*remove*/ ctx[3], false, false, false, false),
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[6]),
     					listen_dev(input, "focus", selectInput$5, false, false, false, false)
     				];
 
@@ -7721,7 +7729,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*card, Object, manaIcons, toggleMana*/ 11) {
+    			if (dirty & /*card, Object, manaIcons, toggleMana*/ 19) {
     				each_value = Object.keys(/*manaIcons*/ ctx[1]);
     				validate_each_argument(each_value);
     				let i;
@@ -7795,6 +7803,7 @@ var app = (function () {
     		C: { icon: img$a, label: 'Colorless' }
     	};
 
+    	const uniqueId = `mana-card-${Date.now()}`; // Generate a unique ID using current date/time
     	let dropdownOpen = false;
     	let buttonPosition = { top: 0, left: 0 };
     	const dispatch = createEventDispatcher();
@@ -7851,6 +7860,7 @@ var app = (function () {
     		GIcon: img$b,
     		CIcon: img$a,
     		manaIcons,
+    		uniqueId,
     		dropdownOpen,
     		buttonPosition,
     		dispatch,
@@ -7870,7 +7880,15 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [card, manaIcons, remove, toggleMana, click_handler, input_input_handler];
+    	return [
+    		card,
+    		manaIcons,
+    		uniqueId,
+    		remove,
+    		toggleMana,
+    		click_handler,
+    		input_input_handler
+    	];
     }
 
     class ManaCard extends SvelteComponentDev {
@@ -9163,13 +9181,13 @@ var app = (function () {
 
     function get_each_context$8(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[14] = list[i];
-    	child_ctx[15] = list;
-    	child_ctx[16] = i;
+    	child_ctx[15] = list[i];
+    	child_ctx[16] = list;
+    	child_ctx[17] = i;
     	return child_ctx;
     }
 
-    // (145:8) {#each card.attributes as attribute, index}
+    // (147:8) {#each card.attributes as attribute, index}
     function create_each_block$8(ctx) {
     	let div;
     	let input;
@@ -9181,17 +9199,17 @@ var app = (function () {
     	let dispose;
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[7].call(input, /*each_value*/ ctx[15], /*index*/ ctx[16]);
+    		/*input_input_handler*/ ctx[8].call(input, /*each_value*/ ctx[16], /*index*/ ctx[17]);
     	}
 
     	function input_handler(...args) {
-    		return /*input_handler*/ ctx[8](/*index*/ ctx[16], ...args);
+    		return /*input_handler*/ ctx[9](/*index*/ ctx[17], ...args);
     	}
 
     	fontawesomeicon = new FontAwesomeIcon({ props: { icon: faTimes }, $$inline: true });
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[9](/*index*/ ctx[16]);
+    		return /*click_handler*/ ctx[10](/*index*/ ctx[17]);
     	}
 
     	const block = {
@@ -9205,17 +9223,17 @@ var app = (function () {
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", "Attribute");
     			attr_dev(input, "class", "svelte-1sq3oh6");
-    			add_location(input, file$b, 146, 16, 3465);
+    			add_location(input, file$b, 148, 16, 3562);
     			attr_dev(button, "aria-label", "Remove custom attribute");
     			attr_dev(button, "class", "remove-attribute-button svelte-1sq3oh6");
-    			add_location(button, file$b, 149, 20, 3705);
+    			add_location(button, file$b, 151, 20, 3802);
     			attr_dev(div, "class", "attribute-row svelte-1sq3oh6");
-    			add_location(div, file$b, 145, 12, 3420);
+    			add_location(div, file$b, 147, 12, 3517);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, input);
-    			set_input_value(input, /*attribute*/ ctx[14]);
+    			set_input_value(input, /*attribute*/ ctx[15]);
     			append_dev(div, t);
     			append_dev(div, button);
     			mount_component(fontawesomeicon, button, null);
@@ -9235,8 +9253,8 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*card*/ 1 && input.value !== /*attribute*/ ctx[14]) {
-    				set_input_value(input, /*attribute*/ ctx[14]);
+    			if (dirty & /*card*/ 1 && input.value !== /*attribute*/ ctx[15]) {
+    				set_input_value(input, /*attribute*/ ctx[15]);
     			}
     		},
     		i: function intro(local) {
@@ -9260,14 +9278,14 @@ var app = (function () {
     		block,
     		id: create_each_block$8.name,
     		type: "each",
-    		source: "(145:8) {#each card.attributes as attribute, index}",
+    		source: "(147:8) {#each card.attributes as attribute, index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (157:12) 
+    // (159:12) 
     function create_trigger_slot$4(ctx) {
     	let button;
     	let fontawesomeicon;
@@ -9291,7 +9309,7 @@ var app = (function () {
     			attr_dev(button, "class", "moreInfo svelte-1sq3oh6");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
-    			add_location(button, file$b, 156, 12, 4120);
+    			add_location(button, file$b, 158, 12, 4217);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -9299,7 +9317,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[10], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[11], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -9325,14 +9343,14 @@ var app = (function () {
     		block,
     		id: create_trigger_slot$4.name,
     		type: "slot",
-    		source: "(157:12) ",
+    		source: "(159:12) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (160:12) 
+    // (162:12) 
     function create_content_slot$4(ctx) {
     	let div;
     	let p0;
@@ -9352,12 +9370,12 @@ var app = (function () {
     			b.textContent = "Limitation";
     			t3 = text(" - Right now, this simulation can only match one card to one desired attribute/card/mana. Let's say you had a card with two attributes (A and B). If you mark below that you desire attribute A and B, the simulation assumes you want two cards to meet those requirements. There is no way to specify that one card can fulfill multiple requirements (a great feature to add, someday).");
     			attr_dev(p0, "class", "popover-content svelte-1sq3oh6");
-    			add_location(p0, file$b, 160, 14, 4429);
-    			add_location(b, file$b, 161, 41, 4744);
+    			add_location(p0, file$b, 162, 14, 4526);
+    			add_location(b, file$b, 163, 41, 4841);
     			attr_dev(p1, "class", "popover-content svelte-1sq3oh6");
-    			add_location(p1, file$b, 161, 14, 4717);
+    			add_location(p1, file$b, 163, 14, 4814);
     			attr_dev(div, "slot", "content");
-    			add_location(div, file$b, 159, 12, 4393);
+    			add_location(div, file$b, 161, 12, 4490);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9377,7 +9395,7 @@ var app = (function () {
     		block,
     		id: create_content_slot$4.name,
     		type: "slot",
-    		source: "(160:12) ",
+    		source: "(162:12) ",
     		ctx
     	});
 
@@ -9401,6 +9419,7 @@ var app = (function () {
     	let t5;
     	let div2;
     	let label;
+    	let t6;
     	let t7;
     	let input1;
     	let current;
@@ -9420,7 +9439,7 @@ var app = (function () {
     	});
 
     	function popover_show_binding(value) {
-    		/*popover_show_binding*/ ctx[11](value);
+    		/*popover_show_binding*/ ctx[12](value);
     	}
 
     	let popover_props = {
@@ -9462,36 +9481,36 @@ var app = (function () {
     			t5 = space();
     			div2 = element("div");
     			label = element("label");
-    			label.textContent = "Amount:";
+    			t6 = text("Amount:");
     			t7 = space();
     			input1 = element("input");
     			attr_dev(input0, "aria-label", "custom group title");
     			attr_dev(input0, "class", "title-input svelte-1sq3oh6");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Title");
-    			add_location(input0, file$b, 136, 8, 2984);
+    			add_location(input0, file$b, 138, 8, 3081);
     			attr_dev(button0, "aria-label", "Remove custom group");
     			attr_dev(button0, "class", "remove-button svelte-1sq3oh6");
-    			add_location(button0, file$b, 139, 8, 3155);
+    			add_location(button0, file$b, 141, 8, 3252);
     			attr_dev(div0, "class", "card-header svelte-1sq3oh6");
-    			add_location(div0, file$b, 135, 4, 2949);
+    			add_location(div0, file$b, 137, 4, 3046);
     			attr_dev(button1, "class", "add-attribute-button svelte-1sq3oh6");
-    			add_location(button1, file$b, 154, 8, 3964);
+    			add_location(button1, file$b, 156, 8, 4061);
     			attr_dev(div1, "class", "attributes-section svelte-1sq3oh6");
-    			add_location(div1, file$b, 143, 4, 3321);
-    			attr_dev(label, "for", "amount");
+    			add_location(div1, file$b, 145, 4, 3418);
+    			attr_dev(label, "for", "" + (/*uniqueId*/ ctx[2] + "-amount"));
     			attr_dev(label, "class", "amount-label svelte-1sq3oh6");
-    			add_location(label, file$b, 166, 8, 5238);
-    			attr_dev(input1, "id", "amount");
+    			add_location(label, file$b, 168, 8, 5335);
+    			attr_dev(input1, "id", "" + (/*uniqueId*/ ctx[2] + "-amount"));
     			attr_dev(input1, "class", "amount-input svelte-1sq3oh6");
     			attr_dev(input1, "type", "number");
     			attr_dev(input1, "placeholder", "Amount");
     			attr_dev(input1, "min", "0");
-    			add_location(input1, file$b, 167, 8, 5304);
+    			add_location(input1, file$b, 169, 8, 5412);
     			attr_dev(div2, "class", "card-footer svelte-1sq3oh6");
-    			add_location(div2, file$b, 165, 4, 5203);
+    			add_location(div2, file$b, 167, 4, 5300);
     			attr_dev(div3, "class", "custom-card svelte-1sq3oh6");
-    			add_location(div3, file$b, 134, 0, 2918);
+    			add_location(div3, file$b, 136, 0, 3015);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9520,6 +9539,7 @@ var app = (function () {
     			append_dev(div3, t5);
     			append_dev(div3, div2);
     			append_dev(div2, label);
+    			append_dev(label, t6);
     			append_dev(div2, t7);
     			append_dev(div2, input1);
     			set_input_value(input1, /*card*/ ctx[0].amount);
@@ -9527,11 +9547,11 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[6]),
+    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[7]),
     					listen_dev(input0, "focus", selectInput$3, false, false, false, false),
-    					listen_dev(button0, "click", /*remove*/ ctx[2], false, false, false, false),
-    					listen_dev(button1, "click", /*addAttribute*/ ctx[3], false, false, false, false),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[12]),
+    					listen_dev(button0, "click", /*remove*/ ctx[3], false, false, false, false),
+    					listen_dev(button1, "click", /*addAttribute*/ ctx[4], false, false, false, false),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[13]),
     					listen_dev(input1, "focus", selectInput$3, false, false, false, false)
     				];
 
@@ -9543,7 +9563,7 @@ var app = (function () {
     				set_input_value(input0, /*card*/ ctx[0].title);
     			}
 
-    			if (dirty & /*removeAttribute, faTimes, card, updateAttribute, selectInput*/ 49) {
+    			if (dirty & /*removeAttribute, faTimes, card, updateAttribute, selectInput*/ 97) {
     				each_value = /*card*/ ctx[0].attributes;
     				validate_each_argument(each_value);
     				let i;
@@ -9573,7 +9593,7 @@ var app = (function () {
 
     			const popover_changes = {};
 
-    			if (dirty & /*$$scope, showPopover*/ 131074) {
+    			if (dirty & /*$$scope, showPopover*/ 262146) {
     				popover_changes.$$scope = { dirty, ctx };
     			}
 
@@ -9640,6 +9660,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('CustomCard', slots, []);
     	const dispatch = createEventDispatcher();
+    	const uniqueId = `mana-card-${Date.now()}`; // Generate a unique ID using current date/time
     	let showPopover = false;
     	let { card = { title: '', attributes: [], amount: 0 } } = $$props;
 
@@ -9706,6 +9727,7 @@ var app = (function () {
     		Popover,
     		faQuestionCircle,
     		dispatch,
+    		uniqueId,
     		showPopover,
     		card,
     		remove,
@@ -9727,6 +9749,7 @@ var app = (function () {
     	return [
     		card,
     		showPopover,
+    		uniqueId,
     		remove,
     		addAttribute,
     		removeAttribute,
@@ -11592,6 +11615,8 @@ var app = (function () {
     	let b;
     	let t1;
     	let p1;
+    	let t3;
+    	let p2;
 
     	const block = {
     		c: function create() {
@@ -11601,12 +11626,17 @@ var app = (function () {
     			b.textContent = "Caution - increasing this may crash your browser!";
     			t1 = space();
     			p1 = element("p");
-    			p1.textContent = "This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.";
+    			p1.textContent = "This parameter changes the number of iterations taken for the monte carlo simulation. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time and accuracy.";
+    			t3 = space();
+    			p2 = element("p");
+    			p2.textContent = "My testing has shown 5000 iterations provides results to within about 1% accuracy (give or take half a percent).";
     			add_location(b, file$9, 1077, 58, 34660);
     			attr_dev(p0, "class", "popover-content popover-text-fixer svelte-mks43d");
     			add_location(p0, file$9, 1077, 12, 34614);
     			attr_dev(p1, "class", "popover-content popover-text-fixer svelte-mks43d");
     			add_location(p1, file$9, 1078, 12, 34730);
+    			attr_dev(p2, "class", "popover-content popover-text-fixer svelte-mks43d");
+    			add_location(p2, file$9, 1079, 12, 35077);
     			attr_dev(div, "slot", "content");
     			add_location(div, file$9, 1076, 10, 34580);
     		},
@@ -11616,6 +11646,8 @@ var app = (function () {
     			append_dev(p0, b);
     			append_dev(div, t1);
     			append_dev(div, p1);
+    			append_dev(div, t3);
+    			append_dev(div, p2);
     		},
     		p: noop$3,
     		d: function destroy(detaching) {
@@ -38414,13 +38446,13 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			button = element("button");
-    			button.textContent = "venmoing me half a coffee";
+    			button.textContent = "venmo me half a coffee";
     			attr_dev(button, "id", "moreInfo");
-    			attr_dev(button, "class", "moreInfo svelte-15hljd");
+    			attr_dev(button, "class", "moreInfo svelte-6dcv4g");
     			attr_dev(button, "slot", "trigger");
     			attr_dev(button, "tabindex", "-1");
     			attr_dev(button, "aria-label", "donate to me if you want!");
-    			add_location(button, file$3, 45, 8, 4078);
+    			add_location(button, file$3, 45, 8, 4161);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -38475,18 +38507,18 @@ var app = (function () {
     			a1.textContent = "Open in mobile app";
     			if (!src_url_equal(img.src, img_src_value = "venmo_qrcode.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Coffee Image");
-    			add_location(img, file$3, 50, 10, 4368);
+    			add_location(img, file$3, 50, 10, 4448);
     			attr_dev(a0, "href", "https://venmo.com/u/Benjamin-Gross-10");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$3, 52, 12, 4431);
-    			add_location(br, file$3, 52, 91, 4510);
+    			add_location(a0, file$3, 52, 12, 4511);
+    			add_location(br, file$3, 52, 91, 4590);
     			attr_dev(a1, "href", "venmo://paycharge?txn=pay&recipients=Benjamin-Gross-10&amount=2.5&note=half-a-coffee");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$3, 53, 12, 4528);
-    			attr_dev(div0, "class", "popover-group svelte-15hljd");
-    			add_location(div0, file$3, 49, 10, 4327);
+    			add_location(a1, file$3, 53, 12, 4608);
+    			attr_dev(div0, "class", "popover-group svelte-6dcv4g");
+    			add_location(div0, file$3, 49, 10, 4407);
     			attr_dev(div1, "slot", "content");
-    			add_location(div1, file$3, 48, 8, 4295);
+    			add_location(div1, file$3, 48, 8, 4375);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -38528,7 +38560,7 @@ var app = (function () {
     	let t5;
     	let strong0;
     	let t7;
-    	let a;
+    	let a0;
     	let t9;
     	let t10;
     	let li1;
@@ -38538,9 +38570,11 @@ var app = (function () {
     	let t14;
     	let p1;
     	let t15;
+    	let a1;
+    	let t17;
     	let popover;
     	let updating_show;
-    	let t16;
+    	let t18;
     	let current;
 
     	function popover_show_binding(value) {
@@ -38580,38 +38614,43 @@ var app = (function () {
     			strong0 = element("strong");
     			strong0.textContent = "monte carlo simulator";
     			t7 = text(" customized for magic the gathering. This simulator runs thousands of hand draws to calculate more complex probabilities, such as the chance you'll get the right colors of mana. The most advanced feature I recommend trying out is the ability to add ramp cards. See the ");
-    			a = element("a");
-    			a.textContent = "monte carlo FAQ";
+    			a0 = element("a");
+    			a0.textContent = "monte carlo FAQ";
     			t9 = text(" to learn how the simulation logic works.");
     			t10 = space();
     			li1 = element("li");
     			t11 = text("A ");
     			strong1 = element("strong");
-    			strong1.textContent = "hypergeometric";
-    			t13 = text(" probability calculator, which provides exact probabilities for questions like, \"what are the chances I draw one draw spell and two lands in my opening hand.\" This tool is comparable to others, but provides some added features in the way of mulligans, variable draws per turn, and group linking.");
+    			strong1.textContent = "hypergeometric probability calculator";
+    			t13 = text(", which provides exact probabilities for questions like, \"what are the chances I draw one draw spell and two lands in my opening hand.\" This tool is comparable to others, but provides some added features in the way of mulligans, variable draws per turn, and group linking.");
     			t14 = space();
     			p1 = element("p");
-    			t15 = text("If you find this helpful, consider emailing me with feedback or\r\n      ");
+    			t15 = text("If you find this helpful, consider emailing me your feedback or contributing (see feedback FAQ ");
+    			a1 = element("a");
+    			a1.textContent = "below";
+    			t17 = text("). You can also\r\n      ");
     			create_component(popover.$$.fragment);
-    			t16 = text("\r\n   🙂.");
+    			t18 = text("\r\n   🙂.");
     			attr_dev(link, "href", "https://fonts.googleapis.com/css2?family=Vollkorn:wght@700&display=swap");
     			attr_dev(link, "rel", "stylesheet");
     			add_location(link, file$3, 31, 2, 2816);
-    			attr_dev(h1, "class", "title svelte-15hljd");
+    			attr_dev(h1, "class", "title svelte-6dcv4g");
     			add_location(h1, file$3, 35, 4, 2959);
     			attr_dev(p0, "class", "larger-text");
     			add_location(p0, file$3, 36, 4, 3015);
     			add_location(strong0, file$3, 38, 14, 3140);
-    			attr_dev(a, "href", "#monte-carlo-faq");
-    			add_location(a, file$3, 38, 321, 3447);
+    			attr_dev(a0, "href", "#monte-carlo-faq");
+    			add_location(a0, file$3, 38, 321, 3447);
     			add_location(li0, file$3, 38, 8, 3134);
     			add_location(strong1, file$3, 40, 14, 3565);
     			add_location(li1, file$3, 40, 8, 3559);
-    			attr_dev(ul, "class", "larger-text list-adjuster svelte-15hljd");
+    			attr_dev(ul, "class", "larger-text list-adjuster svelte-6dcv4g");
     			add_location(ul, file$3, 37, 6, 3086);
+    			attr_dev(a1, "href", "#monte-carlo-faq");
+    			add_location(a1, file$3, 43, 101, 4040);
     			attr_dev(p1, "class", "larger-text");
     			add_location(p1, file$3, 42, 4, 3914);
-    			attr_dev(div, "class", "intro-section svelte-15hljd");
+    			attr_dev(div, "class", "intro-section svelte-6dcv4g");
     			add_location(div, file$3, 34, 2, 2926);
     		},
     		l: function claim(nodes) {
@@ -38630,7 +38669,7 @@ var app = (function () {
     			append_dev(li0, t5);
     			append_dev(li0, strong0);
     			append_dev(li0, t7);
-    			append_dev(li0, a);
+    			append_dev(li0, a0);
     			append_dev(li0, t9);
     			append_dev(ul, t10);
     			append_dev(ul, li1);
@@ -38640,8 +38679,10 @@ var app = (function () {
     			append_dev(div, t14);
     			append_dev(div, p1);
     			append_dev(p1, t15);
+    			append_dev(p1, a1);
+    			append_dev(p1, t17);
     			mount_component(popover, p1, null);
-    			append_dev(p1, t16);
+    			append_dev(p1, t18);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
@@ -38764,31 +38805,28 @@ var app = (function () {
     	let t1;
     	let p0;
     	let i0;
-    	let t3;
-    	let p1;
-    	let i1;
-    	let t4;
+    	let t2;
     	let strong;
-    	let t5_value = formatCount(/*$neededCombinationsCount*/ ctx[2]) + "";
+    	let t3_value = formatCount(/*$neededCombinationsCount*/ ctx[2]) + "";
+    	let t3;
+    	let t4;
     	let t5;
     	let t6;
-    	let t7;
+    	let p1;
+    	let i1;
     	let t8;
     	let p2;
-    	let i2;
     	let t10;
-    	let p3;
-    	let t12;
     	let progress0;
+    	let t11;
+    	let t12;
     	let t13;
-    	let t14;
+    	let p3;
     	let t15;
-    	let p4;
-    	let t17;
     	let progress1;
+    	let t16;
+    	let t17;
     	let t18;
-    	let t19;
-    	let t20;
     	let button;
     	let mounted;
     	let dispose;
@@ -38802,62 +38840,55 @@ var app = (function () {
     			t1 = space();
     			p0 = element("p");
     			i0 = element("i");
-    			i0.textContent = "Simulations with large amounts of cards, desired cards, or possible combinations can be slower to start.";
-    			t3 = space();
+    			t2 = text("Your desired cards can be drawn through ");
+    			strong = element("strong");
+    			t3 = text(t3_value);
+    			t4 = text(" ");
+    			t5 = text("combination(s).");
+    			t6 = space();
     			p1 = element("p");
     			i1 = element("i");
-    			t4 = text("Your desired cards can be drawn through ");
-    			strong = element("strong");
-    			t5 = text(t5_value);
-    			t6 = text(" ");
-    			t7 = text("combination(s).");
+    			i1.textContent = "If this is taking too long, you can try decreasing the iteration value. This will reduce probability accuracy. 5000 iterations provides results to within about 0.5% - 1.5% accuracy.";
     			t8 = space();
     			p2 = element("p");
-    			i2 = element("i");
-    			i2.textContent = "If it's taking too long, you can try decreasing the iteration value. This will reduce probability accuracy.";
+    			p2.textContent = "Calculate combinations:";
     			t10 = space();
-    			p3 = element("p");
-    			p3.textContent = "Calculate combinations";
-    			t12 = space();
     			progress0 = element("progress");
-    			t13 = text(/*$combinationProgress*/ ctx[3]);
-    			t14 = text("%");
+    			t11 = text(/*$combinationProgress*/ ctx[3]);
+    			t12 = text("%");
+    			t13 = space();
+    			p3 = element("p");
+    			p3.textContent = "Simulate draws and turns:";
     			t15 = space();
-    			p4 = element("p");
-    			p4.textContent = "Simulate draws and turns";
-    			t17 = space();
     			progress1 = element("progress");
-    			t18 = text(/*$simulationProgress*/ ctx[4]);
-    			t19 = text("%");
-    			t20 = space();
+    			t16 = text(/*$simulationProgress*/ ctx[4]);
+    			t17 = text("%");
+    			t18 = space();
     			button = element("button");
     			button.textContent = "Cancel Simulation";
     			attr_dev(h2, "class", "svelte-4ub2o8");
     			add_location(h2, file$2, 39, 8, 947);
+    			add_location(strong, file$2, 40, 54, 1037);
     			add_location(i0, file$2, 40, 11, 994);
     			attr_dev(p0, "class", "svelte-4ub2o8");
     			add_location(p0, file$2, 40, 8, 991);
-    			add_location(strong, file$2, 41, 54, 1165);
-    			add_location(i1, file$2, 41, 11, 1122);
+    			add_location(i1, file$2, 41, 11, 1135);
     			attr_dev(p1, "class", "svelte-4ub2o8");
-    			add_location(p1, file$2, 41, 8, 1119);
-    			add_location(i2, file$2, 42, 11, 1263);
+    			add_location(p1, file$2, 41, 8, 1132);
     			attr_dev(p2, "class", "svelte-4ub2o8");
-    			add_location(p2, file$2, 42, 8, 1260);
-    			attr_dev(p3, "class", "svelte-4ub2o8");
-    			add_location(p3, file$2, 43, 8, 1391);
+    			add_location(p2, file$2, 42, 8, 1337);
     			attr_dev(progress0, "class", "progress-bar svelte-4ub2o8");
     			progress0.value = /*$combinationProgress*/ ctx[3];
     			attr_dev(progress0, "max", "100");
-    			add_location(progress0, file$2, 44, 8, 1430);
-    			attr_dev(p4, "class", "svelte-4ub2o8");
-    			add_location(p4, file$2, 45, 8, 1548);
+    			add_location(progress0, file$2, 43, 8, 1377);
+    			attr_dev(p3, "class", "svelte-4ub2o8");
+    			add_location(p3, file$2, 44, 8, 1495);
     			attr_dev(progress1, "class", "progress-bar svelte-4ub2o8");
     			progress1.value = /*$simulationProgress*/ ctx[4];
     			attr_dev(progress1, "max", "100");
-    			add_location(progress1, file$2, 46, 8, 1589);
+    			add_location(progress1, file$2, 45, 8, 1537);
     			attr_dev(button, "class", "svelte-4ub2o8");
-    			add_location(button, file$2, 47, 8, 1705);
+    			add_location(button, file$2, 46, 8, 1653);
     			attr_dev(div0, "class", "modal-content svelte-4ub2o8");
     			add_location(div0, file$2, 38, 4, 910);
     			attr_dev(div1, "class", "modal svelte-4ub2o8");
@@ -38870,30 +38901,27 @@ var app = (function () {
     			append_dev(div0, t1);
     			append_dev(div0, p0);
     			append_dev(p0, i0);
-    			append_dev(div0, t3);
+    			append_dev(i0, t2);
+    			append_dev(i0, strong);
+    			append_dev(strong, t3);
+    			append_dev(strong, t4);
+    			append_dev(i0, t5);
+    			append_dev(div0, t6);
     			append_dev(div0, p1);
     			append_dev(p1, i1);
-    			append_dev(i1, t4);
-    			append_dev(i1, strong);
-    			append_dev(strong, t5);
-    			append_dev(strong, t6);
-    			append_dev(i1, t7);
     			append_dev(div0, t8);
     			append_dev(div0, p2);
-    			append_dev(p2, i2);
     			append_dev(div0, t10);
-    			append_dev(div0, p3);
-    			append_dev(div0, t12);
     			append_dev(div0, progress0);
-    			append_dev(progress0, t13);
-    			append_dev(progress0, t14);
+    			append_dev(progress0, t11);
+    			append_dev(progress0, t12);
+    			append_dev(div0, t13);
+    			append_dev(div0, p3);
     			append_dev(div0, t15);
-    			append_dev(div0, p4);
-    			append_dev(div0, t17);
     			append_dev(div0, progress1);
-    			append_dev(progress1, t18);
-    			append_dev(progress1, t19);
-    			append_dev(div0, t20);
+    			append_dev(progress1, t16);
+    			append_dev(progress1, t17);
+    			append_dev(div0, t18);
     			append_dev(div0, button);
     			/*button_binding*/ ctx[6](button);
 
@@ -38903,14 +38931,14 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$neededCombinationsCount*/ 4 && t5_value !== (t5_value = formatCount(/*$neededCombinationsCount*/ ctx[2]) + "")) set_data_dev(t5, t5_value);
-    			if (dirty & /*$combinationProgress*/ 8) set_data_dev(t13, /*$combinationProgress*/ ctx[3]);
+    			if (dirty & /*$neededCombinationsCount*/ 4 && t3_value !== (t3_value = formatCount(/*$neededCombinationsCount*/ ctx[2]) + "")) set_data_dev(t3, t3_value);
+    			if (dirty & /*$combinationProgress*/ 8) set_data_dev(t11, /*$combinationProgress*/ ctx[3]);
 
     			if (dirty & /*$combinationProgress*/ 8) {
     				prop_dev(progress0, "value", /*$combinationProgress*/ ctx[3]);
     			}
 
-    			if (dirty & /*$simulationProgress*/ 16) set_data_dev(t18, /*$simulationProgress*/ ctx[4]);
+    			if (dirty & /*$simulationProgress*/ 16) set_data_dev(t16, /*$simulationProgress*/ ctx[4]);
 
     			if (dirty & /*$simulationProgress*/ 16) {
     				prop_dev(progress1, "value", /*$simulationProgress*/ ctx[4]);

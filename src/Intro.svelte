@@ -38,13 +38,13 @@
       <ul class="larger-text list-adjuster">
         <li>A <strong>monte carlo simulator</strong> customized for magic the gathering. This simulator runs thousands of hand draws to calculate more complex probabilities, such as the chance you'll get the right colors of mana. The most advanced feature I recommend trying out is the ability to add ramp cards. See the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how the simulation logic works.
         </li>
-        <li>A <strong>hypergeometric</strong> probability calculator, which provides exact probabilities for questions like, "what are the chances I draw one draw spell and two lands in my opening hand." This tool is comparable to others, but provides some added features in the way of mulligans, variable draws per turn, and group linking.</li>
+        <li>A <strong>hypergeometric probability calculator</strong>, which provides exact probabilities for questions like, "what are the chances I draw one draw spell and two lands in my opening hand." This tool is comparable to others, but provides some added features in the way of mulligans, variable draws per turn, and group linking.</li>
      </ul>
     <p class="larger-text">
-      If you find this helpful, consider emailing me with feedback or
+      If you find this helpful, consider emailing me your feedback or contributing (see feedback FAQ <a href="#monte-carlo-faq">below</a>). You can also
       <Popover bind:show={showPopover} placement="bottom">
         <button id="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="donate to me if you want!">
-          venmoing me half a coffee
+          venmo me half a coffee
         </button>
         <div slot="content">
           <div class="popover-group">  
@@ -83,7 +83,7 @@
   }
 
 .list-adjuster {
-  padding: 0px 45px 0px 45px;
+  padding: 0px 30px 0px 30px;
   margin-top: 0.2rem;
 }
 
@@ -100,6 +100,10 @@
 .title {
   font-size: 32px;
 }
+
+.list-adjuster {
+      padding: 0px 20px 0px 20px;
+    }
 }
 
   .subtitle {

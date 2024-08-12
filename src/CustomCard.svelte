@@ -7,6 +7,8 @@
    
   const dispatch = createEventDispatcher();
  
+  const uniqueId = `mana-card-${Date.now()}`; // Generate a unique ID using current date/time
+
   let showPopover = false;
 
     export let card = {
@@ -164,8 +166,8 @@ function selectInput(event) {
           </Popover>
     </div>
     <div class="card-footer">
-        <label for="amount" class="amount-label">Amount:</label>
-        <input id="amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 
+        <label for="{uniqueId}-amount" class="amount-label">Amount:</label>
+        <input id="{uniqueId}-amount" class="amount-input" type="number" placeholder="Amount" min="0" bind:value={card.amount} 
         on:focus="{selectInput}"
         />
     </div>

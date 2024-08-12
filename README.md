@@ -12,8 +12,10 @@ A refactor of monte carlo simulation logic to somehow use bipartite matching met
 
 ## Mathematical accuracy checks
 - hypergeometric and multivatiate math is confirmed
-- hypergeometric mulligan math is mostly confirmed, though not in complex situations with linked (multivariate) groups. 
-- Monte carlo advanced simulation
+- hypergeometric mulligan math is mostly confirmed, though not in complex situations with linked (multivariate) groups.
+- Monte carlo advanced simulation checks:
+   - When comparing my outputs to [mtgoncurve](https://mtgoncurve.com/), I sometimes note a 1-2% difference when adding in basic mulligan logic (no free mulligan, set the same max/min lands accepted, set mtgoncurve with a simple theoretical scenario like 25 plains and 74 Dawn Elementals to test a 4 cmc card). Set the monte carlo to 20k ish iterations for best accuracy in this simpler test. I don't know what could cause this, and some situations increase the margin more or less. I wonder if it has to do with the london aspect of london mulligan (confirm mtgoncurve is placing a sort of... non-wanted card on the bottom?).
+
 
  ## Notes/wishlist
  - Support lands that enter tapped for monte simulation.

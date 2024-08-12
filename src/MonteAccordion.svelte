@@ -1076,7 +1076,8 @@ function selectInput(event) {
           </button>
           <div slot="content">
             <p class="popover-content popover-text-fixer"><b>Caution - increasing this may crash your browser!</p>
-            <p class="popover-content popover-text-fixer">This parameter changes the number of samples taken for this advanced probabilities section. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time.</p>
+            <p class="popover-content popover-text-fixer">This parameter changes the number of iterations taken for the monte carlo simulation. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time and accuracy.</p>
+            <p class="popover-content popover-text-fixer">My testing has shown 5000 iterations provides results to within about 1% accuracy (give or take half a percent).</p>
           </div>
         </Popover>
       </div>

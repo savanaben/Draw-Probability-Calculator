@@ -261,7 +261,6 @@ h4 {
 		font-size: 20px;
 		line-height: 1.6;
 		margin-bottom: 0px;
-		padding: 0px 20px 0px 20px;
 	  }
 	  
 	  @media (max-width: 768px) {
@@ -269,13 +268,6 @@ h4 {
 	  font-size: 18px;
 	 }
 	}
-
-	@media (max-width: 480px) {
-		.larger-text {
-		  padding: 0px 10px 0px 10px;
-		}
-	
-	  }
 
 
 
