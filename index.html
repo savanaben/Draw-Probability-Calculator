@@ -14,19 +14,21 @@
 
     <!-- Conditionally load Google Analytics -->
     <script>
-        if (process.env.NODE_ENV === 'production') {
-            var script = document.createElement('script');
-            script.async = true;
-            script.src = "https://www.googletagmanager.com/gtag/js?id=G-927EKMRK7V";
-            document.head.appendChild(script);
+    console.log('Environment:', process.env.NODE_ENV); // Add this line to log the environment
 
-            script.onload = function() {
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-927EKMRK7V');
-            };
-        }
+    if (process.env.NODE_ENV === 'production') {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-927EKMRK7V";
+        document.head.appendChild(script);
+
+        script.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-927EKMRK7V');
+        };
+    }
     </script>
 
 <!-- turn off console logs for project -->
