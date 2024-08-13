@@ -14,25 +14,28 @@
 
     <!-- Conditionally load Google Analytics -->
     <script>
-    const productionUrl = 'https://savanaben.github.io/Draw-Probability-Calculator/';
-    if (window.location.href.startsWith(productionUrl)) {
-      // Load Google Analytics scripts
-      var script1 = document.createElement('script');
-      script1.async = true;
-      script1.src = "https://www.googletagmanager.com/gtag/js?id=G-927EKMRK7V";
-      document.body.appendChild(script1);
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if the current URL matches the production URL
+      const productionUrl = 'https://savanaben.github.io/Draw-Probability-Calculator/';
+      if (window.location.href.startsWith(productionUrl)) {
+        // Load Google Analytics scripts
+        var script1 = document.createElement('script');
+        script1.async = true;
+        script1.src = "https://www.googletagmanager.com/gtag/js?id=G-927EKMRK7V";
+        document.body.appendChild(script1);
 
-      script1.onload = function() {
-        var script2 = document.createElement('script');
-        script2.innerHTML = `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-927EKMRK7V');
-        `;
-        document.body.appendChild(script2);
-      };
-    }
+        script1.onload = function() {
+          var script2 = document.createElement('script');
+          script2.innerHTML = `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-927EKMRK7V');
+          `;
+          document.body.appendChild(script2);
+        };
+      }
+    });
 
     // if ('<%= htmlWebpackPlugin.options.environment %>' === 'production') {
     //         var script = document.createElement('script');
