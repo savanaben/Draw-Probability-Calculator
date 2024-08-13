@@ -14,9 +14,8 @@
 
     <!-- Conditionally load Google Analytics -->
     <script>
-    console.log('Environment:', process.env.NODE_ENV);
-    console.log('Deploy:', process.env.DEPLOY); // Add this line to log the deploy status
-    if (process.env.DEPLOY === 'true') {
+    const productionUrl = 'https://savanaben.github.io/Draw-Probability-Calculator/';
+    if (window.location.href.startsWith(productionUrl)) {
       var script = document.createElement('script');
       script.async = true;
       script.src = "https://www.googletagmanager.com/gtag/js?id=G-927EKMRK7V";
