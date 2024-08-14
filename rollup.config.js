@@ -34,6 +34,9 @@ function serve() {
 	};
 }
 
+console.log('Building with NODE_ENV:', process.env.NODE_ENV);
+
+
 export default {
 	input: 'src/main.js',
 	output: {
@@ -43,6 +46,12 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+				// Replace environment variables
+				replace({
+					'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+					'process.env.DEPLOY': JSON.stringify(process.env.DEPLOY || 'false'),
+					preventAssignment: true
+				  }),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
@@ -78,13 +87,7 @@ export default {
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
 		production && terser(),
-		postcss(),
-
-		// Replace environment variables
-		replace({
-			preventAssignment: true,
-			'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development')
-		})
+		postcss()
 	],
 	watch: {
 		clearScreen: false

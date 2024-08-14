@@ -2344,7 +2344,7 @@ function getProbabilityColor(probability) {
     <h2 id="probabilities-jump" style="text-align: center; margin-bottom:0;">Probabilities</h2>
     {#if hasOutput}
     <p style="padding:0.5rem;text-align: center;max-width: 500px;margin: auto;"><i>Output information ➜ </i>
-        <Popover bind:show={showPopover} placement="top">
+        <Popover bind:show={showPopover} placement="bottom">
             <button class="moreInfo"  slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover} aria-label="Help">
                 <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
             </button>

@@ -928,7 +928,7 @@ function selectInput(event) {
 
 
 
-      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. Custom groups only work in Hand Simulations.</p>
+      <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. Custom groups only work in hand simulations.</p>
       <div class="mana-cards-container">
         {#each manaCards as card (card.id)}
         <ManaCard
@@ -1048,7 +1048,19 @@ function selectInput(event) {
 
 
              <!-- Mana Requirements Fields -->
-             <p><strong>Step 3</strong> - Run the simulation. You can add advanced mulligan logic too. </p>
+             <p><strong>Step 3</strong> - Run a simulation. Learn what a field vs. hand simulation is here ➜ 
+              <Popover bind:show={showPopover} placement="top">
+                <button id ="moreInfo" class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
+                  <FontAwesomeIcon style="height: 1.2em; vertical-align: -0.155em; color:#0066e9;" icon={faQuestionCircle} />
+                </button>
+                <div slot="content">
+                    <p class="popover-content popover-text-fixer">The <strong>field simulation</strong> plays your lands and ramp spells, and check your mana pool against the mana requirements above.</p>
+                    <p class="popover-content popover-text-fixer">The <strong>hand simulation</strong> checks your hand for the correct colors and cards. Ramp spells essentially act as 1 mana (producing the colors you specified in the ramp group).</p>
+                    <p class="popover-content popover-text-fixer">See the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how the simulation logic works.</p>
+                </div>
+              </Popover>
+             </p>
+             <p>You can also add advanced mulligan logic below.</p>
 
 
       <div class="land-group-parameters">
@@ -1076,7 +1088,7 @@ function selectInput(event) {
           </button>
           <div slot="content">
             <p class="popover-content popover-text-fixer"><b>Caution - increasing this may crash your browser!</p>
-            <p class="popover-content popover-text-fixer">This parameter changes the number of iterations taken for the monte carlo simulation. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing this in 1000-2000 increments to test how it impacts simulation time and accuracy.</p>
+            <p class="popover-content popover-text-fixer">This parameter changes the number of iterations taken for the monte carlo simulation. More iterations will result in more accurate probabilities, but increases the calculation time. Consider increasing/decreasing this in 1000-2000 increments to test how it impacts simulation time and accuracy.</p>
             <p class="popover-content popover-text-fixer">My testing has shown 5000 iterations provides results to within about 1% accuracy (give or take half a percent).</p>
           </div>
         </Popover>

@@ -5,20 +5,13 @@ https://savanaben.github.io/Draw-Probability-Calculator/
 
 This tool applies hypergeometric and monte carlo methods of calculation to determine probabilities. For magic, this tool also supports london mulligans. Probably the most unique aspect of this tool is the monte carlo calculation, which can simulate mana sources with multiple colors (a single card with multiple attributes, which hypergeometric math cannot handle) and casting ramp spells based on complex logic.
 
-## The holy grail
-[mtgoncurve](https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html) uses [maximum bipartite matching](https://github.com/mtgoncurve/landlord/blob/master/lib/src/bipartite.rs) logic to handle mana sources with multiple colors. I don't know how this works! My method is more brute-force by calculating all possible combinations, and is much less efficient. 
+## The holy grails of backlog
+- [mtgoncurve](https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html) uses [maximum bipartite matching](https://github.com/mtgoncurve/landlord/blob/master/lib/src/bipartite.rs) logic to handle mana sources with multiple colors. I don't know how this works! My method is more brute-force by calculating all possible combinations, and is much less efficient. A refactor of monte carlo simulation logic to somehow use bipartite matching method would drastically reduce load-times and increase accuracy.
+- Support lands that enter tapped for monte simulation.
 
-A refactor of monte carlo simulation logic to somehow use bipartite matching method would drastically reduce load-times and increase accuracy.
-
-## Mathematical accuracy checks
-- hypergeometric and multivatiate math is confirmed
-- hypergeometric mulligan math is mostly confirmed, though not in complex situations with linked (multivariate) groups.
-- Monte carlo advanced simulation checks:
-   - When comparing my outputs to [mtgoncurve](https://mtgoncurve.com/), I sometimes note a 1-2% difference when adding in basic mulligan logic (no free mulligan, set the same max/min lands accepted, set mtgoncurve with a simple theoretical scenario like 25 plains and 74 Dawn Elementals to test a 4 cmc card). Set the monte carlo to 20k ish iterations for best accuracy in this simpler test. I don't know what could cause this, and some situations increase the margin more or less. I wonder if it has to do with the london aspect of london mulligan (confirm mtgoncurve is placing a sort of... non-wanted card on the bottom?).
-
-
- ## Notes/wishlist
- - Support lands that enter tapped for monte simulation.
+ ## Notes/backlog
+ - The monte carlo mulligan UX is not intuitive. Other tools will do something like "mulligan down to..x cards". What makes less sense is how my 1 free mulligan toggle sort of is additive, on-top of the Max mulligans.  
+ - The hand simulation should maybe factor in "Total mana ramp can produce" when counting if the cards in your hand meet the requirements. for example, if a ramp spell can make BW and "total mana ramp can produce" is 2, perhaps this ramp should be looked at as two BW sources (almost like two lands). This is fuzzy logic... not sure on this. 
  - Inputting your deck via copy/paste. This is a lofty goal, all ramp spells would have to be mapped to simplified logic. 
  - The gray background cards in the output were a cool idea to give a sense of your hand/cards seen, but are not reliable. They don't factor variable draws per turn or playing cards in monte simulations. And they mess with the layout. Probably something to just remove. 
  - Fix hypergeometric group and link naming method so it's index-based, and does not require unique text names. 
@@ -28,6 +21,12 @@ A refactor of monte carlo simulation logic to somehow use bipartite matching met
  - Extend hypergeometric mulligan support (maybe go up to like 5/6 mulligans).
  - ~~Support adding more turns.~~ 
  - ~~support advanced mana probability calculations~~
+
+## Mathematical accuracy checks
+- hypergeometric and multivatiate math is confirmed
+- hypergeometric mulligan math is mostly confirmed, though not in complex situations with linked (multivariate) groups.
+- Monte carlo advanced simulation checks:
+   - When comparing my outputs to [mtgoncurve](https://mtgoncurve.com/), I sometimes note a 1-2% difference when adding in basic mulligan logic (no free mulligan, set the same max/min lands accepted, set mtgoncurve with a simple theoretical scenario like 25 plains and 74 Dawn Elementals to test a 4 cmc card). Set the monte carlo to 20k ish iterations for best accuracy in this simpler test. I don't know what could cause this, and some situations increase the margin more or less. I wonder if it has to do with the london aspect of london mulligan (confirm mtgoncurve is placing a sort of... non-wanted card on the bottom?).
 
  ## Known Accessibility to-do
  - Contents within the monte accordion (Advanced mana and...) need to not be in the tab index when the accordion is closed.
