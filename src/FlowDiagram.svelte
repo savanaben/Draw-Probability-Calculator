@@ -49,7 +49,7 @@
 
     .nested-box {
         border: 1px solid #e5e5e5;
-        background-color: #efefef;
+        background-color: #eeeeee;
     }
 
     .nested-box .box-title {

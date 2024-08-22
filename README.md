@@ -9,7 +9,12 @@ This tool applies hypergeometric and monte carlo methods of calculation to deter
 - [mtgoncurve](https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html) uses [maximum bipartite matching](https://github.com/mtgoncurve/landlord/blob/master/lib/src/bipartite.rs) logic to handle mana sources with multiple colors. I don't know how this works! My method is more brute-force by calculating all possible combinations, and is much less efficient. A refactor of monte carlo simulation logic to somehow use bipartite matching method would drastically reduce load-times and increase accuracy.
 - Support lands that enter tapped for monte simulation.
 
+## bugs
+- if the mana/card requirements are higher than the number of lands, app crashes. 
+
  ## Notes/backlog
+ - would like an ability to set a land or ramp as "fetches land". This will improve simulation accuracy as it will factor thinning your deck and removing certain specific lands. Right now all ramp pieces just sort of act like mana rocks. See the comment chain [here](https://www.reddit.com/r/CompetitiveEDH/comments/1ex2bgg/simulate_how_well_your_ramp_package_is_working/).
+ - add support for other common types of ramp. The most beneficial I can think of are 1-time use rituals (dark ritual, etc). Cost reducers are also fairly common, but probably not worth it in this tool given it's not supporting complex turns casting multiple spells. 
  - The monte carlo mulligan UX is not intuitive. Other tools will do something like "mulligan down to..x cards". What makes less sense is how my 1 free mulligan toggle sort of is additive, on-top of the Max mulligans.  
  - The hand simulation should maybe factor in "Total mana ramp can produce" when counting if the cards in your hand meet the requirements. for example, if a ramp spell can make BW and "total mana ramp can produce" is 2, perhaps this ramp should be looked at as two BW sources (almost like two lands). This is fuzzy logic... not sure on this. 
  - Inputting your deck via copy/paste. This is a lofty goal, all ramp spells would have to be mapped to simplified logic. 
@@ -43,7 +48,6 @@ This tool applies hypergeometric and monte carlo methods of calculation to deter
  ### Nice to haves
  - fancier link/multivariate logic, such as OR operator (what are the chances I draw a plains and an island, OR a dual land).
  - ~~Group linked cards in the output visual in some way (connector line, within a box, include link name, even just adjacent)~~
- - Support variable draws per turn? (what if I have a lot of cantrips, scry, early-game draw, etc). I'm imagining a dropdown next to each "draw x" output, which could let you increase that value by 1-3. Consider if scry can be supported in a similar way (assume you always pitch a card to the bottom if it's not a desired card?) 
  - support shuffling on any turn (fetch lands, etc, would change probabilities with london mulligan as the cards placed on the bottom sort of "re-enter" the random pool).
  - Some kind of integration with moxfield tags... (I imagine the groupings ppl use on moxfield might also be the groupings they'd want to know probabilities for.. (what are the chances I get x card from "creatures" or "removal")).
  - I had considered supporting "enter tapped" flags and logic for the mana probabilities, but I am less convinced on how helpful this would be. For example, the tool could be expanded to say what the percent change is that you get 1,2,3, etc enter tapped lands. But often enter-tapped lands come with more consideration (can you play them in a way that still allows you to play what you want on a certain turn). Additionally, I think most people avoid tapped lands whenever possible, so a tool that somehow considered their impact might not be too helpful. 

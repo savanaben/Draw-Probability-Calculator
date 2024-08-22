@@ -910,8 +910,8 @@ function selectInput(event) {
       transition:slide|local={{ duration: 250 }}
       style:height="{openItem === 0 ? 'auto' : '0'}"
        >
-      <!-- Mana Cards and Add Button -->
-      <p style="margin-top: 0.5rem;">Simulate the chance you'll get the colors you need in your hand or on the field. check out the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how this works. 
+      <!-- Mana Cards and Add Button --> 
+      <p style="margin-top: 0.5rem;">Simulate the chance you'll get the colors you need in your hand or on the field. This works on a phone, but works best on a more powerful desktop for complex setups with lots of unique lands and mana cards. Check out the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how this works. 
         <!-- To learn more, click the info button ->       
         <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>
@@ -924,9 +924,6 @@ function selectInput(event) {
         </div>
       </Popover> -->
     </p>
-
-
-
 
       <p style="margin-top: 0.5rem;"><strong>Step 1</strong> - Add all of the mana producing cards in your deck. Custom groups only work in hand simulations.</p>
       <div class="mana-cards-container">
