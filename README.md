@@ -7,7 +7,7 @@ This tool applies hypergeometric and monte carlo methods of calculation to deter
 
 ## The holy grails of backlog
 - [mtgoncurve](https://deckulator.blogspot.com/2022/07/mulligans-and-probability-redrawing.html) uses [maximum bipartite matching](https://github.com/mtgoncurve/landlord/blob/master/lib/src/bipartite.rs) logic to handle mana sources with multiple colors. I don't know how this works! My method is more brute-force by calculating all possible combinations, and is much less efficient. A refactor of monte carlo simulation logic to somehow use bipartite matching method would drastically reduce load-times and increase accuracy.
-- Support lands that enter tapped for monte simulation.
+- Support lands that enter tapped for monte simulation. The challenge with this is I believe the land data structure will need to be redone to better support properties and sub-objects. Lands should have a similar object structure as mana ramp so they can be expanded as needed. Right now the flat {W:1, B:1, G:1...} structure is too simplistic to capture something like a boolean (enter tapped true/false). This change unfortunately means updating all of the functions that clean and utalize mana. 
 
 ## bugs
 - if the mana/card requirements are higher than the number of lands, app crashes. 
