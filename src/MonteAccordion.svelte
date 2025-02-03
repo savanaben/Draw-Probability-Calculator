@@ -911,7 +911,7 @@ function selectInput(event) {
       style:height="{openItem === 0 ? 'auto' : '0'}"
        >
       <!-- Mana Cards and Add Button --> 
-      <p style="margin-top: 0.5rem;">Simulate the chance you'll get the colors you need in your hand or on the field. This works on a phone, but works best on a more powerful desktop for complex setups with lots of unique lands and mana cards. Check out the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how this works. 
+      <p style="margin-top: 0.5rem;">Simulate the chance you'll get the colors you need in your hand or on the field. This works on a phone, but works best on a more powerful desktop for complex setups. Check out the <a href="#monte-carlo-faq">monte carlo FAQ</a> to learn how this works. 
         <!-- To learn more, click the info button ->       
         <Popover bind:show={showPopover} placement="top">
         <button class="moreInfo" slot="trigger" tabindex="-1" on:click={() => showPopover = !showPopover}>

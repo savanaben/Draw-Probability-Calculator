@@ -81,18 +81,12 @@ const uniqueId = `mana-card-${Date.now()}`; // Generate a unique ID using curren
         width: 29%;
         text-align: center;
         cursor: pointer;
-        padding: 2px;
-        background-color: white;
+        padding: 3px;
+        background-color: rgb(255, 255, 255);
         border-radius: 4px;
-        border: 2px solid rgb(255, 255, 255); /* Default transparent border */
         margin: 2px;
     }
 
-    .mana-symbol:hover {
-      outline-style: solid;
-	outline-color: #b3b3b3;
-	outline-width: 1px;
-    }
 
     .mana-symbol.active {
         border-color: #1b67e1; 
@@ -203,6 +197,7 @@ width: inherit;
   </div>
 
   <div class="mana-symbols">
+    <p style="font-weight:400; margin: 0 0.4rem 0.1rem 0.4rem;">Colors land(s) &#8203; can produce:</p>
     {#each Object.keys(manaIcons) as mana}
       <button 
         class="mana-symbol {card.mana[mana] ? 'active' : ''}" 

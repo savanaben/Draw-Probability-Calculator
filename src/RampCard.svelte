@@ -126,18 +126,13 @@
         height: 38px; /* Adjusted height */
         text-align: center;
         cursor: pointer;
-        padding: 2px;
+        padding: 3px;
         background-color: white;
         border-radius: 4px;
-        border: 2px solid rgb(255, 255, 255); /* Default transparent border */
         margin: 4px;
     }
 
-    .mana-symbol:hover {
-        outline-style: solid;
-        outline-color: #b3b3b3;
-        outline-width: 1px;
-    }
+
 
     .mana-symbol.active {
         border-color: #1b67e1; 
