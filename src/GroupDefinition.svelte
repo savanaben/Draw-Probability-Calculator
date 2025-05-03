@@ -24,7 +24,7 @@
     let mulliganCountString = "0"; // Use a string for the binding
     let numberOfTurnsInput = 6; // Default value
 
-    let openHypergeo = false; // Add this line to manage the accordion state
+    let openHypergeo = true; // Initialize to true to make the accordion open by default
     let isHoveringHypergeo = false; // Add this line to manage hover state
 
 
